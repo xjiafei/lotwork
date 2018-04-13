@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+
+
+.logo{margin-top:20px;}
+
+.logo a{width:132px;padding-top:61px;background:url("logo-p5.png") no-repeat 0 0;
+_background-image:none;
+_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/game/p5/logo-p5.png"); }
+
+
+.lottery{width:450px;background:url("bg-header-box.png") 0 -80px no-repeat\9;}
+
+
+.deadline{margin-left:38px;width:340px;background:url("bg-header-box.png") 0 0 no-repeat\9;}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,104 @@
+/**
+.bg-content {background:#FFF;}
+**/
+
+/** 提示组件(z-index:500) **/
+.j-ui-tip {background:#FFF;padding:5px 10px;color:#F00;font-size:14px;font-family:Microsoft Yahei;z-index:500;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+border-radius:3px;
+}
+.j-ui-tip-info {color:#007361}
+.j-ui-tip .sj {position:absolute;margin-top:-8px;width:8px;height:15px;background:url(j-ui-tip.png) no-repeat 0 -31px;display:none;}
+.j-ui-tip .sj-t {top:50%;left:-8px;width:15px;height:8px;top:0;left:50%;margin-left:-8px;background-position:0 0;}
+.j-ui-tip .sj-b {width:15px;left:-8px;height:8px;bottom:-8px;left:50%;margin-left:-8px;background-position:0 -23px;}
+.j-ui-tip .sj-l {left:-8px;top:50%;}
+.j-ui-tip .sj-r {right:-8px;top:50%;background-position:0 -8px;}
+.j-ui-tip-t .sj-t,.j-ui-tip-r .sj-r,.j-ui-tip-b .sj-b,.j-ui-tip-l .sj-l {display:block;}
+.j-ui-tip .error{display:inline-block;width:14px;height:14px;margin-right:4px;background-position:-60px -100px;overflow:hidden;vertical-align:-2px;*vertical-align:2px;background-image: url(../login/ui-login.png);}
+
+
+/** 遮罩组件(z-index:600) **/
+.j-ui-mask {z-index:600;}
+
+
+/** 弹出层组件(z-index:700) **/
+.j-ui-miniwindow {width:488px;padding:10px;border:1px solid #CACACA;background-color:#FFF;position:absolute;left:0;top:0;display:none;z-index:700}
+.j-ui-miniwindow .hd{height:28px;line-height:18px;border-bottom:1px solid #EFEFEF;font-size:14px;font-weight:700;}
+.j-ui-miniwindow .close{float:right;width:15px;height:14px;background:url(ui-alert.png) -240px -20px no-repeat;cursor:pointer;}
+.j-ui-miniwindow .close:hover {background-position:-240px 0;}
+.j-ui-miniwindow .bd{padding:10px;}
+
+
+
+/** 日期控件(z-index:600) **/
+.j-ui-datepicker {position:absolute;left:150px;top:200px;z-index:590;background:#FFF;border-top:2px solid #009B7D;color:#555;
+-moz-box-shadow:5px 5px 5px #333;
+-webkit-box-shadow:5px 5px 5px #333;
+box-shadow:5px 5px 5px #333;
+-moz-user-select:none;
+}
+.j-ui-datepicker .control {border-left:1px solid #E3E3E3;border-right:1px solid #E3E3E3;text-align:center;}
+.j-ui-datepicker .control span {padding:10px 5px;display:inline-block;}
+.j-ui-datepicker .control .pre,.j-ui-datepicker .control .next {position:absolute;display:block;top:14px;width:8px;height:15px;overflow:hidden;font-size:0;text-indent:-10000px;background:url(j-ui-button-left.gif) no-repeat;cursor:pointer;padding:0;}
+.j-ui-datepicker .control .pre {left:10px;}
+.j-ui-datepicker .control .next {background-image:url(j-ui-button-right.gif);right:10px;}
+
+.j-ui-datepicker .tb {border-right:1px solid #E3E3E3;border-bottom:1px solid #E3E3E3;}
+.j-ui-datepicker .tb th {font-weight:bold;color:#999;}
+.j-ui-datepicker .tb td,.j-ui-datepicker .tb th {padding:5px 10px;border:1px solid #E3E3E3;text-align:center;border-right:0;border-bottom:0;width:18px;height:20px;}
+.j-ui-datepicker .tb td {cursor:pointer;}
+.j-ui-datepicker .tb td:hover {background:#EEE;}
+.j-ui-datepicker .tb td:active {background:#EEE;border-color:#DBDBDB;}
+.j-ui-datepicker .day-preMonth,.j-ui-datepicker .day-nextMonth {color:#CCC;}
+.j-ui-datepicker .day-today {font-weight:bold;color:#009B7D;}
+.j-ui-datepicker .day-curr {background:#FFFC00;font-weight:bold;}
+
+.j-ui-datepicker td.day-disabled {cursor:default;color:#FFF;background:#FFF;}
+.j-ui-datepicker td.day-disabled:hover {background:#FFF;}
+.j-ui-datepicker td.day-disabled:active {background:none;border-color:#E3E3E3;}
+
+.j-ui-datepicker .content-time {padding:10px;color:#999; text-align:center;}
+.j-ui-datepicker .content-time input {border:1px solid #CCC;width:44px;height:22px;text-align:center;color:#999;}
+.j-ui-datepicker .content-time .button-confirm {height:24px;background:#FFF;color:#009B7D;border-color:#009B7D;cursor:pointer;line-height:24px;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+}
+
+
+
+
+/** 树形菜单 **/
+.ui-tree-minusbottom,.ui-tree-plusbottom,.ui-tree-plus,.ui-tree-minus {cursor:pointer}
+.ui-tree-node {color: #666;line-height:11px;}
+.ui-tree-node:hover {background:#FFFFE1;}
+.ui-tree-node img {border:0px;vertical-align: middle;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

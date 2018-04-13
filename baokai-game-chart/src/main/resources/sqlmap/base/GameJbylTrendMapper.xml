@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameTrendJbyl">
+	<resultMap id="GameJbylTrendResult"
+		type="com.winterframework.firefrog.game.dao.vo.GameTrendJbyl">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameJbylTrendColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	TREND_TYPE as trendType,
+	        	VALUE as value,
+	        	WEB_VALUE as webValue,
+	        	CREATE_TIME as createTime,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	NUMBER_RECORD as numberRecord
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameTrendJbyl"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_JBYL_TREND_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_TREND_JBYL (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_CODE ,
+	        	WEB_ISSUE_CODE ,
+	        	TREND_TYPE ,
+	        	VALUE ,
+	        	WEB_VALUE ,
+	        	CREATE_TIME ,
+	        	GAME_SET_CODE ,
+	        	BET_METHOD_CODE ,
+	        	GAME_GROUP_CODE 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{trendType,javaType=string,jdbcType=VARCHAR} ,
+	        	#{value,javaType=string,jdbcType=VARCHAR} ,
+	        	#{webValue,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{gameSetCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{betMethodCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{gameGroupCode,javaType=int,jdbcType=DECIMAL} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameTrendJbyl">
+	    <![CDATA[
+	        UPDATE GAME_TREND_JBYL SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        TREND_TYPE = #{trendType,javaType=string,jdbcType=VARCHAR} ,
+		        VALUE = #{value,javaType=string,jdbcType=VARCHAR} ,
+		        CREATE_TIME = #{createTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        GAME_SET_CODE = #{gameSetCode,javaType=long,jdbcType=DECIMAL} ,
+		        BET_METHOD_CODE = #{betMethodCode,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_GROUP_CODE = #{gameGroupCode,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_TREND_JBYL where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="GameJbylTrendResult"
+		flushCache="false">
+		select
+		<include refid="gameJbylTrendColumns" />
+		    <![CDATA[
+			    from GAME_TREND_JBYL 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+
+	<select id="getByIds" parameterType="list" resultMap="GameJbylTrendResult"
+		flushCache="false">
+		select
+		<include refid="gameJbylTrendColumns" />
+		from GAME_TREND_JBYL
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="gameJbylTrendDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryId)">
+				and LOTTERYID = #{lotteryId}
+			</if>
+			<if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(webIssueCode)">
+				and WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(trendType)">
+				and TREND_TYPE = #{trendType}
+			</if>
+			<if test="@Ognl@isNotEmpty(value)">
+				and VALUE = #{value}
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(gameSetCode)">
+				and GAME_SET_CODE = #{gameSetCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(betMethodCode)">
+				and BET_METHOD_CODE = #{betMethodCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(gameGroupCode)">
+				and GAME_GROUP_CODE = #{gameGroupCode}
+			</if>
+            <if test="@Ognl@isNotEmpty(userId)">
+                and user_id = #{userId}
+            </if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameJbylTrendResult" flushCache="false">
+		select
+		<include refid="gameJbylTrendColumns" />
+		from GAME_TREND_JBYL
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getGameTrendChart" resultMap="GameJbylTrendResult"
+		flushCache="false">
+		select
+		<include refid="gameJbylTrendColumns" />
+		from GAME_TREND_JBYL
+		where LOTTERYID = #{lotteryId} and ISSUE_CODE =
+		#{issueCode}
+	</select>
+
+	<select id="getLastLotteryIdAndIssueCode" resultMap="GameJbylTrendResult"
+		flushCache="false">
+		select TT.LOTTERYID lotteryid,max(issueCode) issueCode from
+		(select
+		LOTTERYID as lotteryid,
+		ISSUE_CODE as issueCode
+		from
+		GAME_TREND_JBYL
+		group by LOTTERYID,ISSUE_CODE) tt GROUP BY TT.LOTTERYID
+	</select>
+
+	<select id="getCount" resultType="long">
+		select count(*) from
+		GAME_TREND_JBYL
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_TREND_JBYL
+		<include refid="gameJbylTrendDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameJbylTrendResult">
+		select
+		<include refid="gameJbylTrendColumns" />
+		from GAME_TREND_JBYL
+		<include refid="gameJbylTrendDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getTrendJbylTimePeriod" resultMap="GameJbylTrendResult"
+		parameterType="hashMap" flushCache="false">
+		select *
+		from (select
+		<include refid="gameJbylTrendColumns" />
+		from GAME_TREND_JBYL
+		<include refid="gameJbylTrendDynamicWhere" />
+		)
+		<![CDATA[
+		where
+		trunc(createTime) >= trunc(#{startDate}) and trunc(createTime) <=
+		trunc(#{endDate})
+		]]>
+		order by issueCode
+	</select>
+
+	<select id="getTrendJbyl" resultMap="GameJbylTrendResult"
+		parameterType="hashMap" flushCache="false">
+		select *
+		from (select
+		<include refid="gameJbylTrendColumns" />
+		from GAME_TREND_JBYL
+		<include refid="gameJbylTrendDynamicWhere" />
+		order by issue_code desc)
+         <![CDATA[
+         where rownum <= #{num}
+         ]]>
+		order by issueCode
+	</select>
+	<!-- where rownum <= #{num} -->
+
+	<select id="getLastWeiShuTrend" parameterType="hashMap"
+		resultMap="GameJbylTrendResult" flushCache="false">
+		select *
+		from (select *
+		from
+		game_trend_jbyl
+		where lotteryid = #{lotteryId}
+		and game_group_code =
+		#{gameGroupCode}
+		and trend_type = 1
+		order by web_issue_code desc)
+		where
+		rownum = 1
+	</select>
+	
+	
+	<select id="getTrendResultByLotteryIdAndCountIssue" resultMap="GameJbylTrendResult"
+		parameterType="hashMap" flushCache="false">
+		select *
+		from (select
+		<include refid="gameJbylTrendColumns" />
+		from GAME_TREND_JBYL
+		where trend_type = 100 and lotteryid = #{lotteryid}
+        <if test="@Ognl@isNotEmpty(userId)">
+            and user_id = #{userId}
+        </if>
+		order by WEB_ISSUE_CODE desc)
+         <![CDATA[
+         where rownum <= #{countIssue}
+         ]]>
+		order by webIssueCode
+	</select>
+	
+	<select id="getTrendResultByDate" resultMap="GameJbylTrendResult"
+		parameterType="hashMap" flushCache="false">
+		select <include refid="gameJbylTrendColumns" />
+		from GAME_TREND_JBYL		
+		<![CDATA[
+		where
+		trunc(CREATE_TIME) >= trunc(#{startDate}) and trunc(CREATE_TIME) <=
+		trunc(#{endDate})
+		and trend_type = 100 and lotteryid = #{lotteryid}
+		<if test="@Ognl@isNotEmpty(userId)">
+            and user_id = #{userId}
+        </if>
+		]]>
+		order by web_issue_code
+	</select>
+	
+
+	<select id="getWapChart" resultMap="GameJbylTrendResult" flushCache="false">
+		select 
+			LOTTERYID as lotteryid,
+       		WEB_ISSUE_CODE as webIssueCode,
+       		NUMBER_RECORD as numberRecord
+		from (
+		select lotteryid,web_issue_Code,number_record
+		from GAME_TREND_JBYL
+		<![CDATA[
+		where 
+		lotteryid = #{lotteryId} and number_record is not null
+		group by lotteryid ,issue_code,web_issue_Code ,number_record 
+		order by web_issue_code desc
+		)
+		where  rownum < 9		
+		]]>
+	</select>
+	
+	<select id="getDrawResultsByUserIdAndLotteryId" parameterType="hashmap" resultType="java.util.HashMap">
+		select *
+        from (
+	        select 
+	        b.number_record,
+	        b.web_issue_code,
+	        a.issue_code,
+	        a.lotteryid,
+	        b.create_time,
+	        b.update_time,
+	        b.open_draw_time
+	        from (
+		        select * from (
+		        select * from game_order where userid =  #{userid} and lotteryid = #{lotteryId} 
+		        and status in (2, 3) order by issue_code desc ) 
+		        <if test="@Ognl@isNotEmpty(num)">
+	       			<![CDATA[ where rownum < #{num} ]]>
+	       		</if>
+	        ) a join game_issue b 
+	        on a.issue_code = b.issue_code
+	        <if test="@Ognl@isNotEmpty(startDate) and @Ognl@isNotEmpty(endDate)">
+	        	<![CDATA[ where b.open_draw_time >= #{startDate} and b.open_draw_time < #{endDate} ]]>
+	        </if>
+        )
+	</select>
+	
+	<select id="checkQueryTypeByLotteryid" parameterType="hashMap" resultType="string">
+		select VALUE from CONFIG where MODULE = 'chart' and KEY ='query_immediate' 
+	</select>
+	
+</mapper>

@@ -1,0 +1,739 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd"
+	default-lazy-init="true">
+
+	<bean id="gameJbylTrendServiceImpl"
+		class="com.winterframework.firefrog.game.service.impl.GameTrendJbylServiceImpl">
+		<property name="jbylTrendTypeMap" ref="jbylTrendTypeMap" />
+	</bean>
+
+	<!-- 遗漏值查询 -->
+	<bean id="jbylTrendTypeMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<!-- 时时彩 start -->
+				<!-- 五星基本 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.WX}" />
+							<property name="isGeneral" value="${isGeneral.WXJIBEN}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+				<!-- 五星综合 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.WX}" />
+							<property name="isGeneral" value="${isGeneral.WXZONGHE}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">KUADU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">DAXIAORATE</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">DANSHUANGRATE</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZHIHERATE</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVAL</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+
+				<!-- 四星 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.SX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+
+				<!-- 前三 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.QS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">DAXIAO</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">DANSHUANG</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZHIHE</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">LIN12</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZUXUAN</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">KUADUVAL</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVAL</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVALMANTISSA</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+
+				<!-- 后三 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.HS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">DAXIAO</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">DANSHUANG</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZHIHE</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">LIN12</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZUXUAN</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">KUADUVAL</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVAL</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVALMANTISSA</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+				
+				<!-- 中三 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.trend.ZS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">DAXIAO</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">DANSHUANG</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZHIHE</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">LIN12</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZUXUAN</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">KUADUVAL</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVAL</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVALMANTISSA</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+
+				<!-- 前二 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.QE}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZUXUAN</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">KUADU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVAL</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+				<!-- 后二 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.HE}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZUXUAN</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">KUADU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVAL</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+
+				<!-- 时时彩 end -->
+
+				<!-- 11选5 start -->
+				<!-- 选五 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.X5}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">DANSHUANG</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZHONGWEI</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+
+				<!-- 11选5 end -->
+
+				<!-- 3D start -->
+				<!-- 3D end -->
+
+				<!-- 排列5 start -->
+				<!-- p5后二 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.p5HE}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">ZUXUAN</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">KUADU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVAL</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+				<!-- p5一星 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.p5YX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+				<!-- 排列5 end -->
+
+				<!-- 北京快乐8 start -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.QW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">KL8</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+				<!-- 北京快乐8 end -->
+				<!-- 江苏快三 start -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.HEZHI}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">HAOMAZOUSHI</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">HEZHIZOUSHI</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">HEZHIZUHE</value>
+								<value type="com.winterframework.firefrog.game.entity.TrendType">HAOMAXINGTAI</value>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>
+				<!-- 江苏快三 end -->
+                <!--双色球-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+                            <property name="groupCode" value="32" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="java.util.ArrayList">
+                        <constructor-arg>
+                            <list>
+                                <value type="com.winterframework.firefrog.game.entity.TrendType">SSQ</value>
+                            </list>
+                        </constructor-arg>
+                    </bean>
+                </entry>
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+                            <property name="groupCode" value="34" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="java.util.ArrayList">
+                        <constructor-arg>
+                            <list>
+                                <value type="com.winterframework.firefrog.game.entity.TrendType">SSQ_BLUE</value>
+                            </list>
+                        </constructor-arg>
+                    </bean>
+                </entry>
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+                            <property name="groupCode" value="33" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="java.util.ArrayList">
+                        <constructor-arg>
+                            <list>
+                                <value type="com.winterframework.firefrog.game.entity.TrendType">SSQ_RED</value>
+                            </list>
+                        </constructor-arg>
+                    </bean>
+                </entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<!-- 选号球范围 -->
+	<bean id="ballRengeMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="${lottery.SSC}" value="0,9" />
+				<entry key="${lottery.JXSSC}" value="0,9" />
+				<entry key="${lottery.XJSSC}" value="0,9" />
+				<entry key="${lottery.TJSSC}" value="0,9" />
+				<entry key="${lottery.HLJSSC}" value="0,9" />
+				<entry key="${lottery.LLSSC}" value="0,9" />
+				<entry key="${lottery.SHSSL}" value="0,9" />
+				
+				<entry key="${lottery.JLFFC}" value="0,9" />
+				<entry key="${lottery.TXFFC}" value="0,9" />
+				<entry key="${lottery.SLMMC}" value="0,9" />
+
+				<entry key="${lottery.3D}" value="0,9" />
+
+				<entry key="${lottery.p5}" value="0,9" />
+
+				<entry key="${lottery.SD115}" value="1,11" />
+				<entry key="${lottery.JX115}" value="1,11" />
+				<entry key="${lottery.GD115}" value="1,11" />
+				<entry key="${lottery.CQ115}" value="1,11" />
+				<entry key="${lottery.LL115}" value="1,11" />
+				<entry key="${lottery.JS115}" value="1,11" />
+				<entry key="${lottery.SL115}" value="1,11" />
+
+				<entry key="${lottery.BJKL8}" value="1,80" />
+				<entry key="${lottery.JSK3}" value="1,6" />
+				<entry key="${lottery.AHK3}" value="1,6" />
+				<entry key="${lottery.SSQ}" value="1,33" />
+				<entry key="${lottery.JLSB}" value="1,6" />
+				<entry key="${lottery.JLSBV}" value="1,6" />
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<!-- 缓存失效时间 -->
+	<bean id="liveTime" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="${lottery.SSC}" value="600" />
+				<entry key="${lottery.JXSSC}" value="600" />
+				<entry key="${lottery.XJSSC}" value="600" />
+				<entry key="${lottery.TJSSC}" value="600" />
+				<entry key="${lottery.HLJSSC}" value="600" />
+				<entry key="${lottery.LLSSC}" value="600" />
+				<entry key="${lottery.SHSSL}" value="600" />
+
+				<entry key="${lottery.JLFFC}" value="600" />
+				<entry key="${lottery.TXFFC}" value="600" />
+				<entry key="${lottery.SLMMC}" value="600" />
+				<entry key="${lottery.3D}" value="600" />
+
+				<entry key="${lottery.p5}" value="600" />
+
+				<entry key="${lottery.SD115}" value="600" />
+				<entry key="${lottery.JX115}" value="600" />
+				<entry key="${lottery.GD115}" value="600" />
+				<entry key="${lottery.CQ115}" value="600" />
+				<entry key="${lottery.LL115}" value="600" />
+				<entry key="${lottery.SL115}" value="600" />
+
+				<entry key="${lottery.BJKL8}" value="600" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<!-- 跨度值范围 -->
+	<bean id="kuaduRengeMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="${lottery.SSC}" value="0,9" />
+				<entry key="${lottery.JXSSC}" value="0,9" />
+				<entry key="${lottery.XJSSC}" value="0,9" />
+				<entry key="${lottery.TJSSC}" value="0,9" />
+				<entry key="${lottery.HLJSSC}" value="0,9" />
+				<entry key="${lottery.LLSSC}" value="0,9" />
+				<entry key="${lottery.SHSSL}" value="0,9" />
+				
+				<entry key="${lottery.JLFFC}" value="0,9" />
+				<entry key="${lottery.TXFFC}" value="0,9" />
+				<entry key="${lottery.SLMMC}" value="0,9" />
+
+				<entry key="${lottery.p5}" value="0,9" />
+			</map>
+		</constructor-arg>
+	</bean>
+	<!-- 和值范围 -->
+	<bean id="hezhiRengeMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="${groupCode.QS}" value="0,27" />
+				<entry key="${groupCode.HS}" value="0,27" />
+				<entry key="${groupCode.trend.ZS}" value="0,27" />
+				<entry key="${groupCode.QE}" value="0,18" />
+				<entry key="${groupCode.HE}" value="0,18" />
+				<entry key="${groupCode.p5HE}" value="0,18" />
+				<entry key="${groupCode.HEZHI}" value="3,18" />
+			</map>
+		</constructor-arg>
+	</bean>
+	<!-- 不用计算统计数据的类型 -->
+	<bean id="noStatisticsDataTrendType" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">ZHONGWEI</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">DAXIAO</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">DANSHUANG</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">ZHIHE</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">LIN12</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">KUADUVAL</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVAL</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVALMANTISSA</value>
+				
+				<value type="com.winterframework.firefrog.game.entity.TrendType">HAOMAZOUSHI</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">HEZHIZOUSHI</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">HEZHIZUHE</value>
+				<value type="com.winterframework.firefrog.game.entity.TrendType">HAOMAXINGTAI</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="dataMakerMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.WeiShuDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">FENBU</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.FenBuDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">ZUXUAN</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.ZuXuanDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">KUADU</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.KuaDuDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">DAXIAORATE</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.RateMakerServiceImpl">
+						<property name="numbers" ref="smallNumbers" />
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">DANSHUANGRATE</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.RateMakerServiceImpl">
+						<property name="numbers" ref="evenNumbers" />
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">ZHIHERATE</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.RateMakerServiceImpl">
+						<property name="numbers" ref="compositeNumbers" />
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">DAXIAO</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.LiteralDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">DANSHUANG</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.LiteralDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">ZHONGWEI</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.LiteralDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">ZHIHE</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.LiteralDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">LIN12</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.LiteralDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">KUADUVAL</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.NumberDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVAL</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.NumberDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">SUMVALMANTISSA</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.SumvalMantissaDataMakerServiceImpl">
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">KL8</value>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.impl.Kl8DataMakerServiceImpl">
+					</bean>
+				</entry>
+                <entry>
+                    <key>
+                        <value type="com.winterframework.firefrog.game.entity.TrendType">SSQ</value>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.service.impl.SSQDataMakerServiceImpl">
+                    </bean>
+                </entry>
+                <entry>
+                    <key>
+                        <value type="com.winterframework.firefrog.game.entity.TrendType">SSQ_RED</value>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.service.impl.SSQREDDataMakerServiceImpl">
+                    </bean>
+                </entry>
+                <entry>
+                    <key>
+                        <value type="com.winterframework.firefrog.game.entity.TrendType">SSQ_BLUE</value>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.service.impl.SSQBLUEDataMakerServiceImpl">
+                    </bean>
+                </entry>
+                
+                
+                
+                
+                <entry>
+                    <key>
+                        <value type="com.winterframework.firefrog.game.entity.TrendType">HAOMAZOUSHI</value>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.service.impl.K3DataMakerServiceImpl">
+                    </bean>
+                </entry>
+                <entry>
+                    <key>
+                        <value type="com.winterframework.firefrog.game.entity.TrendType">HEZHIZOUSHI</value>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.service.impl.K3HezhiDataMakerServiceImpl">
+                    </bean>
+                </entry>
+                <entry>
+                    <key>
+                        <value type="com.winterframework.firefrog.game.entity.TrendType">HEZHIZUHE</value>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.service.impl.K3DataMakerServiceImpl">
+                    </bean>
+                </entry>
+                <entry>
+                    <key>
+                        <value type="com.winterframework.firefrog.game.entity.TrendType">HAOMAXINGTAI</value>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.service.impl.K3DataMakerServiceImpl">
+                    </bean>
+                </entry>
+                
+                
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="danShuangSpecialManageLotteryids" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value type="java.lang.Long">${lottery.SD115}</value>
+				<value type="java.lang.Long">${lottery.JX115}</value>
+				<value type="java.lang.Long">${lottery.GD115}</value>
+				<value type="java.lang.Long">${lottery.CQ115}</value>
+				<value type="java.lang.Long">${lottery.LL115}</value>
+				<value type="java.lang.Long">${lottery.SL115}</value>
+			</list>
+		</constructor-arg>	
+	</bean>
+	
+	<bean id="smallNumbers" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>0</value>
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+				<value>4</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="evenNumbers" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>0</value>
+				<value>2</value>
+				<value>4</value>
+				<value>6</value>
+				<value>8</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="compositeNumbers" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>0</value>
+				<value>4</value>
+				<value>6</value>
+				<value>8</value>
+				<value>9</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+</beans>

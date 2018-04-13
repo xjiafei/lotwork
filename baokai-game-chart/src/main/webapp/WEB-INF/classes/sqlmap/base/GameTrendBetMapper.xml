@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameTrendBet">
+	<resultMap id="GameTrendBetResult" type="com.winterframework.firefrog.game.dao.vo.GameTrendBet">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameTrendBetColumns"> 
+       	ID as id,
+       	LOTTERYID as lotteryId,
+       	GROUP_CODE as groupCode,
+       	SET_CODE as setCode,
+       	METHOD_CODE as methodCode,
+       	TYPE as type,
+       	VALUE as value,
+       	WEB_VALUE as webValue,
+       	CREATE_TIME as createTime,  
+       	UPDATE_TIME as createTime
+	</sql> 
+    <select id="getById" parameterType="long" resultMap="GameTrendBetResult" flushCache="false">
+	   select <include refid="gameTrendBetColumns" /> 
+	     from GAME_TREND_BET 
+        where ID = #{id}  
+	</select>	 
+	<sql id="gameTrendBetDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	        <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	        <if test="@Ognl@isNotEmpty(lotteryId)">
+				and LOTTERYID = #{lotteryId}
+			</if>
+	        <if test="@Ognl@isNotEmpty(groupCode)">
+				and GROUP_CODE = #{groupCode}
+			</if>
+	        <if test="@Ognl@isNotEmpty(setCode)">
+				and SET_CODE = #{setCode}
+			</if> 
+			<if test="@Ognl@isNotEmpty(methodCode)">
+				and METHOD_CODE = #{methodCode}
+			</if> 
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if> 
+		</where>
+	</sql> 
+    
+    <select id="getByLotteryIdAndBetTypeAndType" resultMap="GameTrendBetResult"  flushCache="false">
+    	select <include refid="gameTrendBetColumns" /> 
+   		  from game_trend_bet b
+		 where b.lotteryid = #{lotteryId}
+		   and b.type = #{type}  
+		   and b.group_code = #{groupCode} 
+		   and b.set_code = #{setCode} 
+		   and b.method_code = #{methodCode} 
+		   and rownum=1
+    </select> 
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.0.xsd " 
+	default-autowire="byName" default-lazy-init="false">
+	
+	<bean id="sDGameTrendChartRuleList"  class="com.winterframework.firefrog.game.service.gametrend.config.GameTrendChartRuleList">
+		<constructor-arg> 
+		   <list> 
+		   		<ref bean="gameTrendWeishuChartGenerateSx3d"/>
+		   		<ref bean="gameTrendWeishuChartGenerateQe3d"/>
+		   		<ref bean="gameTrendWeishuChartGenerateHe3d"/>
+		   		<ref bean="gameTrendWeishuChartGenerateBdw1"/>
+		   		
+		   		<ref bean="gameTrendFenbuChartGenerateSx3d"/>
+		   		<ref bean="gameTrendFenbuChartGenerateQe3d"/>
+		   		<ref bean="gameTrendFenbuChartGenerateHe3d"/>
+		   		
+		   		<ref bean="gameTrendZuxuanChartGenerateQs3d"/>
+		   		<ref bean="gameTrendZuxuanChartGenerateQe3d"/>
+		   		<ref bean="gameTrendZuxuanChartGenerateHe3d"/>
+		   		
+		   		<ref bean="gameTrendKuaduChartGenerateSx3d"/>
+		   		<ref bean="gameTrendKuaduChartGenerateQe3d"/>
+		   		<ref bean="gameTrendKuaduChartGenerateHe3d"/>
+		   		
+		   		<ref bean="gameTrendHezhiChartGenerateQsZx3d"/>
+		   		<ref bean="gameTrendHezhiChartGenerateQeZx3d"/>
+		   		<ref bean="gameTrendHezhiChartGenerateHeZx3d"/>
+		   		
+		   		<ref bean="gameTrendHezhiChartGenerateQsZhx3d"/>
+		   		<ref bean="gameTrendHezhiChartGenerateQeZhx3d"/>
+		   		<ref bean="gameTrendHezhiChartGenerateHeZhx3d"/>
+		   		
+		   		<ref bean="gameTrendDaXiaoChartGenerateQe3d"/>
+		   		<ref bean="gameTrendDaXiaoChartGenerateHe3d"/>
+		   		<ref bean="gameTrendJiOuChartGenerateQe3d"/>
+		   		<ref bean="gameTrendJiOuChartGenerateHe3d"/>
+		   		
+		   		<ref bean="gameTrendDaXiaoChartGenerate3dQS"/>
+				<ref bean="gameTrendDanShuangChartGenerate3dQS"/>
+				<ref bean="gameTrendZhiheChartGenerate3dQS"/>
+				<ref bean="gameTrend012ChartGenerate3dQS"/>
+				<ref bean="gameTrendKuaduValChartGenerate3dQS"/>
+				<ref bean="gameTrendSumValRateChartGenerate3dQS"/>
+		   </list> 
+	  	</constructor-arg>
+	</bean>
+	
+	<!-- 位数遗漏 -->
+	<bean id="gameTrendWeishuChartGenerateSx3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendWeishuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QS}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	      <property name="digitsEndNumber" value="9"></property>
+	      <property name="gameGroupNumberBits" value="3,2,1"></property>
+	</bean>
+	
+	<bean id="gameTrendWeishuChartGenerateQe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendWeishuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QE}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	      <property name="digitsEndNumber" value="9"></property>
+	      <property name="gameGroupNumberBits" value="3,2"></property>
+	</bean>
+	<bean id="gameTrendWeishuChartGenerateHe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendWeishuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.HE}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	      <property name="digitsEndNumber" value="9"></property>
+	      <property name="gameGroupNumberBits" value="2,1"></property>
+	</bean>
+	<bean id="gameTrendWeishuChartGenerateBdw1" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendWeishuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.YX}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	      <property name="digitsEndNumber" value="9"></property>
+	      <property name="gameGroupNumberBits" value="3,2,1"></property>
+	</bean>
+	<!-- <bean id="gameTrendWeishuChartGenerateBdw2" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendWeishuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.YX}"></property>
+	      <property name="methodCode" value="2"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	      <property name="digitsEndNumber" value="9"></property>
+	      <property name="gameGroupNumberBits" value="3,2,1"></property>
+	</bean>
+	<bean id="gameTrendWeishuChartGenerateBdw3" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendWeishuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.YX}"></property>
+	      <property name="methodCode" value="3"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	      <property name="digitsEndNumber" value="9"></property>
+	      <property name="gameGroupNumberBits" value="3,2,1"></property>
+	</bean> -->
+	
+	<!-- 号码分布遗漏 -->
+	<bean id="gameTrendFenbuChartGenerateSx3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendFenbuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QS}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+
+	<bean id="gameTrendFenbuChartGenerateQe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendFenbuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QE}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	<bean id="gameTrendFenbuChartGenerateHe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendFenbuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.HE}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	
+	
+	<bean id="gameTrendDaXiaoChartGenerateQe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendDaXiaoChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QE}"></property>
+	</bean>
+	<bean id="gameTrendDaXiaoChartGenerateHe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendDaXiaoChartGenerate" >
+	      <property name="groupCode" value="${groupCode.HE}"></property>
+	</bean>
+	
+	<bean id="gameTrendJiOuChartGenerateQe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendJiOuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QE}"></property>
+	</bean>
+	<bean id="gameTrendJiOuChartGenerateHe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendJiOuChartGenerate" >
+	      <property name="groupCode" value="${groupCode.HE}"></property>
+	</bean>
+	
+	
+	<!-- 号码组选遗漏 -->
+	<bean id="gameTrendZuxuanChartGenerateQs3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendZuxuanChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QS}"></property>
+	      <property name="initValue" value="0,0,0"></property>
+	</bean>
+	<bean id="gameTrendZuxuanChartGenerateQe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendZuxuanChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QE}"></property>
+	      <property name="initValue" value="0"></property>
+	</bean>
+	<bean id="gameTrendZuxuanChartGenerateHe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendZuxuanChartGenerate" >
+	      <property name="groupCode" value="${groupCode.HE}"></property>
+	      <property name="initValue" value="0"></property>
+	</bean>
+	
+	<!-- 号码跨度遗漏 -->
+	<bean id="gameTrendKuaduChartGenerateSx3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendKuaduChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QS}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	<bean id="gameTrendKuaduChartGenerateQe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendKuaduChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QE}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	<bean id="gameTrendKuaduChartGenerateHe3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendKuaduChartGenerate" >
+	      <property name="groupCode" value="${groupCode.HE}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	
+	<!-- 和值遗漏 -->
+	<bean id="gameTrendHezhiChartGenerateQsZx3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendHezhiChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QS}"></property>
+	      <property name="setCode" value="${setCode.ZX}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	
+	<bean id="gameTrendHezhiChartGenerateQeZx3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendHezhiChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QE}"></property>
+	      <property name="setCode" value="${setCode.ZX}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	
+	<bean id="gameTrendHezhiChartGenerateHeZx3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendHezhiChartGenerate" >
+	      <property name="groupCode" value="${groupCode.HE}"></property>
+	      <property name="setCode" value="${setCode.ZX}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	
+	<!-- 和值遗漏 -->
+	<bean id="gameTrendHezhiChartGenerateQsZhx3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendHezhiChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QS}"></property>
+	      <property name="setCode" value="${setCode.ZHX}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	
+	<bean id="gameTrendHezhiChartGenerateQeZhx3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendHezhiChartGenerate" >
+	      <property name="groupCode" value="${groupCode.QE}"></property>
+	      <property name="setCode" value="${setCode.ZHX}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	
+	<bean id="gameTrendHezhiChartGenerateHeZhx3d" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendHezhiChartGenerate" >
+	      <property name="groupCode" value="${groupCode.HE}"></property>
+	      <property name="setCode" value="${setCode.ZHX}"></property>
+	      <property name="initValue" value="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"></property>
+	</bean>
+	
+	<!-- 形态 -->
+	<bean id="gameTrendDaXiaoChartGenerate3dQS" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendDaXiaoChartGenerate">
+		<property name="groupCode" value="${groupCode.QS}"></property>
+	</bean>
+	<bean id="gameTrendDanShuangChartGenerate3dQS" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendDanShuangChartGenerate">
+		<property name="groupCode" value="${groupCode.QS}"></property>
+	</bean>
+	<bean id="gameTrendZhiheChartGenerate3dQS" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendZhiheChartGenerate">
+		<property name="groupCode" value="${groupCode.QS}"></property>
+	</bean>
+	<bean id="gameTrend012ChartGenerate3dQS" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrend012ChartGenerate">
+		<property name="groupCode" value="${groupCode.QS}"></property>
+	</bean>
+	<!-- 跨度 -->
+	<bean id="gameTrendKuaduValChartGenerate3dQS" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendKuaduValChartGenerate">
+		<property name="groupCode" value="${groupCode.QS}"></property>
+	</bean>
+	<!-- 和值 -->
+	<bean id="gameTrendSumValRateChartGenerate3dQS" class="com.winterframework.firefrog.game.service.gametrend.generalrule.GameTrendSumValChartGenerate">
+		<property name="groupCode" value="${groupCode.QS}"></property>
+	</bean>
+	
+</beans>

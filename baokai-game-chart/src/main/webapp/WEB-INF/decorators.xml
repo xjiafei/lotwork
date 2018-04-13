@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/views/">
+	<excludes>
+		<pattern>/static/*</pattern>
+	</excludes>
+
+	<decorator name="default" page="layouts/main.jsp">
+		<pattern>/game/chart/*</pattern>
+	</decorator>
+</decorators>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.winterframework.firefrog.*"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- 转换message为json类型输出 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.FirefrogHttpMessageConverter">
+				<!-- True only for the blog article - a production system would set this 
+					to false to reduce the number of bytes sent across the wire: -->
+				<property name="prettyPrint" value="true" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	
+	<mvc:annotation-driven />
+	<bean class="com.winterframework.modules.utils.SpringContextHolder"/>
+	<context:component-scan base-package="com.winterframework.modules.spring.exetend" />
+	<context:component-scan base-package="com.winterframework.modules.spring.console" />
+	
+	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
+	<mvc:default-servlet-handler />
+	
+	<bean id="propertyConfigurer"
+		class="com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/application.properties</value>
+				<value>classpath:/serverUrlPath.properties</value>
+				<value>classpath:/game-type.properties</value>
+				<value>file:/usr/local/config/gamechart.properties</value>
+				<value>file:C:/config/gamechart.properties</value>
+				<value>classpath:/gchartversion.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 多个拦截器,顺序执行 -->
+		<mvc:interceptor>		
+		 	<!-- 如果不配置或/*,将拦截所有的Controller -->
+			<mvc:mapping path="/game/chart/**" /><!-- 如果不配置或/*,将拦截所有的Controller -->
+			<mvc:exclude-mapping path="/game/chart/queryAssistAction"/>
+			<mvc:exclude-mapping path="/game/chart/queryMissingValue"/>
+			
+			<bean class="com.winterframework.firefrog.session.interceptor.PathInterceptor">			             
+				<property name="pathMap">
+					<map>
+					<entry key="staticFileContextPath"><value>${static.resources.path}</value></entry>
+					<entry key="userContextPath"><value>${user.resources.path}</value></entry>
+					<entry key="adminContextPath"><value>${admin.resources.path}</value></entry>
+					 <entry key="projectName"><value>${project.name}</value></entry>
+					</map>
+				</property>
+			</bean>
+		</mvc:interceptor>
+
+        <!-- 前台界面访问的拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/2**" />
+            <mvc:exclude-mapping path="/game/chart/queryColdAndHotNumbers"/>
+            <mvc:exclude-mapping path="/game/chart/queryAssistAction"/>
+            <mvc:exclude-mapping path="/game/chart/queryTrendCharts"/>
+            <mvc:exclude-mapping path="/game/chart/queryMissingValue"/>
+            <mvc:exclude-mapping path="/game/chart/showVersion"/>
+            <bean class="com.winterframework.firefrog.session.interceptor.FrontUserAclInterceptor">
+            <property name="supportAnonymity" value="true"></property>
+            </bean>
+        </mvc:interceptor>
+        <!-- 前台界面指定IP白名單访问的拦截器攔截清單同 前台界面访问的拦截器 -->
+		<mvc:interceptor>
+            <mvc:mapping path="/2**" />
+            <mvc:exclude-mapping path="/game/chart/queryColdAndHotNumbers"/>
+            <mvc:exclude-mapping path="/game/chart/queryAssistAction"/>
+            <mvc:exclude-mapping path="/game/chart/queryTrendCharts"/>
+            <mvc:exclude-mapping path="/game/chart/queryMissingValue"/>
+            <mvc:exclude-mapping path="/game/chart/showVersion"/>
+            <bean class="com.winterframework.firefrog.session.interceptor.FrontUserWhiteListIpAclInterceptor">
+            </bean>
+        </mvc:interceptor>
+        
+		<bean id="localeChangeInterceptor"
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+		
+	</mvc:interceptors>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+
+	<!-- Allow Exceptions to be handled in annotated methods if desired. Otherwise 
+		fallback to the 'restExceptionResolver' below: -->
+	<bean id="annotationMethodHandlerExceptionResolver"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver" >
+		<property name="order" value="1" />
+	</bean>
+	<bean id="defaultExceptionResolver"
+		class="org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver">
+		<property name="order" value="0" />
+		
+	</bean>
+	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" /> 
+
+	
+
+</beans>
+ 

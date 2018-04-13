@@ -1,0 +1,774 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+	<bean id="gameBet" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+                <!--重庆时时彩-->
+                <entry key="cqssc">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.SSC}"/>
+                        <entry key="lotteryName" value="重庆时时彩"></entry>
+                        <entry key="Sixing">
+                            <map>
+                                <entry key="code" value="${groupCode.SX}"/>
+                                <entry key="view" value="ssc_sixing"/>
+                            </map>
+                        </entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="ssc_qiansan"/>
+                            </map>
+                        </entry>
+                        
+                        <entry key="Zhongsan">
+                            <map>
+                                <entry key="code" value="${groupCode.trend.ZS}"/>
+                                <entry key="view" value="ssc_zhongsan"/>
+                            </map>
+                        </entry>
+                        
+                        
+                        <entry key="Qianer">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="ssc_qianer"/>
+                            </map>
+                        </entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssc_housan"/>
+                            </map>
+                        </entry>
+                        <entry key="Houer">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="ssc_houer"/>
+                            </map>
+                        </entry>
+                        <entry key="Zonghe">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_zonghe"/>
+                                <entry key="isGeneral" value="0"/>
+                            </map>
+                        </entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_wuxing"/>
+                                <entry key="isGeneral" value="1"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="jxssc">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.JXSSC}"/>
+                        <entry key="lotteryName" value="江西时时彩"></entry>
+                        <entry key="Sixing">
+                            <map>
+                                <entry key="code" value="${groupCode.SX}"/>
+                                <entry key="view" value="ssc_sixing"/>
+                            </map>
+                        </entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="ssc_qiansan"/>
+                            </map>
+                        </entry>
+                        <entry key="Zhongsan">
+                            <map>
+                                <entry key="code" value="${groupCode.trend.ZS}"/>
+                                <entry key="view" value="ssc_zhongsan"/>
+                            </map>
+                        </entry>
+                        <entry key="Qianer">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="ssc_qianer"/>
+                            </map>
+                        </entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssc_housan"/>
+                            </map>
+                        </entry>
+                        <entry key="Houer">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="ssc_houer"/>
+                            </map>
+                        </entry>
+                        <entry key="Zonghe">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_zonghe"/>
+                                <entry key="isGeneral" value="0"/>
+                            </map>
+                        </entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_wuxing"/>
+                                <entry key="isGeneral" value="1"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="hljssc">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.HLJSSC}"/>
+                        <entry key="lotteryName" value="黑龙江时时彩"></entry>
+                        <entry key="Sixing">
+                            <map>
+                                <entry key="code" value="${groupCode.SX}"/>
+                                <entry key="view" value="ssc_sixing"/>
+                            </map>
+                        </entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="ssc_qiansan"/>
+                            </map>
+                        </entry>
+                        <entry key="Zhongsan">
+                            <map>
+                                <entry key="code" value="${groupCode.trend.ZS}"/>
+                                <entry key="view" value="ssc_zhongsan"/>
+                            </map>
+                        </entry>
+                        <entry key="Qianer">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="ssc_qianer"/>
+                            </map>
+                        </entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssc_housan"/>
+                            </map>
+                        </entry>
+                        <entry key="Houer">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="ssc_houer"/>
+                            </map>
+                        </entry>
+                        <entry key="Zonghe">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_zonghe"/>
+                                <entry key="isGeneral" value="0"/>
+                            </map>
+                        </entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_wuxing"/>
+                                <entry key="isGeneral" value="1"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="xjssc">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.XJSSC}"/>
+                        <entry key="lotteryName" value="新疆时时彩"></entry>
+                        <entry key="Sixing">
+                            <map>
+                                <entry key="code" value="${groupCode.SX}"/>
+                                <entry key="view" value="ssc_sixing"/>
+                            </map>
+                        </entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="ssc_qiansan"/>
+                            </map>
+                        </entry>
+                        <entry key="Zhongsan">
+                            <map>
+                                <entry key="code" value="${groupCode.trend.ZS}"/>
+                                <entry key="view" value="ssc_zhongsan"/>
+                            </map>
+                        </entry>
+                        <entry key="Qianer">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="ssc_qianer"/>
+                            </map>
+                        </entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssc_housan"/>
+                            </map>
+                        </entry>
+                        <entry key="Houer">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="ssc_houer"/>
+                            </map>
+                        </entry>
+                        <entry key="Zonghe">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_zonghe"/>
+                                <entry key="isGeneral" value="0"/>
+                            </map>
+                        </entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_wuxing"/>
+                                <entry key="isGeneral" value="1"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="tjssc">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.TJSSC}"/>
+                        <entry key="lotteryName" value="天津时时彩"></entry>
+                        <entry key="Sixing">
+                            <map>
+                                <entry key="code" value="${groupCode.SX}"/>
+                                <entry key="view" value="ssc_sixing"/>
+                            </map>
+                        </entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="ssc_qiansan"/>
+                            </map>
+                        </entry>
+                        <entry key="Zhongsan">
+                            <map>
+                                <entry key="code" value="${groupCode.trend.ZS}"/>
+                                <entry key="view" value="ssc_zhongsan"/>
+                            </map>
+                        </entry>
+                        <entry key="Qianer">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="ssc_qianer"/>
+                            </map>
+                        </entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssc_housan"/>
+                            </map>
+                        </entry>
+                        <entry key="Houer">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="ssc_houer"/>
+                            </map>
+                        </entry>
+                        <entry key="Zonghe">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_zonghe"/>
+                                <entry key="isGeneral" value="0"/>
+                            </map>
+                        </entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_wuxing"/>
+                                <entry key="isGeneral" value="1"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="llssc">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.LLSSC}"/>
+                        <entry key="lotteryName" value="宝开时时彩"></entry>
+                        <entry key="Sixing">
+                            <map>
+                                <entry key="code" value="${groupCode.SX}"/>
+                                <entry key="view" value="ssc_sixing"/>
+                            </map>
+                        </entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="ssc_qiansan"/>
+                            </map>
+                        </entry>
+                        <entry key="Zhongsan">
+                            <map>
+                                <entry key="code" value="${groupCode.trend.ZS}"/>
+                                <entry key="view" value="ssc_zhongsan"/>
+                            </map>
+                        </entry>
+                        <entry key="Qianer">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="ssc_qianer"/>
+                            </map>
+                        </entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssc_housan"/>
+                            </map>
+                        </entry>
+                        <entry key="Houer">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="ssc_houer"/>
+                            </map>
+                        </entry>
+                        <entry key="Zonghe">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_zonghe"/>
+                                <entry key="isGeneral" value="0"/>
+                            </map>
+                        </entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_wuxing"/>
+                                <entry key="isGeneral" value="1"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="slmmc">
+                    <map>
+                        <entry key="lotteryId" value="99112"/>
+                        <entry key="lotteryName" value="秒开时时彩"></entry>
+                        <entry key="Sixing">
+                            <map>
+                                <entry key="code" value="${groupCode.SX}"/>
+                                <entry key="view" value="ssc_sixing"/>
+                            </map>
+                        </entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="ssc_qiansan"/>
+                            </map>
+                        </entry>
+                        <entry key="Zhongsan">
+                            <map>
+                                <entry key="code" value="${groupCode.trend.ZS}"/>
+                                <entry key="view" value="ssc_zhongsan"/>
+                            </map>
+                        </entry>
+                        <entry key="Qianer">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="ssc_qianer"/>
+                            </map>
+                        </entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssc_housan"/>
+                            </map>
+                        </entry>
+                        <entry key="Houer">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="ssc_houer"/>
+                            </map>
+                        </entry>
+                        <entry key="Zonghe">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_zonghe"/>
+                                <entry key="isGeneral" value="0"/>
+                            </map>
+                        </entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_wuxing"/>
+                                <entry key="isGeneral" value="1"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="jlffc">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.JLFFC}"/>
+                        <entry key="lotteryName" value="宝开一分彩"></entry>
+                        <entry key="Sixing">
+                            <map>
+                                <entry key="code" value="${groupCode.SX}"/>
+                                <entry key="view" value="ssc_sixing"/>
+                            </map>
+                        </entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="ssc_qiansan"/>
+                            </map>
+                        </entry>
+                        <entry key="Zhongsan">
+                            <map>
+                                <entry key="code" value="${groupCode.trend.ZS}"/>
+                                <entry key="view" value="ssc_zhongsan"/>
+                            </map>
+                        </entry>
+                        <entry key="Qianer">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="ssc_qianer"/>
+                            </map>
+                        </entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssc_housan"/>
+                            </map>
+                        </entry>
+                        <entry key="Houer">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="ssc_houer"/>
+                            </map>
+                        </entry>
+                        <entry key="Zonghe">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_zonghe"/>
+                                <entry key="isGeneral" value="0"/>
+                            </map>
+                        </entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_wuxing"/>
+                                <entry key="isGeneral" value="1"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="txffc">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.TXFFC}"/>
+                        <entry key="lotteryName" value="腾讯分分彩"></entry>
+                        <entry key="Sixing">
+                            <map>
+                                <entry key="code" value="${groupCode.SX}"/>
+                                <entry key="view" value="ssc_sixing"/>
+                            </map>
+                        </entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="ssc_qiansan"/>
+                            </map>
+                        </entry>
+                        <entry key="Zhongsan">
+                            <map>
+                                <entry key="code" value="${groupCode.ZHONGSAN}"/>
+                                <entry key="view" value="ssc_zhongsan"/>
+                            </map>
+                        </entry>
+                        <entry key="Qianer">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="ssc_qianer"/>
+                            </map>
+                        </entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssc_housan"/>
+                            </map>
+                        </entry>
+                        <entry key="Houer">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="ssc_houer"/>
+                            </map>
+                        </entry>
+                        <entry key="Zonghe">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_zonghe"/>
+                                <entry key="isGeneral" value="0"/>
+                            </map>
+                        </entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.WX}"/>
+                                <entry key="view" value="ssc_wuxing"/>
+                                <entry key="isGeneral" value="1"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <!-- 上海时时乐 -->
+                <entry key="shssl">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.SHSSL}"/>
+                        <entry key="lotteryName" value="上海时时乐"></entry>
+                        <entry key="Housan">
+                            <map>
+                                <entry key="code" value="${groupCode.HS}"/>
+                                <entry key="view" value="ssl_housan"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                
+                <!--福彩3d-->
+                <entry key="d3">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.3D}"/>
+                        <entry key="lotteryName" value="福彩3D"></entry>
+                        <entry key="Qiansan">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="d3"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <!--快乐8-->
+                <entry key="kl8">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.BJKL8}"/>
+                        <entry key="lotteryName" value="北京快乐8"></entry>
+                        <entry key="Quwei">
+                            <map>
+                                <entry key="code" value="${groupCode.QW}"/>
+                                <entry key="view" value="kl8chart"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <!--115-->
+                <entry key="sd115">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.SD115}"/>
+                        <entry key="lotteryName" value="山东11选5"></entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.X5}"/>
+                                <entry key="view" value="n115_wuxing"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="jx115">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.JX115}"/>
+                        <entry key="lotteryName" value="江西11选5"></entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.X5}"/>
+                                <entry key="view" value="n115_wuxing"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="gd115">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.GD115}"/>
+                        <entry key="lotteryName" value="广东11选5"></entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.X5}"/>
+                                <entry key="view" value="n115_wuxing"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="cq115">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.CQ115}"/>
+                        <entry key="lotteryName" value="重庆11选5"></entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.X5}"/>
+                                <entry key="view" value="n115_wuxing"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="ll115">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.LL115}"/>
+                        <entry key="lotteryName" value="宝开11选5"></entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.X5}"/>
+                                <entry key="view" value="n115_wuxing"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <entry key="js115">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.JS115}"/>
+                        <entry key="lotteryName" value="江苏11选5"></entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.X5}"/>
+                                <entry key="view" value="n115_wuxing"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                 <entry key="sl115">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.SL115}"/>
+                        <entry key="lotteryName" value="秒开11选5"></entry>
+                        <entry key="Wuxing">
+                            <map>
+                                <entry key="code" value="${groupCode.X5}"/>
+                                <entry key="view" value="n115_wuxing"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <!--排列5-->
+                <entry key="p5">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.p5}"/>
+                        <entry key="lotteryName" value="排列5"></entry>
+                        <entry key="p5chart">
+                            <map>
+                                <entry key="code" value="${groupCode.p5YX}"/>
+                                <entry key="view" value="p5chart"/>
+                            </map>
+                        </entry>
+                        <entry key="p5charth2">
+                            <map>
+                                <entry key="code" value="${groupCode.p5HE}"/>
+                                <entry key="view" value="p5charth2"/>
+                            </map>
+                        </entry>
+                        <entry key="p3chart">
+                            <map>
+                                <entry key="code" value="${groupCode.QS}"/>
+                                <entry key="view" value="p3chart"/>
+                            </map>
+                        </entry>
+                        <entry key="p3chartq2">
+                            <map>
+                                <entry key="code" value="${groupCode.QE}"/>
+                                <entry key="view" value="p3chartq2"/>
+                            </map>
+                        </entry>
+                        <entry key="p3charth2">
+                            <map>
+                                <entry key="code" value="${groupCode.HE}"/>
+                                <entry key="view" value="p3charth2"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                <!--双色球-->
+                <entry key="ssq">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.SSQ}"/>
+                        <entry key="lotteryName" value="双色球"></entry>
+                        <entry key="ssq_basic">
+                            <map>
+                                <entry key="code" value="32"/>
+                                <entry key="view" value="ssq_basic"/>
+                            </map>
+                        </entry>
+                        <entry key="ssq_blueball">
+                            <map>
+                                <entry key="code" value="34"/>
+                                <entry key="view" value="ssq_blueball"/>
+                            </map>
+                        </entry>
+                        <entry key="ssq_redball">
+                            <map>
+                                <entry key="code" value="33"/>
+                                <entry key="view" value="ssq_redball"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                
+                 <!--快乐8-->
+                <entry key="jsk3">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.JSK3}"/>
+                        <entry key="lotteryName" value="江苏快三"></entry>
+                        <entry key="chart">
+                            <map>
+                                <entry key="code" value="${groupCode.HEZHI}"/>
+                                <entry key="view" value="k3chart"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                
+                <entry key="ahk3">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.AHK3}"/>
+                        <entry key="lotteryName" value="安徽快三"></entry>
+                        <entry key="chart">
+                            <map>
+                                <entry key="code" value="${groupCode.HEZHI}"/>
+                                <entry key="view" value="k3chart"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                
+                <entry key="jsdice">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.JSK3}"/>
+                        <entry key="lotteryName" value="江苏骰宝"></entry>
+                        <entry key="chart">
+                            <map>
+                                <entry key="code" value="${groupCode.HEZHI}"/>
+                                <entry key="view" value="k3chart"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                
+                <entry key="jldice1">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.JLSB}"/>
+                        <entry key="lotteryName" value="高频骰宝(娱乐厅)"></entry>
+                        <entry key="chart">
+                            <map>
+                                <entry key="code" value="${groupCode.HEZHI}"/>
+                                <entry key="view" value="k3chart"/>	
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+                
+                <entry key="jldice2">
+                    <map>
+                        <entry key="lotteryId" value="${lottery.JLSBV}"/>
+                        <entry key="lotteryName" value="高频骰宝(至尊厅)"></entry>
+                        <entry key="chart">
+                            <map>
+                                <entry key="code" value="${groupCode.HEZHI}"/>
+                                <entry key="view" value="k3chart"/>
+                            </map>
+                        </entry>
+                    </map>
+                </entry>
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>
