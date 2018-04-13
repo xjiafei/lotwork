@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.help.dao.vo.HelpCategoryVO">
+	<resultMap id="HelpCategoryResult" type="com.winterframework.firefrog.help.dao.vo.HelpCategoryVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="helpCategoryColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	C_NAME as cname,
+	        	C_LEVEL as clevel,
+	        	C_NO as cno,
+	        	GMT_CREATED as gmtCreated,
+	        	CREATOR as creator,
+	        	P_ID as pid
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.help.dao.vo.HelpCategoryVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_HELP_CATEGORY_ID.Nextval from dual
+	   	</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        HELP_CATEGORY (
+	        	ID ,
+	        	C_NAME ,
+	        	C_LEVEL ,
+	        	C_NO ,
+	        	GMT_CREATED ,
+	        	CREATOR ,
+	        	P_ID 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{cname,javaType=string,jdbcType=VARCHAR} ,
+	        	#{clevel,javaType=long,jdbcType=DECIMAL} ,
+	        	#{cno,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{creator,javaType=long,jdbcType=DECIMAL} ,
+	        	#{pid,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.help.dao.vo.HelpCategoryVO">
+	        UPDATE HELP_CATEGORY 
+	        <set>
+	        	<if test="@Ognl@isNotEmpty(cname)">
+		        C_NAME = #{cname,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(clevel)">
+		        C_LEVEL = #{clevel,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(cno)">
+		        C_NO = #{cno,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(pid)">
+		        P_ID = #{pid,javaType=long,jdbcType=DECIMAL} 
+		        </if>
+		    </set>
+	        WHERE 
+		        ID = #{id} 
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from HELP_CATEGORY where
+		        ID = #{id} or P_ID = #{id}
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="HelpCategoryResult" flushCache="false">
+			select <include refid="helpCategoryColumns" />
+		    <![CDATA[
+			    from HELP_CATEGORY 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="HelpCategoryResult" flushCache="false">
+			select <include refid="helpCategoryColumns" />
+			    from HELP_CATEGORY 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="helpCategoryDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(cname)">
+				and C_NAME = #{cname}
+			</if>
+	       <if test="@Ognl@isNotEmpty(clevel)">
+				and C_LEVEL = #{clevel}
+			</if>
+	       <if test="@Ognl@isNotEmpty(cno)">
+				and C_NO = #{cno}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(creator)">
+				and CREATOR = #{creator}
+			</if>
+	       <if test="@Ognl@isNotEmpty(pid)">
+				and P_ID = #{pid}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="getNoWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(pid)">
+				and P_ID = #{pid}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="HelpCategoryResult"  flushCache="false">
+    	select <include refid="helpCategoryColumns" />
+	    from HELP_CATEGORY 
+		<include refid="helpCategoryDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+    
+    <select id="getHelpCategorys" resultMap="HelpCategoryResult" parameterType="com.winterframework.firefrog.help.dao.vo.HelpCategoryVO" flushCache="false">
+    	select <include refid="helpCategoryColumns" />
+	    from HELP_CATEGORY 
+	    <include refid="helpCategoryDynamicWhere"/>
+	    ORDER BY C_NO desc
+    </select>
+    
+    <select id="getNo" resultType="long" parameterType="com.winterframework.firefrog.help.dao.vo.HelpCategoryVO" flushCache="false">
+    	select NVL(MAX(C_NO),0)+1
+	    from HELP_CATEGORY 
+	     <include refid="getNoWhere"/> 
+    </select>
+    
+    
+	<select id="getCount" resultType="long">
+        select count(*) from HELP_CATEGORY 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from HELP_CATEGORY 
+		<include refid="helpCategoryDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="HelpCategoryResult">
+    	select <include refid="helpCategoryColumns" />
+	    from HELP_CATEGORY 
+		<include refid="helpCategoryDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

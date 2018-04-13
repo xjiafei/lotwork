@@ -1,0 +1,300 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+
+	<!-- 金额验证 -->									 	
+	<bean id="k3BetTotalMoneyValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.money.BetTotalMoneyValidateExecutor" />
+	
+	<!-- 和值和跨度包胆注数验证 -->
+	<bean id="k3BetNumberHZAndKDValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberHZAndKDAndBDValidateExecutor" />
+	
+	<bean id="k3FormatHZandKDValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatHZandKDValidateExecutor">
+        <property name="HZandKDRangeMapConfig">
+            <bean class="com.winterframework.firefrog.phone.web.validate.business.HZandKDRangeMapConfig">
+                <property name="HZandKDRangeMap">
+                    <map>
+                        <entry key="${groupCode.HEZHI}${setCode.HEZHI}${methodCode.HEZHI}">
+                            <value>${range.hz.hz.hz}</value>
+                        </entry>
+                    </map>
+                </property>
+            </bean>
+        </property>
+    </bean>
+	
+	<!-- 三同号格式验证 -->
+	<bean id="k3STHFormatValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.K3STHFormatValidateExecutor" />
+	
+	<bean id="k3ValidateNumberMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="${groupCode.SBTH}" value="3" />
+				<entry key="${groupCode.EBTH}" value="2" />
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="k3FormatTDValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.format.K3FormatTDValidateExecutor">
+		<property name="numMap" ref="k3ValidateNumberMap" />
+	</bean>
+	
+	<bean id="k3NumberTDValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.K3NumberTDValidateExecutor">
+		<property name="numMap" ref="k3ValidateNumberMap" />
+	</bean>
+	
+	<bean id="k3FormatBZValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.format.K3FormatBZValidateExecutor">
+		 <property name="rangeMapConfig">
+            <bean class="com.winterframework.firefrog.phone.web.validate.business.HZandKDRangeMapConfig">
+                <property name="HZandKDRangeMap">
+                    <map>
+                        <entry key="${groupCode.SBTH}${setCode.SBTH}${methodCode.BIAOZHUN}">
+                            <value>${range.sbth.sbth.bz}</value>
+                        </entry>
+                         <entry key="${groupCode.EBTH}${setCode.EBTH}${methodCode.BIAOZHUN}">
+                            <value>${range.ebth.ebth.bz}</value>
+                        </entry>
+                    </map>
+                </property>
+                
+            </bean>
+        </property>
+	</bean>
+	
+	<bean id="k3BetNumberBZValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.K3BetNumberBZValidateExecutor">
+		<property name="k3BzMapConfig" ref="k3BzMapConfig"></property>
+	</bean>
+
+
+	<bean id="k3BzMapConfig" class="com.winterframework.firefrog.phone.web.validate.business.MethodCodeSingleBetNumberMapConfig">
+		<property name="methodCodeSingleBetNumberMap">
+			<map>
+				<!-- 不定位趣味参数配置开始 -->
+				<entry key="${groupCode.SBTH}${setCode.SBTH}${methodCode.BIAOZHUN}">
+					<value>${singleBetNumber.three}</value>
+				</entry>
+				<entry key="${groupCode.EBTH}${setCode.EBTH}${methodCode.BIAOZHUN}">
+					<value>${singleBetNumber.two}</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	
+	<!-- 三连号格式验证 -->
+	<bean id="k3SLHFormatValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.K3SLHFormatValidateExecutor" />
+	
+	<!-- 二同号复选格式验证 -->
+	<bean id="k3EthfxFormatValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.K3EthfxFormatValidateExecutor" />
+	
+	<!-- 二同号单选格式验证 -->
+	<bean id="k3EthdxFormatValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.K3EthdxFormatValidateExecutor" />
+	
+	<!-- 一不同号 -->
+	<bean id="k3YbthFormatValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.K3YbthFormatValidateExecutor" />
+	
+	
+	
+	<bean id="k3Validators" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.HEZHI}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3FormatHZandKDValidateExecutor" />
+								<ref bean="k3BetNumberHZAndKDValidateExecutor" />
+								<ref bean="k3BetTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+					<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.STHTX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3STHFormatValidateExecutor" />
+								<ref bean="k3BetNumberHZAndKDValidateExecutor" />
+								<ref bean="k3BetTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.STHDX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3STHFormatValidateExecutor" />
+								<ref bean="k3BetNumberHZAndKDValidateExecutor" />
+								<ref bean="k3BetTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<!-- k3拖胆格式 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.DT}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3FormatTDValidateExecutor" />
+								<ref bean="k3NumberTDValidateExecutor" />
+								<ref bean="k3BetTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<!-- k3不同号标准格式 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.BIAOZHUN}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3FormatBZValidateExecutor" />
+								<ref bean="k3BetNumberBZValidateExecutor" />
+								<ref bean="k3BetTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<!-- k3 3连号通选-->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.SLHTX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3SLHFormatValidateExecutor" />
+								<ref bean="k3BetTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				
+				<entry>
+					<key>
+						<!-- k3 二同号复选-->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ETHFX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3EthfxFormatValidateExecutor" />
+								<ref bean="k3BetTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<!-- k3 二同号单选-->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ETHDX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3EthdxFormatValidateExecutor" />
+								<ref bean="k3BetTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				
+				<entry>
+					<key>
+						<!-- k3 一不同号-->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.YBTH}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3YbthFormatValidateExecutor" />
+								<ref bean="k3BetTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				
+				
+				
+				
+
+			</map>
+		</constructor-arg>
+	</bean>
+
+	
+	
+</beans>

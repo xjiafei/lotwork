@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserSlotExchangeActivity">
+	<resultMap id="UserSlotExchangeActivityResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserSlotExchangeActivity">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="userSlotExchangeActivityColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	NAME as name,
+	        	GMT_ACTIVITY_START as gmtActivityStart,
+	        	GMT_ACTIVITY_END as gmtActivityEnd,
+	        	STATUS as status,
+	        	GMT_CREATE as gmtCreate,
+	        	GMT_UPDATE as gmtUpdate
+	    ]]>
+	</sql>
+	
+	<sql id="userSlotExchangeActivityWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				AND ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(name)">
+				AND NAME = #{name}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtActivityStart)">
+				<![CDATA[
+					AND GMT_ACTIVITY_START >= #{gmtActivityStart}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtActivityEnd)">
+				<![CDATA[
+					AND GMT_ACTIVITY_END <= #{gmtActivityEnd}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				AND STATUS = #{status}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getUserSlotExchangeActivity"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserSlotExchangeActivity"
+		resultMap="UserSlotExchangeActivityResult" flushCache="false">
+		SELECT
+		<include refid="userSlotExchangeActivityColumns" />
+		FROM USER_SLOT_EXCHANGE_ACTIVITY
+		<include refid="userSlotExchangeActivityWhere" />
+	</select>
+	
+	<select id="getUserSlotExchangeActivityList" parameterType="list"
+		resultMap="UserSlotExchangeActivityResult" flushCache="false">
+		select
+		<include refid="userSlotExchangeActivityColumns" />
+		from USER_SLOT_EXCHANGE_ACTIVITY
+		<include refid="userSlotExchangeActivityWhere" />
+	</select>
+	
+	<insert id="insertUserSlotExchangeActivity"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserSlotExchangeActivity"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT USER_SLOT_EXCHANGE_ACTIVITY_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        USER_SLOT_EXCHANGE_ACTIVITY (
+	        	ID,
+	        	NAME,
+	        	GMT_ACTIVITY_START,
+	        	GMT_ACTIVITY_END,
+	        	STATUS,
+	        	GMT_CREATE,
+	        	GMT_UPDATE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL},
+	        	#{name,javaType=string,jdbcType=VARCHAR},
+	        	#{status,javaType=long,jdbcType=DECIMAL},
+	        	#{gmtActivityStart,javaType=object,jdbcType=TIMESTAMP},
+	        	#{gmtActivityEnd,javaType=object,jdbcType=TIMESTAMP},
+	        	#{gmtCreate,javaType=object,jdbcType=TIMESTAMP},
+	        	#{gmtUpdate,javaType=object,jdbcType=TIMESTAMP}
+	        )
+	    ]]>
+
+	</insert>
+	
+	<update id="updateUserSlotExchangeActivity"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserSlotExchangeActivity">
+		UPDATE USER_SLOT_EXCHANGE_ACTIVITY
+		<set>
+			<if test="@Ognl@isNotEmpty(name)">
+				NAME = #{name,javaType=string,jdbcType=VARCHAR},
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtActivityStart)">
+				GMT_ACTIVITY_START = #{gmtActivityStart,javaType=object,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtActivityEnd)">
+				GMT_ACTIVITY_END = #{gmtActivityEnd,javaType=object,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(exchangePrize)">
+				GMT_UPDATE = #{gmtUpdate,javaType=object,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+
+</mapper>

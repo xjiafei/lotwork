@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.winterframework.firefrog.*"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<bean class="com.winterframework.modules.utils.SpringContextHolder"/>
+	<context:component-scan base-package="com.winterframework.modules.spring.exetend" />
+	<context:component-scan base-package="com.winterframework.modules.spring.console" />
+	
+	<!-- 转换message为json类型输出 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.FirefrogHttpMessageConverter">
+				<property name="prettyPrint" value="true" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
+	<mvc:default-servlet-handler />
+	
+	<bean id="propertyConfigurer"
+		class="com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/application.properties</value>
+				<value>classpath:/serverUrlPath.properties</value>
+				<value>classpath:/upload.properties</value>
+				<value>file:/usr/local/config/firefrog_web.properties</value>
+				<value>file:C:/config/firefrog_web.properties</value>
+				<value>classpath:/loginMock.properties</value> 
+				<value>classpath:/uwebversion.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<bean id="localeChangeInterceptor"
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+
+		<!-- 与全局session相关的拦截器配置 -->
+		<!--拦截所有界面的拦截器 -->
+      <mvc:interceptor>
+			<mvc:mapping path="/**" /><!-- 如果不配置或/*,将拦截所有的Controller -->
+			<bean class="com.winterframework.firefrog.session.interceptor.PathInterceptor">
+				<property name="loginCookie" value="_fracid"/>
+				<property name="pathMap">
+					<map>
+					<entry key="staticFileContextPath"><value>${static.resources.path}</value></entry>
+					<entry key="gamecenterPath"><value>${url.gamecenter.path}</value></entry>
+					<entry key="frontGame"><value>${url.frontgame.path}</value></entry>
+					<entry key="frontContextPath"><value>${url.front.domain}</value></entry>
+					<entry key="ptGameServer"><value>${pt.server.path}</value></entry>
+					</map>					
+				</property>
+			</bean>
+		</mvc:interceptor>
+
+		<!-- 前台界面访问的拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/help/**" />
+			<mvc:mapping path="/ad/**" />
+			<mvc:mapping path="/api/**" />
+			<mvc:exclude-mapping path="/help/addFeedBack*"/>
+			<mvc:exclude-mapping path="/api/jsonp/getAdverts*"/>
+			<bean class="com.winterframework.firefrog.session.interceptor.FrontUserAclInterceptor">
+			</bean>
+		</mvc:interceptor>
+		<!-- 前台界面指定IP白名單访问的拦截器攔截清單同 前台界面访问的拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/help/**" />
+			<mvc:mapping path="/ad/**" />
+			<mvc:mapping path="/api/**" />
+			<mvc:exclude-mapping path="/help/addFeedBack*"/>
+			<mvc:exclude-mapping path="/api/jsonp/getAdverts*"/>
+			<bean class="com.winterframework.firefrog.session.interceptor.FrontUserWhiteListIpAclInterceptor">
+			</bean>
+		</mvc:interceptor>
+			<!-- 后台界面访问的拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/adAdmin/**" />
+			<mvc:mapping path="/aclAdmin/**" />
+			<mvc:mapping path="/globeAdmin/**" />
+			<mvc:mapping path="/helpAdmin/**" />
+			<mvc:mapping path="/noticeAdmin/**" />
+			<mvc:mapping path="/fundAdmin2/**" />
+			<mvc:mapping path="/channel/**" />
+			<mvc:mapping path="/begin/**" />			
+			<bean class="com.winterframework.firefrog.session.interceptor.AdminUserAclInterceptor">
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
+	<bean
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+
+	<!-- Allow Exceptions to be handled in annotated methods if desired. Otherwise 
+		fallback to the 'restExceptionResolver' below: -->
+	<bean id="annotationMethodHandlerExceptionResolver"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver" >
+		<property name="order" value="1" />
+	</bean>
+	<bean id="defaultExceptionResolver"
+		class="org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver">
+		<property name="order" value="0" />
+		
+	</bean>
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
+
+</beans>
+ 

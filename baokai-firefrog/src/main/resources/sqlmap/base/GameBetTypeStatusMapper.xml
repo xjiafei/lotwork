@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.GameBettypeStatus">
+	<resultMap id="GameBetTypeStatusResult" type="com.winterframework.firefrog.fund.dao.vo.GameBettypeStatus">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Columns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryId,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	THEORY_BONUS as theoryBonus,
+	        	BET_TYPE_CODE,
+	        	ORDERBY as orderBy,
+	        	GROUP_CODE_NAME as groupCodeName,
+	        	SET_CODE_NAME as setCodeName,
+	        	METHOD_CODE_NAME as methodCodeName,
+	        	GROUP_CODE_TITLE as groupCodeTitle,
+	        	SET_CODE_TITLE as setCodeTitle,
+	        	METHOD_CODE_TITLE as methodCodeTitle
+	    ]]>
+	</sql>
+
+	<!-- 抓super2000的玩法betTypeCode -->
+	<select id="getSuper2000BetTypeCode" resultType="java.lang.String">
+    	SELECT DISTINCT(BET_TYPE_CODE) FROM GAME_BETTYPE_STATUS 
+		WHERE GROUP_CODE_NAME like '%_2000' ORDER BY BET_TYPE_CODE DESC 
+    </select>
+    
+    <!-- 抓super2000四級玩法betTypeCode -->
+    <select id="getSuper2000FOURLvlBtc" resultType="java.lang.String">
+    	SELECT DISTINCT(a.GAME_GROUP_CODE||'_'||a.GAME_SET_CODE||'_'||a.BET_METHOD_CODE||'_'||b.METHOD_TYPE) AS betTypeCode
+		FROM GAME_BETTYPE_STATUS a , GAME_BETTYPE_ASSIST b 
+		WHERE a.ID = b.BETTYPEID AND a.GAME_GROUP_CODE in 
+		(SELECT DISTINCT(GAME_GROUP_CODE) FROM GAME_BETTYPE_STATUS WHERE GROUP_CODE_NAME LIKE '%_2000')
+    </select>
+    
+    <!-- 抓super2000玩家的活動投注量 -->
+    <select id="getSuper2000TotalBets" resultType="long">
+    	SELECT NVL(SUM(a.TOTAMOUNT),0) FROM GAME_ORDER a , GAME_SLIP b 
+    	<![CDATA[
+	    	WHERE a.ID = b.ORDERID 
+	    	AND a.ORDER_TIME >= #{startTime} AND a.ORDER_TIME < #{endTime}
+	    ]]>
+    	AND a.USERID=(SELECT ID FROM USER_CUSTOMER WHERE id = #{userId})
+		AND a.STATUS in (2,3) AND a.LOTTERYID IN 
+		<foreach collection="lotsList" item="item" index="index" open="(" close=")" separator=",">
+			#{item}  
+	    </foreach>
+		AND b.BET_TYPE_CODE in 
+		<foreach collection="betTypeCodes" item="item" index="index" open="(" close=")" separator=",">  
+	        #{item}  
+	    </foreach>
+    </select>
+    
+    <!-- 抓玩家的彩種投注量 -->
+    <select id="getTotalBets" resultType="long">
+    	SELECT NVL(SUM(b.TOTAMOUNT + b.DIAMOND_AMOUNT),0) FROM GAME_ORDER a , GAME_SLIP b 
+    	<![CDATA[
+	    	WHERE a.ID = b.ORDERID 
+	    	AND a.ORDER_TIME >= #{startTime} AND a.ORDER_TIME < #{endTime}
+	    ]]>
+    	AND a.USERID=(SELECT ID FROM USER_CUSTOMER WHERE id = #{userId})
+		AND a.STATUS in (2,3) AND a.LOTTERYID IN 
+		<foreach collection="lotsList" item="item" index="index" open="(" close=")" separator=",">
+			#{item}  
+	    </foreach>
+    </select>
+	
+	
+	
+
+	
+</mapper>

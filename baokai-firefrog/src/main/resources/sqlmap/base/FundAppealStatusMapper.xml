@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundAppealStatusVO">
+	<resultMap id="fundAppealStatusResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundAppealStatusVO">
+	</resultMap>
+	
+	<resultMap id="fundChargeAppealVO" 
+		type="com.winterframework.firefrog.fund.dao.vo.FundChargeAppealVO">
+	</resultMap>
+	
+
+	<sql id="fundAppealStatusWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+			<choose>
+			    <when test="@Ognl@isNotEmpty(status) and status ==1"> <!--status 4 is review -->
+			      and STATUS in (1,4)
+			    </when>
+			    <when test="@Ognl@isNotEmpty(status)">
+			      and STATUS =#{status}
+			    </when>
+			</choose>
+			<if test="@Ognl@isNotEmpty(appealSn)">
+				and APPEAL_SN = #{appealSn}
+			</if>
+			<if test="@Ognl@isNotEmpty(fundSn)">
+				and FUND_SN = #{fundSn}
+			</if>
+			<if test="@Ognl@isNotEmpty(startDate)">
+				and TRUNC(ARGUE_TIME) >= TRUNC(#{startDate})
+			</if>
+			<if test="@Ognl@isNotEmpty(endDate)">
+				<![CDATA[
+					and ARGUE_TIME < TRUNC(#{endDate})+1
+				]]>
+			</if>
+		</where>
+	</sql>
+
+	<select id="queryFundAppealCount" resultType="long">
+		SELECT COUNT(0)
+		FROM VIEW_FUND_APPEAL_STATUS
+		<include refid="fundAppealStatusWhere" />
+		AND STATUS != 0
+	</select>
+
+	<select id="queryFundAppealList" resultMap="fundAppealStatusResult">
+	SELECT * FROM (	
+		SELECT ROWNUM ROW_NUM,
+			USER_ID AS userId,
+			ACCOUNT AS account,
+			APPEAL_SN AS appealSn,
+			APPEAL_TYPE AS type,
+			APPEAL_TIME AS appealTime,
+			ARGUE_TIME AS argueTime,
+			CREATOR AS 	appealCreator,
+			MEMO AS memo,
+			STATUS AS status,
+			FUND_SN AS fundSn,
+			FUND_AMT AS fundAmt,
+			FUND_TIME AS fundTime,
+			FUND_CARD AS fundCard,
+			FUND_CARD_USER AS fundCardUser,
+			DEPOSITE_MODE AS depositeMode,
+			BANK_NAME AS bankName,
+			TENPAY_ACCOUNT AS tenpayAccount,
+			TENPAY_NAME AS tenpayName,
+			CHARGE_MEMO AS chargeMemo,
+			IS_SEPERATE AS isSeperate
+		 FROM (
+			SELECT 
+				*
+			FROM VIEW_FUND_APPEAL_STATUS
+			<include refid="fundAppealStatusWhere" />
+			AND STATUS != 0
+			ORDER BY ARGUE_TIME DESC
+		) RESULT
+		<where>
+		<if test="@Ognl@isNotEmpty(endNo)">
+				<![CDATA[
+					and ROWNUM <= #{endNo}
+				]]>
+			</if>
+		</where>
+			
+		)	<where>
+			<if test="@Ognl@isNotEmpty(startNo)">
+				<![CDATA[
+					and ROW_NUM >= #{startNo}
+				]]>
+			</if>
+			</where>
+		
+	</select>
+	<select id="queryFundAppeal" parameterType="java.lang.String" resultMap="fundChargeAppealVO">
+		SELECT 
+			ID AS id,
+			USER_ID AS userId,
+		   ( select C.VIP_LVL from user_customer c where c.id = USER_ID) AS vipLvl,
+			APPEAL_SN AS appealSn,
+			APPEAL_STATUS AS appealStatus,
+			APPEAL_ACCT AS appealAcct,
+			REVIEW_START_TIME AS reviewStartTime,
+			REVIEW_END_TIME AS reviewEndTime,
+			APPEAL_MEMO AS appealMemo,
+			ARGUE_TIME AS argueTime,
+			ARGUE_ACCT AS argueAcct,
+			CHARGE_SN AS chargeSn,
+			CHARGE_MEMO AS chargeMemo,
+			CHARGE_USER_NAME AS chargeUserName,
+			CHARGE_AMT AS chargeAmt,
+			CHARGE_TIME AS chargeTime,
+			DEPOSITE_MODE AS depositeMode,
+			BANK_ID AS bankId,
+			BANK_NAME AS bankName,
+			BANK_CARD_NUMBER AS bankCardNumber,
+			ELECTRONIC_NUMBER AS electronicNumber,
+			UPLOAD_IMAGES AS uploadImages,
+			TENPAY_ACCOUNT AS tenpayAccount,	
+			TENPAY_NAME AS tenpayName,	
+			REVIEW_MEMO AS reviewMemo,
+			TRANSACTION_NUM AS transactionNum
+		FROM FUND_CHARGE_APPEAL
+		WHERE APPEAL_SN = #{appealSn}
+	</select>
+	
+	
+
+
+</mapper>

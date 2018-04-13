@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.acl.dao.vo.AclUserVO">
+	<resultMap id="AclUserResult"
+		type="com.winterframework.firefrog.acl.dao.vo.AclUserVO">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="aclUserColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACCOUNT as account,
+	        	GROUP_ID as groupId,
+	        	BIND_PASSWD as bindPasswd,
+	        	bind_card as bindCard,
+	        	CELLPHONE as cellphone,
+	        	TELEPHONE as telephone,
+	        	DEP as dep,
+	        	STATUS as status,
+	        	last_ip as lastIp,
+	        	PASSWD as passwd,
+	        	EMAIL as email,
+	        	GMT_CREATED as gmtCreated,
+	        	GMT_MODIFIED as gmtModified,
+	        	CREATEDER as createder,
+	        	MODIFIEDER as modifieder
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.acl.dao.vo.AclUserVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_ACL_USER_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        ACL_USER (
+	        	ID ,
+	        	ACCOUNT ,
+	        	GROUP_ID ,
+	        	BIND_PASSWD ,
+	        	CELLPHONE ,
+	        	TELEPHONE ,
+	        	DEP ,
+	        	STATUS ,
+	        	PASSWD ,
+	        	EMAIL ,
+	        	GMT_CREATED ,
+	        	GMT_MODIFIED ,
+	        	CREATEDER ,
+	        	MODIFIEDER,
+	        	last_ip,
+	        	bind_card
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{account,javaType=string,jdbcType=VARCHAR} ,
+	        	#{groupId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bindPasswd,javaType=string,jdbcType=VARCHAR} ,
+	        	#{cellphone,javaType=string,jdbcType=VARCHAR} ,
+	        	#{telephone,javaType=string,jdbcType=VARCHAR} ,
+	        	#{dep,javaType=string,jdbcType=VARCHAR} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{passwd,javaType=string,jdbcType=VARCHAR} ,
+	        	#{email,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{createder,javaType=string,jdbcType=VARCHAR} ,
+	        	#{modifieder,javaType=string,jdbcType=VARCHAR} ,
+	        	#{lastIp,javaType=long,jdbcType=DECIMAL},
+	        	#{bindCard,javaType=string,jdbcType=VARCHAR} 
+	        	 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.acl.dao.vo.AclUserVO">
+		UPDATE ACL_USER
+		<set>
+			<if test="@Ognl@isNotEmpty(account)">
+				ACCOUNT = #{account,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(groupId)">
+				GROUP_ID = #{groupId,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(bindPasswd)">
+				BIND_PASSWD = #{bindPasswd,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(bindCard)">
+				bind_card = #{bindCard,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(cellphone)">
+				CELLPHONE = #{cellphone,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(telephone)">
+				TELEPHONE = #{telephone,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(dep)">
+				DEP = #{dep,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(passwd)">
+				PASSWD = #{passwd,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				EMAIL = #{email,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(modifieder)">
+				MODIFIEDER = #{modifieder,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtModified)">
+				GMT_MODIFIED = #{gmtModified,javaType=date,jdbcType=TIMESTAMP} ,
+			</if> 
+			<if test="@Ognl@isNotEmpty(lastIp)">
+				last_ip = #{lastIp,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACL_USER where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getPasswdByBindCard" parameterType="java.lang.String" resultType="hashmap">
+	    <![CDATA[
+	        select bind_passwd from acl_card where
+		        card_number = #{card_number} 
+	    ]]>
+	</select>
+	<select id="getById" parameterType="long" resultMap="AclUserResult"
+		flushCache="false">
+		select
+		<include refid="aclUserColumns" />
+		    <![CDATA[
+			    from ACL_USER 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="AclUserResult"
+		flushCache="false">
+		select
+		<include refid="aclUserColumns" />
+		from ACL_USER
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="getByGroupIds" parameterType="list" resultMap="AclUserResult"
+		flushCache="false">
+		select
+		<include refid="aclUserColumns" />
+		from ACL_USER
+		where group_id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="aclUserDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT = #{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(groupId)">
+				and GROUP_ID = #{groupId}
+			</if>
+			<if test="@Ognl@isNotEmpty(bindPasswd)">
+				and BIND_PASSWD = #{bindPasswd}
+			</if>
+			<if test="@Ognl@isNotEmpty(cellphone)">
+				and CELLPHONE like '%${cellphone}%'
+			</if>
+			<if test="@Ognl@isNotEmpty(telephone)">
+				and TELEPHONE like '%${telephone}%'
+			</if>
+			<if test="@Ognl@isNotEmpty(dep)">
+				and DEP = #{dep}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(passwd)">
+				and PASSWD = #{passwd}
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				and EMAIL like '%${email}%'
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="AclUserResult" flushCache="false">
+		select
+		<include refid="aclUserColumns" />
+		from ACL_USER
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="queryUserByBindCard" resultMap="AclUserResult" flushCache="false" parameterType="string">
+		select
+		<include refid="aclUserColumns" />
+		from ACL_USER
+		where bind_card=#{bindCard}
+	</select>
+	
+	
+	<select id="getCount" resultType="long">
+		select count(*) from ACL_USER
+	</select>
+
+	<select id="getCountByPage" resultType="long">
+		select count(*)
+		from ACL_USER U,ACL_GROUP G
+		<where>
+			<if test="@Ognl@isNotEmpty(account)">
+				and UPPER(ACCOUNT) like UPPER('%${account}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(cellphone)">
+				and UPPER(CELLPHONE) like UPPER('%${cellphone}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(telephone)">
+				and UPPER(TELEPHONE) like UPPER('%${telephone}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				and UPPER(EMAIL) like UPPER('%${email}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(groupId)">
+				and GROUP_ID = #{groupId}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			and U.GROUP_ID=G.ID
+		</where>
+
+	</select>
+	<select id="getUserByAccount" resultMap="AclUserResult"
+		parameterType="com.winterframework.firefrog.acl.dao.vo.AclUserVO">
+		select * from ACL_USER U
+		<where>
+			<if test="@Ognl@isNotEmpty(account)">
+				ACCOUNT = #{account}
+			</if>
+		</where>
+	</select>
+
+
+	<select id="getByPage" resultMap="AclUserResult">
+		select
+		U.ID as id,
+		U.ACCOUNT as account,
+		U.GROUP_ID as groupId,
+		U.BIND_PASSWD as bindPasswd,
+		U.CELLPHONE as cellphone,
+		U.TELEPHONE as telephone,
+		U.DEP as dep,
+		U.STATUS as status,
+		U.PASSWD as passwd,
+		U.EMAIL as email,
+		G.NAME as groupName
+		from ACL_USER U,ACL_GROUP G
+		<where>
+			<if test="@Ognl@isNotEmpty(account)">
+				and UPPER(ACCOUNT) like UPPER('%${account}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(cellphone)">
+				and UPPER(CELLPHONE) like UPPER('%${cellphone}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(telephone)">
+				and UPPER(TELEPHONE) like UPPER('%${telephone}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				and UPPER(EMAIL) like UPPER('%${email}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(groupId)">
+				and GROUP_ID = #{groupId}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(bindPasswd)">
+				and BIND_PASSWD = #{bindPasswd}
+			</if>
+			and U.GROUP_ID=G.ID
+		</where>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+
+    <select id="getCountByPage_userList" resultType="long">
+        SELECT count(*) FROM (select U.ID          as id,
+        U.ACCOUNT     as account,
+        U.GROUP_ID    as groupId,
+        U.BIND_PASSWD as bindPasswd,
+        U.CELLPHONE   as cellphone,
+        U.TELEPHONE   as telephone,
+        U.DEP         as dep,
+        U.STATUS      as status,
+        U.PASSWD      as passwd,
+        U.EMAIL       as email,
+        G.NAME        as groupName,
+        U.GMT_CREATED AS GMT_CREATED
+        from ACL_USER u,
+        (select *
+        from ACL_GROUP G
+        start with G.id = #{id}
+        connect by prior G.id = G.pid) G
+        where u.group_id = G.id
+        )
+        <where>
+            groupId != #{id}
+            <if test="@Ognl@isNotEmpty(account)">
+                and UPPER(account) like UPPER('%${account}%')
+            </if>
+            <if test="@Ognl@isNotEmpty(cellphone)">
+                and UPPER(cellphone) like UPPER('%${cellphone}%')
+            </if>
+            <if test="@Ognl@isNotEmpty(telephone)">
+                and UPPER(telephone) like UPPER('%${telephone}%')
+            </if>
+            <if test="@Ognl@isNotEmpty(email)">
+                and UPPER(email) like UPPER('%${email}%')
+            </if>
+            <if test="@Ognl@isNotEmpty(groupId)">
+                and groupId = #{groupId}
+            </if>
+            <if test="@Ognl@isNotEmpty(status)">
+                and status = #{status}
+            </if>
+            <if test="@Ognl@isNotEmpty(bindPasswd)">
+                and bindPasswd = #{bindPasswd}
+            </if>
+        </where>
+        <if test="@Ognl@isNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+
+    </select>
+
+    <select id="getByPage_userList" resultMap="AclUserResult">
+	SELECT * FROM (select U.ID          as id,
+	       U.ACCOUNT     as account,
+	       U.GROUP_ID    as groupId,
+	       U.BIND_PASSWD as bindPasswd,
+	       U.CELLPHONE   as cellphone,
+	       U.TELEPHONE   as telephone,
+	       U.DEP         as dep,
+	       U.STATUS      as status,
+	       U.PASSWD      as passwd,
+	       U.EMAIL       as email,
+	       G.NAME        as groupName,
+	       U.GMT_CREATED AS GMT_CREATED
+	  from ACL_USER u,
+	       (select *
+	          from ACL_GROUP G
+	         start with G.id = #{id}
+	        connect by prior G.id = G.pid) G
+	 where u.group_id = G.id
+	)
+        <where>
+            groupId != #{id}
+            <if test="@Ognl@isNotEmpty(account)">
+                and UPPER(account) like UPPER('%${account}%')
+            </if>
+            <if test="@Ognl@isNotEmpty(cellphone)">
+                and UPPER(cellphone) like UPPER('%${cellphone}%')
+            </if>
+            <if test="@Ognl@isNotEmpty(telephone)">
+                and UPPER(telephone) like UPPER('%${telephone}%')
+            </if>
+            <if test="@Ognl@isNotEmpty(email)">
+                and UPPER(email) like UPPER('%${email}%')
+            </if>
+            <if test="@Ognl@isNotEmpty(groupId)">
+                and groupId = #{groupId}
+            </if>
+            <if test="@Ognl@isNotEmpty(status)">
+                and status = #{status}
+            </if>
+            <if test="@Ognl@isNotEmpty(bindPasswd)">
+                and bindPasswd = #{bindPasswd}
+            </if>
+        </where>
+        <if test="@Ognl@isNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+
+</mapper>

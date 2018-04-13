@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.GameAwardUserGroup">
+	<resultMap id="GameAwardUserGroupResult"
+		type="com.winterframework.firefrog.user.entity.GameAwardUserGroupVo">
+	</resultMap>
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameUserAwardGroupColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryId,
+	        	DIRECT_RET as directRet,
+	        	THREEONE_RET as threeoneRet,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	USERID as userid,
+	        	SET_TYPE as setType,
+	        	STATUS as status,
+	        	BET_TYPE as betType,  
+	        	SYS_AWARD_GROUP_ID as sysGroupAwardId
+	    ]]>
+	</sql>
+
+	<!-- 一代回收清除奖金组  -->
+	<update id="updateGameAwardGruopBetType"
+		parameterType="com.winterframework.firefrog.user.entity.GameAwardUserGroupDTO">
+	    <![CDATA[
+	        UPDATE 
+	        	GAME_AWARD_USER_GROUP 
+	        SET		        
+		        BET_TYPE = #{betType,javaType=int,jdbcType=DECIMAL}
+	        WHERE 
+		        USERID = #{userId} AND
+		        LOTTERYID NOT IN (
+		        	SELECT LOTTERYID FROM (
+						SELECT LOTTERYID,count(0) AS COUNT FROM GAME_AWARD_USER_GROUP 
+						WHERE USERID = #{userId}
+						GROUP BY LOTTERYID
+					)WHERE COUNT =1
+		        ) 
+	    ]]>
+	</update>
+	
+	<select id="getAwardByUserId" parameterType="com.winterframework.firefrog.user.entity.GameAwardUserGroupDTO" resultMap="GameAwardUserGroupResult"
+		flushCache="false">
+		select
+		<include refid="gameUserAwardGroupColumns" />
+		    <![CDATA[
+			    from GAME_AWARD_USER_GROUP 
+		        where 
+		        USERID = #{userId} AND LOTTERYID = #{lotteryId}
+		    ]]>
+	</select>
+
+
+</mapper>

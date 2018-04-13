@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.help.dao.vo.HelpKnowledgeVO">
+	<resultMap id="HelpKnowledgeResult" type="com.winterframework.firefrog.help.dao.vo.HelpKnowledgeVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="helpKnowledgeColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	NAME as name,
+	        	NO as no,
+	        	GMT_CREATE as gmtCreate,
+	        	CREATOR as creator,
+	        	GMT_MODIFIED as gmtModified,
+	        	MODIFIER as modifier
+	    ]]>
+	</sql>
+	
+	<select id="getHelpKnowledgeNo" resultType="long" flushCache="false">
+    	select NVL(MAX(no),0)+1
+	    from HELP_KNOWLEDGE 
+    </select>
+    
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.help.dao.vo.HelpKnowledgeVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_HELPKNOWLEDGE_ID.Nextval from dual
+	   	</selectKey>
+	   	
+	    <![CDATA[
+	        INSERT INTO
+	        HELP_KNOWLEDGE (
+	        	ID ,
+	        	NAME ,
+	        	NO ,
+	        	GMT_CREATE ,
+	        	CREATOR ,
+	        	GMT_MODIFIED ,
+	        	MODIFIER 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{name,javaType=string,jdbcType=VARCHAR} ,
+	        	#{no,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{creator,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{modifier,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.help.dao.vo.HelpKnowledgeVO">
+	        UPDATE HELP_KNOWLEDGE 
+	        	<set>
+	        	<if test="@Ognl@isNotEmpty(name)">
+		        NAME = #{name,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(no)">
+		        NO = #{no,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(gmtCreate)">
+		        GMT_CREATE = #{gmtCreate,javaType=object,jdbcType=TIMESTAMP} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(gmtModified)">
+		        GMT_MODIFIED = #{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(modifier)">
+		        MODIFIER = #{modifier,javaType=long,jdbcType=DECIMAL} 
+		        </if>
+		        </set>
+	        WHERE 
+		        ID = #{id} 
+		</update>
+		
+		<update id="updateName" parameterType="com.winterframework.firefrog.help.dao.vo.HelpKnowledgeVO">
+	    <![CDATA[
+	        UPDATE HELP_KNOWLEDGE SET
+		        NAME = #{name,javaType=string,jdbcType=VARCHAR}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+		<update id="updateNo" parameterType="com.winterframework.firefrog.help.dao.vo.HelpKnowledgeVO">
+	    <![CDATA[
+	        UPDATE HELP_KNOWLEDGE SET
+		        NO = #{no,javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from HELP_KNOWLEDGE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="HelpKnowledgeResult" flushCache="false">
+			select <include refid="helpKnowledgeColumns" />
+		    <![CDATA[
+			    from HELP_KNOWLEDGE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="HelpKnowledgeResult" flushCache="false">
+			select <include refid="helpKnowledgeColumns" />
+			    from HELP_KNOWLEDGE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="helpKnowledgeDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(name)">
+				and NAME = #{name}
+			</if>
+	       <if test="@Ognl@isNotEmpty(no)">
+				and NO = #{no}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreate)">
+				and GMT_CREATE = #{gmtCreate}
+			</if>
+	       <if test="@Ognl@isNotEmpty(creator)">
+				and CREATOR = #{creator}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtModified)">
+				and GMT_MODIFIED = #{gmtModified}
+			</if>
+	       <if test="@Ognl@isNotEmpty(modifier)">
+				and MODIFIER = #{modifier}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="HelpKnowledgeResult"  flushCache="false">
+    	select <include refid="helpKnowledgeColumns" />
+	    from HELP_KNOWLEDGE 
+		ORDER BY no asc
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from HELP_KNOWLEDGE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from HELP_KNOWLEDGE 
+		<include refid="helpKnowledgeDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="HelpKnowledgeResult">
+    	select <include refid="helpKnowledgeColumns" />
+	    from HELP_KNOWLEDGE 
+		<include refid="helpKnowledgeDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

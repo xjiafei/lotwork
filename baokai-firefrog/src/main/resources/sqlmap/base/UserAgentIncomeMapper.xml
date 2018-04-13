@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.UserAgentIncomeVO">
+	<resultMap id="UserAgentIncomeVOResult"
+		type="com.winterframework.firefrog.fund.dao.vo.UserAgentIncomeVO">
+	</resultMap>
+
+	<resultMap id="UserGameBettypeIncomeResult"
+		type="com.winterframework.firefrog.fund.dao.vo.UserGameBettypeIncome">
+	</resultMap>
+
+	<resultMap id="userCenterReportResult"
+		type="com.winterframework.firefrog.fund.dao.vo.UserCenterReportVo">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Columns">
+	    <![CDATA[
+	    		u.id as id,
+	     		u.ACCOUNT as account,
+	     		u.IS_FREEZE as isFreeze,
+	     		u.USER_LVL as userLvl,
+	     		t.TOTAMOUNT as bet,
+	      		t.EVALUATE_WIN as win,
+	        	t.RET as ret,
+	        	t.TOTAMOUNT - t.RET as trueBet,
+	        	t.EVALUATE_WIN- (t.TOTAMOUNT - t.RET) as result
+	    ]]>
+	</sql>
+
+	<sql id="DynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT = #{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(isFreeze)">
+				<choose>
+					<when test="isFreeze!=0">
+				<![CDATA[
+			    	 and IS_FREEZE >= 1
+			     ]]>
+					</when>
+					<otherwise>
+						and (IS_FREEZE = 0 or IS_FREEZE is null)
+					</otherwise>
+				</choose>
+			</if>
+			<if test="@Ognl@isNotEmpty(userLvl)">
+				and user_lvl = #{userLvl}
+			</if>
+			<if test="@Ognl@isNotEmpty(moneyMode)">
+				and (MONEY_MODE = #{moneyMode} or MONEY_MODE is null)
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryId)">
+				and (LOTTERYID = #{lotteryId} or LOTTERYID is null)
+			</if>
+			<if test="@Ognl@isNotEmpty(betTypeCode)">
+				and (BET_TYPE_CODE = #{betTypeCode} or BET_TYPE_CODE is
+				null)
+			</if>
+			<if test="@Ognl@isNotEmpty(startDate)">
+				and (CREATE_TIME >= #{startDate} or CREATE_TIME is null)
+			</if>
+			<if test="@Ognl@isNotEmpty(endDate)">
+	       		<![CDATA[
+				and (CREATE_TIME <= #{endDate} or CREATE_TIME is null)
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(parentId)">
+				and PARENT_ID = #{parentId}
+			</if>
+			<if test="@Ognl@isNotEmpty(id)">
+				and id = #{id}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="DynamicWhere1">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(account)">
+				and u.ACCOUNT = #{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(isFreeze)">
+				<choose>
+					<when test="isFreeze!=0">
+				<![CDATA[
+			    	 and u.IS_FREEZE >= 1
+			     ]]>
+					</when>
+					<otherwise>
+						and (u.IS_FREEZE = 0 or u.IS_FREEZE is null)
+					</otherwise>
+				</choose>
+			</if>
+			<if test="@Ognl@isNotEmpty(userLvl)">
+				and u.user_lvl = #{userLvl}
+			</if>
+			<if test="@Ognl@isNotEmpty(moneyMode)">
+				and (gs.MONEY_MODE = #{moneyMode} or gs.MONEY_MODE is
+				null)
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryId)">
+				and (gs.LOTTERYID = #{lotteryId} or gs.LOTTERYID is null)
+			</if>
+			<if test="@Ognl@isNotEmpty(betTypeCode)">
+				and (gs.BET_TYPE_CODE = #{betTypeCode} or
+				gs.BET_TYPE_CODE is null)
+			</if>
+			<if test="@Ognl@isNotEmpty(startDate)">
+				and (gs.CREATE_TIME >= #{startDate} or gs.CREATE_TIME is
+				null)
+			</if>
+			<if test="@Ognl@isNotEmpty(endDate)">
+	       		<![CDATA[
+				and (gs.CREATE_TIME <= #{endDate} or gs.CREATE_TIME is null)
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(parentId)">
+				and u.PARENT_ID = #{parentId}
+			</if>
+			<if test="@Ognl@isNotEmpty(id)">
+				and u.id = #{id}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="accountConditions">
+		<![CDATA[
+			(select id from USER_CUSTOMER where USER_CHAIN like ( select USER_CHAIN ||'%' from USER_CUSTOMER  where account=#{account}))
+		]]>
+	</sql>
+
+	<sql id="idConditions">
+		<![CDATA[
+			(select id from USER_CUSTOMER where USER_CHAIN like ( select USER_CHAIN ||'%' from USER_CUSTOMER  where id=#{id}))
+		]]>
+	</sql>
+
+	<select id="getUserAgentIncomes" resultMap="UserAgentIncomeVOResult"
+		parameterType="hashMap" flushCache="false">
+		select
+		<include refid="Columns" />
+		from(
+		select
+		id,
+		sum(TOTAMOUNT) as TOTAMOUNT,
+		sum(EVALUATE_WIN) as
+		EVALUATE_WIN,
+		sum(RET) as RET
+		from USER_AGENT_INCOME
+		<include refid="DynamicWhere" />
+		group by id
+		) t,USER_CUSTOMER u
+		where t.id = u.id
+	</select>
+
+	<select id="getUserIncomes" resultMap="UserAgentIncomeVOResult"
+		parameterType="hashMap" flushCache="false">
+		select
+		<include refid="Columns" />
+		from(
+		select
+		id,
+		sum(TOTAMOUNT) as TOTAMOUNT,
+		sum(EVALUATE_WIN) as
+		EVALUATE_WIN,
+		sum(RET) as RET
+		from USER_AGENT_INCOME
+		<include refid="DynamicWhere" />
+		group by id
+		) t,USER_CUSTOMER u
+		where t.id = u.id
+	</select>
+
+	<select id="getUserBetIncomes" resultMap="UserGameBettypeIncomeResult"
+		parameterType="hashMap" flushCache="false">
+		select
+		u.GAME_GROUP_CODE as gameGroupCode,
+		u.GAME_SET_CODE as
+		gameSetCode,
+		u.BET_METHOD_CODE as betMethodCode,
+		u.BET_TYPE_CODE as
+		betTypeCode,
+		u.GROUP_CODE_TITLE as groupCodeName,
+		u.SET_CODE_TITLE as
+		setCodeName,
+		u.METHOD_CODE_TITLE as methodCodeName,
+		t.TOTAMOUNT as bet,
+		t.EVALUATE_WIN as win,
+		t.RET as ret,
+		t.TOTAMOUNT - t.RET as trueBet,
+		t.EVALUATE_WIN- (t.TOTAMOUNT - t.RET) as result
+		from(
+		select
+		BET_TYPE_CODE,
+		sum(TOTAMOUNT) as TOTAMOUNT,
+		sum(EVALUATE_WIN) as
+		EVALUATE_WIN,
+		sum(RET) as RET
+		from USER_AGENT_INCOME
+		<include refid="DynamicWhere" />
+		group by BET_TYPE_CODE
+		) t,GAME_BETTYPE_STATUS u
+		where
+		t.BET_TYPE_CODE(+) = u.BET_TYPE_CODE
+		and u.LOTTERYID = #{lotteryId}
+	</select>
+
+
+
+	<resultMap id="GameBettypeStatusResult"
+		type="com.winterframework.firefrog.fund.dao.vo.GameBettypeStatus">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameBettypeStatusColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	THEORY_BONUS as theoryBonus,
+	        	GROUP_CODE_TITLE as groupCodeName,
+	        	SET_CODE_TITLE as setCodeName,
+	        	METHOD_CODE_TITLE as methodCodeName
+	    ]]>
+
+	</sql>
+
+	<select id="getGameBetTypes" resultMap="GameBettypeStatusResult"
+		parameterType="java.lang.Long" flushCache="false">
+		select
+		<include refid="gameBettypeStatusColumns" />
+		from GAME_BETTYPE_STATUS where LOTTERYID = #{lotteryId}
+	</select>
+
+	<!-- 新增查詢報表與前台相同 條件查詢(總代與默認查詢) -->
+	<select id="getUserReport" resultMap="UserAgentIncomeVOResult"
+		parameterType="hashMap" flushCache="false">
+		SELECT UC.ID    AS userId ,
+		  UC.id         AS id,
+		  UC.ACCOUNT    AS account,
+		  UC.IS_FREEZE  AS isFreeze,
+		  UC.user_lvl   AS userLvl,
+		  UC.user_chain AS userChain,
+		  A.bet         AS bet,
+		  A.win         AS win ,
+		  A.ret         AS ret,
+		  A.trueBet     AS trueBet,
+		  A.result      AS result,
+		  
+
+		  (
+		    select
+		      (CASE WHEN SUM(CT_BAL-BEFOR_BAL) IS NULL THEN 0 ELSE SUM(CT_BAL-BEFOR_BAL) END)
+		    from FUND_CHANGE_LOG
+		    where SUBSTR(REASON,4,4) = 'PGXX' 
+		    <![CDATA[
+			  AND GMT_CREATED >= #{startDate} AND GMT_CREATED <= #{endDate}
+			  AND GMT_CREATED > TRUNC(SYSDATE-7)
+		  	]]>
+		    and USER_ID in (SELECT id FROM USER_CUSTOMER CONNECT BY PRIOR id = parent_id START WITH account = #{account})
+		) as activityGifts
+		  
+		  
+		FROM
+		  (SELECT SUM(gor.total_amount) AS bet,
+		    SUM(NVL(gor.total_win,0))          AS win,
+		    SUM(NVL(gor.total_ret,0))          AS ret ,
+		    SUM(NVL(gor.total_bet,0))          AS trueBet,
+		    SUM(NVL(gor.total_result,0))       AS result 
+		  FROM GAME_ORDER_REPORT GOR
+		  WHERE USER_ID IN
+		    (SELECT ID
+		    FROM USER_CUSTOMER
+		    WHERE USER_CHAIN LIKE
+		      ( SELECT USER_CHAIN||'%' FROM USER_CUSTOMER WHERE account = #{account}
+		      )
+		    )
+		  <![CDATA[
+			  AND create_time >= #{startDate}
+			  AND create_time <= #{endDate}
+			  AND TRUNC(create_time) > TRUNC(SYSDATE-7)
+		  ]]>
+		<if test="@Ognl@isNotEmpty(lotteryId)">
+			and (LOTTERYID = #{lotteryId} or LOTTERYID is null)
+		</if>
+		)A, USER_CUSTOMER UC WHERE UC.ACCOUNT = #{account} AND (A.bet > 0 OR A.win > 0 OR A.ret > 0 OR A.trueBet > 0 OR A.result > 0 )
+		<if test="@Ognl@isNotEmpty(isFreeze)">
+			<choose>
+				<when test="isFreeze!=0">
+				<![CDATA[
+			    	 and UC.IS_FREEZE >= 1
+			     ]]>
+				</when>
+				<otherwise>
+					and (UC.IS_FREEZE = 0 or UC.IS_FREEZE is null)
+				</otherwise>
+			</choose>
+		</if>
+		<if test="@Ognl@isNotEmpty(userLvl)">
+			and UC.user_lvl = #{userLvl}
+		</if>
+<!-- 		SELECT UC.ID    AS userId , -->
+<!-- 		  UC.id         AS id, -->
+<!-- 		  UC.ACCOUNT    AS account, -->
+<!-- 		  UC.IS_FREEZE  AS isFreeze, -->
+<!-- 		  UC.user_lvl   AS userLvl, -->
+<!-- 		  UC.user_chain AS userChain, -->
+<!-- 		  A.bet         AS bet, -->
+<!-- 		  A.win         AS win , -->
+<!-- 		  A.ret         AS ret, -->
+<!-- 		  A.trueBet     AS trueBet, -->
+<!-- 		  A.result      AS result -->
+<!-- 		FROM -->
+<!-- 		  (SELECT SUM(gor.total_amount) AS bet, -->
+<!-- 		    SUM(gor.total_win)          AS win, -->
+<!-- 		    SUM(gor.total_ret)          AS ret , -->
+<!-- 		    SUM(gor.total_amount)-SUM(gor.total_ret) AS trueBet, -->
+<!-- 		    SUM(gor.total_win)-(SUM(gor.total_amount)-SUM(gor.total_ret)) AS result -->
+<!-- 		  FROM ( -->
+<!-- 		  	SELECT GR.USER_ID, -->
+<!-- 	            SUM(GR.TOTAL_AMOUNT) AS TOTAL_AMOUNT, -->
+<!-- 	            SUM(GR.TOTAL_WIN)    AS TOTAL_WIN, -->
+<!-- 	            SUM(0)               AS TOTAL_RET -->
+<!-- 	          FROM GAME_ORDER_REPORT GR -->
+<!-- 	          <![CDATA[ -->
+<!-- 		          WHERE GR.create_time >= #{startDate} -->
+<!-- 		          AND GR.create_time   <= #{endDate} -->
+<!-- 		      ]]> -->
+		      
+<!-- 		<if test="@Ognl@isNotEmpty(lotteryId)"> -->
+<!-- 			and GR.LOTTERYID = #{lotteryId} -->
+<!-- 		</if> -->
+<!-- 	          GROUP BY GR.USER_ID -->
+<!-- 	          UNION ALL -->
+<!-- 	          SELECT GRF.USER_ID, -->
+<!-- 	            SUM(0)             AS TOTAL_AMOUNT, -->
+<!-- 	            SUM(0)             AS TOTAL_WIN, -->
+<!-- 	            SUM(GRF.TOTAL_RET) AS TOTAL_RET -->
+<!-- 	          FROM GAME_RISK_FUND_REPORT GRF -->
+<!-- 	          <![CDATA[ -->
+<!-- 		          WHERE GRF.create_time >= #{startDate} -->
+<!-- 		          AND GRF.create_time   <= #{endDate} -->
+<!-- 	          ]]> -->
+	          
+<!-- 		<if test="@Ognl@isNotEmpty(lotteryId)"> -->
+<!-- 			and GRF.LOTTERYID = #{lotteryId} -->
+<!-- 		</if> -->
+<!-- 	          GROUP BY GRF.USER_ID -->
+<!-- 		  ) GOR -->
+<!-- 		  WHERE USER_ID IN -->
+<!-- 		    (SELECT ID -->
+<!-- 		    FROM USER_CUSTOMER -->
+<!-- 		    WHERE USER_CHAIN LIKE -->
+<!-- 		      ( SELECT USER_CHAIN||'%' FROM USER_CUSTOMER WHERE account = #{account} -->
+<!-- 		      ) -->
+<!-- 		    ) -->
+<!-- 		)A -->
+<!-- 		LEFT JOIN USER_CUSTOMER UC -->
+<!-- 		ON UC.ACCOUNT          = #{account} -->
+<!-- 		<if test="@Ognl@isNotEmpty(isFreeze)"> -->
+<!-- 			<choose> -->
+<!-- 				<when test="isFreeze!=0"> -->
+<!-- 				<![CDATA[ -->
+<!-- 			    	 and UC.IS_FREEZE >= 1 -->
+<!-- 			     ]]> -->
+<!-- 				</when> -->
+<!-- 				<otherwise> -->
+<!-- 					and (UC.IS_FREEZE = 0 or UC.IS_FREEZE is null) -->
+<!-- 				</otherwise> -->
+<!-- 			</choose> -->
+<!-- 		</if> -->
+<!-- 		<if test="@Ognl@isNotEmpty(userLvl)"> -->
+<!-- 			and UC.user_lvl = #{userLvl} -->
+<!-- 		</if> -->
+	</select>
+
+
+	<!-- 新增查詢報表與前台相同 條件查詢(非總代) -->
+	<!-- <select id="getUserAndAgentReport" resultMap="UserAgentIncomeVOResult"
+		parameterType="hashMap" flushCache="false">
+		select distinct
+		account,id,userlvl,userChain,userId,isFreeze,bet,ret,win
+		from ( select u.account as account,u.id as id,u.user_lvl as
+		userLvl,u.user_chain
+		as userChain,u.id as userId,u.is_freeze as isFreeze, gs.lotteryid as
+		lotteryId,
+		gs.bet_type_code as betTypeCode, gs.money_mode as moneyMode,gs.create_time
+		as createTime, ((select decode(sum(TOTAMOUNT),null,0,sum(TOTAMOUNT))
+		from
+		GAME_ORDER where <![CDATA[ status in(2,3) and userId in ]]>
+		<include refid="accountConditions" /> 
+		<![CDATA[ and (ORDER_TIME >= #{startDate} or ORDER_TIME is null) and (ORDER_TIME 
+		<= #{endDate} or ORDER_TIME is null) ]]>
+		and trunc(ORDER_TIME) > trunc(SYSDATE-7)))
+		as bet, (select decode(sum(AMOUNT), null, 0, sum(AMOUNT)) from
+		GAME_RISK_FUND
+		gf,game_order gor where gf.ORDER_CODE = gor.ORDER_CODE and gor.status in
+		(2, 3) and gf.CANCEL_STATUS = 0 and gf.FUND_TYPE = 5008 and gf.userId in
+		<include refid="accountConditions" /> <![CDATA[ and (create_time >= #{startDate} 
+		or create_time is null) and (create_time <= #{endDate} or create_time is 
+		null) ]]>
+		and trunc(create_time) > trunc(SYSDATE-7)) as ret, (select
+		decode(sum(COUNT_WIN),null,0,sum(COUNT_WIN))
+		from game_order_win gow,game_order gor where gor.id=gow.orderid and
+		gor.status=2
+		and gow.userId in
+		<include refid="accountConditions" /> <![CDATA[ and (gow.ORDER_TIME 
+		>= #{startDate} or gow.ORDER_TIME is null) and (gow.ORDER_TIME <= #{endDate} 
+		or gow.ORDER_TIME is null) ]]>
+		and trunc(gow.ORDER_TIME) > trunc(SYSDATE-7))
+		as win from USER_CUSTOMER u, GAME_SLIP gs
+		<include refid="DynamicWhere1" />
+		and u.id = gs.userid)
+	</select>-->
+
+	<select id="getAgentReportListByOwn" parameterType="com.winterframework.firefrog.fund.dao.vo.UserAgentIncomeVO"
+		resultMap="UserAgentIncomeVOResult" flushCache="false">
+		SELECT ID id,
+		  ACCOUNT account,
+		  isFreeze isFreeze,
+		  userLvl userLvl,
+		  userChain userChain,
+		  SUM(NVL(bet,0))           AS bet,
+		  SUM(NVL(win,0))           AS win,
+		  SUM(NVL(ret,0))           AS ret,
+		  SUM(NVL(trueBet,0))       AS trueBet,
+		  SUM(NVL(result,0))        AS result,
+		  SUM(NVL(activityGifts,0)) AS activityGifts
+		FROM
+		  (SELECT B.ID id,
+		    B.ACCOUNT account,
+		    B.IS_FREEZE isFreeze,
+		    B.USER_LVL userLvl,
+		    B.USER_CHAIN userChain,
+		    SUM(NVL(A.total_amount,0)) AS bet,
+		    SUM(NVL(A.total_win,0))    AS win,
+		    SUM(NVL(A.total_ret,0))    AS ret,
+		    SUM(NVL(A.total_bet,0))    AS trueBet,
+		    SUM(NVL(A.total_result,0)) AS result,
+		    0                          AS activityGifts
+		  FROM GAME_ORDER_REPORT A
+		  JOIN USER_CUSTOMER B
+		  ON A.USER_ID       = B.ID
+		  AND A.USER_ID      = #{id}
+		  <![CDATA[
+			  AND A.CREATE_TIME >= #{startDate} 
+			  AND A.CREATE_TIME <= #{endDate}
+		  ]]>
+		   <!-- AND A.CREATE_TIME  > TRUNC(SYSDATE-7)  -->
+		  
+		  <where>
+		    <if test="@Ognl@isNotEmpty(lotteryId)">
+		    	and A.LOTTERYID = #{lotteryId}
+		    </if>
+		    <if test="@Ognl@isNotEmpty(isFreeze)">
+				<choose>
+					<when test="isFreeze!=0">
+					<![CDATA[ and B.IS_FREEZE >= 1 ]]> 
+					</when>
+					<otherwise>
+						and (B.IS_FREEZE = 0 or B.IS_FREEZE is null)
+					</otherwise>
+				</choose>
+			</if>
+			<if test="@Ognl@isNotEmpty(userLvl)">
+				and B.USER_LVL = #{userLvl}
+			</if>
+		  </where>
+		  GROUP BY B.ID,
+		    B.ACCOUNT,
+		    B.IS_FREEZE,
+		    B.USER_LVL,
+		    B.USER_CHAIN
+		  UNION ALL
+		  SELECT B.ID id,
+		    B.ACCOUNT account,
+		    B.IS_FREEZE isFreeze,
+		    B.USER_LVL userLvl,
+		    B.USER_CHAIN userChain,
+		    0 AS bet,
+		    0 AS win,
+		    0 AS ret,
+		    0 AS trueBet,
+		    0 AS result,
+		    SUM(NVL(A.AMOUNT,0)) AS activityGifts
+		  FROM USER_ACTIVITY_GIFTS A
+		  JOIN USER_CUSTOMER B
+		  ON A.USER_ID             = B.ID
+		  AND A.USER_ID            = #{id}
+		  AND SUBSTR(A.REASON,4,4) = 'PGXX'
+		  <![CDATA[
+			  AND A.CREATE_TIME       >= #{startDate} 
+			  AND A.CREATE_TIME       <= #{endDate}
+		  ]]>
+		  
+		  <!--  AND A.CREATE_TIME        > TRUNC(SYSDATE-7)   -->
+		  <where>
+		    <if test="@Ognl@isNotEmpty(isFreeze)">
+				<choose>
+					<when test="isFreeze!=0">
+					<![CDATA[ and B.IS_FREEZE >= 1 ]]> 
+					</when>
+					<otherwise>
+						and (B.IS_FREEZE = 0 or B.IS_FREEZE is null)
+					</otherwise>
+				</choose>
+			</if>
+			<if test="@Ognl@isNotEmpty(userLvl)">
+				and B.USER_LVL = #{userLvl}
+			</if>
+		  </where>
+		  GROUP BY B.ID,
+		    B.ACCOUNT,
+		    B.IS_FREEZE,
+		    B.USER_LVL,
+		    B.USER_CHAIN
+		  )
+		GROUP BY ID,
+		  ACCOUNT,
+		  ISFREEZE,
+		  USERLVL,
+		  USERCHAIN
+	</select>
+
+	<select id="getAgentReportCount" resultType="java.lang.Long" parameterType="hashMap" flushCache="false">
+		
+		SELECT
+		  COUNT(*)
+		FROM (
+		  select
+		    SUM(NVL(A.total_amount,0)) AS V1,
+		    SUM(NVL(A.total_win,0)) AS V2,
+		    SUM(NVL(A.total_ret,0)) AS V3,
+		    SUM(NVL(A.total_bet,0)) AS V4,
+		    SUM(NVL(A.total_result,0)) AS V5,
+		    B.U_ID V7
+		  from GAME_ORDER_REPORT A 
+		  join USER_CUSTOMER_FOR_REPORT_TEMP B on A.USER_ID = B.O_ID
+		  <![CDATA[ 
+		  	where A.CREATE_TIME >= #{startDate}
+		  	and A.CREATE_TIME <= #{endDate}
+		  
+		  ]]>
+		  	<!-- and TRUNC(A.CREATE_TIME) > TRUNC(SYSDATE-7) --> 
+			<if test="@Ognl@isNotEmpty(lotteryId)">
+				and A.LOTTERYID = #{lotteryId}
+			</if>
+		  group by B.U_ID
+		) REPORT JOIN USER_CUSTOMER UC ON REPORT.V7 = UC.ID
+		WHERE (REPORT.V1 > 0 OR REPORT.V2 > 0 OR REPORT.V3 > 0 OR REPORT.V4 > 0 OR REPORT.V5 > 0)
+		<if test="@Ognl@isNotEmpty(parentId)">
+	    	<![CDATA[ and UC.PARENT_ID = #{parentId} ]]>
+	    </if>
+	    <if test="@Ognl@isNotEmpty(isFreeze)">
+			<choose>
+				<when test="isFreeze!=0">
+				<![CDATA[ and UC.IS_FREEZE >= 1 ]]> 
+				</when>
+				<otherwise>
+					and (UC.IS_FREEZE = 0 or UC.IS_FREEZE is null)
+				</otherwise>
+			</choose>
+		</if>
+		<if test="@Ognl@isNotEmpty(userLvl)">
+			and UC.USER_LVL = #{userLvl}
+		</if>
+		<if test="@Ognl@isNotEmpty(account)">
+			and UC.ACCOUNT = #{account}
+		</if>
+	</select>
+
+	<select id="getAgentReportList" resultMap="UserAgentIncomeVOResult" parameterType="list" flushCache="false">
+		
+		SELECT TMP_A.*,(select 
+			  	NVL(SUM(uag.AMOUNT),0) 
+			  from USER_ACTIVITY_GIFTS uag 
+			  join USER_CUSTOMER_FOR_REPORT_TEMP ucfrt on ucfrt.O_ID = uag.USER_ID 		  
+			  <![CDATA[ 
+			  	where uag.CREATE_TIME >= #{startDate} 
+			  	and uag.CREATE_TIME <= #{endDate} 
+			  ]]>
+			   	<!-- and uag.CREATE_TIME > TRUNC(SYSDATE-7)  -->
+				<if test="@Ognl@isNotEmpty(lev)">
+			  		and ucfrt.LEV = 1
+			  	</if>
+			    and ucfrt.U_ID = TMP_A.ID
+			  ) as activityGifts 
+			FROM (SELECT
+			  UC.ID as id,
+			  UC.ACCOUNT as account,
+			  UC.IS_FREEZE as isFreeze,
+			  UC.USER_LVL as userLvl,
+			  UC.USER_CHAIN as userChain,
+			  REPORT.V1 as bet,
+			  REPORT.V2 as win,
+			  REPORT.V3 as ret,
+			  REPORT.V4 as trueBet,
+			  REPORT.V5 as result,
+			  rownum as rnum
+			FROM (
+			  select
+			    SUM(NVL(A.total_amount,0)) AS V1,
+			    SUM(NVL(A.total_win,0)) AS V2,
+			    SUM(NVL(A.total_ret,0)) AS V3,
+			    SUM(NVL(A.total_bet,0)) AS V4,
+			    SUM(NVL(A.total_result,0)) AS V5,
+			    B.U_ID V7
+			  from GAME_ORDER_REPORT A 
+			  join USER_CUSTOMER_FOR_REPORT_TEMP B on A.USER_ID = B.O_ID
+			  <![CDATA[ 
+			  	where A.CREATE_TIME >= #{startDate}
+			  	and A.CREATE_TIME <= #{endDate}
+			  ]]>
+			   	<!-- and TRUNC(A.CREATE_TIME) > TRUNC(SYSDATE-7) -->
+				<if test="@Ognl@isNotEmpty(lotteryId)">
+					and A.LOTTERYID = #{lotteryId}
+				</if>
+			  group by B.U_ID
+			) REPORT JOIN USER_CUSTOMER UC ON REPORT.V7 = UC.ID
+			WHERE (REPORT.V1 > 0 OR REPORT.V2 > 0 OR REPORT.V3 > 0 OR REPORT.V4 > 0 OR REPORT.V5 > 0)
+			<if test="@Ognl@isNotEmpty(parentId)">
+		    	<![CDATA[ and UC.PARENT_ID = #{parentId} ]]>
+		    </if>
+		    <if test="@Ognl@isNotEmpty(isFreeze)">
+				<choose>
+					<when test="isFreeze!=0">
+					<![CDATA[ and UC.IS_FREEZE >= 1 ]]> 
+					</when>
+					<otherwise>
+						and (UC.IS_FREEZE = 0 or UC.IS_FREEZE is null)
+					</otherwise>
+				</choose>
+			</if>
+			<if test="@Ognl@isNotEmpty(userLvl)">
+				and UC.USER_LVL = #{userLvl}
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				and UC.ACCOUNT = #{account}
+			</if>
+		
+		) TMP_A
+		
+		<![CDATA[ WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
+	</select>
+
+	<select id="getGeneralAgents" resultType="java.lang.String"
+		parameterType="hashMap" flushCache="false">
+		SELECT account FROM (SELECT rownum as rnum ,a.* FROM (
+		select r.user_account AS account from game_order_report r, user_customer u
+		where
+		u.id = r.user_id and u.user_lvl= 0 
+		<![CDATA[ 
+			and (r.create_time >= #{startDate} or r.create_time is null)
+			and (r.create_time <= #{endDate} or r.create_time is null)
+			AND TRUNC(r.create_time) > TRUNC(SYSDATE-7)
+		]]>
+			<if test="@Ognl@isNotEmpty(lotteryId)">
+				and (r.LOTTERYID = #{lotteryId} or r.LOTTERYID is null)
+			</if>
+			group by r.user_account order by account asc
+		  )a
+		<![CDATA[ 
+			) WHERE rnum >= #{startNo} AND rnum <= #{endNo}
+		]]>
+		
+	</select>
+	
+	<select id="getGeneralAgentCounts" resultType="java.lang.Long"
+		parameterType="hashMap" flushCache="false">
+		
+		select count(distinct(r.user_account)) from game_order_report r, user_customer u
+		where
+		u.id = r.user_id and u.user_lvl= 0 
+		<![CDATA[ 
+ 			and (r.create_time >= #{startDate} or r.create_time is null)
+ 			and (r.create_time <= #{endDate} or r.create_time is null) 
+ 			AND TRUNC(r.create_time) > TRUNC(SYSDATE-7)
+ 		]]>
+ 		<if test="@Ognl@isNotEmpty(lotteryId)">
+			and (LOTTERYID = #{lotteryId} or LOTTERYID is null)
+		</if>
+	</select>
+
+	<select id="queryUserIncomes" resultMap="UserAgentIncomeVOResult"
+		parameterType="hashMap" flushCache="false">
+		SELECT t.user_id AS userId ,
+			t.bet AS bet,
+			t.win AS win ,
+			t.ret AS ret,
+			t.trueBet AS trueBet,
+			(t.result-t.activityGifts) AS result,
+			u.IS_FREEZE AS isFreeze,
+			u.user_lvl AS userLvl,
+			u.user_chain AS userChain,
+			u.account AS account,
+			u.id AS id,
+			t.activityGifts AS activityGifts
+		FROM
+			(SELECT user_id ,
+				SUM(gor.total_amount) AS bet,
+				SUM(gor.total_win) AS win,
+				SUM(gor.total_ret) AS ret ,
+				SUM(gor.total_bet) AS trueBet,
+				SUM(gor.total_result) AS result,
+
+				
+				(
+				  <![CDATA[ CASE WHEN gor.user_id <> (select id from user_customer where account=#{account}) THEN ( ]]>
+				    select
+				      (CASE WHEN SUM(fcl.CT_BAL-fcl.BEFOR_BAL) IS NULL THEN 0 ELSE SUM(fcl.CT_BAL-fcl.BEFOR_BAL) END)
+				    from FUND_CHANGE_LOG fcl, USER_CUSTOMER AU
+				    where fcl.USER_ID = AU.ID
+				    and SUBSTR(fcl.REASON,4,4) = 'PGXX' 
+				    <![CDATA[
+					  AND fcl.GMT_CREATED      >= #{startDate}
+					  AND fcl.GMT_CREATED      <= #{endDate}
+					  AND fcl.GMT_CREATED > TRUNC(SYSDATE-7)
+					]]>
+				    and fcl.USER_ID in (SELECT id FROM USER_CUSTOMER CONNECT BY PRIOR id = parent_id START WITH id = gor.user_id)
+				  ) ELSE (
+				    select
+				      (CASE WHEN SUM(CT_BAL-BEFOR_BAL) IS NULL THEN 0 ELSE SUM(CT_BAL-BEFOR_BAL) END)
+				    from FUND_CHANGE_LOG 
+				    where SUBSTR(REASON,4,4) = 'PGXX' 
+				    <![CDATA[
+					  AND GMT_CREATED      >= #{startDate}
+					  AND GMT_CREATED      <= #{endDate}
+					  AND GMT_CREATED > TRUNC(SYSDATE-7)
+					]]>
+				    and USER_ID = gor.user_id
+				  ) END
+				) as activityGifts
+				
+				
+			FROM
+			game_order_report gor
+		WHERE gor.user_id = (select id from user_customer where
+		account=#{account})
+		  <![CDATA[
+			  AND (gor.create_time      >= #{startDate} OR gor.create_time IS NULL)
+			  AND (gor.create_time      <= #{endDate} OR gor.create_time IS NULL)
+			  AND TRUNC(gor.create_time) > TRUNC(SYSDATE-7)
+		  ]]>
+		<if test="@Ognl@isNotEmpty(lotteryId)">
+			and (gor.LOTTERYID = #{lotteryId} or gor.LOTTERYID is null)
+		</if>
+		GROUP BY gor.user_id
+		) t,
+		user_customer u
+		WHERE t.user_id = u.id
+		<if test="@Ognl@isNotEmpty(isFreeze)">
+			<choose>
+				<when test="isFreeze!=0">
+				<![CDATA[
+			    	 and u.IS_FREEZE >= 1
+			     ]]>
+				</when>
+				<otherwise>
+					and (u.IS_FREEZE = 0 or u.IS_FREEZE is null)
+				</otherwise>
+			</choose>
+		</if>
+		<if test="@Ognl@isNotEmpty(userLvl)">
+			and u.user_lvl = #{userLvl}
+		</if>
+<!-- 		SELECT t.user_id AS userId , -->
+<!-- 			t.bet AS bet, -->
+<!-- 			t.win AS win , -->
+<!-- 			t.ret AS ret, -->
+<!-- 			t.trueBet AS trueBet, -->
+<!-- 			t.result AS result, -->
+<!-- 			u.IS_FREEZE AS isFreeze, -->
+<!-- 			u.user_lvl AS userLvl, -->
+<!-- 			u.user_chain AS userChain, -->
+<!-- 			u.account AS account, -->
+<!-- 			u.id AS id -->
+<!-- 			FROM -->
+<!-- 			(SELECT user_id ,SUM(gor.total_amount) AS bet, -->
+<!-- 		    SUM(gor.total_win)          AS win, -->
+<!-- 		    SUM(gor.total_ret)          AS ret , -->
+<!-- 		    SUM(gor.total_amount)-SUM(gor.total_ret) AS trueBet, -->
+<!-- 		    SUM(gor.total_win)-(SUM(gor.total_amount)-SUM(gor.total_ret)) AS result -->
+<!-- 		  FROM ( -->
+<!-- 		  	SELECT GR.USER_ID, -->
+<!-- 		  		SUM(GR.TOTAL_AMOUNT) AS TOTAL_AMOUNT, -->
+<!-- 	            SUM(GR.TOTAL_WIN)    AS TOTAL_WIN, -->
+<!-- 	            SUM(0)               AS TOTAL_RET -->
+<!-- 	          FROM GAME_ORDER_REPORT GR -->
+<!-- 	          <![CDATA[ -->
+<!-- 		          WHERE GR.create_time >= #{startDate} -->
+<!-- 		          AND GR.create_time   <= #{endDate} -->
+<!-- 		      ]]> -->
+<!-- 		<if test="@Ognl@isNotEmpty(lotteryId)"> -->
+<!-- 			and GR.LOTTERYID = #{lotteryId} -->
+<!-- 		</if> -->
+<!-- 	          GROUP BY GR.USER_ID -->
+<!-- 	          UNION ALL -->
+<!-- 	          SELECT GRF.USER_ID, -->
+<!-- 	            SUM(0)             AS TOTAL_AMOUNT, -->
+<!-- 	            SUM(0)             AS TOTAL_WIN, -->
+<!-- 	            SUM(GRF.TOTAL_RET) AS TOTAL_RET -->
+<!-- 	          FROM GAME_RISK_FUND_REPORT GRF -->
+<!-- 	          <![CDATA[ -->
+<!-- 		          WHERE GRF.create_time >= #{startDate} -->
+<!-- 		          AND GRF.create_time   <= #{endDate} -->
+<!-- 	          ]]> -->
+	          
+<!-- 		<if test="@Ognl@isNotEmpty(lotteryId)"> -->
+<!-- 			and GRF.LOTTERYID = #{lotteryId} -->
+<!-- 		</if> -->
+<!-- 	          GROUP BY GRF.USER_ID -->
+<!-- 		  ) GOR -->
+<!-- 		WHERE user_id = (select id from user_customer where -->
+<!-- 		account=#{account}) -->
+<!-- 		GROUP BY user_id -->
+<!-- 		) t, -->
+<!-- 		user_customer u -->
+<!-- 		WHERE t.user_id = u.id -->
+<!-- 		<if test="@Ognl@isNotEmpty(isFreeze)"> -->
+<!-- 			<choose> -->
+<!-- 				<when test="isFreeze!=0"> -->
+<!-- 				<![CDATA[ -->
+<!-- 			    	 and u.IS_FREEZE >= 1 -->
+<!-- 			     ]]> -->
+<!-- 				</when> -->
+<!-- 				<otherwise> -->
+<!-- 					and (u.IS_FREEZE = 0 or u.IS_FREEZE is null) -->
+<!-- 				</otherwise> -->
+<!-- 			</choose> -->
+<!-- 		</if> -->
+<!-- 		<if test="@Ognl@isNotEmpty(userLvl)"> -->
+<!-- 			and u.user_lvl = #{userLvl} -->
+<!-- 		</if> -->
+	</select>
+
+	<select id="getLowers" resultType="java.lang.Long" parameterType="java.lang.Long" flushCache="false">
+		SELECT count(*) from (SELECT r.user_account AS account FROM game_order_report r,user_customer u
+	    WHERE u.id = r.user_id AND u.parent_id = #{id} 
+	    <![CDATA[ 
+		    AND (r.create_time      >= #{startDate} OR r.create_time IS NULL)
+		    AND (r.create_time      <= #{endDate} OR r.create_time IS NULL)
+		    AND TRUNC(r.create_time) > TRUNC(SYSDATE-7)
+		]]>
+		<if test="@Ognl@isNotEmpty(lotteryId)">
+			and (r.LOTTERYID = #{lotteryId} or r.LOTTERYID is null)
+		</if>
+	    GROUP BY r.user_account ORDER BY account ASC)
+	</select>
+
+<!-- 	<select id="getSubLowers" resultType="java.lang.String" parameterType="hashMap" flushCache="false"> -->
+<!-- 		select account from user_customer where parent_id=#{id} order by account asc -->
+<!-- 	</select> -->
+
+	<select id="getSubLowers" resultType="java.lang.String" parameterType="hashMap" flushCache="false">
+		SELECT account FROM (SELECT rownum as rnum ,a.* FROM (
+		select r.user_account AS account from game_order_report r, user_customer u
+		where
+		u.id = r.user_id and u.parent_id=#{parentId}  
+		<![CDATA[ 
+			and (r.create_time >= #{startDate} or r.create_time is null)
+			and (r.create_time <= #{endDate} or r.create_time is null)
+			AND TRUNC(r.create_time) > TRUNC(SYSDATE-7)
+		]]>
+			<if test="@Ognl@isNotEmpty(lotteryId)">
+				and (r.LOTTERYID = #{lotteryId} or r.LOTTERYID is null)
+			</if>
+			group by r.user_account order by account asc
+		  )a
+		<![CDATA[ 
+			) WHERE rnum >= #{startNo} AND rnum <= #{endNo}
+		]]>
+	</select>
+
+	<!-- 新增查詢報表與前台相同 條件查詢(總代) -->
+	<select id="getAgentIncome" resultMap="UserAgentIncomeVOResult"
+		parameterType="hashMap" flushCache="false">
+		SELECT account,id,user_lvl AS userLvl,user_chain AS userChain ,(SELECT
+		DECODE(SUM(TOTAMOUNT),NULL,0,SUM(TOTAMOUNT))
+		FROM GAME_ORDER
+		WHERE
+		status IN(2,3)
+		AND userId = (SELECT id FROM USER_CUSTOMER WHERE
+		account=#{account})
+	    <![CDATA[
+		    AND (ORDER_TIME      >= #{startDate} OR ORDER_TIME        IS NULL)
+		    AND (ORDER_TIME      <= #{endDate} OR ORDER_TIME        IS NULL)
+		    AND TRUNC(ORDER_TIME) > TRUNC(SYSDATE-7)
+		]]>
+		) AS bet,
+		(SELECT DECODE(SUM(AMOUNT), NULL, 0, SUM(AMOUNT)) FROM
+		GAME_RISK_FUND gf,
+		game_order gor
+		WHERE gf.ORDER_CODE = gor.ORDER_CODE
+		AND gor.status IN (2, 3) AND
+		gf.CANCEL_STATUS = 0
+		AND gf.FUND_TYPE =
+		5008 AND gf.userId = (SELECT id FROM USER_CUSTOMER
+		WHERE
+		account=#{account})
+	    <![CDATA[
+		    AND (create_time      >= #{startDate} OR create_time        IS NULL)
+		    AND (create_time      <= #{endDate} OR create_time        IS NULL)
+		    AND TRUNC(create_time) > TRUNC(SYSDATE-7)
+		]]>
+		) AS ret,
+		(SELECT DECODE(SUM(COUNT_WIN),NULL,0,SUM(COUNT_WIN)) FROM
+		game_order_win
+		gow,game_order gor
+		WHERE gor.id =gow.orderid AND
+		gor.status =2 AND gow.userId = (SELECT id
+		FROM USER_CUSTOMER WHERE
+		account=#{account})
+	    <![CDATA[
+		    AND (gow.ORDER_TIME      >= #{startDate} OR gow.ORDER_TIME        IS NULL)
+		    AND (gow.ORDER_TIME      <= #{endDate} OR gow.ORDER_TIME        IS NULL)
+		    AND TRUNC(gow.ORDER_TIME) > TRUNC(SYSDATE-7)
+		]]>
+		) AS win FROM USER_CUSTOMER where account=#{account}
+	</select>
+
+</mapper>

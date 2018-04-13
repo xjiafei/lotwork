@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundChargeQueue">
+	<resultMap id="FundChargeResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundChargeQueue">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundChargeQueueColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	SN as sn,
+	        	STATUS as status,
+	        	TIME as time,
+	        	CREATED_TIME as createdTime,
+	        	UPDATE_TIME as updateTime,
+	        	NOTE as note,
+	        	USER_SN as userSn,
+	        	CHARGE_CONFIRM_TIME as chargeConfirmTime
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeQueue"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_FUND_CHARGE_QUEUE_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_CHARGE_QUEUE (
+	        	ID ,
+	        	SN ,
+	        	STATUS ,
+	        	TIME ,
+	        	CREATED_TIME ,
+	        	UPDATE_TIME ,
+	        	NOTE,
+	        	USER_SN,
+	        	CHARGE_CONFIRM_TIME
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{time,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createdTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{note,javaType=string,jdbcType=VARCHAR},
+	        	#{userSn,javaType=string,jdbcType=VARCHAR},
+	        	#{chargeConfirmTime,javaType=long,jdbcType=DECIMAL}	        	
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeQueue">
+		UPDATE FUND_CHARGE_QUEUE
+		<set>
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(time)">
+				TIME = #{time,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(createdTime)">
+				CREATED_TIME = #{createdTime,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				UPDATE_TIME = #{updateTime,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(note)">
+				NOTE = #{note,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(userSn)">
+				NOTE = #{userSn,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(chargeConfirmTime)">
+				CHARGE_CONFIRM_TIME = #{chargeConfirmTime,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+		</set>
+		WHERE
+		SN = #{sn,javaType=string,jdbcType=VARCHAR}
+	</update>
+
+	<sql id="fundChargeQueueDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(sn)">
+				and SN = #{sn}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(time)">
+				and TIME = #{time}
+			</if>
+		
+			<if test="@Ognl@isNotEmpty(createdTime)">
+				and CREATED_TIME = #{createdTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(note)">
+				and NOTE = #{note}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(user_sn)">
+				and USER_SN = #{user_sn}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(chargeConfirmTime)">
+				and CHARGE_CONFIRM_TIME = #{chargeConfirmTime,javaType=long,jdbcType=DECIMAL}
+			</if>
+			
+		</where>
+	</sql>
+	
+	<select id="getBySn" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeQueue" resultMap="FundChargeResult"
+		flushCache="false">
+		select
+		<include refid="fundChargeQueueColumns" />
+		    <![CDATA[
+			    from FUND_CHARGE_QUEUE 
+		        where 
+		        SN = #{sn} 
+		    ]]>
+	</select>
+	
+	<select id="getByStatus" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeQueue" resultMap="FundChargeResult"
+		flushCache="false">
+		select
+		<include refid="fundChargeQueueColumns" />
+		    <![CDATA[
+			    from FUND_CHARGE_QUEUE 
+		        where 
+		        status = #{status} 
+		    ]]>
+	</select>
+	
+	<select id="getUntreatOrder" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeQueue" resultMap="FundChargeResult"
+		flushCache="false">
+		select
+		<include refid="fundChargeQueueColumns" />
+		    <![CDATA[
+			    from FUND_CHARGE_QUEUE 
+		        where 
+		        status in (3,7)
+		    ]]>
+	</select>
+
+</mapper>

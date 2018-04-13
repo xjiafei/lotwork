@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.channel.dao.vo.ChannelVO">
+	<resultMap id="ChannelResult" type="com.winterframework.firefrog.channel.dao.vo.ChannelVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="channelColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	NAME as name,
+	        	URL as url,
+	        	VAILD as vaild,
+	        	END_TIME as end_time,
+	        	FREQUENCY as frequency,
+	        	FREQUENCY_TIME as frequency_time,
+	        	FREEZE as freeze,
+	        	FREEZE_TIME as freeze_time,
+	        	IP as ip,
+	        	IP_TIME as ip_time,
+	        	RESET as reset
+	    ]]>
+	</sql>
+	
+		<update id="updateChannel" parameterType="com.winterframework.firefrog.channel.dao.vo.ChannelVO">
+	        UPDATE CHANNEL
+	    	<set>
+	    	<if test="@Ognl@isNotEmpty(name)">
+		        NAME = #{name,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isEmpty(name)">
+		        NAME = null ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(url)">
+		        URL = #{url,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isEmpty(url)">
+		        URL = null ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(vaild)">
+		        VAILD = #{vaild,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(end_time)">
+		        END_TIME = #{end_time,javaType=object,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isEmpty(end_time)">
+		        END_TIME = null ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(frequency)">
+		        FREQUENCY = #{frequency,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(frequency_time)">
+		        FREQUENCY_TIME = #{frequency_time,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(ip)">
+		        IP = #{ip,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(ip_time)">
+		        IP_TIME = #{ip_time,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(freeze)">
+		        FREEZE = #{freeze,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(freeze_time)">
+		        FREEZE_TIME = #{freeze_time,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(reset)">
+		        RESET = #{reset,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    </set>    
+	        WHERE 
+		        ID = #{id} 
+		</update>
+	  
+	    <select id="queryByID" parameterType="Long" resultMap="ChannelResult" flushCache="false">
+			select <include refid="channelColumns" />
+		    <![CDATA[
+			    from CHANNEL 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>
+		
+		<select id="getParam" parameterType="String" resultType="long" flushCache="false">
+			select id
+		    <![CDATA[
+			    from CHANNEL 
+		        where 
+		        name = #{param} 
+		    ]]>
+		</select>
+		
+		<select id="getReset"  resultMap="ChannelResult" flushCache="false">
+			select <include refid="channelColumns" />
+			    from CHANNEL 
+		        where 
+		        reset = 1 
+		</select>
+		
+		 <select id="getCountByPage_channelList" resultType="long">
+       		 SELECT count(*) 
+       		 FROM CHANNEL
+       		 <include refid="channelWhere" />
+   		 </select>
+   		 
+   		 <select id="getByPage_channelList" resultMap="ChannelResult">
+			 SELECT <include refid="channelColumns" />  
+	 		 from channel
+			<include refid="channelWhere" />
+            ORDER BY id
+    	 </select>
+   		 
+		<sql id="channelWhere">
+			<where>
+				<if test="searchValue != null">
+	      	 		<if test="searchType == 1">
+						and ID = ${searchValue}
+					</if>
+					<if test="searchType == 2">
+						and NAME like '%${searchValue}%'
+					</if>
+					<if test="searchType == 3">
+						and URL like '%${searchValue}%'
+					</if>
+				</if>
+				
+			</where>
+		</sql>
+		
+		<insert id="insertChannelLog" parameterType="map" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_CHANNEL_LOG_ID.Nextval from dual
+			   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        CHANNEL_LOG (
+	        	ID ,
+	        	TYPE,
+	        	LAST_STATUS,
+	        	CURRENT_STATUS,
+	        	UPDATE_TIME,
+	        	ACTOR 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{last_status,javaType=string,jdbcType=VARCHAR} ,
+	        	#{current_status,javaType=string,jdbcType=VARCHAR} ,
+	        	#{update_time,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{actor,javaType=string,jdbcType=VARCHAR} 
+	        )
+	    ]]>	
+	
+		</insert>
+</mapper>

@@ -1,0 +1,23 @@
+package com.winterframework.firefrog.beginmession.enums;
+/**
+ * 
+ * @author Ami.Tsai
+ *
+ */
+public class BeginMissionEnum {
+	
+	public enum LogType{
+		
+		NEW_MISSION(0L),
+		DAILY_MISSION(1L),		LOTTERY_SET(2L);		
+		private Long type;
+		
+		private LogType(Long type){
+			this.type = type;
+		}
+		
+		public Long getType(){
+			return type;
+		}
+	}		public enum LotteryType {		NONE(-1L,"","",""),		GOLD(2l,"金獎","prize_3","golden"),		SILVER(1l,"银獎","prize_2","silver"),		COPPER(0l,"铜獎","prize_1","coppor");				private Long type;		private String text;		private String cssConfig;		private String phpConfig;				private LotteryType(Long type,String text ,String cssConfig ,String phpConfig){			this.type = type;			this.text = text;			this.cssConfig = cssConfig;			this.phpConfig=phpConfig;		}				public Long getType(){			return type;		}		public String getText() {			return text;		}				public static LotteryType mapping(Long value){			LotteryType[] types= LotteryType.values();	      for(LotteryType type:types){	        if(type.getType().equals(value)){	          return type;	        }	      }	      return NONE;	    }		public String getCssConfig() {			return cssConfig;		}		public void setCssConfig(String cssConfig) {			this.cssConfig = cssConfig;		}		public String getPhpConfig() {			return phpConfig;		}		public void setPhpConfig(String phpConfig) {			this.phpConfig = phpConfig;		}	}		public enum LotteryUnit {		NONE(-1L,"",0.0),		ANGLE(0l,"角",0.1),			CENT(2l,"分",0.01),		DOLLAR(1l,"元",1.0);				private Long type;		private String text;		private Double scale;				private LotteryUnit(Long type,String text ,Double scale){			this.type = type;			this.text = text;			this.scale = scale;		}				public Long getType(){			return type;		}		public String getText() {			return text;		}				public static LotteryUnit mapping(Long value){			LotteryUnit[] types= LotteryUnit.values();	      for(LotteryUnit type:types){	        if(type.getType().equals(value)){	          return type;	        }	      }	      return NONE;	    }		public Double getScale() {			return scale;		}	}		public enum MissionType{		BIND_CARD(0L,"新手任務绑卡礼金"), //綁卡		FIRST_CHARGE(1L,"新手任務首充礼金"), //首充		FIRST_WITHDRAW(2L,"新手任務首提礼金"), //首提		DAY_ANS(3L,"新手任務每日答题礼金"),		//每日答題		TOL_ANS(4L,"新手任务连续答题礼金"),        //連續答題		DAY_BET(5L,"新手任务每日投注礼金"),		//每日投注		TOL_BET(6L,"新手任务累积投注礼金"),		//連續投注		EGG(7L,"新手任务砸蛋礼金");			//砸蛋		private Long value;		private String text;				private MissionType(long value,String text){			this.value = value;			this.text =text;		}		public Long getValue() {			return value;		}		public String getText() {			return text;		}		public void setText(String text) {			this.text = text;		}	}		public enum YesOrNo{		YES("Y"),		NO("N");				private String value;				private YesOrNo(String value){			this.value = value;		}		public String getValue() {			return value;		}	}		public enum Status{		BEVALID(3L),//待生效,取得綁卡獎勵壓成生效				CANCEL(2L),//取消資格		VALID(1L),//生效		INVALID(0L);//失效				private Long value;				private Status(Long value){			this.value = value;		}		public Long getValue() {			return value;		}	}			public enum AwardStatus{		UnAward(0L),//未派獎		toBeAward(1L),//待派獎		AwardSucess(2L),//派獎成功		AwardFail(3L),//派獎失敗		AwardCancel(4L);//派獎取消		private Long value;				private AwardStatus(Long value){			this.value = value;		}		public Long getValue() {			return value;		}	}		public enum AwardReason{		Award_Expired("奖期已超过派奖期限"),		Award_charge_multiget("非并列领取已派奖,此奖项取消派奖");		private String value;				private AwardReason(String value){			this.value = value;		}		public String getValue() {			return value;		}	}		public enum BindCardStatus{		BEHCECK(0l),		PASS(1l),		UNPASS(2l);		private Long value;		private BindCardStatus(Long value){			this.value = value;		}		public Long getValue() {			return value;		}	}		public enum CancelReason{		Award_Expired("奖期已超过派奖期限"),		Award_charge_multiget("非并列领取已派奖,此奖项取消派奖"),		Bank_Card_Error("银行卡资料不符规则,取消资格"),		Bank_Card_End_Time_Error("注册七天未绑卡，取消资格"),				Mission_Over_Time("新手活动21天时间到期"),		Bank_Card_check_Error("绑卡奖励审核未通过,取消资格"),				Bank_Card_Double_Lock("银行卡绑定期间变更银行卡");				private String value;				private CancelReason(String value){			this.value = value;		}		public String getValue() {			return value;		}	}		//頁面顯示綁卡狀態	public enum BindCardType{		FAIL(-1L),//		UNBIND(0L),//未绑卡		BIND_UNLOCK(1L),//绑卡但未锁定		CHECKING(2L),//审核中		FINISH(3L);// 已完成		private Long value;				private BindCardType(Long value){			this.value = value;		}		public Long getValue() {			return value;		}	}		
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.winterframework.firefrog.help.dao.vo.OperVO">
+
+	<resultMap id="operVoResult" type="com.winterframework.firefrog.help.dao.vo.OperVO">
+		<result column="BIZ_DATE" property="bizDate" />
+		<result column="ACTIVE_USER_COUNT" property="activeUserCount" />
+		<result column="PROFIT" property="profit" />
+		<result column="BET_AMT" property="betAmt" />
+		<result column="WIN_AMT" property="winAmt" />
+		<result column="RET_AMT" property="retAmt" />
+		<result column="CHARGE_AMT" property="chargeAmt" />
+		<result column="WITHDRAW_AMT" property="withdrawAmt" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_TIME" property="updateTime" />
+
+	</resultMap>
+	
+	<resultMap id="fundOperSum" type="com.winterframework.firefrog.help.dao.vo.OperReportSumVO">
+	</resultMap>
+	
+	<!-- 查找总数据量 -->
+	<select id="getHelpExcelReportCount" resultType="int" parameterType="HashMap">
+		select 
+		COUNT(BIZ_DATE) counts
+		from oper_statistics
+		<if test="@Ognl@isNotEmpty(bizDate)">
+			<![CDATA[
+			where to_char(cast(cast(BIZ_DATE as timestamp) as date),'yyyy-mm-dd') like  concat(concat('%',#{bizDate}),'%')
+			]]>
+		</if>
+	</select>
+	
+	<!-- 根据日期查找报表数据 -->
+	<select id="getHelpExcelReportList" resultMap="operVoResult" parameterType="HashMap">
+		select
+		BIZ_DATE as bizDate,
+		NVL(ACTIVE_USER_COUNT,0) as activeUserCount,
+		NVL(PROFIT,0) as profit,
+		NVL(BET_AMT,0) as betAmt,
+		NVL(CHARGE_AMT,0) as chargeAmt,
+		NVL(WITHDRAW_AMT,0) as withdrawAmt
+		from oper_statistics
+		<if test="@Ognl@isNotEmpty(bizDate)">
+			<![CDATA[
+			where to_char(cast(cast(BIZ_DATE as timestamp) as date),'yyyy-mm-dd') like  concat(concat('%',#{bizDate}),'%')
+			]]>
+		</if>
+		<if test="@Ognl@isNotEmpty(sortColumns)">ORDER BY ${sortColumns}</if>
+	</select>
+	
+	<!-- 计算报表各类数据的总和以及平均值 -->
+	<select id="getReportExcelSum"  parameterType="HashMap" resultMap="fundOperSum">
+		select 
+		ROUND(AVG(NVL(ACTIVE_USER_COUNT,0))) as activeUserAVG,
+		SUM(NVL(PROFIT,0)) as profitSum,
+		SUM(NVL(BET_AMT,0)) as betAmtSum,
+		SUM(NVL(CHARGE_AMT,0)) as chargeAmtSum,
+		SUM(NVL(WITHDRAW_AMT,0)) as withdrawAmtSum
+		from oper_statistics
+		<if test="@Ognl@isNotEmpty(bizDate)">
+			<![CDATA[
+			where to_char(cast(cast(BIZ_DATE as timestamp) as date),'yyyy-mm-dd') like  concat(concat('%',#{bizDate}),'%')
+			]]>
+		</if>
+	</select>
+</mapper>

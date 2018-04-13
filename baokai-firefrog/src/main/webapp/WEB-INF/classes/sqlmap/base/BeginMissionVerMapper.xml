@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginMissionVer">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginMissionVer">
+			<result column="ID" property="id"/>
+			<result column="USER_ID" property="userId"/>
+			<result column="USER_ACCOUNT" property="userAccount"/>
+			<result column="EGG_VER" property="eggVer"/>
+			<result column="CHARGE_VER" property="chargeVer"/>
+			<result column="DAYBET_VER" property="daybetVer"/>
+			<result column="DAYQUES_VER" property="dayquesVer"/>
+			<result column="NEW_MISSION_VER" property="newMissionVer"/>
+			<result column="TOLBET_VER" property="tolbetVer"/>
+
+ </resultMap>
+	<sql id="fields">ID,USER_ID,USER_ACCOUNT,EGG_VER,CHARGE_VER,DAYBET_VER,DAYQUES_VER,NEW_MISSION_VER,TOLBET_VER
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="userId != null">
+			And USER_ID = #{userId}
+		</if>
+
+		<if test="userAccount != null">
+			And USER_ACCOUNT = #{userAccount}
+		</if>
+
+		<if test="eggVer != null">
+			And EGG_VER = #{eggVer}
+		</if>
+
+		<if test="chargeVer != null">
+			And CHARGE_VER = #{chargeVer}
+		</if>
+
+		<if test="daybetVer != null">
+			And DAYBET_VER = #{daybetVer}
+		</if>
+
+		<if test="dayquesVer != null">
+			And DAYQUES_VER = #{dayquesVer}
+		</if>
+
+		<if test="newMissionVer != null">
+			And NEW_MISSION_VER = #{newMissionVer}
+		</if>
+
+		<if test="tolbetVer != null">
+			And TOLBET_VER = #{tolbetVer}
+		</if>
+
+		</where>
+
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginMissionVer">
+		Select <include refid="fields"/>
+				From BEGIN_MISSION_VER
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_MISSION_VER
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_MISSION_VER
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginMissionVer"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_MISSION_VER.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_MISSION_VER (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{userId,javaType=long,jdbcType=DECIMAL},
+	         #{userAccount,javaType=string,jdbcType=VARCHAR},
+	         #{eggVer,javaType=long,jdbcType=DECIMAL},
+	         #{chargeVer,javaType=long,jdbcType=DECIMAL},
+	         #{daybetVer,javaType=long,jdbcType=DECIMAL},
+	         #{dayquesVer,javaType=long,jdbcType=DECIMAL},
+	         #{newMissionVer,javaType=long,jdbcType=DECIMAL},
+	         #{tolbetVer,javaType=long,jdbcType=DECIMAL}
+	        )
+	</insert>
+
+	<select id="findByUserId" resultMap="result" parameterType="long">
+		Select <include refid="fields" /> 
+				From BEGIN_MISSION_VER
+		where user_id = #{userId}
+	</select>
+
+	<select id="getCountByPage" resultType="Long">
+		Select count(1) 
+				From BEGIN_MISSION_VER
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getByPage" resultType="Long">
+		Select <include refid="fields" /> 
+				From BEGIN_MISSION_VER
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+</mapper>

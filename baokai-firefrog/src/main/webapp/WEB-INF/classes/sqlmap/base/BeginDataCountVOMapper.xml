@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginDataCountVO">
+	
+	<select id="getMissionCount" parameterType="map" resultType="long">
+		select count(1) from Begin_mission where 
+		 <![CDATA[MISSION_START_TIME >= #{startTime} and MISSION_START_TIME <= #{endTime}]]>
+	</select>
+
+	<select id="getBindCardAward" parameterType="map" resultType="long">
+		select count(1) from Begin_mission a  
+		join begin_award b on
+		a.user_id = b.user_id and  b.award_type1 = #{cardType} and b.status = #{status}
+		where  <![CDATA[MISSION_START_TIME >= #{startTime} and MISSION_START_TIME <= #{endTime}]]>
+	</select>
+
+	<select id="getCharegCount" parameterType="map" resultType="long">
+		select count(1) from begin_mission a
+		where  <![CDATA[a.MISSION_START_TIME >= #{startTime} and a.MISSION_START_TIME <= #{endTime}]]> and 
+	    exists(select 1 from fund_charge b where a.user_id= b.user_id and b.status = #{chargeStatus} and rownum = 1)
+	</select>
+	
+	<select id="getWithdrawCount" parameterType="map" resultType="long">
+		select count(1) from begin_mission a
+		where  <![CDATA[a.MISSION_START_TIME >= #{startTime} and a.MISSION_START_TIME <= #{endTime}]]> and 
+	    exists(select 1 from fund_withdraw b where a.user_id = b.user_id and b.status in 
+	    <foreach collection="withDrawStatuses" item="withdrawStatus" index="index" open="(" close=")" separator=",">
+	    	#{withdrawStatus}
+	    </foreach>
+	    and rownum = 1)
+	</select>
+	
+	<select id="getTotalCharegAmt" parameterType="map" resultType="double">
+		select sum(nvl(REAL_CHARGE_AMT,0))/10000  from BEGIN_MISSION a
+		join fund_charge b on a.user_id = b.user_id and b.status = 2 and 
+		b.apply_time = (select min(apply_time) from fund_charge c where  a.user_id = c.user_id and c.status = 2)
+		<![CDATA[where  a.MISSION_START_TIME >= #{startTime} and a.MISSION_START_TIME <= #{endTime}]]>
+	</select>
+	
+	<select id="getTotalOrderAmt" parameterType="map" resultType="double">
+		select sum(TOTAMOUNT)/10000 from Begin_mission a
+		join game_order b on a.user_id = b.userid and b.STATUS in (2,3) 
+		and
+		<![CDATA[b.ORDER_TIME >=#{startTime} and b.ORDER_TIME <=#{endTime}]]>		 
+		where  <![CDATA[MISSION_START_TIME >= #{startTime} and MISSION_START_TIME <= #{endTime}]]>
+	</select>
+	
+	<select id="getAwardLotteryCount" parameterType="map" resultType="long">
+		select count(1) from Begin_mission a where 
+		<![CDATA[MISSION_START_TIME >= #{startTime} and MISSION_START_TIME <= #{endTime}]]>
+		and exists (select 1 from begin_award_lottery b where a.user_id = b.user_id
+		and b.status=#{awardStatus})
+	</select>
+	
+	<select id="getAwardTotalAmt" parameterType="map" resultType="long">
+		select count(PRIZE) from begin_award a join
+		begin_award_log b on a.id = b.AWARD_ID
+		where <![CDATA[a.AWARD_TIME >= #{startTime} and a.AWARD_TIME <= #{endTime}]]>
+		and a.status=#{awardStatus} and a.award_type1= #{missionType}
+	</select>
+	
+	<select id="getAwardLotteryTime" parameterType="map" resultType="long">
+		select count(1) from Begin_mission a 
+		join begin_award_lottery b on a.user_id = b.user_id and b.status = #{status}
+		where <![CDATA[MISSION_START_TIME >= #{startTime} and MISSION_START_TIME <= #{endTime}]]>
+	</select>
+		
+</mapper>

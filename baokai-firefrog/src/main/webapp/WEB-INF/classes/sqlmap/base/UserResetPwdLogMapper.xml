@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserResetPwdLogRequestVo">
+	<resultMap id="UserResetPwdLogResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserResetPwdLogVo">
+	</resultMap>
+
+	<sql id="userResetPwdLogColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	PT_ACCOUNT as ptAccount,
+	        	CREATE_ACCOUNT as createAccount,
+	        	IP as ip,
+	        	GMT_CREATE as gmtCreate
+	    ]]>
+	</sql>
+
+	<sql id="userResetPwdLogWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(ptAccount)">
+				and PT_ACCOUNT = #{ptAccount}
+			</if>
+			<if test="@Ognl@isNotEmpty(createAccount)">
+				and CREATE_ACCOUNT = #{createAccount}
+			</if>
+			<if test="@Ognl@isNotEmpty(ip)">
+				and IP = #{ip}
+			</if>
+		</where>
+	</sql>
+
+	<insert id="insertUserResetPwdLog" parameterType="com.winterframework.PT.user.vo.UserResetPwdLogVo"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		INSERT INTO
+		PT_USER_RESET_PWD_LOG (
+		ID,
+		PT_ACCOUNT,
+		CREATE_ACCOUNT,
+		IP,
+		GMT_CREATE
+		) VALUES (
+		#{id,javaType=long,jdbcType=DECIMAL},
+		#{ptAccount,javaType=string,jdbcType=VARCHAR},
+		#{createAccount,javaType=string,jdbcType=VARCHAR},
+		#{ip,javaType=long,jdbcType=DECIMAL},
+		#{gmtCreate,javaType=object,jdbcType=TIMESTAMP}
+		);
+	</insert>
+
+</mapper>

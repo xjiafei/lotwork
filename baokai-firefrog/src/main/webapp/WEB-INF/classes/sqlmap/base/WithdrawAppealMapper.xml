@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.WithdrawAppealVO">
+	<resultMap id="NoticeWithdrawAppealResult" type="com.winterframework.firefrog.fund.dao.vo.WithdrawAppealVO">
+    </resultMap>
+	<resultMap id="UserNoticeTaskResult" type="com.winterframework.firefrog.fund.dao.vo.WithdrawAppealVO">
+	</resultMap>
+		
+	
+
+	<sql id="WithdrawAppealColumns">
+	    <![CDATA[
+	        	USER_ID         AS userId,
+			    WITHDRAW_SN     AS sn,
+			    WITHDRAW_TIME   AS applyTime,
+			    WITHDRAW_AMT    AS withdrawAmt,
+			    BANK_ID         AS bankId,
+			    CARD_NUMBER     AS cardNumber,
+			    APPEAL_MEMO     AS appealMemo,
+			    APPEAL_STATUS   AS appealStatus,
+			    APPEAL_TIPS     AS appealTips,
+			    UPLOAD_IMAGES   AS uploadImages,
+			    IS_SEPERATE     AS isSeperate
+	    ]]>
+	</sql>
+	
+	
+	<sql id="fundWithdrawAppealColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USER_ID as userId,
+	        	APPEAL_SN as appealSn,
+	        	WITHDRAW_AMT as withdrawAmt,
+	        	WITHDRAW_TIME as withdrawTime,
+	        	VIP_LVL as vipLvl,
+	        	USER_NAME as userName,
+	        	APPEAL_STATUS as appealStatus,
+	        	APPEAL_ACCT as appealAcct,
+	        	APPEAL_TIME as appealTime,
+	        	BANK_ID as bankId,
+	        	BANK_NAME as bankName,
+	        	CARD_NUMBER as cardNumber,
+	        	APPEAL_MEMO as appealMemo,
+	        	ARGUE_TIME as argueTime,
+	        	ARGUE_ACCT as argueAcct,
+	        	WITHDRAW_SN as withdrawSn,
+	        	IS_APPEAL as isAppeal,      	
+	        	APPEAL_TIPS as appealTips,
+	        	UPLOAD_IMAGES as uploadImages,
+   		        APPEAL_TIPS_RESULT as appealTipsResult,
+   		        BANK_ACCOUNT as bankAccount,
+   		        IS_SEPERATE as isSeperate 	
+	    ]]>
+	</sql>
+	
+	
+	
+	<sql id="withdrAppealColumns">
+	    <![CDATA[
+	        	APPEAL_MEMO as appealMemo,
+	        	APPEAL_STATUS as appealStatus      	
+	    ]]>
+	</sql>
+	
+	
+	
+			
+	<insert id="insertWithdrawAppeal" parameterType="HashMap" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						    SELECT SEQ_FUND_WITHDRAW_APPEAL_ID.Nextval from dual
+			   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_WITHDRAW_APPEAL(
+	        	ID ,
+	        	USER_ID ,
+	        	APPEAL_SN ,
+	        	WITHDRAW_AMT ,
+	        	WITHDRAW_TIME ,
+	        	VIP_LVL,
+	        	USER_NAME ,
+	        	APPEAL_STATUS ,
+	        	APPEAL_ACCT ,
+	        	APPEAL_TIME ,
+	        	BANK_ID ,
+	        	BANK_NAME ,
+	        	CARD_NUMBER ,
+	        	APPEAL_MEMO ,
+	        	ARGUE_TIME ,
+	        	ARGUE_ACCT ,
+	        	WITHDRAW_SN ,
+	        	IS_APPEAL ,
+	        	APPEAL_TIPS,
+	        	UPLOAD_IMAGES,
+	        	APPEAL_TIPS_RESULT,
+	        	BANK_ACCOUNT,
+	        	IS_SEPERATE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{appealSn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{withdrawAmt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{withdrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{vipLvl,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{appealStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{appealAcct,javaType=string,jdbcType=VARCHAR} ,
+	        	#{appealTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{bankId,javaType=string,jdbcType=VARCHAR} ,
+	        	#{bankName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{cardNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	#{appealMemo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{argueTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{argueAcct,javaType=string,jdbcType=VARCHAR} ,
+	        	#{withdrawSn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{isAppeal,javaType=long,jdbcType=DECIMAL} ,
+	        	#{appealTips,javaType=string,jdbcType=VARCHAR},
+	        	#{uploadImages,javaType=string,jdbcType=VARCHAR} ,
+	        	#{appealTipsResult,javaType=string,jdbcType=VARCHAR},
+	        	#{bankAccount,javaType=string,jdbcType=VARCHAR},
+	        	#{isSeperate,javaType=string,jdbcType=VARCHAR}         	
+	        )
+	    ]]>	
+	
+	</insert>
+		
+		
+		
+		
+		
+		
+	    
+	<update id="updateAppealByWithdrawSn" parameterType="HashMap">
+		UPDATE FUND_WITHDRAW_APPEAL			
+		<set>			
+			<if test="@Ognl@isNotEmpty(argueAcct)">
+				ARGUE_ACCT = #{argueAcct,javaType=string,jdbcType=VARCHAR} ,
+			</if>			
+			<if test="@Ognl@isNotEmpty(argueTime)">
+				ARGUE_TIME = #{argueTime,javaType=date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@Ognl@isNotEmpty(uploadImages)">
+				UPLOAD_IMAGES = #{uploadImages,javaType=string,jdbcType=VARCHAR},
+			</if>		
+			<if test="@Ognl@isNotEmpty(appealStatus)">
+				APPEAL_STATUS = #{appealStatus,javaType=long,jdbcType=DECIMAL}
+			</if>				
+		</set>			
+		<where> 
+		<if test="@Ognl@isNotEmpty(withdrawSn)">
+				WITHDRAW_SN = #{withdrawSn}	
+		</if>		
+		</where>			
+	</update>
+	
+	<update id="updateAppealByAppealSn" parameterType="HashMap">
+		UPDATE FUND_WITHDRAW_APPEAL
+		
+		<set>			
+			<if test="@Ognl@isNotEmpty(appealStatus)">
+				APPEAL_STATUS = #{appealStatus,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(appealAcct)">
+				APPEAL_ACCT = #{appealAcct,javaType=string,jdbcType=VARCHAR} ,
+			</if>			
+			<if test="@Ognl@isNotEmpty(appealTime)">
+				APPEAL_TIME = #{appealTime,javaType=date,jdbcType=TIMESTAMP} ,
+			</if>	
+			<if test="@Ognl@isNotEmpty(appealMemo)">
+				APPEAL_MEMO = #{appealMemo,javaType=string,jdbcType=VARCHAR} ,
+			</if>			
+			<if test="@Ognl@isNotEmpty(appealTipsResult)">
+				APPEAL_TIPS_RESULT = #{appealTipsResult,javaType=string,jdbcType=VARCHAR} 
+			</if>			
+		</set>		
+			
+		<where> 
+		<if test="@Ognl@isNotEmpty(appealSn)">
+				APPEAL_SN = #{appealSn}	
+		</if>
+		
+		</where>			
+	</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from NOTICE_TASK where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	
+	
+
+
+	<sql id="noticeWithdrawAppealWhere">
+		<where>   
+	       <if test="@Ognl@isNotEmpty(userId)">
+				USER_ID = #{userId}
+		   </if>		
+	       
+	       and APPEAL_STATUS in (0,1,3,4)
+	       and is_appeal=1
+	       <if test="@Ognl@isNotEmpty(fromDate)">
+				<![CDATA[
+				and TRUNC(WITHDRAW_TIME) >= TRUNC(#{fromDate})
+				]]>
+			</if>
+		</where>
+	</sql>
+	
+	
+	<sql id="withdrawAppealWhere">
+		<where>   
+			<if test="@Ognl@isNotEmpty(appealSn)">
+				and APPEAL_SN = #{appealSn}
+		    </if>		
+	        <if test="@Ognl@isNotEmpty(userName)">
+				and USER_NAME = #{userName}
+		    </if>		    
+			<if test="@Ognl@isNotEmpty(withdrawAmtFrom)">
+				and WITHDRAW_AMT >= #{withdrawAmtFrom}
+			</if>
+			<if test="@Ognl@isNotEmpty(withdrawAmtTo)">
+				<![CDATA[
+				and WITHDRAW_AMT <= #{withdrawAmtTo}
+			 	]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(fromWithdrawDate)">
+			<![CDATA[
+				and (WITHDRAW_TIME is not null  and  WITHDRAW_TIME >= #{fromWithdrawDate})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toWithdrawDate)">
+			<![CDATA[
+				and (WITHDRAW_TIME is not null  and WITHDRAW_TIME <= #{toWithdrawDate})
+					 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(vipLvl)">
+				and VIP_LVL = #{vipLvl}
+			</if>
+	       	<if test="@Ognl@isNotEmpty(statuses)">
+				and APPEAL_STATUS in
+				<foreach item="statuses" index="index" collection="statuses"
+					open="(" separator="," close=")">
+					#{statuses}
+				</foreach>
+			</if>			
+		    <if test="@Ognl@isNotEmpty(appealAcct)">
+				and APPEAL_ACCT = #{appealAcct}
+		    </if>
+		 
+		   	<if test="@Ognl@isNotEmpty(fromAppealDate)">
+			<![CDATA[
+				and (APPEAL_TIME is not null  and  APPEAL_TIME >= #{fromAppealDate})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toAppealDate)">
+			<![CDATA[
+				and (APPEAL_TIME is not null  and APPEAL_TIME <= #{toAppealDate})
+					 ]]>
+			</if>
+	       <if test="@Ognl@isNotEmpty(fromArgueDate)">
+			<![CDATA[
+				and (ARGUE_TIME is not null  and  ARGUE_TIME >= #{fromArgueDate})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toArgueDate)">
+			<![CDATA[
+				and (ARGUE_TIME is not null  and ARGUE_TIME <= #{toArgueDate})
+					 ]]>
+			</if>
+	       
+	       
+	       
+	       
+		</where>
+	</sql>
+	
+	
+	
+	
+	 <select id="queryWithdrawAppealByAppealSn" resultMap="NoticeWithdrawAppealResult" parameterType="HashMap">
+    	select 
+    	<include refid="withdrAppealColumns" />
+	    from FUND_WITHDRAW_APPEAL 
+	  
+		<where> 
+		<if test="@Ognl@isNotEmpty(withdrawSn)">
+				WITHDRAW_SN = #{withdrawSn}	
+		</if>	
+		
+		
+			
+		</where>	
+		
+    </select>
+    
+     <select id="queryAppealByAppealSn" resultMap="NoticeWithdrawAppealResult" parameterType="HashMap">
+    	select 
+    	<include refid="fundWithdrawAppealColumns" />
+	    from FUND_WITHDRAW_APPEAL 
+	  
+		<where> 
+		<if test="@Ognl@isNotEmpty(appealSn)">
+				APPEAL_SN = #{appealSn}	
+		</if>		
+		</where>	
+		
+    </select>
+    
+    <select id="queryWithdrawAppeal" resultMap="NoticeWithdrawAppealResult" parameterType="HashMap">
+    	select 
+    	<include refid="WithdrawAppealColumns" />
+	    from FUND_WITHDRAW_APPEAL
+	    <include refid="noticeWithdrawAppealWhere" />
+		order by withdraw_time desc
+    </select>
+    
+<!--     <select id="queryWithdrawAppeal" resultMap="NoticeWithdrawAppealResult" parameterType="HashMap"> -->
+<!--     	select  -->
+<!--     	<include refid="fundWithdrawLeftJoinWithdrawAppealColumns" /> -->
+<!-- 	    from FUND_WITHDRAW a left join -->
+<!--         FUND_WITHDRAW_APPEAL b  -->
+<!-- 	    on a.sn=b.WITHDRAW_SN -->
+<!-- 		<include refid="noticeWithdrawAppealWhere" /> -->
+<!-- 		order by a.apply_time desc -->
+<!--     </select> -->
+    
+    <select id="queryUncheckAppealCount" resultType="long" >
+    	select count(1)
+	    from FUND_WITHDRAW_APPEAL where APPEAL_STATUS = 1
+    </select>
+    
+    
+    <select id="queryAppeal" resultMap="NoticeWithdrawAppealResult" parameterType="HashMap">
+    	select 
+    	<include refid="fundWithdrawAppealColumns" />
+	    from FUND_WITHDRAW_APPEAL  
+		<include refid="withdrawAppealWhere" />
+		order by WITHDRAW_TIME DESC
+    </select>
+    
+	
+</mapper>

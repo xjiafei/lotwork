@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListLogVO">
+	<resultMap id="GlobalWhiteListLogResult"
+		type="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListLogVO">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="globalWhiteListLogColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	WHITELIST_IP as whiteListIP,
+	        	ACCUNT as accunt,
+	        	COUNTRY as country,
+	        	OPERATOR as operator,
+	        	OPERATION_TIME as operationTime,
+	        	STATUS as status,
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListLogVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GLOBAL_WHITE_LIST_LOG.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GLOBAL_WHITE_LIST_LOG (
+	        	ID ,
+	        	WHITELIST_IP ,
+	        	ACCUNT ,
+	        	COUNTRY ,
+	        	OPERATOR ,
+	        	OPERATION_TIME ,
+	        	STATUS
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{whiteListIP,javaType=string,jdbcType=VARCHAR} ,
+	        	#{accunt,javaType=string,jdbcType=VARCHAR} ,
+	        	#{country,javaType=string,jdbcType=VARCHAR} ,
+	        	#{operator,javaType=string,jdbcType=VARCHAR} ,
+	        	#{operationTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>
+
+	</insert>
+
+	<select id="getLogRecord" 
+			resultMap="GlobalWhiteListLogResult" 
+			parameterType="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListLogVO">
+		select  
+		ID as id ,
+		WHITELIST_IP as whiteListIP ,
+		ACCUNT as accunt ,
+		COUNTRY as country ,
+		OPERATOR as operator ,
+		OPERATION_TIME as operationTime ,
+		STATUS as status ,
+		LISTIP as listIP
+		from(	
+			select     			 
+				 GLOBAL_WHITE_LIST_LOG.*,
+				 GLOBAL_WHITE_LIST_IP.ID AS LISTIP
+			from GLOBAL_WHITE_LIST_LOG 
+      		left join GLOBAL_WHITE_LIST_IP on GLOBAL_WHITE_LIST_IP.IP_ADDR = GLOBAL_WHITE_LIST_LOG.WHITELIST_IP
+      		<where>
+      			<if test="@Ognl@isNotEmpty(accunt)">
+					AND GLOBAL_WHITE_LIST_LOG.ACCUNT LIKE '%${accunt}%'
+				</if>
+				<if test="@Ognl@isNotEmpty(whiteListIP)">
+					AND GLOBAL_WHITE_LIST_LOG.WHITELIST_IP = #{whiteListIP} 
+				</if>
+      		</where>
+			ORDER BY GLOBAL_WHITE_LIST_LOG.ID DESC
+		)
+		<![CDATA[
+	    	WHERE ROWNUM <= #{pageSize}
+	    	]]>	
+	</select>
+
+</mapper>

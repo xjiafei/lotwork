@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.global.dao.vo.GlobalGrayListVO">
+	<resultMap id="GlobalGrayListResult"
+		type="com.winterframework.firefrog.global.dao.vo.GlobalGrayListVO">
+	</resultMap>
+	<resultMap id="GlobalGrayListTestResult"
+		type="com.winterframework.firefrog.global.dao.vo.GlobalGrayListTestVO">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="globalGrayListColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USER_ID as userId,
+	        	LAST_LOGIN_TIME as lastLoginTime,
+	        	RISK_TYPE as riskType,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	REGISTER_DATE as registerDate
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="saveGlobalGrayList"
+		parameterType="com.winterframework.firefrog.global.dao.vo.GlobalGrayListVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GLOBAL_GRAYLIST_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GLOBAL_GRAYLIST (
+	        	ID ,
+	        	USER_ID ,
+	        	LAST_LOGIN_TIME ,
+	        	RISK_TYPE ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	REGISTER_DATE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lastLoginTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{riskType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{registerDate,javaType=date,jdbcType=TIMESTAMP}
+	        )
+	    ]]>
+
+	</insert>
+
+	<select id="queryGrayListByUserId" 
+			resultMap="GlobalGrayListResult" 
+			parameterType="hashmap">
+		select  
+		<include refid="globalGrayListColumns"/>
+		from GLOBAL_GRAYLIST
+		WHERE
+		USER_ID = #{userId}
+	</select>
+	
+	<update id="updateById" parameterType="com.winterframework.firefrog.global.dao.vo.GlobalGrayListVO">
+	    <![CDATA[
+	        UPDATE GLOBAL_GRAYLIST SET
+		        LAST_LOGIN_TIME = #{lastLoginTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        RISK_TYPE = #{riskType,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        REGISTER_DATE = #{registerDate,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+
+	<delete id="deleteById" parameterType="hashmap">
+	    <![CDATA[
+	        delete from GLOBAL_GRAYLIST where
+		        USER_ID = #{userId} 
+	    ]]>
+	</delete>   
+	
+	
+	<select id="queryByTest" 
+			resultMap="GlobalGrayListTestResult" 
+			parameterType="hashmap">
+		select a.RISK_TYPE as riskType,b.account from GLOBAL_GRAYLIST a RIGHT join USER_CUSTOMER b on a.user_id = b.id 
+		                CONNECT BY PRIOR  b.parent_id= b.id
+		               START WITH ACCOUNT  = #{userAccount}
+	</select>
+	
+	<select id="queryByTest2" 
+			resultMap="GlobalGrayListTestResult" 
+			parameterType="hashmap">
+		select a.RISK_TYPE as riskType,b.account from GLOBAL_GRAYLIST a RIGHT join USER_CUSTOMER b on a.user_id = b.id 
+		                where b.parent_id= (select c.id from USER_CUSTOMER c where account = #{userAccount}) or b.account = #{userAccount} 
+	</select>
+	
+
+</mapper>

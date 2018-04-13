@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundWithdrawTips">
+	<resultMap id="result" type="com.winterframework.firefrog.fund.dao.vo.FundWithdrawTips">
+		<result column="ID" property="id"/>
+			<result column="TIPS_MODEL" property="tipsModel"/>		
+			<result column="TIPS_GROUPA" property="tipsGroupa"/>
+			<result column="TIPS_GROUPB" property="tipsGroupb"/>
+			<result column="TIPS_CONTEXT" property="tipsContext"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="CREATE_USER" property="createUser"/>
+			<result column="MODIFY_TIME" property="modifyTime"/>
+			<result column="MODIFY_USER" property="modifyUser"/>
+			<result column="TIPS_MEMO" property="tipsMemo"/>
+	</resultMap>
+	
+		<sql id="fields">ID,TIPS_GROUPA,TIPS_GROUPB,TIPS_CONTEXT,CREATE_TIME,CREATE_USER,MODIFY_TIME,MODIFY_USER,TIPS_MEMO,TIPS_MODEL
+	</sql>
+		
+		<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="tipsGroupa != null">
+			And TIPS_GROUPA = #{tipsGroupa}
+		</if>
+
+		<if test="tipsGroupb != null">
+			And TIPS_GROUPB = #{tipsGroupb}
+		</if>
+
+		<if test="tipsContext != null">
+			And TIPS_CONTEXT = #{tipsContext}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="createUser != null">
+			And CREATE_USER = #{createUser}
+		</if>
+
+		<if test="modifyTime != null">
+			And MODIFY_TIME = #{modifyTime}
+		</if>
+
+		<if test="modifyUser != null">
+			And MODIFY_USER = #{modifyUser}
+		</if>
+
+		<if test="tipsMemo != null">
+			And TIPS_MEMO = #{tipsMemo}
+		</if>
+
+		<if test="tipsModel != null">
+			And tips_Model = #{tipsModel}
+		</if>
+
+		</where>
+
+	</sql>
+		
+		<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdrawTips" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_FUND_WITHDRAW_TIPS.Nextval from dual
+	   	</selectKey>
+	   	INSERT INTO
+	        FUND_WITHDRAW_TIPS (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{tipsGroupa,javaType=string,jdbcType=VARCHAR},
+	         #{tipsGroupb,javaType=string,jdbcType=VARCHAR},
+	         #{tipsContext,javaType=string,jdbcType=VARCHAR},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{createUser,javaType=string,jdbcType=VARCHAR},
+	         #{modifyTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{modifyUser,javaType=string,jdbcType=VARCHAR},
+	         #{tipsMemo,javaType=string,jdbcType=VARCHAR},
+    	     #{tipsModel,javaType=string,jdbcType=VARCHAR}	         
+	        )
+		</insert>
+		
+		<!--  
+		<insert id="addTrainRecordBatch" useGeneratedKeys="true" parameterType="java.util.List">  
+		    <selectKey resultType="long" order="BEFORE" keyProperty="id">
+				SELECT SEQ_FUND_WITHDRAW_TIPS.Nextval from dual
+	   		</selectKey>  
+		    insert into t_train_record (add_time,emp_id,activity_id,flag)   
+		    values  
+		    <foreach collection="list" item="item" index="index" separator="," >  
+		        (#{id,javaType=long,jdbcType=DECIMAL},
+		         #{tipsModel,javaType=string,jdbcType=VARCHAR},	         
+		         #{tipsGroupa,javaType=string,jdbcType=VARCHAR},
+		         #{tipsGroupb,javaType=string,jdbcType=VARCHAR},
+		         #{tipsContext,javaType=string,jdbcType=VARCHAR},
+		         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+		         #{createUser,javaType=string,jdbcType=VARCHAR},
+		         #{modifyTime,javaType=object,jdbcType=TIMESTAMP},
+		         #{modifyUser,javaType=string,jdbcType=VARCHAR},
+		         #{tipsMemo,javaType=string,jdbcType=VARCHAR}
+	        	)
+		    </foreach>  
+		</insert>  
+		-->
+		
+	    <select id="getTips" parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdrawTips" resultMap="result" flushCache="false">
+			select <include refid="fields"/>
+			    from FUND_WITHDRAW_TIPS 
+		       <include refid="whereCondition"/>
+		</select>	
+		
+		<delete id="deleteByCondition" flushCache="true" parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdrawTips">
+			delete from FUND_WITHDRAW_TIPS
+		       <include refid="whereCondition"/>
+		</delete>
+		
+		<select id="getGroupBCount" parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdrawTips" resultType="java.lang.Integer" flushCache="false">
+			select MAX(count(1)) from  fund_withdraw_tips where TIPS_MODEL = #{tipsModel} and TIPS_GROUPA  = #{tipsGroupa} group by TIPS_MODEL , TIPS_GROUPA,TIPS_GROUPB
+		</select>
+		
+		
+</mapper>

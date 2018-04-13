@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.active.entity.ActiveUserMigrate">
+	<resultMap id="ActiveUserMigrateResult"
+		type="com.winterframework.firefrog.active.entity.ActiveUserMigrate">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="activeUserMigrateColumns">
+	    <![CDATA[
+	        	UPDATE_TIME as updateTime,
+	        	FUND_TIME as fundTime,
+	        	BET_TIME as betTime,
+	        	test_time as testTime,
+	        	ID as id
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.active.entity.ActiveUserMigrate"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVE_USER_MIGRATE (
+	        	UPDATE_TIME ,
+	        	FUND_TIME ,
+	        	BET_TIME ,
+	        	ID 
+	        ) VALUES (
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{fundTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{betTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{id,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.active.entity.ActiveUserMigrate">
+		UPDATE ACTIVE_USER_MIGRATE
+		<set>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+
+			</if>
+			<if test="@Ognl@isNotEmpty(fundTime)">
+				FUND_TIME = #{fundTime,javaType=date,jdbcType=TIMESTAMP} ,
+
+			</if>
+			<if test="@Ognl@isNotEmpty(betTime)">
+				BET_TIME = #{betTime,javaType=date,jdbcType=TIMESTAMP}
+
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACTIVE_USER_MIGRATE where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="ActiveUserMigrateResult"
+		flushCache="false">
+		select
+		<include refid="activeUserMigrateColumns" />
+		    <![CDATA[
+			    from ACTIVE_USER_MIGRATE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="ActiveUserMigrateResult"
+		flushCache="false">
+		select
+		<include refid="activeUserMigrateColumns" />
+		from ACTIVE_USER_MIGRATE
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="activeUserMigrateDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(fundTime)">
+				and FUND_TIME = #{fundTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(betTime)">
+				and BET_TIME = #{betTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="ActiveUserMigrateResult"
+		flushCache="false">
+		select
+		<include refid="activeUserMigrateColumns" />
+		from ACTIVE_USER_MIGRATE
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from
+		ACTIVE_USER_MIGRATE
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from ACTIVE_USER_MIGRATE
+		<include refid="activeUserMigrateDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="ActiveUserMigrateResult">
+		select
+		<include refid="activeUserMigrateColumns" />
+		from ACTIVE_USER_MIGRATE
+		<include refid="activeUserMigrateDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+</mapper>

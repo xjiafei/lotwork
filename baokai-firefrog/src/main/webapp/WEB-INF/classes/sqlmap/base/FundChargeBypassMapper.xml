@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundChargeBypassVO">
+	<resultMap id="fundChargeBypassResult" type="com.winterframework.firefrog.fund.dao.vo.FundChargeBypassVO">
+		<result column="ID" property="id"/>
+		<result column="USER_ACCOUNT" property="userAccount"/>
+		<result column="CREATE_TIME" property="createTime"/>
+		<result column="MEMO" property="memo"/>
+		<result column="DELETE_FLAG" property="deleteFlag"/>
+		<result column="CHARGE_CHANNEL" property="chargeChannel"/>
+		<result column="CHARGEWAY_SET" property="chargeWaySet"/>
+	</resultMap>
+	
+	<sql id="fields">ID,USER_ACCOUNT,CREATE_TIME,MEMO,DELETE_FLAG,CHARGE_CHANNEL,CHARGEWAY_SET
+	</sql>
+	
+	<sql id="whereCondition">
+		<where>
+		<if test="userAccount != null">
+			And USER_ACCOUNT = #{userAccount}
+		</if>
+		
+		<if test="chargeChannel != null">
+			And CHARGE_CHANNEL = #{chargeChannel}
+		</if>
+		<if test="chargeWaySet != null">
+			AND CHARGEWAY_SET = #{chargeWaySet}
+		</if>
+		</where>
+	</sql>
+	
+	<select id="getCountByPage" resultType="long">
+        select count(1) from FUND_CHARGE_BYPASS_WHITELIST 
+		<include refid="whereCondition"/>    
+    </select>
+    
+    <select id="getByPage" resultMap="fundChargeBypassResult">
+    	select <include refid="fields" />
+	    from FUND_CHARGE_BYPASS_WHITELIST 
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    
+    <select id="searchByAccount" resultMap="fundChargeBypassResult">
+    	select <include refid="fields" />
+	    from FUND_CHARGE_BYPASS_WHITELIST 
+		<include refid="whereCondition"/>
+	</select>
+    
+    
+    
+    
+	
+	<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeBypassVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BYPASS_WHITELIST.Nextval from dual
+		</selectKey>
+	    INSERT INTO
+        FUND_CHARGE_BYPASS_WHITELIST (
+			<include refid="fields"/>
+        ) VALUES (
+        	#{id,javaType=long,jdbcType=DECIMAL},
+        	#{userAccount,javaType=string,jdbcType=VARCHAR},
+        	#{createTime,javaType=object,jdbcType=TIMESTAMP},
+        	#{memo,javaType=string,jdbcType=VARCHAR},
+        	#{deleteFlag,javaType=string,jdbcType=VARCHAR},
+        	#{chargeChannel,javaType=long,jdbcType=DECIMAL},
+        	#{chargeWaySet,javaType=long,jdbcType=DECIMAL}
+        )
+	    
+
+	</insert>
+	
+	<update id="updateDeleteFlag" parameterType="map">
+		update FUND_CHARGE_BYPASS_WHITELIST set 
+		  	 delete_Flag = #{deleteFlag,javaType=string,jdbcType=VARCHAR}
+		 <if test="deleteId!=null">
+		 where 
+		 ID = #{deleteId} 
+		 </if>
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_CHARGE_BYPASS_WHITELIST where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	
+	
+
+</mapper>

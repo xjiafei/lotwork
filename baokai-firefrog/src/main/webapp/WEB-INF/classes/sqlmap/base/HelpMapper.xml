@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.help.dao.vo.HelpVO">
+	<resultMap id="HelpResult"
+		type="com.winterframework.firefrog.help.dao.vo.HelpVO">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="helpColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	TITLE as title,
+	        	IS_REC as isRec,
+	        	NO as no,
+	        	TYPE as type,
+	        	LOTTERY_LOGO as lotteryLogo,
+	        	LOTTERY_LINK as lotteryLink,
+	        	LOTTERY_ADVERT as lotteryAdvert,
+	        	SOLVEDNUM as solvednum,
+	        	UNSOLVEDNUM as unsolvednum,
+	        	BROWSENUM as browsenum,
+	        	CATE_ID as cateId,
+	        	CATE_ID2 as cateId2,
+	        	REC_NO as recNo,
+	        	PREFACE as preface,
+	        	RECOMMAND_TIME as recommandTime
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.help.dao.vo.HelpVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_HELP_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        HELP (
+	        	ID ,
+	        	TITLE ,
+	        	IS_REC ,
+	        	CONTENT ,
+	        	NO ,
+	        	GMT_CREATED ,
+	        	GMT_MODIFIED ,
+	        	TYPE ,
+	        	LOTTERY_LOGO ,
+	        	LOTTERY_LINK ,
+	        	LOTTERY_ADVERT ,
+	        	SOLVEDNUM ,
+	        	UNSOLVEDNUM ,
+	        	BROWSENUM ,
+	        	CATE_ID ,
+	        	CATE_ID2 ,
+	        	REC_NO ,
+	        	PREFACE ,
+	        	RECOMMAND_TIME
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{title,javaType=string,jdbcType=VARCHAR} ,
+	        	#{isRec,javaType=long,jdbcType=DECIMAL} ,
+	        	#{content,javaType=string,jdbcType=VARCHAR} ,
+	        	#{no,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryLogo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{lotteryLink,javaType=string,jdbcType=VARCHAR} ,
+	        	#{lotteryAdvert,javaType=string,jdbcType=VARCHAR} ,
+	        	#{solvednum,javaType=long,jdbcType=DECIMAL} ,
+	        	#{unsolvednum,javaType=long,jdbcType=DECIMAL} ,
+	        	#{browsenum,javaType=long,jdbcType=DECIMAL} ,
+	        	#{cateId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{cateId2,javaType=long,jdbcType=DECIMAL} ,
+	        	#{recNo,javaType=long,jdbcType=DECIMAL} ,
+	        	#{preface,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP}
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.help.dao.vo.HelpVO">
+		UPDATE HELP
+		<set>
+			<if test="@Ognl@isNotEmpty(title)">
+				TITLE = #{title,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(isRec)">
+				IS_REC = #{isRec,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(content)">
+				CONTENT = #{content,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(no)">
+				NO = #{no,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				TYPE = #{type,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryLogo)">
+				LOTTERY_LOGO =
+				#{lotteryLogo,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryLink)">
+				LOTTERY_LINK =
+				#{lotteryLink,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryAdvert)">
+				LOTTERY_ADVERT =
+				#{lotteryAdvert,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(solvednum)">
+				SOLVEDNUM = #{solvednum,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(unsolvednum)">
+				UNSOLVEDNUM =
+				#{unsolvednum,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(browsenum)">
+				BROWSENUM = #{browsenum,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(cateId)">
+				CATE_ID = #{cateId,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(cateId2)">
+				CATE_ID2 = #{cateId2,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(recNo)">
+				REC_NO = #{recNo,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(preface)">
+				PREFACE = #{preface,javaType=string,jdbcType=VARCHAR},
+			</if>
+			<if test="@Ognl@isNotEmpty(recommandTime)">
+				RECOMMAND_TIME =
+				#{recommandTime,javaType=object,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	<update id="updateFeedBackCount" parameterType="com.winterframework.firefrog.help.dao.vo.HelpVO">
+		UPDATE HELP
+		<set>
+			<if test="@Ognl@isNotEmpty(solvednum)">
+				SOLVEDNUM = #{solvednum,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(unsolvednum)">
+				UNSOLVEDNUM =
+				#{unsolvednum,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	<update id="updateBrowsenum" parameterType="com.winterframework.firefrog.help.dao.vo.HelpVO">
+		UPDATE HELP
+		<set>
+			<if test="@Ognl@isNotEmpty(browsenum)">
+					BROWSENUM = nvl(BROWSENUM, 0) +1 ,
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from HELP where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="HelpResult"
+		flushCache="false">
+		select
+		ID as id,
+		TITLE as title,
+		IS_REC as isRec,
+		CONTENT as content,
+		NO as
+		no,
+		TYPE as type,
+		LOTTERY_LOGO as lotteryLogo,
+		LOTTERY_LINK as
+		lotteryLink,
+		LOTTERY_ADVERT as lotteryAdvert,
+		SOLVEDNUM as solvednum,
+		UNSOLVEDNUM as
+		unsolvednum,
+		BROWSENUM as browsenum,
+		CATE_ID as cateId,
+		CATE_ID2 as
+		cateId2,
+		REC_NO as recNo,
+		PREFACE as preface ,
+		RECOMMAND_TIME
+		as
+		recommandTime
+		    <![CDATA[
+			    from HELP 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="HelpResult"
+		flushCache="false">
+		select
+		<include refid="helpColumns" />
+		from HELP
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="helpDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+
+			<if test=" @Ognl@isNotEmpty(title)">
+
+				<if test="@Ognl@isEmpty(like_match)">
+					and (TITLE like '%${title}%' or preface like '%${title}%')
+				</if>
+				<if test="@Ognl@isNotEmpty(like_match)">
+					and TITLE = #{title}
+				</if>
+			</if>
+
+			<if test="@Ognl@isNotEmpty(isRec)">
+				and IS_REC = #{isRec}
+			</if>
+			<if test="@Ognl@isNotEmpty(content)">
+				and CONTENT = #{content}
+			</if>
+			<if test="@Ognl@isNotEmpty(no)">
+				and NO = #{no}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryLogo)">
+				and LOTTERY_LOGO = #{lotteryLogo}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryLink)">
+				and LOTTERY_LINK = #{lotteryLink}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryAdvert)">
+				and LOTTERY_ADVERT = #{lotteryAdvert}
+			</if>
+			<if test="@Ognl@isNotEmpty(solvednum)">
+				and SOLVEDNUM = #{solvednum}
+			</if>
+			<if test="@Ognl@isNotEmpty(unsolvednum)">
+				and UNSOLVEDNUM = #{unsolvednum}
+			</if>
+			<if test="@Ognl@isNotEmpty(browsenum)">
+				and BROWSENUM = #{browsenum}
+			</if>
+			<if test="@Ognl@isNotEmpty(cateId)">
+				and CATE_ID = #{cateId}
+			</if>
+			<if test="@Ognl@isNotEmpty(cateId2)">
+				and CATE_ID2 = #{cateId2}
+			</if>
+			<if test="@Ognl@isNotEmpty(recNo)">
+				and REC_NO = #{recNo}
+			</if>
+			<if test="@Ognl@isNotEmpty(recommandTime)">
+				and recommandTime = #{recommandTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="HelpResult" flushCache="false">
+		select
+		<include refid="helpColumns" />
+		from HELP
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getHelpCount" resultType="long">
+		select count(*) from HELP
+	</select>
+	<select id="getHelpCountByPage" resultType="long">
+		select count(*) from HELP
+		<include refid="helpDynamicWhere" />
+	</select>
+	<select id="getHelpWithKeyCountByPage" resultType="long">
+		select count(*) from HELP
+		<where>
+			<if test="@Ognl@isNotEmpty(title)">
+				or TITLE like '%${title}%'
+			</if>
+			<if test="@Ognl@isNotEmpty(preface)">
+				or PREFACE like '%${preface}%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getHelpByPage" resultMap="HelpResult">
+		select
+		<include refid="helpColumns" />
+		from HELP
+		<include refid="helpDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getHelpWithKeyByPage" resultMap="HelpResult">
+		select
+		<include refid="helpColumns" />
+		from HELP
+		<where>
+			<if test="@Ognl@isNotEmpty(title)">
+				or TITLE like '%${title}%'
+			</if>
+			<if test="@Ognl@isNotEmpty(preface)">
+				or PREFACE like '%${preface}%'
+			</if>
+		</where>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+</mapper>

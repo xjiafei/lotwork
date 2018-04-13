@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserSlotExchange">
+	<resultMap id="UserSlotExchangeResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserSlotExchange">
+	</resultMap>
+	<resultMap id="UserSlotExchangeCheckResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserSlotExchangeCount">
+	</resultMap>
+	<resultMap id="ViewUserSlotExchangeResult"
+		type="com.winterframework.firefrog.user.dao.vo.ViewUserSlotExchange">
+	</resultMap>
+
+	<sql id="userSlotExchangeColumns">
+	    <![CDATA[
+	        	EXCHANGE_NUMBER as exchangeNumber,
+	        	USER_ID as userId,
+	        	EXCHANGE_AMOUNT as exchangeAmount,
+	        	EXCHANGE_PRIZE as exchangePrize,
+	        	IS_BINDING as isBinding,
+	        	IS_AWARD as isAward,
+	        	SEND_STATUS as sendStatus,
+	        	CELLULAR_PHONE as cellularPhone,
+	        	GMT_CREATE as gmtCreate,
+	        	GMT_UPDATE as gmtUpdate,
+	        	GMT_BINDING_DATE as gmtBindingDate,
+	        	GMT_AWARD_DATE as gmtAwardDate,
+	        	ACTIVITY_ID as activityId,
+	        	TYPE as type
+	    ]]>
+	</sql>
+	
+	<sql id="viewUserSlotExchangeColumns">
+	    <![CDATA[
+	        	EXCHANGE_NUMBER as exchangeNumber,
+	        	USER_ID as userId,
+	        	EXCHANGE_AMOUNT as exchangeAmount,
+	        	EXCHANGE_PRIZE as exchangePrize,
+	        	IS_BINDING as isBinding,
+	        	IS_AWARD as isAward,
+	        	SEND_STATUS as sendStatus,
+	        	CELLULAR_PHONE as cellularPhone,
+	        	ACTIVITY_ID as activityId,
+	        	NAME as activityName,
+	        	GMT_ACTIVITY_START as gmtActivityStart,
+	        	GMT_ACTIVITY_END as gmtActivityEnd,
+	        	ACTIVITY_STATUS as activityStatus,
+	        	GMT_BINDING_DATE as gmtBindingDate,
+	        	GMT_AWARD_DATE as gmtAwardDate,
+	        	TYPE as type
+	    ]]>
+	</sql>
+
+	<sql id="userSlotExchangeWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(exchangeNumber)">
+				AND EXCHANGE_NUMBER = #{exchangeNumber}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				AND USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(exchangeAmount)">
+				AND EXCHANGE_AMOUNT = #{exchangeAmount}
+			</if>
+			<if test="@Ognl@isNotEmpty(exchangePrize)">
+				AND EXCHANGE_PRIZE = #{exchangePrize}
+			</if>
+			<if test="@Ognl@isNotEmpty(isBinding)">
+				AND IS_BINDING = #{isBinding}
+			</if>
+			<if test="@Ognl@isNotEmpty(isAward)">
+				AND IS_AWARD = #{isAward}
+			</if>
+			<if test="@Ognl@isNotEmpty(sendStatus)">
+				AND SEND_STATUS = #{sendStatus}
+			</if>
+			<if test="@Ognl@isNotEmpty(cellularPhone)">
+				AND CELLULAR_PHONE = #{cellularPhone}
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="viewUserSlotExchangeWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(exchangeNumber)">
+				AND EXCHANGE_NUMBER = #{exchangeNumber}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				AND USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(exchangeAmount)">
+				AND EXCHANGE_AMOUNT = #{exchangeAmount}
+			</if>
+			<if test="@Ognl@isNotEmpty(exchangePrize)">
+				AND EXCHANGE_PRIZE = #{exchangePrize}
+			</if>
+			<if test="@Ognl@isNotEmpty(isBinding)">
+				AND IS_BINDING = #{isBinding}
+			</if>
+			<if test="@Ognl@isNotEmpty(isAward)">
+				AND IS_AWARD = #{isAward}
+			</if>
+			<if test="@Ognl@isNotEmpty(sendStatus)">
+				AND SEND_STATUS = #{sendStatus}
+			</if>
+			<if test="@Ognl@isNotEmpty(cellularPhone)">
+				AND CELLULAR_PHONE = #{cellularPhone}
+			</if>
+			<if test="@Ognl@isNotEmpty(activityId)">
+				AND ACTIVITY_ID = #{activityId}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtBindingStart)">
+				<![CDATA[
+					AND GMT_BINDING_DATE >= #{gmtBindingStart}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtBindingEnd)">
+				<![CDATA[
+					AND GMT_BINDING_DATE <= #{gmtBindingEnd}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtActivityStart)">
+				<![CDATA[
+					AND GMT_ACTIVITY_START >= #{gmtActivityStart}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtActivityEnd)">
+				<![CDATA[
+					AND GMT_ACTIVITY_END <= #{gmtActivityEnd}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(activityStatus)">
+				ACTIVITY_STATUS as activityStatus,
+			</if>
+		</where>
+	</sql>
+
+	<select id="getRandomViewUserSlotExchange"
+		parameterType="com.winterframework.firefrog.user.dao.vo.ViewUserSlotExchange"
+		resultMap="ViewUserSlotExchangeResult" flushCache="false">
+		SELECT
+		<include refid="viewUserSlotExchangeColumns" />
+		FROM (SELECT 
+			EXCHANGE_NUMBER,
+			USER_ID,
+			EXCHANGE_AMOUNT,
+			IS_BINDING,
+			IS_AWARD,
+			SEND_STATUS,
+			EXCHANGE_PRIZE,
+			CELLULAR_PHONE,
+			ACTIVITY_ID,
+			NAME,
+			GMT_ACTIVITY_START,
+			GMT_ACTIVITY_END,
+			ACTIVITY_STATUS,
+			TYPE,
+			GMT_BINDING_DATE,
+			GMT_AWARD_DATE
+		FROM VIEW_USER_SLOT_EXCHANGE
+		<include refid="viewUserSlotExchangeWhere" />
+		ORDER BY dbms_random.VALUE)
+		WHERE ROWNUM = 1
+	</select>
+
+	<select id="getViewUserSlotExchangeCount" resultType="long"
+		parameterType="com.winterframework.firefrog.user.dao.vo.ViewUserSlotExchange">
+		SELECT COUNT(*) FROM VIEW_USER_SLOT_EXCHANGE
+		<include refid="viewUserSlotExchangeWhere" />
+	</select>
+
+	<select id="getViewUserSlotExchange"
+		parameterType="com.winterframework.firefrog.user.dao.vo.ViewUserSlotExchange"
+		resultMap="ViewUserSlotExchangeResult" flushCache="false">
+		SELECT
+		<include refid="viewUserSlotExchangeColumns" />
+		FROM VIEW_USER_SLOT_EXCHANGE
+		<include refid="viewUserSlotExchangeWhere" />
+	</select>
+
+	<select id="getUserSlotExchangeCheck"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserSlotExchange"
+		resultMap="UserSlotExchangeCheckResult" flushCache="false">
+		SELECT
+		A.EXCHANGE_AMOUNT as exchangeNumber,
+		count(*) as totleCount,
+		(select count(*) from USER_SLOT_EXCHANGE where A.EXCHANGE_AMOUNT = EXCHANGE_AMOUNT and IS_BINDING = 0) as noBindingsCount,
+		(select count(*) from USER_SLOT_EXCHANGE where A.EXCHANGE_AMOUNT = EXCHANGE_AMOUNT and IS_AWARD = 0) as noAwardCount
+		FROM USER_SLOT_EXCHANGE A
+		<where>
+			<if test="@Ognl@isNotEmpty(exchangeNumber)">
+				AND A.EXCHANGE_NUMBER = #{exchangeNumber}
+			</if>
+			<if test="@Ognl@isNotEmpty(exchangeAmount)">
+				AND A.EXCHANGE_AMOUNT = #{exchangeAmount}
+			</if>
+		</where>
+		GROUP BY A.EXCHANGE_AMOUNT
+	</select>
+
+	<select id="getUserSlotExchangeCheckList" parameterType="list"
+		resultMap="UserSlotExchangeCheckResult" flushCache="false">
+		SELECT
+		A.EXCHANGE_AMOUNT,
+		count(*) as totleCount,
+		(select count(*) from USER_SLOT_EXCHANGE where A.EXCHANGE_AMOUNT = EXCHANGE_AMOUNT and IS_BINDING = 0) as noBindingsCount,
+		(select count(*) from USER_SLOT_EXCHANGE where A.EXCHANGE_AMOUNT = EXCHANGE_AMOUNT and IS_AWARD = 0) as noAwardCount
+		FROM USER_SLOT_EXCHANGE A GROUP BY
+		A.EXCHANGE_AMOUNT
+	</select>
+
+	<select id="getViewUserSlotExchangeList" parameterType="list"
+		resultMap="ViewUserSlotExchangeResult" flushCache="false">
+		select
+		<include refid="viewUserSlotExchangeColumns" />
+		from VIEW_USER_SLOT_EXCHANGE
+		<include refid="viewUserSlotExchangeWhere" />
+	</select>
+
+	<update id="updateUserSlotExchange"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserSlotExchange">
+		UPDATE USER_SLOT_EXCHANGE
+		<set>
+			<if test="@Ognl@isNotEmpty(userId)">
+				USER_ID = #{userId,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(isBinding)">
+				IS_BINDING = #{isBinding,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(isAward)">
+				IS_AWARD = #{isAward,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(sendStatus)">
+				SEND_STATUS = #{sendStatus,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(exchangePrize)">
+				EXCHANGE_PRIZE = #{exchangePrize,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(cellularPhone)">
+				CELLULAR_PHONE = #{cellularPhone,javaType=string,jdbcType=VARCHAR},
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtCreate)">
+				GMT_CREATE = #{gmtCreate,javaType=object,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtUpdate)">
+				GMT_UPDATE = #{gmtUpdate,javaType=object,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtBindingDate)">
+				GMT_BINDING_DATE = #{gmtBindingDate,javaType=object,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtAwardDate)">
+				GMT_AWARD_DATE = #{gmtAwardDate,javaType=object,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				TYPE = #{type,javaType=long,jdbcType=DECIMAL}
+			</if>
+		</set>
+		WHERE EXCHANGE_NUMBER = #{exchangeNumber}
+	</update>
+	
+	<update id="updateUserSlotExchangeByRestart"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserSlotExchange">
+		UPDATE USER_SLOT_EXCHANGE 
+		SET USER_ID = null, IS_BINDING = 0, IS_AWARD = 0, SEND_STATUS = 0, CELLULAR_PHONE = null, GMT_BINDING_DATE = null
+		WHERE EXCHANGE_NUMBER = #{exchangeNumber}
+	</update>
+
+</mapper>

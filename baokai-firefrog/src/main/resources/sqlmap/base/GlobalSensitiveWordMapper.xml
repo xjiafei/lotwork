@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.global.dao.vo.GlobalSensitiveWordVO">
+	<resultMap id="GlobalSensitiveWordResult" type="com.winterframework.firefrog.global.dao.vo.GlobalSensitiveWordVO">
+	</resultMap>
+	<resultMap id="typeMap" type="com.winterframework.firefrog.global.dao.vo.TypeMap" />
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="globalSensitiveWordColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	TYPE as type,
+	        	WORD as word
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.global.dao.vo.GlobalSensitiveWordVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GLOBAL_SENSITIVE_WORD_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GLOBAL_SENSITIVE_WORD (
+	        	ID ,
+	        	TYPE ,
+	        	WORD 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{word,javaType=string,jdbcType=VARCHAR} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.global.dao.vo.GlobalSensitiveWordVO">
+	    <![CDATA[
+	        UPDATE GLOBAL_SENSITIVE_WORD SET
+		        WORD = #{word,javaType=string,jdbcType=VARCHAR} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GLOBAL_SENSITIVE_WORD where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GlobalSensitiveWordResult" flushCache="false">
+			select <include refid="globalSensitiveWordColumns" />
+		    <![CDATA[
+			    from GLOBAL_SENSITIVE_WORD 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GlobalSensitiveWordResult" flushCache="false">
+			select <include refid="globalSensitiveWordColumns" />
+			    from GLOBAL_SENSITIVE_WORD 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+		
+		<select id="queryForRepeat" parameterType="map"  resultMap="GlobalSensitiveWordResult" flushCache="false">
+			select <include refid="globalSensitiveWordColumns" />
+			    from GLOBAL_SENSITIVE_WORD 
+		        where type=#{type} and word in
+				<foreach item="item" index="index" collection="keyWords" open="(" separator="," close=")" >
+					#{item}				
+				</foreach>	
+		</select>	
+		
+		<select id="reNameCheckRepeat" parameterType="com.winterframework.firefrog.global.dao.vo.GlobalSensitiveWordVO"  resultMap="GlobalSensitiveWordResult" flushCache="false">
+			select <include refid="globalSensitiveWordColumns" />
+			    from GLOBAL_SENSITIVE_WORD where type = (select type from GLOBAL_SENSITIVE_WORD where id=#{id}) and WORD=#{word} and id!=#{id}
+		</select>	
+				
+
+
+	<sql id="globalSensitiveWordDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(word)">
+				and WORD like '%${word}%' 
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GlobalSensitiveWordResult"  flushCache="false">
+    	select <include refid="globalSensitiveWordColumns" />
+	    from GLOBAL_SENSITIVE_WORD 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GLOBAL_SENSITIVE_WORD 
+    </select>
+    <select id="getWordCountByPage" resultType="long">
+        select count(*) from GLOBAL_SENSITIVE_WORD 
+		<include refid="globalSensitiveWordDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getWordByPage" resultMap="GlobalSensitiveWordResult">
+    	select <include refid="globalSensitiveWordColumns" />
+	    from GLOBAL_SENSITIVE_WORD 
+		<include refid="globalSensitiveWordDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="queryByType" resultMap="typeMap">
+    	select TYPE as type,count(ID) as count from GLOBAL_SENSITIVE_WORD group by TYPE
+    </select>
+    
+ 	 <select id="quaryListByType" parameterType="long" resultMap="GlobalSensitiveWordResult" flushCache="false">
+			select <include refid="globalSensitiveWordColumns" />
+		    <![CDATA[
+			    from GLOBAL_SENSITIVE_WORD 
+		        where 
+		        TYPE = #{type} 
+		    ]]>
+	</select>
+	
+</mapper>

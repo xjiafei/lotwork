@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.acl.dao.vo.AclGroupVO">
+	<resultMap id="AclGroupResult" type="com.winterframework.firefrog.acl.dao.vo.AclGroupVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="aclGroupColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	CREATORER as creatorer,
+	        	MODIFIERER as modifierer,
+	        	GMT_CREATED as gmtCreated,
+	        	GMT_MODIFIED as gmtModified,
+	        	IN_USE as inUse,
+	        	NAME as name,
+	        	FULL_NAME as fullName,
+	        	PID as pid,
+	        	LVL as lvl
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.acl.dao.vo.AclGroupVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_ACL_GROUP_ID.Nextval from dual
+	   	</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        ACL_GROUP (
+	        	ID ,
+	        	CREATORER ,
+	        	MODIFIERER ,
+	        	GMT_CREATED ,
+	        	GMT_MODIFIED ,
+	        	IN_USE ,
+	        	NAME ,
+	        	FULL_NAME ,
+	        	PID ,
+	        	LVL 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{creatorer,javaType=string,jdbcType=VARCHAR} ,
+	        	#{modifierer,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{inUse,javaType=long,jdbcType=DECIMAL} ,
+	        	#{name,javaType=string,jdbcType=VARCHAR} ,
+	        	#{fullName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{pid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lvl,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.acl.dao.vo.AclGroupVO">
+	        UPDATE ACL_GROUP 
+	        <set>
+	        	<if test="@Ognl@isNotEmpty(creatorer)">
+		        CREATORER = #{creatorer,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(modifierer)">
+		         MODIFIERER = #{modifierer,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(gmtModified)">
+		        GMT_MODIFIED = #{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(inUse)">
+		        IN_USE = #{inUse,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(name)">
+		        NAME = #{name,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(fullName)">
+		        FULL_NAME = #{fullName,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(pid)">
+		        PID = #{pid,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(lvl)">
+		        LVL = #{lvl,javaType=long,jdbcType=DECIMAL} 
+		        </if>
+	        </set>
+	        WHERE 
+		        ID = #{id} 
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACL_GROUP where
+		        ID = #{id} 
+	    ]]>
+	    </delete>
+
+	<delete id="deleteByIds" parameterType="list" flushCache="false">
+		delete from ACL_GROUP where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>   
+	    
+	    <select id="getById" parameterType="long" resultMap="AclGroupResult" flushCache="false">
+			select <include refid="aclGroupColumns" />
+		    <![CDATA[
+			    from ACL_GROUP 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		
+		<select id="queryAclGroupByUser" parameterType="long" resultMap="AclGroupResult" flushCache="false">
+			select groups.ID as id,
+	        	groups.CREATORER as creatorer,
+	        	groups.MODIFIERER as modifierer,
+	        	groups.GMT_CREATED as gmtCreated,
+	        	groups.GMT_MODIFIED as gmtModified,
+	        	groups.IN_USE as inUse,
+	        	groups.NAME as name,
+	        	groups.FULL_NAME as fullName,
+	        	groups.PID as pid,
+	        	groups.LVL as lvl
+			    from ACL_GROUP groups,ACL_USER users 
+		        where
+		        users.group_id = groups.id
+		        and users.ID = #{userId} 
+		</select>
+		
+		<select id="queryAllSubGroup" resultMap="AclGroupResult">
+			select <include refid="aclGroupColumns" />
+		    <![CDATA[
+			    from ACL_GROUP   start with id= #{groupId} connect by prior id=pid
+		    ]]>
+		</select>
+		
+		<select id="queryFirstSubGroups" parameterType="list"  resultMap="AclGroupResult" flushCache="false">
+			select <include refid="aclGroupColumns" />
+			    from ACL_GROUP where pid = #{groupId}
+	    </select>
+	    
+		<select id="getByIds" parameterType="list"  resultMap="AclGroupResult" flushCache="false">
+			select <include refid="aclGroupColumns" />
+			    from ACL_GROUP 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>
+		
+		<select id="queryByName" parameterType="list"  resultMap="AclGroupResult" flushCache="false">
+			select <include refid="aclGroupColumns" />
+			    from ACL_GROUP where name = #{name} 
+			    <if test="@Ognl@isNotEmpty(id)">
+					and ID != #{id}
+				</if>
+	    </select>
+			
+
+	<sql id="aclGroupDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(creatorer)">
+				and CREATORER = #{creatorer}
+			</if>
+	       <if test="@Ognl@isNotEmpty(modifierer)">
+				and MODIFIERER = #{modifierer}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtModified)">
+				and GMT_MODIFIED = #{gmtModified}
+			</if>
+	       <if test="@Ognl@isNotEmpty(inUse)">
+				and IN_USE = #{inUse}
+			</if>
+	       <if test="@Ognl@isNotEmpty(name)">
+				and NAME = #{name}
+			</if>
+	       <if test="@Ognl@isNotEmpty(fullName)">
+				and FULL_NAME = #{fullName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(pid)">
+				and PID = #{pid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lvl)">
+				and LVL = #{lvl}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AclGroupResult"  flushCache="false">
+    	select <include refid="aclGroupColumns" />
+	    from ACL_GROUP 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACL_GROUP 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ACL_GROUP 
+		<include refid="aclGroupDynamicWhere"/>    
+    </select>
+    
+    <select id="getSubGroupCountByPage" resultType="long">
+        select count(*) from ACL_GROUP
+		where pid in (select groups.id from ACL_GROUP groups,ACL_USER users where groups.id = users.group_id and users.id= #{userId})   
+    </select>
+    
+    
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AclGroupResult">
+    	select <include refid="aclGroupColumns" />
+	    from ACL_GROUP 
+		<include refid="aclGroupDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<select id="getSubGroupByPage" resultMap="AclGroupResult">
+    	select <include refid="aclGroupColumns" />
+	    from ACL_GROUP where pid in (select groups.id from ACL_GROUP groups,ACL_USER users where groups.id = users.group_id and users.id= #{userId})
+		order by GMT_CREATED desc
+    </select>
+	
+</mapper>

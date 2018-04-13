@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	
+	<import resource="mow-callback-map.xml"/>
+	<!-- import resource="applicationContext-quartz.xml"/ -->
+	<!-- add by tanx  简单任务采用注解方式配置 @Scheduled -->
+	<task:annotation-driven/>
+	<!-- 属性文件读入-->
+	<bean id="propertyConfigurer" class="com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/application.properties</value>
+				<value>classpath:/db.properties</value>
+				<value>classpath:/mail.properties</value>
+				<value>classpath:/mq.properties</value>
+				<value>classpath:/mownecum.properties</value>
+				<value>classpath:/redis.properties</value>
+				<value>classpath:/security.properties</value>
+				<value>classpath:/file.properties</value>
+				<value>classpath:/global-config.properties</value>
+				<value>classpath:/key-config.properties</value>
+				<value>classpath:/notice.properties</value>
+				<value>classpath:/api.properties</value>
+				<value>classpath:/pt.properties</value>
+				<value>classpath:/uapiversion.properties</value>
+				<value>classpath:/super2000.properties</value>
+				<value>classpath:/thpay.properties</value>
+				<value>classpath:/hbpay.properties</value>
+				<value>classpath:/worthpay.properties</value>
+				<value>classpath:/sppay.properties</value>
+				<value>classpath:/ddbpay.properties</value>
+				<value>classpath:/wftpay.properties</value>
+				<value>classpath:/dinpay.properties</value>
+				<value>classpath:/huayinpay.properties</value>
+				<value>classpath:/yinbangpay.properties</value>
+				<value>classpath:/jinyangpay.properties</value>
+				<!-- <value>file:/usr/local/config/firefrog_api.properties</value>
+				<value>file:C:/config/firefrog_api.properties</value> -->
+			</list>
+		</property>
+	</bean>
+	
+	
+	<aop:aspectj-autoproxy/>	
+	<bean class="com.winterframework.modules.utils.SpringContextHolder"/>
+	<context:component-scan base-package="com.winterframework.modules.spring.exetend" />
+	<context:component-scan base-package="com.winterframework.modules.spring.console" />
+	<context:component-scan base-package="com.winterframework.firefrog.active.web.controller"/>
+		
+	<context:component-scan base-package="com.winterframework.firefrog">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<context:component-scan base-package="com.winterframework.**.common" >
+		<context:exclude-filter type="regex" expression="com.winterframework.firefrog.common.mownecum.mock"/>
+	</context:component-scan>
+
+	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">     
+	  <property name="corePoolSize" value="${mail.threadpool.corePoolSize}" />
+	  <property name="queueCapacity" value="${mail.threadpool.queueCapacity}" />
+	  <property name="maxPoolSize" value="${mail.threadpool.maxPoolSize}" />
+	  <property name="keepAliveSeconds" value="${mail.threadpool.keepAliveSeconds}" />
+	  <property name="rejectedExecutionHandler">
+	   <bean class="${mail.threadpool.rejectedExecutionHandler}" />
+	  </property>
+	</bean>
+	
+	<!-- 不可体现余额配置 
+		key: summary code + trade code
+		value: config table不可体现余额配置 资金业务类型编号。
+	-->
+	<bean id="paramTypeMap" name="paramTypeMap" class="java.util.HashMap">
+		<constructor-arg> 
+		   <map> 
+		   		<!-- 用户充值 -->
+		   		<entry key="AUDX-ADLS" value="1" />
+				<entry key="ABDX-ADLS" value="1" />
+				<entry key="WRXX-DDFS" value="2" />	
+				<!-- 代理返点 -->
+				<entry key="RTRX-RRS2" value="6" />
+				<!-- 游戏派奖 -->
+				<entry key="PDXX-PDXX" value="4" />
+				<!-- 活动加币 -->
+				<entry key="DBAX-DBAX" value="5" />
+				<!-- 转账 -->
+				<entry key="TAIX" value="3" />
+		   </map> 
+	  	</constructor-arg>
+	</bean>
+</beans>

@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundBankWithSub">
+	<resultMap id="FundBankResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundBankWithSub">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundBankColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOGO as logo,
+	        	NAME as name,
+	        	CODE as code,
+	        	URL as url,
+	        	IN_USE as inUse,
+	        	DEPOSIT as deposit,
+	        	WITHDRAW as withdraw,
+	        	BIND as bind,
+	        	MOWNECUM_ID as mownecumId,
+	        	UPLIMIT as uplimit,
+	        	LOWLIMIT as lowlimit,
+	        	VIPUPLIMIT as vipuplimit,
+	        	VIPLOWLIMIT as viplowlimit,
+	        	RTN_MIN as rtnMin,
+	        	RTN_STRUC as strRtnStruc,
+	        	RTN_SET as rtnSet,
+	        	countdown,
+	        	other,
+	        	otheruplimit,
+	        	otherdownlimit,
+	        	othervipdownlimit,
+	        	othervipuplimit,
+	        	HELP_ID helpIds,
+	        	CAN_RECHARGE_APPEAL as canRechargeAppeal,
+	        	OTHER_CAN_RECHARGE_APPEAL as otherCanRechargeAppeal,
+	        	move_quick_type as moveQuickType,
+	        	move_quick_deposit as moveQuickDeposit,
+	        	move_deposit as moveDeposit,
+	        	VIP_OPEN as vipOpen ,
+	        	NORMAL_OPEN as normalOpen,
+	        	MOVE_VIP_OPEN as moveVipOpen,
+	        	MOVE_NORMAL_OPEN as moveNormalOpen,
+                MOVE_CAN_RECHARGE_APPEAL as moveCanRechargeAppeal,
+	        	DAYLIMIT as daylimit,
+	        	VERSION as version,
+	        	MAPPING_CODE as mappingCode
+	    ]]>
+	</sql>
+	<sql id="fundBankColumnsWithSub">
+	    <![CDATA[
+	        	FUND_BANK.ID as id,
+	        	FUND_BANK.LOGO as logo,
+	        	FUND_BANK.NAME as name,
+	        	FUND_BANK.CODE as code,
+	        	FUND_BANK.URL as url,
+	        	FUND_BANK.IN_USE as inUse,
+	        	FUND_BANK.DEPOSIT as deposit,
+	        	FUND_BANK.WITHDRAW as withdraw,
+	        	FUND_BANK.BIND as bind,
+	        	FUND_BANK.MOWNECUM_ID as mownecumId,
+	        	FUND_BANK.UPLIMIT as uplimit,
+	        	FUND_BANK.LOWLIMIT as lowlimit,
+	        	FUND_BANK.VIPUPLIMIT as vipuplimit,
+	        	FUND_BANK.VIPLOWLIMIT as viplowlimit,
+	        	FUND_BANK.RTN_MIN as rtnMin,
+	        	FUND_BANK.RTN_STRUC as strRtnStruc,
+	        	FUND_BANK.RTN_SET as rtnSet,
+	        	FUND_BANK.countdown,
+	        	FUND_BANK.other,
+	        	FUND_BANK.otheruplimit,
+	        	FUND_BANK.otherdownlimit,
+	        	FUND_BANK.othervipdownlimit,
+	        	FUND_BANK.othervipuplimit,
+	        	FUND_BANK.HELP_ID helpIds,
+	        	FUND_BANK.CAN_RECHARGE_APPEAL as canRechargeAppeal,
+	        	FUND_BANK.OTHER_CAN_RECHARGE_APPEAL as otherCanRechargeAppeal,
+	        	FUND_BANK.move_quick_type as moveQuickType,
+	        	FUND_BANK.move_quick_deposit as moveQuickDeposit,
+	        	FUND_BANK.move_deposit as moveDeposit,
+	        	FUND_BANK_SUB.VIP_OPEN as vipOpen ,
+	        	FUND_BANK_SUB.NORMAL_OPEN as normalOpen,
+	        	FUND_BANK.MOVE_VIP_OPEN as moveVipOpen,
+	        	FUND_BANK.MOVE_NORMAL_OPEN as moveNormalOpen,
+                FUND_BANK.MOVE_CAN_RECHARGE_APPEAL as moveCanRechargeAppeal,
+	        	FUND_BANK.DAYLIMIT as daylimit,
+	        	FUND_BANK_SUB.VERSION as version,
+	        	FUND_BANK_SUB.MAPPING_CODE as mappingCode
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundBankWithSub"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_BANK (
+	        	ID ,
+	        	LOGO ,
+	        	NAME ,
+	        	CODE ,
+	        	URL ,
+	        	IN_USE ,
+	        	DEPOSIT ,
+	        	WITHDRAW ,
+	        	BIND ,
+	        	MOWNECUM_ID ,
+	        	UPLIMIT ,
+	        	LOWLIMIT ,
+	        	VIPUPLIMIT ,
+	        	VIPLOWLIMIT ,
+	        	RTN_MIN ,
+	        	RTN_STRUC ,
+	        	RTN_SET ,
+	        	DAYLIMIT
+	        ) VALUES (
+	        	#{mownecumId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{logo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{name,javaType=string,jdbcType=VARCHAR} ,
+	        	#{code,javaType=string,jdbcType=VARCHAR} ,
+	        	#{url,javaType=string,jdbcType=VARCHAR} ,
+	        	#{inUse,javaType=long,jdbcType=DECIMAL} ,
+	        	#{deposit,javaType=long,jdbcType=DECIMAL} ,
+	        	#{withdraw,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bind,javaType=long,jdbcType=DECIMAL} ,
+	        	#{mownecumId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{uplimit,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lowlimit,javaType=long,jdbcType=DECIMAL} ,
+	        	#{vipuplimit,javaType=long,jdbcType=DECIMAL} ,
+	        	#{viplowlimit,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rtnMin,javaType=string,jdbcType=VARCHAR} ,
+	        	#{strRtnStruc,javaType=string,jdbcType=VARCHAR} ,
+	        	#{rtnSet,javaType=long,jdbcType=DECIMAL},
+	        	#{daylimit,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundBankWithSub">
+
+		UPDATE FUND_BANK_SUB
+		<set>
+			<if test="@Ognl@isNotEmpty(inUse)">
+				IN_USE =
+				#{inUse,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(logo)">
+				LOGO = #{logo,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(name)">
+				NAME = #{name,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(code)">
+				CODE =
+				#{code,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(url)">
+				URL =
+				#{url,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+
+			<if test="@Ognl@isNotEmpty(deposit)">
+				DEPOSIT =
+				#{deposit,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(withdraw)">
+				WITHDRAW =
+				#{withdraw,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(bind)">
+				BIND =
+				#{bind,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mownecumId)">
+				MOWNECUM_ID =
+				#{mownecumId,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(uplimit)">
+				UPLIMIT =
+				#{uplimit,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(lowlimit)">
+				LOWLIMIT =
+				#{lowlimit,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(vipuplimit)">
+				VIPUPLIMIT =
+				#{vipuplimit,javaType=long,jdbcType=DECIMAL}
+				,
+			</if>
+			<if test="@Ognl@isNotEmpty(viplowlimit)">
+				VIPLOWLIMIT =
+				#{viplowlimit,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rtnMin)">
+				RTN_MIN =
+				#{rtnMin,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rtnStruc)">
+				RTN_STRUC =
+				#{strRtnStruc,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rtnSet)">
+				RTN_SET =
+				#{rtnSet,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(countdown)">
+				countdown=
+				#{countdown,javaType=long,jdbcType=DECIMAL}
+			</if>
+
+			<if test="@Ognl@isNotEmpty(other)">
+				other=
+				#{other,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(otheruplimit)">
+				otheruplimit=
+				#{otheruplimit,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(otherdownlimit)">
+				otherdownlimit=
+				#{otherdownlimit,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(othervipdownlimit)">
+				othervipdownlimit=
+				#{othervipdownlimit,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(othervipuplimit)">
+				othervipuplimit=#{othervipuplimit,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(canRechargeAppeal)">
+				can_recharge_appeal=#{canRechargeAppeal,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(otherCanRechargeAppeal)">
+				other_can_recharge_appeal=#{otherCanRechargeAppeal,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(moveQuickType)">
+				move_quick_type=#{moveQuickType,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(moveQuickDeposit)">
+				move_quick_deposit=#{moveQuickDeposit,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(vipOpen)">
+				VIP_OPEN=#{vipOpen,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(normalOpen)">
+				NORMAL_OPEN=#{normalOpen,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(moveVipOpen)">
+				MOVE_VIP_OPEN=#{moveVipOpen,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(moveNormalOpen)">
+				MOVE_NORMAL_OPEN=#{moveNormalOpen,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(daylimit)">
+				DAYLIMIT=#{daylimit,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(moveDeposit)">
+				move_deposit=#{moveDeposit,javaType=long,jdbcType=DECIMAL}
+			</if>
+			<if test="@Ognl@isNotEmpty(moveCanRechargeAppeal)">
+				MOVE_CAN_RECHARGE_APPEAL=#{moveCanRechargeAppeal,javaType=long,jdbcType=DECIMAL}
+			</if>
+			<if test="@Ognl@isNotEmpty(version)">
+				VERSION=#{version,javaType=long,jdbcType=DECIMAL}
+			</if>
+			<if test="@Ognl@isNotEmpty(mappingCode)">
+				MAPPING_CODE=#{mappingCode,javaType=long,jdbcType=DECIMAL}
+			</if>
+
+		</set>
+		WHERE
+		MAPPING_CODE = #{id} and VERSION = #{version}
+
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_BANK where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="FundBankResult"
+		flushCache="false">
+		select
+		<include refid="fundBankColumns" />
+		    <![CDATA[
+			    from FUND_BANK 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="FundBankResult"
+		flushCache="false">
+		select
+		<include refid="fundBankColumns" />
+		from FUND_BANK
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="fundBankDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(logo)">
+				and LOGO = #{logo}
+			</if>
+			<if test="@Ognl@isNotEmpty(name)">
+				and NAME = #{name}
+			</if>
+			<if test="@Ognl@isNotEmpty(code)">
+				and CODE = #{code}
+			</if>
+			<if test="@Ognl@isNotEmpty(url)">
+				and URL = #{url}
+			</if>
+			<if test="@Ognl@isNotEmpty(inUse)">
+				and IN_USE = #{inUse}
+			</if>
+			<if test="@Ognl@isNotEmpty(deposit)">
+				and DEPOSIT = #{deposit}
+			</if>
+			<if test="@Ognl@isNotEmpty(withdraw)">
+				and WITHDRAW = #{withdraw}
+			</if>
+			<if test="@Ognl@isNotEmpty(bind)">
+				and BIND = #{bind}
+			</if>
+			<if test="@Ognl@isNotEmpty(mownecumId)">
+				and MOWNECUM_ID = #{mownecumId}
+			</if>
+			<if test="@Ognl@isNotEmpty(uplimit)">
+				and UPLIMIT = #{uplimit}
+			</if>
+			<if test="@Ognl@isNotEmpty(lowlimit)">
+				and LOWLIMIT = #{lowlimit}
+			</if>
+			<if test="@Ognl@isNotEmpty(vipuplimit)">
+				and VIPUPLIMIT = #{vipuplimit}
+			</if>
+			<if test="@Ognl@isNotEmpty(viplowlimit)">
+				and VIPLOWLIMIT = #{viplowlimit}
+			</if>
+			<if test="@Ognl@isNotEmpty(canRechargeAppeal)">
+				and CAN_RECHARGE_APPEAL = #{canRechargeAppeal}
+			</if>
+			<if test="@Ognl@isNotEmpty(canRechargeAppeal)">
+				and OTHER_CAN_RECHARGE_APPEAL = #{otherCanRechargeAppeal}
+			</if>
+			<if test="@Ognl@isNotEmpty(rtnMin)">
+				and RTN_MIN = #{rtnMin}
+			</if>
+			<if test="@Ognl@isNotEmpty(rtnStruc)">
+				and RTN_STRUC = #{rtnStruc}
+			</if>
+			<if test="@Ognl@isNotEmpty(rtnSet)">
+				and RTN_SET = #{rtnSet}
+			</if>
+			<if test="@Ognl@isNotEmpty(daylimit)">
+				and DAYLIMIT=#{daylimit}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="FundBankResult" flushCache="false">
+		select
+		<include refid="fundBankColumns" />
+		from FUND_BANK
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from FUND_BANK
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from FUND_BANK
+		<include refid="fundBankDynamicWhere" />
+	</select>
+
+	<select id="getCanAppealBanks" resultMap="FundBankResult"
+		flushCache="false" parameterType="hashmap">
+		select
+		<include refid="fundBankColumns" />
+		from FUND_BANK
+		<if test="@Ognl@isNotEmpty(canRechargeAppeal)">
+			where can_recharge_appeal = #{canRechargeAppeal}
+		</if>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<!-- <select id="getFundBankAll" resultMap="FundBankResult" -->
+	<!-- flushCache="false" parameterType="hashmap"> -->
+	<!-- select -->
+	<!-- <include refid="fundBankColumns" /> -->
+	<!-- from FUND_BANK -->
+	<!-- <if test="@Ognl@isNotEmpty(sortColumns)"> -->
+	<!-- ORDER BY ${sortColumns} -->
+	<!-- </if> -->
+	<!-- </select> -->
+
+	<select id="getFundBankAllWithSub" resultMap="FundBankResult"
+		flushCache="false" parameterType="hashmap">
+		select
+		<include refid="fundBankColumnsWithSub" />
+		from FUND_BANK
+		LEFT JOIN FUND_BANK_SUB ON
+		(FUND_BANK.ID=FUND_BANK_SUB.MAPPING_CODE)
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="FundBankResult">
+		select
+		<include refid="fundBankColumns" />
+		from FUND_BANK
+		<include refid="fundBankDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getFundBankWithSubByMappingCodeVersion" resultMap="FundBankResult"
+		flushCache="false" parameterType="hashmap">
+		select
+		<include refid="fundBankColumns" />
+		from FUND_BANK_SUB
+		where MAPPING_CODE = #{mapping_code} and VERSION =
+		#{version}
+	</select>
+	
+	<select id="getFundBankWithSubByCOndition" resultMap="FundBankResult"
+		flushCache="false" parameterType="hashmap">
+		select
+		<include refid="fundBankColumnsWithSub" />
+		from FUND_BANK
+		LEFT JOIN FUND_BANK_SUB ON
+		(FUND_BANK.ID=FUND_BANK_SUB.MAPPING_CODE)
+		WHERE FUND_BANK.CODE = #{code} 
+		<if test="@Ognl@isNotEmpty(version)">
+			AND FUND_BANK_SUB.VERSION = #{version};
+		</if>
+		
+	</select>
+
+
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.entity.ImGroup">
+ 	<resultMap id="result" type="com.winterframework.firefrog.user.entity.ImGroup">
+		<result column="ID" property="id"/>
+		<result column="GROUP_KEY" property="groupKey"/>
+		<result column="CREATE_DATE" property="createDate"/>
+ 	</resultMap>
+	<sql id="fields">
+		ID,
+		GROUP_KEY,
+		CREATE_DATE
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+			<if test="targetId != null">
+				AND ID = #{targetId}
+			</if>
+			<if test="targetGroupKey != null">
+				AND GROUP_KEY = #{targetGroupKey}
+			</if>
+			<if test="targetCreateDateStart != null">
+				AND CREATE_DATE >= #{targetCreateDateStart}
+			</if>
+			<if test="targetCreateDateEnd != null">
+			<![CDATA[
+				AND CREATE_DATE < #{targetCreateDateEnd}
+			]]>
+			</if>
+		</where>
+	</sql>
+	<select id="queryImGroups" resultMap="result" parameterType="com.winterframework.firefrog.user.entity.ImGroup">
+		SELECT <include refid="fields"/>
+				FROM IM_GROUP
+		<include refid="whereCondition"/>
+	</select>
+	
+	<select id="queryImGroup" resultMap="result" parameterType="com.winterframework.firefrog.user.entity.ImGroup">
+		SELECT <include refid="fields"/>
+				FROM IM_GROUP
+		WHERE GROUP_KEY = #{targetGroupKey}
+	</select>
+
+	<insert id="insertImGroup" parameterType="com.winterframework.firefrog.user.entity.ImGroup"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_IM_GROUP_ID.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        IM_GROUP (
+	        <include refid="fields"/>)
+	        VALUES (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{groupKey,javaType=string,jdbcType=VARCHAR},
+	         #{createDate,javaType=object,jdbcType=TIMESTAMP}
+	        )
+	</insert>
+
+</mapper>

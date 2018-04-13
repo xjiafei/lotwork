@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.active.dao.vo.ActivitySignUp">
+	<resultMap id="result" type="com.winterframework.firefrog.active.dao.vo.ActivitySignUp">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="ActivitySignUpColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACTIVITY_ID as activityId,
+	        	ACCOUNT as accunt,
+	        	MONTH as month,
+	        	SOURCE as startTime,
+	        	NOTICE as endTime,
+	        	STATUS as id,
+	        	GMT_CREATE as account,
+	        	START_TIME as source,
+	        	END_TIME as month
+	    ]]>
+	</sql>
+
+		<insert id="insert" parameterType="com.winterframework.firefrog.active.dao.vo.ActivitySignUp" 
+			useGeneratedKeys="false" keyProperty="id"  flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_ACTIVITY_SIGN_UP.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVITY_SIGN_UP (
+	        	ID,
+	        	ACTIVITY_ID ,
+	        	ACCOUNT,
+	        	MONTH,
+	        	SOURCE,
+	        	NOTICE,
+	        	STATUS,
+	        	GMT_CREATE,
+	        	START_TIME,
+	        	END_TIME
+	        ) VALUES (
+		        #{id,javaType=long,jdbcType=DECIMAL} ,
+		        #{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{accunt,javaType=string,jdbcType=VARCHAR} ,
+	        	#{month,javaType=long,jdbcType=DECIMAL} ,
+	        	#{source,javaType=string,jdbcType=VARCHAR} ,
+	        	#{notice,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreate,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{startTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{endTime,javaType=date,jdbcType=TIMESTAMP}        		        	
+	        )
+	    ]]>	
+	
+		</insert>
+
+	   <select id="queryUser" resultType="long"
+			parameterType="com.winterframework.firefrog.active.dao.vo.ActivitySignUp" flushCache="false">
+			select COUNT(*)	from ACTIVITY_SIGN_UP 
+		    <where>
+				<if test="@Ognl@isNotEmpty(accunt)">
+					and ACCOUNT = #{accunt}
+				</if>
+				<if test="@Ognl@isNotEmpty(activityId)">
+					and ACTIVITY_ID = #{activityId}
+				</if>
+			</where>
+		</select>	
+</mapper>

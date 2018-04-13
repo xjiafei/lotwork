@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.advert.dao.vo.AdspaceRelationVO">
+	<resultMap id="AdAdspaceRelationResult" type="com.winterframework.firefrog.advert.dao.vo.AdspaceRelationVO">
+	</resultMap>
+	<resultMap id="AdspaceRelationAdVO" type="com.winterframework.firefrog.advert.dao.vo.AdspaceRelationAdVO">
+	</resultMap>
+	<resultMap id="AdSpaceStateVOResult" type="com.winterframework.firefrog.advert.dao.vo.AdSpaceStateVO">
+	</resultMap>
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="adAdspaceRelationColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	AD_ID as adId,
+	        	SPACE_ID as spaceId,
+	        	ORDERS as orders,
+	        	IS_SHOWN as isShown
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.advert.dao.vo.AdspaceRelationVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_ADSPACE_RELATION_ID.Nextval from dual
+	   	</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        AD_ADSPACE_RELATION (
+	        	ID ,
+	        	AD_ID ,
+	        	SPACE_ID ,
+	        	ORDERS ,
+	        	IS_SHOWN
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{adId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{spaceId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{orders,javaType=long,jdbcType=DECIMAL} ,
+	        	#{isShown,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.advert.dao.vo.AdspaceRelationVO">
+	    <![CDATA[
+	        UPDATE AD_ADSPACE_RELATION SET
+		        AD_ID = #{adId,javaType=long,jdbcType=DECIMAL} ,
+		        SPACE_ID = #{spaceId,javaType=long,jdbcType=DECIMAL} ,
+		        ORDERS = #{orders,javaType=long,jdbcType=DECIMAL} ,
+		        IS_SHOWN = #{isShown,javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		<update id="updateUnbingAdvert" parameterType="com.winterframework.firefrog.advert.dao.vo.AdspaceRelationVO">
+	        UPDATE AD_ADSPACE_RELATION 
+	        	<set>
+	         	<if test="@Ognl@isNotEmpty(orders)">
+		       	 ORDERS = #{orders,javaType=long,jdbcType=DECIMAL} ,
+		         </if>
+		         <if test="@Ognl@isNotEmpty(isShown)">
+		        IS_SHOWN = #{isShown,javaType=long,jdbcType=DECIMAL}
+		        </if>
+		        </set>
+	        WHERE 
+		        AD_ID = #{adId} and
+		        SPACE_ID = #{spaceId} 
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from AD_ADSPACE_RELATION where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    
+	    <delete id="deleteByAd" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from AD_ADSPACE_RELATION where
+		        AD_ID = #{adId} 
+	    ]]>
+	    </delete>
+	    
+	    <select id="getById" parameterType="long" resultMap="AdAdspaceRelationResult" flushCache="false">
+			select <include refid="adAdspaceRelationColumns" />
+		    <![CDATA[
+			    from AD_ADSPACE_RELATION 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AdAdspaceRelationResult" flushCache="false">
+			select <include refid="adAdspaceRelationColumns" />
+			    from AD_ADSPACE_RELATION 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	
+		<select id="getAdsByAdSpace" parameterType="java.lang.Long" resultMap="AdAdspaceRelationResult"  flushCache="false">
+		select <include refid="adAdspaceRelationColumns" />
+		    <![CDATA[
+			    from AD_ADSPACE_RELATION 
+		        where 
+		        SPACE_ID = #{SPACE_ID} 
+		    ]]>
+   		</select>
+   		<select id="getRelationWithAd" parameterType="java.lang.Long" resultMap="AdspaceRelationAdVO" flushCache="false">
+   		<![CDATA[
+			select r.id as id,r.orders as orders,r.is_shown as isShown,ad.name as adName,ad.img_url as adImgUrl,
+			ad.gmt_effect_begin as adGmtEffectBegin,ad.gmt_effect_end as adGmtEffectEnd,ad.target_url as adTargetUrl,
+			ad.status as adStatus,ad.id as advertId,r.SPACE_ID as adSpaceId,
+			ad.rc_All as rcAll,	ad.rc_Guest as rcGuest	,ad.rc_Top_Agent as rcTopAgent	,
+			ad.rc_Ot_Agent as rcOtAgent,	ad.rc_Vip as rcVip,	ad.rc_Non_Vip as rcNonVip	,
+			ad.rc_Customer as rcCustomer				
+			 from AD_ADSPACE_RELATION r , AD ad where AD.id = r.AD_ID and ad.status in(1,2,3,4) and  SYSDATE<=AD.GMT_EFFECT_END  and r.SPACE_ID =#{adSpaceId} order by ad.gmt_created desc, r.orders desc
+			    ]]>
+		</select>
+		
+		<select id="getEffectAdByAdspaceId" parameterType="java.lang.Long" resultMap="AdspaceRelationAdVO" flushCache="false">
+   		<![CDATA[
+			select r.id as id,r.orders as orders,r.is_shown as isShown,ad.name as adName,ad.img_url as adImgUrl,
+			ad.gmt_effect_begin as adGmtEffectBegin,ad.gmt_effect_end as adGmtEffectEnd,ad.target_url as adTargetUrl,
+			ad.status as adStatus,ad.id as advertId,r.SPACE_ID as adSpaceId,
+			ad.rc_All as rcAll,	ad.rc_Guest as rcGuest	,ad.rc_Top_Agent as rcTopAgent	,
+			ad.rc_Ot_Agent as rcOtAgent,	ad.rc_Vip as rcVip,	ad.rc_Non_Vip as rcNonVip	,
+			ad.rc_Customer as rcCustomer				
+			 from AD_ADSPACE_RELATION r , AD ad where AD.id = r.AD_ID and ad.status in(2)  and r.is_shown=1 and  SYSDATE between AD.gmt_effect_begin and AD.GMT_EFFECT_END  and r.SPACE_ID =#{adSpaceId} order by r.orders desc
+			    ]]>
+		</select>
+   		
+	<sql id="adAdspaceRelationDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(adId)">
+				and AD_ID = #{adId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(spaceId)">
+				and SPACE_ID = #{spaceId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orders)">
+				and ORDERS = #{orders}
+			</if>
+			 <if test="@Ognl@isNotEmpty(isShown)">
+				and IS_SHOWN = #{isShown}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AdAdspaceRelationResult"  flushCache="false">
+    	select <include refid="adAdspaceRelationColumns" />
+	    from AD_ADSPACE_RELATION 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from AD_ADSPACE_RELATION 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from AD_ADSPACE_RELATION 
+		<include refid="adAdspaceRelationDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AdAdspaceRelationResult">
+    	select <include refid="adAdspaceRelationColumns" />
+	    from AD_ADSPACE_RELATION 
+		<include refid="adAdspaceRelationDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

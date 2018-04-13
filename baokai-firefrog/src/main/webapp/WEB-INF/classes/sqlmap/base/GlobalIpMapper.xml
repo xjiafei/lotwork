@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.global.dao.vo.GlobalIpVO">
+	<resultMap id="GlobalIpResult"
+		type="com.winterframework.firefrog.global.dao.vo.GlobalIpVO">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="globalIpColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	AREA as area,
+	        	IP as ip,
+	        	EFFECT_TIME as effectTime,
+	        	EXPIRE_TIME as expireTime,
+	        	OPERATOR as operator,
+	        	TYPE as type
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.global.dao.vo.GlobalIpVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GLOBAL_IP_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GLOBAL_IP (
+	        	ID ,
+	        	AREA ,
+	        	IP ,
+	        	EFFECT_TIME ,
+	        	EXPIRE_TIME ,
+	        	OPERATOR ,
+	        	TYPE 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{area,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ip,javaType=string,jdbcType=VARCHAR} ,
+	        	#{effectTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{expireTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{operator,javaType=string,jdbcType=VARCHAR} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.global.dao.vo.GlobalIpVO">
+	    <![CDATA[
+	        UPDATE GLOBAL_IP SET
+		        AREA = #{area,javaType=string,jdbcType=VARCHAR} ,
+		        IP = #{ip,javaType=string,jdbcType=VARCHAR} ,
+		        EFFECT_TIME = #{effectTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        EXPIRE_TIME = #{expireTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        OPERATOR = #{operator,javaType=string,jdbcType=VARCHAR} ,
+		        TYPE = #{type,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GLOBAL_IP where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="GlobalIpResult"
+		flushCache="false">
+		select
+		<include refid="globalIpColumns" />
+		    <![CDATA[
+			    from GLOBAL_IP 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="GlobalIpResult"
+		flushCache="false">
+		select
+		<include refid="globalIpColumns" />
+		from GLOBAL_IP
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="globalIpDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(area)">
+				and AREA = #{area}
+			</if>
+			<if test="@Ognl@isNotEmpty(ip)">
+				and IP = #{ip}
+			</if>
+			<if test="@Ognl@isNotEmpty(effectTime)">
+				and EFFECT_TIME = #{effectTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(expireTime)">
+				and EXPIRE_TIME = #{expireTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(operator)">
+				and OPERATOR = #{operator}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GlobalIpResult" flushCache="false">
+		select
+		<include refid="globalIpColumns" />
+		from GLOBAL_IP
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from GLOBAL_IP
+	</select>
+	<select id="getIpCountByPage" resultType="long">
+		select count(*) from GLOBAL_IP
+		<include refid="globalIpDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getIpByPage" resultMap="GlobalIpResult">
+		select
+		<include refid="globalIpColumns" />
+		from GLOBAL_IP
+		<include refid="globalIpDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getEffectIpList" resultMap="GlobalIpResult"
+		flushCache="false">
+		select
+		<include refid="globalIpColumns" />
+		from GLOBAL_IP global
+	    where  #{date}  between global.EFFECT_TIME and global.EXPIRE_TIME  
+		and global.TYPE = #{type}
+	</select>
+
+</mapper>

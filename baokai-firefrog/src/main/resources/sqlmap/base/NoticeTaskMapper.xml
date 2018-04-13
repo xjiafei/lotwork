@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.notice.dao.vo.NoticeTaskVO">
+	<resultMap id="NoticeTaskResult" type="com.winterframework.firefrog.notice.dao.vo.NoticeTaskVO">
+    </resultMap>
+	<resultMap id="UserNoticeTaskResult" type="com.winterframework.firefrog.notice.dao.vo.UserNoticeTaskVO">
+	</resultMap>
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="noticeTaskColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	MODULE as module,
+	        	TASK as task,
+	        	ACTIVATED as activated,
+	        	INNER_MSG_ACTIVATED as innerMsgActivated,
+	        	INNER_MSG_USED as innerMsgUsed,
+	        	EMAIL_ACTIVATED as emailActivated,
+	        	EMAIL_USED as emailUsed,
+	        	NOTE_ACTIVATED as noteActivated,
+	        	NOTE_USED as noteUsed,
+	        	EMS_ACTIVATED as emsActivated,
+	        	EMS_USED as emsUsed,
+	        	INNER_MSG_TEMP as innerMsgTemp,
+	        	EMAIL_TEMP as emailTemp,
+	        	NOTE_TEMP as noteTemp,
+	        	EMS_TEMP as emsTemp,
+	        	INNER_MSG_TITLE as innerMsgTitle,
+	        	EMAIL_TITLE as emailTitle,
+	        	SET_BY_USER as setByUser
+	    ]]>
+	</sql>
+	<sql id="usernoticeTaskColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	MODULE as module,
+	        	TASK as task,
+	        	ACTIVATED as activated,
+	        	INNER_MSG_ACTIVATED as innerMsgActivated,
+	        	INNER_MSG_USED as innerMsgUsed,
+	        	EMAIL_ACTIVATED as emailActivated,
+	        	EMAIL_USED as emailUsed,
+	        	NOTE_ACTIVATED as noteActivated,
+	        	NOTE_USED as noteUsed,
+	        	EMS_ACTIVATED as emsActivated,
+	        	EMS_USED as emsUsed,
+	        	USER_ID as userId
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.notice.dao.vo.NoticeTaskVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        NOTICE_TASK (
+	        	ID ,
+	        	MODULE ,
+	        	TASK ,
+	        	ACTIVATED ,
+	        	INNER_MSG_ACTIVATED ,
+	        	INNER_MSG_USED ,
+	        	EMAIL_ACTIVATED ,
+	        	EMAIL_USED ,
+	        	NOTE_ACTIVATED ,
+	        	NOTE_USED ,
+	        	EMS_ACTIVATED ,
+	        	EMS_USED ,
+	        	INNER_MSG_TEMP ,
+	        	EMAIL_TEMP ,
+	        	NOTE_TEMP ,
+	        	EMS_TEMP ,
+	        	INNER_MSG_TITLE ,
+	        	EMAIL_TITLE ,
+	        	SET_BY_USER 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{module,javaType=string,jdbcType=VARCHAR} ,
+	        	#{task,javaType=string,jdbcType=VARCHAR} ,
+	        	#{activated,javaType=long,jdbcType=DECIMAL} ,
+	        	#{innerMsgActivated,javaType=long,jdbcType=DECIMAL} ,
+	        	#{innerMsgUsed,javaType=long,jdbcType=DECIMAL} ,
+	        	#{emailActivated,javaType=long,jdbcType=DECIMAL} ,
+	        	#{emailUsed,javaType=long,jdbcType=DECIMAL} ,
+	        	#{noteActivated,javaType=long,jdbcType=DECIMAL} ,
+	        	#{noteUsed,javaType=long,jdbcType=DECIMAL} ,
+	        	#{emsActivated,javaType=long,jdbcType=DECIMAL} ,
+	        	#{emsUsed,javaType=long,jdbcType=DECIMAL} ,
+	        	#{innerMsgTemp,javaType=string,jdbcType=VARCHAR} ,
+	        	#{emailTemp,javaType=string,jdbcType=VARCHAR} ,
+	        	#{noteTemp,javaType=string,jdbcType=VARCHAR} ,
+	        	#{emsTemp,javaType=string,jdbcType=VARCHAR} ,
+	        	#{innerMsgTitle,javaType=string,jdbcType=VARCHAR} ,
+	        	#{emailTitle,javaType=string,jdbcType=VARCHAR} ,
+	        	#{setByUser,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.notice.dao.vo.NoticeTaskVO">
+	        UPDATE NOTICE_TASK
+	        <set>
+	        	<if test="@Ognl@isNotEmpty(module)">
+	        	MODULE = #{module,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(task)">
+	        	TASK = #{task,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(activated)">
+	        	ACTIVATED = #{activated,javaType=long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(innerMsgActivated)">
+	        	INNER_MSG_ACTIVATED = #{innerMsgActivated,javaType=long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(innerMsgUsed)">
+	        	INNER_MSG_USED = #{innerMsgUsed,javaType=long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(emailActivated)">
+	        	EMAIL_ACTIVATED = #{emailActivated,javaType=long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(emailUsed)">
+	        	EMAIL_USED = #{emailUsed,javaType=long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(noteActivated)">
+	        	NOTE_ACTIVATED = #{noteActivated,javaType=long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(noteUsed)">
+	        	NOTE_USED = #{noteUsed,javaType=long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(emsActivated)">
+	        	EMS_ACTIVATED = #{emsActivated,javaType=long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(emsUsed)">
+	        	EMS_USED = #{emsUsed,javaType=long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(innerMsgTemp)">
+	        	INNER_MSG_TEMP = #{innerMsgTemp,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(emailTemp)">
+	        	EMAIL_TEMP = #{emailTemp,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(noteTemp)">
+	        	NOTE_TEMP = #{noteTemp,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(emsTemp)">
+	        	EMS_TEMP = #{emsTemp,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(innerMsgTitle)">
+	        	INNER_MSG_TITLE = #{innerMsgTitle,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(emailTitle)">
+	        	EMAIL_TITLE = #{emailTitle,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(setByUser)">
+	        	SET_BY_USER = #{setByUser,javaType=long,jdbcType=DECIMAL} 
+	        	</if>
+	        </set>
+	        WHERE 
+		        ID = #{id}
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from NOTICE_TASK where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="NoticeTaskResult" flushCache="false">
+			select <include refid="noticeTaskColumns" />
+		    <![CDATA[
+			    from NOTICE_TASK 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="NoticeTaskResult" flushCache="false">
+			select <include refid="noticeTaskColumns" />
+			    from NOTICE_TASK 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>
+		<select id="getUserNoticeTaskbyUserID" resultMap="UserNoticeTaskResult" flushCache="false">
+			select <include refid="usernoticeTaskColumns" />
+			from USER_NOTICE_TASK task
+			where task.TASK=#{id}
+		    and task.USER_ID=#{userId}
+		</select>
+		<select id="getNoticeForSend" resultMap="NoticeTaskResult" flushCache="false">
+			select <include refid="noticeTaskColumns" />
+			from view_notice_task task
+			where task.id=#{id}
+			<if test="@Ognl@isNotEmpty(userId)">
+					and task.USER_ID=#{userId}
+			 </if>
+			 <if test="@Ognl@isEmpty(userId)">
+					and task.USER_ID is null
+			 </if>
+		</select>
+
+	<sql id="noticeTaskDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(module)">
+				and MODULE = #{module}
+			</if>
+	       <if test="@Ognl@isNotEmpty(task)">
+				and TASK = #{task}
+			</if>
+	       <if test="@Ognl@isNotEmpty(activated)">
+				and ACTIVATED = #{activated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(innerMsgActivated)">
+				and INNER_MSG_ACTIVATED = #{innerMsgActivated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(innerMsgUsed)">
+				and INNER_MSG_USED = #{innerMsgUsed}
+			</if>
+	       <if test="@Ognl@isNotEmpty(emailActivated)">
+				and EMAIL_ACTIVATED = #{emailActivated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(emailUsed)">
+				and EMAIL_USED = #{emailUsed}
+			</if>
+	       <if test="@Ognl@isNotEmpty(noteActivated)">
+				and NOTE_ACTIVATED = #{noteActivated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(noteUsed)">
+				and NOTE_USED = #{noteUsed}
+			</if>
+	       <if test="@Ognl@isNotEmpty(emsActivated)">
+				and EMS_ACTIVATED = #{emsActivated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(emsUsed)">
+				and EMS_USED = #{emsUsed}
+			</if>
+	       <if test="@Ognl@isNotEmpty(innerMsgTemp)">
+				and INNER_MSG_TEMP = #{innerMsgTemp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(emailTemp)">
+				and EMAIL_TEMP = #{emailTemp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(noteTemp)">
+				and NOTE_TEMP = #{noteTemp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(emsTemp)">
+				and EMS_TEMP = #{emsTemp}
+			</if>
+	       <if test="@Ognl@isNotEmpty(innerMsgTitle)">
+				and INNER_MSG_TITLE = #{innerMsgTitle}
+			</if>
+	       <if test="@Ognl@isNotEmpty(emailTitle)">
+				and EMAIL_TITLE = #{emailTitle}
+			</if>
+	       <if test="@Ognl@isNotEmpty(setByUser)">
+				and SET_BY_USER = #{setByUser}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="NoticeTaskResult"  flushCache="false">
+    	select <include refid="noticeTaskColumns" />
+	    from NOTICE_TASK 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from NOTICE_TASK 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from NOTICE_TASK 
+		<include refid="noticeTaskDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="NoticeTaskResult">
+    	select <include refid="noticeTaskColumns" />
+	    from NOTICE_TASK 
+		<include refid="noticeTaskDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

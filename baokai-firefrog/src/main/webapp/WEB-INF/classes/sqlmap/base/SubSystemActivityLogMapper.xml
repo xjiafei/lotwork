@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.subsys.vo.SubSystemActivityLog">
+	<resultMap id="SubsystemActivityLog" type="com.winterframework.firefrog.subsys.vo.SubSystemActivityLog">
+	</resultMap>
+	
+	<sql id="DynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT = #{account}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(amount)">
+				and AMOUNT = #{amount}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(roundId)">
+				and ROUND_ID = #{roundId}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and (CREATE_DATE >= #{createTime} or CREATE_TIME is null)
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(status)">
+				and status = #{status}
+			</if>
+		</where>
+	</sql>
+	
+	 
+    <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.subsys.vo.SubSystemActivityLog" 
+			useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_SUBSYS_ACTIVITY_LOG.Nextval from dual
+			   	    </selectKey>
+		<![CDATA[
+	        INSERT INTO
+	        SUBSYS_ACTIVITY_LOG (
+	        	ID,
+	        	ACCOUNT ,
+	        	AMOUNT,
+	        	ROUND_ID,
+	        	MEMO,
+	        	CREATE_DATE,
+	        	STATUS,
+	        	ACTIVITY_SN,
+	        	DEBIT_SN
+			) VALUES (
+				#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{account,javaType=string,jdbcType=VARCHAR} ,
+	        	#{amount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{roundId,javaType=string,jdbcType=VARCHAR} ,
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL},
+	        	#{activitySn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{debitSn,javaType=string,jdbcType=VARCHAR}  
+	        )
+	    ]]>	
+	
+		</insert>
+		
+		<select id="querySubsysActivityLog" resultType="long">
+	    	select count(*) from subsys_activity_log
+	    	<include refid="DynamicWhere" />
+	    </select>
+	    
+	    <select id="querySubsysActivity" parameterType="com.winterframework.firefrog.subsys.vo.SubSystemActivityLog" resultMap="SubsystemActivityLog" flushCache="false">
+	    	select ACCOUNT AS account,
+	    	 AMOUNT AS amount,
+	    	 ROUND_ID AS roundId,
+	    	 MEMO AS memo,
+	    	 ACTIVITY_SN AS activitySn,
+	    	 DEBIT_SN AS debitSn
+	    	from SUBSYS_ACTIVITY_LOG 
+			<include refid="DynamicWhere" />	
+	    </select>
+	    
+</mapper>

@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundWithdraw">
+	<resultMap id="FundWithdrawResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundWithdraw">
+	</resultMap>
+	
+	<resultMap id="SubSysActivityWithdrawResult"
+		type="com.winterframework.firefrog.subsys.web.dto.SubSysActivityWithdraw">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundWithdrawColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	CURR_APPRER as currApprer,
+	        	USER_ID as userId,
+	        	APPLY_TIME as applyTime,
+	        	WITHDRAW_AMT as withdrawAmt,
+	        	APPR_ACCOUNT as apprAccount,
+	        	APPR_TIME as apprTime,
+	        	MC_REMIT_TIME as mcRemitTime,
+	        	STATUS as status,
+	        	SN as sn,
+	        	mc_sn as mcSn,
+	        	IP_ADDR as ipAddr,
+	        	APPROVE_MEMO as approveMemo,
+	        	USER_BANK_STRUC as userBankStruc,
+	        	APPLY_EXPIRE_TIME as applyExpireTime,
+	        	MEMO as memo,
+	        	MC_NOTICE_TIME as mcNoticeTime,
+	        	APPLY_ACCOUNT as applyAccount,
+	        	APPR2_ACCT as appr2Acct,
+	        	APPR2_TIME as appr2Time,
+	        	NOTICE_MOW_TIME as noticeMowTime,
+	        	appr_begin_Time as apprBeginTime,
+	        	appr_begin_status as apprBeginStatus,
+	        	risk_type as riskType,
+	        	attach,
+	        	appr2_begin_Time as appr2BeginTime,
+	        	curr_date as currDate,
+	        	mc_memo as mcMemo,
+	        	REAL_WITHDRAL_AMT as realWithdrawAmt
+	        	,isVip
+				,top_acc as topAcc
+				,apChannel
+				,apProject
+				,CANCEL_ACCT as cancelAcct
+	        	,CANCEL_TIME as cancelTime,
+	        	OPERATING_TIME as operatingTime,
+	        	WITHDRAW_MODE as withdrawMode,
+	        	ROOT_SN as rootSn,
+	        	IS_SEPERATE as isSeperate,
+	        	SEPERATE_COUNT as seperateCount,
+	        	TOTAL_DRAW_AMOUNT as totalDrawAmount
+	        	
+	        	
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdraw"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_FUND_WITHDRAW_ID.Nextval from dual
+		</selectKey>
+		 
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_WITHDRAW (
+	        	ID ,
+	        	USER_ID ,
+	        	APPLY_TIME ,
+	        	WITHDRAW_AMT ,
+	        	APPR_ACCOUNT ,
+	        	APPR_TIME ,
+	        	MC_REMIT_TIME ,
+	        	STATUS ,
+	        	SN ,
+	        	IP_ADDR ,
+	        	APPROVE_MEMO ,
+	        	USER_BANK_STRUC ,
+	        	APPLY_EXPIRE_TIME ,
+	        	MEMO ,
+	        	MC_NOTICE_TIME ,
+	        	APPLY_ACCOUNT,
+	        	APPR2_ACCT,
+	        	APPR2_TIME,
+	        	risk_type,
+	        	ROOT_SN,
+	        	IS_SEPERATE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{applyTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{withdrawAmt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{apprAccount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{apprTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{mcRemitTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ipAddr,javaType=long,jdbcType=DECIMAL} ,
+	        	#{approveMemo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{userBankStruc,javaType=string,jdbcType=VARCHAR} ,
+	        	#{applyExpireTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcNoticeTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{applyAccount,javaType=string,jdbcType=VARCHAR},
+	        	#{appr2Acct,javaType=string,jdbcType=VARCHAR},
+	        	#{appr2Time,javaType=date,jdbcType=TIMESTAMP},
+	        	#{riskType,javaType=long,jdbcType=DECIMAL},
+	        	#{rootSn,javaType=string,jdbcType=VARCHAR},
+	        	#{isSeperate,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdraw">
+	    <![CDATA[
+	        UPDATE FUND_WITHDRAW SET
+		        USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,
+		        APPLY_TIME = #{applyTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        WITHDRAW_AMT = #{withdrawAmt,javaType=long,jdbcType=DECIMAL} ,
+		        APPR_ACCOUNT = #{apprAccount,javaType=long,jdbcType=DECIMAL} ,
+		        APPR_TIME = #{apprTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        MC_REMIT_TIME = #{mcRemitTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        SN = #{sn,javaType=string,jdbcType=VARCHAR} ,
+		        mc_SN = #{sn),javaType=string,jdbcType=VARCHAR} ,
+		        IP_ADDR = #{ipAddr,javaType=long,jdbcType=DECIMAL} ,
+		        APPROVE_MEMO = #{approveMemo,javaType=string,jdbcType=VARCHAR} ,
+		        USER_BANK_STRUC = #{userBankStruc,javaType=string,jdbcType=VARCHAR} ,
+		        APPLY_EXPIRE_TIME = #{applyExpireTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+		        MC_NOTICE_TIME = #{mcNoticeTime,javaType=long,jdbcType=DECIMAL} ,
+		        APPLY_ACCOUNT = #{applyAccount,javaType=string,jdbcType=VARCHAR},
+		        APPR2_ACCT = #{appr2Acct,javaType=string,jdbcType=VARCHAR},
+	        	APPR2_TIME = #{appr2Time,javaType=date,jdbcType=TIMESTAMP},
+	        	WITHDRAW_MODE = #{withdrawMode,javaType=long,jdbcType=DECIMAL}
+	        	
+		        
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+
+	<update id="updateFundWithdrawAudit" parameterType="HashMap">
+		UPDATE FUND_WITHDRAW
+		<set>
+			<if test="@Ognl@isNotEmpty(apprAccount)">
+				APPR_ACCOUNT
+				=#{apprAccount,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+
+			<if test="@Ognl@isNotEmpty(apprTime)">
+				APPR_TIME = #{apprTime,javaType=date,jdbcType=TIMESTAMP}
+				,
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(attach)">
+				attach = #{attach,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(appr2Acct)">
+				APPR2_ACCT =
+				#{appr2Acct,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(appr2Time)">
+				APPR2_TIME =
+				#{appr2Time,javaType=date,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(NOTICE_MOW_TIME)">
+				NOTICE_MOW_TIME =
+				#{NOTICE_MOW_TIME,javaType=date,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+		and status not in (2,3,4)
+	</update>
+	
+	<update id="updateReFund" parameterType="HashMap">
+		UPDATE FUND_WITHDRAW
+		<set>			
+			<if test="@Ognl@isNotEmpty(memo)">
+				MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(attach)">
+				attach = #{attach,javaType=string,jdbcType=VARCHAR} ,
+			</if>			
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(cancelAcct)">
+				CANCEL_ACCT = #{cancelAcct,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(cancelTime)">
+				CANCEL_TIME = #{cancelTime,javaType=date,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	
+	
+	<update id="updateNowStatus" parameterType="HashMap">
+		UPDATE FUND_WITHDRAW
+		<set>			
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+			</if>			
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	
+	
+	
+	
+	
+	
+	<update id="updateFundWithdrawCall" parameterType="HashMap">
+		UPDATE FUND_WITHDRAW
+		<set>
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL},
+			</if>
+
+			<if test="@Ognl@isNotEmpty(MC_NOTICE_TIME)">
+				MC_NOTICE_TIME =
+				#{MC_NOTICE_TIME,javaType=date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@Ognl@isNotEmpty(mcMemo)">
+				mc_memo = #{mcMemo,javaType=string,jdbcType=VARCHAR},
+			</if>
+			<if test="@Ognl@isNotEmpty(REAL_WITHDRAL_AMT)">
+				REAL_WITHDRAL_AMT =
+				#{REAL_WITHDRAL_AMT,javaType=long,jdbcType=DECIMAL},
+			</if>
+			<if test="@Ognl@isNotEmpty(operatingTime)">
+				OPERATING_TIME = #{operatingTime,javaType=date,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	<update id="updateRemark" parameterType="HashMap">
+		UPDATE FUND_WITHDRAW
+		<set>
+			<if test="@Ognl@isNotEmpty(memo)">
+				MEMO = #{memo,javaType=string,jdbcType=VARCHAR}
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_WITHDRAW where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="FundWithdrawResult"
+		flushCache="false">
+		select
+		<include refid="fundWithdrawColumns" />
+		    <![CDATA[
+			    from view_fund_withdraw 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="FundWithdrawResult"
+		flushCache="false">
+		select
+		<include refid="fundWithdrawColumns" />
+		from view_fund_withdraw
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="queryByRootSn" parameterType="HashMap" resultMap="FundWithdrawResult"
+		flushCache="false">
+		select
+		<include refid="fundWithdrawColumns" />
+		    <![CDATA[
+			    from view_fund_withdraw 
+		        where 
+		        ROOT_SN = #{rootSn} 
+		        ORDER BY ID ASC
+		    ]]>
+	</select>
+	
+	<sql id="fundWithdrawDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+
+			<if test="@Ognl@isNotEmpty(mowSn)">
+				and mc_sn = #{mowSn}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcSn)">
+				and mc_sn = #{mcSn}
+			</if>
+           <if test="@Ognl@isNotEmpty(topAcc)">
+				and top_acc = #{topAcc}
+			</if>
+
+			<if test="@Ognl@isNotEmpty(applyTime)">
+				and APPLY_TIME = #{applyTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(fromDate)">
+			<![CDATA[
+				and (APPLY_TIME is not null  and  APPLY_TIME >= #{fromDate})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toDate)">
+			<![CDATA[
+				and (APPLY_TIME is not null  and APPLY_TIME <= #{toDate})
+					 ]]>
+			</if>
+
+			<if test="@Ognl@isNotEmpty(realWithDrawAmtFrom)">
+			<![CDATA[
+				and (REAL_WITHDRAL_AMT is not null  and  REAL_WITHDRAL_AMT >= #{realWithDrawAmtFrom})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(realWithDrawAmtTo)">
+			<![CDATA[
+				and (REAL_WITHDRAL_AMT is not null  and REAL_WITHDRAL_AMT <= #{realWithDrawAmtTo})
+					 ]]>
+			</if>
+
+			<if test="@Ognl@isNotEmpty(withdrawAmt)">
+				and WITHDRAW_AMT = #{withdrawAmt}
+			</if>
+			<if test="@Ognl@isNotEmpty(withdrawAmtFrom)">
+				and WITHDRAW_AMT >= #{withdrawAmtFrom}
+			</if>
+			<if test="@Ognl@isNotEmpty(withdrawAmtTo)">
+				<![CDATA[
+				and WITHDRAW_AMT <= #{withdrawAmtTo}
+			 	]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(apprAccount)">
+				and APPR_ACCOUNT = #{apprAccount}
+			</if>
+			<if test="@Ognl@isNotEmpty(apprTime)">
+				and APPR_TIME = #{apprTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcRemitTime)">
+				and MC_REMIT_TIME = #{mcRemitTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(statuses)">
+				and STATUS in
+				<foreach item="statuses" index="index" collection="statuses"
+					open="(" separator="," close=")">
+					#{statuses}
+				</foreach>
+			</if>
+			<if test="@Ognl@isNotEmpty(sn)">
+				and SN = #{sn}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS in
+				<foreach item="status" index="index" collection="status"
+					open="(" separator="," close=")">
+					#{status}
+				</foreach>
+			</if>
+
+			<if test="@Ognl@isNotEmpty(ipAddr)">
+				and IP_ADDR = #{ipAddr}
+			</if>
+			<if test="@Ognl@isNotEmpty(applyCardAcctStruc)">
+				and USER_BANK_STRUC like '%'||#{applyCardAcctStruc}||'%'
+			</if> 
+			
+			<if test="@Ognl@isNotEmpty(isVip)">
+				and isVip = #{isVip}
+			</if>
+			<if test="@Ognl@isNotEmpty(approveMemo)">
+				and APPROVE_MEMO = #{approveMemo}
+			</if>
+			<if test="@Ognl@isNotEmpty(applyExpireTime)">
+				and APPLY_EXPIRE_TIME = #{applyExpireTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				and MEMO = #{memo}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcNoticeTime)">
+				and MC_NOTICE_TIME = #{mcNoticeTime}
+			</if>
+
+			<if test="@Ognl@isNotEmpty(fromMowDate)">
+			<![CDATA[
+				and (MC_NOTICE_TIME is not null  and  MC_NOTICE_TIME >= #{fromMowDate})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toMowDate)">
+			<![CDATA[
+				and (MC_NOTICE_TIME is not null  and MC_NOTICE_TIME <= #{toMowDate})
+					 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(fromNoticeMowDate)">
+			<![CDATA[
+				and (nvl(APPR2_TIME,APPR_TIME) >= #{fromNoticeMowDate})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toNoticeMowDate)">
+			<![CDATA[
+				and (nvl(APPR2_TIME,APPR_TIME) <= #{toNoticeMowDate})
+					 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(yishenStartBegin)">			
+			<![CDATA[
+				and (APPR_BEGIN_TIME is not null  and  APPR_BEGIN_TIME >= #{yishenStartBegin})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(yishenStartEnd)">
+			<![CDATA[
+				and (APPR_BEGIN_TIME is not null  and APPR_BEGIN_TIME <= #{yishenStartEnd})
+					 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(yishenEndBegin)">			
+			<![CDATA[
+				and (APPR_TIME is not null  and  APPR_TIME >= #{yishenEndBegin})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(yishenEndEnd)">
+			<![CDATA[
+				and (APPR_TIME is not null  and APPR_TIME <= #{yishenEndEnd})
+					 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(fengxianType)">
+				and fengxian_Type = #{fengxianType}
+			</if>
+
+			<if test="@Ognl@isNotEmpty(applyAccount)">
+				and APPLY_ACCOUNT = #{applyAccount}
+			</if>
+			<if test="@Ognl@isNotEmpty(applyCardAcct)">
+				and USER_BANK_STRUC like '%'||#{applyCardAcct}||'%'
+			</if>
+
+			<if test="@Ognl@isNotEmpty(appr2Acct)">
+				and APPR2_ACCT = #{appr2Acct}
+			</if>
+			<if test="@Ognl@isNotEmpty(appr2Time)">
+				and APPR2_TIME = #{appr2Time}
+			</if>
+			<if test="@Ognl@isNotEmpty(riskType)">
+				and risk_type in
+				<foreach item="item" index="index" collection="riskType"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="@Ognl@isNotEmpty(currApprer)">
+				<![CDATA[
+					and CURR_APPRER = #{currApprer}
+					    
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(recycleDate)">
+				and APPLY_TIME > #{recycleDate}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(fromOperatingDate)">			
+			<![CDATA[
+				and (OPERATING_TIME is not null  and  OPERATING_TIME >= #{fromOperatingDate})
+				 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toOperatingDate)">
+			<![CDATA[
+				and (OPERATING_TIME is not null  and OPERATING_TIME <= #{toOperatingDate})
+					 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(withdrawMode)">
+			<![CDATA[
+				and WITHDRAW_MODE = #{withdrawMode}
+					 ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(rootSn)">
+			<![CDATA[
+				and ROOT_SN = #{rootSn}
+					 ]]>
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="FundWithdrawResult" flushCache="false">
+		select
+		<include refid="fundWithdrawColumns" />
+		from view_fund_withdraw
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from
+		view_fund_withdraw
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from view_fund_withdraw
+		<include refid="fundWithdrawDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="FundWithdrawResult">
+		select
+		<include refid="fundWithdrawColumns" />
+		from view_fund_withdraw
+		<include refid="fundWithdrawDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="queryFundWithdrawByMowNum" resultMap="FundWithdrawResult">
+		select
+		<include refid="fundWithdrawColumns" />
+		from view_fund_withdraw
+		WHERE SN = #{sn}
+	</select>
+
+	<select id="getCountByFundWithdrawList"
+		resultType="com.winterframework.firefrog.fund.web.controller.vo.SumCount"
+		parameterType="HashMap">
+		SELECT count(1) as count ,sum(case when 1=1 then REAL_WITHDRAL_AMT
+		end) as sum from
+		<if test="@Ognl@isEmpty(isReport)">
+			view_fund_withdraw
+		</if>
+		<if test="@Ognl@isNotEmpty(isReport)">
+			view_fund_withdraw_${isReport}
+		</if>
+		<include refid="fundWithdrawDynamicWhere" />
+	</select>
+	
+	<!--風險提現處理中頁籤 退款 及 獲得狀態-->
+	<select id="getCountByRefundAndGetStatusList"
+		resultType="com.winterframework.firefrog.fund.web.controller.vo.SumCount"
+		parameterType="HashMap">
+		SELECT count(1) as count ,sum(REAL_WITHDRAL_AMT) as sum from 
+		<if test="@Ognl@isEmpty(isReport)">
+			view_fund_withdraw
+		</if>
+		<if test="@Ognl@isNotEmpty(isReport)">
+			view_fund_withdraw_${isReport}
+		</if>
+		WHERE SN = #{sn}
+	</select>
+	
+	
+	<select id="queryFundWithdrawList" resultMap="FundWithdrawResult"
+		parameterType="HashMap">
+		select
+		<include refid="fundWithdrawColumns" />
+		
+		 from 
+ 		view_fund_withdraw
+		<include refid="fundWithdrawDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="queryWithdrawFHXList" resultMap="SubSysActivityWithdrawResult"
+		parameterType="HashMap">
+		<![CDATA[
+		select TP.BANK_NUMBER AS bankNumber from (
+		  select 
+		    substr(
+		      user_bank_struc,INSTR(user_bank_struc, '"bankNumber":"',1)+14, 
+		      INSTR(substr(user_bank_struc,INSTR( user_bank_struc, '"bankNumber":"',1)+15), '","',1)
+		    ) BANK_NUMBER ,
+		    NOTICE_MOW_TIME
+		  from FUND_WITHDRAW where USER_ID = #{userId} and STATUS in (4,6)
+		) TP GROUP BY TP.BANK_NUMBER
+		]]>
+	</select>
+	
+	<!--風險提現處理中頁籤 退款 及 獲得狀態-->
+	<select id="queryReFundAndStatusList" resultMap="FundWithdrawResult"
+		parameterType="HashMap">
+		select
+		<include refid="fundWithdrawColumns" />
+		
+		 from 
+ 		view_fund_withdraw
+		WHERE SN = #{sn}
+		
+	</select>
+	
+	<sql id="queryFundWithDynamicWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(fromDate)">
+		  	<![CDATA[
+		    	and APPLY_TIME >= #{fromDate}
+		    ]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toDate)">
+		  	<![CDATA[
+		  		and APPLY_TIME <= #{toDate}
+		  	]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(sn)">
+				and SN = #{sn}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS in
+				<foreach item="status" index="index" collection="status"
+					open="(" separator="," close=")">
+					#{status}
+				</foreach>
+
+			</if>
+		</where>
+	</sql>
+	<update id="yuchuli">
+		update FUND_withdraw
+		set
+		CURR_APPRER=#{currApprer} ,
+		CURR_DATE=#{currDate},
+		<if test="currStatus != null and currStatus == 1">
+			APPR_BEGIN_TIME=#{currDate},
+		</if>
+		<if test="currStatus != null and currStatus == 2">
+			APPR2_BEGIN_TIME=#{currDate},
+		</if>
+		APPR_BEGIN_STATUS=1
+		where ID = #{id}
+	</update>
+	<update id="yuchuliEnd">
+		update FUND_withdraw
+		set CURR_APPRER=null ,CURR_DATE=null,
+		<if test="currStatus != null and currStatus == 1">
+			APPR_BEGIN_TIME=null,
+		</if>
+		<if test="currStatus != null and currStatus == 2">
+			APPR2_BEGIN_TIME=null,
+		</if>
+		APPR_BEGIN_STATUS=0
+		where ID = #{id}
+	</update>
+	<update id="updateTargetStatusToLock">
+		UPDATE FUND_WITHDRAW
+		SET STATUS=#{status}
+		WHERE ID = #{id}
+		AND STATUS=#{targetStatus}
+	</update>
+	<update id="yuchuliEndRefund">
+		update FUND_withdraw
+		set APPR_BEGIN_STATUS=2
+		where ID = #{id}
+	</update>
+	
+	
+	<update id="updateWithdrawMode">
+		update FUND_WITHDRAW
+		set WITHDRAW_MODE = #{withdrawMode}
+		where sn = #{sn}
+	</update>
+	<!--未处理单据-->
+	<select id="getCountUnhandle" resultType="integer">
+		select count(1) as cnt
+		 from 
+ 		FUND_WITHDRAW
+		WHERE status = 0
+	</select>	
+</mapper>

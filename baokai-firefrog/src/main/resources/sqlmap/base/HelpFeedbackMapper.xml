@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.help.dao.vo.HelpFeedbackVO">
+	<resultMap id="HelpFeedbackResult" type="com.winterframework.firefrog.help.dao.vo.HelpFeedbackVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="helpFeedbackColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	HELP_ID as helpId,
+	        	REASON_ID as reasonId,
+	        	REASON_CONTENT as reasonContent,
+	        	IS_SOLVED as isSolved
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.help.dao.vo.HelpFeedbackVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_HELP_FEEDBACK_ID.Nextval from dual
+			   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        HELP_FEEDBACK (
+	        	ID ,
+	        	U_ID ,
+	        	HELP_ID ,
+	        	REASON_ID ,
+	        	REASON_CONTENT ,
+	        	IS_SOLVED ,
+	        	GMT_CREATED
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{uid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{helpId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{reasonId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{reasonContent,javaType=string,jdbcType=VARCHAR} ,
+	        	#{isSolved,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.help.dao.vo.HelpFeedbackVO">
+	    <![CDATA[
+	        UPDATE HELP_FEEDBACK SET
+		        U_ID = #{uid,javaType=long,jdbcType=DECIMAL} ,
+		        HELP_ID = #{helpId,javaType=long,jdbcType=DECIMAL} ,
+		        REASON_ID = #{reasonId,javaType=long,jdbcType=DECIMAL} ,
+		        REASON_CONTENT = #{reasonContent,javaType=string,jdbcType=VARCHAR} ,
+		        IS_SOLVED = #{isSolved,javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from HELP_FEEDBACK where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="HelpFeedbackResult" flushCache="false">
+			select <include refid="helpFeedbackColumns" />
+		    <![CDATA[
+			    from HELP_FEEDBACK 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="HelpFeedbackResult" flushCache="false">
+			select <include refid="helpFeedbackColumns" />
+			    from HELP_FEEDBACK 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="helpFeedbackDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(uid)">
+				and U_ID = #{uid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(helpId)">
+				and HELP_ID = #{helpId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(reasonId)">
+				and REASON_ID = #{reasonId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(reasonContent)">
+				and REASON_CONTENT = #{reasonContent}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isSolved)">
+				and IS_SOLVED = #{isSolved}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="HelpFeedbackResult"  flushCache="false">
+    	select <include refid="helpFeedbackColumns" />
+	    from HELP_FEEDBACK 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from HELP_FEEDBACK 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from HELP_FEEDBACK 
+		<include refid="helpFeedbackDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="HelpFeedbackResult">
+    	select <include refid="helpFeedbackColumns" />
+	    from HELP_FEEDBACK 
+		<include refid="helpFeedbackDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="getHelpFeedbacks" resultMap="HelpFeedbackResult" parameterType="com.winterframework.firefrog.help.dao.vo.HelpFeedbackVO">
+    	select <include refid="helpFeedbackColumns" />
+	    from HELP_FEEDBACK
+		<include refid="helpFeedbackDynamicWhere"/>
+    </select>
+</mapper>

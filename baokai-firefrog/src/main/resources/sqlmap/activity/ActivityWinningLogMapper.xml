@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.winterframework.firefrog.active.dao.vo.ActivityWinningLog">
+
+	<resultMap id="result"
+		type="com.winterframework.firefrog.active.dao.vo.ActivityWinningLog">
+		<result column="ID" property="id" />
+		<result column="ACTIVITY_ID" property="activityId" />
+		<result column="ACCOUNT" property="account" />
+		<result column="USER_ID" property="userId" />
+		<result column="ACTIVITY_PRIZE_ID" property="activityPrizeId" />
+		<result column="FUND_CHANGE_LOG_SN" property="fundChangeLogSN" />
+		<result column="WINNING_PRIZE" property="winningPrize" />
+		<result column="CHANGE_AMT" property="changeAmt" />
+		<result column="APPROVER_AMT" property="approverAmt" />
+		<result column="GMT_CREATED" property="gmtCreated" />
+		<result column="APPROVER" property="approver" />
+		<result column="GMT_APPR" property="gmtAppr" />
+		<result column="APPROVER_MEMO" property="approverMemo" />
+	</resultMap>
+
+	<sql id="DynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(activityId)">
+				and ACTIVITY_ID = #{activityId}
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT = #{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(activityPrizeId)">
+				and ACTIVITY_PRIZE_ID = #{activityPrizeId}
+			</if>
+			<if test="@Ognl@isNotEmpty(fundChangeLogSN)">
+				and FUND_CHANGE_LOG_SN = #{fundChangeLogSN}
+			</if>
+			<if test="@Ognl@isNotEmpty(winningPrize)">
+				and WINNING_PRIZE = #{winningPrize}
+			</if>
+			<if test="@Ognl@isNotEmpty(changeAmt)">
+				and CHANGE_AMT = #{changeAmt}
+			</if>
+			<if test="@Ognl@isNotEmpty(approverAmt)">
+				and APPROVER_AMT = #{approverAmt}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+			<if test="@Ognl@isNotEmpty(approver)">
+				and APPROVER = #{approver}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtAppr)">
+				and GMT_APPR = #{gmtAppr}
+			</if>
+			<if test="@Ognl@isNotEmpty(approverMemo)">
+				and APPROVER_MEMO = #{approverMemo}
+			</if>
+			
+		</where>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.active.dao.vo.ActivityWinningLog"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_ACTIVITY_WINNING_LOG_ID.Nextval from dual
+		</selectKey>
+		<![CDATA[
+	        INSERT INTO
+	        ACTIVITY_WINNING_LOG (
+	        	ID ,
+	        	ACTIVITY_ID,
+	        	ACCOUNT,
+	        	ACTIVITY_PRIZE_ID,
+	        	FUND_CHANGE_LOG_SN,
+	        	WINNING_PRIZE,
+				CHANGE_AMT,
+				APPROVER_AMT,
+				GMT_CREATED,
+				APPROVER,
+				GMT_APPR,
+				APPROVER_MEMO,
+				USER_ID,
+				ACTIVITY_WEEK
+			) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL},
+	        	#{activityId,javaType=long,jdbcType=DECIMAL},
+	        	#{account,javaType=string,jdbcType=VARCHAR},
+				#{activityPrizeId,javaType=long,jdbcType=DECIMAL},
+				#{fundChangeLogSN,javaType=string,jdbcType=VARCHAR},
+	        	#{winningPrize,javaType=long,jdbcType=DECIMAL},
+				#{changeAmt,javaType=long,jdbcType=DECIMAL},
+				#{approverAmt,javaType=long,jdbcType=DECIMAL},
+				#{gmtCreated,javaType=object,jdbcType=TIMESTAMP},
+	        	#{approver,javaType=string,jdbcType=VARCHAR},
+				#{gmtAppr,javaType=object,jdbcType=TIMESTAMP},
+	        	#{approverMemo,javaType=string,jdbcType=VARCHAR},
+	        	#{userId,javaType=long,jdbcType=DECIMAL},
+	        	#{activityWeek,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>
+	</insert>
+	<select id="getById" parameterType="long" resultMap="result"
+		flushCache="false">
+		select * from ACTIVITY_WINNING_LOG
+		where ID = #{id}
+	</select>
+
+	<select id="queryActivityWinningLogById" resultMap="result"
+		parameterType="com.winterframework.firefrog.active.dao.vo.ActivityWinningLog"
+		flushCache="false">
+		select * from ACTIVITY_WINNING_LOG
+		where ID = #{id}
+	</select>
+	
+	<select id="queryActivityWinningLogByActivityId" resultMap="result"
+		parameterType="com.winterframework.firefrog.active.dao.vo.ActivityWinningLog"
+		flushCache="false">
+		select * from ACTIVITY_WINNING_LOG
+		where ACTIVITY_ID = #{activityId}
+	</select>
+
+	<select id="queryByActivityIdAndAccount" resultMap="result"
+		parameterType="com.winterframework.firefrog.active.dao.vo.ActivityWinningLog"
+		flushCache="false">
+		select * from ACTIVITY_WINNING_LOG
+		where ACTIVITY_ID = #{activityId} and ACOUNT = #{account}
+	</select>
+	
+	<!-- 計算某日某活動使用者總共中獎次數 -->
+	<select id="countUserWinningTimesByDay" parameterType="hashmap" 
+		resultType="Long" flushCache="false">
+    	select count(id) from ACTIVITY_WINNING_LOG 
+    	where 
+    		ACTIVITY_ID = #{activityId}
+    		and ACCOUNT = #{account}
+    		and WINNING_PRIZE = 1
+	    	<![CDATA[
+	    	and (GMT_CREATED >= trunc(#{someDay}) 
+	    	or 
+	    	GMT_CREATED < trunc(#{someDay}) + 1)
+	    	]]>
+	</select>
+	
+	<!-- 取得某活動已中獎且未派發的獎金列表 -->
+	<select id="queryForApproveList" resultMap="result"
+		parameterType="com.winterframework.firefrog.active.dao.vo.ActivityWinningLog"
+		flushCache="false">
+		select * from ACTIVITY_WINNING_LOG
+		where 
+			ACTIVITY_ID = #{activityId} 
+			and FUND_CHANGE_LOG_SN is null 
+			and WINNING_PRIZE = 1
+			<![CDATA[
+			and CHANGE_AMT > 0
+			]]>
+	</select>
+	
+	<!-- 取得某活動已中獎且已派發的獎金列表 -->
+	<select id="queryForBeApprovedList" resultMap="result"
+		parameterType="com.winterframework.firefrog.active.dao.vo.ActivityWinningLog"
+		flushCache="false">
+		select * from ACTIVITY_WINNING_LOG
+		where 
+			ACTIVITY_ID = #{activityId} 
+			and FUND_CHANGE_LOG_SN is not null
+			and WINNING_PRIZE = 1
+			<![CDATA[
+			and CHANGE_AMT > 0
+			]]>
+	</select>
+	
+	<update id="updateApproval" parameterType="hashMap">
+		UPDATE 
+			ACTIVITY_WINNING_LOG 
+		SET 
+			APPROVER = #{approver},
+			GMT_APPR = #{gmtAppr},
+			APPROVER_AMT = #{approverAmt},
+			APPROVER_MEMO = #{approverMemo},
+			FUND_CHANGE_LOG_SN = #{fundChangeLogSN} 
+		where 
+			ID = #{id}
+			AND FUND_CHANGE_LOG_SN IS NULL
+			AND APPROVER_AMT IS NULL
+			AND APPROVER IS NULL
+			AND GMT_APPR IS NULL
+	</update>
+	<select id="getWinningCountByPage"
+		resultType="long">
+		select count(*) from ACTIVITY_WINNING_LOG
+		where 
+			ACTIVITY_ID = #{activity_id} 
+			AND trunc(GMT_CREATED) = to_date( #{querydate},'YYYYMMDD')
+			AND FUND_CHANGE_LOG_SN IS NULL
+			AND APPROVER_AMT IS NULL
+			AND APPROVER IS NULL
+			AND GMT_APPR IS NULL
+	</select>
+	<select id="getWinningByPage"
+		resultMap="result">
+		select * from ACTIVITY_WINNING_LOG
+		where 
+			ACTIVITY_ID = #{activity_id} 
+			AND trunc(GMT_CREATED) = to_date( #{querydate},'YYYYMMDD')
+			AND FUND_CHANGE_LOG_SN IS NULL
+			AND APPROVER_AMT IS NULL
+			AND APPROVER IS NULL
+			AND GMT_APPR IS NULL
+		ORDER BY ID
+	</select>
+	<select id="getWinningCompleteCountByPage"
+		resultType="long">
+		select count(*) from ACTIVITY_WINNING_LOG
+		where 
+			ACTIVITY_ID = #{activity_id} 
+			AND trunc(GMT_CREATED) = to_date( #{querydate},'YYYYMMDD')
+			AND FUND_CHANGE_LOG_SN IS NOT NULL
+			AND APPROVER_AMT IS NOT NULL
+			AND APPROVER IS NOT NULL
+			AND GMT_APPR IS NOT NULL
+	</select>
+	<select id="getWinningCompleteByPage"
+		resultMap="result">
+		select * from ACTIVITY_WINNING_LOG
+		where 
+			ACTIVITY_ID = #{activity_id} 
+			AND trunc(GMT_CREATED) = to_date( #{querydate},'YYYYMMDD')
+			AND FUND_CHANGE_LOG_SN IS NOT NULL
+			AND APPROVER_AMT IS NOT NULL
+			AND APPROVER IS NOT NULL
+			AND GMT_APPR IS NOT NULL
+		ORDER BY GMT_APPR
+	</select>
+	<!-- 查詢資料群中是否有已派獎資料 -->
+	<select id="queryNumOfAwardsLog" parameterType="list" flushCache="false"
+		resultType="Long">
+		SELECT COUNT(*)
+	    FROM ACTIVITY_WINNING_LOG
+	    WHERE ID in
+	    <foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+			AND FUND_CHANGE_LOG_SN IS NOT NULL
+			AND APPROVER_AMT IS NOT NULL
+			AND APPROVER IS NOT NULL
+			AND GMT_APPR IS NOT NULL
+	</select>
+	
+	<select id="deleteAwardByCodeAndWeek" parameterType="hashMap" flushCache="false">
+		DELETE
+	    FROM ACTIVITY_WINNING_LOG
+	    WHERE ACTIVITY_ID = #{activityId}
+			AND ACTIVITY_WEEK = #{activityWeek}
+			AND APPROVER_MEMO IS NULL
+	</select>
+	
+	<select id="queryAlreadyAwarded" parameterType="hashMap" flushCache="false"
+		resultType="long">
+		SELECT COUNT(*)
+	    FROM ACTIVITY_WINNING_LOG
+	    WHERE ACTIVITY_ID = #{activityId}
+			AND ACTIVITY_WEEK = #{activityWeek}
+			AND APPROVER_MEMO IS NOT NULL
+	</select>
+	
+	<select id="checkUserIsUpload" parameterType="hashMap" flushCache="false"
+		resultMap="result">
+		SELECT *
+	    FROM ACTIVITY_WINNING_LOG
+	    WHERE ACTIVITY_ID = #{activityId} 
+	        AND ACCOUNT = #{account}
+			AND ACTIVITY_WEEK = #{activityWeek}
+	</select>
+	
+	<select id="queryUserUploadToal" parameterType="hashMap" flushCache="false"
+		resultType="long">
+		SELECT COUNT(*)
+	    FROM ACTIVITY_WINNING_LOG
+	    WHERE ACTIVITY_ID = #{activityId} 
+			AND ACTIVITY_WEEK = #{activityWeek}
+	</select>
+	
+	
+
+</mapper>

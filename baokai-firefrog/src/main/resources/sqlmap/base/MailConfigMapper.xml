@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+				  
+<mapper namespace="com.winterframework.firefrog.common.config.dao.vo.MailConfig">
+	<resultMap id="MailConfigResult" type="com.winterframework.firefrog.common.config.dao.vo.MailConfig">
+	</resultMap>
+	<sql id="MailconfigColumns">
+	    <![CDATA[
+	        	SENDMETHOD as sendmethod,
+	        	SMTPSERVER as smtpserver,
+	        	PORT as mailport,
+	        	SENDER as sender,
+	        	ACCOUNT as account,
+	        	PASSWORD as password
+	      ]]>
+	</sql>
+  	<select id="getAllConfig" resultMap="MailConfigResult"  flushCache="false">
+    	select <include refid="MailconfigColumns" />
+	    from MAILCONFIG 
+	</select>	
+	
+	<select id="getEmailById" parameterType="string" resultMap="MailConfigResult"  flushCache="false">
+    	select <include refid="MailconfigColumns" />
+	    from MAILCONFIG where ACCOUNT = #{account}
+	</select>	
+	
+	<update id="updateMailConfigByID" parameterType="hashMap" flushCache="false">
+  		update MailConfig set SENDMETHOD = #{sendmethod},SMTPSERVER = #{smtpserver},
+  		PORT = #{mailport},SENDER = #{sender} ,PASSWORD= #{password}  		
+    	where ACCOUNT = #{account}
+	</update>
+	
+	<insert id="insertEMail" parameterType="hashMap" flushCache="false">
+  		INSERT INTO MailConfig (SENDMETHOD,SMTPSERVER,PORT,SENDER,ACCOUNT,PASSWORD)
+		VALUES (#{sendmethod},#{smtpserver},#{mailport},#{sender}, #{account},#{password})
+	</insert>
+	
+	<delete id="deleteEmailById" parameterType="string" flushCache="false">
+  		DELETE FROM MailConfig
+	    WHERE ACCOUNT= #{account}
+	</delete>	    
+</mapper>

@@ -1,0 +1,1068 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+
+	<!-- 金额验证 -->
+	<bean id="betTotalMoneyValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.money.BetTotalMoneyValidateExecutor" />
+	<!-- 复式注数验证 -->
+	<bean id="betNumberDoubleValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberDoubleValidateExecutor" />
+	<!-- 组选10注数验证 -->
+	<bean id="betNumberGroup10ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup10ValidateExecutor" />
+	<!-- 组选120注数验证 -->
+	<bean id="betNumberGroup120ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup120ValidateExecutor" />
+	<!-- 组选12注数验证 -->
+	<bean id="betNumberGroup12ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup12ValidateExecutor" />
+	<!-- 组选20注数验证 -->
+	<bean id="betNumberGroup20ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup20ValidateExecutor" />
+	<!-- 组选24注数验证 -->
+	<bean id="betNumberGroup24ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup24ValidateExecutor" />
+	<!-- 组选30注数验证 -->
+	<bean id="betNumberGroup30ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup30ValidateExecutor" />
+	<!-- 组选4注数验证 -->
+	<bean id="betNumberGroup4ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup4ValidateExecutor" />
+	<!-- 组选5注数验证 -->
+	<bean id="betNumberGroup5ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup5ValidateExecutor" />
+	<!-- 组选60注数验证 -->
+	<bean id="betNumberGroup60ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup60ValidateExecutor" />
+	<!-- 组选6注数验证 -->
+	<bean id="betNumberGroup6ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup6ValidateExecutor" />
+	<!-- 单式注数验证 -->
+	<bean id="betNumberSimplexValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberSimplexValidateExecutor" />
+	<!-- 不定位及趣味注数验证 -->
+	<bean id="betNumberBDWAndQWValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberBDWAndQWValidateExecutor">
+		<property name="methodCodeSingleBetNumberMap" ref="methodCodeSingleBetNumberMapConfig"></property>
+	</bean>
+	<!-- 和值和跨度包胆注数验证 -->
+	<bean id="betNumberHZAndKDValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberHZAndKDAndBDValidateExecutor" />
+	<!-- 组3注数验证 -->
+	<bean id="betNumberGroup3ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberGroup3ValidateExecutor" />
+	<!-- 一码 -->
+	<bean id="betNumberYXValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberYXValidateExecutor" />
+	<!-- 二星组选复式注数验证 -->
+	<bean id="betNumber2XZXFSValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumber2XZXFSValidateExecutor" />
+	<!-- 三星组6注数验证 -->
+	<bean id="betNumberZ6ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.number.BetNumberZ6ValidateExecutor" />
+	
+	<bean id="sscValidators" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.DS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitBySpaceValidateExecutor" />
+								<ref bean="betNumberSimplexValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+					<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="lotteryType" value="${lottery.SHSSL}" />
+							<property name="groupCode" value="${groupCode.HS}" />
+							<property name="setCode" value="${setCode.ZHX}"></property>
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="sslFormatFSValidateExecutor" />
+								<ref bean="betNumberDoubleValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="lotteryType" value="${lottery.SHSSL}" />
+							<property name="groupCode" value="${groupCode.QE}" />
+							<property name="setCode" value="${setCode.ZHX}"></property>
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="sslFormatFSValidateExecutor" />
+								<ref bean="betNumberDoubleValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="lotteryType" value="${lottery.SHSSL}" />
+							<property name="groupCode" value="${groupCode.HE}" />
+							<property name="setCode" value="${setCode.ZHX}"></property>
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="sslFormatFSValidateExecutor" />
+								<ref bean="betNumberDoubleValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatFSValidateExecutor" />
+								<ref bean="betNumberDoubleValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				
+				<!-- 前二组选复式 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.QE}" />
+							<property name="setCode" value="${setCode.ZX}" />
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormat2XZXFSValidateExecutor" />
+								<ref bean="betNumber2XZXFSValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+		
+				
+				<!-- 后二组选复式 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.HE}" />
+							<property name="setCode" value="${setCode.ZX}" />
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormat2XZXFSValidateExecutor" />
+								<ref bean="betNumber2XZXFSValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+		        <!-- 后二组选复式 -->
+		        <entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.HE2000}" />
+							<property name="setCode" value="${setCode.ZX}" />
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormat2XZXFSValidateExecutor" />
+								<ref bean="betNumber2XZXFSValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX120}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByCommaValidateExecutor" />
+								<ref bean="betNumberGroup120ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX24}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByCommaValidateExecutor" />
+								<ref bean="betNumberGroup24ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX60}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByComma2ValidateExecutor" />
+								<ref bean="betNumberGroup60ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX30}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByComma2ValidateExecutor" />
+								<ref bean="betNumberGroup30ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX20}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByComma2ValidateExecutor" />
+								<ref bean="betNumberGroup20ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX10}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByComma2ValidateExecutor" />
+								<ref bean="betNumberGroup10ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX4}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByComma2ValidateExecutor" />
+								<ref bean="betNumberGroup4ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX12}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByComma2ValidateExecutor" />
+								<ref bean="betNumberGroup12ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX6}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByCommaValidateExecutor" />
+								<ref bean="betNumberGroup6ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZX5}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByComma2ValidateExecutor" />
+								<ref bean="betNumberGroup5ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.YMBDW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatBDWandQWValidateExecutor" />
+								<ref bean="betNumberBDWAndQWValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.EMBDW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatBDWandQWValidateExecutor" />
+								<ref bean="betNumberBDWAndQWValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.SMBDW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatBDWandQWValidateExecutor" />
+								<ref bean="betNumberBDWAndQWValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.YFFS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatBDWandQWValidateExecutor" />
+								<ref bean="betNumberBDWAndQWValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.HSCS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatBDWandQWValidateExecutor" />
+								<ref bean="betNumberBDWAndQWValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.SXBX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatBDWandQWValidateExecutor" />
+								<ref bean="betNumberBDWAndQWValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.SJFC}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatBDWandQWValidateExecutor" />
+								<ref bean="betNumberBDWAndQWValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.HZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatHZandKDValidateExecutor" />
+								<ref bean="betNumberHZAndKDValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.KD}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+					      <property name="validateExecutors">
+							<list>
+								<ref bean="betFormatHZandKDValidateExecutor" />
+								<ref bean="betNumberHZAndKDValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+		
+					</bean>
+				</entry>
+		
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.Z3}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByCommaValidateExecutor" />
+								<ref bean="betNumberGroup3ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.Z6}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatSplitByCommaValidateExecutor" />
+								<ref bean="betNumberZ6ValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZSDS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatZ3DSValidateExecutor" />
+								<ref bean="betNumberSimplexValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.ZLDS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatZ6DSValidateExecutor" />
+								<ref bean="betNumberSimplexValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+		
+		
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.HHZX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatHHZXValidateExecutor" />
+								<ref bean="betNumberSimplexValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+		
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.YX}" />
+							<property name="setCode" value="${setCode.DWD}"></property>
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatYXValidateExecutor" />
+								<ref bean="betNumberYXValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry> <!-- 超級2000一星 -->
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.YX2000}" />
+							<property name="setCode" value="${setCode.DWD}"></property>
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatYXValidateExecutor" />
+								<ref bean="betNumberYXValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="lotteryType" value="${lottery.SHSSL}" />
+							<property name="groupCode" value="${groupCode.YX}" />
+							<property name="setCode" value="${setCode.DWD}"></property>
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="sslFormatYXValidateExecutor" />
+								<ref bean="betNumberYXValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+		
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.BD}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="betFormatBDValidateExecutor" />
+								<ref bean="betNumberHZAndKDValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<!-- format 组件包bean 开始 -->
+	<!-- 不定位和趣味格式验证 -->
+	<bean id="betFormatBDWandQWValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatBDWandQWValidateExecutor">
+		<property name="methodCodeSingleBetNumberMap" ref="methodCodeSingleBetNumberMapConfig"></property>
+	</bean>
+	<!-- 复式投注格式验证 -->
+	<bean id="betFormatFSValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatFSValidateExecutor">
+		<property name="groupCodeSingleBetNumberMapConfig" ref="groupCodeSingleBetNumberMapConfig"></property>
+		<property name="groupCodeBetContentRegexMapConfig" ref="groupCodeBetContentRegexMapConfig"></property>
+	</bean>
+	<bean id="sslFormatFSValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.SSLFormatFSValidateExecutor">
+		<property name="groupCodeSingleBetNumberMapConfig" ref="groupCodeSingleBetNumberMapConfig"></property>
+		<property name="groupCodeBetContentRegexMapConfig" ref="sslGroupCodeBetContentRegexMapConfig"></property>
+	</bean>
+	<!-- 二星组选复式复式 -->
+	<bean id="betFormat2XZXFSValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormat2XZXFSValidateExecutor" />
+	<!-- 符合由逗号分割后的数组长度为2的大部分验证(不含组三组六) -->
+	<bean id="betFormatSplitByComma2ValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatSplitByComma2ValidateExecutor"></bean>
+	<!-- 分割由逗号隔开的投注的内容，每个逗号隔开的都是一个数字，包含多个投注项，如五星组选120,4星组选24 -->
+	<bean id="betFormatSplitByCommaValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatSplitByCommaValidateExecutor">
+		<property name="methodCodeSingleBetNumberMap" ref="methodCodeSingleBetNumberMapConfig"></property>
+	</bean>
+	<!-- 符合由空格分割的大部分验证-单选(不含组三组六) -->
+	<bean id="betFormatSplitBySpaceValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatSplitBySpaceValidateExecutor">
+		<property name="groupCodeSingleBetNumberMapConfig" ref="groupCodeSingleBetNumberMapConfig"></property>
+	</bean>
+	<!-- 组三单式 -->
+	<bean id="betFormatZ3DSValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatZ3DSValidateExecutor"></bean>
+	<!-- 组六单式 -->
+	<bean id="betFormatZ6DSValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatZ6DSValidateExecutor"></bean>
+	<!-- 混合组选 -->
+	<bean id="betFormatHHZXValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatHHZXValidateExecutor"></bean>
+	<!-- 包胆 -->
+	<bean id="betFormatBDValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatBDValidateExecutor"></bean>
+	<!--一星 -->
+	<bean id="betFormatYXValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatYXValidateExecutor"></bean>
+	<bean id="sslFormatYXValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.SSLFormatYXValidateExecutor"></bean>
+	<!-- 和值和跨度格式验证 -->
+	<bean id="betFormatHZandKDValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.BetFormatHZandKDValidateExecutor">
+		<property name="HZandKDRangeMapConfig" ref="HZandKDRangeMapConfig"></property>
+	</bean>
+	<!-- format 组件包bean 结束 -->
+	<bean id="groupCodeSingleBetNumberMapConfig" class="com.winterframework.firefrog.phone.web.validate.business.GroupCodeSingleBetNumberMapConfig">
+		<property name="groupCodeSingleBetNumberMap">
+			<map>
+				<entry key="${groupCode.WX}">
+					<value>${singleBetNumber.five}</value>
+				</entry>
+				<entry key="${groupCode.SX}">
+					<value>${singleBetNumber.four}</value>
+				</entry>
+				<entry key="${groupCode.QS}">
+					<value>${singleBetNumber.three}</value>
+				</entry>
+				<entry key="${groupCode.HS}">
+					<value>${singleBetNumber.three}</value>
+				</entry>
+				<entry key="${groupCode.QE}">
+					<value>${singleBetNumber.two}</value>
+				</entry>
+				<entry key="${groupCode.HE}">
+					<value>${singleBetNumber.two}</value>
+				</entry>
+				<entry key="${groupCode.YX}">
+					<value>${singleBetNumber.one}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN}">
+					<value>${singleBetNumber.three}</value>
+				</entry>
+				<entry key="${groupCode.HE2000}">
+					<value>${singleBetNumber.two}</value>
+				</entry>
+				<entry key="${groupCode.YX2000}">
+					<value>${singleBetNumber.one}</value>
+				</entry>
+				<entry key="${groupCode.SX2000}">
+					<value>${singleBetNumber.four}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN2000}">
+					<value>${singleBetNumber.three}</value>
+				</entry>
+				<entry key="${groupCode.HS2000}">
+					<value>${singleBetNumber.three}</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="methodCodeSingleBetNumberMapConfig" class="com.winterframework.firefrog.phone.web.validate.business.MethodCodeSingleBetNumberMapConfig">
+		<property name="methodCodeSingleBetNumberMap">
+			<map>
+				<!-- 不定位趣味参数配置开始 -->
+				<entry key="${methodCode.YMBDW}">
+					<value>${singleBetNumber.one}</value>
+				</entry>
+				<entry key="${methodCode.EMBDW}">
+					<value>${singleBetNumber.two}</value>
+				</entry>
+				<entry key="${methodCode.SMBDW}">
+					<value>${singleBetNumber.three}</value>
+				</entry>
+				<entry key="${methodCode.YFFS}">
+					<value>${singleBetNumber.one}</value>
+				</entry>
+				<entry key="${methodCode.HSCS}">
+					<value>${singleBetNumber.one}</value>
+				</entry>
+				<entry key="${methodCode.SXBX}">
+					<value>${singleBetNumber.one}</value>
+				</entry>
+				<entry key="${methodCode.SJFC}">
+					<value>${singleBetNumber.one}</value>
+				</entry>
+				<!-- 不定位趣味参数配置结束 -->
+				<entry key="${methodCode.ZX120}">
+					<value>${singleBetNumber.five}</value>
+				</entry>
+				<entry key="${methodCode.ZX24}">
+					<value>${singleBetNumber.four}</value>
+				</entry>
+				<entry key="${methodCode.Z3}">
+					<value>${singleBetNumber.two}</value>
+				</entry>
+				<entry key="${methodCode.Z6}">
+					<value>${singleBetNumber.three}</value>
+				</entry>
+				<entry key="${methodCode.ZX6}">
+					<value>${singleBetNumber.two}</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- 复式投注规则参数map映射开始 -->
+	<bean id="groupCodeBetContentRegexMapConfig" class="com.winterframework.firefrog.phone.web.validate.business.GroupCodeBetContentRegexMapConfig">
+		<property name="groupCodeBetContentRegexMap">
+			<map>
+				<entry key="${groupCode.WX}">
+					<value>${betContentRegex.wxfs}</value>
+				</entry>
+				<entry key="${groupCode.SX}">
+					<value>${betContentRegex.sxfs}</value>
+				</entry>
+				<entry key="${groupCode.QS}">
+					<value>${betContentRegex.qsfs}</value>
+				</entry>
+				<entry key="${groupCode.HS}">
+					<value>${betContentRegex.hsfs}</value>
+				</entry>
+				<entry key="${groupCode.QE}">
+					<value>${betContentRegex.qefs}</value>
+				</entry>
+				<entry key="${groupCode.HE}">
+					<value>${betContentRegex.hefs}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN}">
+					<value>${betContentRegex.zsfs}</value>
+				</entry>
+				<entry key="${groupCode.HS2000}">     <!-- 後三 -->
+					<value>${betContentRegex.hsfs}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN2000}">  <!-- 中山 -->
+					<value>${betContentRegex.zsfs}</value>
+				</entry>
+				<entry key="${groupCode.HE2000}">  <!-- 後2 -->
+					<value>${betContentRegex.hefs}</value>
+				</entry>
+				<entry key="${groupCode.SX2000}">   <!-- 四星 -->
+					<value>${betContentRegex.sxfs}</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="sslGroupCodeBetContentRegexMapConfig" class="com.winterframework.firefrog.phone.web.validate.business.GroupCodeBetContentRegexMapConfig">
+		<property name="groupCodeBetContentRegexMap">
+			<map>
+				<entry key="${groupCode.HS}">
+					<value>${betContentRegex.ssl.hsfs}</value>
+				</entry>
+				<entry key="${groupCode.QE}">
+					<value>${betContentRegex.ssl.qefs}</value>
+				</entry>
+				<entry key="${groupCode.HE}">
+					<value>${betContentRegex.ssl.hefs}</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- 复式投注规则参数map映射结束 -->
+	<!-- 和值跨度规则参数map映射开始 -->
+	<bean id="HZandKDRangeMapConfig" class="com.winterframework.firefrog.phone.web.validate.business.HZandKDRangeMapConfig">
+		<property name="HZandKDRangeMap">
+			<map>
+				<entry key="${groupCode.HS}${setCode.ZHX}${methodCode.HZ}">
+					<value>${range.hs.zhx.hz}</value>
+				</entry>
+				<entry key="${groupCode.HS}${setCode.ZHX}${methodCode.KD}">
+					<value>${range.hs.zhx.kd}</value>
+				</entry>
+				<entry key="${groupCode.HS}${setCode.ZX}${methodCode.HZ}">
+					<value>${range.hs.zx.hz}</value>
+				</entry>
+				<entry key="${groupCode.QS}${setCode.ZHX}${methodCode.HZ}">
+					<value>${range.qs.zhx.hz}</value>
+				</entry>
+				<entry key="${groupCode.QS}${setCode.ZHX}${methodCode.KD}">
+					<value>${range.qs.zhx.kd}</value>
+				</entry>
+				<entry key="${groupCode.QS}${setCode.ZX}${methodCode.HZ}">
+					<value>${range.qs.zx.hz}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN}${setCode.ZHX}${methodCode.HZ}">
+					<value>${range.zs.zhx.hz}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN}${setCode.ZHX}${methodCode.KD}">
+					<value>${range.zs.zhx.kd}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN}${setCode.ZX}${methodCode.HZ}">
+					<value>${range.zs.zx.hz}</value>
+				</entry>
+				<entry key="${groupCode.HE}${setCode.ZHX}${methodCode.HZ}">
+					<value>${range.he.zhx.hz}</value>
+				</entry>
+				<entry key="${groupCode.HE}${setCode.ZHX}${methodCode.KD}">
+					<value>${range.he.zhx.kd}</value>
+				</entry>
+				<entry key="${groupCode.HE}${setCode.ZX}${methodCode.HZ}">
+					<value>${range.he.zx.hz}</value>
+				</entry>
+				<entry key="${groupCode.QE}${setCode.ZHX}${methodCode.HZ}">
+					<value>${range.qe.zhx.hz}</value>
+				</entry>
+				<entry key="${groupCode.QE}${setCode.ZHX}${methodCode.KD}">
+					<value>${range.qe.zhx.kd}</value>
+				</entry>
+				<entry key="${groupCode.QE}${setCode.ZX}${methodCode.HZ}">
+					<value>${range.qe.zx.hz}</value>
+				</entry>
+				<entry key="${groupCode.HS2000}${setCode.ZHX}${methodCode.HZ}">
+					<value>${range.hs.zhx.hz}</value>
+				</entry>
+				<entry key="${groupCode.HS2000}${setCode.ZHX}${methodCode.KD}">
+					<value>${range.hs.zhx.kd}</value>
+				</entry>
+				<entry key="${groupCode.HS2000}${setCode.ZX}${methodCode.HZ}">
+					<value>${range.hs.zx.hz}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN2000}${setCode.ZHX}${methodCode.HZ}">
+					<value>${range.zs.zhx.hz}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN2000}${setCode.ZHX}${methodCode.KD}">
+					<value>${range.zs.zhx.kd}</value>
+				</entry>
+				<entry key="${groupCode.ZHONGSAN2000}${setCode.ZX}${methodCode.HZ}">
+					<value>${range.zs.zx.hz}</value>
+				</entry>
+				<entry key="${groupCode.HE2000}${setCode.ZHX}${methodCode.HZ}"> <!-- 直選 直选和值 -->
+					<value>${range.he.zhx.hz}</value>
+				</entry>
+				<entry key="${groupCode.HE2000}${setCode.ZHX}${methodCode.KD}"> <!-- 直選 跨度-->
+					<value>${range.he.zhx.kd}</value>
+				</entry>
+				<entry key="${groupCode.HE2000}${setCode.ZX}${methodCode.HZ}">    <!-- 組選 組选和值 -->
+					<value>${range.he.zx.hz}</value>
+				</entry>
+				
+			</map>
+		</property>
+	</bean>
+	<!-- 和值跨度规则参数map映射结束 -->
+	
+</beans>

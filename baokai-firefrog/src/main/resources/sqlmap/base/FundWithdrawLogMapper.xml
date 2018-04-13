@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundWithdrawLog">
+		
+		<resultMap id="result" type="com.winterframework.firefrog.fund.dao.vo.FundWithdrawLog">
+			<result column="ID" property="id"/>
+			<result column="WITHDRAW_SN" property="withdrawSn"/>
+			<result column="LOG_CONTENT" property="logContent"/>						
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="LOG_MODEL" property="logModel"/>			
+		</resultMap>
+		
+		
+	<sql id="fields">ID,WITHDRAW_SN,LOG_MODEL,LOG_CONTENT,CREATE_TIME
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+		<if test="withdrawSn != null">
+			And WITHDRAW_SN = #{withdrawSn}
+		</if>
+		<if test="logModel != null">
+			And LOG_MODEL = #{logModel}
+		</if>
+		<if test="logContent != null">
+			And LOG_CONTENT = #{logContent}
+		</if>
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+		</where>
+	</sql>
+		
+		
+		<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdrawLog" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_FUND_WITHDRAW_log.Nextval from dual
+	   	</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_WITHDRAW_LOG (
+	        	ID ,
+	        	WITHDRAW_SN ,
+	        	LOG_CONTENT ,
+	        	CREATE_TIME ,
+	        	LOG_MODEL
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{withdrawSn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{logContent,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP},
+	        	#{logModel,javaType=string,jdbcType=VARCHAR}	        	
+	        )
+	    ]]>	
+		</insert>
+		
+	    <select id="getLogsBySn" parameterType="String" resultMap="result">
+			select ID ,
+	        	WITHDRAW_SN ,
+	        	LOG_CONTENT ,
+	        	CREATE_TIME ,
+	        	LOG_MODEL
+			    from FUND_WITHDRAW_LOG 
+			    WHERE WITHDRAW_SN = #{withdrawSn}
+		</select>	
+		
+</mapper>

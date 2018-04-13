@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+	
+	
+	<bean id="paymentCallbackDispatcher"
+		class="com.winterframework.firefrog.fund.service.impl.PaymentCallbackDispatcher">
+		<property name="serviceMap">
+			<map>
+				<entry key="FDCWTF"  value-ref="FundMowWithdrawService" />
+				<entry key="FDADML"      value-ref="FundMowExceptionWithdrawServiceImpl" />
+				
+				<entry key="FDMWXX"  value-ref="FundManualWithdrawService" /> 
+				<entry key="FDCWCF"  value-ref="FundManualWithdrawService" />
+				<entry key="OTRGDK"  value-ref="FundManualRGDKService" /> 
+	                                
+				
+			</map>
+		</property>
+	</bean>
+	
+	
+	
+</beans>

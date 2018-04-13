@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.advert.dao.vo.AdTopicVO">
+	<resultMap id="AdTopicResult" type="com.winterframework.firefrog.advert.dao.vo.AdTopicVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="adTopicColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	CATE_ID as cateId,
+	        	TITLE as title,
+	        	URLS as urls,
+	        	OPERATOR as operator,
+	        	GMT_CREATED as gmtCreated
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.advert.dao.vo.AdTopicVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_AD_TOPIC_ID.Nextval from dual
+			   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        AD_TOPIC (
+	        	ID ,
+	        	CATE_ID ,
+	        	TITLE ,
+	        	URLS ,
+	        	OPERATOR ,
+	        	GMT_CREATED 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{cateId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{title,javaType=string,jdbcType=VARCHAR} ,
+	        	#{urls,javaType=string,jdbcType=VARCHAR} ,
+	        	#{operator,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtCreated,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.advert.dao.vo.AdTopicVO">
+	        UPDATE AD_TOPIC
+	    	<set>
+	    	<if test="@Ognl@isNotEmpty(cateId)">
+		        CATE_ID = #{cateId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(title)">
+		        TITLE = #{title,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(urls)">
+		        URLS = #{urls,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(operator)">
+		        OPERATOR = #{operator,javaType=string,jdbcType=VARCHAR} 
+		    </if>
+		    </set>    
+	        WHERE 
+		        ID = #{id} 
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from AD_TOPIC where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="AdTopicResult" flushCache="false">
+			select <include refid="adTopicColumns" />
+		    <![CDATA[
+			    from AD_TOPIC 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AdTopicResult" flushCache="false">
+			select <include refid="adTopicColumns" />
+			    from AD_TOPIC 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="adTopicDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(cateId)">
+				and CATE_ID = #{cateId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(title)">
+				and UPPER(TITLE) like UPPER('%${title}%')
+			</if>
+	       <if test="@Ognl@isNotEmpty(urls)">
+				and URLS = #{urls}
+			</if>
+	       <if test="@Ognl@isNotEmpty(operator)">
+				and OPERATOR = #{operator}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AdTopicResult"  flushCache="false">
+    	select <include refid="adTopicColumns" />
+	    from AD_TOPIC 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from AD_TOPIC 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from AD_TOPIC 
+		<include refid="adTopicDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AdTopicResult">
+    	select <include refid="adTopicColumns" />
+	    from AD_TOPIC 
+		<include refid="adTopicDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

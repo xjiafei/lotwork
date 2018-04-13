@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.entity.FundUserRemarkRecyle">
+	<resultMap id="FundUserRemarkRecyleResult" type="com.winterframework.firefrog.fund.entity.FundUserRemarkRecyle">
+	</resultMap>
+	<resultMap id="FundUserRemarkRecyleResultExt" type="com.winterframework.firefrog.fund.dao.vo.FundUserRemarkRecyleExtVO">
+	</resultMap>
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundUserRemarkRecyleColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	REMARK as remark,
+	        	USER_ID as userId,
+	        	GMT_CREATED as gmtCreated
+	    ]]>
+	</sql>
+		<sql id="fundUserRemarkRecyleExtColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	REMARK as remark,
+	        	USER_ID as userId,
+	        	GMT_CREATED as gmtCreated,
+	        	ACCOUNT as account,
+	        	USER_CHAIN as userChain,
+	        	VIP_LVL as vipLvl,
+	        	IS_FREEZE as userStatus
+	        	
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.fund.entity.FundUserRemarkRecyle" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_FUND_USER_REMARK_RECYLE_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_USER_REMARK_RECYLE (
+	        	ID ,
+	        	REMARK ,
+	        	USER_ID ,
+	        	GMT_CREATED 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{remark,javaType=string,jdbcType=VARCHAR} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=object,jdbcType=OTHER} 
+	        )
+	    ]]>	
+	
+		</insert>
+		<update id="update" parameterType="com.winterframework.firefrog.fund.entity.FundUserRemarkRecyle">
+	    <![CDATA[
+	        UPDATE FUND_USER_REMARK_RECYLE SET
+		        REMARK = #{remark,javaType=string,jdbcType=VARCHAR} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_USER_REMARK_RECYLE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="FundUserRemarkRecyleResultExt" flushCache="false">
+			select <include refid="fundUserRemarkRecyleColumns" />
+		    <![CDATA[
+			    from view_fund_user_remark_recyle 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="FundUserRemarkRecyleResultExt" flushCache="false">
+			select <include refid="fundUserRemarkRecyleColumns" />
+			    from view_fund_user_remark_recyle 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="fundUserRemarkRecyleDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	     	<if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+			 <if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT = #{account}
+			</if>
+			 <if test="@Ognl@isNotEmpty(remark)">
+				and remark = #{remark}
+			</if>
+			 <if test="@Ognl@isNotEmpty(bindStatTime)">
+				and GMT_CREATED >= #{bindStatTime}
+			</if>
+			
+			 <if test="@Ognl@isNotEmpty(bindEndTime)">
+			 <![CDATA[
+				and GMT_CREATED <= #{bindEndTime}
+				]]>
+			</if>
+		</where>
+	</sql>
+	
+	
+	<delete id="deleteFundUserRecyle">
+	    <![CDATA[
+	        delete from FUND_USER_REMARK_RECYLE where REMARK = #{remark} 
+	    ]]>
+	</delete>   
+    <select id="getCountByPage" resultType="long">
+        select count(*) from view_fund_user_remark_recyle 
+		<include refid="fundUserRemarkRecyleDynamicWhere"/>    
+    </select>
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+	    <select id="getAllRecyleRemarks" resultMap="FundUserRemarkRecyleResultExt">
+    	select <include refid="fundUserRemarkRecyleExtColumns" />
+	    from view_fund_user_remark_recyle
+		<include refid="fundUserRemarkRecyleDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+	
+</mapper>

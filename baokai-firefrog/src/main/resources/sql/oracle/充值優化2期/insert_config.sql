@@ -1,0 +1,1 @@
+﻿INSERT INTO CONFIG VALUES (SEQ_CONFIG_ID.NEXTVAL,'fund','appeal_time','{"wait_time":0,"cd_time":0}',null,sysdate,0, null, null, null ,null, null);

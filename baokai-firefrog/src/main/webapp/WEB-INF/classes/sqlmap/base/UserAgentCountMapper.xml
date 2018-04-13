@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserAgentCountVo">
+	<resultMap id="UserAgentCountResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserAgentCountVo">
+	</resultMap>
+	<resultMap id="UserAgentChargeCountResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundChargeWithdrawVo">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="userAgentCountColumns">
+	    <![CDATA[
+	        	DAY as day,
+	        	TIME as time,
+	        	WITH_DRAW as withDraw,
+	        	CHARGE as charge,
+	        	BET as bet,
+	        	REWARD as reward,
+	        	NEW_USER as newUser,
+	        	ID as id,
+	        	USER_ID as userId
+	    ]]>
+	</sql>
+
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserAgentCountVo"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_USER_AGENT_COUNT_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        USER_AGENT_COUNT (
+	        	ID ,
+	        	DAY ,
+	        	TIME ,
+	        	WITH_DRAW ,
+	        	CHARGE ,
+	        	BET ,
+	        	REWARD ,
+	        	NEW_USER ,
+	        	USER_ID
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{day,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{time,javaType=long,jdbcType=DECIMAL} ,
+	        	#{withDraw,javaType=long,jdbcType=DECIMAL} ,
+	        	#{charge,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{reward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{newUser,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>
+
+	</insert>
+
+
+	<select id="getAll" resultMap="UserAgentCountResult" flushCache="false">
+		select
+		<include refid="userAgentCountColumns" />
+		from USER_AGENT_COUNT
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+	<select id="queryUserAgentCount"
+		parameterType="com.winterframework.firefrog.user.web.dto.UserAgentCountStruc"
+		resultMap="UserAgentCountResult" flushCache="false">
+		<if test="@Ognl@equals(type,1)">
+			select
+			<include refid="userAgentCountColumns" />
+			from view_user_agent_count
+			<where>
+				<if test="@Ognl@isNotEmpty(userId)">
+					and USER_ID = #{userId}
+				</if>
+				<if test="@Ognl@isNotEmpty(startTime)">
+					and trunc(DAY) = #{startTime}
+				</if>
+			</where>
+			 order by time desc
+		</if>
+		<if test="@Ognl@equals(type,2)">
+			select trunc(day) as day,
+			sum(WITH_DRAW) as withDraw,
+			sum(CHARGE) as
+			charge,
+			sum(BET) as bet,
+			sum(REWARD) as reward,
+			sum(NEW_USER) as newUser
+			from view_user_agent_count
+			<where>
+				<if test="@Ognl@isNotEmpty(userId)">
+					and USER_ID = #{userId}
+				</if>
+				<if test="@Ognl@isNotEmpty(startTime)">
+					and trunc(DAY) >= #{startTime}
+				</if>
+				<if test="@Ognl@isNotEmpty(endTime)">
+				 <![CDATA[
+					and trunc(DAY) <= #{endTime}
+		 		 ]]>
+				</if>
+			</where>
+			group by trunc(day)
+			order by trunc(day) desc
+		</if>
+	</select>
+	<select id="queryUserAgentCount3" resultType="hashmap">
+		select * from view_team_bal where id=#{userId} 
+	</select>
+	<select id="queryUserAgentCount2"
+		parameterType="com.winterframework.firefrog.user.web.dto.UserAgentCountStruc"
+		resultMap="UserAgentCountResult" flushCache="false">
+		select
+		<include refid="userAgentCountColumns" />
+		from USER_AGENT_COUNT
+		<where>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(startTime)">
+				and trunc(DAY) = #{startTime}
+			</if>
+		</where>
+	</select>
+		<select id="queryTopChargeWithdraw"
+		parameterType="com.winterframework.firefrog.user.web.dto.UserAgentCountStruc"
+		resultMap="UserAgentChargeCountResult" flushCache="false">
+		select  account,
+        0       as user_lvl,
+       sum(game_1)  as game1,
+        sum(game_2)   as game2,
+       sum( game_3)   as game3,
+        sum(game_4)   as game4,
+       sum( game_5)   as game5,
+        sum(money_1)  as money1,
+       sum( money_2)  as money2,
+       sum( money_3)  as money3,
+       sum( money_4)  as money4,
+        sum(money_5)  as money5
+		from view_top_charge_withdrw_rpt
+		where trunc(day) between trunc(#{startTime}) and trunc(#{endTime})	
+		group by account	 
+	</select>
+	
+
+
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundReport">
+
+	<resultMap id="FundReportDepositRes"
+		type="com.winterframework.firefrog.fund.web.dto.FundReportDepositRes">
+	</resultMap>
+	<resultMap id="WithChargeMap"
+		type="com.winterframework.firefrog.fund.web.controller.vo.WithCharge">
+	</resultMap>
+
+	<select id="getCountByPage_getDeport" resultType="int">
+		select count(*) as count
+		from
+		FUND_REPORT_DEPOSIT t
+		<where>
+			<if test="@Ognl@isNotEmpty(account)">
+				t.account=#{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(startDate)">
+				and trunc(day) between
+				trunc(#{startDate}) and
+				trunc(#{endDate})
+			</if>
+		</where>
+		group by
+		t.user_chain,t.account
+	</select>
+	<select id="getByPage_getDeport" resultMap="FundReportDepositRes">
+		select t.user_chain,
+		t.account
+		as account,
+		sum(in_time) as inTime,
+		sum(in_sum) as inSum,
+		sum(out_time)
+		as outTime,
+		sum(out_sum) as outSum
+		from
+		FUND_REPORT_DEPOSIT
+		t
+		<where>
+			<if test="@Ognl@isNotEmpty(account)">
+				t.account=#{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(startDate)">
+				and trunc(day) between
+				trunc(#{startDate}) and
+				trunc(#{endDate})
+			</if>
+		</where>
+		group by
+		t.user_chain,t.account
+	</select>
+	<select id="getCountByPage_chargeWithdraw" resultType="int">
+		select
+		count(*) as count
+		from
+		FUND_REPORT_WITHDRAWCHARGE t
+		where trunc(day) between
+		trunc(#{startDate}) and
+		trunc(#{endDate})
+		group
+		by account
+	</select>
+	<select id="getByPage_chargeWithdraw" resultMap="WithChargeMap">
+		select account,
+		sum(online_charge) as onlineCharge,
+		sum(online_withdraw) as
+		onlineWithdraw,
+		sum(charge_fee) as chargeFee,
+		sum(withdraw_fee) as
+		withdrawFee,
+		sum(manual_addcoin) as manualAddcoin,
+		sum(
+		manual_reducecoin) as manualReducecoin,
+		sum(withdraw_sum) as
+		withdrawSum,
+		sum(charge_sum) as chargeSum
+		from
+		FUND_REPORT_WITHDRAWCHARGE t
+		where trunc(day) between
+		trunc(#{startDate}) and
+		trunc(#{endDate})
+		group by account
+	</select>
+</mapper>

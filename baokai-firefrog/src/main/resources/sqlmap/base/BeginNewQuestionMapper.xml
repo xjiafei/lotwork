@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginNewQuestion">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginNewQuestion">
+			<result column="ID" property="id"/>
+			<result column="CREATE_USER" property="createUser"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="MODIFY_USER" property="modifyUser"/>
+			<result column="MODIFY_TIME" property="modifyTime"/>
+			<result column="QUESTION" property="question"/>
+			<result column="CRT_ANSWER" property="crtAnswer"/>
+			<result column="ERR_ANSWER1" property="errAnswer1"/>
+			<result column="ERR_ANSWER2" property="errAnswer2"/>
+			<result column="DELETE_FLAG" property="deleteFlag"/>
+ </resultMap>
+	<sql id="fields">ID,CREATE_USER,CREATE_TIME,MODIFY_USER,MODIFY_TIME,QUESTION,CRT_ANSWER,ERR_ANSWER1,ERR_ANSWER2,DELETE_FLAG
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="createUser != null">
+			And CREATE_USER = #{createUser}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="modifyUser != null">
+			And MODIFY_USER = #{modifyUser}
+		</if>
+
+		<if test="modifyTime != null">
+			And MODIFY_TIME = #{modifyTime}
+		</if>
+
+		<if test="question != null">
+			And QUESTION = #{question}
+		</if>
+
+		<if test="crtAnswer != null">
+			And CRT_ANSWER = #{crtAnswer}
+		</if>
+
+		<if test="errAnswer1 != null">
+			And ERR_ANSWER1 = #{errAnswer1}
+		</if>
+
+		<if test="errAnswer2 != null">
+			And ERR_ANSWER2 = #{errAnswer2}
+		</if>
+		
+		<if test="deleteFlag!=null">
+			And DELETE_FLAG = #{deleteFlag}
+		</if>
+
+		</where>
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewQuestion">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_QUESTION
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getAll" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewQuestion">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_QUESTION
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_QUESTION
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_QUESTION
+	</select>
+
+    <select id="getCountByPage" resultType="long">
+        select count(1) from BEGIN_NEW_QUESTION 
+		<include refid="whereCondition"/>    
+    </select>
+    
+   <select id="getByPage" resultMap="result">
+    	select <include refid="fields" />
+	    from BEGIN_NEW_QUESTION 
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewQuestion"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_NEW_QUESTION.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_NEW_QUESTION (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{createUser,javaType=string,jdbcType=VARCHAR},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{modifyUser,javaType=string,jdbcType=VARCHAR},
+	         #{modifyTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{question,javaType=string,jdbcType=VARCHAR},
+	         #{crtAnswer,javaType=string,jdbcType=VARCHAR},
+	         #{errAnswer1,javaType=string,jdbcType=VARCHAR},
+	         #{errAnswer2,javaType=string,jdbcType=VARCHAR},
+	         #{deleteFlag,javaType=string,jdbcType=VARCHAR}	         
+	        )
+	</insert>
+	
+	<update id="update" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewQuestion">
+		update BEGIN_NEW_QUESTION set 
+		  	 question = #{question,javaType=string,jdbcType=VARCHAR},
+	         crt_Answer = #{crtAnswer,javaType=string,jdbcType=VARCHAR},
+	         err_Answer1 = #{errAnswer1,javaType=string,jdbcType=VARCHAR},
+	         err_Answer2 = #{errAnswer2,javaType=string,jdbcType=VARCHAR},
+	         modify_User = #{modifyUser,javaType=string,jdbcType=VARCHAR},
+	         modify_Time =#{modifyTime,javaType=object,jdbcType=TIMESTAMP}
+		 where 
+		 ID = #{id} 
+	</update>
+	
+	<update id="updateDeleteFlag" parameterType="map">
+		update BEGIN_NEW_QUESTION set 
+		  	 delete_Flag = #{deleteFlag,javaType=string,jdbcType=VARCHAR}
+		 <if test="deleteId!=null">
+		 where 
+		 ID = #{deleteId} 
+		 </if>
+	</update>
+	
+	<delete id="deleteFlagData">
+		delete from BEGIN_NEW_QUESTION where 
+		delete_flag = 'Y'
+	</delete>
+	
+</mapper>

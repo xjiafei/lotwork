@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.advert.dao.vo.AdNoticeVO">
+	<resultMap id="AdNoticeResult" type="com.winterframework.firefrog.advert.dao.vo.AdNoticeVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="adNoticeColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	TYPE as type,
+	        	TITLE as title,
+	        	CONTENT as content,
+	        	GMT_EFFECT_BEGIN as gmtEffectBegin,
+	        	GMT_EFFECT_END as gmtEffectEnd,
+	        	OPERATOR as operator,
+	        	GMT_CREATED as gmtCreated,
+	        	SHOW_PAGES as showPages,
+	        	STATUS as status,
+	        	RC_ALL as rcAll,
+	        	RC_TOP_AGENT as rcTopAgent,
+	        	RC_OT_AGENT as rcOtAgent,
+	        	RC_VIP as rcVip,
+	        	RC_NON_VIP as rcNonVip,
+	        	RC_CUSTOMER as rcCustomer,
+	        	MEMO as memo,
+	        	APPROVER as approver,
+	        	NOTICELEVEL as noticeLevel,
+	        	GMT_MODIFIED as gmtModified
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.advert.dao.vo.AdNoticeVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_AD_NOTICE_ID.Nextval from dual
+			   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        AD_NOTICE (
+	        	ID ,
+	        	TYPE ,
+	        	TITLE ,
+	        	CONTENT ,
+	        	GMT_EFFECT_BEGIN ,
+	        	GMT_EFFECT_END ,
+	        	OPERATOR ,
+	        	GMT_CREATED ,
+	        	SHOW_PAGES ,
+	        	STATUS ,
+	        	RC_ALL ,
+	        	RC_TOP_AGENT ,
+	        	RC_OT_AGENT ,
+	        	RC_VIP ,
+	        	RC_NON_VIP ,
+	        	RC_CUSTOMER ,
+	        	MEMO ,
+	        	APPROVER,
+	        	NOTICELEVEL,
+	        	GMT_MODIFIED
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{title,javaType=string,jdbcType=VARCHAR} ,
+	        	#{content,javaType=string,jdbcType=CLOB} ,
+	        	#{gmtEffectBegin,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{gmtEffectEnd,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{operator,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtCreated,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{showPages,javaType=string,jdbcType=VARCHAR} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcAll,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcTopAgent,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcOtAgent,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcVip,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcNonVip,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcCustomer,javaType=long,jdbcType=DECIMAL} ,
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{approver,javaType=string,jdbcType=VARCHAR} ,
+	        	#{noticeLevel,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtModified,javaType=date,jdbcType=TIMESTAMP}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.advert.dao.vo.AdNoticeVO">
+	        UPDATE AD_NOTICE
+	        <set>
+	        <if test="@Ognl@isNotEmpty(type)">
+		        TYPE = #{type,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(title)">
+		        TITLE = #{title,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(content)">
+		        CONTENT = #{content,javaType=string,jdbcType=CLOB} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(gmtEffectBegin)">
+		        GMT_EFFECT_BEGIN = #{gmtEffectBegin,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(gmtEffectEnd)">
+		        GMT_EFFECT_END = #{gmtEffectEnd,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(operator)">
+		        OPERATOR = #{operator,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(showPages)">
+		        SHOW_PAGES = #{showPages,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(status)">
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcAll)">
+		        RC_ALL = #{rcAll,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcTopAgent)">
+		        RC_TOP_AGENT = #{rcTopAgent,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcOtAgent)">
+		        RC_OT_AGENT = #{rcOtAgent,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcVip)">
+		        RC_VIP = #{rcVip,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcNonVip)">
+		        RC_NON_VIP = #{rcNonVip,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcCustomer)">
+		        RC_CUSTOMER = #{rcCustomer,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(memo)">
+		        MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(approver)">
+		        APPROVER = #{approver,javaType=string,jdbcType=VARCHAR},
+		    </if>
+		    <if test="@Ognl@isNotEmpty(status) and status==1">
+		        APPROVER = null,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(gmtModified)">
+		        GMT_MODIFIED = #{gmtModified,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		     <if test="@Ognl@isNotEmpty(noticeLevel)">
+			    NOTICELEVEL = #{noticeLevel,javaType=long,jdbcType=DECIMAL},
+			</if>
+		    <if test="@Ognl@isNotEmpty(gmtCreated)">
+		        GMT_CREATED = #{gmtCreated,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		   
+		    </set>
+	        WHERE 
+		        ID = #{id} 
+		</update>
+		
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from AD_NOTICE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="AdNoticeResult" flushCache="false">
+			select <include refid="adNoticeColumns" />
+		    <![CDATA[
+			    from AD_NOTICE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AdNoticeResult" flushCache="false">
+			select <include refid="adNoticeColumns" />
+			    from AD_NOTICE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+	<sql id="adNoticeDynamicWherelight">
+		<where>
+	 		<if test="userId">
+		 	and userId = #{userId} 
+	 		</if>
+		    <if test="@Ognl@isNotEmpty(noticeLevel)">
+			       and  NOTICELEVEL = #{noticeLevel}
+			</if>
+		    <![CDATA[
+		       and ROWNUM < 50
+		          		    ]]>
+		    
+		</where>
+	</sql>
+	<sql id="adNoticeDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(title)">
+				and UPPER(TITLE) like UPPER('%${title}%')
+			</if>
+	       <if test="@Ognl@isNotEmpty(content)">
+				and CONTENT = #{content}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtEffectBegin)">
+				and GMT_EFFECT_BEGIN = #{gmtEffectBegin}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtEffectEnd)">
+				and GMT_EFFECT_END = #{gmtEffectEnd}
+			</if>
+	       <if test="@Ognl@isNotEmpty(operator)">
+				and OPERATOR = #{operator}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(showPages)">
+				and SHOW_PAGES = #{showPages}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="isAudit==1">
+	       <![CDATA[
+				and STATUS <> 1 and STATUS <> 5
+			]]>
+			</if>
+			<if test="@Ognl@isEmpty(rcAll)">
+				and 1=1
+		       <if test="@Ognl@isNotEmpty(rcTopAgent)">
+					and RC_TOP_AGENT = #{rcTopAgent}
+				</if>
+		       <if test="@Ognl@isNotEmpty(rcOtAgent)">
+					and RC_OT_AGENT = #{rcOtAgent}
+				</if>
+		       <if test="@Ognl@isNotEmpty(rcVip)">
+					and RC_VIP = #{rcVip}
+				</if>
+		       <if test="@Ognl@isNotEmpty(rcNonVip)">
+					and RC_NON_VIP = #{rcNonVip}
+				</if>
+		       <if test="@Ognl@isNotEmpty(rcCustomer)">
+					and RC_CUSTOMER = #{rcCustomer}
+				</if>
+			
+			</if>
+		   <if test="@Ognl@isNotEmpty(noticeLevel)">
+		       and  NOTICELEVEL = #{noticeLevel}
+		   </if>
+	       <if test="periodStatus==1">
+	       <![CDATA[
+				and ((type=2 and GMT_EFFECT_BEGIN<=sysdate and GMT_EFFECT_END>=sysdate)
+				or (type=1 and GMT_EFFECT_BEGIN<=sysdate))
+			]]>
+			</if>
+	       <if test="periodStatus==2">
+	       <![CDATA[
+				and ((type=2 and GMT_EFFECT_BEGIN>sysdate)
+				or (type=1 and GMT_EFFECT_BEGIN>sysdate))
+			]]>
+			</if>
+	       <if test="periodStatus==3">
+	       <![CDATA[
+				and type=2 and GMT_EFFECT_END<sysdate
+			]]>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AdNoticeResult"  flushCache="false">
+    	select <include refid="adNoticeColumns" />
+	    from AD_NOTICE 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="getEffectPage" resultMap="AdNoticeResult" parameterType="HashMap" flushCache="false">
+    	select <include refid="adNoticeColumns" />
+	    from view_general_adnotice
+	    where userId = #{userId}
+	    and GMT_EFFECT_END > sysdate and SHOW_PAGES is not null  
+	    <if test="@Ognl@isNotEmpty(noticeLevel)">
+		       and  NOTICELEVEL = #{noticeLevel}
+		</if>
+	    and (1!=1 
+	    <foreach item="item" index="index" collection="pagesList" open=" " separator=" " close=" ">
+			or SHOW_PAGES like '%${item}%'  
+		</foreach>
+		)
+    </select>
+    
+    <select id="getGeneralEffectPage" parameterType="HashMap"  resultMap="AdNoticeResult"  flushCache="false">
+    	select <include refid="adNoticeColumns" />
+	    from view_general_adnotice
+	    <include refid="adNoticeDynamicWherelight"/> 
+	    
+    </select>
+    
+	<select id="getCount" resultType="long">
+        select count(*) from AD_NOTICE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from 
+        <if test="@Ognl@isEmpty(frontCall)">
+	        AD_NOTICE 
+			<include refid="adNoticeDynamicWhere"/> 
+		</if>
+		<if test="@Ognl@isNotEmpty(frontCall)">
+			<if test="frontCall==1">
+				 view_general_adnotice
+	   			 where userId = #{userId}
+	   			  <if test="@Ognl@isNotEmpty(noticeLevel)">
+				       and  NOTICELEVEL = #{noticeLevel}
+				</if>
+	   			 and GMT_EFFECT_END > sysdate and SHOW_PAGES is not null
+			</if>
+		</if>   
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AdNoticeResult">
+    
+    	select <include refid="adNoticeColumns" />
+	    from 
+	    <if test="@Ognl@isEmpty(frontCall)">
+		    AD_NOTICE 
+			<include refid="adNoticeDynamicWhere"/>
+			<if test="@Ognl@isNotEmpty(rcNonVip)">
+			    <if test="rcNonVip !=0">
+			       		and  NOTICELEVEL != 4
+			    </if>
+		    </if>
+			<if test="@Ognl@isNotEmpty(status)">
+			ORDER BY gmtModified desc
+			</if>
+			<if test="@Ognl@isEmpty(status)">
+			ORDER BY gmtEffectBegin desc
+			</if>
+		</if>
+		<if test="@Ognl@isNotEmpty(frontCall)">
+			<if test="frontCall==1">
+				 view_general_adnotice
+	   			 where userId = #{userId}
+	   			 <if test="@Ognl@isNotEmpty(noticeLevel)">
+				       and  NOTICELEVEL = #{noticeLevel}
+				</if>
+	   			 and GMT_EFFECT_END > sysdate and SHOW_PAGES is not null
+			</if>
+		</if>
+    </select>
+
+	
+</mapper>

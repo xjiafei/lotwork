@@ -1,0 +1,264 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	<!-- n115 任选几中几复式格式验证器 -->
+	<bean id="n115FormatRXFSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.format.N115FormatRXFSValidateExecutor">
+		<property name="numMap" ref="n115ValidateNumberMap" />
+	</bean>
+	<!-- n115 任选几中几复式注数验证器 -->
+	<bean id="n115NumberRXFSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.N115NumberRXFSValidateExecutor">
+		<property name="numMap" ref="n115ValidateNumberMap" />
+	</bean>
+	<!-- n115 任选几中几单式格式验证器 -->
+	<bean id="n115FormatRXDSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.format.N115FormatRXDSValidateExecutor">
+		<property name="numMap" ref="n115ValidateNumberMap" />
+	</bean>
+	<!-- n115 任选几中几单式注数验证器 -->
+	<bean id="n115NumberRXDSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.N115NumberRXDSValidateExecutor">
+	</bean>
+	<!-- n115 任选几中几拖胆格式验证器 -->
+	<bean id="n115FormatRXTDValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.format.N115FormatRXTDValidateExecutor">
+		<property name="numMap" ref="n115ValidateNumberMap" />
+	</bean>
+	<!-- n115 任选几中几拖胆注数验证器 -->
+	<bean id="n115NumberRXTDValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.N115NumberRXTDValidateExecutor">
+		<property name="numMap" ref="n115ValidateNumberMap" />
+	</bean>
+	<!-- n115 任选一中一定位胆复式格式验证器 -->
+	<bean id="n115FormatDWDFSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.format.N115FormatDWDFSValidateExecutor">
+	</bean>
+	<!-- n115 任选一中一定位胆复式注数验证器 -->
+	<bean id="n115NumberDWDFSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.N115NumberDWDFSValidateExecutor">
+	</bean>
+	<!-- n115 选二选三直选复式格式验证器 -->
+	<bean id="n115FormatZXFSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.format.N115FormatZXFSValidateExecutor">
+		<property name="regexMap" ref="n115ValidateRegexMap" />
+	</bean>
+	<!-- n115 选二直选复式注数验证器 -->
+	<bean id="n115NumberQEZXFSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.N115NumberQEZXFSValidateExecutor">
+	</bean>
+	<!-- n115 选三直选复式注数验证器 -->
+	<bean id="n115NumberQSZXFSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.N115NumberQSZXFSValidateExecutor">
+	</bean>
+	<!-- n115 猜中位格式验证器 -->
+	<bean id="n115FormatCZWValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.format.N115FormatCZWValidateExecutor">
+	</bean>
+	<!-- n115 猜中位注数验证器 -->
+	<bean id="n115NumberCZWValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.N115NumberCZWValidateExecutor">
+	</bean>
+	<!-- n115 订单双格式验证器 -->
+	<bean id="n115FormatDDSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.format.N115FormatDDSValidateExecutor">
+	</bean>
+	<!-- n115 订单双注数验证器 -->
+	<bean id="n115NumberDDSValidateExecutor"
+		class="com.winterframework.firefrog.phone.web.validate.composite.number.N115NumberDDSValidateExecutor">
+	</bean>
+	<bean id="n115ValidateNumberMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="${groupCode.X1}" value="1" />
+				<entry key="${groupCode.X2}" value="2" />
+				<entry key="${groupCode.X3}" value="3" />
+				<entry key="${groupCode.X4}" value="4" />
+				<entry key="${groupCode.X5}" value="5" />
+				<entry key="${groupCode.X6}" value="6" />
+				<entry key="${groupCode.X7}" value="7" />
+				<entry key="${groupCode.X8}" value="8" />
+			</map>
+		</constructor-arg>
+	</bean>
+	<bean id="n115ValidateRegexMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="${groupCode.X2}" value="${n115Regex.qianer.zhixuan.fushi}" />
+				<entry key="${groupCode.X3}" value="${n15Regex.qiansan.zhixuan.fushi}" />
+			</map>
+		</constructor-arg>
+	</bean>
+	<bean id="n115Validate" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+						<!-- n115 有多种复式 由于任选几中几复式的通用性比较强 处理其他复式的时候，key值配置具体一点 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="n115FormatRXFSValidateExecutor" />
+								<ref bean="n115NumberRXFSValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<!-- n115 任选几中几单式 由于任选几中几复式的通用性比较强 处理其他复式的时候，key值配置具体一点 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.DS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="n115FormatRXDSValidateExecutor" />
+								<ref bean="n115NumberRXDSValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<!-- n115 任选几中几拖胆配置 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.DT}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="n115FormatRXTDValidateExecutor" />
+								<ref bean="n115NumberRXTDValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<!-- n115 任选一中一定位胆复式配置 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="setCode" value="${setCode.DWD}" />
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="n115FormatDWDFSValidateExecutor" />
+								<ref bean="n115NumberDWDFSValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<!-- n115 选二直选复式复式配置 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="setCode" value="${setCode.ZHX}" />
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="n115FormatZXFSValidateExecutor" />
+								<ref bean="n115NumberQEZXFSValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<!-- n115 选三直选复式复式配置 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.X3}" />
+							<property name="setCode" value="${setCode.ZHX}" />
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="n115FormatZXFSValidateExecutor" />
+								<ref bean="n115NumberQSZXFSValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<!-- n115 猜中位配置 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.CZW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="n115FormatCZWValidateExecutor" />
+								<ref bean="n115NumberCZWValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<!-- n115 定单双配置 -->
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.DDS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="n115FormatDDSValidateExecutor" />
+								<ref bean="n115NumberDDSValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>

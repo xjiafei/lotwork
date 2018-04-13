@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+  "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+	<typeHandlers>
+		<typeHandler javaType="boolean" jdbcType="VARCHAR"
+			handler="com.winterframework.orm.dal.ibatis3.type.YesNoTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.DateTypeHandler"
+			javaType="java.util.Date" jdbcType="TIMESTAMP" />
+	</typeHandlers>
+
+
+	<plugins>
+
+		<plugin interceptor="com.winterframework.orm.page.plugin.OffsetLimitInterceptor">
+			<property name="dialectClass"
+				value="com.winterframework.orm.dialect.OracleDialect" />
+		</plugin>
+	</plugins>
+	<mappers>
+<mapper resource="sqlmap/base/TaskMapper.xml" />
+		<mapper resource="sqlmap/base/ExcelReportMapper.xml"/>
+		<mapper resource="sqlmap/base/MailConfigMapper.xml" />
+ 		<mapper resource="sqlmap/base/UserAppealMapper.xml" />
+		<mapper resource="sqlmap/base/UserCustomerMapper.xml" />
+		<mapper resource="sqlmap/base/UserFreezeLogMapper.xml" />
+		<mapper resource="sqlmap/base/UserLoginLogMapper.xml" />
+		<mapper resource="sqlmap/base/UserMessageMapper.xml" />
+		<mapper resource="sqlmap/base/UserMessageReplyMapper.xml" />
+		<mapper resource="sqlmap/base/UserUrlMapper.xml" />		
+		<mapper resource="sqlmap/base/JudgementMapper.xml" />
+		<mapper resource="sqlmap/base/ConfigMapper.xml" />
+		<mapper resource="sqlmap/base/FundMapper.xml" />
+		<mapper resource="sqlmap/base/FundTransferMapper.xml" />
+		<mapper resource="sqlmap/base/FundChangeLogMapper.xml" />
+		<mapper resource="sqlmap/base/UserBankMapper.xml" />
+		<mapper resource="sqlmap/base/UserBankLockedMapper.xml" />
+		<mapper resource="sqlmap/base/FundWithdrawMapper.xml"/>
+		<mapper resource="sqlmap/base/FundBankMapper.xml"/>
+		<mapper resource="sqlmap/base/FundBankWithSubMapper.xml"/>
+		<mapper resource="sqlmap/base/FundChargeMapper.xml"/>
+		<mapper resource="sqlmap/base/FundChargeQueueMapper.xml"/>
+		<mapper resource="sqlmap/base/FundChargeExceptionMapper.xml"/>
+		<mapper resource="sqlmap/base/FundSuspiciousCardMapper.xml"/>
+		<mapper resource="sqlmap/base/FundManualDepositMapper.xml"/>
+		<mapper resource="sqlmap/base/FundMowPayMapper.xml"/>
+		<mapper resource="sqlmap/base/FundReportMapper.xml"/>
+		<mapper resource="sqlmap/base/HelpHotkeywordsMapper.xml"/>
+		<mapper resource="sqlmap/base/HelpKnowledgeMapper.xml"/>
+		<mapper resource="sqlmap/base/HelpKnowledgeLinkMapper.xml"/>
+		<mapper resource="sqlmap/base/HelpCategoryMapper.xml"/>
+		<mapper resource="sqlmap/base/HelpFeedbackMapper.xml"/>
+		<mapper resource="sqlmap/base/HelpMapper.xml"/>
+		<mapper resource="sqlmap/base/AclMapper.xml"/>
+		<mapper resource="sqlmap/base/AclGroupMapper.xml"/>
+		<mapper resource="sqlmap/base/AclGroupAuthorizationMapper.xml"/>
+		<mapper resource="sqlmap/base/GlobalSensitiveWordMapper.xml"/>
+		<mapper resource="sqlmap/base/GlobalIpMapper.xml"/>
+		<mapper resource="sqlmap/base/AclUserMapper.xml"/>
+		<mapper resource="sqlmap/base/AclOperateLogMapper.xml"/>
+		<mapper resource="sqlmap/base/UserNoticeTaskMapper.xml"/>
+		<mapper resource="sqlmap/base/NoticeTaskMapper.xml"/>
+		<mapper resource="sqlmap/base/NoticeMsgMapper.xml"/>
+		<mapper resource="sqlmap/base/AdTopicCategoryMapper.xml"/>
+		<mapper resource="sqlmap/base/AdTopicMapper.xml"/>
+		<mapper resource="sqlmap/base/AdPageMapper.xml"/>
+		<mapper resource="sqlmap/base/AdParamMapper.xml"/>
+		<mapper resource="sqlmap/base/AdSpaceMapper.xml"/>
+		<mapper resource="sqlmap/base/AdNoticeMapper.xml"/>
+		<mapper resource="sqlmap/base/AdMapper.xml"/>
+		<mapper resource="sqlmap/base/AdAdspaceRelationMapper.xml"/>
+		<mapper resource="sqlmap/base/UserAgentCountMapper.xml"/>
+		
+		<mapper resource="sqlmap/base/FundSoloRemarkManualMapper.xml"/>
+		<mapper resource="sqlmap/base/FundSoloRemarkSystemMapper.xml"/>
+		<mapper resource="sqlmap/base/FundUserRemarkMapper.xml"/>
+		<mapper resource="sqlmap/base/FundUserRemarkRecyleMapper.xml"/>
+		<mapper resource="sqlmap/base/WithdrawWhiteList.xml"/>
+		<mapper resource="sqlmap/base/GameGoldDetailMapper.xml"/>
+		<mapper resource="sqlmap/base/GameBetTypeStatusMapper.xml"/>
+		<mapper resource="sqlmap/base/UserAgentIncomeMapper.xml"/>
+		<mapper resource="sqlmap/base/ActiveUserMigrateMapper.xml"/>	
+		<mapper resource="sqlmap/base/ChannelMapper.xml"/>		
+		<mapper resource="sqlmap/base/SubSystemMapper.xml"/>
+		<mapper resource="sqlmap/base/PtRegisterMapper.xml"/>
+		<mapper resource="sqlmap/base/WithdrawAppealMapper.xml"/>
+		
+		<mapper resource="sqlmap/base/LevelRecycleMapper.xml"/>
+		<mapper resource="sqlmap/base/GameUserAwardGroupMapper.xml"/> 
+		<mapper resource="sqlmap/base/UserSlotExchangeMapper.xml"/>
+		<mapper resource="sqlmap/base/UserSlotExchangeLogMapper.xml"/>
+		<mapper resource="sqlmap/base/UserSlotExchangeActivityMapper.xml"/>
+		<mapper resource="sqlmap/base/FundAppealStatusMapper.xml"/>
+		<mapper resource="sqlmap/base/FundChargeAppealMapper.xml"/>
+		<mapper resource="sqlmap/base/FundWithdrawLogMapper.xml"/>		
+		<mapper resource="sqlmap/base/FundWithdrawTipsMapper.xml"/>		
+		<mapper resource="sqlmap/base/FundWithdrawUrgencyMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginNewQuestionMapper.xml"/>	
+		<mapper resource="sqlmap/base/BeginNewChargeMapper.xml"/>	
+		<mapper resource="sqlmap/base/BeginNewMissionMapper.xml"/>	
+		<mapper resource="sqlmap/base/BeginNewLogMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginNewDaybetMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginNewDayquesMapper.xml"/>				
+		<mapper resource="sqlmap/base/BeginNewTolbetMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginLotterySetMapper.xml"/>		
+		<mapper resource="sqlmap/base/BeginMissionMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginAwardMapper.xml"/>		
+		<mapper resource="sqlmap/base/BeginAwardLogMapper.xml"/>	
+		<mapper resource="sqlmap/base/BeginMissionVerMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginAwardLotteryMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginBindCardCheckMapper.xml"/>	
+		<mapper resource="sqlmap/base/BeginDataCountVOMapper.xml"/>	
+		
+		<mapper resource="sqlmap/base/VipActivityMapper.xml"/>
+		<mapper resource="sqlmap/base/SubSystemActivityLogMapper.xml"/>		
+		<mapper resource="sqlmap/base/ActivityDoubleboxLogMapper.xml"/>
+		<mapper resource="sqlmap/base/ImGroupMapper.xml"/>			
+		<mapper resource="sqlmap/base/ImGroupMessageMapper.xml"/>			
+		<mapper resource="sqlmap/base/ImGroupUserMapper.xml"/>				
+		<mapper resource="sqlmap/base/NoticeMsgPushMapper.xml"/>		
+		<mapper resource="sqlmap/base/GameDiamondBettypeMapper.xml"/>
+		<mapper resource="sqlmap/base/GlobalWhiteListIpMapper.xml"/>	
+		<mapper resource="sqlmap/base/GlobalWhiteListLogMapper.xml"/>	
+		<mapper resource="sqlmap/base/FundChargeBypassMapper.xml"/>
+		<mapper resource="sqlmap/base/BypassConfigMapper.xml"/>
+		<mapper resource="sqlmap/base/GlobalGrayListMapper.xml"/>	
+		
+		<!-- ====================Activity 活動專區 活動相關TABLE START====================== -->
+		
+		<!-- 紅包活動LOG紀錄 -->
+		<mapper resource="sqlmap/activity/ActivityRedenvelopeLogMapper.xml"/>
+		<!-- 活動LOG紀錄 -->
+		<mapper resource="sqlmap/activity/ActivityLogMapper.xml"/>
+		<!-- 活動主檔 -->
+		<mapper resource="sqlmap/activity/ActivityMapper.xml"/>
+		<!-- 活動結果 -->
+		<mapper resource="sqlmap/activity/ActivityResultMapper.xml"/>
+		<!-- 活動報名 -->
+		<mapper resource="sqlmap/activity/ActivitySignUpMapper.xml"/>
+		<!-- 活動設定 -->
+		<mapper resource="sqlmap/activity/ActivityConfigMapper.xml"/>
+		<!-- 活動得獎名單 -->
+		<mapper resource="sqlmap/activity/ActivityWinningLogMapper.xml"/>
+		
+		<!-- =====================Activity 活動專區 活動相關TABLE END======================== -->
+	</mappers>						
+	
+
+
+
+</configuration>

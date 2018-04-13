@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.entity.ImGroupMessage">
+	<resultMap id="result" type="com.winterframework.firefrog.user.entity.ImGroupMessage">
+		<result column="ID" property="id"/>
+		<result column="GROUP_ID" property="groupId"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="ACCOUNT" property="account"/>
+		<result column="CONTENT" property="content"/>
+		<result column="CREATE_DATE" property="createDate"/>
+	</resultMap>
+	<resultMap type="com.winterframework.firefrog.user.entity.UserInboxMessage" id="inboxMessage"></resultMap>
+	
+	
+	<sql id="fields">
+		ID,
+		GROUP_ID,
+		USER_ID,
+		ACCOUNT,
+		CONTENT,
+		CREATE_DATE
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+			<if test="targetId != null">
+				AND ID = #{targetId}
+			</if>
+			<if test="targetGroupId != null">
+				AND GROUP_ID = #{targetGroupId}
+			</if>
+			<if test="targetUserId != null">
+				AND USER_ID = #{targetUserId}
+			</if>
+			<if test="targetAccount != null">
+				AND ACCOUNT = #{targetAccount}
+			</if>
+			<if test="targetContent != null">
+				AND CONTENT = #{targetContent}
+			</if>
+			<if test="targetCreateDateStart != null">
+				AND CREATE_DATE >= #{targetCreateDateStart}
+			</if>
+			<if test="targetCreateDateEnd != null">
+			<![CDATA[
+				AND CREATE_DATE < #{targetCreateDateEnd}
+			]]>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="queryImGroupMessages" resultMap="result" parameterType="com.winterframework.firefrog.user.entity.ImGroupMessage">
+		SELECT <include refid="fields"/>
+				FROM IM_GROUP_MESSAGE
+		<include refid="whereCondition"/>
+		ORDER BY ID DESC
+	</select>
+	
+	<select id="queryUserInboxMessages" resultMap="inboxMessage" parameterType="list">
+		SELECT 
+		  IGU_SELF.USER_ID AS ownUserId,
+		  IGU_TALK.USER_ID AS talkUserId,
+		  	CASE WHEN IGU_TALK.USER_ID=0 THEN '系统管理员' 
+		  	WHEN IGU_TALK.USER_ID=(SELECT PARENT_ID from USER_CUSTOMER where id=#{targetUserId}) THEN '上級代理'
+		  ELSE UC_TALK.ACCOUNT END AS talkUserAccount,
+		  IGU_SELF.UNREAD_COUNT AS unreadCount,
+		  IGM.GROUP_ID AS groupId,
+		  IGM.USER_ID AS sendUser,
+		  IGM.ACCOUNT AS sendAccount,
+		  IGM.CONTENT AS content,
+		  IGM.CREATE_DATE AS createDate,
+		  IGU_SELF.LAST_UPDATE_DATE AS lastReadTime
+		FROM IM_GROUP_MESSAGE IGM
+		JOIN IM_GROUP_USER IGU_TALK ON IGU_TALK.GROUP_ID = IGM.GROUP_ID and IGU_TALK.USER_ID != #{targetUserId}
+		JOIN IM_GROUP_USER IGU_SELF ON IGU_SELF.GROUP_ID = IGM.GROUP_ID and IGU_SELF.USER_ID = #{targetUserId}
+		LEFT JOIN USER_CUSTOMER UC_TALK ON UC_TALK.ID = IGU_TALK.USER_ID
+		JOIN (
+			SELECT GROUP_ID, MAX(ID) AS ID FROM IM_GROUP_MESSAGE 
+			WHERE GROUP_ID IN (SELECT GROUP_ID FROM IM_GROUP_USER WHERE USER_ID = #{targetUserId})
+        	GROUP BY GROUP_ID
+		) TEMP ON IGM.ID = TEMP.ID
+		WHERE IGM.GROUP_ID IN (
+		  SELECT GROUP_ID FROM IM_GROUP_USER 
+		  WHERE USER_ID = #{targetUserId}
+		)
+		<if test="targetHasUnreadMsg != null">
+		<![CDATA[
+			AND IGU_SELF.UNREAD_COUNT > 0
+		]]>
+		</if>
+		AND IGM.CREATE_DATE>= IGU_SELF.HISTORY_START_TIME
+		ORDER BY IGU_SELF.UNREAD_COUNT DESC,IGM.CREATE_DATE DESC
+	</select>
+	
+	
+	<select id="queryUserInboxMessageCount" resultType="long" parameterType="com.winterframework.firefrog.user.entity.ImGroupMessage">
+		SELECT 
+			COUNT(0)
+		FROM IM_GROUP_MESSAGE IGM
+		JOIN IM_GROUP_USER IGU_TALK ON IGU_TALK.GROUP_ID = IGM.GROUP_ID and IGU_TALK.USER_ID != #{targetUserId}
+		JOIN IM_GROUP_USER IGU_SELF ON IGU_SELF.GROUP_ID = IGM.GROUP_ID and IGU_SELF.USER_ID = #{targetUserId}
+		JOIN (
+			SELECT GROUP_ID, MAX(ID) AS ID FROM IM_GROUP_MESSAGE 
+			WHERE GROUP_ID IN (SELECT GROUP_ID FROM IM_GROUP_USER WHERE USER_ID = #{targetUserId})
+        	GROUP BY GROUP_ID
+		) TEMP ON IGM.ID = TEMP.ID
+		WHERE IGM.GROUP_ID IN (
+		  SELECT GROUP_ID FROM IM_GROUP_USER 
+		  WHERE USER_ID = #{targetUserId}
+		)
+		AND IGM.CREATE_DATE>= IGU_SELF.HISTORY_START_TIME
+	</select>
+	
+	<select id="queryUserInboxMsgTotalUnreadCount" resultType="long" parameterType="com.winterframework.firefrog.user.entity.ImGroupMessage">
+		SELECT 
+			NVL(SUM(IGU_SELF.UNREAD_COUNT),0)
+		FROM IM_GROUP_MESSAGE IGM
+		JOIN IM_GROUP_USER IGU_TALK ON IGU_TALK.GROUP_ID = IGM.GROUP_ID and IGU_TALK.USER_ID != #{targetUserId}
+		JOIN IM_GROUP_USER IGU_SELF ON IGU_SELF.GROUP_ID = IGM.GROUP_ID and IGU_SELF.USER_ID = #{targetUserId}
+		JOIN (
+			SELECT GROUP_ID, MAX(ID) AS ID FROM IM_GROUP_MESSAGE 
+			WHERE GROUP_ID IN (SELECT GROUP_ID FROM IM_GROUP_USER WHERE USER_ID = #{targetUserId})
+        	GROUP BY GROUP_ID
+		) TEMP ON IGM.ID = TEMP.ID
+		WHERE IGM.GROUP_ID IN (
+		  SELECT GROUP_ID FROM IM_GROUP_USER 
+		  WHERE USER_ID = #{targetUserId}
+		)
+		AND IGM.CREATE_DATE>= IGU_SELF.HISTORY_START_TIME
+	</select>
+	
+	<select id="queryUserInboxMessageDetails" resultMap="inboxMessage" parameterType="list">
+		SELECT 
+		  IGU.USER_ID AS ownUserId,
+		  IGM.USER_ID AS talkUserId,
+		  IGM.ACCOUNT AS talkUserAccount,
+		  IGU.UNREAD_COUNT AS unreadCount,
+		  IGM.GROUP_ID AS groupId,
+		  IGM.USER_ID AS sendUser,
+		  IGM.ACCOUNT AS sendAccount,
+		  IGM.CONTENT AS content,
+		  IGM.CREATE_DATE AS createDate,
+		  IGU.LAST_UPDATE_DATE AS lastReadTime
+		FROM IM_GROUP_MESSAGE IGM
+		JOIN IM_GROUP_USER IGU ON IGU.GROUP_ID = IGM.GROUP_ID AND IGU.USER_ID = #{targetUserId}
+		WHERE IGM.GROUP_ID = #{targetGroupId}
+		AND IGM.CREATE_DATE>= IGU.HISTORY_START_TIME
+		ORDER BY IGM.CREATE_DATE DESC
+	</select>
+	
+	<select id="queryUserAllMessages" resultMap="inboxMessage" parameterType="list">
+		SELECT 
+			(SELECT USER_ID FROM IM_GROUP_USER 
+			WHERE GROUP_ID = IGM.GROUP_ID AND USER_ID!=IGM.USER_ID) AS ownUserId,
+			IGM.USER_ID AS talkUserId,
+			IGM.ACCOUNT AS talkUserAccount,
+			0 AS unreadCount,
+			IGM.GROUP_ID AS groupId,
+			(SELECT USER_ID FROM IM_GROUP_USER 
+			WHERE GROUP_ID = IGM.GROUP_ID AND USER_ID!=IGM.USER_ID) AS sendUser,
+			(SELECT UC.ACCOUNT FROM IM_GROUP_USER IGU 
+			LEFT JOIN USER_CUSTOMER UC ON UC.ID = IGU.USER_ID 
+			WHERE IGU.GROUP_ID = IGM.GROUP_ID AND IGU.USER_ID!=IGM.USER_ID) AS sendAccount,
+			IGM.CONTENT AS content,
+			IGM.CREATE_DATE AS createDate,
+			IGM.CREATE_DATE AS lastReadTime
+		FROM IM_GROUP_MESSAGE IGM
+		WHERE IGM.ID IN(
+		  SELECT MAX(ID) FROM IM_GROUP_MESSAGE WHERE USER_ID!=0 GROUP BY GROUP_ID
+		)
+	    
+			<if test="targetAccount != null">
+				<!--  AND (IGM.ACCOUNT = #{targetAccount} OR UC.ACCOUNT = #{targetAccount}) -->
+				AND (IGM.ACCOUNT = #{targetAccount})
+			</if>
+			<if test="targetReceiverAccount != null">
+				 and ( SELECT UC.ACCOUNT
+                       FROM IM_GROUP_USER IGU LEFT JOIN USER_CUSTOMER UC
+                           ON UC.ID = IGU.USER_ID
+                           WHERE     IGU.GROUP_ID = IGM.GROUP_ID
+                           AND IGU.USER_ID != IGM.USER_ID) =#{targetReceiverAccount}
+			</if>
+			<if test="targetCreateDateStart != null">
+				AND IGM.CREATE_DATE >= #{targetCreateDateStart}
+			</if>
+			<if test="targetCreateDateEnd != null">
+			<![CDATA[
+				AND IGM.CREATE_DATE < #{targetCreateDateEnd}
+			]]>
+			</if>
+		
+	    ORDER BY IGM.CREATE_DATE DESC
+	</select>
+	
+	<select id="queryAllMessageCount" resultType="long" parameterType="com.winterframework.firefrog.user.entity.ImGroupMessage">
+		SELECT 
+			COUNT(0)
+		FROM IM_GROUP_MESSAGE IGM
+		WHERE IGM.ID IN(
+		  SELECT MAX(ID) FROM IM_GROUP_MESSAGE WHERE USER_ID!=0 GROUP BY GROUP_ID
+		)
+	 
+			<if test="targetAccount != null">
+				<!--  AND (IGM.ACCOUNT = #{targetAccount} OR UC.ACCOUNT = #{targetAccount}) -->
+				AND (IGM.ACCOUNT = #{targetAccount})
+			</if>
+			<if test="targetCreateDateStart != null">
+				AND IGM.CREATE_DATE >= #{targetCreateDateStart}
+			</if>
+			<if test="targetCreateDateEnd != null">
+			<![CDATA[
+				AND IGM.CREATE_DATE < #{targetCreateDateEnd}
+			]]>
+			</if>
+	
+	</select>
+	
+	<select id="queryAllMessageDetails" resultMap="inboxMessage" parameterType="list">
+		SELECT 
+		  IGU.USER_ID AS ownUserId,
+		  IGM.USER_ID AS talkUserId,
+		  IGM.ACCOUNT AS talkUserAccount,
+		  0 AS unreadCount,
+		  IGM.GROUP_ID AS groupId,
+		  IGU.USER_ID AS sendUser,
+		  UC.ACCOUNT AS sendAccount,
+		  IGM.CONTENT AS content,
+		  IGM.CREATE_DATE AS createDate,
+		  IGU.LAST_UPDATE_DATE AS lastReadTime
+		FROM IM_GROUP_MESSAGE IGM
+		JOIN IM_GROUP_USER IGU ON IGU.GROUP_ID = IGM.GROUP_ID AND IGU.USER_ID !=IGM.USER_ID
+    	LEFT JOIN USER_CUSTOMER UC ON UC.ID = IGU.USER_ID
+		WHERE IGM.GROUP_ID = #{targetGroupId}
+		ORDER BY IGM.CREATE_DATE DESC
+	</select>
+
+	<insert id="insertImGroupMessage" parameterType="com.winterframework.firefrog.user.entity.ImGroupMessage"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_IM_GROUP_MESSAGE_ID.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        IM_GROUP_MESSAGE (
+	        <include refid="fields"/>)
+	        VALUES (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{groupId,javaType=long,jdbcType=DECIMAL},
+	         #{userId,javaType=long,jdbcType=DECIMAL},
+	         #{account,javaType=string,jdbcType=VARCHAR},
+	         #{content,javaType=string,jdbcType=VARCHAR},
+	         #{createDate,javaType=object,jdbcType=TIMESTAMP}
+	        )
+	</insert>
+
+</mapper>

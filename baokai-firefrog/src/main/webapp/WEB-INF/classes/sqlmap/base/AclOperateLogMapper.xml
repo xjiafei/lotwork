@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.acl.dao.vo.AclOperateLogVO">
+	<resultMap id="AclOperateLogResult" type="com.winterframework.firefrog.acl.dao.vo.AclOperateLogVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="aclOperateLogColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACCOUNT as account,
+	        	IP as ip,
+	        	URL as url,
+	        	ACTION as action,
+	        	DETAIL as detail,
+	        	GMT_CREATED as gmtCreated
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.acl.dao.vo.AclOperateLogVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_ACL_OPERATE_LOG_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACL_OPERATE_LOG (
+	        	ID ,
+	        	ACCOUNT ,
+	        	IP ,
+	        	URL ,
+	        	ACTION ,
+	        	DETAIL ,
+	        	GMT_CREATED 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{account,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ip,javaType=string,jdbcType=VARCHAR} ,
+	        	#{url,javaType=string,jdbcType=VARCHAR} ,
+	        	#{action,javaType=string,jdbcType=VARCHAR} ,
+	        	#{detail,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.acl.dao.vo.AclOperateLogVO">
+	    <![CDATA[
+	        UPDATE ACL_OPERATE_LOG SET
+		        ACCOUNT = #{account,javaType=string,jdbcType=VARCHAR} ,
+		        IP = #{ip,javaType=string,jdbcType=VARCHAR} ,
+		        URL = #{url,javaType=string,jdbcType=VARCHAR} ,
+		        ACTION = #{action,javaType=string,jdbcType=VARCHAR} ,
+		        DETAIL = #{detail,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACL_OPERATE_LOG where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="AclOperateLogResult" flushCache="false">
+			select <include refid="aclOperateLogColumns" />
+		    <![CDATA[
+			    from ACL_OPERATE_LOG
+		        where 
+		        ID = #{id}
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AclOperateLogResult" flushCache="false">
+			select <include refid="aclOperateLogColumns" />
+			    from ACL_OPERATE_LOG
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="aclOperateLogDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID like '%${id}%'
+			</if>
+	       <if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT like '%${account}%'
+			</if>
+	       <if test="@Ognl@isNotEmpty(ip)">
+				and IP = #{ip}
+			</if>
+	       <if test="@Ognl@isNotEmpty(url)">
+				and URL = #{url}
+			</if>
+	       <if test="@Ognl@isNotEmpty(action)">
+				and ACTION = #{action}
+			</if>
+	       <if test="@Ognl@isNotEmpty(detail)">
+				and DETAIL = #{detail}
+			</if>
+	       <if test="@Ognl@isNotEmpty(startTime)">
+				and GMT_CREATED >= #{startTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(endTime)">
+	       <![CDATA[
+				and GMT_CREATED <= #{endTime}
+			]]>
+			</if>
+            <if test="@Ognl@isNotEmpty(userId)">
+				and user_id != ${userId}
+            </if>
+
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AclOperateLogResult"  flushCache="false">
+    	select <include refid="aclOperateLogColumns" />
+	    from ACL_OPERATE_LOG
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACL_OPERATE_LOG
+    </select>
+    <select id="getLogCountByPage" resultType="long">
+        select
+        count(*)
+        from
+        (select * from (select
+        T1.*, t2.id group_id, t2.pid, t3.id user_id
+        from ACL_OPERATE_LOG t1
+        inner join acl_user t3 on t1.account = t3.account
+        left join acl_group t2 on t3.group_id = t2.id) tt
+        start with tt.group_id = ${groupId} connect by prior tt.id = tt.pid)
+        <include refid="aclOperateLogDynamicWhere"/>
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getLogByPage" resultMap="AclOperateLogResult">
+        select
+            ID as id,
+            ACCOUNT as account,
+            IP as ip,
+            URL as url,
+            ACTION as action,
+            DETAIL as detail,
+            GMT_CREATED as gmtCreated
+        from
+        (select * from (select
+        T1.*, t2.id group_id, t2.pid, t3.id user_id
+        from ACL_OPERATE_LOG t1
+        left join acl_user t3 on t1.account = t3.account
+        left join acl_group t2 on t3.group_id = t2.id) tt
+        start with tt.group_id = ${groupId} connect by prior tt.id = tt.pid)
+        <include refid="aclOperateLogDynamicWhere"/>
+        <if test="@Ognl@isNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+
+	
+</mapper>

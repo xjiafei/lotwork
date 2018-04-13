@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.advert.dao.vo.AdVO">
+	<resultMap id="AdResult"
+		type="com.winterframework.firefrog.advert.dao.vo.AdVO">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="adColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	SPACES as spaces,
+	        	NAME as name,
+	        	IMG_URL as imgUrl,
+	        	GMT_EFFECT_BEGIN as gmtEffectBegin,
+	        	GMT_EFFECT_END as gmtEffectEnd,
+	        	TARGET_URL as targetUrl,
+	        	STATUS as status,
+	        	MEMO as memo,
+	        	APPROVER as approver,
+	        	GMT_APPR as gmtAppr,
+	        	ORDERS as orders,
+	        	RC_ALL as rcAll,
+	        	RC_GUEST as rcGuest,
+	        	RC_TOP_AGENT as rcTopAgent,
+	        	RC_OT_AGENT as rcOtAgent,
+	        	RC_VIP as rcVip,
+	        	RC_NON_VIP as rcNonVip,
+	        	RC_CUSTOMER as rcCustomer,
+	        	GMT_CREATED as gmtCreated,
+	        	OPERATOR as operator
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.advert.dao.vo.AdVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_AD_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        AD (
+	        	ID ,
+	        	SPACES ,
+	        	NAME ,
+	        	IMG_URL ,
+	        	GMT_EFFECT_BEGIN ,
+	        	GMT_EFFECT_END ,
+	        	TARGET_URL ,
+	        	STATUS ,
+	        	MEMO ,
+	        	APPROVER ,
+	        	GMT_APPR ,
+	        	ORDERS ,
+	        	RC_ALL ,
+	        	RC_GUEST ,
+	        	RC_TOP_AGENT ,
+	        	RC_OT_AGENT ,
+	        	RC_VIP ,
+	        	RC_NON_VIP ,
+	        	RC_CUSTOMER ,
+	        	GMT_CREATED ,
+	        	GMT_MODIFIED,
+	        	OPERATOR
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{spaces,javaType=long,jdbcType=DECIMAL} ,
+	        	#{name,javaType=string,jdbcType=VARCHAR} ,
+	        	#{imgUrl,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtEffectBegin,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{gmtEffectEnd,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{targetUrl,javaType=string,jdbcType=VARCHAR} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{approver,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtAppr,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{orders,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcAll,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcGuest,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcTopAgent,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcOtAgent,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcVip,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcNonVip,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcCustomer,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{operator,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.advert.dao.vo.AdVO">
+		UPDATE AD
+		<set>
+			<if test="@Ognl@isNotEmpty(spaces)">
+				SPACES = #{spaces,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(name)">
+				NAME = #{name,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(imgUrl)">
+				IMG_URL = #{imgUrl,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtEffectBegin)">
+				GMT_EFFECT_BEGIN = #{gmtEffectBegin,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtEffectEnd)">
+				GMT_EFFECT_END = #{gmtEffectEnd,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(targetUrl)">
+				TARGET_URL = #{targetUrl,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(approver)">
+				APPROVER = #{approver,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtAppr)">
+				GMT_APPR = #{gmtAppr,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtCreated)">
+				GMT_CREATED = #{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtModified)">
+				GMT_MODIFIED = #{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(orders)">
+				ORDERS = #{orders,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcAll)">
+				RC_ALL = #{rcAll,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcGuest)">
+				RC_GUEST = #{rcGuest,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcTopAgent)">
+				RC_TOP_AGENT = #{rcTopAgent,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcOtAgent)">
+				RC_OT_AGENT = #{rcOtAgent,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcVip)">
+				RC_VIP = #{rcVip,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcNonVip)">
+				RC_NON_VIP = #{rcNonVip,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcCustomer)">
+				RC_CUSTOMER = #{rcCustomer,javaType=long,jdbcType=DECIMAL}
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from AD where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="AdResult"
+		flushCache="false">
+		select
+		<include refid="adColumns" />
+		    <![CDATA[
+			    from AD 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="AdResult"
+		flushCache="false">
+		select
+		<include refid="adColumns" />
+		from AD
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="adDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(spaces)">
+				and SPACES = #{spaces}
+			</if>
+			<if test="@Ognl@isNotEmpty(name)">
+				and NAME = #{name}
+			</if>
+			<if test="@Ognl@isNotEmpty(imgUrl)">
+				and IMG_URL = #{imgUrl}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtEffectBegin)">
+				and GMT_EFFECT_BEGIN = #{gmtEffectBegin}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtEffectEnd)">
+				and GMT_EFFECT_END = #{gmtEffectEnd}
+			</if>
+			<if test="@Ognl@isNotEmpty(targetUrl)">
+				and TARGET_URL = #{targetUrl}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				and MEMO = #{memo}
+			</if>
+			<if test="@Ognl@isNotEmpty(approver)">
+				and APPROVER = #{approver}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtAppr)">
+				and GMT_APPR = #{gmtAppr}
+			</if>
+			<if test="@Ognl@isNotEmpty(orders)">
+				and ORDERS = #{orders}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcAll)">
+				and RC_ALL = #{rcAll}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcGuest)">
+				and RC_GUEST = #{rcGuest}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcTopAgent)">
+				and RC_TOP_AGENT = #{rcTopAgent}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcOtAgent)">
+				and RC_OT_AGENT = #{rcOtAgent}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcVip)">
+				and RC_VIP = #{rcVip}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcNonVip)">
+				and RC_NON_VIP = #{rcNonVip}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcCustomer)">
+				and RC_CUSTOMER = #{rcCustomer}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="AdResult" flushCache="false">
+		select
+		<include refid="adColumns" />
+		from AD
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from AD
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(distinct(ad.id)) from AD ad,AD_ADSPACE_RELATION adspace
+		<include refid="adPageDynamicWhere" />
+	</select>
+
+	<select id="getCountByAdvertPage" resultType="long">
+		select count(distinct(ad.id)) from AD ad,AD_ADSPACE_RELATION adspace
+		<include refid="adPageDynamicWhere" />
+	</select>
+
+	<select id="getBySpace" parameterType="long" resultMap="AdResult"
+		flushCache="false">
+		select
+		<include refid="adColumns1" />
+		    <![CDATA[
+			    from AD ad,AD_ADSPACE_RELATION adspace 
+		        where ad.id = adspace.AD_ID
+		        and adspace.SPACE_ID = #{spaceId} 
+		    ]]>
+	</select>
+
+	<sql id="adColumns1">
+	    <![CDATA[
+	        	ad.ID as id,
+	        	SPACES as spaces,
+	        	NAME as name,
+	        	IMG_URL as imgUrl,
+	        	GMT_EFFECT_BEGIN as gmtEffectBegin,
+	        	GMT_EFFECT_END as gmtEffectEnd,
+	        	TARGET_URL as targetUrl,
+	        	STATUS as status,
+	        	MEMO as memo,
+	        	APPROVER as approver,
+	        	GMT_APPR as gmtAppr,
+	        	ad.ORDERS as orders,
+	        	RC_ALL as rcAll,
+	        	RC_GUEST as rcGuest,
+	        	RC_TOP_AGENT as rcTopAgent,
+	        	RC_OT_AGENT as rcOtAgent,
+	        	RC_VIP as rcVip,
+	        	RC_NON_VIP as rcNonVip,
+	        	RC_CUSTOMER as rcCustomer,
+	        	GMT_CREATED as gmtCreated,
+	        	GMT_MODIFIED as gmtModified,
+	        	OPERATOR as operator
+	    ]]>
+	</sql>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="AdResult">
+		select distinct
+		<include refid="adColumns1" />
+		from AD ad,AD_ADSPACE_RELATION adspace
+		<include refid="adPageDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(status)">
+			ORDER BY gmtModified desc
+		</if>
+		<if test="@Ognl@isEmpty(status)">
+			ORDER BY gmtCreated desc
+		</if>
+	</select>
+
+	<sql id="adPageDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			and ad.id = adspace.AD_ID
+			<if test="@Ognl@isNotEmpty(spaceId)">
+				and adspace.SPACE_ID = #{spaceId}
+			</if>
+			<if test="@Ognl@isNotEmpty(begin)">
+			<![CDATA[
+				and GMT_EFFECT_BEGIN <= #{currentDate}
+				and GMT_EFFECT_END >= #{currentDate}
+			]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(end)">
+			<![CDATA[
+				and GMT_EFFECT_END < #{currentDate}
+			]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(unBegin)">
+			<![CDATA[
+				and GMT_EFFECT_BEGIN > #{currentDate}
+			]]>
+			</if>
+
+			<if test="@Ognl@isNotEmpty(id)">
+				and ad.ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(spaces)">
+				and SPACES = #{spaces}
+			</if>
+			<if test="@Ognl@isNotEmpty(name)">
+				and UPPER(NAME) like UPPER('%${name}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(imgUrl)">
+				and IMG_URL = #{imgUrl}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtEffectBegin)">
+				and GMT_EFFECT_BEGIN = #{gmtEffectBegin}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtEffectEnd)">
+				and GMT_EFFECT_END = #{gmtEffectEnd}
+			</if>
+			<if test="@Ognl@isNotEmpty(targetUrl)">
+				and TARGET_URL = #{targetUrl}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(allStatus)">
+				and STATUS in (1,2,3)
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				and MEMO = #{memo}
+			</if>
+			<if test="@Ognl@isNotEmpty(approver)">
+				and APPROVER = #{approver}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtAppr)">
+				and GMT_APPR = #{gmtAppr}
+			</if>
+			<if test="@Ognl@isNotEmpty(orders)">
+				and ad.ORDERS = #{orders}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(rcAll)">
+				and RC_ALL = #{rcAll}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcGuest)">
+				and RC_GUEST = #{rcGuest}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcTopAgent)">
+				and RC_TOP_AGENT = #{rcTopAgent}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcOtAgent)">
+				and RC_OT_AGENT = #{rcOtAgent}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcVip)">
+				and RC_VIP = #{rcVip}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcNonVip)">
+				and RC_NON_VIP = #{rcNonVip}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcCustomer)">
+				and RC_CUSTOMER = #{rcCustomer}
+			</if>
+			
+		</where>
+	</sql>
+
+</mapper>

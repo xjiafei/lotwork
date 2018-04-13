@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundSuspiciousCardVO">
+	<resultMap id="FundSuspiciousCardResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundSuspiciousCardVO">
+	</resultMap>
+	
+	<resultMap id="UserBankFundResult"
+		type="com.winterframework.firefrog.fund.dao.vo.UserBank"></resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundSuspiciousCardColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	CARD_NUMBER as cardNumber,
+	        	MEMO as memo,
+	        	TYPE as type,
+	        	CREATOR_ACCOUNT as creatorAccount,
+	        	GMT_CREATED as gmtCreated
+	    ]]>
+	</sql>
+	
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundSuspiciousCardVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_FUND_SUSPICIOUS_CARD_ID.Nextval from dual
+		</selectKey>
+		
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_SUSPICIOUS_CARD (
+	        	ID ,
+	        	CARD_NUMBER ,
+	        	MEMO ,
+	        	TYPE ,
+	        	CREATOR_ACCOUNT ,
+	        	GMT_CREATED 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{cardNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{creatorAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundSuspiciousCardVO">
+	    <![CDATA[
+	        UPDATE FUND_SUSPICIOUS_CARD SET
+		        CARD_NUMBER = #{cardNumber,javaType=string,jdbcType=VARCHAR} ,
+		        MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+		        TYPE = #{type,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_SUSPICIOUS_CARD where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="FundSuspiciousCardResult"
+		flushCache="false">
+		select
+		<include refid="fundSuspiciousCardColumns" />
+		    <![CDATA[
+			    from FUND_SUSPICIOUS_CARD 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="FundSuspiciousCardResult"
+		flushCache="false">
+		select
+		<include refid="fundSuspiciousCardColumns" />
+		from FUND_SUSPICIOUS_CARD
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="fundSuspiciousCardDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(cardNumber)">
+				and CARD_NUMBER = #{cardNumber}
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				and MEMO = #{memo}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+			<if test="@Ognl@isNotEmpty(creator)">
+				and CREATOR = #{creator}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+
+			<if test="@Ognl@isNotEmpty(cardNo)">
+				and CARD_NUMBER = #{cardNo}
+			</if>
+			<if test="@Ognl@isNotEmpty(bankAcc)">
+				and bank_acc = #{bankAcc}
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				and account = #{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(startDate)">
+				and GMT_CREATED >= #{startDate}
+			</if>
+			<if test="@Ognl@isNotEmpty(endDate)">
+			  <![CDATA[
+				and GMT_CREATED <= #{endDate}
+				]]>
+			</if>
+
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="FundSuspiciousCardResult"
+		flushCache="false">
+		select
+		<include refid="fundSuspiciousCardColumns" />
+		from FUND_SUSPICIOUS_CARD
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from FUND_SUSPICIOUS_CARD
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from FUND_SUSPICIOUS_CARD
+		<include refid="fundSuspiciousCardDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getFundSusppiciousCardRecordsByPage" resultMap="FundSuspiciousCardResult">
+		select
+		<include refid="fundSuspiciousCardColumns" />
+		,top_acc as topAcc
+		,bank_account as bankAcc
+		,account
+		from view_suspicious_card
+		<include refid="fundSuspiciousCardDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	
+	<select id="getFundSuspiciousAccounts" resultMap="UserBankFundResult">
+			select user_id as userId,BANK_ACCOUNT as bankAccount from FUND_SUSPICIOUS_CARD a,user_bank b where a.card_number=b.bank_number
+	</select>
+
+</mapper>

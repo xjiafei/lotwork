@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/views">
+	<excludes>
+		<pattern>/static/*</pattern>
+		<pattern>/helpAdmin/uploadImg</pattern>
+		<pattern>/adAdmin/uploadImg*</pattern>
+		<pattern>/adAdmin/uploadSpaceImg</pattern>
+		<pattern>/adAdmin/uploadSpacePlaceHolderImg</pattern>
+		<pattern>/adAdmin/forwardSpaceHolder</pattern>	
+		<pattern>/xheditorAdmin/uploadTemplateImg</pattern>
+		<pattern>/noticeAdmin/uploadUserFile</pattern>
+		<pattern>/begin/toBeginLog*</pattern>
+		<pattern>/globeAdmin/uploadWhiteListFile</pattern>
+		<pattern>/help/wap/*</pattern>
+	</excludes>
+	
+	
+	<decorator name="fundAdmin"  page="fund/layouts/main.jsp">
+		<pattern>/fundAdmin/*</pattern>
+	</decorator> 
+	
+	<decorator name="operation" page="help/layouts/operationMain.jsp">
+		<pattern>/operation/*</pattern>
+	</decorator>
+	
+	<decorator name="help" page="help/layouts/helpMain.jsp">
+		<pattern>/help/*</pattern>
+		<pattern>/helpAdmin/queryListByKey</pattern>
+	</decorator>
+	<decorator name="helpAdmin" page="help/layouts/helpAdminMain.jsp">
+		<pattern>/helpAdmin/*</pattern>
+	</decorator>
+	<decorator name="globeAdmin" page="global/layouts/main.jsp">
+		<pattern>/globeAdmin/*</pattern>
+	</decorator>
+	<decorator name="aclAdmin" page="acl/layouts/aclGroupAuthMain.jsp">
+		<pattern>/aclAdmin/*</pattern>
+	</decorator>
+	<decorator name="noticeAdmin" page="notice/layouts/noticeMain.jsp">
+		<pattern>/noticeAdmin/*</pattern>
+	</decorator>
+	<decorator name="adAdmin" page="advert/layouts/adMain.jsp">
+		<pattern>/adAdmin/*</pattern>
+		<pattern>/channel/*</pattern>
+	</decorator>
+	<decorator name="ad" page="advert/layouts/adFrontMain.jsp">
+		<pattern>/ad/*</pattern>
+	</decorator>
+	<decorator name="begin" page="advert/begin/layouts/adMain.jsp">
+		<pattern>/begin/*</pattern>		
+	</decorator>
+</decorators>

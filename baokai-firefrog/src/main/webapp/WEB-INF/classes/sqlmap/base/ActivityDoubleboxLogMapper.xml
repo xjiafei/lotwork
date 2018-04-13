@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.active.dao.vo.ActivityDoubleboxLog">
+	<resultMap id="result" type="com.winterframework.firefrog.active.dao.vo.ActivityDoubleboxLog">
+			<result column="ID" property="id"/>
+			<result column="USER_ID" property="userId"/>
+			<result column="USER_ACCOUNT" property="userAccount"/>
+			<result column="ACTIVITY_ID" property="activityId"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="MULTIPLE" property="multiple"/>
+			<result column="MULTIPLE_PRIZE" property="multiplePrize"/>			
+			<result column="SALES" property="sales"/>
+	</resultMap>
+	<sql id="fields">ID,USER_ID,USER_ACCOUNT,ACTIVITY_ID,CREATE_TIME,MULTIPLE,MULTIPLE_PRIZE,SALES
+	</sql>
+	<sql id="whereCondition">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and user_id = #{userId}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(activityId)">
+				and activity_id = #{activityId}
+			</if>
+		</where>
+	</sql>
+	
+	 
+    <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.active.dao.vo.ActivityDoubleboxLog" 
+			useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_ACTIVITY_DOUBLEBOX_LOG.Nextval from dual
+			   	    </selectKey>
+		<![CDATA[
+	        INSERT INTO
+	        ACTIVITY_DOUBLEBOX_LOG (
+	        	ID ,
+	        	USER_ID,
+	        	USER_ACCOUNT,
+	        	ACTIVITY_ID,
+	        	CREATE_TIME,
+				MULTIPLE,
+				MULTIPLE_PRIZE,
+				SALES		
+			) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP} ,	        
+	        	#{multiple,javaType=float,jdbcType=FLOAT} ,      
+	        	#{multiplePrize,javaType=long,jdbcType=DECIMAL},
+	        	#{sales,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>	
+	
+		</insert>
+		
+	    <select id="queryTodayLogByUserId" parameterType="map" resultMap="result" flushCache="false">
+	    	select <include refid="fields" /> 
+	    	from ACTIVITY_DOUBLEBOX_LOG 
+	    	<include refid="whereCondition"/>
+	    	<![CDATA[
+	    		AND CREATE_TIME >= trunc(sysdate)
+	    		AND CREATE_time < trunc(sysdate+1)
+	    	]]>
+	    </select>
+	    
+	    <select id="getWinList" parameterType="map" resultMap="result" flushCache="false">
+	    	SELECT * FROM (select <include refid="fields" /> 
+	    	from ACTIVITY_DOUBLEBOX_LOG 
+	    	WHERE ACTIVITY_ID=#{activityId} ORDER BY CREATE_TIME DESC )
+	    	<![CDATA[
+	    		WHERE ROWNUM < #{rownum}
+	    	]]>
+	    </select>
+
+
+
+</mapper>

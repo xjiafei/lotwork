@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserMessage">
+	<resultMap id="UserMessageResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserMessage">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="userMessageColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	SENDER as sender,
+	        	SEND_TIME as sendTime,
+	        	READ_TIME as readTime,
+	        	SENDER_UNREAD as senderUnread,
+	        	TITLE as title,
+	        	CONTENT as content,
+	        	TYPE as type,
+	        	SENDER_ACCOUNT as senderAccount,
+	        	RECEIVER_ACCOUNT as receiverAccount,
+	        	RECEIVER as receiver,
+	        	RECEIVERS as receivers,
+	        	MSG_ROUT as msgRout,
+	        	SENDER_FROM as senderFrom,
+	        	RECEIVE_FROM as receiveFrom,
+	        	RECEIVE_UNREAD as receiveUnread,
+	        	GMTMODIFIED as gmtModified,
+	        	NOTICE_MSG_ID as noticeMsgId,
+	        	EFFECT_END_TIME as effectHours,
+	        	MSGPUSH as messagePush
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserMessage"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_USER_MESSAGE_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        USER_MESSAGE (
+	        	ID ,
+	        	SENDER ,
+	        	SEND_TIME ,
+	        	READ_TIME ,
+	        	SENDER_UNREAD ,
+	        	TITLE ,
+	        	CONTENT ,
+	        	TYPE ,
+	        	SENDER_ACCOUNT ,
+	        	RECEIVER_ACCOUNT ,
+	        	RECEIVER ,
+	        	RECEIVERS ,
+	        	MSG_ROUT ,
+	        	SENDER_FROM ,
+	        	RECEIVE_FROM ,
+	        	RECEIVE_UNREAD ,
+	        	GMTMODIFIED,
+	        	EFFECT_END_TIME,
+	        	GMTMODIFIED ,
+	        	NOTICE_MSG_ID
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sender,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sendTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{readTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{senderUnread,javaType=long,jdbcType=DECIMAL} ,
+	        	#{title,javaType=string,jdbcType=VARCHAR} ,
+	        	#{content,javaType=string,jdbcType=VARCHAR} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{senderAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{receiverAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{receiver,javaType=long,jdbcType=DECIMAL} ,
+	        	#{receivers,javaType=string,jdbcType=VARCHAR} ,
+	        	#{msgRout,javaType=string,jdbcType=VARCHAR} ,
+	        	#{senderFrom,javaType=long,jdbcType=DECIMAL} ,
+	        	#{receiveFrom,javaType=long,jdbcType=DECIMAL} ,
+	        	#{receiveUnread,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP},
+	        	#{effectHours,javaType=object,jdbcType=TIMESTAMP},
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{noticeMsgId,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>
+
+	</insert>
+	
+		<insert id="insertWithNotID"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserMessage"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        USER_MESSAGE (
+	        	ID ,
+	        	SENDER ,
+	        	SEND_TIME ,
+	        	READ_TIME ,
+	        	SENDER_UNREAD ,
+	        	TITLE ,
+	        	CONTENT ,
+	        	TYPE ,
+	        	SENDER_ACCOUNT ,
+	        	RECEIVER_ACCOUNT ,
+	        	RECEIVER ,
+	        	RECEIVERS ,
+	        	MSG_ROUT ,
+	        	SENDER_FROM ,
+	        	RECEIVE_FROM ,
+	        	RECEIVE_UNREAD ,
+	        	GMTMODIFIED,
+	        	EFFECT_END_TIME,
+	        	NOTICE_MSG_ID
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sender,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sendTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{readTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{senderUnread,javaType=long,jdbcType=DECIMAL} ,
+	        	#{title,javaType=string,jdbcType=VARCHAR} ,
+	        	#{content,javaType=string,jdbcType=VARCHAR} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{senderAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{receiverAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{receiver,javaType=long,jdbcType=DECIMAL} ,
+	        	#{receivers,javaType=string,jdbcType=VARCHAR} ,
+	        	#{msgRout,javaType=string,jdbcType=VARCHAR} ,
+	        	#{senderFrom,javaType=long,jdbcType=DECIMAL} ,
+	        	#{receiveFrom,javaType=long,jdbcType=DECIMAL} ,
+	        	#{receiveUnread,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP},
+	        	#{effectHours,javaType=object,jdbcType=TIMESTAMP},
+	        	#{noticeMsgId,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>
+
+	</insert>
+	
+	<update id="update"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserMessage">
+	        UPDATE USER_MESSAGE 
+	         <set> 
+	       		<if test="@Ognl@isNotEmpty(sender)">
+			        SENDER=#{sender,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(sendTime)">
+			         SEND_TIME=#{sendTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(readTime)">
+			        READ_TIME=#{readTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(senderUnread)">
+			        SENDER_UNREAD=#{senderUnread,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(title)">
+			        TITLE=#{title,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(content)">
+			        CONTENT=#{content,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(type)">
+			        TYPE=#{type,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(senderAccount)">
+			        SENDER_ACCOUNT=#{senderAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(receiverAccount)">
+			         RECEIVER_ACCOUNT=#{receiverAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(receiver)">
+			        RECEIVER=#{receiver,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(receivers)">
+			        RECEIVERS=#{receivers,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(msgRout)">
+			        MSG_ROUT=#{msgRout,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(senderFrom)">
+			        SENDER_FROM=#{senderFrom,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(receiveFrom)">
+			        RECEIVE_FROM=#{receiveFrom,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(receiveUnread)">
+			        RECEIVE_UNREAD=#{receiveUnread,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(gmtModified)">
+			        GMTMODIFIED=#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	        </set>
+	        WHERE ID = #{id} 
+	</update>
+
+	<update id="batchUpdate" parameterType="java.util.List">
+		update USER_MESSAGE
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="SENDER =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.sender!=null">
+						when (ID=#{i.id}) then #{i.sender}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="SEND_TIME =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.sendTime!=null">
+						when (ID=#{i.id}) then #{i.sendTime}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="READ_TIME =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.readTime!=null">
+						when (ID=#{i.id}) then #{i.readTime}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="SENDER_UNREAD =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.senderUnread!=null">
+						when (ID=#{i.id}) then #{i.senderUnread}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="TITLE =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.title!=null">
+						when (ID=#{i.id}) then #{i.title}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="CONTENT =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.content!=null">
+						when (ID=#{i.id}) then #{i.content}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="TYPE =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.type!=null">
+						when (ID=#{i.id}) then #{i.type}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="SENDER_ACCOUNT =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.senderAccount!=null">
+						when (ID=#{i.id}) then #{i.senderAccount}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="RECEIVER_ACCOUNT =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.receiverAccount!=null">
+						when (ID=#{i.id}) then #{i.receiverAccount}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="RECEIVER =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.receiver!=null">
+						when (ID=#{i.id}) then #{i.receiver}
+					</if>
+				</foreach>
+			</trim>
+
+
+			<trim prefix="RECEIVERS =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.receivers!=null">
+						when (ID=#{i.id}) then #{i.receivers}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="MSG_ROUT =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.msgRout!=null">
+						when (ID=#{i.id}) then #{i.msgRout}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="SENDER_FROM =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.senderFrom!=null">
+						when (ID=#{i.id}) then #{i.senderFrom}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="RECEIVE_FROM =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.receiveFrom!=null">
+						when (ID=#{i.id}) then #{i.receiveFrom}
+					</if>
+				</foreach>
+			</trim>
+
+			<trim prefix="RECEIVE_UNREAD =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.receiveUnread!=null">
+						when (ID=#{i.id}) then #{i.receiveUnread}
+					</if>
+				</foreach>
+			</trim>
+	        	
+	       <trim prefix="GMTMODIFIED =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.gmtModified!=null">
+						when (ID=#{i.id}) then #{i.gmtModified}
+					</if>
+				</foreach>
+			</trim>
+
+		</trim>
+		where id in
+		<foreach collection="list" index="index" item="i" open="("
+			separator="," close=")">
+			#{i.id}
+		</foreach>
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from USER_MESSAGE where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	
+	<delete id="delete5dayMessage" >
+	    <![CDATA[delete from USER_MESSAGE where SEND_TIME < to_date(to_char(SYSDATE-4,'yyyy-MM-dd'),'yyyy-MM-dd'); ]]>	    
+	</delete>
+	
+	<delete id="deleteByNoticeId" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from USER_MESSAGE where
+		        NOTICE_MSG_ID = #{noticeId} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="UserMessageResult"
+		flushCache="false">
+		select
+		<include refid="userMessageColumns" />
+		    <![CDATA[
+			    from view_user_message 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="java.util.List" resultMap="UserMessageResult"
+		flushCache="false">
+		select
+		<include refid="userMessageColumns" />
+		from view_user_message
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="userMessageDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(sendTime)">
+				and SEND_TIME = #{sendTime}
+			</if>
+
+			<if test="@Ognl@isNotEmpty(sendTimeStart)">
+				and SEND_TIME >= #{sendTimeStart}
+			</if>
+			<if test="@Ognl@isNotEmpty(sendTimeEnd)">
+			<![CDATA[
+				and SEND_TIME <= #{sendTimeEnd}
+			]]>
+			</if>
+
+			<if test="@Ognl@isNotEmpty(readTime)">
+				and READ_TIME = #{readTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(senderUnread)">
+				and SENDER_UNREAD = #{senderUnread}
+			</if>
+			<if test="@Ognl@isNotEmpty(title)">
+				and lower(TITLE) like lower('%${title}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(content)">
+				and CONTENT = #{content}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+			<if test="@Ognl@isNotEmpty(sender)">
+				and lower(SENDER_ACCOUNT) like lower('%${sender}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(receiver)">
+				and lower(RECEIVER_ACCOUNT) like lower('%${receiver}%')
+			</if>
+			<if test="@Ognl@isNotEmpty(receivers)">
+				and RECEIVERS = #{receivers}
+			</if>
+			<if test="@Ognl@isNotEmpty(msgRout)">
+				and MSG_ROUT = #{msgRout}
+			</if>
+			<if test="@Ognl@isNotEmpty(senderFrom)">
+				and SENDER_FROM = #{senderFrom}
+			</if>
+			<if test="@Ognl@isNotEmpty(receiveFrom)">
+				and RECEIVE_FROM = #{receiveFrom}
+			</if>
+			<if test="@Ognl@isNotEmpty(receiveUnread)">
+				and RECEIVE_UNREAD = #{receiveUnread}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtModified)">
+				and GMTMODIFIED=#{gmtModified}
+	        </if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="UserMessageResult" flushCache="false">
+		select
+		<include refid="userMessageColumns" />
+		from view_user_message
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from view_user_message
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from view_user_message
+		<include refid="userMessageDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="UserMessageResult">
+		select
+		<include refid="userMessageColumns" />
+		from view_user_message
+		<include refid="userMessageDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="getMaxId">
+		select max(id) from view_user_message
+	</select>
+
+	<!-- 获取当前用户的所有站内信 -->
+	<select id="getMessageList" resultMap="UserMessageResult"
+		parameterType="HashMap">
+		select
+		<include refid="userMessageColumns" />
+		from view_user_message
+		where (SENDER = #{userId,javaType=long,jdbcType=DECIMAL} and sender_from
+		not in (-1, -2))
+		or
+		<![CDATA[ 
+		(RECEIVER = #{userId,javaType=long,jdbcType=DECIMAL} and receive_from not in (-1) and 
+			(EFFECT_END_TIME is null or (sysdate <= EFFECT_END_TIME))
+		)
+		]]>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<!-- 获取当前用户的所有未读站内信 -->
+	<select id="getUnReadMessageList" resultMap="UserMessageResult"
+		parameterType="HashMap">
+		select
+		<include refid="userMessageColumns" />
+		from view_user_message
+		where (SENDER = #{userId,javaType=long,jdbcType=DECIMAL} and SENDER_UNREAD = 0 and SENDER_FROM
+		not in (-1, -2))
+		or
+		<![CDATA[ 
+			(RECEIVER = #{userId,javaType=long,jdbcType=DECIMAL} and RECEIVE_UNREAD = 0 and receive_from not in (-1) and 
+				(EFFECT_END_TIME is null or (sysdate <= EFFECT_END_TIME))
+			)
+		]]>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<!-- 获取当前用户的所有站内信总数 -->
+	<select id="getMessageListNumber" resultType="int"
+		parameterType="HashMap">
+		select COUNT(*) counts
+		from view_user_message
+		where (SENDER = #{userId,javaType=long,jdbcType=DECIMAL} and sender_from
+		not in (-1, -2))
+		or
+		<![CDATA[ 
+		(RECEIVER = #{userId,javaType=long,jdbcType=DECIMAL} and receive_from not in (-1) and 
+			(EFFECT_END_TIME is null or (sysdate <= EFFECT_END_TIME))
+		)
+		]]>
+	</select>
+
+	<!-- 获取当前用户的未读消息的总数 -->
+	<select id="getUnreadMessagesNumber" resultType="int">
+		select COUNT(*)
+		counts
+		from view_user_message
+		where (SENDER = #{userId,javaType=long,jdbcType=DECIMAL} and SENDER_FROM
+		not in (-1, -2) and SENDER_UNREAD = 0)
+		or
+		<![CDATA[ 
+			(RECEIVER = #{userId,javaType=long,jdbcType=DECIMAL} and RECEIVE_UNREAD = 0 and receive_from not in (-1) and 
+				(EFFECT_END_TIME is null or (sysdate <= EFFECT_END_TIME))
+			)
+		]]>
+	</select>
+	
+	<select id="selectNextId"  resultType="long">
+		SELECT SEQ_USER_MESSAGE_ID.Nextval from dual
+	</select>
+	
+	<!-- 一代回收清理站内信 -->
+	<update id="updateByReceiver"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserMessage">
+	        UPDATE USER_MESSAGE 
+	         <set>
+	         	<if test="@Ognl@isNotEmpty(receiveFrom)">
+			        RECEIVE_FROM=#{receiveFrom,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if> 
+	       		<if test="@Ognl@isNotEmpty(receiver)">
+			        RECEIVER=#{receiver,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(sender)">
+			        SENDER=#{sender,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(sendTime)">
+			        SEND_TIME=#{sendTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(readTime)">
+			        READ_TIME=#{readTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(senderUnread)">
+			        SENDER_UNREAD=#{senderUnread,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(title)">
+			        TITLE=#{title,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(content)">
+			        CONTENT=#{content,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(type)">
+			        TYPE=#{type,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(senderAccount)">
+			        SENDER_ACCOUNT=#{senderAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>	       		
+	       		<if test="@Ognl@isNotEmpty(receivers)">
+			        RECEIVERS=#{receivers,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(msgRout)">
+			        MSG_ROUT=#{msgRout,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(senderFrom)">
+			        SENDER_FROM=#{senderFrom,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>	       		
+	       		<if test="@Ognl@isNotEmpty(receiveUnread)">
+			        RECEIVE_UNREAD=#{receiveUnread,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(gmtModified)">
+			        GMTMODIFIED=#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	        </set>
+	        WHERE 
+	        	<![CDATA[ 
+	        	SEND_TIME < #{sendTime} AND	
+	        	]]>
+	        	RECEIVE_FROM not in (-1) AND
+	        	  	        
+	        	RECEIVER = #{receiver} 
+	</update>
+	
+	<update id="updateBySender"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserMessage">
+	        UPDATE USER_MESSAGE 
+	         <set>
+	         	<if test="@Ognl@isNotEmpty(senderFrom)">
+			        SENDER_FROM=#{senderFrom,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	         	<if test="@Ognl@isNotEmpty(receiveFrom)">
+			        RECEIVE_FROM=#{receiveFrom,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if> 
+	       		<if test="@Ognl@isNotEmpty(receiver)">
+			        RECEIVER=#{receiver,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(sender)">
+			        SENDER=#{sender,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(sendTime)">
+			        SEND_TIME=#{sendTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(readTime)">
+			        READ_TIME=#{readTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(senderUnread)">
+			        SENDER_UNREAD=#{senderUnread,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(title)">
+			        TITLE=#{title,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(content)">
+			        CONTENT=#{content,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(type)">
+			        TYPE=#{type,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(senderAccount)">
+			        SENDER_ACCOUNT=#{senderAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>	       		
+	       		<if test="@Ognl@isNotEmpty(receivers)">
+			        RECEIVERS=#{receivers,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(msgRout)">
+			        MSG_ROUT=#{msgRout,javaType=string,jdbcType=VARCHAR} ,
+	        	</if>	       			       		
+	       		<if test="@Ognl@isNotEmpty(receiveUnread)">
+			        RECEIVE_UNREAD=#{receiveUnread,javaType=java.lang.Long,jdbcType=DECIMAL} ,
+	        	</if>
+	        	<if test="@Ognl@isNotEmpty(gmtModified)">
+			        GMTMODIFIED=#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	        </set>
+	        WHERE 
+	        	<![CDATA[ 
+	        	SEND_TIME < #{sendTime} AND	
+	        	]]>
+	        	SENDER_FROM not in (-1) AND
+	        	  	        
+	        	SENDER = #{sender} 
+	</update>
+	
+</mapper>

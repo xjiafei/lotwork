@@ -1,0 +1,71 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	<!-- 一不同号 -->
+	<bean id="k3DiceValidateExecutor" class="com.winterframework.firefrog.phone.web.validate.composite.format.K3DiceValidateExecutor" />
+	
+	
+	
+	<bean id="k3diceValidators" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="lotteryType" value="99601" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3DiceValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="lotteryType" value="99602" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3DiceValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.phone.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="lotteryType" value="99603" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.phone.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="k3DiceValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
+	
+	
+</beans>

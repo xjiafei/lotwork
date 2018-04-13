@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundSoloRemarkSystemVO">
+	<resultMap id="FundSoloRemarkSystemResult" type="com.winterframework.firefrog.fund.dao.vo.FundSoloRemarkSystemVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundSoloRemarkSystemColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	REMARK as remark
+	    ]]>
+	</sql>
+	<select id="getNextSeq" resultType="long">
+			SELECT FUND_SOLO_REMARK_SYSTEM_REMARK.Nextval from dual
+    </select>
+    <select id="getNextSystemRemark" resultMap="FundSoloRemarkSystemResult">
+    	<!-- selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT FUND_SOLO_REMARK_SYSTEM_REMARK.Nextval from dual
+		</selectKey-->
+    	select <include refid="fundSoloRemarkSystemColumns" /> from FUND_SOLO_REMARK_SYSTEM where  ID = #{seqNo}
+    </select>
+   </mapper>

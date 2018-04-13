@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundCharge">
+	<resultMap id="FundChargeResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundCharge">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundChargeColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USER_ID as userId,
+	        	BANK_ID as bankId,
+	        	PRE_CHARGE_AMT as preChargeAmt,
+	        	CARD_NUMBER as cardNumber,
+	        	RCV_CARD_NUMBER as rcvCardNumber,
+	        	RCV_ACC_NAME as rcvAccName,
+	        	RCV_EMAIL as rcvEmail,
+	        	APPLY_TIME as applyTime,
+	        	REAL_CHARGE_AMT as realChargeAmt,
+	        	CHARGE_TIME as chargeTime,
+	        	MC_NOTICE_TIME as mcNoticeTime,
+	        	STATUS as status,
+	        	CHARGE_MEMO as chargeMemo,
+	        	MC_FEE as mcFee,
+	        	SN as sn,
+	        	MC_EXPIRE_TIME as mcExpireTime,
+	        	MC_ERROR_MSG as mcErrorMsg,
+	        	MC_CHANNEL as mcChannel,
+	        	MC_AREA as mcArea,
+	        	MC_UUID as mcUuid,
+	        	MC_SN as mcSn,
+	        	MC_BANK_FEE as mcBankFee,
+	        	USER_ACT as userAct,
+	        	TEMP_SN as tempSn,
+	        	ACCOUNT as account,
+	        	RCV_BANK_NAME as rcvBankName,
+	        	pay_bank_id as payBankId,
+	        	topVip,
+	        	break_url as breakUrl,
+	        	DEPOSIT_MODE as depositMode,
+	        	real_bank_id as realBankId,
+	        	PLATFOM as platfom,
+	        	VER as ver,
+	        	OPERATING_TIME as operatingTime,
+	        	CHARGE_CARD_NUM as chargeCardNum,
+	        	CHARGE_MODE as chargeMode
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundCharge"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_FUND_CHARGE_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_CHARGE (
+	        	ID ,
+	        	USER_ID ,
+	        	BANK_ID ,
+	        	PRE_CHARGE_AMT ,
+	        	CARD_NUMBER ,
+	        	RCV_CARD_NUMBER ,
+	        	RCV_ACC_NAME ,
+	        	RCV_EMAIL ,
+	        	APPLY_TIME ,
+	        	REAL_CHARGE_AMT ,
+	        	CHARGE_TIME ,
+	        	MC_NOTICE_TIME ,
+	        	STATUS ,
+	        	CHARGE_MEMO ,
+	        	MC_FEE ,
+	        	SN ,
+	        	MC_EXPIRE_TIME ,
+	        	MC_ERROR_MSG ,
+	        	MC_CHANNEL ,
+	        	MC_AREA ,
+	        	MC_UUID ,
+	        	MC_SN ,
+	        	MC_BANK_FEE ,
+	        	USER_ACT ,
+	        	TEMP_SN ,
+	        	ACCOUNT,
+	        	pay_bank_id,
+	        	DEPOSIT_MODE,
+	        	PLATFOM,
+	        	VER,
+	        	CHARGE_CARD_NUM,
+	        	CHARGE_MODE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bankId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{preChargeAmt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{cardNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	#{rcvCardNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	#{rcvAccName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{rcvEmail,javaType=string,jdbcType=VARCHAR} ,
+	        	#{applyTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{realChargeAmt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{chargeTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{mcNoticeTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{chargeMemo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcFee,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcExpireTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{mcErrorMsg,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcChannel,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcArea,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcUuid,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcSn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcBankFee,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userAct,javaType=string,jdbcType=VARCHAR} ,
+	        	#{tempSn,javaType=long,jdbcType=DECIMAL} ,
+	        	#{account,javaType=string,jdbcType=VARCHAR} ,
+	        	#{payBankId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{depositMode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{platfom,javaType=long,jdbcType=VARCHAR} ,
+	        	#{ver,javaType=string,jdbcType=DECIMAL} ,
+	        	#{chargeCardNum,javaType=string,jdbcType=VARCHAR},
+	        	#{chargeMode,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>
+
+	</insert>
+	
+	<update id="updateStatus" parameterType="com.winterframework.firefrog.fund.dao.vo.FundCharge">
+		UPDATE FUND_CHARGE  
+		<set>
+		STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		</set>
+		WHERE
+		id = #{id,javaType=long,jdbcType=DECIMAL}
+		and (STATUS = 1 or STATUS = 3 or STATUS = 4 or STATUS = 5 or  STATUS is null)
+	</update>
+	
+	<select id="getByItemUserId" parameterType="hashmap" resultMap="FundChargeResult"
+		flushCache="false">
+		select
+		<include refid="fundChargeColumns" />
+		    <![CDATA[
+			    from view_FUND_CHARGE 
+		        where 
+		        USER_ID = #{userId} and APPLY_TIME > #{currentC} and STATUS = 1
+		    ]]>
+	</select>
+
+	<select id="getMowFundChargeByTimeAndStatusOne" parameterType="hashmap" resultMap="FundChargeResult"
+		flushCache="false">
+		select
+		<include refid="fundChargeColumns" />
+		    <![CDATA[
+			    from view_FUND_CHARGE 
+		        where APPLY_TIME < #{time} and deposit_mode!=2 and STATUS = 1
+		    ]]>
+	</select>
+
+
+	<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.FundCharge">
+		UPDATE FUND_CHARGE
+		<set>
+			<if test="@Ognl@isNotEmpty(userId)">
+				USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(payBankId)">
+				pay_bank_id = #{payBankId,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(bankId)">
+				BANK_ID = #{bankId,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(preChargeAmt)">
+				PRE_CHARGE_AMT = #{preChargeAmt,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(cardNumber)">
+				CARD_NUMBER = #{cardNumber,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcvCardNumber)">
+				RCV_CARD_NUMBER = #{rcvCardNumber,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcvBankName)">
+				RCV_BANK_NAME = #{rcvBankName,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcvAccName)">
+				RCV_ACC_NAME = #{rcvAccName,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(rcvEmail)">
+				RCV_EMAIL = #{rcvEmail,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(applyTime)">
+				APPLY_TIME = #{applyTime,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(realChargeAmt)">
+				REAL_CHARGE_AMT = #{realChargeAmt,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(chargeTime)">
+				CHARGE_TIME = #{chargeTime,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mcNoticeTime)">
+				MC_NOTICE_TIME = #{mcNoticeTime,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(chargeMemo)">
+				CHARGE_MEMO = #{chargeMemo,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mcFee)">
+				MC_FEE = #{mcFee,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mcErrorMsg)">
+				MC_ERROR_MSG = #{mcErrorMsg,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mcChannel)">
+				MC_CHANNEL = #{mcChannel,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mcArea)">
+				MC_AREA = #{mcArea,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mcUuid)">
+				MC_UUID = #{mcUuid,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mcSn)">
+				MC_SN = #{mcSn,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mcBankFee)">
+				MC_BANK_FEE = #{mcBankFee,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(userAct)">
+				USER_ACT = #{userAct,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(tempSn)">
+				TEMP_SN = #{tempSn,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(realBankId)">
+				real_bank_id = #{realBankId,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(account)">
+				ACCOUNT = #{account,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(mcExpireTime)">
+				MC_EXPIRE_TIME = #{mcExpireTime,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(sn)">
+				SN = #{sn,javaType=string,jdbcType=VARCHAR},
+			</if>
+			<if test="@Ognl@isNotEmpty(depositMode)">
+				DEPOSIT_MODE = #{depositMode,javaType=string,jdbcType=VARCHAR},
+			</if>
+			<if test="@Ognl@isNotEmpty(breakUrl)">
+				break_Url = #{breakUrl,javaType=string,jdbcType=VARCHAR},
+			</if>
+			<if test="@Ognl@isNotEmpty(operatingTime)">
+				OPERATING_TIME = #{operatingTime,javaType=object,jdbcType=TIMESTAMP} 
+			</if>
+		</set>
+		WHERE
+		SN = #{sn,javaType=string,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_CHARGE where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="FundChargeResult"
+		flushCache="false">
+		select
+		<include refid="fundChargeColumns" />
+		    <![CDATA[
+			    from view_FUND_CHARGE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="FundChargeResult"
+		flushCache="false">
+		select
+		<include refid="fundChargeColumns" />
+		from view_FUND_CHARGE
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="fundChargeDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(bankId)">
+				and BANK_ID = #{bankId}
+			</if>
+			<if test="@Ognl@isNotEmpty(preChargeAmt)">
+				and PRE_CHARGE_AMT = #{preChargeAmt}
+			</if>
+		
+			<if test="@Ognl@isNotEmpty(rcvCardNumber)">
+				and RCV_CARD_NUMBER = #{rcvCardNumber}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcvAcct)">
+				and RCV_CARD_NUMBER = #{rcvAcct}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(rcvAccName)">
+				and RCV_ACC_NAME = #{rcvAccName}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcvEmail)">
+				and RCV_EMAIL = #{rcvEmail}
+			</if>
+			<if test="@Ognl@isNotEmpty(applyTime)">
+				and APPLY_TIME = #{applyTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(realChargeAmt)">
+				and REAL_CHARGE_AMT = #{realChargeAmt}
+			</if>
+			<if test="@Ognl@isNotEmpty(chargeTime)">
+				and CHARGE_TIME = #{chargeTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcNoticeTime)">
+				and MC_NOTICE_TIME = #{mcNoticeTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS in
+				<foreach item="status" index="index" collection="status"
+					open="(" separator="," close=")">
+					#{status}
+				</foreach>
+			</if>
+			<if test="@Ognl@isNotEmpty(chargeMemo)">
+				and CHARGE_MEMO = #{chargeMemo}
+			</if>
+			<if test="@Ognl@isNotEmpty(depositeMode)">
+				and DEPOSIT_MODE in 
+				<foreach item="status" index="index" collection="depositeMode"
+					open="(" separator="," close=")">
+					#{status}
+				</foreach>
+			</if>
+			<if test="@Ognl@isNotEmpty(mcFee)">
+				and MC_FEE = #{mcFee}
+			</if>
+			<if test="@Ognl@isNotEmpty(sn)">
+				and SN = #{sn}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcExpireTime)">
+				and MC_EXPIRE_TIME = #{mcExpireTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcErrorMsg)">
+				and MC_ERROR_MSG = #{mcErrorMsg}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcChannel)">
+				and MC_CHANNEL = #{mcChannel}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcArea)">
+				and MC_AREA = #{mcArea}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcUuid)">
+				and MC_UUID = #{mcUuid}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcSn)">
+				and MC_SN = #{mcSn}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcBankFee)">
+				and MC_BANK_FEE = #{mcBankFee}
+			</if>
+			<if test="@Ognl@isNotEmpty(userAct)">
+				and USER_ACT = #{userAct}
+			</if>
+			<if test="@Ognl@isNotEmpty(tempSn)">
+				and TEMP_SN = #{tempSn}
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT = #{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(payNo)">
+				and ACCOUNT = #{payNo}
+			</if>
+			<if test="@Ognl@isNotEmpty(topAcc)">
+				and topVip = #{topAcc}
+			</if>
+			<if test="@Ognl@isNotEmpty(fromDate)">
+				<![CDATA[
+				and TRUNC(APPLY_TIME) >= TRUNC(#{fromDate})
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toDate)">
+				<![CDATA[
+				and APPLY_TIME <= #{toDate}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(fromDealDate)">
+				<![CDATA[
+				and APPLY_TIME >= #{fromDealDate}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toDealDate)">
+				<![CDATA[
+				and APPLY_TIME <= #{toDealDate}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(fromAddCoinDate)">
+				<![CDATA[
+				and ( MC_NOTICE_TIME is not null and MC_NOTICE_TIME >= #{fromAddCoinDate})
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toAddCoinDate)">
+				<![CDATA[
+				and ( MC_NOTICE_TIME is not null and MC_NOTICE_TIME <= #{toAddCoinDate})
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(cardNumber)">
+				and CARD_NUMBER = #{cardNumber}
+			</if>
+				<if test="@Ognl@isNotEmpty(payAcct)">
+				and CARD_NUMBER = #{payAcct}
+			</if>
+				<if test="@Ognl@isNotEmpty(payBankId)">
+				and pay_bank_id = #{payBankId}
+			</if>
+			<if test="@Ognl@isNotEmpty(platVersion)">
+				and platfom = #{platVersion}
+			</if>
+			<if test="@Ognl@isNotEmpty(recycleDate)">
+				and APPLY_TIME > #{recycleDate}
+			</if>
+			<if test="@Ognl@isNotEmpty(fromOperatingDate)">
+				<![CDATA[
+				and ( OPERATING_TIME is not null and OPERATING_TIME >= #{fromOperatingDate})
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toOperatingDate)">
+				<![CDATA[
+				and ( OPERATING_TIME is not null and OPERATING_TIME <= #{toOperatingDate})
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(chargeMode)">
+				and CHARGE_MODE = #{chargeMode}
+			</if>
+			<if test="@Ognl@isNotEmpty(notAppealStatus)">
+			and nvl(ca.appeal_status,10) not in
+			<foreach item="appealStatus" index="index" collection="notAppealStatus"
+					open="(" separator="," close=")">
+					#{appealStatus}
+			</foreach>
+			</if>
+			<if test="@Ognl@isNotEmpty(notAppealStatus)">
+				<![CDATA[
+					and DEPOSIT_MODE <> 7
+					and DEPOSIT_MODE <> 8
+					and DEPOSIT_MODE <> 9
+				]]>
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="FundChargeResult" flushCache="false">
+		select
+		<include refid="fundChargeColumns" />
+		from view_FUND_CHARGE
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from view_FUND_CHARGE
+	</select>
+	<select id="getChargeCountByPage"
+		resultType="com.winterframework.firefrog.fund.web.controller.vo.SumCount">
+		select count(*) as count,sum(REAL_CHARGE_AMT) as sum from 
+		<if test="@Ognl@isNotEmpty(isReport)">
+			 view_FUND_CHARGE_${isReport}
+		</if>
+		<if test="@Ognl@isEmpty(isReport)">
+			 view_FUND_CHARGE
+		</if>
+		<if test="@Ognl@isNotEmpty(notAppealStatus)">
+			left join (select a.charge_sn,a.appeal_status from fund_charge_appeal  a ) ca on  ca.charge_sn =SN 
+		</if>
+		<include refid="fundChargeDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="FundChargeResult">
+		select
+		<include refid="fundChargeColumns" />
+		from
+		<if test="@Ognl@isNotEmpty(isReport)">
+			view_FUND_CHARGE_${isReport}
+		</if>
+		<if test="@Ognl@isEmpty(isReport)">
+			view_FUND_CHARGE
+		</if>
+		<include refid="fundChargeDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+	<select id="getChargeByPage" resultMap="FundChargeResult">
+		select
+		<include refid="fundChargeColumns" />
+		from 
+		<if test="@Ognl@isNotEmpty(isReport)">
+			 view_FUND_CHARGE_${isReport}
+		</if>
+		<if test="@Ognl@isEmpty(isReport)">
+			 view_FUND_CHARGE
+		</if>
+		<if test="@Ognl@isNotEmpty(notAppealStatus)">
+			 left join (select a.charge_sn,a.appeal_status from fund_charge_appeal  a ) ca on  ca.charge_sn =SN 
+		</if>
+		
+		<include refid="fundChargeDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="queryDailyChargeSum" resultType="long" parameterType="hashmap">
+		SELECT NVL(SUM(REAL_CHARGE_AMT),0) FROM FUND_CHARGE WHERE DEPOSIT_MODE = #{depositMode}
+		AND CHARGE_MODE=#{chargeMode} AND STATUS=2
+		<![CDATA[
+			AND CHARGE_TIME >= trunc(sysdate)
+			AND CHARGE_TIME < trunc(sysdate+1)
+		]]>
+	</select>
+	
+	<select id="queryDailyAppUnipayChargeSum" resultType="long" parameterType="hashmap">
+		SELECT NVL(SUM(REAL_CHARGE_AMT),0) FROM FUND_CHARGE WHERE DEPOSIT_MODE = #{depositMode}
+		AND CHARGE_MODE=#{chargeMode} AND STATUS=2 AND PLATFOM IN (1,2)
+		<![CDATA[
+			AND CHARGE_TIME >= trunc(sysdate)
+			AND CHARGE_TIME < trunc(sysdate+1)
+		]]>
+	</select>
+	
+	<select id="queryPeriodChargeSum" resultType="long" parameterType="hashmap">
+		<![CDATA[
+		select sum(amt)
+		from(
+			SELECT NVL(REAL_CHARGE_AMT,0)amt 
+				FROM FUND_CHARGE 
+			WHERE STATUS=2 AND USER_ID = #{userId} 
+				AND CHARGE_TIME >= #{startTime}
+				AND CHARGE_TIME < #{endTime}
+			union all
+			select NVL(TRANSFER_AMT,0)amt 
+				from fund_transfer 
+			where RCV_USER_ID = #{userId}
+				AND GMT_CREATED >= #{startTime}
+				AND GMT_CREATED < #{endTime}
+		)
+		]]>
+	</select>
+
+	<select id="getDayCharge" parameterType="map" resultType="long">
+	<![CDATA[
+		select sum(REAL_CHARGE_AMT) from fund_charge where 
+			PAY_BANK_ID =#{bankId} and APPLY_TIME >= trunc(sysdate) AND APPLY_TIME <= trunc(sysdate+1)
+	]]>
+	</select>
+	
+	<select id="getDayChargeThirdParty" parameterType="map" resultType="long">
+	<![CDATA[
+		select sum(REAL_CHARGE_AMT) from fund_charge where
+		 	USER_ID = #{userId} and to_char(CHARGE_TIME,'YYYYMMDD')=to_char(sysdate,'YYYYMMDD')
+		  	and (deposit_mode = 2 or deposit_mode =5) and status=2
+	]]>
+	</select>
+	
+	<select id="queryThirdChargeRecordsTemp" parameterType="map" resultType="long">
+	<![CDATA[
+		select count(*) from fund_charge where
+			 USER_ID = #{userId}  and CHARGE_TIME < to_date( #{firstLimitDay} ,'YYYYMMDD HH24:MI:SS')
+			 and (deposit_mode = 2 or deposit_mode =5) and status=2
+	]]>
+	</select>
+	
+	<select id="queryThirdChargeRecords" parameterType="map" resultType="long">
+	<![CDATA[
+		select count(*) from fund_charge where
+			USER_ID = #{userId} and to_char(CHARGE_TIME,'YYYYMMDD hh24:mi:ss') < to_char(sysdate-#{secondLimitDay},'YYYYMMDD hh24:mi:ss')
+			and (deposit_mode = 2 or deposit_mode =5) and status=2
+	]]>
+	</select>
+
+	<select id="queryBankDayChargeSum" parameterType="map"
+		resultType="long">
+	<![CDATA[
+		select sum(REAL_CHARGE_AMT) from fund_charge where
+		 	charge_time >= trunc(sysdate) AND charge_time < trunc(sysdate+1)
+		  	and deposit_mode=#{deposit_mode} and status=2
+	]]>
+	</select>
+	<!--未处理单据-->
+	<select id="getCountUnhandle" resultType="integer">
+		select count(1) as cnt
+		 from 
+ 		fund_charge
+		WHERE status = 1
+	</select>	
+
+</mapper>

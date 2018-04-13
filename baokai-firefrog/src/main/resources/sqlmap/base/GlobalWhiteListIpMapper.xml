@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListIpVO">
+	<resultMap id="GlobalWhiteListIpResult"
+		type="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListIpVO">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="globalWhiteListIpColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	IP_ADDR as ipAddr,
+	        	USER_ACCUNT as userAccunt,
+	        	STATUS as status,
+	        	REMARK as remark,
+	        	CREATE_USER as createUser,
+	        	CREATE_TIME as cerateTime,
+	        	UPDATE_USER as updateUser,
+	        	UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListIpVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GLOBAL_WHITE_LIST_IP.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GLOBAL_WHITE_LIST_IP (
+	        	ID ,
+	        	IP_ADDR ,
+	        	USER_ACCUNT ,
+	        	STATUS ,
+	        	REMARK ,
+	        	CREATE_USER ,
+	        	CREATE_TIME ,
+	        	UPDATE_USER ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{ipAddr,javaType=string,jdbcType=VARCHAR} ,
+	        	#{userAccunt,javaType=string,jdbcType=VARCHAR} ,
+	        	#{status,javaType=long,jdbcType=VARCHAR} ,
+	        	#{remark,javaType=string,jdbcType=DECIMAL} ,
+	        	#{createUser,javaType=string,jdbcType=VARCHAR} ,
+	        	#{cerateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateUser,javaType=string,jdbcType=VARCHAR} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP}
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListIpVO">
+	        UPDATE GLOBAL_WHITE_LIST_IP 
+	        <set>
+				USER_ACCUNT = #{userAccunt,javaType=string,jdbcType=VARCHAR} ,
+				STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+				IP_ADDR = #{ipAddr} ,
+			<if test="@Ognl@isNotEmpty(remark)">
+				REMARK = #{remark,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+				UPDATE_USER = #{updateUser,javaType=string,jdbcType=VARCHAR} ,
+				UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP}
+			</set>
+	        WHERE 
+		        IP_ADDR = #{ipAddr_bk}  
+	</update>
+	<delete id="deleteWhiteList" parameterType="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListIpVO" >
+	    <![CDATA[
+	        delete from  GLOBAL_WHITE_LIST_IP
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</delete>
+
+	<sql id="getwhiteListIpDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(ipAddr)">
+				and IP_ADDR = #{ipAddr}
+			</if>
+			<if test="@Ognl@isNotEmpty(userAccunt)">
+				and USER_ACCUNT like '%${userAccunt}%'
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = status
+			</if>
+			
+		</where>
+	</sql>
+
+	<select id="getCountByCondition" resultType="java.lang.Long" 
+	parameterType="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListIpVO">
+		select count(*) from GLOBAL_WHITE_LIST_IP
+		WHERE
+			STATUS = #{status}
+			<if test="@Ognl@isNotEmpty(id)">
+				AND ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(ipAddr)">
+				AND IP_ADDR = #{ipAddr}
+			</if>
+	</select>
+	
+	<select id="getWhiteListIpByEntity" resultMap="GlobalWhiteListIpResult" 
+	parameterType="com.winterframework.firefrog.global.dao.vo.GlobalWhiteListIpVO">
+		select 
+			<include refid="globalWhiteListIpColumns" />
+		from GLOBAL_WHITE_LIST_IP
+			<include refid="getwhiteListIpDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getWhiteListIpByPage" resultMap="GlobalWhiteListIpResult">
+		select
+		<include refid="globalWhiteListIpColumns" />
+		from GLOBAL_WHITE_LIST_IP
+		WHERE
+			STATUS = #{status}
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(ipAddr)">
+				and IP_ADDR = #{ipAddr}
+			</if>
+			<if test="@Ognl@isNotEmpty(userAccunt)">
+				and USER_ACCUNT like '%${userAccunt}%'
+				AND EXISTS (SELECT 1 FROM USER_CUSTOMER WHERE USER_CUSTOMER.ACCOUNT = #{userAccunt})
+			</if>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="getWhiteListIpByUser"  resultMap="GlobalWhiteListIpResult">
+		SELECT ID as id, IP_ADDR as ipAddr , USER_ACCUNT As userAccunt
+		from GLOBAL_WHITE_LIST_IP
+					WHERE STATUS = 1 
+					AND USER_ACCUNT like '%${userAccunt}%'		
+	</select>
+	
+</mapper>

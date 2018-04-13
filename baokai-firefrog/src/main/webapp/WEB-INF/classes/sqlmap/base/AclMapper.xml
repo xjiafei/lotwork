@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.acl.dao.vo.AclVO">
+	<resultMap id="AclResult" type="com.winterframework.firefrog.acl.dao.vo.AclVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="aclColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	PID as pid,
+	        	NAME as name,
+	        	TYPE as type,
+	        	ORDERS as orders,
+	        	LABEL as label
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.acl.dao.vo.AclVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        ACL (
+	        	ID ,
+	        	PID ,
+	        	NAME ,
+	        	TYPE ,
+	        	ORDERS ,
+	        	LABEL 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{pid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{name,javaType=string,jdbcType=VARCHAR} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{orders,javaType=long,jdbcType=DECIMAL} ,
+	        	#{label,javaType=string,jdbcType=VARCHAR} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.acl.dao.vo.AclVO">
+	    <![CDATA[
+	        UPDATE ACL SET
+		        PID = #{pid,javaType=long,jdbcType=DECIMAL} ,
+		        NAME = #{name,javaType=string,jdbcType=VARCHAR} ,
+		        TYPE = #{type,javaType=long,jdbcType=DECIMAL} ,
+		        ORDERS = #{orders,javaType=long,jdbcType=DECIMAL} ,
+		        LABEL = #{label,javaType=string,jdbcType=VARCHAR} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACL where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="AclResult" flushCache="false">
+			select <include refid="aclColumns" />
+		    <![CDATA[
+			    from ACL 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AclResult" flushCache="false">
+			select <include refid="aclColumns" />
+			    from ACL 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>
+		
+		<select id="queryAclsByGroup" parameterType="long"  resultMap="AclResult" flushCache="false">
+			select acl.ID as id,
+	        	PID as pid,
+	        	NAME as name,
+	        	TYPE as type,
+	        	ORDERS as orders,
+	        	LABEL as label
+		    <![CDATA[
+			    from ACL acl,ACL_GROUP_AUTHORIZATION auth
+		        where acl.id = auth.acl_id
+		        and auth.gid = #{groupId}
+		        order by acl.ORDERS
+		    ]]>				
+		</select>
+
+		<select id="queryAclsByUser" parameterType="long"  resultMap="AclResult" flushCache="false">
+			select acl.ID as id,
+	        	PID as pid,
+	        	NAME as name,
+	        	TYPE as type,
+	        	ORDERS as orders,
+	        	LABEL as label
+		    <![CDATA[
+			    from ACL acl,ACL_GROUP_AUTHORIZATION auth,ACL_USER usr
+		        where acl.id = auth.acl_id
+		        and auth.gid = usr.group_id
+		        and usr.id = #{userId}
+		        order by acl.ORDERS
+		    ]]>				
+		</select>
+			
+
+	<sql id="aclDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(pid)">
+				and PID = #{pid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(name)">
+				and NAME = #{name}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orders)">
+				and ORDERS = #{orders}
+			</if>
+	       <if test="@Ognl@isNotEmpty(label)">
+				and LABEL = #{label}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AclResult"  flushCache="false">
+    	select <include refid="aclColumns" />
+	    from ACL 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACL 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ACL 
+		<include refid="aclDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AclResult">
+    	select <include refid="aclColumns" />
+	    from ACL 
+		<include refid="aclDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

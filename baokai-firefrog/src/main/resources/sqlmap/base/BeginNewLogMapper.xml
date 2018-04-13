@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginNewLog">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginNewLog">
+			<result column="ID" property="id"/>
+			<result column="LOG_TYPE" property="logType"/>
+			<result column="LOG_TIME" property="logTime"/>
+			<result column="TITLE" property="title"/>
+			<result column="BEFORE_UPDATE" property="beforeUpdate"/>
+			<result column="AFTER_UPDATE" property="afterUpdate"/>
+			<result column="LOG_USER" property="logUser"/>
+
+ </resultMap>
+	<sql id="fields">ID,LOG_TYPE,LOG_TIME,TITLE,BEFORE_UPDATE,AFTER_UPDATE,LOG_USER
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="logType != null">
+			And LOG_TYPE = #{logType}
+		</if>
+
+		<if test="logTime != null">
+			And LOG_TIME = #{logTime}
+		</if>
+
+		<if test="title != null">
+			And TITLE = #{title}
+		</if>
+
+		<if test="beforeUpdate != null">
+			And BEFORE_UPDATE = #{beforeUpdate}
+		</if>
+
+		<if test="afterUpdate != null">
+			And AFTER_UPDATE = #{afterUpdate}
+		</if>
+
+		<if test="logUser != null">
+			And LOG_USER = #{logUser}
+		</if>
+
+		</where>
+	</sql>
+	
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewLog">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_LOG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_LOG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_LOG
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewLog"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_NEW_LOG.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_NEW_LOG (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{logType,javaType=long,jdbcType=DECIMAL},
+	         #{logTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{title,javaType=string,jdbcType=VARCHAR},
+	         #{beforeUpdate,javaType=string,jdbcType=VARCHAR},
+	         #{afterUpdate,javaType=string,jdbcType=VARCHAR},
+	         #{logUser,javaType=string,jdbcType=VARCHAR}
+	        )
+	</insert>
+	
+	<select id="getCountByPage" resultType="long" parameterType="long">
+        select count(1) from BEGIN_NEW_LOG 
+		<include refid="whereCondition"/>       
+    </select>
+    
+   <select id="getByPage" resultMap="result" parameterType="long">
+    	select <include refid="fields" />
+	    from BEGIN_NEW_LOG 
+	  	<include refid="whereCondition"/>  
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+</mapper>

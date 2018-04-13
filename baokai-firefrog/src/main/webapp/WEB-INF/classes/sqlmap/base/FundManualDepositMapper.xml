@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ 
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundManualDepositVO">
+	<resultMap id="FundManualDepositResult" type="com.winterframework.firefrog.fund.dao.vo.FundManualDepositVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundManualDepositColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	TYPE_ID as typeId,
+	        	RCV_ACCOUNT as rcvAccount,
+	        	SN as sn,
+	        	DEPOSIT_AMT as depositAmt,
+	        	STATUS as status,
+	        	APPROVER as approver,
+	        	APPROVE_TIME as approveTime,
+	        	APPLY_ACCOUNT as applyAccount,
+	        	APPLY_TIME as applyTime,
+	        	USER_BANK_STRUC as userBankStruc,
+	        	MC_NOTICE_TIME as mcNoticeTime,
+	        	MEMO as memo,
+	        	NOTE as note,
+	        	attach,
+	        	rcv_id as rcvId,
+	        	charge_sn as chargeSn,
+	        	is_batch as isBatch
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundManualDepositVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_FUND_MANUAL_DEPOSIT_ID.Nextval from dual
+			   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_MANUAL_DEPOSIT (
+	        	ID ,
+	        	TYPE_ID ,
+	        	RCV_ACCOUNT ,
+	        	SN ,
+	        	DEPOSIT_AMT ,
+	        	STATUS ,
+	        	APPROVER ,
+	        	APPROVE_TIME ,
+	        	APPLY_ACCOUNT ,
+	        	APPLY_TIME ,
+	        	USER_BANK_STRUC ,
+	        	MC_NOTICE_TIME ,
+	        	MEMO,
+	        	NOTE,
+	        	attach,
+	        	rcv_id,
+	        	is_batch
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{typeId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcvAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{sn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{depositAmt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{approver,javaType=string,jdbcType=VARCHAR} ,
+	        	#{approveTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{applyAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{applyTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{userBankStruc,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcNoticeTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{memo,javaType=string,jdbcType=VARCHAR},
+	        	#{note,javaType=string,jdbcType=VARCHAR},
+	        	#{attach,javaType=string,jdbcType=VARCHAR},
+	        	#{rcvId,javaType=long,jdbcType=DECIMAL},
+	        	#{isBatch,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>	
+	
+		</insert>
+		
+		<update id="updateDemo" parameterType="com.winterframework.firefrog.fund.dao.vo.FundManualDepositVO">
+	        UPDATE FUND_MANUAL_DEPOSIT SET MEMO = #{memo,javaType=string,jdbcType=VARCHAR}
+	        WHERE 
+		        ID = #{id} 
+		</update>
+		
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.FundManualDepositVO">
+	        UPDATE FUND_MANUAL_DEPOSIT SET
+	        <if test="@Ognl@isNotEmpty(typeId)">
+		        TYPE_ID = #{typeId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcvAccount)">
+		        RCV_ACCOUNT = #{rcvAccount,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(chargeSn)">
+		        charge_sn = #{chargeSn,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(sn)">
+		        SN = #{sn,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcAmount)">
+		        MC_AMOUNT = #{mcAmount,javaType=long,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(depositAmt)">
+		        DEPOSIT_AMT = #{depositAmt,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(approver)">
+		        APPROVER = #{approver,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(approveTime)">
+		        APPROVE_TIME = #{approveTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(applyAccount)">
+		        APPLY_ACCOUNT = #{applyAccount,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(applyTime)">
+		        APPLY_TIME = #{applyTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(userBankStruc)">
+		        USER_BANK_STRUC = #{userBankStruc,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcNoticeTime)">
+		        MC_NOTICE_TIME = #{mcNoticeTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(apprDemo)">
+		        APPR_DEMO = #{apprDemo,javaType=string,jdbcType=VARCHAR} ,
+		     </if>
+		    <if test="@Ognl@isNotEmpty(memo)">
+		        MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(status)">
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL}
+		    </if>
+	        WHERE 
+		        ID = #{id} 
+		</update>
+		
+		<update id="updateManualDepositCheckStatus" parameterType="com.winterframework.firefrog.fund.dao.vo.FundManualDepositVO">
+	        UPDATE FUND_MANUAL_DEPOSIT SET
+	        <if test="@Ognl@isNotEmpty(typeId)">
+		        TYPE_ID = #{typeId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcvAccount)">
+		        RCV_ACCOUNT = #{rcvAccount,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(chargeSn)">
+		        charge_sn = #{chargeSn,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(sn)">
+		        SN = #{sn,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcAmount)">
+		        MC_AMOUNT = #{mcAmount,javaType=long,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(depositAmt)">
+		        DEPOSIT_AMT = #{depositAmt,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(approver)">
+		        APPROVER = #{approver,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(approveTime)">
+		        APPROVE_TIME = #{approveTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(applyAccount)">
+		        APPLY_ACCOUNT = #{applyAccount,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(applyTime)">
+		        APPLY_TIME = #{applyTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(userBankStruc)">
+		        USER_BANK_STRUC = #{userBankStruc,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcNoticeTime)">
+		        MC_NOTICE_TIME = #{mcNoticeTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(apprDemo)">
+		        APPR_DEMO = #{apprDemo,javaType=string,jdbcType=VARCHAR} ,
+		     </if>
+		    <if test="@Ognl@isNotEmpty(memo)">
+		        MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(status)">
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL}
+		    </if>
+	        WHERE 
+		        ID = #{id} and status in (0,1)
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_MANUAL_DEPOSIT where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="FundManualDepositResult" flushCache="false">
+			select <include refid="fundManualDepositColumns" />
+		    <![CDATA[
+			    from FUND_MANUAL_DEPOSIT 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+	    <select id="getBySn" parameterType="String" resultMap="FundManualDepositResult" flushCache="false">
+			select <include refid="fundManualDepositColumns" />
+		    <![CDATA[
+			    from FUND_MANUAL_DEPOSIT 
+		        where 
+		        SN = #{sn} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="FundManualDepositResult" flushCache="false">
+			select <include refid="fundManualDepositColumns" />
+			    from FUND_MANUAL_DEPOSIT 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="fundManualDepositDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(typeId)">
+				and TYPE_ID = #{typeId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(rcvAccount)">
+				and RCV_ACCOUNT = #{rcvAccount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sn)">
+				and SN = #{sn}
+			</if>
+			<if test="isVip != null and isVip == 0">
+				and VIP_LVL = 0
+			</if>
+			<if test="isVip != null and isVip == 1">
+				and VIP_LVL > 0
+			</if>
+			<if test="isBatch !=null">
+				and is_batch=#{isBatch}
+			</if>
+	       <if test="@Ognl@isNotEmpty(depositAmt)">
+				and DEPOSIT_AMT = #{depositAmt}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS in
+		       	<foreach item="status" index="index" collection="status" open="(" separator="," close=")">
+		       		#{status}
+		       	</foreach>
+			</if>
+	       <if test="@Ognl@isNotEmpty(approver)">
+				and APPROVER = #{approver}
+			</if>
+	       <if test="@Ognl@isNotEmpty(approveTime)">
+				and APPROVE_TIME = #{approveTime}
+			</if>
+			   <if test="@Ognl@isNotEmpty(apprDateStart)">
+				and APPROVE_TIME >= #{apprDateStart}
+			</if>
+			   <if test="@Ognl@isNotEmpty(apprDateEnd)">
+			   <![CDATA[
+				and APPROVE_TIME <= #{apprDateEnd}
+				]]>
+			</if>
+	       <if test="@Ognl@isNotEmpty(applyAccount)">
+				and APPLY_ACCOUNT = #{applyAccount}
+			</if>
+			 <if test="@Ognl@isNotEmpty(apprAccount)">
+				and approver = #{apprAccount}
+			</if>
+			
+	       <if test="@Ognl@isNotEmpty(applyTime)">
+				and APPLY_TIME = #{applyTime}
+			</if>
+			  <if test="@Ognl@isNotEmpty(gmtCreatedStart)">
+				and APPLY_TIME >= #{gmtCreatedStart}
+			</if>
+			 <if test="@Ognl@isNotEmpty(gmtCreatedEnd)">
+			  <![CDATA[
+				and APPLY_TIME <= #{gmtCreatedEnd}
+				 ]]>	
+			</if>
+			
+	       <if test="@Ognl@isNotEmpty(userBankStruc)">
+				and USER_BANK_STRUC = #{userBankStruc}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mcNoticeTime)">
+				and MC_NOTICE_TIME = #{mcNoticeTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(memo)">
+				and MEMO = #{memo}
+			</if>
+	       <if test="@Ognl@isNotEmpty(apprDemo)">
+				and APPR_DEMO = #{apprDemo}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="FundManualDepositResult"  flushCache="false">
+    	select <include refid="fundManualDepositColumns" />
+	    from FUND_MANUAL_DEPOSIT 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from FUND_MANUAL_DEPOSIT 
+    </select>
+    <select id="getDepositCountByPage" resultType="long">
+        select count(*) from VIEW_FUND_MANUAL_DEPOSIT 
+		<include refid="fundManualDepositDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getDepositByPage" resultMap="FundManualDepositResult">
+    	select <include refid="fundManualDepositColumns" />,vip_lvl as vipLvl 
+	    from VIEW_FUND_MANUAL_DEPOSIT 
+		<include refid="fundManualDepositDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

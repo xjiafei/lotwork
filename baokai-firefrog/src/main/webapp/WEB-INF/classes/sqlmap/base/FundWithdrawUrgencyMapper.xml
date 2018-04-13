@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundWithdrawUrgency">
+
+ <resultMap id="result" type="com.winterframework.firefrog.fund.dao.vo.FundWithdrawUrgency">
+			<result column="ID" property="id"/>
+			<result column="URGENCY_CONTEXT" property="urgencyContext"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="CREATE_USER" property="createUser"/>
+			<result column="UPDATE_TIME" property="updateTime"/>
+			<result column="UPDATE_USER" property="updateUser"/>
+			<result column="CANCEL_FLAG" property="cancelFlag"/>
+ </resultMap>
+	
+	<sql id="fields">ID,URGENCY_CONTEXT,CREATE_TIME,CREATE_USER,UPDATE_TIME,UPDATE_USER,CANCEL_FLAG
+	</sql>
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="urgencyContext != null">
+			And URGENCY_CONTEXT = #{urgencyContext}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="createUser != null">
+			And CREATE_USER = #{createUser}
+		</if>
+
+		</where>
+
+	</sql>
+	
+	
+	<select id="getAll" resultMap="result" parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdrawUrgency">
+		Select <include refid="fields"/>
+				From FUND_WITHDRAW_URGENCY order by create_time desc
+	</select>
+	
+	<select id="findAll" resultMap="result" parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdrawUrgency">
+		Select <include refid="fields"/>
+				From FUND_WITHDRAW_URGENCY
+		<include refid="whereCondition"/> order by create_time desc
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdrawUrgency"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_FUND_WITHDRAW_URGENCY.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        FUND_WITHDRAW_URGENCY (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{urgencyContext,javaType=string,jdbcType=VARCHAR},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{createUser,javaType=string,jdbcType=VARCHAR},
+	         #{updateTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{updateUser,javaType=string,jdbcType=VARCHAR},
+	         #{cancelFlag,javaType=string,jdbcType=VARCHAR}
+	        )
+	</insert>
+	
+	 <select id="getUrgenctAfterTime" parameterType="java.util.Date" resultMap="result" flushCache="false">
+			select *
+			    from FUND_WITHDRAW_URGENCY 
+		        where 
+		        CREATE_TIME >= #{date} 
+	</select>	
+		
+	<select id="getUrgenctBetweenTime" parameterType="hashMap" resultMap="result" flushCache="false">
+			<![CDATA[
+			select *
+			    from FUND_WITHDRAW_URGENCY 
+		        where 
+		        CREATE_TIME >= #{afterTime} 
+		        and 
+		        CREATE_TIME <= #{beforeTime}  
+		        and 
+				nvl(CANCEL_FLAG,'N') != 'Y'
+			]]>
+		     
+	</select>
+	
+	<update id="update"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundWithdrawUrgency">
+		
+		UPDATE FUND_WITHDRAW_URGENCY
+		
+		<set>
+		
+		    <if test="@Ognl@isNotEmpty(updateUser)">
+				UPDATE_USER = #{updateUser,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			
+				UPDATE_TIME = SYSDATE,
+			
+			<if test="@Ognl@isNotEmpty(cancelFlag)">
+				CANCEL_FLAG = #{cancelFlag,javaType=string,jdbcType=VARCHAR} 
+			</if>
+				
+		
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+
+</mapper>

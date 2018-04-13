@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginAwardLog">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginAwardLog">
+			<result column="ID" property="id"/>
+			<result column="USER_ID" property="userId"/>
+			<result column="AWARD_ID" property="awardId"/>
+			<result column="AWARD_LOTTERY_ID" property="awardLotteryId"/>
+			<result column="PRIZE" property="prize"/>
+			<result column="AWARD_TIME" property="awardTime"/>
+
+ </resultMap>
+	<sql id="fields">ID,USER_ID,AWARD_ID,PRIZE,AWARD_TIME,AWARD_LOTTERY_ID
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="userId != null">
+			And USER_ID = #{userId}
+		</if>
+
+		<if test="awardId != null">
+			And AWARD_ID = #{awardId}
+		</if>
+
+		<if test="awardLotteryId != null">
+			And  AWARD_LOTTERY_ID = #{awardLotteryId}
+		</if>
+
+		<if test="prize != null">
+			And PRIZE = #{prize}
+		</if>
+
+		<if test="awardTime != null">
+			And AWARD_TIME = #{awardTime}
+		</if>
+
+		</where>
+
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginAwardLog">
+		Select <include refid="fields"/>
+				From BEGIN_AWARD_LOG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_AWARD_LOG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_AWARD_LOG
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginAwardLog"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_AWARD_LOG.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_AWARD_LOG (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{userId,javaType=long,jdbcType=DECIMAL},
+	         #{awardId,javaType=long,jdbcType=DECIMAL},
+	         #{prize,javaType=long,jdbcType=DECIMAL},
+	         #{awardTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{awardLotteryId,javaType=long,jdbcType=DECIMAL}	         
+	        )
+	</insert>
+
+	<select id="findByUserId" resultMap="result" parameterType="long">
+		Select <include refid="fields" /> 
+				From BEGIN_AWARD_LOG
+		where user_id = #{userId}		
+	</select>
+
+	<select id="getCountByPage" resultType="Long">
+		Select count(1) 
+				From BEGIN_AWARD_LOG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getByPage" resultType="Long">
+		Select <include refid="fields" /> 
+				From BEGIN_AWARD_LOG
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+</mapper>

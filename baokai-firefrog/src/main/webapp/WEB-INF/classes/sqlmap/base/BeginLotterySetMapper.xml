@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginLotterySet">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginLotterySet">
+			<result column="ID" property="id"/>
+			<result column="CREATE_USER" property="createUser"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="MODIFY_USER" property="modifyUser"/>
+			<result column="MODIFY_TIME" property="modifyTime"/>
+			<result column="LOTTERY_TYPE" property="lotteryType"/>
+			<result column="LOTTERY_UNIT" property="lotteryUnit"/>
+			<result column="LOTTERY_LOW" property="lotteryLow"/>
+			<result column="LOTTERY_HIGH" property="lotteryHigh"/>
+			<result column="VERSION" property="version"/>
+ </resultMap>
+	<sql id="fields">ID,CREATE_USER,CREATE_TIME,MODIFY_USER,MODIFY_TIME,LOTTERY_TYPE,LOTTERY_UNIT,LOTTERY_LOW,LOTTERY_HIGH ,VERSION
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="createUser != null">
+			And CREATE_USER = #{createUser}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="modifyUser != null">
+			And MODIFY_USER = #{modifyUser}
+		</if>
+
+		<if test="modifyTime != null">
+			And MODIFY_TIME = #{modifyTime}
+		</if>
+
+		<if test="lotteryType != null">
+			And LOTTERY_TYPE = #{lotteryType}
+		</if>
+
+		<if test="lotteryUnit != null">
+			And LOTTERY_UNIT = #{lotteryUnit}
+		</if>
+
+		<if test="lotteryLow != null">
+			And LOTTERY_LOW = #{lotteryLow}
+		</if>
+
+		<if test="lotteryHigh != null">
+			And LOTTERY_HIGH = #{lotteryHigh}
+		</if>
+
+		<if test="version != null">
+			And VERSION = #{version}
+		</if>
+		</where>
+
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginLotterySet">
+		Select <include refid="fields"/>
+				From BEGIN_LOTTERY_SET
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_LOTTERY_SET
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_LOTTERY_SET
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginLotterySet"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_LOTTERY_SET.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_LOTTERY_SET (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{createUser,javaType=string,jdbcType=VARCHAR},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{modifyUser,javaType=string,jdbcType=VARCHAR},
+	         #{modifyTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{lotteryType,javaType=long,jdbcType=DECIMAL},
+	         #{lotteryUnit,javaType=long,jdbcType=DECIMAL},
+	         #{lotteryLow,javaType=long,jdbcType=DECIMAL},
+	         #{lotteryHigh,javaType=long,jdbcType=DECIMAL},
+     	     #{version,javaType=long,jdbcType=DECIMAL}
+	        )
+	</insert>
+
+	<select id="getCountByPage" resultType="Long">
+		Select count(1) 
+				From BEGIN_LOTTERY_SET
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getByPage" resultType="Long">
+		Select <include refid="fields" /> 
+				From BEGIN_LOTTERY_SET
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+	<select id="findMaxVersion" resultMap="result" >
+		Select <include refid="fields"/>
+				From BEGIN_LOTTERY_SET
+		where VERSION = (select max(VERSION) from BEGIN_LOTTERY_SET) order by id
+	</select>
+	
+	<select id="getMaxVersion" resultType="long">
+		Select nvl(max(version),0)
+				From BEGIN_LOTTERY_SET
+	</select>
+	
+	<select id="findByVersion" resultMap="result" parameterType="long">
+		Select <include refid="fields"/>
+				From BEGIN_LOTTERY_SET
+		where VERSION = #{version} order by 
+	</select>
+
+	<select id="findById" resultMap="result" parameterType="long">
+		Select <include refid="fields"/>
+				From BEGIN_LOTTERY_SET
+		where id = #{id}
+	</select>
+
+</mapper>

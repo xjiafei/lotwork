@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<urlrewrite use-query-string="true" >
+  <rule>
+        <from>^/fund/mownecum/mcRequest\?type=([a-zA-Z]+)</from>
+        <to>/fund/mownecum/$1</to>
+  </rule>  
+  <rule>
+        <from>^/fund/sppay/notify</from>
+        <to>/fund/sppay/chargeConfirm</to>
+  </rule>
+  <rule>
+        <from>^/fund/ddbpay/notify</from>
+        <to>/fund/ddbpay/chargeConfirm</to>
+  </rule>
+  <rule>
+        <from>^/fund/wftpay/notify</from>
+        <to>/fund/wftpay/chargeConfirm</to>
+  </rule>
+  <rule>
+        <from>^/fund/dinpay/notify</from>
+        <to>/fund/dinpay/chargeConfirm</to>
+  </rule>
+  <rule>
+        <from>^/fund/huayinpay/notify</from>
+        <to>/fund/huayinpay/chargeConfirm</to>
+  </rule>
+  <rule>
+        <from>^/fund/yinbangpay/notify</from>
+        <to>/fund/yinbangpay/chargeConfirm</to>
+  </rule>
+  <rule>
+        <from>^/fund/jinyangpay/notify</from>
+        <to>/fund/jinyangpay/chargeConfirm</to>
+  </rule>
+</urlrewrite>
+

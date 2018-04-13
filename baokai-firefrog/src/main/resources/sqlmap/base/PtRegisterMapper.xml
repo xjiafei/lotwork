@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserPtRegister">
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<resultMap id="ptRegisterResult" type="com.winterframework.firefrog.user.dao.vo.UserPtRegister">
+	</resultMap>
+	
+	<sql id="userPtRegisterColumns">
+	    <![CDATA[
+	        	USERID as userid ,
+	        	PARENTID as parentId,
+	        	TYPE as type
+	    ]]>
+	</sql>
+	
+	<sql id="userPtRegisterWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and USERID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(parentId)">
+				and PARENTID = #{parentId}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+		</where>
+	</sql>
+	
+	<insert id="insertToPt"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserPtRegister"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+
+	    <![CDATA[
+	        INSERT INTO
+	        USER_PT_REGISTER (
+	        	USERID ,
+	        	PARENTID ,
+	        	TYPE 
+	        ) VALUES (
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{parentId,javaType=long,jdbcType=DECIMAL},
+	        	#{type,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>
+	</insert>
+	
+	<select id="getUserPtRegister" parameterType="com.winterframework.firefrog.user.dao.vo.UserPtRegister"
+    		 resultMap="ptRegisterResult" flushCache="false">
+			SELECT
+			<include refid="userPtRegisterColumns" /> 
+			FROM USER_PT_REGISTER
+			<include refid="userPtRegisterWhere" />
+	</select>	
+</mapper>

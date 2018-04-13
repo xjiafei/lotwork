@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.advert.dao.vo.AdSpaceVO">
+	<resultMap id="AdSpaceResult" type="com.winterframework.firefrog.advert.dao.vo.AdSpaceVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="adSpaceColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	AD_PARAM_ID as adParamId,
+	        	WIDTH as width,
+	        	HEIGHT as height,
+	        	NAME as name,
+	        	URL_TARGET as urlTarget,
+	        	DFT_IMG as dftImg,
+	        	IS_USED as isUsed,
+	        	PAGE_ID as pageId,
+	        	DFT_IMGS as dftImgs,
+	        	IS_DFT_USED as isDftUsed
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.advert.dao.vo.AdSpaceVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_ADSPAC_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        AD_SPACE (
+	        	ID ,
+	        	AD_PARAM_ID ,
+	        	WIDTH ,
+	        	HEIGHT ,
+	        	NAME ,
+	        	URL_TARGET ,
+	        	DFT_IMG ,
+	        	IS_USED ,
+	        	PAGE_ID ,
+	        	DFT_IMGS ,
+	        	IS_DFT_USED 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{adParamId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{width,javaType=long,jdbcType=DECIMAL} ,
+	        	#{height,javaType=long,jdbcType=DECIMAL} ,
+	        	#{name,javaType=string,jdbcType=VARCHAR} ,
+	        	#{urlTarget,javaType=long,jdbcType=DECIMAL} ,
+	        	#{dftImg,javaType=string,jdbcType=VARCHAR} ,
+	        	#{isUsed,javaType=long,jdbcType=DECIMAL} ,
+	        	#{pageId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{dftImgs,javaType=string,jdbcType=VARCHAR} ,
+	        	#{isDftUsed,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.advert.dao.vo.AdSpaceVO">
+	        UPDATE AD_SPACE
+	         <set>
+		        <if test="@Ognl@isNotEmpty(adParamId)">
+		     	   AD_PARAM_ID = #{adParamId,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(width)">
+		     	   WIDTH = #{width,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(height)">
+		     	   HEIGHT = #{height,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(name)">
+		       	 NAME = #{name,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(urlTarget)">
+		       	 URL_TARGET = #{urlTarget,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(dftImg)">
+		        	DFT_IMG = #{dftImg,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(isUsed)">
+		        	IS_USED = #{isUsed,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(pageId)">
+		        	PAGE_ID = #{pageId,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        DFT_IMGS = #{dftImgs,javaType=string,jdbcType=VARCHAR} ,
+		        <if test="@Ognl@isNotEmpty(isDftUsed)">
+		        	IS_DFT_USED = #{isDftUsed,javaType=long,jdbcType=DECIMAL} 
+		        </if>
+		        </set>
+	        WHERE 
+		        ID = #{id} 
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from AD_SPACE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="AdSpaceResult" flushCache="false">
+			select <include refid="adSpaceColumns" />
+		    <![CDATA[
+			    from AD_SPACE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AdSpaceResult" flushCache="false">
+			select <include refid="adSpaceColumns" />
+			    from AD_SPACE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>
+		
+		<select id="getByNames" parameterType="list"  resultMap="AdSpaceResult" flushCache="false">
+			select <include refid="adSpaceColumns" />
+			    from AD_SPACE 
+		        where name in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>		
+
+	<sql id="adSpaceDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(adParamId)">
+				and AD_PARAM_ID = #{adParamId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(width)">
+				and WIDTH = #{width}
+			</if>
+	       <if test="@Ognl@isNotEmpty(height)">
+				and HEIGHT = #{height}
+			</if>
+	       <if test="@Ognl@isNotEmpty(name)">
+				and NAME = #{name}
+			</if>
+	       <if test="@Ognl@isNotEmpty(urlTarget)">
+				and URL_TARGET = #{urlTarget}
+			</if>
+	       <if test="@Ognl@isNotEmpty(dftImg)">
+				and DFT_IMG = #{dftImg}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isUsed)">
+				and IS_USED = #{isUsed}
+			</if>
+	       <if test="@Ognl@isNotEmpty(pageId)">
+				and PAGE_ID = #{pageId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(dftImgs)">
+				and DFT_IMGS = #{dftImgs}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isDftUsed)">
+				and IS_DFT_USED = #{isDftUsed}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAdSpacesByAd" parameterType="java.lang.Long" resultMap="AdSpaceResult"  flushCache="false">
+		select 
+			ads.ID as id,
+        	ads.AD_PARAM_ID as adParamId,
+        	ads.WIDTH as width,
+        	ads.HEIGHT as height,
+        	ads.NAME as name,
+        	ads.URL_TARGET as urlTarget,
+        	ads.DFT_IMG as dftImg,
+        	ads.IS_USED as isUsed,
+        	ads.PAGE_ID as pageId,
+        	ads.DFT_IMGS as dftImgs,
+        	ads.IS_DFT_USED as isDftUsed
+		from AD_SPACE ads,AD_ADSPACE_RELATION adr  
+			where ads.id= adr.SPACE_ID and adr.AD_ID=#{adId}
+   	</select>
+	
+	<select id="getAll" resultMap="AdSpaceResult"  flushCache="false">
+	  <![CDATA[
+	    select ID as id,
+	        	AD_PARAM_ID as adParamId,
+	        	WIDTH as width,
+	        	HEIGHT as height,
+	        	NAME as name,
+	        	URL_TARGET as urlTarget,
+	        	DFT_IMG as dftImg,
+	        	IS_USED as isUsed,
+	        	PAGE_ID as pageId,
+	        	DFT_IMGS as dftImgs,
+	        	IS_DFT_USED as isDftUsed,
+	        	allProcess as allProcess,
+	        	inProcess as inProcess,
+	        	noProcess as noProcess
+	        	from  view_ad_space
+		 ]]>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from AD_SPACE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from AD_SPACE 
+		<include refid="adSpaceDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AdSpaceResult">
+    	select <include refid="adSpaceColumns" />
+	    from AD_SPACE 
+		<include refid="adSpaceDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

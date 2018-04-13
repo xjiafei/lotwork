@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginMission">
+ <resultMap id="cancelList" type="com.winterframework.firefrog.beginmession.entity.CancelListData"></resultMap>
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginMission">
+			<result column="ID" property="id"/>
+			<result column="USER_ID" property="userId"/>
+			<result column="STATUS" property="status"/>
+			<result column="BIND_CARD_TIME" property="bindCardTime"/>
+			<result column="MISSION_START_TIME" property="missionStartTime"/>
+			<result column="CHARGE_AMT" property="chargeAmt"/>
+			<result column="WITHDRAW_AMT" property="withdrawAmt"/>
+			<result column="CANCEL_REASON" property="cancelReason"/>			
+			<result column="CHARGE_TIME" property="chargeTime"/>
+			<result column="WITHDRAW_TIME" property="withdrawTime"/>
+			<result column="BIND_CARD_END_TIME" property="bindCardEndTime"/>									
+			<result column="MISSION_END_TIME" property="missionEndTime"/>																											
+			<result column="CANCEL_TIME" property="cancelTime"/>
+			<result column="CANCEL_USER" property="cancelUser"/>																								
+			<result column="BIND_CARD_LOCK_TIME" property="bindCardLockTime"/>
+			<result column="MISSION_VALID_TIME" property="missionValidTime"/>																																			
+ </resultMap>
+ 
+	<sql id="fields">ID,USER_ID,STATUS,BIND_CARD_TIME,MISSION_START_TIME,CHARGE_AMT,WITHDRAW_AMT,CANCEL_REASON,CHARGE_TIME,WITHDRAW_TIME,BIND_CARD_END_TIME,MISSION_END_TIME,
+				     CANCEL_TIME ,CANCEL_USER,BIND_CARD_LOCK_TIME,MISSION_VALID_TIME
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="userId != null">
+			And USER_ID = #{userId}
+		</if>
+
+		<if test="status != null">
+			And STATUS = #{status}
+		</if>
+
+		<if test="bindCardTime != null">
+			And BIND_CARD_TIME = #{bindCardTime}
+		</if>
+
+		<if test="missionStartTime != null">
+			And MISSION_START_TIME = #{missionStartTime}
+		</if>
+
+		<if test="withdrawAmt != null">
+			And WITHDRAW_AMT = #{withdrawAmt}
+		</if>
+		
+		<if test="chargeAmt != null">
+			And CHARGE_AMT = #{chargeAmt}
+		</if>
+		
+		<if test="chargeTime != null">
+			And CHARGE_TIME = #{chargeTime}
+		</if>
+		
+		<if test="withdrawTime != null">
+			And WITHDRAW_TIME = #{withdrawTime}
+		</if>
+		
+		</where>
+
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginMission">
+		Select <include refid="fields"/>
+				From BEGIN_MISSION
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_MISSION
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_MISSION
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginMission"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_MISSION.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_MISSION (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{userId,javaType=long,jdbcType=DECIMAL},
+	         #{status,javaType=long,jdbcType=DECIMAL},
+	         #{bindCardTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{missionStartTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{chargeAmt,javaType=long,jdbcType=DECIMAL},
+	         #{withdrawAmt,javaType=long,jdbcType=DECIMAL},
+	         #{cancelReason,javaType=string,jdbcType=VARCHAR},	     
+	         #{chargeTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{withdrawTime,javaType=object,jdbcType=TIMESTAMP},	         	         
+	         #{bindCardEndTime,javaType=object,jdbcType=TIMESTAMP},         	         
+	         #{missionEndTime,javaType=object,jdbcType=TIMESTAMP},	         	         	         	         
+	         #{cancelTime,javaType=object,jdbcType=TIMESTAMP},	         	         	         	         
+	         #{cancelUser,javaType=string,jdbcType=VARCHAR},
+	         #{bindCardLockTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{missionValidTime,javaType=object,jdbcType=TIMESTAMP}	         
+	        )
+	</insert>
+
+	<select id="findByUserId" resultMap="result" parameterType="long">
+		Select <include refid="fields" /> 
+				From BEGIN_MISSION
+		where user_id = #{userId}		
+	</select>
+
+
+	<select id="getCountByPage" resultType="Long">
+		Select count(1) 
+				From BEGIN_MISSION
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getByPage" resultType="Long">
+		Select <include refid="fields" /> 
+				From BEGIN_MISSION
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="findFirstWithdraw" parameterType="map" resultType="long">
+		select count(1) from fund_withdraw a
+		<![CDATA[join begin_mission b on a.USER_ID = b.USER_ID and MISSION_VALID_TIME <= APPLY_TIME]]>
+		and b.status = #{missionStatus}
+		where a.USER_ID = #{userId} 
+		and a.status in (4,6)
+	</select>
+
+	<select id="findFirstcharge" parameterType="map" resultType="long">
+		select count(1) from fund_charge a 
+		<![CDATA[join begin_mission b on a.USER_ID = b.USER_ID and MISSION_VALID_TIME <= APPLY_TIME]]>
+		and b.status = #{missionStatus}
+		where 
+		a.USER_ID = #{userId} 
+		and a.status = #{status}
+	</select>
+	
+	<select id="searchCancelList" resultMap="cancelList" parameterType="map">
+		SELECT a.account as accountName,b.CANCEL_TIME as cancelTime,
+		b.CANCEL_REASON as cancelReason,b.CANCEL_USER as cancelUser 
+		FROM USER_CUSTOMER a, BEGIN_MISSION b WHERE
+		b.USER_ID = a.id AND b.STATUS IN  
+		<foreach collection="statusList" item="status" index="index" open="(" separator="," close=")">
+			#{status} 
+		</foreach>
+		<![CDATA[
+			AND b.CANCEL_TIME >= #{timeStart} 
+			AND b.CANCEL_TIME  < #{timeEnd}
+		]]>
+		ORDER BY b.CANCEL_TIME DESC
+	</select>
+	
+	<select id="searchCancelListCount" resultType="Long">
+		SELECT count(1) FROM USER_CUSTOMER a, BEGIN_MISSION b WHERE
+		b.USER_ID = a.id AND b.STATUS IN  
+		<foreach collection="statusList" item="status" index="index" open="(" separator="," close=")">
+			#{status} 
+		</foreach>
+		<![CDATA[
+			AND b.CANCEL_TIME >= #{timeStart} 
+			AND b.CANCEL_TIME  < #{timeEnd}
+		]]>
+	</select>
+	
+	<update id="updateMissionTime" parameterType="map">
+		update BEGIN_MISSION set BIND_CARD_TIME = #{bindCardDate} , MISSION_END_TIME =TO_DATE(TO_CHAR(#{misisonEndTime},'YYYYMMDD'),'YYYYMMDD'),
+			BIND_CARD_LOCK_TIME = #{bindCardLockTime}	 
+			where 
+			user_Id = #{userId}
+	</update>
+
+	<update id="updateChargeAmt" parameterType="map">
+		update BEGIN_MISSION set CHARGE_AMT = #{chargeAmt} , CHARGE_TIME = #{chargeTime} where 
+			user_Id = #{userId}
+	</update>
+
+	<update id="updateWithdrawAmt" parameterType="map">
+		update BEGIN_MISSION set WITHDRAW_AMT = #{withdrawAmt} , WITHDRAW_TIME = #{withdrawTime} where 
+			user_Id = #{userId}
+	</update>
+
+	<update id="cancelMission" parameterType="map">
+		update BEGIN_MISSION  set STATUS = #{status} , CANCEL_REASON = #{cancelReason} , CANCEL_TIME =#{cancelTime} ,
+		 CANCEL_USER = #{cancelUser} where 
+			user_Id = #{userId}
+	</update>
+	
+	<select id="updateStatusValid" parameterType="map">
+		update BEGIN_MISSION SET STATUS =#{status} , MISSION_VALID_TIME =#{validTime} where user_id = #{userId}
+	</select>
+	
+	<update id="updateBindCardLockTime" parameterType="long">
+		update BEGIN_MISSION SET BIND_CARD_LOCK_TIME = SYSDATE WHERE USER_ID = #{userId}
+	</update>
+	
+</mapper>

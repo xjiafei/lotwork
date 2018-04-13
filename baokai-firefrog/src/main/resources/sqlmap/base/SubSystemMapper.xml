@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.subsys.vo.SubSystem">
+	<resultMap id="SubsystemResult" type="com.winterframework.firefrog.subsys.vo.SubSystem">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="configColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	NAME as name,
+	        	TOKEN as token
+	    ]]>
+	</sql>
+		
+   <delete id="delete" parameterType="java.lang.Long">
+    <![CDATA[
+        delete from SUBSYSTEMLIST where
+	        ID = #{id} 
+    ]]>
+    </delete>   
+    <select id="getBytoken" parameterType="com.winterframework.firefrog.subsys.vo.SubSystem"
+    		 resultMap="SubsystemResult" flushCache="false">
+		select <include refid="configColumns" />
+	    <![CDATA[
+		    from SUBSYSTEMLIST 
+	        where 
+	        TOKEN = #{token} 
+	    ]]>
+	</select>	
+
+
+
+</mapper>

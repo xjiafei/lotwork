@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.entity.UserUrl">
+	<resultMap id="UserUrlResult"
+		type="com.winterframework.firefrog.user.entity.UserUrl">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="userUrlColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	CREATOR as creator,
+	        	GMT_CREATED as gmtCreated,
+	        	URL as url,
+	        	MEMO as memo,
+	        	TYPE as type,
+	        	USERAWARD_LIST_STRUC as strUserawardListStruc,
+	        	REGISTERS as registers,
+	        	days,
+	        	uuid,
+	        	QQ as qq
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.user.entity.UserUrl"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_USER_URL_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        USER_URL (
+	        	ID ,
+	        	CREATOR ,
+	        	GMT_CREATED ,
+	        	URL ,
+	        	MEMO ,
+	        	TYPE ,
+	        	USERAWARD_LIST_STRUC ,
+	        	REGISTERS,
+	        	days,
+	        	uuid,
+	        	QQ
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{creator,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{url,javaType=string,jdbcType=VARCHAR} ,
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{strUserawardListStruc,javaType=string,jdbcType=CLOB} ,
+	        	#{registers,javaType=long,jdbcType=DECIMAL},
+	        	#{days,javaType=long,jdbcType=DECIMAL},
+	        	#{uuid,javaType=string,jdbcType=VARCHAR},
+	        	#{qq,javaType=string,jdbcType=VARCHAR}	        	
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.user.entity.UserUrl">
+		UPDATE USER_URL
+		<set>
+			<if test="@Ognl@isNotEmpty(url)">
+				URL = #{url,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(creator)">
+				CREATOR=#{creator,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(qq)">
+				QQ = #{qq,javaType=string,jdbcType=VARCHAR},
+			</if>			
+			<if test="@Ognl@isNotEmpty(strUserawardListStruc)">
+				USERAWARD_LIST_STRUC =
+				#{strUserawardListStruc,javaType=string,jdbcType=CLOB} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(registers)">
+				REGISTERS = #{registers,javaType=long,jdbcType=DECIMAL}
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from USER_URL where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="UserUrlResult"
+		flushCache="false">
+		select
+		<include refid="userUrlColumns" />
+		    <![CDATA[
+			    from USER_URL 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="UserUrlResult"
+		flushCache="false">
+		select
+		<include refid="userUrlColumns" />
+		from USER_URL
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="userUrlDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(creator)">
+				and CREATOR = #{creator}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+			<if test="@Ognl@isNotEmpty(url)">
+				and URL = #{url}
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				and MEMO = #{memo}
+			</if>
+			<if test="@Ognl@isNotEmpty(uuid)">
+				and uuid = #{uuid}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+			<if test="@Ognl@isNotEmpty(userawardListStruc)">
+				and USERAWARD_LIST_STRUC = #{userawardListStruc}
+			</if>
+			<if test="@Ognl@isNotEmpty(registers)">
+				and REGISTERS = #{registers}
+			</if>
+			<if test="@Ognl@isNotEmpty(qq)">
+				and QQ = #{qq}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="UserUrlResult" flushCache="false">
+		select
+				<include refid="userUrlColumns" />
+		from USER_URL
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from USER_URL
+	</select>
+	
+	<select id="getCountByPage" resultType="hashmap">
+		select SUM(CASE type WHEN 1 THEN 1 ELSE 0 END) as a, SUM(CASE type WHEN 1 THEN 0 ELSE 1 END) as b from USER_URL
+		<include refid="userUrlDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="UserUrlResult">
+		select
+		<include refid="userUrlColumns" />
+		from USER_URL
+		<include refid="userUrlDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+</mapper>

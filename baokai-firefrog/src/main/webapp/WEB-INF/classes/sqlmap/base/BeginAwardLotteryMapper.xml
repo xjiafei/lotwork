@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginAwardLottery">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginAwardLottery">
+			<result column="ID" property="id"/>
+			<result column="USER_ID" property="userId"/>
+			<result column="LOTTERY_TYPE1" property="lotteryType1"/>
+			<result column="LOTTERY_TYPE2" property="lotteryType2"/>
+			<result column="MISSION_ID" property="missionId"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="STATUS" property="status"/>
+			<result column="AWARD_TIME" property="awardTime"/>
+ </resultMap>
+	<sql id="fields">ID,USER_ID,LOTTERY_TYPE1,LOTTERY_TYPE2,MISSION_ID,CREATE_TIME,STATUS,AWARD_TIME
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="userId != null">
+			And USER_ID = #{userId}
+		</if>
+
+		<if test="lotteryType1 != null">
+			And LOTTERY_TYPE1 = #{lotteryType1}
+		</if>
+
+		<if test="lotteryType2 != null">
+			And LOTTERY_TYPE2 = #{lotteryType2}
+		</if>
+
+		<if test="missionId != null">
+			And MISSION_ID = #{missionId}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="status != null">
+			And STATUS = #{status}
+		</if>
+
+		<if test="awardTime != null">
+			And AWARD_TIME = #{awardTime}
+		</if>
+		</where>
+
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginAwardLottery">
+		Select <include refid="fields"/>
+				From BEGIN_AWARD_LOTTERY
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_AWARD_LOTTERY
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_AWARD_LOTTERY
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginAwardLottery"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_AWARD_LOTTERY.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_AWARD_LOTTERY (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{userId,javaType=long,jdbcType=DECIMAL},
+	         #{lotteryType1,javaType=long,jdbcType=DECIMAL},
+	         #{lotteryType2,javaType=long,jdbcType=DECIMAL},
+	         #{missionId,javaType=long,jdbcType=DECIMAL},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{status,javaType=long,jdbcType=DECIMAL},
+	         #{awardTime,javaType=object,jdbcType=TIMESTAMP}
+	        )
+	</insert>
+
+	<select id="findByUserId" resultType="Long" parameterType="long">
+		Select count(1) 
+				From BEGIN_AWARD_LOTTERY
+		where USER_ID= #{userId}		
+	</select>
+
+	<select id="updateLotteryAwardStatus"  parameterType="map">
+		update BEGIN_AWARD_LOTTERY
+			SET STATUS = #{status} 
+			<if test="awardTime!=null">
+				, award_Time = #{awardTime}
+			</if>
+		where id = #{id}
+	</select>
+
+
+</mapper>

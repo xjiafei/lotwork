@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.BypassConfigVO">
+	<resultMap id="BypassConfigResult" type="com.winterframework.firefrog.fund.dao.vo.BypassConfigVO">
+		<result column="ID" property="id"/>
+		<result column="TYPE" property="type"/>
+		<result column="AGENCY" property="agency"/>
+		<result column="SINGLE_LOWLIMIT" property="singleLowlimit"/>
+		<result column="SINGLE_UPLIMIT" property="singleUplimit"/>
+		<result column="DAILY_UPLIMIT" property="dailyUplimit"/>
+		<result column="IS_OPEN" property="isOpen"/>
+		<result column="CHARGEWAY_SET" property="chargeWaySet"/>
+		<result column="PLATFORM" property="platform"/>
+		<result column="OPEN_USER" property="openUser"/>
+		<result column="IS_BYPASS_VIEW" property="isBypassView"/>
+	</resultMap>
+	
+	<sql id="fields">ID,TYPE,AGENCY,SINGLE_LOWLIMIT,SINGLE_UPLIMIT,DAILY_UPLIMIT,IS_OPEN,CHARGEWAY_SET,PLATFORM,OPEN_USER,IS_BYPASS_VIEW</sql>
+	
+	<sql id="whereCondition">
+		<where>
+		<if test="type != null">
+			AND TYPE = #{type}
+		</if>
+		<if test="agency != null">
+			AND AGENCY = #{agency}
+		</if>
+		<if test="isOpen != null">
+			AND IS_OPEN = #{isOpen}
+		</if>
+		<if test="chargeWaySet != null">
+			AND CHARGEWAY_SET = #{chargeWaySet}
+		</if>
+		<if test="platform != null">
+			AND PLATFORM = #{platform}
+		</if>
+		<if test="openUser != null">
+			AND OPEN_USER = #{openUser}
+		</if>
+		<if test="isBypassView != null">
+			AND IS_BYPASS_VIEW = #{isBypassView}
+		</if>
+		</where>
+	</sql>
+	
+	<select id="findByCondition" resultMap="BypassConfigResult" parameterType="com.winterframework.firefrog.fund.dao.vo.BypassConfigVO">
+		Select <include refid="fields"/>
+				From BYPASS_CONFIG
+		<include refid="whereCondition"/>
+	</select>
+	
+	<select id="getCountByPage" resultType="long">
+        select count(1) from BYPASS_CONFIG
+		<include refid="whereCondition"/>    
+    </select>
+    
+    <select id="getByPage" resultMap="BypassConfigResult">
+    	select <include refid="fields" />
+	    from BYPASS_CONFIG 
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+	
+	<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.BypassConfigVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BYPASS_CONFIG.Nextval from dual
+		</selectKey>
+	    INSERT INTO
+        BYPASS_CONFIG (
+			<include refid="fields"/>
+        ) VALUES (
+        	#{id,javaType=long,jdbcType=DECIMAL},
+        	#{type,javaType=long,jdbcType=DECIMAL},
+        	#{agency,javaType=long,jdbcType=DECIMAL},
+        	#{singleLowlimit,javaType=long,jdbcType=DECIMAL},
+        	#{singleUplimit,javaType=long,jdbcType=DECIMAL},
+        	#{dailyUplimit,javaType=long,jdbcType=DECIMAL},
+        	#{isOpen,javaType=string,jdbcType=VARCHAR}
+        	#{chargeWaySet,javaType=long,jdbcType=DECIMAL}
+        	#{platform,javaType=long,jdbcType=DECIMAL}
+        	#{openUser,javaType=long,jdbcType=DECIMAL}
+        	#{isBypassView,javaType=string,jdbcType=VARCHAR}
+        )
+	    
+	</insert>
+	
+	<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.BypassConfigVO">
+		update BYPASS_CONFIG set 
+		  	 SINGLE_LOWLIMIT = #{singleLowlimit,javaType=long,jdbcType=DECIMAL},
+	         SINGLE_UPLIMIT = #{singleUplimit,javaType=long,jdbcType=DECIMAL},
+	         <if test="@Ognl@isNotEmpty(dailyUplimit)">
+		         DAILY_UPLIMIT = #{dailyUplimit,javaType=long,jdbcType=DECIMAL},
+		     </if>
+	         IS_OPEN = #{isOpen,javaType=string,jdbcType=VARCHAR}
+	         
+		 where 
+		 ID = #{id} 
+	</update>
+</mapper>
+	
+	
+	
+	
+

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundChargeAppealVO">
+	<resultMap id="fundChargeAppealResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundChargeAppealVO">
+	</resultMap>
+
+	<sql id="fundChargeAppealWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(chargeSn)">
+				and FCA.CHARGE_SN = #{chargeSn}
+			</if>
+			<if test="@Ognl@isNotEmpty(appealSn)">
+				and FCA.APPEAL_SN = #{appealSn}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and FCA.USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(userAccount)">
+				and UC.ACCOUNT = #{userAccount}
+			</if>
+			<if test="@Ognl@isNotEmpty(userLvl)">
+				and UC.USER_LVL = #{userLvl}
+			</if>
+			<if test="vipLvl != null and vipLvl == 0">
+				and UC.VIP_LVL = 0
+			</if>
+			<if test="vipLvl != null and vipLvl == 1">
+				and UC.VIP_LVL > 0
+			</if>
+<!-- 			<if test="@Ognl@isNotEmpty(vipLvl)"> -->
+<!-- 				and UC.VIP_LVL = #{vipLvl} -->
+<!-- 			</if> -->
+			<if test="@Ognl@isNotEmpty(amtStart)">
+				and FCA.CHARGE_AMT >= #{amtStart}
+			</if>
+			<if test="@Ognl@isNotEmpty(amtEnd)">
+				<![CDATA[
+					and FCA.CHARGE_AMT < #{amtEnd}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(argueStartDate)">
+				<![CDATA[
+					and FCA.ARGUE_TIME >= #{argueStartDate}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(argueEndDate)">
+				<![CDATA[
+					and FCA.ARGUE_TIME < #{argueEndDate}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(appealStatus)">
+				and FCA.APPEAL_STATUS = #{appealStatus}
+			</if>
+		</where>
+	</sql>
+
+	<select id="queryAppealCount" resultType="long">
+		SELECT COUNT(0)
+		FROM FUND_CHARGE_APPEAL FCA
+		LEFT JOIN USER_CUSTOMER UC ON UC.ID = FCA.USER_ID 
+		<include refid="fundChargeAppealWhere" />
+	</select>
+
+	<select id="queryAppealList" resultMap="fundChargeAppealResult">
+		SELECT 
+			FCA.ID AS id,
+			FCA.USER_ID AS userId,
+			UC.ACCOUNT AS userAccount,
+			UC.USER_LVL AS userLvl,
+			UC.VIP_LVL AS vipLvl,
+			FCA.APPEAL_SN AS appealSn,
+			FCA.APPEAL_STATUS AS appealStatus,
+			FCA.APPEAL_ACCT AS appealAcct,
+			FCA.REVIEW_START_TIME AS reviewStartTime,
+			FCA.REVIEW_END_TIME AS reviewEndTime,
+			FCA.APPEAL_MEMO AS appealMemo,
+			FCA.ARGUE_TIME AS argueTime,
+			FCA.ARGUE_ACCT AS argueAcct,
+			FCA.CHARGE_SN AS chargeSn,
+			FCA.CHARGE_USER_NAME AS chargeUserName,
+			FCA.CHARGE_AMT AS chargeAmt,
+			FCA.CHARGE_TIME AS chargeTime,
+			FCA.CHARGE_MEMO AS chargeMemo,
+			FCA.TENPAY_ACCOUNT AS tenpayAccount,
+			FCA.TENPAY_NAME AS tenpayName,
+			FCA.DEPOSITE_MODE AS depositeMode,
+			FCA.BANK_ID AS bankId,
+			FCA.BANK_NAME AS bankName,
+			FCA.BANK_CARD_NUMBER AS bankCardNumber,
+			FCA.ELECTRONIC_NUMBER AS electronicNumber,
+			FCA.UPLOAD_IMAGES AS uploadImages,
+			FCA.REVIEW_MEMO AS reviewMemo
+		 FROM FUND_CHARGE_APPEAL FCA
+		 LEFT JOIN USER_CUSTOMER UC ON UC.ID = FCA.USER_ID 
+		<include refid="fundChargeAppealWhere" />
+		<where>
+			<if test="@Ognl@isNotEmpty(startNo)">
+				<![CDATA[
+					and ROWNUM >= #{startNo}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(endNo)">
+				<![CDATA[
+					and ROWNUM < #{endNo}
+				]]>
+			</if>
+		</where>
+		ORDER BY FCA.ARGUE_TIME DESC
+	</select>
+	<insert id="insertAppeal" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeAppealVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_CHARGE_APPEAL (
+				ID,
+				USER_ID,
+				APPEAL_SN,
+				APPEAL_STATUS,
+				APPEAL_ACCT,
+				REVIEW_START_TIME,
+				REVIEW_END_TIME,
+				APPEAL_MEMO,
+				ARGUE_TIME,
+				ARGUE_ACCT,
+				CHARGE_SN,
+				CHARGE_USER_NAME,
+				CHARGE_AMT,
+				CHARGE_TIME,
+				CHARGE_MEMO,
+				TENPAY_ACCOUNT,
+				TENPAY_NAME,
+				DEPOSITE_MODE,
+				BANK_ID,
+				BANK_NAME,
+				BANK_CARD_NUMBER,
+				ELECTRONIC_NUMBER,
+				UPLOAD_IMAGES,
+				REVIEW_MEMO,
+				TRANSACTION_NUM
+	        ) VALUES (
+	        	SEQ_FUND_CHARGE_APPEAL_ID.Nextval ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{appealSn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{appealStatus,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{appealAcct,javaType=string,jdbcType=VARCHAR} ,
+	        	#{reviewStartTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{reviewEndTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{appealMemo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{argueTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{argueAcct,javaType=string,jdbcType=VARCHAR} ,
+	        	#{chargeSn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{chargeUserName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{chargeAmt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{chargeTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{chargeMemo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{tenpayAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{tenpayName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{depositeMode,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{bankId,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{bankName,javaType=string,jdbcType=TIMESTAMP} ,
+	        	#{bankCardNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	#{electronicNumber,javaType=long,jdbcType=DECIMAL} ,
+	        	#{uploadImages,javaType=string,jdbcType=VARCHAR},
+	        	#{reviewMemo,javaType=string,jdbcType=VARCHAR},
+	        	#{transactionNum,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>
+
+	</insert>
+	
+	<update id="updateAppeal" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeAppealVO">
+		UPDATE FUND_CHARGE_APPEAL  
+		<set>
+	        <if test="@Ognl@isNotEmpty(appealAcct)">
+	        	APPEAL_ACCT = #{appealAcct,javaType=string,jdbcType=VARCHAR},
+	        </if>
+	        <if test="@Ognl@isNotEmpty(reviewStartTime)">
+	        	REVIEW_START_TIME = #{reviewStartTime,javaType=object,jdbcType=TIMESTAMP},
+	        </if>
+	        <if test="@Ognl@isNotEmpty(reviewEndTime)">
+	        	REVIEW_END_TIME = #{reviewEndTime,javaType=object,jdbcType=TIMESTAMP},
+	        </if>
+	        <if test="@Ognl@isNotEmpty(appealMemo)">
+	        	APPEAL_MEMO = #{appealMemo,javaType=string,jdbcType=VARCHAR},
+	        </if>
+	        <if test="@Ognl@isNotEmpty(appealStatus)">
+	        	APPEAL_STATUS = #{appealStatus,javaType=integer,jdbcType=DECIMAL},
+	        </if>
+	        <if test="@Ognl@isNotEmpty(reviewMemo)">
+	        	REVIEW_MEMO = #{reviewMemo,javaType=string,jdbcType=VARCHAR}
+	        </if>
+		</set>
+		WHERE APPEAL_SN = #{appealSn}
+	</update>
+
+</mapper>

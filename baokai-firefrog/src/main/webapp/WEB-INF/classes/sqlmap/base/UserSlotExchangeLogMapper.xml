@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserSlotExchangeLog">
+	<resultMap id="UserLoginLogResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserSlotExchangeLog">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="userSlotExchangeLogColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	CELLULAR_PHONE as cellularPhone,
+	        	EXCHANGE_NUMBER as exchangeNumber,
+	        	ACTIVITY_ID as activityId,
+	        	STATUS as status,
+	        	NOTE as note,
+	        	GMT_CREATE as gmtCreate
+	    ]]>
+	</sql>
+	
+	<insert id="insertUserSlotExchangeLog"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserSlotExchangeLog"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_USER_EXCHANGE_LOG_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        USER_SLOT_EXCHANGE_LOG (
+	        	ID,
+	        	CELLULAR_PHONE,
+	        	EXCHANGE_NUMBER,
+	        	ACTIVITY_ID,
+	        	STATUS,
+	        	NOTE,
+	        	GMT_CREATE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL},
+	        	#{cellularPhone,javaType=string,jdbcType=VARCHAR},
+	        	#{exchangeNumber,javaType=string,jdbcType=VARCHAR},
+	        	#{activityId,javaType=long,jdbcType=DECIMAL},
+	        	#{status,javaType=long,jdbcType=DECIMAL},
+	        	#{note,javaType=string,jdbcType=VARCHAR},
+	        	#{gmtCreate,javaType=object,jdbcType=TIMESTAMP}
+	        )
+	    ]]>
+
+	</insert>
+
+</mapper>

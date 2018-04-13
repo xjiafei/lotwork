@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundSoloRemarkManualVO">
+	<resultMap id="FundSoloRemarkManualResult" type="com.winterframework.firefrog.fund.dao.vo.FundSoloRemarkManualVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundSoloRemarkManualColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	REMARK as remark,
+	        	ISUSED as isused
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundSoloRemarkManualVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT   SEQ_FUND_SOLO_REMARK_MANUAL_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_SOLO_REMARK_MANUAL (
+	        	ID ,
+	        	REMARK ,
+	        	ISUSED 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{remark,javaType=string,jdbcType=VARCHAR} ,
+	        	#{isused,javaType=integer,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.FundSoloRemarkManualVO">
+	    <![CDATA[
+	        UPDATE FUND_SOLO_REMARK_MANUAL SET
+		        REMARK = #{remark,javaType=string,jdbcType=VARCHAR} ,
+		        ISUSED = #{isused,javaType=integer,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	<sql id="fundSoloRemarkManualDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(remark)">
+				and REMARK = #{remark}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isused)">
+				and ISUSED = #{isused}
+			</if>
+		</where>
+	</sql>
+	   <delete id="delete" parameterType="java.lang.String">
+	    <![CDATA[
+	        delete from FUND_SOLO_REMARK_MANUAL where
+		        remark = #{remark} 
+	    ]]>
+	    </delete>
+	
+    <select id="getFundSoloManaulByRemark" resultMap="FundSoloRemarkManualResult">
+    	select <include refid="fundSoloRemarkManualColumns" />
+	    from FUND_SOLO_REMARK_MANUAL where REMARK = #{remark}
+    </select>
+</mapper>

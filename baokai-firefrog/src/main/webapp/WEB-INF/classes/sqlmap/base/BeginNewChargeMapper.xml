@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginNewCharge">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginNewCharge">
+			<result column="ID" property="id"/>
+			<result column="CREATE_USER" property="createUser"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="MODIFY_USER" property="modifyUser"/>
+			<result column="MODIFY_TIME" property="modifyTime"/>
+			<result column="CHARGE_AMT" property="chargeAmt"/>
+			<result column="CHARGE_FACTOR" property="chargeFactor"/>
+			<result column="CHARGE_PER" property="chargePer"/>
+			<result column="CHARGE_PREIUM" property="chargePreium"/>
+			<result column="BETTING_DATE" property="bettingDate"/>
+			<result column="MULTIPLE_GET" property="multipleGet"/>
+			<result column="VERSION" property="version"/>
+
+ </resultMap>
+	<sql id="fields">ID,CREATE_USER,CREATE_TIME,MODIFY_USER,MODIFY_TIME,CHARGE_AMT,CHARGE_FACTOR,CHARGE_PER,CHARGE_PREIUM,BETTING_DATE,MULTIPLE_GET,VERSION
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="createUser != null">
+			And CREATE_USER = #{createUser}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="modifyUser != null">
+			And MODIFY_USER = #{modifyUser}
+		</if>
+
+		<if test="modifyTime != null">
+			And MODIFY_TIME = #{modifyTime}
+		</if>
+
+		<if test="chargeAmt != null">
+			And CHARGE_AMT = #{chargeAmt}
+		</if>
+
+		<if test="chargeFactor != null">
+			And CHARGE_FACTOR = #{chargeFactor}
+		</if>
+
+		<if test="chargePer != null">
+			And CHARGE_PER = #{chargePer}
+		</if>
+
+		<if test="chargePreium != null">
+			And CHARGE_PREIUM = #{chargePreium}
+		</if>
+
+		<if test="bettingDate != null">
+			And BETTING_DATE = #{bettingDate}
+		</if>
+
+		<if test="multipleGet != null">
+			And MULTIPLE_GET = #{multipleGet}
+		</if>
+
+		<if test="version != null">
+			And VERSION = #{version}
+		</if>
+		</where>
+
+	</sql>
+	
+	<select id="findMaxVersion" resultMap="result" >
+		Select <include refid="fields"/>
+				From BEGIN_NEW_CHARGE
+		where VERSION = (select max(VERSION) from BEGIN_NEW_CHARGE) order by id
+	</select>
+	
+	<select id="getMaxVersion" resultType="long">
+		Select nvl(max(version),0)
+				From BEGIN_NEW_CHARGE
+	</select>
+	
+	
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewCharge">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_CHARGE
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_CHARGE
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_CHARGE
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewCharge"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_NEW_CHARGE.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_NEW_CHARGE (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{createUser,javaType=string,jdbcType=VARCHAR},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{modifyUser,javaType=string,jdbcType=VARCHAR},
+	         #{modifyTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{chargeAmt,javaType=long,jdbcType=DECIMAL},
+	         #{chargeFactor,javaType=long,jdbcType=DECIMAL},
+	         #{chargePer,javaType=long,jdbcType=DECIMAL},
+	         #{chargePreium,javaType=long,jdbcType=DECIMAL},
+	         #{bettingDate,javaType=long,jdbcType=DECIMAL},
+	         #{multipleGet,javaType=string,jdbcType=VARCHAR},
+	         #{version,javaType=long,jdbcType=DECIMAL}
+	        )
+	</insert>
+
+	<select id="findByVersion" resultMap="result" parameterType="long">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_CHARGE
+		where VERSION = #{version}
+	</select>
+
+	<select id="findByCondition2" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewCharge">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_CHARGE
+		<include refid="whereCondition2"/>
+	</select>
+
+	<sql id="whereCondition2">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="chargeAmt != null">
+			<![CDATA[And CHARGE_AMT <= #{chargeAmt}]]>
+		</if>
+
+		<if test="chargeFactor != null">
+			And CHARGE_FACTOR = #{chargeFactor}
+		</if>
+
+		<if test="chargePer != null">
+			And CHARGE_PER = #{chargePer}
+		</if>
+
+		<if test="chargePreium != null">
+			And CHARGE_PREIUM = #{chargePreium}
+		</if>
+
+		<if test="bettingDate != null">
+			And BETTING_DATE = #{bettingDate}
+		</if>
+
+		<if test="multipleGet != null">
+			And MULTIPLE_GET = #{multipleGet}
+		</if>
+
+		<if test="version != null">
+			And VERSION = #{version}
+		</if>
+		</where>
+
+	</sql>
+
+</mapper>

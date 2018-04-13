@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.GameGoldDetailVO">
+	<resultMap id="GameGoldDetailResult" type="com.winterframework.firefrog.fund.dao.vo.GameGoldDetailVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Columns">
+	    <![CDATA[
+	        	ACCOUNT as account,
+	        	IS_FREEZE as isFreeze,
+	        	BAL as bal,
+	        	FROZEN_AMT as frozenAmt,
+	        	USE_MONEY as useMoney,
+	        	SUM_BAL as sumBal,
+	        	SUM_FROZEN as sumFrozen,
+	        	SUM_USE_MONEY as sumUseMoney
+	    ]]>
+	</sql>
+
+	<sql id="DynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT = #{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(isFreeze)">
+			 <choose>
+				<when test="isFreeze!=0">
+					<![CDATA[
+				   	  and IS_FREEZE >= 1
+				     ]]>	
+			     </when>
+				<otherwise>
+			        and (IS_FREEZE = 0 or IS_FREEZE is null)
+			    </otherwise>
+			    </choose>				
+			</if>
+	       <if test="@Ognl@isNotEmpty(useMoney)">
+				and USE_MONEY >= #{useMoney}
+			</if>
+	       <if test="@Ognl@isNotEmpty(endUseMoney)">
+	       		<![CDATA[
+				and USE_MONEY <= #{endUseMoney}
+				]]>	
+			</if>
+	       <if test="@Ognl@isNotEmpty(sumUseMoney)">
+				and SUM_USE_MONEY >= #{sumUseMoney}
+			</if>
+	       <if test="@Ognl@isNotEmpty(endSumUseMoney)">
+	       		<![CDATA[
+				and SUM_USE_MONEY <= #{endSumUseMoney}
+				]]>
+			</if>
+	       
+		</where>
+	</sql>
+	
+	<select id="getGameGoldDetails" resultMap="GameGoldDetailResult" parameterType="hashMap"  flushCache="false">
+    	select <include refid="Columns" />
+	    from VIEW_GAME_GOLD_DETAIL 
+		<include refid="DynamicWhere" />		
+    </select>	
+	
+
+	
+</mapper>

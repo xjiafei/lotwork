@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.acl.dao.vo.AclGroupAuthorizationVO">
+	<resultMap id="AclGroupAuthorizationResult" type="com.winterframework.firefrog.acl.dao.vo.AclGroupAuthorizationVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="aclGroupAuthorizationColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	GID as gid,
+	        	ACL_ID as aclId
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.acl.dao.vo.AclGroupAuthorizationVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_ACL_GROUP_AUTH_ID.Nextval from dual
+	   	</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        ACL_GROUP_AUTHORIZATION (
+	        	ID ,
+	        	GID ,
+	        	ACL_ID 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{aclId,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.acl.dao.vo.AclGroupAuthorizationVO">
+	    <![CDATA[
+	        UPDATE ACL_GROUP_AUTHORIZATION SET
+		        GID = #{gid,javaType=long,jdbcType=DECIMAL} ,
+		        ACL_ID = #{aclId,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACL_GROUP_AUTHORIZATION where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    
+	    <delete id="deleteByGroup" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACL_GROUP_AUTHORIZATION where
+		        GID = #{id}
+	    ]]>
+	    </delete>
+
+	<delete id="deleteByGroups" parameterType="list" flushCache="false">
+		delete from ACL_GROUP_AUTHORIZATION where
+		GID in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	    
+	    <select id="getById" parameterType="long" resultMap="AclGroupAuthorizationResult" flushCache="false">
+			select <include refid="aclGroupAuthorizationColumns" />
+		    <![CDATA[
+			    from ACL_GROUP_AUTHORIZATION 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AclGroupAuthorizationResult" flushCache="false">
+			select <include refid="aclGroupAuthorizationColumns" />
+			    from ACL_GROUP_AUTHORIZATION 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="aclGroupAuthorizationDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gid)">
+				and GID = #{gid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(aclId)">
+				and ACL_ID = #{aclId}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AclGroupAuthorizationResult"  flushCache="false">
+    	select <include refid="aclGroupAuthorizationColumns" />
+	    from ACL_GROUP_AUTHORIZATION 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACL_GROUP_AUTHORIZATION 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ACL_GROUP_AUTHORIZATION 
+		<include refid="aclGroupAuthorizationDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AclGroupAuthorizationResult">
+    	select <include refid="aclGroupAuthorizationColumns" />
+	    from ACL_GROUP_AUTHORIZATION 
+		<include refid="aclGroupAuthorizationDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

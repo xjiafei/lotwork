@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: ibm
+Build-Jdk: 1.8.0_121
+Specification-Title: baokai-firefrog
+Specification-Version: 1.0
+Implementation-Title: baokai-firefrog
+Implementation-Version: 1.0
+Implementation-Vendor-Id: com.winterframework
+Created-By: Maven Integration for Eclipse
+

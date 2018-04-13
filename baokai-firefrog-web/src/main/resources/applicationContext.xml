@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.1.xsd"
+	default-lazy-init="true">
+
+	<description>Spring公共配置 </description>
+
+	<bean id="propertyConfigurer"
+		class="com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/application.properties</value>
+				<value>classpath:/serverUrlPath.properties</value>
+				<value>classpath:/upload.properties</value>
+				<value>file:/usr/local/config/firefrog_web.properties</value>
+				<value>classpath:/loginMock.properties</value>
+				<value>classpath:/session_redis.properties</value>
+				<value>file:C:/config/firefrog_web.properties</value>
+			</list>
+		</property>
+	</bean>
+
+    <bean class="com.winterframework.modules.utils.SpringContextHolder"/>
+	<context:component-scan base-package="com.winterframework.modules.spring.exetend" />
+	<context:component-scan base-package="com.winterframework.modules.spring.console" />
+	
+	<context:component-scan base-package="com.winterframework.**.web">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<context:component-scan base-package="com.winterframework.**.common">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+</beans>
