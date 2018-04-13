@@ -1,0 +1,110 @@
+.data-save{
+	display: none;
+}
+
+#lid .flip {
+position: absolute;
+ }
+#lid .flip > .front, #lid .flip > .back {
+position: absolute;
+width: 100%;
+height: 100%;
+-webkit-backface-visibility: hidden;
+-moz-backface-visibility: hidden; }
+#lid .flip > .back {
+-webkit-transform: rotateX(180deg);
+-moz-transform: rotateX(180deg); }
+#content:target #lid .flip {
+-webkit-transform: rotateX(180deg);
+-moz-transform: rotateX(180deg);
+-webkit-transition-duration: 0.5s;
+-moz-transition-duration: 0.5s;
+-webkit-transition-delay: 0s;
+-moz-transition-delay: 0s; }
+
+#letter .flip > div, #lid .flip > div, section.container > form.flip > div {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box; }
+
+#lid .flip .front, section.container > form.flip .front {
+background: beige url("../images/bg.png");
+border: 1px #eae1d5 solid;
+box-shadow: inset 0 0 10px 1px rgba(255, 255, 255, 0.6), 0 2px 3px -2px rgba(0, 0, 0, 0.6);
+padding: 20px 30px;
+color: #837362;
+text-shadow: 0 1px 0 #fff,0 1px 0 #fff; }
+
+.rp-step-3 .rp-cover1,
+.rp-step-3 .rp-cover2,
+.rp-step-4 .rp-cover1,
+.rp-step-4 .rp-cover2{
+	display: block;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-webkit-transition: -webkit-transform 0.3s;
+	-moz-transition: -moz-transform 0.3s;
+	-webkit-transform-origin: left top;
+	-moz-transform-origin: left top;
+}
+
+.rp-step-3 .rp-cover2,
+.rp-step-4 .rp-cover2{
+	-webkit-transform: rotateX(-180deg);
+	-moz-transform: rotateX(-180deg);
+	-webkit-transform-origin: left bottom;
+	-moz-transform-origin: left bottom;
+}
+
+.rp-step-2 .rp-content,
+.rp-step-3 .rp-content,
+.rp-step-4 .rp-content,
+.rp-step-5 .rp-content,
+.rp-step-7 .rp-content{
+	opacity: 0;
+	-moz-transition: opacity 0.25s ease-in 0.5s;
+	-webkit-transition: opacity 0.25s ease-in 0.5s;
+	-o-transition: opacity 0.25s ease-in 0.5s;
+	transition: opacity 0.25s ease-in 0.5s;
+}
+
+
+.animated .rp-cover1{
+	display: none;
+	z-index: 5;
+	-webkit-transform: rotateX(180deg);
+	-moz-transform: rotateX(180deg);
+}
+
+.animated .rp-cover2{
+	opacity: 1;
+	z-index: 6;
+	-webkit-transform: rotateX(0deg);
+	-moz-transform: rotateX(0deg);
+}
+
+.animated .rp-cover2{
+	z-index: 6;
+	-webkit-transform: rotateX(0deg);
+	-moz-transform: rotateX(0deg);
+}
+
+.animated .rp-content{
+	opacity: 1;
+}
+
+.rp-space{
+	width: 20px;
+}
+
+.nav1 .red-paket li{
+	float: left;
+	width: 25px;
+	height: 33px;
+	margin: 5px 0 0 15px;
+	background: transparent -36px 0  url("../images/red-paket.png") no-repeat;
+}
+
+.nav1 .red-paket li.over{
+	background-position: 0 0;
+}

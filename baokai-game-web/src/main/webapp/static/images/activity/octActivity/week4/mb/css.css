@@ -1,0 +1,295 @@
+*{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+em{font-style:normal}
+ol,ul{list-style:none}
+fieldset,img,abbr,acronym{border:0}
+input,select{font-family:Microsoft YaHei}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+body{font:normal 20px/2em Microsoft YaHei,Tahoma,simsun;color:#4c2e00;margin:0 auto; background-color: #eda635;}
+.clearfix{*zoom:1}
+.clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+
+.model {
+    display: none;
+    position: absolute;
+    width: 7.2rem;
+    height: 38.60rem;
+    background: url(model_bg.png);
+    background-repeat: repeat;
+    z-index: 100;
+}
+.ModelBody {
+    background: url(model.png) no-repeat;
+    background-size: 100% auto;
+    width: 6.79rem;
+    height: 3.43rem;
+    margin: 0 auto;
+    margin-top: 3.51rem;
+
+    position: relative;
+
+}
+.btn_add {
+    display: block;
+    width: 1.76rem;
+    height: 0.46rem;
+    position: absolute;
+    top:2.57rem;
+    left: 3.53rem;
+}
+.btn_later {
+    display: block;
+    width: 1.80rem;
+    height: 0.5rem;
+    position: absolute;
+    top:2.57rem;
+    left: 1.42rem;
+}
+
+.main {
+    margin: 0 auto;
+    max-width: 720px;
+}
+.banner
+{
+    width: 100%;
+    height: 6.65rem;
+    background: url(MergedLayers.png) no-repeat center top;
+    position: relative;
+    background-size: 100% auto;
+}
+.signup {
+    background: url(btn_normal.png) no-repeat; 
+    background-size: 100% auto;
+    width: 5.6rem;
+    height: 1.05rem;
+
+    position:absolute;
+    top: 5.16rem;
+}
+.signdone {
+    background: url(btn_done.png) no-repeat; 
+    background-size: 100% auto;
+    width: 5.6rem;
+    height: 1.05rem;
+
+    position:absolute;
+    top: 5.16rem;
+}
+.singupBtn
+{
+    display: block;
+    width: 4.06rem;
+    height: 0.80rem;
+    margin-left:1.46rem;
+    padding-top: 0.2rem;
+}
+.com2 {
+    background: url(com-2.png) no-repeat; 
+    background-size: 100% auto;
+    width: 7.2rem;
+    height: 7.23rem;
+
+    position: relative;
+}
+.TodayDeposit {
+    color: #4c2e00;
+    font: 700 0.34rem / 0.3rem 'Microsoft YaHei';
+    text-align: center;
+
+    position: absolute;
+    width: 1.2rem;
+    height: 0.3rem;
+    left: 0.45rem;
+    top: 1.7rem;
+}
+.TodayBets {
+    color: #4c2e00;
+    font: 700 0.34rem / 0.3rem 'Microsoft YaHei';
+    text-align: center;
+
+    position: absolute;
+    width: 1.20rem;
+    height: 0.3rem;
+    left: 2.25rem;
+    top: 1.7rem;
+}
+.TodayPrize {
+    color: #ea3713;
+    font: 700 0.34rem / 0.30rem 'Microsoft YaHei';
+    text-align: center;
+
+    position: absolute;
+    width: 1.20rem;
+    height: 0.3rem;
+    left: 4.05rem;
+    top: 1.7rem;
+}
+.btn_deposit {
+    width: 1.18rem;
+    height: 1.26rem;
+
+    position: absolute;
+    left: 5.78rem;
+    top: 1.08rem;
+
+}
+.goDP {
+    display: block;
+    width: 1.18rem;
+    height: 1.26rem;
+
+}
+
+
+.com3 {
+    background: url(com-3.png) no-repeat;
+    background-size: 100% auto;
+    position: relative;
+    width:7.2rem;
+    height: 9.47rem;
+    margin-top: -0.7rem;
+}
+.sign1 {
+    display: none;
+    background: url(sign1.png) no-repeat;
+    background-size: 100% auto;
+    height: 1.26rem;
+    width: 2.41rem;
+    height: 1.99rem;
+
+    position: absolute;
+    left: 3rem;
+    top: 0.4rem;
+}
+.sign1num
+{
+    text-align: center;
+    margin-top: 0.62rem;
+    margin-left: 0.33rem;
+    width: 1.8rem;
+    line-height: 0.26rem;
+    color: #885505;
+    font: 0.3rem / 0.26rem FZLTCHJW;
+}
+.gift1 {
+    display: none;
+    background: url(gift1.png) no-repeat;
+    background-size: 100% auto;
+    width: 2.66rem;
+    height: 1.42rem;
+
+    position: absolute;
+    left: 3.82rem;
+    top: 1.57rem;
+}
+.sign2 {
+    display: none;
+    background: url(sign2.png) no-repeat;
+    background-size: 100% auto;
+    width: 3.0rem;
+    height: 1.61rem;
+
+    position: absolute;
+    left: 1.48rem;
+    top: 2.15rem;
+}
+.sign2num {
+    text-align: center;
+    margin-top: 0.63rem;
+    margin-left: 0.2rem;
+    width: 1.8rem;
+    line-height: 0.26rem;
+    color: #885505;
+    font: 0.3rem / 0.26rem FZLTCHJW;
+}
+.gift2 {
+    display: none;
+    background: url(gift2.png)no-repeat;
+    background-size: 100% auto;
+    width: 2.7rem;
+    height: 1.62rem;
+
+    position: absolute;
+    left: 0.8rem;
+    top: 3.52rem;
+}
+.sign3 {
+    display: none;
+    background: url(sign3.png)no-repeat;
+    background-size: 100% auto;
+    width: 2.94rem;
+    height: 2.14rem;
+
+    position: absolute;
+    left: 0.99rem;
+    top: 4.77rem;
+}
+.sign3num {
+    text-align: center;
+    margin-top: 1.38rem;
+    margin-left: 0.25rem;
+    width: 1.8rem;
+    line-height: 0.26rem;
+    color: #885505;
+    font: 0.3rem / 0.26rem FZLTCHJW;
+}
+.gift3 {
+    display: none;
+    background: url(gift3.png)no-repeat;
+    background-size: 100% auto;
+    width: 2.97rem;
+    height: 2.28rem;
+
+    position: absolute;
+    left: 3.45rem;
+    top: 4.38rem;
+}
+.btn_ChangeAddress {
+    display: none;
+    width: 1.18rem;
+    height: 1.26rem;
+
+    position: absolute;
+    left: 5.85rem;
+    top: 7.9rem;
+}
+.goCA
+{
+    display: block;
+    width: 1.18rem;
+    height: 1.26rem;
+}
+.goCA img
+{
+    width: 1.18rem;
+    height: 1.26rem;
+}
+.com4 {
+    background: url(com-4.png) no-repeat;
+    background-size: 100% auto;
+    width: 7.20rem;
+    height: 13.94rem;
+
+    margin-top: 0.5rem;
+}
+.copyrigit
+{
+    background: url(copyright.png) no-repeat center;
+    background-size: 50% auto;
+
+    width: 7.2rem;
+    height: 1.5rem;
+}
+
+.sign4 {
+    display: none;
+    background: url(sign4.png)no-repeat;
+    background-size: 100% auto;
+    width: 2.94rem;
+    height: 1.54rem;
+
+    position: absolute;
+    left: 0.69rem;
+    top: 5.57rem;
+}

@@ -1,0 +1,277 @@
+@charset "UTF-8";
+
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+img{border:none;}
+body{font:16px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;color:#333;}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+html{
+	width: 100%;
+}
+body{
+	width: 100%;
+	overflow-x: hidden;
+	background: #000;
+}
+body,
+input,
+select{
+	font-family: 'Microsoft Yahei',Tahoma,Arial,Helvetica,Simsun,STHeiti;
+}
+
+
+
+.top {
+	width: 100%;
+	background:#1e1e27 url(../images/topbg.jpg) no-repeat center top;
+}
+.top_m {
+	width: 1000px;
+	height: 800px;
+	margin: 0 auto;
+	background:#1e1e27 url(../images/top.jpg) no-repeat center top;
+	position: relative;
+}
+.home {
+	position: absolute;
+	width: 140px;
+	height: 60px;
+	display: block;
+	left: 430px;
+}
+
+.main {
+	background: #1e1e27;
+	width: 100%;
+}
+.main_m {
+	width: 960px;
+	margin: 0 auto;
+	color: #9e8b59;
+	padding: 10px 20px;
+}
+.part {
+	padding: 10px 0;
+	position: relative;
+}
+.history {
+	position: absolute;
+	right: 15px;
+	top: 20px;
+	color: #ffec83;
+	text-decoration: underline;
+}
+.part_title {
+	display: block;
+	font-size: 36px;
+	line-height: 38px;
+	border-left: 8px solid #ffd86a;
+	color: #ffd86a;
+	font-weight: normal;
+	padding-left: 5px;
+}
+.part_title span {
+	font-size: 32px;
+}
+.info {
+	font-size: 16px;
+	line-height: 24px;
+	padding: 10px 0px;
+}
+
+.tab_title {
+	width: 100%;
+	height: 75px;
+}
+.tab_title li {
+	width: 300px;
+	margin-right: 20px;
+	display: inline;
+	float: left;
+	text-align: center;
+	position: relative;
+	cursor: pointer;
+}
+.tab_title2 li {
+	width: 220px;
+}
+
+.tab_title dt {
+	font-size: 24px;
+	line-height: 30px;
+	padding: 5px 0px;
+	box-shadow: inset 0 0 10px rgba(0,0,0,.5);
+	background: #72643e;
+	color: #3d3829;
+}
+.tab_title dd {
+	background: #3e382a;
+	color: #72643e;
+	box-shadow: inset 0 0 10px rgba(0,0,0,.5);
+	font-size: 12px;
+	line-height: 14px;
+	padding: 4px 0px;
+}
+.tab_title .arrow {
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	margin-left: -5px;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-width: 10px;
+	border-color: #393755 transparent transparent transparent;
+	border-style: solid dotted none;
+	display: none;
+}
+.tab_title .current {
+	cursor: default;
+}
+.tab_title .current dt {
+	background: #ffd86a;
+	color: #13121b;
+}
+.tab_title .current dd {
+	background: #44446e;
+	color: #9595ce;
+}
+.tab_title .current .arrow {
+	display: block;
+}
+
+.tab_content {
+	width: 100%;
+}
+.tab_content .content {
+	display: none;
+}
+.rank_table {
+	width: 940px;
+	color: #dcdcfe;
+	text-align: center;
+	border: 10px solid #232337;
+}
+.rank_table th {
+	background: #11111b;
+	color: #9090c2;
+	border: 2px solid #232337;
+	line-height: 20px;
+	padding: 10px 0px;
+}
+.rank_table td {
+	background: #1e1e2f;
+	border: 2px solid #232337;
+	line-height: 20px;
+	padding: 10px 0px;
+}
+.rank_table .tr_even td {
+	background: #1a1a29;
+}
+.rank_table tr:hover td,
+.rank_table .current td{
+	background: #8181b3;
+	color: #1e1e27;
+}
+.info_ul {
+	padding: 10px 0px;
+}
+.info_ul li{
+	line-height: 20px;
+	padding: 4px 0px 4px 20px;
+	background: url(../images/dot.jpg) no-repeat left 8px;
+}
+.info_2 {
+	color: #8181b3;
+	margin-bottom: 10px;
+}
+.info_3 {
+	color: #8181b3;
+	font-size: 20px;
+	padding: 10px 0px;
+}
+.info_4 {
+	color: #ffd86a;
+	font-size: 20px;
+	padding: 0px 0px 20px 0px;
+}
+
+.footer {
+	padding: 20px 0px;
+	text-align: center;
+	font-size: 12px;
+	color: #3c3c5c;
+}
+
+.sublogo {
+	width: 100%;
+	background: #1c1c29;
+}
+.sub {
+	width: 1000px;
+	margin: 0 auto;
+	padding: 10px 0px;
+}
+.sub a {
+	width: 379px;
+	height: 38px;
+	display: block;
+	background: url(../images/logo.jpg) no-repeat;
+}
+
+.changepage {
+	padding: 10px 0px;
+	text-align: center;
+}
+.changepage a {
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+	line-height: 30px;
+	color: #191a2c;
+	background: #3c3c5c;
+	text-decoration: none;
+}
+.changepage a:hover {
+	color: #3c3c5c;
+	background: #191a2c;
+}
+
+.fixed {
+	width: 60px;
+	height: 121px;
+	position: fixed;
+	top: 100px;
+	right: 50%;
+	margin-right: -600px;
+
+}
+.backtop,
+.gotorank{
+	background-image: url(../images/float.png);
+	background-repeat:  no-repeat;
+}
+
+.backtop {
+	width: 60px;
+	height: 61px;
+	display: block;
+	background-position: left top;
+}
+.backtop:hover {
+	background-position: right top;
+}
+.gotorank {
+	width: 60px;
+	height: 60px;
+	display: block;
+	background-position: left bottom;
+}
+.gotorank:hover {
+	background-position: right bottom;
+}

@@ -1,0 +1,87 @@
+.title span{
+    background:url(icon_man.png) no-repeat center center;
+    right:0;
+}
+.head{
+    width:640px;
+    height: 197px;
+    background:url(head_bg.jpg) no-repeat top center;
+}
+.head p{
+    font-size: 30px;
+    color: rgb(146,146,146);
+    margin: 0px 20px;
+    line-height: 60px;
+ }
+.head ol li{
+    width:300px;
+    height: 100px;
+    float:left;
+    margin:10px;
+}
+.head ol li a,.box ul li a{
+	display:block;
+}
+ol li img,ul li img{
+    margin-left:23px;
+}
+.right{
+    float: right;
+    width: 160px;
+    height: 100px;
+}
+.right h1{
+    font-size: 22px;
+    color: rgb(69,69,69);
+    font-weight: bold;
+    line-height: 55px;
+    margin-bottom: -13px;
+}
+.right h2{
+    color: rgb(153,153,153);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 27px;
+}
+
+.box{
+    width:640px;
+    height: auto;
+    overflow: hidden;
+}
+.box p{
+    width:640px;
+    height: 70px;
+    font-size:30px;
+    font-weight: bold;
+    text-indent:22px;
+    line-height: 70px;
+    color:rgb(102,102,102);
+}
+
+.box li{
+    width: 317px;
+    height: 140px;
+    border: 3px solid rgb(240,247,246);
+    border-right: none;
+    float: left;
+}
+.box li:last-child{
+    /*border-right: 3px solid rgb(240,247,246);*/
+}
+
+ul li img{
+    margin-top:25px;
+}
+ul .right{
+    width: 180px;
+    height: 140px;
+}
+ul .right h1{
+    line-height: 100px;
+    margin-bottom: -30px;
+}
+
+.own{
+    background:url(icon_own.png) no-repeat right top;
+}

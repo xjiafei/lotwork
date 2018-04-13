@@ -1,0 +1,154 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2014-06-19 15:57:02
+ * @version $Id$
+ */
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+img{border:none;}
+body{font:12px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;color:#333;}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+
+html{
+    width: 100%;
+}
+body{
+    width: 100%;
+    overflow-x: hidden;
+    background: #EEEDE6 url(../images/bg.jpg) center 0;
+}
+body,
+input,
+select{
+    font-family: 'Microsoft Yahei',Tahoma,Arial,Helvetica,Simsun,STHeiti;
+}
+
+.hide{
+    display: none;
+}
+.layout{
+    width: 980px;
+    margin: 0px auto;
+    position: relative;
+}
+.layout:after{content:'';display:block;overflow:hidden;clear:both;}
+
+
+.banner{
+    position: relative;
+    width: 980px;
+    height: 500px;
+    margin: 0 auto;
+    background: url(../images/banner.jpg) center 0 no-repeat;
+}
+
+/*article*/
+.content{
+    position: relative;
+    width: 980px;
+    height: 1900px;
+    margin: 0 auto;
+    background: url(../images/content.jpg) center 0 no-repeat;
+}
+
+.btn{
+    position: absolute;
+    left: 50%;
+    top: 919px;
+    margin-left: -130px;
+    width: 260px;
+    height: 80px;
+    
+}
+
+/*footer*/
+.footer{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin-top: -100px;
+}
+.footer .copy-right{
+    overflow: hidden;
+    font-size: 14px;
+    color: #66633E;
+    line-height: 100px;
+    text-align: center;
+}
+.mask {
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.7);
+    z-index:1001;
+}
+.loginbox,.userbox{
+    height: 225px;
+    width: 428px;
+    background: url(../images/pop.png) no-repeat;
+    color: #E1BF44;
+    font-size: 14px;
+    text-align: center;
+    z-index:1002;
+    position: absolute;
+    left: 50%;
+    top: 200px;
+    display:none;
+}
+.loginbox .title,.userbox .title{
+    height:40px;
+    margin:10px 12px 0;
+    line-height: 40px;
+    border-bottom: 1px solid #7B1A1D;
+    font-size: 18px;
+}
+.userbox .title{
+    margin-top: 50px;
+    border-bottom: 0 none;
+    font-size: 24px;
+}
+.userbox .title strong{
+    margin: 0 10px;
+    color: #FFF;
+}
+.loginbox p,.userbox p{
+    padding:15px 0;
+}
+.loginbox .input{
+    width: 240px;
+    padding: 8px;
+    border: 0 none;
+    background-color: #000;
+    font-size: 16px;
+    color: #E1BF44; 
+    border-radius: 3px;
+}
+.loginbox .btn,.userbox .btn{
+    width: 110px;
+    height: 38px;
+    display: block;
+    margin: 15px auto 0;
+    background: url(../images/un-btn.png) no-repeat;
+}
+.loginbox .btn:hover,.userbox .btn:hover{
+    background-position: -120px -1px;
+}
+.btn2{
+    position: absolute;
+    left: 50%;
+    top: 330px;
+    margin-left: 170px;
+    width: 220px;
+    height: 80px;    
+}

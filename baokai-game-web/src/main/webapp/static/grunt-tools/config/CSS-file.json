@@ -1,0 +1,8 @@
+{
+  "<%= pkg.cssReleaseDir %>/game.min.css": [
+  	"<%= pkg.developDir %>images/common/base.css",
+  	"<%= pkg.developDir %>images/game/game.css",
+  	"<%= pkg.developDir %>images/admin/login.css",
+  	"<%= pkg.developDir %>images/common/js-ui.css"
+  ]
+}

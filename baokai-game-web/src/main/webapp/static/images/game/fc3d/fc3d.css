@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.header .logo{
+margin-top:1px;
+background-image: none;
+}
+.logo a{width:132px;padding-top:81px;background:url("logo-3d.png") no-repeat 0 0;
+_background-image:none;
+_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/game/fc3d/logo-3d.png"); }
+.lottery{width: 385px;background:url("bg-header-box.png") 0 -80px no-repeat\9;}
+.deadline{width: 375px;margin-left:68px;background:url("bg-header-box.png") 0 0 no-repeat\9;}

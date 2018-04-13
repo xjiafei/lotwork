@@ -1,0 +1,236 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2014-06-19 15:57:02
+ * @version $Id$
+ */
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+img{border:none;}
+body{
+    position: relative;
+    background: #F5F5F5;
+    font-size: .24rem;
+    line-height:1.5;
+    color: #333;
+    width: 100%;
+    min-width: 320px;
+    overflow-x: hidden;
+    -webkit-text-size-adjust:none;
+}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+
+html{
+    width: 100%;
+}
+body{
+    max-width: 750px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+.hide{
+    display: none;
+}
+.layout{
+    width: 7rem;
+    margin: 0px auto;
+    position: relative;
+}
+.layout:after{content:'';display:block;overflow:hidden;clear:both;}
+
+
+
+header{
+    position: relative;
+    width: 7.5rem;
+    height: 5rem;
+    background: #100E0F url(../images/banner.jpg) center 0 no-repeat;
+    background-size: 7.5rem 5rem;
+}
+.btn-register{
+    position: absolute;
+    left: 50%;
+    top: 3.8rem;
+    margin-left: .05rem;
+    width: 2.03rem;
+    height: .7rem;
+    background: url(../images/btn-register.jpg) center 0 no-repeat;
+    background-size: 2.03rem .7rem;
+    text-decoration: none;
+}
+.enrollments{
+    position: absolute;
+    left: 50%;
+    top: 3.4rem;
+    width: 2.03rem;
+    margin-left: .05rem;
+    text-align: center;
+    font-size: .22rem;
+    line-height: 2;
+    color: #FFF;
+    border-radius: .25rem;
+}
+.enrollments-current{
+    background-color: rgba(0,0,0,.75);
+}
+.enrollments strong{
+    font-weight: 100;
+    color: #F9D613;
+}
+
+
+/*article*/
+
+.activity-content{
+    margin-top: -1rem;
+    background-color: #1C1819;
+    overflow: hidden;
+    color: #969696;
+}
+h3{
+    height: .4rem;
+    line-height: .4rem;
+    margin: .4rem 0 .15rem;
+    font-size: .28rem;
+    color: #FCDC17;
+}
+.list li{
+    position: relative;
+    padding-left: .4rem;
+    padding-bottom: .2rem;
+}
+.list i{
+    position: absolute;
+    left: 0;
+    top: .04rem;
+    width: .3rem;
+    height: .3rem;
+    line-height: .3rem;
+    text-align: center;
+    font-style: normal;
+    background-color: #828282;
+    color: #161314;
+    border-radius: 50%;
+}
+p{
+    line-height: 2;
+    
+}
+p strong{
+    color: #AC7B08;
+}
+.text p{
+    padding-left: .4rem;
+}
+.text p em{
+    position: absolute;
+    width: .36rem;
+    height: .24rem;
+    margin-left: -.4rem;
+    margin-top: .1rem;
+    line-height: .24rem;
+    text-align: center;
+    background-color: #A87805;
+    color: #1C1819;
+    font-style: normal;
+    border-radius: 3px;
+}
+.table-content{
+    width: 7rem;
+    margin-bottom: 10px;
+    border-collapse:separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    font-size: .16rem;
+    white-space: nowrap;
+}
+.table-content th{
+    padding: .12rem .1rem;
+    border-left:1px solid #252730;
+    background-color: #252730;
+    text-align: center;
+}
+
+.table-content td{
+    padding: .12rem .1rem;
+    border-left:1px solid #23242B;
+    border-bottom:1px solid #23242B;
+    background-color: #1B1C22;
+    color: #6C7081;
+    text-align: center;
+
+}
+.table-content td.title{
+    background-color: #1E1F25;
+}
+.activity-rules{
+    padding:.4rem 0;
+    background-color: #FF654C;
+    overflow: hidden;
+    color: #4B2F0A;
+}
+
+
+
+
+/*footer*/
+.footer{
+    background-color: #1C1819;
+}
+.footer .copy-right{
+    overflow: hidden;
+    font-size: .22rem;
+    color: #4F4F4F;
+    line-height: .5rem;
+    text-align: center;
+}
+
+.mask{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+}
+.pop{
+    display: none;
+    position: fixed;
+    z-index: 111;
+    left: 50%;
+    top:50%;
+    width: 5.2rem;
+    height: 3rem;
+    margin: -1.5rem 0 0 -2.6rem;
+    background-color: #34383A;
+}
+.pop .close{
+    position: absolute;
+    right: .15rem;
+    top: .15rem;
+    width: .36rem;
+    height: .36rem;
+    background: url(../images/close.png?);
+    background-size: .36rem .36rem;
+    transition: .3s;
+}
+.pop .close:hover{
+    transform:rotate(90deg);
+}
+.pop p{
+    width: 2.44rem;
+    height: 1.84rem;
+    margin: .3rem auto 0;
+    background: url(../images/pop-text.png?121);
+    background-size: 2.44rem 1.84rem;
+}

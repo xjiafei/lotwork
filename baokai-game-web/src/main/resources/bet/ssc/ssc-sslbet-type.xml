@@ -1,0 +1,129 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="sslGameGroups" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup">
+					<property name="code" value="13" />
+					<property name="title" value="三星" />
+					<property name="name" value="housan" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup">
+					<property name="code" value="14" />
+					<property name="title" value="后二" />
+					<property name="name" value="houer" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup">
+					<property name="code" value="15" />
+					<property name="title" value="前二" />
+					<property name="name" value="qianer" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup">
+					<property name="code" value="16" />
+					<property name="title" value="一星" />
+					<property name="name" value="yixing" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="sslGameSets" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameSet">
+					<property name="code" value="10" />
+					<property name="title" value="直选" />
+					<property name="name" value="zhixuan" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameSet">
+					<property name="code" value="11" />
+					<property name="title" value="组选" />
+					<property name="name" value="zuxuan" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameSet">
+					<property name="code" value="12" />
+					<property name="title" value="不定位" />
+					<property name="name" value="budingwei" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameSet">
+					<property name="code" value="14" />
+					<property name="title" value="定位胆" />
+					<property name="name" value="dingweidan" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sslSetMethods" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="10" />
+					<property name="title" value="复式" />
+					<property name="name" value="fushi" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="11" />
+					<property name="title" value="单式" />
+					<property name="name" value="danshi" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="33" />
+					<property name="title" value="和值" />
+					<property name="name" value="hezhi" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="34" />
+					<property name="title" value="跨度" />
+					<property name="name" value="kuadu" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="35" />
+					<property name="title" value="组三" />
+					<property name="name" value="zusan" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="36" />
+					<property name="title" value="组六" />
+					<property name="name" value="zuliu" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="37" />
+					<property name="title" value="混合组选" />
+					<property name="name" value="hunhezuxuan" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="39" />
+					<property name="title" value="包胆" />
+					<property name="name" value="baodan" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="40" />
+					<property name="title" value="一码不定位" />
+					<property name="name" value="yimabudingwei" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="41" />
+					<property name="title" value="二码不定位" />
+					<property name="name" value="ermabudingwei" />
+				</bean>
+		
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="62" />
+					<property name="title" value="组三单式" />
+					<property name="name" value="zusandanshi" />
+				</bean>
+				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod">
+					<property name="code" value="63" />
+					<property name="title" value="组六单式" />
+					<property name="name" value="zuliudanshi" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+</beans>

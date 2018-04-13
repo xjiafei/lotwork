@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+*{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+em{font-style:normal}
+ol,ul{list-style:none}
+fieldset,img,abbr,acronym{border:0}
+input,select{font-family:Microsoft YaHei}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+body{font:normal 13px/2em Microsoft YaHei,Tahoma,simsun;color:#fff;margin:0 auto; background: #000;}
+.clearfix{*zoom:1}
+.clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+a{text-decoration:none; color: #fff;}
+a:hover{text-decoration:none; color: #abc6eb;}
+.tc { text-align: center}
+
+
+.banner,
+.rule,
+.footer{
+	width: 100%;
+}
+.banner {
+	background: #000 url(bg.jpg) no-repeat center top;
+}
+.rule {
+	background: #000 url(line.jpg) repeat-x;
+	height: 543px;
+	padding-top: 50px;
+}
+.footer {
+	background: #000;
+	color: #8d8d8d;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+}
+.bannerM,
+.ruleM,
+.footerM{
+	width: 1000px;
+	margin: 0 auto;
+}
+.bannerM {
+	background:url(banner.jpg) no-repeat center top;
+	height: 1394px;
+	position: relative;
+}
+.bannerM .p1 {
+	position: absolute;
+	width: 430px;
+	top: 1218px;
+	left: 61px;
+	color: #c70c22;
+}
+.bannerM .p2 {
+	position: absolute;
+	width: 430px;
+	top: 1218px;
+	left: 532px;
+	color: #f69a09;
+}
+.bannerM .tips {
+	position: absolute;
+	width: 800px;
+	top: 1280px;
+	left: 61px;
+}
+.bannerM  .code {
+	background: url(code.png) no-repeat;
+	width: 122px;
+	height: 128px;
+	position: absolute;
+	right: -100px;
+	bottom: 228px;
+}
+.bannerM .btn {
+	position: absolute;
+
+	width: 340px;
+	height: 130px;
+	left: 341px;
+	top: 490px;
+}
+#baomingAlready {
+  display: block;
+  width: 238px;
+  height: 114px;
+  margin: 586px auto auto auto;
+  margin-top: 506px;
+  text-indent: -999em;
+  background: url(../imgs/joinbtn.png) no-repeat;
+  overflow: hidden;
+}
+
+/* .bannerM .btn.reg {
+	background: url(regbtn.png);
+	-webkit-animation:hand 3s  ease both infinite;
+	-moz-animation:hand 3s  ease both infinite;
+} */
+#regbtn{
+	background: url(regbtn.png);
+	-webkit-animation:hand 3s  ease both infinite;
+	-moz-animation:hand 3s  ease both infinite;
+}
+#regbtn1 {
+	background: url(joinbtn.png);
+	-webkit-animation:hand 3s  ease both infinite;
+	-moz-animation:hand 3s  ease both infinite;
+}
+
+.bannerM .btn.joined {
+	background: url(joinbtn.png);
+}
+
+.bannerM .btn.end {
+	background: url(overbtn.png);
+}
+
+.ruleM h3 {
+	font-size: 20px;
+	display: block;
+	padding: 8px 10px;
+	background: #fff;
+	border-radius: 5px;
+	color: #000;
+	font-size: 20px;
+	line-height: 20px;
+	width: 80px;
+	margin-left: 60px;
+}
+.ruleM ul {
+	padding-left: 76px;
+	padding-top: 20px;
+
+}
+.ruleM li {
+	line-height: 40px;
+	font-size: 16px;
+	list-style: decimal;
+}
+
+
+@-webkit-keyframes hand{
+	0%,50%,100%{;
+		-webkit-transform: scale(1.05,1.05);
+		}
+	25%,75%{ -webkit-transform: scale(1,1);
+		}
+}
+@-moz-keyframes hand{
+	0%,50%,100%{-moz-transform:scale(1.05,1.05);}
+	25%,75%{-moz-transform:  scale(1,1); }
+}

@@ -1,0 +1,408 @@
+@charset "UTF-8";
+
+
+
+.header .logo{
+margin-top:5px;
+background-image: none;
+}
+.logo a{width:129px;padding-top:63px;background:url("logo-k8.png") no-repeat 0 0;
+_background-image:none;
+_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/game/bjklb/logo-k8.png"); 
+}
+
+.lottery{width:540px;background:url("bg-header-box.png") 0 -80px no-repeat\9;}
+.lottery-text a:hover{color:#FFF100;}
+.lottery-number{width:250px;height:auto;margin-top:8px;margin-bottom:8px;}
+.lottery-number em{width:21px;height:21px;margin:1px 2px;line-height:20px;background:url("un-lottery-number.png") 0 0 no-repeat;font-size:12px;}
+.lottery-info{display:inline-block;*display:inline;*zoom:1;margin-left:4px;vertical-align:middle;text-align:left;}
+
+.deadline{width:270px;margin-left:17px;background:url("bg-header-box.png") 0 0 no-repeat\9;}
+
+
+
+
+.chart-table-k8{float:left;width:470px;height:334px;overflow-y:auto;}
+
+.number-section{padding:10px;}
+.ball-control{display:block;padding:10px;margin:0;overflow:hidden;border-top:1px solid #CDCDCD;}
+.ball-control-title,.ball-control-text{float:left;height:26px;line-height:26px;color:#888;}
+.ball-control a{width:auto;height:24px;margin-right:5px;line-height:24px;padding:0 8px;border:1px solid #CACACA;font-family:"宋体";font-size:12px;font-weight:100;color:#888;cursor:pointer;
+border-radius:3px;
+-moz-border-radius:3px;
+-webkit-border-radius:3px;
+background:-webkit-linear-gradient(top,#FFF,#F0F0F0) #F5F5F5;
+background:    -moz-linear-gradient(top,#FFF,#F0F0F0) #F5F5F5;
+background:         -o-linear-gradient(top,#FFF,#F0F0F0) #F5F5F5;
+background:              linear-gradient(top,#FFF,#F0F0F0) #F5F5F5;
+background:#F6F6F6\9;
+box-shadow:0 1px 2px rgba(0,0,0,0.1);
+}
+.ball-control a.current{
+border-color:#187464;
+background:-webkit-linear-gradient(top,#0B9A84,#058974) #07907A;
+background:    -moz-linear-gradient(top,#0B9A84,#058974) #07907A;
+background:         -o-linear-gradient(top,#0B9A84,#058974) #07907A;
+background:              linear-gradient(top,#0B9A84,#058974) #07907A;
+background:#07907A\9;
+color:#FFF;
+}
+.ball-section{background-color:#F2F2F2;padding: 8px 14px;}
+.ball-number{float:left;margin:1px 2px;font-size:14px;_display:inline;}
+.ball-number-current{font-size:14px;}
+.balls-import-input{display:inline-block;width:107px;height:31px;margin:0;margin-right:20px;background-position:0 -160px;}
+.ball-title{width:auto;background-color:#F2F2F2;}
+.ball-title strong{font-size:20px;color:#959595}
+.ball-title-k8{float:left;width:120px;height:45px;line-height:45px;vertical-align:middle;text-align:center;background-color:#FFF;font-size:16px;font-weight:700;color:#EF8D00;
+border-radius:4px;
+-moz-border-radius:4px;
+-webkit-border-radius:4px;}
+.ball-number-k8{position:relative;display:inline-block;*display:inline;*zoom:1;width:120px;height:45px;margin:0 20px;vertical-align:middle;text-align:center;background-color:#FFF;font-size:24px;color:#888;
+border-radius:4px;
+-moz-border-radius:4px;
+-webkit-border-radius:4px;
+background: url("ballsbutton.png") no-repeat;
+box-shadow:0 1px 2px rgba(0,0,0,0.1);
+line-height: normal;
+}
+.ball-number-k8 strong,
+.ball-number-k8 span{
+	display: none;
+}
+.ball-number-k8 .for_touch{
+	position: absolute;
+	width:120px;
+	height:45px;
+	top: 0px;
+	left: 0px;
+}
+.ball-number-k8.up.ball-number-current,.ball-number-k8.up.ball-number-current:hover{
+	background-position: 0px -47px; 
+}
+.ball-number-k8.updown,.ball-number-k8.updown:hover{
+	background-position: -122px 0px; 
+}
+.ball-number-k8.updown.ball-number-current,.ball-number-k8.updown.ball-number-current:hover{
+	background-position: -122px -47px; 
+}
+.ball-number-k8.down,.ball-number-k8.down:hover{
+	background-position: -244px 0px; 
+}
+.ball-number-k8.down.ball-number-current,.ball-number-k8.down.ball-number-current:hover{
+	background-position: -244px -47px; 
+}
+.ball-number-k8.ji,.ball-number-k8.ji:hover{
+	background-position: 0px -94px;
+}
+.ball-number-k8.ji.ball-number-current,.ball-number-k8.ji.ball-number-current:hover{
+	background-position: 0px -141px; 
+}
+.ball-number-k8.huo,.ball-number-k8.huo:hover{
+	background-position: -122px -94px;
+}
+.ball-number-k8.huo.ball-number-current,.ball-number-k8.huo.ball-number-current:hover{
+	background-position: -122px -141px; 
+}
+.ball-number-k8.ou,.ball-number-k8.ou:hover{
+	background-position: -244px -94px;
+}
+.ball-number-k8.ou.ball-number-current,.ball-number-k8.ou.ball-number-current:hover{
+	background-position: -244px -141px; 
+}
+.ball-number-k8.dadan,.ball-number-k8.dadan:hover{
+	background-position: 0px -188px;
+}
+.ball-number-k8.dadan.ball-number-current,.ball-number-k8.dadan.ball-number-current:hover{
+	background-position: 0px -235px; 
+}
+.ball-number-k8.dashuang,.ball-number-k8.dashuang:hover{
+	background-position: -122px -188px;
+}
+.ball-number-k8.dashuang.ball-number-current,.ball-number-k8.dashuang.ball-number-current:hover{
+	background-position: -122px -235px; 
+}
+.ball-number-k8.xiaodan,.ball-number-k8.xiaodan:hover{
+	background-position: -244px -188px;
+}
+.ball-number-k8.xiaodan.ball-number-current,.ball-number-k8.xiaodan.ball-number-current:hover{
+	background-position: -244px -235px; 
+}
+.ball-number-k8.xiaoshuang,.ball-number-k8.xiaoshuang:hover{
+	background-position: -367px -188px;
+}
+.ball-number-k8.xiaoshuang.ball-number-current,.ball-number-k8.xiaoshuang.ball-number-current:hover{
+	background-position: -367px -235px; 
+}
+
+
+.ball-number-k8:hover{text-decoration:none;cursor:pointer;}
+
+.ball-content{width:440px;}
+.ball-number-section{float:left;}
+.ball-number-up,.ball-number-down{padding:8px 0;}
+.ball-number-up{border-bottom:1px solid #CFCFCF;}
+.ball-table{float:right;width:430px;}
+.ball-table-title{padding:15px 0;text-align:center;font-size:14px;color:#888;}
+.ball-table table{width:100%;}
+.ball-table table th{padding:4px 2px;border:1px solid #C7C7C7;background-color:#F6F6F6;text-align:center;font-weight:700;color:#888;}
+.ball-table table td{padding:3px 2px;border:1px solid #C7C7C7;background-color:#FFF;text-align:center;color:#888;}
+.ball-table table .title{background-color:#F6F6F6;}
+
+
+
+
+
+
+
+.dingdanshuang .ball-number{
+	width: 105px;
+	background:url("un-ball-number.png") 0px -46px no-repeat;
+}
+.dingdanshuang .ball-number-current{
+	background-position:-108px -46px;font-size:16px;color:#FFF;
+}
+
+.ball-table table td.msg-tips{border-top: none;text-align: left;padding-left:10px;}
+
+
+
+.charts-area{
+	float: left;
+	overflow: hidden;
+	width: 490px;
+}
+
+/*统计表*/
+#calculate{
+	width: 510px;
+	height: 330px;
+	background: #fff;
+}
+#calculate .buttons{
+	height: 50px;
+	padding: 25px 0 0 50px;
+}
+#calculate .buttons span{
+	display: block;
+	float: left;
+	margin-left: 10px;
+	height: 25px;
+	padding: 0 10px;
+	color: #555;
+	cursor: pointer;
+	line-height: 25px;
+	border-radius: 5px;
+	background: #f5f5f5;
+	border: 1px solid #c2c2c2;
+}
+#calculate .buttons span.current{
+	color: #fff;
+	border: 1px solid #da1c3d;
+	background: #e5415e;
+	/* 设置阴影 */
+    -webkit-box-shadow:0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow:0px 1px 3px rgba(0,0,0,0.5);
+    box-shadow:0px 1px 3px rgba(0,0,0,0.5);
+}
+#calculate	.graduation{
+	float: left;
+	width: 40px;
+	height: 180px;
+	text-align: left;
+	margin-left: 20px;
+	_display:inline;
+}
+#calculate	.graduation li{
+	position: relative;
+	height: 29px;
+	*height: 27px;
+	line-height: 29px;
+	border-top: 1px solid #ccc;
+}
+#calculate	.graduation .graduNum{
+	position: absolute;
+	top: -16px;
+	width: 30px;
+	_width: 18px;
+	_overflow:hidden;
+	background: #fff;
+}
+#calculate .result{
+	float: left;
+	width: 430px;
+	height: 179px;
+	_height: 179px;
+	_overflow: hidden;
+	border: 1px solid #ccc;
+	border-right: none;
+}
+#calculate .result li{
+	position: relative;
+	float: left;
+}
+
+/*color*/
+#calculate .red{
+	background: #f55e57;
+}
+#calculate .green{
+	background: #9fc354;
+}
+#calculate .blue{
+	background: #6ea0dd;
+}
+#calculate .Purple{
+	background: #c978eb;
+}
+#calculate .yellow{
+	background: #f9e11a;
+}
+#calculate .fred{
+	color: #f55e57;
+}
+#calculate .fgreen{
+	color: #9fc354;
+}
+#calculate .fblue{
+	color: #6ea0dd;
+}
+#calculate .fPurple{
+	color: #c978eb;
+}
+#calculate .fyellow{
+	color: #e19b05;
+}
+#calculate .dataGroup{
+	height: 180px;
+}
+#calculate .result .databox{
+	position: absolute;
+	bottom: 1px;
+	left: 0;
+	width: 20px;
+	-moz-transition: height 0.5s ease-in-out,color 0.3s ease-out;
+    -webkit-transition: height 0.5s ease-in-out,color 0.3s ease-out;
+    -o-transition: height 0.5s ease-in-out,color 0.3s ease-out;
+    transition: height 0.5s ease-in-out,color 0.3s ease-out;
+}
+#calculate .result .title{
+	position: absolute;
+	top: -18px;
+	width: 20px;
+	text-align: center;
+	overflow: hidden;
+}
+#calculate .result .shang{
+	left: 15px;
+}
+#calculate .result .zhong{
+	left: 37px;
+}
+#calculate .result .xia{
+	left: 59px;
+}
+/*ji ou he*/
+#calculate .result .ji{
+	left: 16px;
+}
+#calculate .result .ou{
+
+	left: 59px;
+}
+#calculate .result .he{
+	left: 37px;
+}
+/*dan shuang*/
+#calculate .result .dan{
+	left: 18px;
+}
+#calculate .result .shuang{
+	left: 40px;
+}
+/*dan shuang*/
+#calculate .result .da{
+	left: -1px;
+}
+#calculate .result .xiao{
+	left: 21px;
+}
+/*dan shuang*/
+#calculate .result .dadan{
+	left: -17px;
+}
+#calculate .result .dashuang{
+	left: 5px;
+}
+#calculate .result .xiaodan{
+	left: 27px;
+}
+#calculate .result .xiaoshuang{
+	left: 49px;
+}
+
+/*data-list-text*/
+#calculate .data-list-text{
+	display: block;
+	_margin-top: -30px;
+	width: 100%;
+}
+#calculate .data-list-text li{
+	float: left;
+	border-left: 1px solid #ccc;
+	text-align: center;
+}
+#calculate .data-list-text li span{
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	width: 20px;
+	text-align: center;
+	margin-left: 2px;
+}
+#calculate .data-list-text li.group0{
+	margin-left: 60px;
+	_display: inline;
+	width: 90px;
+}
+#calculate .data-list-text li.group1{
+	width: 86px;
+}
+#calculate .data-list-text li.group2{
+	width: 65px;
+}
+#calculate .data-list-text li.group3{
+	width: 67px;
+}
+#calculate .data-list-text li.group4 span{
+	width: 27px;
+}
+#calculate .data-group-text li{
+	float: left;
+	margin-right: 13px;
+}
+#calculate .data-group-text{
+	margin: 18px 0 0 35px;
+}
+#calculate .data-group-text li .color-box{
+	display: inline-block;
+	*zoom:1;
+	*display: inline;
+	width: 15px;
+	height: 15px;
+	vertical-align: middle;
+}
+#calculate .data-group-text span{
+	margin-left: 5px;
+}
+
+a.ball-number:hover {
+    background-position: -439px -188px;
+}
+
+a.ball-number.up:hover{
+  background-position: 0px 0px;
+}
+
+.ball-control a.current {
+    border-color: #008ad8;
+    background: #008ad8}

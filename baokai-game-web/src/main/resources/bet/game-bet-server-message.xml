@@ -1,0 +1,272 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+	<bean id="serverMessages" class="java.util.HashMap">
+		<constructor-arg>
+			<map key-type="java.lang.Long" value-type="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                <entry key="0">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="success" />
+                        <property name="isSuccess" value="1" />
+                        <property name="msg" value="恭喜您投注成功~!" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="恭喜您投注成功~!"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="901000">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="serverError" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="服务器错误请稍后再试!" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="服务器错误请稍后再试!"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+              	<entry key="1000">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="subFaild" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="提交过于频繁，请稍后再提交!" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="提交过于频繁，请稍后再提交!"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="99998">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="subFaild" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="下注操作失败！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="下注操作失败！"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="99999">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="subFaild" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="方案提交失败，请检查网络并重新提交！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="方案提交失败，请检查网络并重新提交！"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="201005">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="subFaild" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="当前奖期已停止销售，请刷新页面重试！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="当前奖期已停止销售，请刷新页面重试！"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="202005">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="overLimit" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="您的投注内容 超出倍数限制，请调整！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="您的投注内容 超出倍数限制，请调整！"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="202009">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="overAmountLimit" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="您的投注金額超過上限，请调整！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="您的投注金額超過上限，请调整！"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="202008">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="pauseBet" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="您的投注内容中有投注方式暂停，请确认！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="您的投注内容中有投注方式暂停，请确认！"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="204001">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="Insufficientbalance" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="您的余额不足，请确认！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="您的余额不足，请确认！"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="204002">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="normal" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="总代不能投注，请确认！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="总代不能投注，请确认！"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="204003">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="normal" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="没分配奖金组，请联系上级或客服人员" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="没分配奖金组，请联系上级或客服人员"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="204004">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="normal" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="您尚未选择投注奖金组，请在进入投注页面时选择！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="您尚未选择投注奖金组，请在进入投注页面时选择！"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="201006">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="lotteryClose" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="您好，当前彩种已停售！" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="您好，当前彩种已停售！"/>
+                                        <property name="lotteryType">
+                                            <value>
+                                                <![CDATA[
+                                                            <dd>
+                                                                <span class="pic"><img src="${static.resources.path}/static/images/game/tancenglogo/llssc.jpg"/></span>
+                                                                <a class="btn" href="/gameBet/llssc">
+                                                                    去投注
+                                                                </a>
+                                                            </dd>
+                                                            <dd>
+                                                                <span class="pic"><img src="${static.resources.path}/static/images/game/tancenglogo/ll115.jpg"/></span>
+                                                                <a class="btn" href="/gameBet/ll115">
+                                                                    去投注
+                                                                </a>
+                                                            </dd>
+                                                        ]]>
+                                            </value>
+                                        </property>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="205000">
+                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonResultStruc">
+                        <property name="type" value="blockade" />
+                        <property name="isSuccess" value="0" />
+                        <property name="msg" value="存在封锁变价" />
+                        <property name="data">
+                            <bean class="com.winterframework.firefrog.game.web.dto.GameBetJsonDateStruc">
+                                <property name="tplData">
+                                    <bean class="com.winterframework.firefrog.game.web.dto.GameBetTplData">
+                                        <property name="msg" value="存在封锁变价"/>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+</beans>

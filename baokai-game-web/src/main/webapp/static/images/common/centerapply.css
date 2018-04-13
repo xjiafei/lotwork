@@ -1,0 +1,30 @@
+.btn {
+
+    border: 1px solid #CACACA;
+    padding: 0 15px;
+    line-height: 32px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #F6F6F6;
+    font-size: 14px;
+    font-weight: 700;
+    color: #555;
+    cursor: pointer;
+    border-radius: 3px;
+
+    height: 34px\9;
+    line-height: 34px\9;
+    border: 0 none\9;
+    text-decoration: none;
+    -moz-box-shadow: 0px 5px 23px -10px rgba(0,0,0,1);
+     box-shadow: none;
+    color: #595D5F;
+}
+
+.btn-important.btn, .pop .confirm {
+    color: #FFF;
+    /* border-color: #F13131; */
+    box-shadow: none\9;
+    background-color: #008ad8;
+   
+}

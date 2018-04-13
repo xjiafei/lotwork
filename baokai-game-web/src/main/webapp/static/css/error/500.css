@@ -1,0 +1,10 @@
+body{margin:0;padding:0;background:#035F54 url("../../images/common/bg-header.jpg") repeat;color:#FFF;font:12px/1.5 Tahoma,Arial,"宋体",sans-serif;}
+	.logo-error{width:320px;height:219px;margin:150px 0 0 150px;background:url("../../images/common/un-error-page.png") 0 0 no-repeat;}
+	.logo-fh{position:absolute;right:20px;bottom:20px;width:100px;height:27px;background:url("../../images/common/un-error-page.png") 0 -460px no-repeat;}
+	p{margin-left:160px;line-height:2;}
+	a{color:#FFF;text-decoration:underline;
+	-webkit-transition:0.3s ease;
+	-moz-transition:0.3s ease;
+	transition:0.3s ease;
+	}
+	a:hover{color:#009B7D;}

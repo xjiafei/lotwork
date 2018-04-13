@@ -1,0 +1,142 @@
+{
+	"isSuccess": 1,
+	"msg": "success",
+	"data": {
+		"username": "fd0011",
+		"isstop": 0,
+		"number": "20150226-056",
+		"issueCode": 20150226101056,
+		"resulttime": "2015/03/03 17:37:12",
+		"nowtime": "2015/03/03 17:40:12",
+		"nowstoptime": "2015/03/03 17:42:12",
+		"lastnumber": "20150218-053",
+		"lastballs": "2,4,5",
+		"tracemaxtimes": 11,
+		"multiplemaxtimes": 10,
+		"multipleToCnyFactor": 2,
+		"gamenumbers": [{
+			"number": "20150226-056",
+			"issueCode": 20150226101056,
+			"time": "2015/02/26 15:19:10"
+		}, {
+			"number": "20150226-057",
+			"issueCode": 20150226101057,
+			"time": "2015/02/26 15:29:10"
+		}, {
+			"number": "20150226-058",
+			"issueCode": 20150226101058,
+			"time": "2015/02/26 15:39:10"
+		}, {
+			"number": "20150226-059",
+			"issueCode": 20150226101059,
+			"time": "2015/02/26 15:49:10"
+		}, {
+			"number": "20150226-060",
+			"issueCode": 20150226101060,
+			"time": "2015/02/26 15:59:10"
+		}, {
+			"number": "20150226-061",
+			"issueCode": 20150226101061,
+			"time": "2015/02/26 16:09:10"
+		}, {
+			"number": "20150226-062",
+			"issueCode": 20150226101062,
+			"time": "2015/02/26 16:19:10"
+		}, {
+			"number": "20150226-063",
+			"issueCode": 20150226101063,
+			"time": "2015/02/26 16:29:10"
+		}, {
+			"number": "20150226-064",
+			"issueCode": 20150226101064,
+			"time": "2015/02/26 16:39:10"
+		}, {
+			"number": "20150226-065",
+			"issueCode": 20150226101065,
+			"time": "2015/02/26 16:49:10"
+		}, {
+			"number": "20150226-066",
+			"issueCode": 20150226101066,
+			"time": "2015/02/26 16:59:10"
+		}, {
+			"number": "20150226-067",
+			"issueCode": 20150226101067,
+			"time": "2015/02/26 17:09:10"
+		}, {
+			"number": "20150226-068",
+			"issueCode": 20150226101068,
+			"time": "2015/02/26 17:19:10"
+		}, {
+			"number": "20150226-069",
+			"issueCode": 20150226101069,
+			"time": "2015/02/26 17:29:10"
+		}, {
+			"number": "20150226-070",
+			"issueCode": 20150226101070,
+			"time": "2015/02/26 17:39:10"
+		}, {
+			"number": "20150226-071",
+			"issueCode": 20150226101071,
+			"time": "2015/02/26 17:49:10"
+		}, {
+			"number": "20150226-072",
+			"issueCode": 20150226101072,
+			"time": "2015/02/26 17:59:10"
+		}, {
+			"number": "20150226-073",
+			"issueCode": 20150226101073,
+			"time": "2015/02/26 18:09:10"
+		}, {
+			"number": "20150226-074",
+			"issueCode": 20150226101074,
+			"time": "2015/02/26 18:19:10"
+		}, {
+			"number": "20150226-075",
+			"issueCode": 20150226101075,
+			"time": "2015/02/26 18:29:10"
+		}, {
+			"number": "20150226-076",
+			"issueCode": 20150226101076,
+			"time": "2015/02/26 18:39:10"
+		}, {
+			"number": "20150226-077",
+			"issueCode": 20150226101077,
+			"time": "2015/02/26 18:49:10"
+		}],
+		"gamelimit": [{
+			"daxiao": {				
+				"maxmultiple": 500,
+				"usergroupmoney": null
+			},
+			"danshuang": {				
+				"maxmultiple": 500,
+				"usergroupmoney": null
+			},
+			"ertonghaofuxuan": {				
+				"maxmultiple": 500,
+				"usergroupmoney": null
+			},
+			"santonghaodanxuan": {				
+				"maxmultiple": 500,
+				"usergroupmoney": null
+			},
+			"santonghaotongxuan": {				
+				"maxmultiple": 500,
+				"usergroupmoney": null
+			},
+			"hezhi": {				
+				"maxmultiple": 500,
+				"usergroupmoney": null
+			},
+			"erbutonghao": {				
+				"maxmultiple": 500,
+				"usergroupmoney": null
+			},
+			"yibutonghao": {				
+				"maxmultiple": 500,
+				"usergroupmoney": null
+			}
+		}],
+		"ballInfo": null
+	}
+}

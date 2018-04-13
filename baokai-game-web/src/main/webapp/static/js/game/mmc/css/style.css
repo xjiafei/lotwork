@@ -1,0 +1,229 @@
+@charset "UTF-8";
+*{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+em{font-style:normal}
+ol,ul{list-style:none}
+fieldset,img,abbr,acronym{border:0}
+input,select{font-family:Microsoft YaHei}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+body{font:normal 12px/1.6em Microsoft YaHei,Tahoma,simsun;color:#666;margin:0 auto;}
+.clearfix{*zoom:1}
+.clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+a{text-decoration:none}
+a:hover{text-decoration:underline}
+
+.outer {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+.inner {
+    width: 1000px;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: inherit;
+    position: relative;
+}
+.outer.o1 {
+    background-image: url(../images/bg1.jpg);
+    height: 1965px;
+}
+.o1 .inner {
+    background-image: url(../images/m1.jpg);
+}
+.outer.o2 {
+    background-image: url(../images/bg2.jpg);
+    height: 1230px;
+}
+.o2 .inner {
+    background-image: url(../images/m2.jpg);
+}
+.outer.o3 {
+    background-image: url(../images/bg3.jpg);
+    height: 2105px;
+}
+.o3 .inner {
+    background-image: url(../images/m3.jpg);
+}
+
+
+.text {
+    position: absolute;
+    font-size: 16px;
+    color: #969696;
+    line-height: 1.8em;
+    color: #f2f5f7;
+    padding: 0px 30px 0px 20px;
+}
+.t1 {
+    top: 228px;
+}
+.t2 {
+    color: #081c32;
+    top: 220px;
+}
+.t3 {
+    top: 828px;
+}
+.text.t3 p {
+    margin-bottom: 20px;
+}
+
+.text h3 {
+    font-size: 50px;
+    line-height: 2em;
+    font-weight: normal;
+    font-family: "宋体";
+}
+.text p {
+    margin-bottom: 166px;
+}
+.text p span{
+    color: #ffe33b;
+}
+.window {
+    width: 100%;
+    position: relative;
+    min-height: 500px;
+}
+
+.window .down {
+    position: absolute;
+    background: url(../images/down.png) no-repeat;
+    width: 29px;
+    height: 60px;
+    bottom: 20px;
+    left: 528px;
+    z-index: 2;
+    animation: mouse 1.5s infinite;
+    -moz-animation: mouse 1.5s infinite;
+    -webkit-animation: mouse 1.5s infinite;
+    -o-animation: mouse 1.5s infinite;
+}
+
+.btnJoin {
+    position: absolute;
+    left: 394px;
+    top: 739px;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-image: url(../images/btn.png);
+    width: 293px;
+    height: 84px;
+    text-indent: -999em;
+}
+.btnJoin:hover {
+    background-position: left bottom;
+}
+.btnVideo {
+    position: absolute;
+    left: 42px;
+    top: 1884px;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-image: url(../images/video.png);
+    width: 222px;
+    height: 68px;
+    text-indent: -999em;
+    display: block;
+    cursor: pointer;
+}
+.btnJoin:hover {
+    background-position: left bottom;
+}
+
+/*footer*/
+.footer{
+    width: 100%;
+    color: #40696f;
+    line-height: 100px;
+    text-align: center;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0px;
+}
+
+@keyframes mouse
+{
+    0% { margin-bottom: 0px;}
+    50% { margin-bottom: -20px;}
+    100% {  margin-bottom: 0px;}
+}
+
+@-moz-keyframes mouse /* Firefox */
+{
+    0% { margin-bottom: 0px;}
+    50% { margin-bottom: -20px;}
+    100% { margin-bottom: 0px;}
+}
+
+@-webkit-keyframes mouse /* Safari 和 Chrome */
+{
+    0% { margin-bottom: 0px;}
+    50% { margin-bottom: -20px;}
+    100% { margin-bottom: 0px;}
+}
+@-o-keyframes mouse /* Opera */
+{
+    0% { margin-bottom: 0px;}
+    50% { margin-bottom: -20px;}
+    100% { margin-bottom: 0px;}
+}
+
+
+.video_box {
+    width: 800px;
+    height: 600px;
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    margin-left: -400px;
+    margin-top: -300px;
+}
+.video_box .close {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    background: url(../images/close.png) no-repeat 0 0;
+    transition: .3s;
+}
+.close:hover{transform:rotate(180deg);}
+
+
+.btnVideo {
+    position: absolute;
+    left: 42px;
+    top: 1884px;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-image: url(../images/video.png);
+    width: 222px;
+    height: 68px;
+    text-indent: -999em;
+    display: block;
+    cursor: pointer;
+}
+.btnJoin, .btnVideo2{
+    position: absolute;
+    left: 394px;
+    top: 739px;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-image: url(../images/btn.png);
+    width: 293px;
+    height: 84px;
+    text-indent: -999em;
+}
+
+.btnVideo2{
+    background-image: url(../images/video.png);
+    left: 430px;
+    display:none;
+}

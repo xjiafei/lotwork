@@ -1,0 +1,510 @@
+@charset "utf-8";
+
+/* ico-bank */
+.ABC {background-position: 0 0;}
+.BJBANK {background-position: 0 -36px;}
+.BOC {background-position: 0 -72px;}
+.BSB {background-position: 0 -108px;}
+.CCB {background-position: 0 -144px;}
+.CEB {background-position: 0 -180px;}
+.CITIC {background-position: 0 -216px;}
+.CMB {background-position: 0 -252px;}
+.CMBC {background-position: 0 -288px;}
+.COMM {background-position: 0 -324px;}
+.EGBANK {background-position: 0 -360px;}
+.FJHXBC {background-position: 0 -396px;}
+.GDB {background-position: 0 -432px;}
+.HXBANK {background-position: 0 -468px;}
+.HZCB {background-position: 0 -504px;}
+.ICBC {background-position: 0 -537px;}
+.JHBANK {background-position: 0 -576px;}
+.JSBANK {background-position: 0 -612px;}
+.JXBANK {background-position: 0 -648px;}
+.NBBANK {background-position: 0 -684px;}
+.NBYZ {background-position: 0 -720px;}
+.PSBC {background-position: 0 -756px;}
+.SDB {background-position: 0 -792px;}
+.SHBANK {background-position: 0 -828px;}
+.SPABANK {background-position: 0 -864px;}
+.SPDB {background-position: 0 -900px;}
+.SXCB {background-position: 0 -936px;}
+.WZCB {background-position: 0 -972px;}
+.ZJNX {background-position: 0 -1008px;}
+.CIB {background-position: 0 -1044px;}
+.ALIPAY{background-position: 0 -1080px;}
+.TENPAY{background-position: 0 -1116px;}
+.YEEPAY{background-position: 0 -1152px;}
+.SPAY{background-position: 0 -1186px;}
+.UPY{background-position: 0 -1217px;}
+.WECHAT{background-position: 0 -1250px;}
+.QQ{background-position: 0 -1285px;}
+
+.bank-select .ui-label{width:68px;font-weight:700;}
+.bank-select .ui-btn,.bank-select .ui-text{margin-left:76px;}
+.bank-select-from{margin-top:-20px;}
+.bank-select-from .ico-info{float:right;width:16px;height:16px;margin-top:12px;background:url(../../images/common/ui-alert.png) -240px -60px;cursor:pointer;}
+.bank-list .ico-bank:hover{border-color: #008ad8;}
+.ico-bank{display:inline-block;width:126px;height:36px;border:2px solid #FFF;vertical-align:middle;background-image:url(ui-bank.png);background-repeat:no-repeat;cursor:pointer;}
+.ui-form .ico-warning{cursor:pointer;}
+
+/* bank-more */
+.bank-more{display:inline-block;*display:inline;*zoom:1;background-color:#FFF;color:#555;overflow:hidden;vertical-align:middle;}
+.bank-more .bank-more-title{min-height:300px;_height:300px;margin-right:-1px;background-color:#FFF;border:1px solid #E3E3E3;border-right:0 none;}
+.bank-more .bank-more-title li{width:130px;height:40px;padding:10px 20px;margin:0;line-height:40px;text-align:center;cursor:pointer;}
+.bank-more .bank-more-title .current{position:relative;margin:-1px -2px -1px -1px;padding:9px 21px 9px 19px;background-color:#FEFDF0;border:2px solid #FAD89E;border-right:0 none;}
+.bank-more .bank-more-title .more{margin-top:-1px;border-top:1px solid #F7F7F7;}
+.bank-more .bank-label{position:relative;z-index:2;display:inline-block;border:1px solid #E3E3E3;background-color:#FFF;vertical-align:middle;cursor:pointer;}
+.bank-more .bank-label-current{border-bottom:0 none;}
+.bank-more .bank-label .ico-bank{float:left;}
+.bank-more .bank-drop{float:left;height:40px;padding:0 15px;line-height:40px;text-align:center;vertical-align:middle;cursor:pointer;}
+.bank-more .bank-drop i,.link-others-bank i{display:block;width: 11px;height:6px;margin-top:18px;overflow: hidden;background-image: url("../common/ui-proxy.png");background-repeat: no-repeat;}
+.bank-more .bank-drop .ico-up,.link-others-bank .ico-up{background-position: -80px -30px;}
+.bank-more .bank-drop .ico-down,.link-others-bank .ico-down{background-position: -100px -30px;}
+.bank-more .bank-drop:hover{text-decoration:none;}
+.bank-more .bank-drop-text{float:left;width:130px;height:40px;line-height:40px;text-align:center;}
+.bank-more-content{position:absolute;z-index:1;margin-top:-1px;width:520px;padding:15px 20px;background-color:#FFF;border:1px solid #E3E3E3}
+.bank-more-content .bank-list{text-align:left;}
+.bank-more-content .ico-bank{float:left;margin:5px 0;}
+.bank-more-content table{width:100%;text-align:center;}
+.bank-more-content table .ico-bank{float:none;}
+.bank-more-content td{padding:2px 4px;}
+.bank-more tr:hover td,.bank-more-content tr.current td{background-color:#52A3CC;color:#FFF;cursor:pointer;}
+
+.table-bank-limit{margin-top:5px;border:1px solid #E3E3E3;}
+.table-bank-limit th{background-color:#F8F8F8;text-align:center;}
+.table-bank-limit td{border:0 none;text-align:center;}
+
+.bank-check{padding:20px;margin-bottom:20px;border:1px solid #E3E3E3;}
+.bank-title{margin-bottom:10px;font-weight:700;}
+.bank-title .info{margin-left:20px;font-weight:100;color:#808080;}
+.bank-title a{margin-left:20px;font-weight:100;}
+.bank-check li{margin-top:10px;margin-bottom:10px;}
+.bank-check .ui-label{width:118px;}
+.bank-check .copy{float:right;line-height:34px;}
+.bank-check .ui-btn,.bank-check .ui-text{margin-left:128px;}
+.payee-info{position:relative;padding-right:300px;}
+.payment-help{position:absolute;right:0;top:0;height:100%;border-left:1px solid #E3E3E3;;}
+.payment-help .time{padding:50px 0;font-size:36px;color:#EE4645;text-align:center;}
+.payment-help .text{text-align:center;}
+.payment-help .bank-check{border:0 none;margin:0;}
+.help-text{margin-top:10px;}
+
+/* bank-recharge */
+.bank-cash h3{padding-left:30px;}
+.bank-cash .ui-label{width:120px;font-weight:700;}
+.bank-cash .ui-btn,.bank-cash .ui-text{margin-left:130px;}
+.bank-cash .ui-text{margin-top:-15px;font-size:14px;}
+.bank-cash .ui-singleline strong{display:inline-block;width:108px;font-size:14px;font-weight:700;color:#E20000;}
+.bank-cash .bank-more-title{border:0 none;font-size:12px;color:#009B7D;}
+.num-cash span{font-size:12px;font-weight:100;color:#888;}
+.balance-cash a{font-size:12px;font-weight:100;}
+.bank-more-list{display:inline-block;*display:inline;*zoom:1;width:598px;vertical-align:top;}
+.recently-used{position:absolute;right:0;top:0;height:100%;width:12px;padding:0 4px;line-height:16px;background-color:#E3E3E3;}
+.charge-label-ul li{
+    float: left;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 1px solid #DEDEDE;
+    border-bottom: 0 none;
+    background-color: #F6F6F6;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+
+
+.bank-cash .bank-more-content{position:static;width:auto;}
+.bank-cash .bank-more-content table{text-align:left;}
+
+/* bank-card-management */
+.bank-card-management .ui-select{width:210px;}
+.bank-card-management .address .ui-select{width:103px;}
+
+/* bank-card-bind */
+.bank-card-bind .ui-label{width:172px;text-align:left;font-weight:700;}
+
+/* bank-cash-continue */
+.bank-cash-continue .ui-btn,.bank-cash-continue .ui-text{margin-left:30px;}
+.bank-cash-continue .ui-text{color:#888;}
+
+/* level-transfer */
+.level-transfer h3{padding-bottom:20px;}
+.level-transfer .ui-label{width:120px;font-weight:700;}
+.level-transfer .ui-btn,.level-transfer .ui-text{margin-left:130px;}
+.level-transfer .ui-singleline strong{font-size:14px;font-weight:700;color:#E20000;}
+.level-transfer .ui-text{margin-top:-15px;font-size:14px;}
+.level-transfer .ui-select{width:210px;}
+.level-transfer .user-level{display:inline-block;height:32px;line-height:32px;padding:0 10px;margin-left:10px;border:1px solid #E3E3E3;background-color:#F8F8F8;vertical-align:middle;}
+.level-transfer .user-level span{font-weight:700;}
+.ui-from-border{border:1px solid #E3E3E3;margin:-1px;}
+.ui-from-border .ui-label{font-weight:100;}
+
+/* search-fund */
+.common-article .recharge{margin-bottom:10px;padding:0 10px;border:1px solid #E3E3E3;background-color:#FAFAFA;font-size:14px;font-weight:700;}
+.common-article .recharge table{width:100%;}
+.common-article .recharge td{padding:8px 10px;}
+.fund-info-supplement{padding:10px;line-height:24px;}
+.search-fund{background-color:#FFF;}
+.search-fund .status .ui-select{width:84px;}
+.search-fund .number .input{width:72px;}
+.search-fund .serial-number .input{width:108px;}
+.cumulative-recharge{padding:10px 20px;background-color:#F6F6F6;border-bottom:1px dotted #E3E3E3;font-weight:700;font-size:14px;}
+.check-right{display:inline-block;width:19px;height:14px;margin-left:5px;background:url(../../images/common/ico-check-right.png) 0 0 no-repeat;vertical-align:middle;display:none;}
+.check-loading{display:inline-block;width:19px;height:14px;margin-left:5px;background:url(../../images/common/ico-loading.gif) 0 0 no-repeat;vertical-align:middle;display:none;}
+/** ui-wd-funds-expired **/
+.ui-wd-funds-expired .wd-control-panel {padding:20px;text-align:center;}
+.ui-wd-funds-expired table td {padding:5px;}
+.ui-wd-funds-expired .wd-title {padding:10px;font-size:14px;color:#F60;}
+.ui-wd-funds-expired .wd-tip {color:#999;}
+
+
+/**/
+.ui-form .canceled{display: none;}
+
+/** **/
+.system-generate{
+	display: none;
+	padding-left: 150px;
+}
+
+.system-generate .code-area{
+	margin-right: 10px;
+}
+
+.system-generate .reacquire{
+	height: 30px;
+	margin-left: 10px;
+	line-height: 30px;
+}
+
+.system-generate p{
+	height: 50px;
+	line-height: 50px;
+}
+
+.system-generate .normal-button{
+	width: 50px;
+}
+.system-generate .btn-important{
+	margin-right: 10px;
+}
+
+/** custom **/
+.custom{
+	display: none;
+	padding-left: 150px;
+}
+
+.custom .customId{
+	width: 140px;
+	height: 25px;
+	margin-right: 10px;
+	line-height: 25px;
+}
+
+.custom .normal-button{margin-top: 20px;}
+.custom .btn-important{margin-right: 10px;}
+
+/** recharge **/
+/*
+.recharge{
+	display:none;
+}*/
+
+.recharge .ui-label{
+	width:140px;
+}
+
+.recharge .code-area{
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	width: 120px;
+	height: 30px;
+	color: #ff0000;
+	font-size: 14px;
+	line-height: 30px;
+	text-align: center;
+	background: #ddd;
+	vertical-align: middle;
+}
+.ui-form .code-area{
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	width: 120px;
+	height: 30px;
+	color: #ff0000;
+	font-size: 14px;
+	line-height: 30px;
+	text-align: center;
+	background: #ddd;
+	vertical-align: middle;
+}
+.recharge .cancel{
+	margin-left: 10px;
+}
+
+.recharge .edit{
+	margin-left: 15px;
+}
+
+.recharge .rechargebutton{
+
+	margin: 15px 0 0 0;
+}
+
+/****/
+
+#J-select-desc{
+	margin-left: 10px;
+}
+
+.bank-unlock{color:#ee6701}
+.bank-lock{color:#009b7d}
+.bank-unlock i,
+.bank-lock i{display:inline-block;width:12px;height:16px;margin-right:4px;vertical-align:middle;overflow:hidden;background-image:url("ico-bank-lock.png");background-position:no-repeat;}
+.bank-unlock i{background-position:0 0;}
+.bank-lock i{background-position:0 -20px;}
+
+.prompt-ps{margin-left:80px;padding:5px;background-color:#FFF;border:1px dashed #D8D8D8;color:#B4B4B4;}
+.ico-ps{display:inline-block;width:13px;height:13px;margin-left:4px;vertical-align:middle;overflow:hidden;background:url("ico-ps.png") no-repeat;cursor:pointer;}
+.pop-ps{display:none;position:absolute;background-color:#FFF;padding:10px;border:1px solid #CACACA;box-shadow:1px 2px 3px rgba(0,0,0,.5)}
+
+/*加強充值附言的樣式*/
+.charge-memo{
+	border:1px solid #cccccc;
+	padding:5px;
+	background-color:#eeeeee;
+	font-weight:bold;
+	font-size:22px;
+}
+
+/*-------充提优化---------*/
+.drawing-status {
+	margin-top: 40px;
+}
+.status-line {
+	width: 710px;
+	height: 130px;
+	background-image: url(icon-5status.png);
+	background-repeat: no-repeat;
+}
+.drawing-s0 {
+	background-position: left top;
+}
+.drawing-s1 {
+	background-position: left -130px;
+}
+.drawing-s2 {
+	background-position: left -260px;
+}
+.drawing-s3 {
+	background-position: left -390px;
+}
+.drawing-s4 {
+	background-position: left -520px;
+}
+.drawing-s5 {
+	background-position: left -650px;
+}
+.drawing-s6 {
+	background-position: left -780px;
+}
+.drawing-s7 {
+	background-position: left -910px;
+}
+.drawing-s8 {
+	background-position: left -1040px;
+}
+.drawing-s9 {
+	background-position: left -1170px;
+}
+.status-time {
+	overflow: hidden;
+}
+.status-time li{
+	width: 148px;
+	float: left;
+	text-align: center;
+	display: inline;
+}
+.status-time .time1 {
+	width: 100px;
+}
+.status-time .time2 {
+	margin-left: 20px;
+}
+.status-time .time3 {
+	margin-left: 10px;
+}
+.status-time .time5 {
+	margin-left: 40px;
+	width: 100px;
+}
+.text-area  {
+	margin-top: 30px;
+}
+.text-area h3 {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 2em;
+}
+.text-area .textarea-box {
+	height: 160px;
+	overflow: scroll;
+	padding: 5px 10px;
+	border: 1px solid #c8c8c8;
+}
+.tips-right {
+	float: right;
+	line-height: 40px;
+}
+.form-small {
+	width: 500px;
+}
+.form-small li {
+	margin: 0px;
+}
+.form-small .ui-label {
+	width: 80px;
+}
+.ui-table {
+	width: 100%;
+}
+.ui-table td{
+	padding: 4px 2px;
+	border: 1px solid #ddd;
+}
+.us-des-scroll {
+	height: 100px;
+	overflow-y: scroll;
+}
+.ui-description {
+	width: 100%;
+	margin-top: 20px;
+}
+.ui-des-t {
+	text-align: center;
+	font-weight: 700;
+	line-height: 2em;
+}
+.ui-des-c {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px 4px;
+}
+input.num-bigger {
+	font-size: 14px;
+	font-weight: 500;
+	letter-spacing: 1px;
+}
+.input-four-num {
+	width: 40px !important;
+}
+.margin-left-20 {
+	margin-left: 20px !important;
+}
+
+.appeal-link-tab{
+    position: relative;
+}
+.appeal-link{
+    position: absolute;
+    right:20px;
+    bottom:5px;
+    font-size: x-small;
+}
+.ui-newFntips {
+	text-align: center;
+}
+.newFntext {
+	padding: 10px 40px;
+	text-align: left;
+}
+.newFntips {
+	background: url(newFntips.png) no-repeat left top;
+	width: 258px;
+	height: 135px;
+	margin: 10px auto;
+	position: relative;
+}
+.newFntips:after  {
+	content:"";
+	display: block;
+	position: absolute;
+	width: 47px;
+	height: 94px;
+	background: url(circlecover.png) no-repeat right top;
+	left: 128px;
+	top: 41px;
+	transform:rotate(-66deg);
+	-ms-transform:rotate(-66deg); 	/* IE 9 */
+	-moz-transform:rotate(-66deg); 	/* Firefox */
+	-webkit-transform:rotate(-66deg); /* Safari 和 Chrome */
+	-o-transform:rotate(-66deg);
+	transform-origin:0 47px;
+	-ms-transform-origin:0 47px;		/* IE 9 */
+	-webkit-transform-origin:0 47px;	/* Safari 和 Chrome */
+	-moz-transform-origin:0 47px;	/* Firefox */
+	-o-transform-origin:0 47px;		/* Opera */
+}
+.newFntips:before {
+	content:"";
+	display: block;
+	position: absolute;
+	width: 47px;
+	height: 94px;
+	background: url(circlecover.png) no-repeat left top;
+	left: 81px;
+	top: 41px;
+	transform:rotate(113deg);
+	-ms-transform:rotate(113deg); 	/* IE 9 */
+	-moz-transform:rotate(113deg); 	/* Firefox */
+	-webkit-transform:rotate(113deg); /* Safari 和 Chrome */
+	-o-transform:rotate(113deg);
+	transform-origin:47px 47px;
+	-ms-transform-origin:47px 47px;		/* IE 9 */
+	-webkit-transform-origin:47px 47px;	/* Safari 和 Chrome */
+	-moz-transform-origin:47px 47px;	/* Firefox */
+	-o-transform-origin:47px 47px;		/* Opera */
+
+
+	animation: roatecircle 1s;
+	-moz-animation: roatecircle 1s; /* Firefox */
+	-webkit-animation: roatecircle 1s; /* Safari and Chrome */
+	-o-animation: roatecircle 1s; /* Opera */
+}
+
+@keyframes roatecircle
+{
+	from {transform:rotate(-66deg);}
+	to {transform:rotate(113deg);}
+}
+
+@-moz-keyframes roatecircle /* Firefox */
+{
+	from {
+		-moz-transform:rotate(-66deg); 	/* Firefox */
+		}
+	to {
+		-moz-transform:rotate(113deg); 	/* Firefox */
+		}
+}
+
+@-webkit-keyframes roatecircle /* Safari 和 Chrome */
+{
+	from {
+		-webkit-transform:rotate(-66deg); /* Safari 和 Chrome */
+	}
+	to {
+		-webkit-transform:rotate(113deg); /* Safari 和 Chrome */
+	}
+}
+
+@-o-keyframes roatecircle /* Opera */
+{
+	from {
+		-o-transform:rotate(-66deg);}
+	to {
+		-o-transform:rotate(113deg);}
+}

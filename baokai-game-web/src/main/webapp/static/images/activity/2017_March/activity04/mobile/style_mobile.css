@@ -1,0 +1,134 @@
+@charset "UTF-8";
+
+*{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+em{font-style:normal}
+ol,ul{list-style:none}
+fieldset,img,abbr,acronym{border:0}
+input,select{font-family:Microsoft YaHei}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+body{font:normal 0.16rem/0.2em Microsoft YaHei,Tahoma,simsun;color:#bbc7e7;margin:0 auto; background: #fff8cc;}
+.clearfix{*zoom:1}
+.clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+a{text-decoration:none; color: #575c69;}
+a:hover{text-decoration:none; color: #abc6eb;}
+.tc { text-align: center}
+
+
+
+.main {
+	margin: 0 auto;
+	max-width: 720px;
+	background-color: #2d0b45;
+	background-image: url(images/allbg.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+}
+
+.banner {
+	height: 7.71rem;
+	position: relative;
+}
+
+.banner .btn_box {
+	position: absolute;
+	width: 2.94rem;
+	height: 2rem;
+	left: 2.31rem;
+	top: 5rem;
+}
+.banner .btn {
+	display: block;
+	width: 2.94rem;
+	height: 1.34rem;
+	background-image: url(images/btn.png);
+	background-repeat: no-repeat;
+	background-size: 8.83rem 2.65rem;
+	text-indent: -909em;
+}
+.banner .btn_join:hover {
+	background-position: -2.95rem top;
+}
+.banner .btn_join:active {
+	background-position: -5.90rem top;
+}
+.banner .btn_finish {
+	background-position: left -1.38rem;
+}
+.banner .btn_end {
+	background-position: -2.95rem -1.38rem;
+	cursor: default;
+}
+
+.rule {
+	padding-top: 0.2rem;
+}
+.footer {
+	color: #cf939a;
+	height: 0.60rem;
+	line-height: 0.30rem;
+	text-align: center;
+	font-size: 0.12rem;
+	padding: 0.30rem 0;
+
+}
+
+
+
+.rule h3 {
+	font-size: 0.22rem;
+	background: url(images/title.png) no-repeat;
+	background-size: 2.34rem auto;
+	line-height: 0.20rem;
+	color: #fff;
+	width: 2.34rem;
+	text-align: center;
+	margin-bottom: 0.2rem;
+}
+.rule p {
+	line-height: 0.36rem;
+	padding-left: 0.05rem;
+	padding-right: 0.05rem;
+	margin: 0.30rem 0.15rem;
+}
+.rule .border-dot {
+	border: 1px dashed #eacfec;
+	border-radius: 0.05rem;
+	padding-left: 0.15rem;
+}
+
+.rule table {
+	font-size: 0.14rem;
+	border-collapse: collapse;
+	width: 95%;
+	margin-left: 3%;
+	line-height: 0.36rem;
+}
+.rule table td,
+.rule table th {
+	border: 2px solid #280840;
+	text-align: center;
+	padding: 0.05rem 0.1rem;
+
+}
+.rule table th,
+.rule table .strong {
+
+	background: #601769;
+	color:#e9ceeb;
+}
+.rule table td {
+	background: #dcbaeb;
+	color: #5b1665;
+}
+.rule ul {
+	padding-left: 0.44rem;
+	padding-top: 0.20rem;
+	list-style: decimal;
+}
+.rule li {
+	line-height: 0.30rem;
+	padding-right: 0.2rem;
+}
+
+

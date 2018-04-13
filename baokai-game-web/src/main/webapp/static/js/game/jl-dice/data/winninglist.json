@@ -1,0 +1,15 @@
+{
+  "isSuccess": 1,
+  "msg": "success",
+  "data":{
+      "user1": "3000",
+      "user2": "1000",
+      "user3": "0",
+      "user4": "5000",
+      "user5": "0",
+      "user6": "7000",
+      "user6": "0"
+    }
+}
+
+

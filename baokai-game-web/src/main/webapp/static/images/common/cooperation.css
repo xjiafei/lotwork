@@ -1,0 +1,43 @@
+@charset "utf-8";
+body{background:url("bg-cooperation.jpg") center 0 no-repeat;font-family:microsoft yahei;}
+.header{height:50px;padding:40px 0;margin:0;background:none;}
+.content{margin-bottom:50px;}
+.logo-cooperation{float:left;}
+.logo-cooperation img{display:block;width:178px;height:40px;}
+.service-cooperation{float:right;width:99px;height:23px;background:url("un-cooperation.png") 0 -180px no-repeat;}
+.service-cooperation:hover{background-position:0 -210px;}
+.list-cooperation{overflow:hidden;}
+.list-cooperation li{float:left;width:420px;height:120px;margin-bottom:30px;padding:20px 25px;border:1px solid #6773A3;color:#FFF;
+-webkit-transition: 0.3s ease;
+-moz-transition: 0.3s ease;
+transition:0.3s ease;
+}
+.list-cooperation li:hover{border-color:#f5f5f5;}
+.list-cooperation .title{width:122px;height:27px;background:url("un-cooperation.png") no-repeat;}
+.list-cooperation p{margin-top:15px;margin-bottom:5px;line-height:2;font-size:14px;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.cooperation-content{margin-right:18px;}
+.cooperation-ad{margin-right:18px;}
+.cooperation-medium{margin-left:18px;}
+.cooperation-outsource{margin-left:18px;}
+
+.cooperation-content .title{background-position:0 0;}
+.cooperation-medium .title{background-position:0 -40px;}
+.cooperation-ad .title{background-position:0 -80px;}
+.cooperation-outsource .title{background-position:0 -120px;}
+
+.mail-link{padding-top:10px;color:#FFF;font-size:14px;text-align:center;}
+.mail-link .mail{padding-left:30px;margin-left:10px;color:#FFF;font-size:14px;text-decoration:underline;background:url("un-cooperation.png") 0 -156px no-repeat;
+-webkit-transition: 0.3s ease;
+-moz-transition: 0.3s ease;
+transition:0.3s ease;
+}
+.mail-link .mail:hover{color:#98baff;}
+/* footer */
+.footer{height:auto;background:none;font-family:microsoft yahei;line-height:1.5}
+.footer-help{height:108px;background:#EEE url("bg-footer-help.jpg") center 0 no-repeat;overflow:hidden;}
+.footer-help-link{margin-top:55px;margin-left:680px;}
+.footer-help-link a{float:left;width:69px;color:#7C7C7C;}
+.footer-link{padding:18px 0;background-color:#3A3F59;}
+.footer-link a{margin:0;vertical-align:middle;}
+.footer-link span{display:inline-block;vertical-align:middle;width:1px;height:10px;overflow:hidden;margin:0 6px;background-color:#DDD;}
+.footer-copyright{margin-top:8px;color:#8A8C99;}

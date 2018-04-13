@@ -1,0 +1,217 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    /*background: url(../images/bg.jpg) no-repeat center top;*/
+    background: #140015;
+    font-family: 微软雅黑;
+    visibility: hidden;
+}
+.main{
+    width:640px;
+    height: 3300px;
+    margin: 0 auto;
+    position: relative;
+    background: url(../images/bg-m.jpg) no-repeat center top;
+}
+.footer{
+    width:100%;
+    height:60px;
+    position: relative;
+    text-align: center;
+    line-height: 60px;
+    font-size:12px;
+    color:#e0bbe1;
+    background: #000;
+}
+.logo{
+    width:176px;
+    height:52px;
+    background: url(../images/logo.png) no-repeat center center;
+    position: relative;
+    left:170px;
+    top:30px;
+    text-indent: -9999px;
+    visibility: hidden;
+}
+.title{
+    width: 445px;
+    height: 33px;
+    background: #6d13ab;
+    border-radius: 20px;
+    margin: 0 auto;
+    margin-top: 340px;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    line-height: 33px;
+    clear: both;
+}
+.top{
+    width:100%;
+    color:#ffffff;
+    text-align: center;
+    font-size:16px;
+    margin-top: 15px;
+}
+.btn{
+    display: block;
+    width:279px;
+    height: 93px;
+    background: url(../images/btn.png) no-repeat center center;
+    margin:0 auto;
+    margin-top:15px;
+    text-indent: -9999px;
+}
+.btn:hover{
+    background: url(../images/btn-h.png) no-repeat center center;
+}
+.h{
+    width:487px;
+    height: 145px;
+    background: url(../images/h1.png) no-repeat center center;
+    position: relative;
+    margin:0 auto;
+}
+.h_1{
+    top:100px;
+}
+.table1{
+    width: 592px;
+    color: #ffffff;
+    height: 287px;
+    border: 2px solid #390f45;
+    margin: 0 auto;
+    margin-top: 59px;
+}
+.table1 thead tr{
+    background: url(../images/th.png) no-repeat left top;
+}
+.table1 thead tr th{
+    width:20%;
+    height: 67px;
+    border: 1px solid #2f0531;
+    border-top:none;
+    color:#976a9a;
+    font-size:18px;
+
+}
+.table1 tbody tr td{
+    text-align:center;
+    height: 53px;
+    border:1px solid #390f45;
+    background: #19011a;
+}
+.tf{
+    text-align: center;
+    color:#7b5213;
+    margin-top:20px;
+    font-size:16px;
+}
+.tf span{
+    font-size:18px;
+    color:#d4a253;
+}
+.h_2{
+    background: url(../images/h2.png) no-repeat center center;
+    top:20px;
+    z-index: 2;
+}
+.tbox{
+    margin: 0 auto;
+    width: 552px;
+    /* height: 946px; */
+    height: 1180px;
+    border: 2px solid #390f45;
+    border-radius: 10px;
+    position: relative;
+    top: -22px;
+    overflow: hidden;
+}
+
+.h_3{
+    background: url(../images/h3.png) no-repeat center center;
+    top:20px;
+    z-index: 2;
+}
+.h_3_tbox{
+    height: 600px;
+    top:-31px;
+}
+.table2{
+    width:552px;
+    height: auto;
+    margin:0 auto;
+    color:#ffffff;
+    /*margin-top:30px;*/
+}
+.table2 thead tr{
+
+}
+.table2 thead tr th{
+    width:40%;
+    height: 60px;
+    background: url(../images/tr.png) no-repeat center bottom;
+    border:2px solid #3b1c4e;
+    font-size:20px;
+    color:#714f73;
+}
+.table2 thead tr th span{
+    color:#d4a253;
+    font-weight: normal;
+}
+.table2 tbody tr td{
+    background: #290b2a;
+    height: 42px;
+    text-align: center;
+    font-size:16px;
+    color:#8b648e;
+}
+.table2 tbody tr td.white{
+    color:#ffffff;
+}
+.table2 tbody tr td.yellow{
+    color:#d4a253;
+}
+.table2 tbody tr:nth-child(even) td{
+    background: #240725;
+}
+.bot{
+    width:297px;
+    height: 45px;
+    background: url(../images/bot.png) no-repeat center center;
+    margin:0 auto;
+    color:#7b5213;
+    font-size:16px;
+    line-height: 45px;
+    text-align: center;
+    margin-top:22px
+}
+.bot span{
+    color:#d4a253;
+}
+.text{
+    width:552px;
+    height: auto;
+    margin:0 auto;
+    margin-top:30px;
+    padding:10px;
+    overflow: hidden;
+}
+.text p{
+    font-size:16px;
+    color:#7c567f;
+    line-height: 30px;
+    text-indent: 8px;
+}
+.text p span{
+    width:25px;
+    height: 25px;
+    border-radius: 50%;
+    float: left;
+    background: #3f1f40;
+    text-align: center;
+    line-height: 25px;
+    text-indent: 0px;
+}

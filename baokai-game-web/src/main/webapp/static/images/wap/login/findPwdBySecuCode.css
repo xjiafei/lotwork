@@ -1,0 +1,25 @@
+.v{
+    visibility: visible;
+}
+.step{
+    background:url('step3.png') no-repeat center center;
+}
+
+.tipinput{
+    margin:30px auto;
+}
+
+.inputOL li input{
+    width: 450px;
+    text-indent: 10px;
+}
+
+.inputOL li span{
+    margin-left: 10px;
+    display: block;
+    float: left;
+    width: 100px;
+    color: rgb(153,153,153);
+    font-size: 30px;
+    font-weight: normal;
+}

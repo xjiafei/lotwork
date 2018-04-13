@@ -1,0 +1,17 @@
+@charset "utf-8";
+body{padding-top:120px;color: black !important; background: #076A5B !important; background-image: none !important; font-family: '微软雅黑', Georgia, ‘Times New Roman’, serif;}
+.ptint-body{width:340px;margin:0 auto;padding:10px;background-color:#FFF;}
+.ptint-body .table{margin-bottom:10px;}
+.ptint-body .table td{padding:8px 4px;text-align:left;white-space:nowrap;}
+.ptint-body .table th{text-align:center;}
+.ptint-body .table-info th{font-size:16px;font-weight:700;}
+.ptint-body .table .lottery-number{word-break:break-all;white-space:normal;}
+.ptint-btn{padding-bottom:15px;margin-bottom:10px;text-align:center;border-bottom:1px dotted #CCC;}
+.ptint-btn p{margin-top:10px;color:#999;}
+.ptint-logo{display:block;width:144px;height:42px;margin:20px auto 0;}
+.ptint-logo img{display:block;width:100%;height:100%;}
+@media print {
+	body{padding-top:0;}
+	.ptint-btn{display:none;}
+	.ptint-body{padding:0;}
+}

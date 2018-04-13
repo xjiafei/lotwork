@@ -1,0 +1,564 @@
+/*css reset*/
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address,big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul,li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed,figure, figcaption,footer, header, hgroup,menu, nav, output, ruby, section, summary,time, mark, audio, video {margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;}article, aside, details, figcaption, figure,footer,header, hgroup, menu, nav, section {display: block;}body {line-height: 1;}ol, ul{list-style: none;}blockquote, q {quotes: none;}blockquote:before, blockquote:after,q:before, q:after {content: "";content: none;}
+
+body
+{
+  width: 100%;
+  min-width: 1200px;
+  background: url(../images/BGLayers.png)no-repeat center top;
+  height: 3300px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans GB","Hiragino Sans GB W3", "Microsoft YaHei", "Wenquanyi Micro Hei", sans-serif;
+}
+
+/*fixed*/
+.fixed
+{
+  width: 70px;
+  height: 180px;
+  background: url(../images/fixed_bg_1.png);
+
+  position: fixed;
+  top: 40%;
+  right: 24px;
+}
+.num
+{
+  width: 25px;
+  height: 38px;
+
+  position: absolute;
+  top: 129px;
+  left: 10px;
+}
+/*fixed*/
+
+
+.main {
+  width: 1200px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+.con1 {
+  background: url(../images/banner.png)no-repeat center top;
+  width: 1200px;
+  height: 800px;
+
+  position: relative;
+}
+
+/*phone*/
+.phone
+{
+  padding-top: 295px;
+  padding-left: 270px
+}
+.phone_body
+{
+/*  background: url(../images/full.png)no-repeat;*/
+  background: url(../images/phone_body.png)no-repeat;
+  width: 824px;
+  height: 717px;
+
+  position: relative;
+}
+.piece1
+{
+  position: absolute;
+
+}
+.piece_body1
+{
+  position: relative;
+}
+.pf
+{
+  z-index: 20;
+}
+.pb
+{
+  z-index: 10;
+}
+
+.pf,.pb
+{
+  display: none;
+}
+.dot {
+  z-index: 30;
+}
+.dot>.mis
+{
+  display: none;
+}
+
+
+.pf,.pb,.dot
+{
+  position: absolute;
+}
+
+.dot_body
+{
+  position: relative;
+}
+.dot_point
+{
+  background-color: #ffe170;
+  width: 10px;
+  height: 10px;
+  border-radius:99em;
+
+  position: absolute;
+  left:10px;
+  top:10px;
+}
+.dot_eff
+{
+  border: 10px solid #ffe170;;
+  -webkit-border-radius: 30px;
+  height: 10px;
+  width: 10px;
+  position: absolute;
+
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite; 
+  opacity: 0.0
+}
+
+@-webkit-keyframes pulsate {
+  0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+  50% {opacity: 0.5;}
+  100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+}
+.mis
+{
+  background-color: rgba(76, 71, 30, 0.8);
+  border-radius: 5px;
+  width: 80px;
+  height: 28px;
+  text-align: center;
+  color: #ffe172;
+  font-size: 16px;
+  line-height: 30px;
+
+  position: absolute;
+  left:40px;
+}
+
+.pf.p1
+{
+  background: url(../images/pf1.png)no-repeat;
+  width: 245px;
+  height: 143px;
+
+  left: 409px;
+  top:2px;
+}
+.pb.p1
+{
+  background: url(../images/pb1.png)no-repeat;
+  width: 245px;
+  height: 152px;
+
+  left: 409px;
+  top:2px;
+}
+.dot.p1 {
+  left: 516px;
+  top: 35px;
+}
+
+
+.pf.p2
+{
+  background: url(../images/pf2.png)no-repeat;
+  width: 295px;
+  height: 178px;
+
+  left: 387px;
+  top:73px;
+}
+.pb.p2
+{
+  background: url(../images/pb2.png)no-repeat;
+  width: 295px;
+  height: 178px;
+
+  left: 387px;
+  top:73px;
+}
+.dot.p2 {
+  left: 545px;
+  top: 138px;
+}
+
+
+.pf.p3
+{
+  background: url(../images/pf3.png)no-repeat;
+  width: 275px;
+  height: 160px;
+
+  left: 212px;
+  top: 61px;
+}
+.pb.p3
+{
+  background: url(../images/pb3.png)no-repeat;
+  width: 275px;
+  height: 160px;
+
+  left: 212px;
+  top: 61px;
+}
+.dot.p3 {
+  left: 312px;
+  top: 99px;
+}
+
+.pf.p4
+{
+  background: url(../images/pf4.png)no-repeat;
+  width: 287px;
+  height: 175px;
+
+  left: 185px;
+  top: 143px;
+}
+
+.pb.p4
+{
+  background: url(../images/pb4.png)no-repeat;
+  width: 287px;
+  height: 175px;
+
+  left: 185px;
+  top: 143px;
+}
+.dot.p4 {
+  left: 315px;
+  top: 213px;
+}
+
+
+.pf.p5
+{
+  background: url(../images/pf5.png)no-repeat;
+  width: 259px;
+  height: 249px;
+
+  left: 30px;
+  top: 127px;
+}
+
+.pb.p5
+{
+  background: url(../images/pb5.png)no-repeat;
+  width: 236px;
+  height: 229px;
+
+  left: 52px;
+  top: 127px;
+}
+.dot.p5 {
+  left: 115px;
+  top: 219px;
+
+}
+/*phone*/
+
+
+
+
+.SignUpDiv 
+{
+  background: url(../images/BtnDivBg.png)no-repeat;
+  width: 553px;
+  height: 116px;
+
+  position: absolute;
+  left: 362px;
+  bottom: -12px;
+}
+.SignUpDivCon
+{
+  position: relative;
+}
+.SignUpbtn
+{
+  width: 194px;
+  height: 88px;
+  position: absolute;
+  left: 293px;
+  top: 19px;
+
+}
+
+.SignUpEndbtn
+{
+  width: 194px;
+  height: 88px;
+  position: absolute;
+  left: 293px;
+  top: 19px;
+
+}
+
+.SignUpEndbtn a
+{
+  width: 194px;
+  height: 88px;
+  display: block;
+  z-index: 10;
+  position: absolute;
+
+  background: url(../images/btn_already_reg.png)no-repeat;
+}
+
+.SignUpbtn a
+{
+  width: 194px;
+  height: 88px;
+  display: block;
+  z-index: 10;
+  position: absolute;
+
+  background: url(../images/btn-signup.png)no-repeat;
+}
+.SignUpbtn a:hover
+{
+  background: url(../images/btn-signup-hover.png)no-repeat;
+}
+.SignUpbtn a:active
+{
+  background: url(../images/btn-signup-click.png)no-repeat;
+}
+
+.con2
+{
+  width: 1200px;
+}
+.tablediv
+{
+  margin: 5px auto;
+  width: 829px;
+}
+.tablediv table
+{
+  border: 0px;
+  color: #c6c9d4;
+  font-size: 18px;
+  line-height: 30px;
+
+}
+.tablediv table tr td
+{
+  padding: 10px;
+  text-align: center;
+}
+.tablediv table tr td:nth-child(1)
+{
+  width: 140px;
+}
+.tablediv table tr td:nth-child(2)
+{
+  width: 270px;
+}
+.tablediv table tr td:nth-child(3)
+{
+  width: 210px;
+}
+.tablediv table tr td:nth-child(4)
+{
+  width: 200px;
+  color: #f7dc80;
+}
+.tb_color6 td
+{
+  background-color: #21202d;
+  color: #64687e;
+}
+.tb_color5 td
+{
+  background-color: #32323f;
+  color: #c6c9d4;
+}
+.tb_color4 td
+{
+  background-color: #21212c;
+}
+.tb_color3 td
+{
+  background-color:#191923;
+}
+.tb_color2 td
+{
+  background-color:#1a1825;
+}
+.tb_color1 td
+{
+  background-color:#1a1825;
+}
+.con3
+{
+  width: 1200px;
+  height: 720px;
+}
+.rule1
+{
+  margin: 30px auto;
+  width: 868px;
+  font-size: 18px;
+  line-height: 18px;
+  color: #625128;
+  margin-top: 50px;
+  text-align: left;
+}
+.rule1 p
+{
+  margin-bottom: 20px;
+}
+.goldfont{
+  color: #ffd370;
+}
+.rule2
+{
+  margin-top: 60px;
+}
+.rule_title
+{
+  background: url(../images/rule_title.png);
+  width: 131px;
+  height: 43px;
+  margin: 0 auto;
+}
+.rule_content
+{
+  margin: 30px auto;
+  width: 868px;
+  color: #64687e;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: left;
+}
+.rule_content ul
+{
+  list-style-type:decimal;
+}
+.rule_content ul li
+{
+  padding: 10px 15px;
+}
+.con4
+{
+  width: 1200px;
+}
+.info_title {
+  background: url(../images/info_title.png)no-repeat;
+  width: 1200px;
+  height: 111px;
+  margin-top: 20px;
+}
+.info1
+{
+  width: 900px;
+  height: 300px;
+  margin-top: 100px;
+  position: relative;
+}
+.info1_img {
+  width: 221px;
+  height: 260px;
+  margin-right: 40px;
+  margin-right: 40px;
+
+  position: absolute;
+  left: 156px;
+}
+.info1_content {
+  width: 636px;
+  height: 268px;
+  font-size: 16px;
+  line-height: 26px;
+  color: #64687e;
+
+  position: absolute;
+  left: 416px;
+
+  text-align: left;
+}
+.info2
+{
+  width: 900px;
+  height: 240px;
+  margin-top: 50px;
+  position: relative;
+}
+.info2_img {
+  width: 221px;
+  height: 260px;
+  margin-right: 40px;
+  margin-right: 40px;
+
+  position: absolute;
+  left: 727px;
+}
+.info2_content {
+  width: 528px;
+  height: 185px;
+  font-size: 16px;
+  line-height: 26px;
+  color: #64687e;
+
+  position: absolute;
+  left: 416px;
+  left: 156px;
+
+  text-align: left;
+}
+.games
+{
+  width: 900px;
+  height: 400px;
+  margin: 70px auto;
+  position: relative;
+}
+.game {
+  width: 270px;
+  height: 340px;
+  position: absolute;
+}
+.game:hover
+{
+  background: url(../images/game_hover_bg.png);
+}
+.game>a{
+  width: 270px;
+  height: 340px;
+  display: block;
+}
+.g1
+{
+  left: 10px;
+  top:10px;
+}
+.g2
+{
+  left: 320px;
+  top:10px;
+}
+.g3
+{
+  left: 640px;
+  top:10px;
+}
+
+.copyright
+{
+  margin: 0 auto;
+  width: 240px;
+  color: rgba(160, 145, 82, 0.2);
+  font: 400 12px 'Microsoft YaHei';
+}

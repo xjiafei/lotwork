@@ -1,0 +1,54 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="fc3dAbstractBetOperator" class="com.winterframework.firefrog.game.web.bet.operator.impl.AbstractBetOperator" parent="betSupport" abstract="true">
+		<property name="view" value="/bet/fc3d/bet" />
+<!-- 		<property name="bnConvertor"> -->
+<!-- 			<bean class="com.winterframework.firefrog.game.web.bet.convertor.impl.BetNameConvertor"> -->
+<!-- 				<property name="gameGroups" ref="fc3dGameGroups" /> -->
+<!-- 				<property name="gameSets" ref="fc3dGameSets" /> -->
+<!-- 				<property name="betMethods" ref="fc3dSetMethods" /> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+		<property name="trendCharts">
+			<bean class="java.util.HashMap">
+				<constructor-arg>
+					<map>
+                        <entry>
+                            <key><value>fc3d</value></key>
+                            <ref bean="fc3dTrendCharts" />
+                        </entry>
+					</map>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	<bean id="fc3d" class="com.winterframework.firefrog.game.web.bet.operator.impl.Fc3dBetOperator" parent="fc3dAbstractBetOperator">
+		<property name="lotteryCode" value="fc3d" />
+		<property name="lotteryId" value="${lottery.3D}" />
+        <property name="lotteryName" value="3D"/>
+        <property name="defaultMethod" value="12,10,10"/>
+        <property name="lotterySeries" value="FC3D" />
+        <property name="helpLink" value="/help/queryLotteryDetail?helpId=901" />
+	</bean>
+<!--    <bean id="p3AbstractBetOperator" class="com.winterframework.firefrog.game.web.bet.operator.impl.AbstractBetOperator" parent="betSupport" abstract="true">
+        <property name="view" value="/bet/p3/bet" />
+        <property name="bnConvertor">
+            <bean class="com.winterframework.firefrog.game.web.bet.convertor.impl.BetNameConvertor">
+                <property name="gameGroups" ref="fc3dGameGroups" />
+                <property name="gameSets" ref="fc3dGameSets" />
+                <property name="betMethods" ref="fc3dSetMethods" />
+            </bean>
+        </property>
+    </bean>
+    <bean id="p3" class="com.winterframework.firefrog.game.web.bet.operator.impl.Fc3dBetOperator" parent="p3AbstractBetOperator">
+        <property name="lotteryCode" value="p3" />
+        <property name="lotteryId" value="${lottery.p3}" />
+        <property name="lotteryName" value="排列三"/>
+        <property name="defaultMethod" value="p3sanxing.zhixuan.p3fushi"/>
+        <property name="lotterySeries" value="P5" />
+    </bean>-->
+</beans>

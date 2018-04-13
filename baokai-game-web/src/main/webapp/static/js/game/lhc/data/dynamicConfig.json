@@ -1,0 +1,59 @@
+{
+  "isSuccess": 1,
+  "msg": "success",
+  "data": {
+    "username": "luck888",
+    "isstop": 0,
+    "number": "16/024",
+    "issueCode": 20160323101053,
+    "resulttime": "2016/03/23 14:39:10",
+    "nowtime": "2016/03/23 14:39:12",
+    "nowstoptime": "2016/03/23 14:39:54",
+    "lotteryday": "2016/2/28",
+    "lastnumber": "16/023",
+    "lastballs": "09,01,01,18,28,32,43",
+    "tracemaxtimes": 360,
+    "gamenumbers": [
+      {
+        "number": "20160323-053",
+        "issueCode": 20160323101053,
+        "time": "2016/03/23 14:49:10"
+      },
+      {
+        "number": "20160323-054",
+        "issueCode": 20160323101054,
+        "time": "2016/03/23 14:59:10"
+      },
+      {
+        "number": "20160323-055",
+        "issueCode": 20160323101055,
+        "time": "2016/03/23 15:09:10"
+      }
+
+
+    ],
+    "gamelimit": [
+      {
+        "wuxing.quwei.haoshichengshuang": {
+          "maxmultiple": 18181,
+          "usergroupmoney": null,
+          "maxmultiples": null
+        },
+        "houer.zhixuan.kuadu": {
+          "maxmultiple": 2222,
+          "usergroupmoney": null,
+          "maxmultiples": null
+        },
+        "qianer.zuxuan.hezhi": {
+          "maxmultiple": 4444,
+          "usergroupmoney": null,
+          "maxmultiples": null
+        }
+
+      }
+    ],
+    "ballInfo": null,
+    "multiplemaxtimes": 10,
+    "multipleToCnyFactor": 2
+  }
+}

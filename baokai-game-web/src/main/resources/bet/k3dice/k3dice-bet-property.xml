@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="k3diceBetProperties" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key><value>traceMaxTimes</value></key>
+					<value>360</value> <!-- 时时彩最大360期 -->
+				</entry>
+				<entry>
+					<key><value>fileModeMethodTypes</value></key>
+					<value>danshi,hunhezuxuan</value> <!-- 单式文件编码 -->
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+</beans>
+			

@@ -1,0 +1,39 @@
+{
+  "isSuccess": 1,
+  "msg": "success",
+  "oddsList": {
+    "zhixuanliuma": 7.5, 
+    "zhixuanema": [40, 41, 42, 43, 44, 45, 46, 47],
+    "texiao": [9, 11.2],
+    "saibo": [2.7, 2.85, 2.85],
+    "banbo": [6.4, 4.5, 5.6, 5, 5, 6.4, 5.6, 5.6, 5.6, 6.4, 5.6, 6.4],
+    "liangmian": [1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9],
+    "yixiao": [1.7, 2],
+    "buzhong": {
+      "sibuzhong": 1.8,
+      "wubuzhong": 2,
+      "liubuzhong": 2.5,
+      "qibuzhong": 3,
+      "babuzhong": 3.6
+    },
+    "lianxiaozhong": {
+      "erlianxiao": [3.8, 4.5],
+      "sanlianxiao": [9.6, 11.5],
+      "silianxiao": [27, 32],
+      "wulianxiao": [85, 105]
+    },
+    "lianxiaobuzhong": {
+      "erlianxiao": [4.2, 3.5],
+      "sanlianxiao": [9.5, 7.7],
+      "silianxiao": [23, 18],
+      "wulianxiao": [60, 46]
+    },
+    "lianma": {
+      "sanquanzhong": 680,
+      "sanzhonger": [20, 110],
+      "erquanzhong": 68,
+      "erzhongte": [51, 31],
+      "techuan": 160
+    }
+  }
+}

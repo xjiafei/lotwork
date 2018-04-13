@@ -1,0 +1,397 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+			
+	<bean id="chartTitleTextIssueCode" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextIssueCodeAndNumberTemplate" />
+		<property name="text" value="期号" />
+	</bean>
+	
+	<bean id="chartTitleTextNumber" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextIssueCodeAndNumberTemplate" />
+		<property name="text" value="开奖号码" />
+	</bean>
+	
+	<bean id="chartTitleTextNumber115" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextIssueCodeAndNumberTemplate115" />
+		<property name="text" value="开奖号码" />
+	</bean>
+	
+	<bean id="chartTitleTextWan" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBUTemplate" />
+		<property name="text" value="万位" />
+	</bean>
+	
+	<bean id="chartTitleTextQian" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBUTemplate" />
+		<property name="text" value="千位" />
+	</bean>
+
+	<bean id="chartTitleTextBai" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBUTemplate" />
+		<property name="text" value="百位" />
+	</bean>
+	
+	<bean id="chartTitleTextShi" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBUTemplate" />
+		<property name="text" value="十位" />
+	</bean>
+	
+	<bean id="chartTitleTextGe" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBULastTemplate" />
+		<property name="text" value="个位" />
+	</bean>
+	
+		<bean id="chartTitleTextYi" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBUTemplate115" />
+		<property name="text" value="第一位" />
+	</bean>
+	
+	<bean id="chartTitleTextEr" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBUTemplate115" />
+		<property name="text" value="第二位" />
+	</bean>
+
+	<bean id="chartTitleTextSan" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBUTemplate115" />
+		<property name="text" value="第三位" />
+	</bean>
+	
+	<bean id="chartTitleTextSi" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBUTemplate115" />
+		<property name="text" value="第四位" />
+	</bean>
+	
+	<bean id="chartTitleTextWu" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextWEISHUFENBULastTemplate115" />
+		<property name="text" value="第五位" />
+	</bean>
+	
+	
+	<bean id="chartTitleItemWEISHUFENBU" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItem">
+		<property name="template" ref="basicChartTitleItemWEISHUFENBUTemplate" />
+		<property name="panes" ref="chartPane0To9" />
+	</bean>
+	
+	<bean id="chartTitleItemWEISHUFENBULast" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItem">
+		<property name="template" ref="basicChartTitleItemWEISHUFENBULastTemplate" />
+		<property name="panes" ref="chartPane0To9" />
+	</bean>
+	
+	<bean id="chartTitleItemWEISHUFENBU115" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItem">
+		<property name="template" ref="basicChartTitleItemWEISHUFENBUTemplate" />
+		<property name="panes" ref="chartPane01To11" />
+	</bean>
+	
+	<bean id="chartTitleItemWEISHUFENBULast115" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItem">
+		<property name="template" ref="basicChartTitleItemWEISHUFENBULastTemplate" />
+		<property name="panes" ref="chartPane01To11" />
+	</bean>	
+	
+	<bean id="chartTitleTextHAOMAFENBU" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextHAOMAFENBUTemplate" />
+		<property name="text" value="号码分布" />
+	</bean>
+
+	<bean id="chartTitleTextHAOMAFENBU115" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextHAOMAFENBUTemplate115" />
+		<property name="text" value="号码分布" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN120" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANTemplate" />
+		<property name="text" value="组选120" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN60" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANTemplate" />
+		<property name="text" value="组选60" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN30" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANTemplate" />
+		<property name="text" value="组选30" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN20" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANTemplate" />
+		<property name="text" value="组选20" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN10" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANTemplate" />
+		<property name="text" value="组选10" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN5" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANLastTemplate" />
+		<property name="text" value="组选5" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN24" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANTemplate" />
+		<property name="text" value="组选24" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN12" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANTemplate" />
+		<property name="text" value="组选12" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN6" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANTemplate" />
+		<property name="text" value="组选6" />
+	</bean>
+	
+	<bean id="chartTitleTextZUXUAN4" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANLastTemplate" />
+		<property name="text" value="组选4" />
+	</bean>
+	
+	<bean id="chartTitleTextZUSAN" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANLastTemplate" />
+		<property name="text" value="组三" />
+	</bean>
+	
+	<bean id="chartTitleTextZULIU" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANLastTemplate" />
+		<property name="text" value="组六" />
+	</bean>
+	
+	<bean id="chartTitleTextBAOZI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANLastTemplate" />
+		<property name="text" value="豹子" />
+	</bean>
+	
+	<bean id="chartTitleTextDUIZI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextZUXUANLastTemplate" />
+		<property name="text" value="对子" />
+	</bean>	
+	
+	<bean id="chartTitleTextSanXingZhiXuanHEZHI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextSanXingZhiXuanHEZHITemplate" />
+		<property name="text" value="和值" />
+	</bean>
+	
+	<bean id="chartTitleTextSanXingZuXuanHEZHI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextSanXingZuXuanHEZHITemplate" />
+		<property name="text" value="和值" />
+	</bean>	
+	
+	<bean id="chartTitleTextErXingZhiXuanHEZHI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextErXingZhiXuanHEZHITemplate" />
+		<property name="text" value="和值" />
+	</bean>
+	
+	<bean id="chartTitleTextErXingZuXuanHEZHI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextErXingZuXuanHEZHITemplate" />
+		<property name="text" value="和值" />
+	</bean>
+	
+	<bean id="chartTitleTextKUADU" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextKUADUTemplate" />
+		<property name="text" value="跨度" />
+	</bean>
+	
+	<bean id="chartTitleTextDANSHUANG" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextLiteralsLastTemplate" />
+		<property name="text" value="单：双" />
+	</bean>
+
+	<bean id="chartTitleTextZHONGWEI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextLiteralsLastTemplate" />
+		<property name="text" value="中位数" />
+	</bean>
+
+	<bean id="chartTitleTextDAXIAO" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextLiteralsLastTemplate" />
+		<property name="text" value="大小" />
+	</bean>
+
+	<bean id="chartTitleTextJIOU" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleText">
+		<property name="template" ref="basicChartTitleTextLiteralsLastTemplate" />
+		<property name="text" value="奇偶" />
+	</bean>
+		
+	<bean id="chartTitleItemHEZHI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItem">
+		<property name="template" ref="basicChartTitleItemWEISHUFENBUTemplate" />
+		<property name="panes" ref="chartPane0To27" />
+	</bean>
+	
+	<bean id="chartTitleItemSanXingZuXuanHEZHI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItem">
+		<property name="template" ref="basicChartTitleItemWEISHUFENBUTemplate" />
+		<property name="panes" ref="chartPane1To26" />
+	</bean>
+	
+	<bean id="chartTitleItemErXingZhiXuanHEZHI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItem">
+		<property name="template" ref="basicChartTitleItemWEISHUFENBUTemplate" />
+		<property name="panes" ref="chartPane0To18" />
+	</bean>	
+	
+	<bean id="chartTitleItemErXingZuXuanHEZHI" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItem">
+		<property name="template" ref="basicChartTitleItemWEISHUFENBUTemplate" />
+		<property name="panes" ref="chartPane1To17" />
+	</bean>	
+	
+	<bean id="chartTitleItemKUADU" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItem">
+		<property name="template" ref="basicChartTitleItemWEISHUFENBUTemplate" />
+		<property name="panes" ref="chartPane0To9" />
+	</bean>
+	
+	<bean id="chartPane0To9" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="0" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="1" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="2" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="3" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="4" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="5" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="6" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="7" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="8" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="9" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="chartPane01To11" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="01" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="02" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="03" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="04" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="05" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="06" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="07" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="08" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="09" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="10" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="11" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+			</list>
+		</constructor-arg>
+	</bean>	
+	
+	<bean id="chartPane0To27" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="0" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="1" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="2" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="3" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="4" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="5" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="6" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="7" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="8" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="9" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="10" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="11" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="12" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="13" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="14" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="15" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="16" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="17" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="18" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="19" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="20" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="21" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="22" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="23" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="24" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="25" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="26" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="27" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="chartPane1To26" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="1" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="2" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="3" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="4" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="5" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="6" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="7" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="8" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="9" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="10" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="11" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="12" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="13" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="14" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="15" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="16" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="17" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="18" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="19" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="20" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="21" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="22" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="23" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="24" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="25" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="26" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+			</list>
+		</constructor-arg>
+	</bean>	
+	
+	
+	<bean id="chartPane0To18" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="0" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="1" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="2" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="3" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="4" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="5" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="6" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="7" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="8" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="9" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="10" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="11" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="12" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="13" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="14" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="15" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="16" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="17" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="18" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="chartPane1To17" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="1" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="2" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="3" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="4" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="5" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="6" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="7" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="8" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="9" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="10" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="11" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="12" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="13" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="14" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="15" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="16" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+				<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitleItemPane"><property name="pane" value="17" /><property name="template" ref="basicChartTitleItemPaneWEISHUFENBUTemplate" /></bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+</beans>

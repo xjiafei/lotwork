@@ -1,0 +1,75 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="betHttpClient" class="com.winterframework.firefrog.game.web.bet.util.BetHttpJsonClient" />
+	
+	<bean id="betSupport" class="com.winterframework.firefrog.game.web.bet.operator.BetSupport" abstract="true">
+		<property name="properties" ref="basicBetProperties" />
+		<property name="messages" ref="basicBetMessages" />
+	</bean>
+	
+	<bean id="gameBetOperators" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 重慶時時彩 -->
+				<ref bean="cqssc" />
+				<!-- 江西時時彩 -->
+				<ref bean="jxssc" />
+				<!-- 新疆時時彩 -->
+				<ref bean="xjssc" />
+				<!-- 天津時時彩 -->
+				<ref bean="tjssc" />
+				<!-- 黑龍江時時彩-->
+				<ref bean="hljssc" />
+				<!-- 樂利時時彩 -->
+				<ref bean="llssc" />
+				<!-- 上海時時樂 -->
+				<ref bean="shssl" />
+				<!-- 北京快樂8 -->
+				<ref bean="bjkl8" />
+				<!-- 宝开一分彩 -->
+				<ref bean="jlffc" />
+				<!-- 順利秒秒彩 -->
+				<ref bean="slmmc" />
+                <!-- 山東11選5 -->				
+				<ref bean="sd115" />
+				<!-- 江西11選5 -->
+				<ref bean="jx115" />
+				<!-- 廣東11選5 -->
+				<ref bean="gd115" />
+				<!-- 重慶11選5 -->
+				<ref bean="cq115" />
+				<!-- 樂利11選5 -->
+				<ref bean="ll115" />
+				<!-- 江苏11選5 -->
+				<ref bean="js115" />
+                <!-- 3D -->
+                <ref bean="fc3d" />
+                <!-- 排列5 -->
+                <ref bean="p5" />
+                <!-- 雙色球 -->
+                <ref bean="ssq" />
+                <!-- 江蘇快三 -->
+                <ref bean="jsk3" />
+                <!-- 安徽快三 -->
+                <ref bean="ahk3" />
+                <!-- 江蘇骰寶 -->
+                <ref bean="jsdice" />
+                <!-- 順利11選5 -->
+                <ref bean="sl115" />
+                <!-- 吉利骰寶(娛樂廳) -->
+                <ref bean="jldice1" />
+                <!-- 吉利骰寶(至尊廳) -->
+                <ref bean="jldice2" />
+                <!-- 六合彩 -->
+                <ref bean="lhc" />
+                <!-- 腾讯分分彩 -->
+				<ref bean="txffc" />
+			</list>
+		</constructor-arg>
+	</bean>
+	
+</beans>

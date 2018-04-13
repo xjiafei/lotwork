@@ -1,0 +1,217 @@
+*{
+    margin:0;
+    padding:0;
+}
+.container{
+    background:url(bg.jpg) no-repeat center top;
+    overflow: hidden;
+}
+.preload{
+    width:100%;
+    height: 2500px;
+    position: absolute;
+    left:0;
+    top:0;
+    background:url(bg1.jpg) no-repeat center top;
+    visibility: hidden;
+}
+.page{
+    width:1000px;
+    height: 2500px;
+    margin:0 auto;
+    position: relative;
+}
+.head{
+    width: 1000px;
+    height: 440px;
+    background: url(head.png) no-repeat center center;
+    position: absolute;
+    top: 599px;
+}
+.total{
+    width: 300px;
+    height: 60px;
+    position: absolute;
+    left: 30px;
+    top: 121px;
+    font-size: 40px;
+    color: rgb(121,166,227);
+    text-align: center;
+    line-height: 60px;
+}
+.sales{
+    left:680px;
+}
+.money{
+    width: 350px;
+    height: 80px;
+    position: absolute;
+    left: 328px;
+    top: 278px;
+    text-align: center;
+    line-height: 80px;
+    color: #dfca81;
+    font-size: 75px;
+}
+.gold{
+    width: 70px;
+    height: 90px;
+    background: url(0.png) no-repeat center center;
+    position: absolute;
+    left: 432px;
+    top: 98px;
+}
+.bit{
+    left:500px;
+}
+.rule{
+    width: 178px;
+    height: 35px;
+    position: absolute;
+    bottom: 0;
+    left: 412px;
+}
+.curtion{
+    background: none;
+    display: none;
+}
+.cbox{
+    width: 842px;
+    height: 263px;
+    background: url('curtionbg.png') no-repeat center center;
+    position: absolute;
+    left: 91px;
+    top: 105px;
+}
+.back{
+    width: 165px;
+    height: 32px;
+    position: absolute;
+    top: 9px;
+    left: 420px;
+}
+.txt{
+    width: 230px;
+    height: 47px;
+    left: -8px;
+    color: #96b7da;
+    font-size: 35px;
+    top: 33px;
+    position: absolute;
+    overflow: visible;
+    text-align: center;
+}
+.t2{
+    left:195px;
+}
+.t3{
+    left:370px;
+}
+.t4{
+    left:514px;
+}
+.t5{
+    left:652px;
+}
+.t6{
+    top: 197px;
+    left: 290px;
+    color: #dfca81;
+    font-size: 75px;
+    height: 90px;
+}
+.activity{
+    width: 1000px;
+    position: absolute;
+    left: 0;
+    top: 1360px;
+    height: 460px;
+    /*background:blue;*/
+}
+
+h1{
+    font-size:30px;
+    color:#aac2e0;
+    line-height: 55px;
+}
+p{
+    color:#b3c9e4;
+    font-size:15px;
+    line-height: 38px;
+}
+
+table th{
+    background:#3f4e69;
+    color:#98c5ff;
+    font-size:15px;
+    height: 33px;
+}
+.last{
+    width:20%;
+}
+table td{
+    font-size:15px;
+    color:#d8e9ff;
+    text-align: center;
+    height: 31px;
+}
+.odd{
+    background:#263248;
+}
+.even{
+    background:#12131a;
+}
+.bd{
+    border-bottom:2px solid #3f4e69;
+}
+.pd25{
+    padding:25px;
+}
+.arule{
+    top:1850px;
+}
+
+.bottoms{
+    width:1000px;
+    height:62px;
+    font-size:12px;
+    text-align: center;
+    line-height: 62px;
+    position:absolute;
+    bottom:0;
+    left:0;
+    color:#535c65;
+}
+
+/** 2016-7-18 14:18:30 by feiker */
+
+.enter{
+    width: 391px;
+    height: 192px;
+    background: url(enter.png) no-repeat center center;
+    position: absolute;
+    left: 307px;
+    top: 188px;
+}
+.cover{
+    width:100%;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 10;
+    background: rgba(0,0,0,0.6);
+    display: none;
+}
+.ok{
+    width:420px;
+    height:280px;
+    background:url(ok.png) no-repeat center center;
+    position:fixed;
+}
+.confirm{
+    width: 171px;
+    height: 60px;
+    top: 179px;
+    position: absolute;
+    left: 125px;
+}

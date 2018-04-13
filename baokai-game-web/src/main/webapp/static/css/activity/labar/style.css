@@ -1,0 +1,865 @@
+@charset "UTF-8";
+
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+
+img{border:none;}
+body{font:14px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;color:#333; background: #000;}
+input,select{font-family: 'Microsoft Yahei',Tahoma,Arial,Helvetica,Simsun,STHeiti;}
+.hide{display: none;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.clearfix{*zoom:1;}
+
+
+
+.window{
+	width: 100%;
+	background: url(../../../images/activity/labar/windowbg.jpg) no-repeat center top;
+}
+.main {
+	width: 1000px;
+	margin: 0 auto;
+	background: url(../../../images/activity/labar/mainbg.jpg) no-repeat left top;
+	height: 1035px;
+	position: relative;
+}
+.footer {
+	width: 100%;
+	background: #000;
+}
+.footer_in {
+	width: 1000px;
+	margin: 0 auto;
+	padding: 100px 0 20px 0;
+	background: url(../../../images/activity/labar/footerbg.jpg) no-repeat left 30px;
+	color: #404040;
+	text-align: center;
+}
+
+.header {
+	text-indent: -999em;
+	width: 100%;
+	height: 195px;
+	position: relative;
+}
+.header .logo {
+	width: 180px;
+	height: 40px;
+	cursor: pointer;
+	position: absolute;
+	left: 150px;
+	top: 18px;
+}
+
+.game {
+	position: absolute;
+	top: 204px;
+	width: 1000px;
+	height: 668px;
+}
+.prize {
+	width: 630px;
+	height: 124px;
+	padding-left: 180px;
+}
+.prize div {
+	width: 126px;
+	height: 62px;
+	float: left;
+	background-repeat: no-repeat;
+	background-image: url(../../../images/activity/labar/prize.png);
+
+
+
+}
+.prize .active {
+	-webkit-animation:bgshake .3s  ;
+	-moz-animation:bgshake .3s ;
+	-ms-animation:bgshake .3s ;
+	animation:bgshake .3s ;
+}
+
+.prize_0.active {
+	background-position: 16px 5px;
+}
+.prize_1.active {
+	background-position: -110px 5px;
+}
+.prize_2.active {
+	background-position: -236px 5px;
+}
+.prize_3.active {
+	background-position: -362px 5px;
+}
+.prize_4.active {
+	background-position: -488px 5px;
+}
+.prize_5.active {
+	background-position: 16px -53px;
+}
+.prize_6.active {
+	background-position: -110px -53px;
+}
+.prize_7.active {
+	background-position: -236px -53px;
+}
+.prize_8.active {
+	background-position: -362px -53px;
+}
+.prize_9.active {
+	background-position: -488px -53px;
+}
+.prize_0 {
+	background-position: 16px -144px;
+}
+.prize_1 {
+	background-position: -110px -144px;
+}
+.prize_2 {
+	background-position: -236px -144px;
+}
+.prize_3 {
+	background-position: -362px -144px;
+}
+.prize_4 {
+	background-position: -488px -144px;
+}
+.prize_5 {
+	background-position: 16px -202px;
+}
+.prize_6 {
+	background-position: -110px -202px;
+}
+.prize_7 {
+	background-position: -236px -202px;
+}
+.prize_8 {
+	background-position: -362px -202px;
+}
+.prize_9 {
+	background-position: -488px -202px;
+}
+
+.gamebox {
+	width: 1000px;
+	height: 500px;
+	position: relative;
+	padding-top: 50px;
+}
+.screen {
+	position: absolute;
+	left: 165px;
+	top: 50px;
+	width: 670px;
+	height: 258px;
+}
+.light {
+	width: 672px;
+	height: 258px;
+	background-repeat: no-repeat;
+	background-image: url(../../../images/activity/labar/light.png);
+	background-position: left top;
+}
+.screen .lightup {
+	background-position: left bottom;
+}
+.screen .fruit {
+	width: 618px;
+	height: 206px;
+	overflow: hidden;
+	position: absolute;
+	left: 23px;
+	top: 24px;
+}
+.fruit_1,
+.fruit_2,
+.fruit_3 {
+	width: 186px;
+	height: 9999px;
+	background-image: url(../../../images/activity/labar/fruits.png);
+	background-repeat: repeat-y;
+	position: absolute;
+	top: 0px;
+	margin-top: -120px;
+}
+.fruit_2 {
+	left: 216px;
+}
+.fruit_3 {
+	left: 432px;
+}
+
+.screen .screen_cover {
+	width: 618px;
+	height: 206px;
+	position: absolute;
+	background: url(../../../images/activity/labar/cover.png) left top no-repeat;
+	position: absolute;
+	left: 23px;
+	top: 24px;
+}
+
+.oprate {
+	width: 670px;
+	height: 80px;
+	position: absolute;
+	left: 165px;
+	top: 318px;
+}
+.result {
+	position: absolute;
+	width: 80px;
+	height: 30px;
+	left: 129px;
+	top: 92px;
+}
+.result span {
+	display: block;
+	float: left;
+	width: 20px;
+	height: 100%;
+	background-image: url(../../../images/activity/labar/number.png);
+	background-repeat: no-repeat;
+}
+.number_0{
+	background-position: left 0px;
+}
+.number_1{
+	background-position: left -30px;
+}
+.number_2{
+	background-position: left -60px;
+}
+.number_3{
+	background-position: left -90px;
+}
+.number_4{
+	background-position: left -120px;
+}
+.number_5{
+	background-position: left -150px;
+}
+.number_6{
+	background-position: left -180px;
+}
+.number_7{
+	background-position: left -210px;
+}
+.number_8{
+	background-position: left -240px;
+}
+.number_9{
+	background-position: left -270px;
+}
+
+.start {
+	width: 67px;
+	height: 208px;
+	background-repeat: no-repeat;
+	background-image: url(../../../images/activity/labar/btn.png);
+	background-position: -644px 0;
+	position: absolute;
+	left: 850px;
+	top: 158px;
+	cursor: pointer;
+}
+.started {
+	display: none;
+	background-position: -715px 0;
+}
+
+.award,
+.again{
+	position: absolute;
+	width: 92px;
+	height: 47px;
+	left: 435px;
+	top: 80px;
+	background-repeat: no-repeat;
+	background-image: url(../../../images/activity/labar/btn.png);
+	background-position: -409px -18px;
+	text-indent: -999em;
+	cursor: pointer;
+}
+.again {
+	left: 545px;
+	top: 80px;
+	background-position: -516px -20px;
+}
+.award.clicked {
+	background-position: -409px -87px;
+	cursor: not-allowed;
+}
+.again.clicked {
+	background-position: -516px -89px;
+	cursor: not-allowed;
+}
+
+
+.stop div {
+	width: 118px;
+	height: 75px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background-image: url(../../../images/activity/labar/btn.png);
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.stop .stop_1 {
+	left: 40px;
+	background-position: left top;
+}
+.stop .stop_2 {
+	left: 280px;
+	background-position: -132px top;
+}
+.stop .stop_3 {
+	left: 510px;
+	background-position: -264px top;
+}
+.stop_1.clicked {
+	background-position: left -89px;
+	cursor: not-allowed;
+}
+.stop_2.clicked {
+	background-position: -132px -89px;
+	cursor: not-allowed;
+}
+.stop_3.clicked {
+	background-position: -264px -89px;
+	cursor: not-allowed;
+}
+
+.tips {
+	padding-left: 140px;
+	color: #896a51;
+}
+.tips h3 {
+	width: 80px;
+	height: 100%;
+	float: left;
+	font-size: 16px;
+	line-height: 16px;
+	padding-top: 6px;
+}
+.tips ul {
+	width: 750px;
+	float: left;
+	font-size: 12px;
+	padding-left: 4px;
+}
+.tips ul li {
+	line-height: 16px;
+	padding: 2px 0px;
+	list-style: disc;
+}
+.tips2 {
+	padding-top: 20px;
+}
+.tips2 ul li {
+	line-height: 20px;
+}
+/* pop */
+
+.mask{ display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#99000000', endColorstr='#99000000');}
+.pop{
+	z-index:1001;
+	text-align:center;
+	width:427px;
+	height:369px;
+	position: absolute;
+	background:url(../../../images/activity/labar/alertbg.png) no-repeat left top;
+	color: #e9dfc2;
+	font-size: 20px;
+	left: 50%;
+	top: 0px;
+	margin-left: -213px;
+	margin-top: 150px;
+	display: none;
+}
+.pop .line1 {
+	font-size: 30px;
+	font-weight: normal;
+	line-height: 30px;
+	height: 30px;
+	width: 100px;
+	padding: 132px 100px 0px 194px;
+	text-align: center;
+}
+.pop .line1 span {
+	font-size: 30px;
+	color: #ffb751;
+}
+.pop .line2 {
+	padding: 20px 0px;
+	line-height: 30px;
+	font-size: 16px;
+	position: relative;
+}
+.pop .line2 a {
+	font-size: 14px;
+	color: #ffb751;
+	text-decoration: underline;
+	vertical-align:middle;
+	margin-top: -3px;
+}
+.pop .line2 .input {
+	width: 100px;
+	height: 20px;
+	line-height: 20px;
+	padding: 4px 15px;
+	border: 1px solid #524832;
+	background: #140d07;
+	vertical-align:middle;
+	font-size: 16px;
+	color: #6a6152;
+	margin-top: -3px;
+	color: #c7c0b8;
+	outline: none;
+}
+.pop .line2 p {
+	font-size: 18px;
+	line-height: 30px;
+	padding-top: 20px;
+}
+.pop .line3,
+.pop .line4{
+	position: absolute;
+	top: 290px;
+	left: 40px;
+	width: 340px;
+	border-top: 1px dashed #6d6658;
+}
+
+.pop .showcode {
+	text-align: center;
+	padding: 3px 0px;
+	font-size: 12px;
+	line-height: 20px;
+	margin: 10px auto 0px auto;
+}
+.pop .showcode span {
+	color:#f1da38;
+}
+.pop .exchange {
+	position: absolute;
+	width: 131px;
+	height: 32px;
+	text-indent: -999em;
+	left: 143px;
+	top: 225px;
+	cursor: pointer;
+	background-position: left top;
+}
+.pop .playagain,
+.pop .register,
+.pop .register2{
+	position: absolute;
+	width: 93px;
+	height: 39px;
+	text-indent: -999em;
+	left: 71px;
+	top: 16px;
+	cursor: pointer;
+	background-image: url(../../../images/activity/labar/alert_btn.png);
+	background-repeat: no-repeat;
+}
+.pop .playagain{
+	left: 191px;
+	background-position:-97px top;
+}
+.pop .register2{
+	left: 135px;
+	background-position:-300px top;
+}
+.pop .line4{
+	display: none;
+}
+.pop .register {
+	left: 60px;
+	background-position:-196px top;
+}
+
+.pop .pop_close {
+	width: 38px;
+	height: 37px;
+	position: absolute;
+	background: url(../../../images/activity/labar/close.png) no-repeat left top;
+	right: 5px;
+	top: 38px;
+	cursor: pointer;
+}
+.pop .pop_close:hover{
+	background: url(../../../images/activity/labar/close.png) no-repeat -40px top;
+}
+.pop .pop_prize {
+	position: absolute;
+	left: 100px;
+	top: 18px;
+	width: 216px;
+	height: 71px;
+	background-image: url(../../../images/activity/labar/prizeall.jpg);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+.pop .p_0 {
+	background-position: left top;
+}
+.pop .p_1 {
+	background-position: left -71px;
+}
+.pop .p_2 {
+	background-position: left -142px;
+}
+.pop .p_3 {
+	background-position: left -213px;
+}
+.pop .p_4 {
+	background-position: left -284px;
+}
+.pop .p_5 {
+	background-position: left -355px;
+}
+.pop .p_6 {
+	background-position: left -426px;
+}
+.pop .p_7 {
+	background-position: left -497px;
+}
+.pop .p_8 {
+	background-position: left -568px;
+}
+.pop .p_9 {
+	background-position: left -639px;
+}
+
+
+.pop2 {
+	z-index:1001;
+	text-align:center;
+	width:456px;
+	height:276px;
+	position: absolute;
+	background:url(../../../images/activity/labar/alertbg2.png) no-repeat left top;
+	color: #e9dfc2;
+	font-size: 20px;
+	left: 50%;
+	top: 0px;
+	margin-left: -228px;
+	margin-top: 150px;
+	display: none;
+}
+.pop2 .line1 {
+	padding-top: 100px;
+	padding-bottom: 10px;
+}
+.pop2 .input {
+	padding: 4px 10px;
+	width: 320px;
+	height: 28px;
+	line-height: 28px;
+	color: #e9dfc2;
+	border: 1px solid #504732;
+	background: #140d07;
+	outline: none;
+	font-size: 18px;
+	text-align: center;
+}
+.pop2 .line2 {
+	padding: 10px 0px;
+	font-size: 16px;
+	width: 340px;
+	margin: 0 auto;
+	border-bottom: 1px dashed #6f6658;
+}
+.pop2 .line3 {
+	padding: 10px 0px;
+}
+.pop2 .exchange {
+	width: 199px;
+	height: 39px;
+	text-indent: -999em;
+	background: url(../../../images/activity/labar/alertbtn2.png) no-repeat;
+	display: inline-block;
+}
+
+
+/* animation */
+
+.animated {
+-webkit-animation-duration:.3s;
+animation-duration:.3s;
+-webkit-animation-fill-mode:both;
+animation-fill-mode:both;
+}
+
+
+
+
+
+
+@-webkit-keyframes zoomIn {
+	0%{
+		-webkit-transform: scale3d(.3, .3, .3);
+	}
+}
+@keyframes zoomIn {
+	0%{
+		transform: scale3d(.3, .3, .3);
+	}
+}
+.zoomIn {
+-webkit-animation-name: zoomIn;
+animation-name: zoomIn;
+}
+@-webkit-keyframes zoomOut {
+	100% {
+		-webkit-transform: scale3d(.3, .3, .3);
+	}
+}
+@keyframes zoomOut {
+	100% {
+		transform: scale3d(.3, .3, .3);
+	}
+}
+.zoomOut {
+	-webkit-animation-name: zoomOut;
+	animation-name: zoomOut;
+}
+
+
+
+
+
+@keyframes bgshake
+{
+	0% { transform:scale(1.8);}
+	25%{ transform:scale(1);}
+	50%{ transform:scale(1.6);}
+	100% { transform:scale(1);}
+}
+
+@-moz-keyframes bgshake /* Firefox */
+{
+	0% { -moz-transform:scale(1.8);}
+	25%{ -moz-transform:scale(1);}
+	50%{ -moz-transform:scale(1.6);}
+	100% { -moz-transform:scale(1);}
+}
+
+@-webkit-keyframes bgshake /* Safari 和 Chrome */
+{
+	0% { -webkit-transform:scale(1.8);}
+	25%{ -webkit-transform:scale(1);}
+	50%{ -webkit-transform:scale(1.6);}
+	100% { -webkit-transform:scale(1);}
+}
+
+@-o-keyframes bgshake /* Opera */
+{
+	0% { -o-transform:scale(1.8);}
+	25%{ -o-transform:scale(1);}
+	50%{ -o-transform:scale(1.6);}
+	100% { -o-transform:scale(1);}
+}
+
+.loading {
+	width: 150px;
+	padding: 5px 20px;
+	border-radius: 5px;
+	position: absolute;
+	left: 50%;
+	margin-left: -75px;
+	top: 100px;
+	z-index: 1003;
+	-webkit-border-radius: 5px;
+	background-color: #fff;
+	text-align: center;
+}
+
+
+.sub {
+	background: url(../../../images/activity/labar/subbg.jpg) no-repeat center top;
+}
+
+.sub .main{
+	height: 1134px;
+	background: url(../../../images/activity/labar/submain.jpg) no-repeat left top;
+}
+
+.step {
+	width: 590px;
+	height: 690px;
+	padding: 30px 0 0 200px;
+	margin-bottom: 80px;
+}
+.step_money {
+	text-align: center;
+	font-size: 36px;
+	color: #f0e4d8;
+	font-weight: normal;
+	text-shadow: 0 0 6px rgba(0,0,0,.8);
+}
+.step_money span {
+	font-size: 48px;
+	color: #c35731;
+}
+
+.step_tab {
+	width: 100%;
+	margin-top: 20px;
+	color: #aca39a;
+	position: relative;
+	padding-top: 50px;
+}
+.tab_title {
+	position: absolute;
+	width: 586px;
+	height: 40px;
+	background: url(../../../images/activity/labar/tab_title.jpg) no-repeat;
+	left: 2px;
+	top: 2px;
+
+}
+.list_title {
+	position: absolute;
+	padding-left: 110px;
+	top: 2px;
+	z-index: 2;
+}
+.list_title li {
+	float: left;
+	width: 110px;
+	height: 43px;
+	line-height: 42px;
+	text-align: center;
+	margin-left: 50px;
+	cursor: pointer;
+	font-size: 16px;
+	text-shadow: 0 0 4px rgba(0,0,0,.8);
+	background: url(../../../images/activity/labar/tab_btn.jpg) no-repeat left top;
+}
+.list_title .active {
+	background: url(../../../images/activity/labar/tab_btn.jpg) no-repeat left bottom;
+}
+.tab_content {
+	width: 100%;
+	position: absolute;
+	top: 44px;
+	z-index: 1;
+	border: 1px solid #483d2b;
+	background: url(../../../images/activity/labar/tab_content.jpg);
+}
+.content_box {
+	padding: 20px;
+	display: none;
+}
+
+
+.tab_content .color1 {
+	color: #c6b069;
+}
+
+.tab_content .color3 {
+	color: #907c6e;
+	margin-top: 30px;
+}
+.choice {
+	overflow: hidden;
+	width: 100%;
+}
+.choice .choice_box {
+	width: 250px;
+	padding-right: 10px;
+	float: left;
+	margin-top: 20px;
+	height: 410px;
+
+}
+.choice .choice_boder {
+	border-left: 1px dashed #5f543e;
+	padding-left: 10px;
+}
+
+.choice_box ul li {
+	font-size: 12px;
+}
+
+
+.content_box ul,
+.choice_box ul {
+	padding-left: 20px;
+	color: #907C72;
+}
+.content_box li,
+.choice_box li{
+	list-style: decimal;
+
+}
+.choice_box .color2 {
+	height: 80px;
+}
+.choice_box h3 {
+	color: #c35731;
+}
+.select_btn {
+	text-indent: -999em;
+	width: 55px;
+	height: 26px;
+	display: inline-block;
+	background: url(../../../images/activity/labar/select_btn.jpg);
+}
+.choice .choiced {
+	background: url(../../../images/activity/labar/choiced.png) center bottom no-repeat;
+}
+.choice .dischoice,
+.choice .dischoice .color3,
+.choice .dischoice h3,{
+	color: #524a45;
+}
+
+.guide {
+	position: absolute;
+	width: 28px;
+	height: 173px;
+	background: url(../../../images/activity/labar/guide.png) left top no-repeat;
+	left:870px;
+	top: -30px;
+	-webkit-animation: 1s ease 0.8s normal none infinite running handle;
+	animation: 1s ease 0.8s normal none infinite running handle;
+	z-index: 3;
+}
+@-webkit-keyframes handle {
+	0% {
+		opacity: 0.8;
+		top: -40px;
+	}
+	100% {
+		opacity: 1;
+		top: -30px;
+	}
+}
+@keyframes handle {
+	0% {
+		opacity: 0.8;
+		top: -40px;
+	}
+	100% {
+		opacity: 1;
+		top: -30px;
+	}
+}
+
+.service {
+	position: fixed;
+	z-index: 100;
+	right:50%;
+	margin-right: -460px;
+	top: 230px;
+	cursor: pointer;
+	width: 68px;
+	height: 55px;
+	display: block;
+	background: url(../../../images/activity/labar/service.png) left top no-repeat;
+}

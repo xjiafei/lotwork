@@ -1,0 +1,354 @@
+@charset "UTF-8";
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+input,button,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
+input,button,textarea,select{*font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+ul,li{list-style:none;}
+img{border:none;}
+body{font:14px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;color:#fbefc5;}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+
+
+.top, .level, .middle1, .middle2, .middle3, .bottom, .footer {
+    width:100%;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #521853;
+}
+.topM, .levelM, .middle1M, .middle2M, .middle3M {
+    width: 1000px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    position: relative;
+    margin: 0 auto;
+}
+
+.top {
+    height: 652px;
+    background-image: url(../../images/vip/top.jpg);
+}
+.topM {
+    height: 652px;
+    background-image: url(../../images/vip/topM.jpg);
+}
+.level {
+    height: 323px;
+    background-image: url(../../images/vip/level.jpg);
+    background-position: center -30px;
+    z-index: 99;
+}
+.levelM {
+    height: 323px;
+    background-image: url(../../images/vip/levelM.jpg?201505260944);
+    background-position: center -30px;
+}
+.middle1 {
+    height: 1078px;
+    background-image: url(../../images/vip/middle1.jpg);
+}
+.middle1M {
+    height: 1078px;
+    background-image: url(../../images/vip/middle1M.jpg?201507240944);
+}
+.middle2 {
+    height: 425px;
+}
+.middle2M {
+    height: 425px;
+    background-image: url(../../images/vip/middle2M.jpg);
+}
+.middle3 {
+    height: 630px;
+}
+.middle3M {
+    height: 630px;
+    background-image: url(../../images/vip/middle3M.jpg?20160301);
+}
+.bottom {
+    background-image: url(../../images/vip/bottomB.jpg);
+    background-repeat: repeat-x;
+    height:153px;
+    padding-top: 5px;
+}
+.bottomPic {
+    width: 1000px;
+    height: 152px;
+    background-image: url(../../images/vip/bottom.jpg);
+    margin: 0 auto;
+}
+.footer {
+    width: 100%;
+    height: 90px;
+    background: #fbf1ce;
+}
+.footerContent {
+    width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 14px;
+    color: #b2ab92;
+    text-shadow: 1px 0px 1px #d9cfad ;
+}
+
+
+
+.topM p{
+    position: absolute;
+    text-align: center;
+}
+.topM .text1 {
+    width: 806px;
+    left: 62px;
+    top: 510px;
+    padding: 0px 40px;
+}
+.topM .text2 {
+    width: 886px;
+    left: 74px;
+    top: 627px;
+}
+
+
+.beauty {
+    position: absolute;
+    width: 139px;
+    height: 571px;
+    right: -174px;
+    bottom: -10px;
+    background: url(../../images/vip/beauty.png) no-repeat left top;
+    z-index: 99;
+}
+
+
+.levelTips {
+    position: absolute;
+    left: 0px;
+    bottom: 296px;
+    width: 666px;
+}
+.levelTips div {
+    width: 67px;
+    height: 58px;
+    background: url(../../images/vip/levelTips.png) no-repeat left top;
+    position: absolute;
+    text-align: center;
+    color: #1c0e2b;
+    top: 0px;
+    font-size: 16px;
+    line-height: 18px;
+    padding-top: 16px;
+    font-family: "Times New Roman",Georgia,Serif;
+    display: none;
+
+}
+.levelTips div span {
+    font-size: 12px;
+    line-height: 14px;
+}
+.tip0 {
+    left: -9px;
+    -webkit-animation-delay: 2s;
+    -moz-animation-delay: 2s;
+}
+.levelTips .tip1 {
+    left: 134px;
+    -webkit-animation-delay: 3s;
+    -moz-animation-delay: 3s;
+}
+
+.levelTips .tip2 {
+    left: 278px;
+    -webkit-animation-delay: 4s;
+    -moz-animation-delay: 4s;
+}
+
+.levelTips .tip3 {
+    left: 418px;
+    -webkit-animation-delay: 5s;
+    -moz-animation-delay: 5s;
+}
+.levelTips .tip4 {
+    left: 563px;
+    -webkit-animation-delay: 6s;
+    -moz-animation-delay: 6s;
+}
+
+
+.levelM .levelActive{
+    width: 666px;
+    height: 170px;
+    position: absolute;
+    bottom: 40px;
+    left: 0px;
+}
+.levelM .levelActive div {
+    float: left;
+    height: 170px;
+    cursor: pointer;
+}
+.level0 {
+    width: 94px;
+}
+.level1 {
+    width: 144px;
+}
+.level2 {
+    width: 141px;
+}
+.level3 {
+    width: 147px;
+}
+.level4 {
+    width: 138px;
+}
+
+
+
+
+.middle1M {
+    padding: 170px 50px 0px;
+    width: 900px;
+    height: 908px;
+}
+
+.middle1M h3{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    padding-bottom: 10px;
+}
+
+.middle1M p {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.tableBox {
+    background: #fbefc5;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    padding: 6px 22px;
+    color: #3b063f;
+}
+.tableBox table {
+    border: 0;
+    cellspacing: 0;
+    cellpadding: 0;
+    text-align: left;
+}
+.tableBox table td, .tableBox table th{
+    padding: 3px 0px;
+}
+.tableBox table th {
+    border-bottom: 1px solid #7e716f;
+}
+
+.tableBox td.text_c {
+    text-indent: 28px;
+}
+
+.table1 {
+    width: 400px;
+}
+.table2 {
+    width: 800px;
+}
+.middle1M p {
+    margin-bottom: 10px;
+}
+.middle1M hr {
+    height:1px;
+    border:none;
+    border-top:1px solid #4f2a49;
+    margin: 30px 0px;
+}
+.middle1M  span {
+    color: #ff7f47;
+}
+
+
+.middle2M {
+    color: #8f5488;
+}
+.middle2M div {
+    position: absolute;
+    top: 300px;
+    text-align: center;
+    width: 290px;
+    height: 100px;
+}
+.middle2M .communicate {
+    left:50px;
+}
+.middle2M .operate {
+    left:370px;
+}
+.middle2M .serve {
+    left:700px;
+}
+.middle2M  span {
+    color: #e79de4;
+}
+
+.middle3M {
+    color: #905489;
+    padding: 164px 62px 0px 62px;
+    width: 876px;
+    height: 419px;
+
+}
+.middle3M dl dt {
+    color:  #fbefc5;
+    font-size: 20px;
+    line-height: 26px;
+}
+.middle3M dl dd {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+
+.middle3M span {
+    color: #fbefc5;
+}
+
+
+.service {
+    position: fixed;
+    z-index: 100;
+    right: 100px;
+    top: 260px;
+    cursor: pointer;
+}
+
+.back {
+    position: fixed;
+    z-index: 100;
+    right: 90px;
+    bottom: 20px;
+    cursor: pointer;
+    display: none;
+}
+
+
+@media screen and (max-width:1343px) {
+    .beauty {
+        right: 0px;
+    }
+}
+@media screen and (max-width:1000px) {
+    .footer, .bottom {
+        width: 1000px;
+    }
+    .footerContent {
+        width:100%;
+    }
+}
+
+@media screen and (max-height:620px) {
+    .service {
+        top: initial;
+        bottom: 400px;
+    }
+}

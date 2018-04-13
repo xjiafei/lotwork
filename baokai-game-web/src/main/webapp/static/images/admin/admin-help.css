@@ -1,0 +1,112 @@
+@charset "utf-8";
+
+/**
+表头排序
+**/
+.table-toggle a {color:#555;}
+
+/**
+全选checkbox label标签
+**/
+.label-checked-all {cursor:pointer;}
+/**
+模拟alert提示
+**/
+.ui-alert-custom {padding-bottom:0;}
+.ui-alert-custom .control {padding:10px 0 0 0;text-align:center;}
+.ui-alert-custom .control .btn {width:37%}
+
+.panel-help-search {padding:15px 0 10px 20px;border:1px solid #DEDEDE;border-top:0;border-left:0;
+background:-webkit-linear-gradient(top,#FFF,#F7F7F7) #F3F3F3;
+background:    -moz-linear-gradient(top,#FFF,#F7F7F7) #F3F3F3;
+background:         -o-linear-gradient(top,#FFF,#F7F7F7) #F3F3F3;
+background:              linear-gradient(top,#FFF,#F7F7F7) #F3F3F3;
+}
+.panel-help-search .ui-select {width:auto;}
+
+/**
+新建帮助
+**/
+.panel-help-addcontent {}
+.panel-help-addcontent .ui-check {position:absolute;display:none;}
+
+/**
+新增彩种
+**/
+.panel-help-addlottery .ui-check {position:absolute;display:none;}
+.tab-lottery-type {display:inline-block;width:50%}
+.tab-lottery-type-title li {float:left;margin:0;padding:5px 15px;margin:0 5px 0 0;border:1px solid #CCC;border-bottom:0;cursor:pointer;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+-moz-border-radius-bottomleft: 0;
+-moz-border-radius-bottomright: 0;
+-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-webkit-border-bottom-left-radius: 0;
+-webkit-border-bottom-right-radius: 0;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+border-bottom-right-radius: 0;
+border-bottom-left-radius:  0;
+}
+.tab-lottery-type-title li.tab-lottery-type-title-current {
+background:#EEE;
+background:-webkit-linear-gradient(top,#F7F7F7,#F0F0F0) #F3F3F3;
+background:    -moz-linear-gradient(top,#F7F7F7,#F0F0F0) #F3F3F3;
+background:         -o-linear-gradient(top,#F7F7F7,#F0F0F0) #F3F3F3;
+background:              linear-gradient(top,#F7F7F7,#F0F0F0) #F3F3F3;
+}
+.tab-lottery-type-panel {display:none;}
+.tab-lottery-type-panel-current {display:block;}
+
+
+/**
+类目列表 
+**/
+.panel-sort {padding:20px;}
+.panel-sort .title {padding:10px;}
+.panel-sort .item {padding:10px;border:1px solid #CCC;margin:10px 0;
+line-height:34px;
+background:#F9F9F9;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius:5px;
+background:-webkit-linear-gradient(top,#FFF,#F0F0F0) #F5F5F5;
+background:    -moz-linear-gradient(top,#FFF,#F0F0F0) #F5F5F5;
+background:         -o-linear-gradient(top,#FFF,#F0F0F0) #F5F5F5;
+background:              linear-gradient(top,#FFF,#F0F0F0) #F5F5F5;
+}
+
+
+.panel-sort .item .item-child {border:1px solid #CCC;margin:5px 20px;padding:10px;margin-top:10px;margin-bottom:0;
+line-height:24px;
+background:#FFFFE1;
+display:none;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius:5px;
+}
+.panel-sort .btn-addchild {float:right;margin-right:20px;}
+.panel-sort .item-name {font-weight:bold;padding:0 30px 0 18px;font-size:14px;background:url(sort-a.gif) no-repeat 0 2px; cursor:pointer;}
+.panel-sort .item-name-open {background-image:url(sort-b.gif)}
+.panel-sort .item-child .item-name {font-size:12px;background:none;cursor:default;}
+.panel-sort .item-rename,.panel-sort .item-del,.panel-sort .item-up,.panel-sort .item-down {display:inline-block;padding:0 5px;cursor:pointer;visibility:hidden;}
+.panel-sort .item-rename:hover, .panel-sort .item-del:hover, .panel-sort .item-up:hover, .panel-sort .item-down:hover {text-decoration:underline}
+.panel-sort .item-del,.panel-sort .item-down {padding-right:20px}
+
+
+
+/**
+帮助配置
+**/
+.panel-help-setting {}
+.panel-help-setting .table-info td,.panel-help-setting .table-info th {text-align:left;}
+.panel-help-setting .table-info th {padding-left:18px}
+
+.panel-help-setting .input {color:#666;}
+.panel-help-setting .info {padding:10px 20px 0 20px;color:#999;}
+.panel-help-setting .table-info .input {text-align:center;}
+
+.panel-help-setting .ui-check {position:absolute;display:none;}
+
+

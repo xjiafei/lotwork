@@ -1,0 +1,234 @@
+.pace .pace-progress {
+	background-color: #deb961;
+}
+
+.main,
+.dice-wrap{
+	height:840px;
+	background: url(bg2.jpg) center top no-repeat;
+	border: none;
+	
+}
+.main a {
+	color: #837541;
+}
+.main a:hover {
+	color: #907d36;
+}
+
+.dice-panel {
+	width: 1000px;
+	margin: 0 auto;
+	background: rgba(255, 255, 255, 0.03);
+}
+
+.logo {
+
+}
+.quickChange {
+
+}
+.dice-panel .shortcuts {
+	left: 64px;
+}
+.dice-panel .shortcuts a {
+	border: 1px solid  #948f7c;
+	background: url(btn_sprite2.png) -404px -56px no-repeat;
+}
+.dice-panel .shortcuts a:hover{
+	border: 1px solid #837541;
+}
+.lottery-info-number {
+	left: 364px;
+}
+
+.game-volume {
+	border: 1px solid  #b59b5e;
+	background-image: url(btn_sprite2.png);
+	left: 550px;
+}
+.lottery-status {
+	left: 375px;
+}
+.lottery-countdown span {
+	/*background-image: url(countdown_03.png);*/
+}
+.caution-countdown span{
+	background-image: url(countdown_02.png);
+}
+.record-top a {
+	/*border: 1px solid  #948f7c;
+	background: url(btn_sprite2.png) -404px -56px no-repeat;*/
+	color: #fff;
+}
+.record-top a:hover {
+	 border: 1px solid #837541;
+	 text-decoration: none;
+ }
+.jspDrag {
+	/*background: #ab954a;*/
+}
+
+
+.dice-ctrl {
+	position: relative; 
+	bottom: auto; 
+	left: 0px;
+	background: url(dice_panel_bg2.jpg) no-repeat center top;
+}
+.dice-bar {
+	background: url(dice_panel_bg2.jpg) no-repeat -460px top;
+}
+.dice-chip-choose .dice-chip-shadow {
+	background: url(dicecover.png) no-repeat ;
+}
+.ui-button {
+	background-image: url(btn_sprite2.png);
+}
+.ui-simulation-counter input, .value_box {
+	color: #837644;
+}
+
+.user-head, .user-winning {
+	background-image: url(user_sprite2.png);
+}
+
+.dice-sheet .dice-winning {
+	top: -34px;
+	margin-left: -66px;
+	width: 84px;
+	height: 42px;
+	background: url(user_sprite2.png) -242px 0px no-repeat;
+	color: #aea077;
+	padding-left: 38px;
+	padding-top: 34px;
+
+}
+.dice-sheet-0 .dice-sheet-bg{background-image: url(sheets/psheet-0.png);}
+.dice-sheet-1 .dice-sheet-bg{background-image: url(sheets/psheet-1.png);}
+.dice-sheet-2 .dice-sheet-bg{background-image: url(sheets/psheet-2.png);}
+.dice-sheet-3 .dice-sheet-bg{background-image: url(sheets/psheet-3.png);}
+.dice-sheet-4 .dice-sheet-bg{background-image: url(sheets/psheet-4.png);}
+.dice-sheet-5 .dice-sheet-bg{background-image: url(sheets/psheet-5.png);}
+.dice-sheet-6 .dice-sheet-bg{background-image: url(sheets/psheet-6.png);}
+.dice-sheet-7 .dice-sheet-bg{background-image: url(sheets/psheet-7.png);}
+.dice-sheet-8 .dice-sheet-bg{background-image: url(sheets/psheet-8.png);}
+.dice-sheet-9 .dice-sheet-bg{background-image: url(sheets/psheet-9.png);}
+.dice-sheet-10 .dice-sheet-bg{background-image: url(sheets/psheet-10.png);}
+.dice-sheet-11 .dice-sheet-bg{background-image: url(sheets/psheet-11.png);}
+.dice-sheet-12 .dice-sheet-bg{background-image: url(sheets/psheet-12.png);}
+.dice-sheet-13 .dice-sheet-bg{background-image: url(sheets/psheet-13.png);}
+.dice-sheet-14 .dice-sheet-bg{background-image: url(sheets/psheet-14.png);}
+.dice-sheet-15 .dice-sheet-bg{background-image: url(sheets/psheet-15.png);}
+.dice-sheet-16 .dice-sheet-bg{background-image: url(sheets/psheet-16.png);}
+.dice-sheet-17 .dice-sheet-bg{background-image: url(sheets/psheet-17.png);}
+.dice-sheet-18 .dice-sheet-bg{background-image: url(sheets/psheet-18.png);}
+.dice-sheet-19 .dice-sheet-bg{background-image: url(sheets/psheet-19.png);}
+.dice-sheet-20 .dice-sheet-bg{background-image: url(sheets/psheet-20.png);}
+.dice-sheet-21 .dice-sheet-bg{background-image: url(sheets/psheet-21.png);}
+.dice-sheet-22 .dice-sheet-bg{background-image: url(sheets/psheet-22.png);}
+.dice-sheet-23 .dice-sheet-bg{background-image: url(sheets/psheet-23.png);}
+.dice-sheet-24 .dice-sheet-bg{background-image: url(sheets/psheet-24.png);}
+.dice-sheet-25 .dice-sheet-bg{background-image: url(sheets/psheet-25.png);}
+.dice-sheet-26 .dice-sheet-bg{background-image: url(sheets/psheet-26.png);}
+.dice-sheet-27 .dice-sheet-bg{background-image: url(sheets/psheet-27.png);}
+.dice-sheet-28 .dice-sheet-bg{background-image: url(sheets/psheet-28.png);}
+.dice-sheet-29 .dice-sheet-bg{background-image: url(sheets/psheet-29.png);}
+.dice-sheet-30 .dice-sheet-bg{background-image: url(sheets/psheet-30.png);}
+.dice-sheet-31 .dice-sheet-bg{background-image: url(sheets/psheet-31.png);}
+.dice-sheet-32 .dice-sheet-bg{background-image: url(sheets/psheet-32.png);}
+.dice-sheet-33 .dice-sheet-bg{background-image: url(sheets/psheet-33.png);}
+.dice-sheet-34 .dice-sheet-bg{background-image: url(sheets/psheet-34.png);}
+.dice-sheet-35 .dice-sheet-bg{background-image: url(sheets/psheet-35.png);}
+.dice-sheet-36 .dice-sheet-bg{background-image: url(sheets/psheet-36.png);}
+.dice-sheet-37 .dice-sheet-bg{background-image: url(sheets/psheet-37.png);}
+.dice-sheet-38 .dice-sheet-bg{background-image: url(sheets/psheet-38.png);}
+.dice-sheet-39 .dice-sheet-bg{background-image: url(sheets/psheet-39.png);}
+.dice-sheet-40 .dice-sheet-bg{background-image: url(sheets/psheet-40.png);}
+.dice-sheet-41 .dice-sheet-bg{background-image: url(sheets/psheet-41.png);}
+.dice-sheet-42 .dice-sheet-bg{background-image: url(sheets/psheet-42.png);}
+.dice-sheet-43 .dice-sheet-bg{background-image: url(sheets/psheet-43.png);}
+.dice-sheet-44 .dice-sheet-bg{background-image: url(sheets/psheet-44.png);}
+.dice-sheet-45 .dice-sheet-bg{background-image: url(sheets/psheet-45.png);}
+.dice-sheet-46 .dice-sheet-bg{background-image: url(sheets/psheet-46.png);}
+.dice-sheet-47 .dice-sheet-bg{background-image: url(sheets/psheet-47.png);}
+.dice-sheet-48 .dice-sheet-bg{background-image: url(sheets/psheet-48.png);}
+.dice-sheet-49 .dice-sheet-bg{background-image: url(sheets/psheet-49.png);}
+.dice-sheet-50 .dice-sheet-bg{background-image: url(sheets/psheet-50.png);}
+.dice-sheet-51 .dice-sheet-bg{background-image: url(sheets/psheet-51.png);}
+.user-head,
+.user-winning{
+	background-image: url(user_sprite2.png);
+}
+.user-winning {
+	position: absolute;
+	left: -28px;
+	top: -20px;
+	width: 95px;
+	height: 31px;
+	background-position: -392px 0px;
+	color: #422404;
+	padding-top: 32px;
+	padding-left: 33px;
+}
+.main-chair .user-winning {
+	width: 243px;
+	height: 50px;
+	padding-top: 54px;
+	left: -75px;
+	background-position: -242px -90px;
+	text-align: center;
+	font-size: 16px;
+	padding-left: 0px;
+	color: #802506;
+}
+
+.history-toggle {
+	background: url(btn_sprite2.png) -488px 0px;
+}
+
+.dice-chip {
+	background-image: url(chips2.png);
+}
+.dice-chip-mirror {
+	background-image: url(chips_big2.png);
+}
+.dice-chip-custom {
+	background: url(chips_custom2.png) left top no-repeat;
+}
+.dice-chip-wrap .dice-chip-button{
+	background: url(dice-custom-button2.png) no-repeat center top;
+}
+.dice-chip-wrap .active {
+	background-position: center bottom;
+}
+.dice-cup {
+	background-image: url(dicecup2.png);
+}
+.dice-chip-100{background-position: 0 0;}
+.dice-chip-200{background-position: -50px 0;}
+.dice-chip-500{background-position: -100px 0;}
+.dice-chip-1000{background-position: -150px 0;}
+.dice-chip-2000{background-position: -200px 0;}
+.dice-chip-5000{background-position: -250px 0;}
+.dice-chip-6000{background-position: -300px 0;}
+.dice-chip-8000{background-position: -350px 0;}
+.dice-chip-10000{background-position: -400px 0;}
+.dice-chip-20000{background-position: -450px 0;}
+
+.dice-chip-custom .dice-chip-100{background-position: 0 0;}
+.dice-chip-custom .dice-chip-200{background-position: -51px 0;}
+.dice-chip-custom .dice-chip-500{background-position: -101px 0;}
+.dice-chip-custom .dice-chip-1000{background-position: -153px 0;}
+.dice-chip-custom .dice-chip-2000{background-position: -204px 0;}
+.dice-chip-custom .dice-chip-5000{background-position: -255px 0;}
+.dice-chip-custom .dice-chip-6000{background-position: -306px 0;}
+.dice-chip-custom .dice-chip-8000{background-position: -357px 0;}
+.dice-chip-custom .dice-chip-10000{background-position: -408px 0;}
+.dice-chip-custom .dice-chip-20000{background-position: -459px 0;}
+.topbar {
+    background: url(bgHeader2.jpg) top center;
+}
+.topbar-bg {
+    background-color: rgba(255, 255, 255, 0.03);
+}

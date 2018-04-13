@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+.step-seven .round-area div{
+	display: none;
+}
+
+.step-one .line{
+	display: none;
+}
+
+
+/*ie - bg*/
+.step-1-bg img{
+	display: block;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.step-one .plane,
+.step-three .computer,
+.step-three .lights,
+.step-one .slogan,
+.step-five .slogan,
+.step-five .page-area,
+.step-eight .thumb,
+.step-twelve .thumb,
+.step-thirteen .thumb,
+.step-11-bg2{
+	display: none;
+}
+
+.step-3-bg img{
+	display: block;
+	height: 120%;
+	margin: 0 auto;
+}
+
+.step-5-bg{
+	padding-top: 20px;
+}
+
+.step-5-bg img{
+	display: block;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.step-six .step-6-slide .item{
+	width: 100%;
+	height: 724px;
+	line-height: 724px;
+	text-align: center;
+}
+
+.step-nine .step-9-slide .item{
+	width: 100%;
+	height: 800px;
+	line-height: 800px;
+	text-align: center;
+}
+
+.step-ten .step-ten-slide .item{
+	width: 100%;
+	height: 800px;
+	line-height: 800px;
+	text-align: center;
+}
+
+.step-elven .step-elven-slide .item{
+	width: 100%;
+	height: 800px;
+	line-height: 800px;
+	text-align: center;
+}
+.step-14 .step-14-slide .item{
+	width: 100%;
+	height: 800px;
+	line-height: 800px;
+	text-align: center;
+}
+
+.step-7-bg,
+.step-8-bg{
+	text-align: center;
+}
+
+.step-7-bg img{
+	display: inline-block;
+	height: 80%;
+	margin: 10% auto 0 auto;
+}
+
+.step-8-bg img{
+	display: inline-block;
+	height: 100%;
+	margin: 0 auto 0 ;
+}
+.step-2-bg img{
+	display: block;
+	height: 80%;
+	margin: 10% auto 0;
+}
+.step-12-bg img{
+	display: block;
+	height: 90%;
+	margin: 5% auto 0;
+}

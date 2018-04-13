@@ -1,0 +1,344 @@
+@charset "utf-8";
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+table{border-collapse:collapse;border-spacing:0;}
+img{border:none;}
+
+/* common css */
+a{	
+	text-decoration: none;
+}
+.seo_txt{
+	position: absolute;
+	left: -9999em;
+	top: -9999em;
+	font-size: 0;
+	line-height: 0;
+	height: 0;
+	opacity: 0;
+	text-indent: -9999em;
+}
+.transparent_link{
+	background: transparent url(../../../images/activity/newuser_prize/transparent.gif) repeat;
+	cursor: pointer;
+}
+.fade_link{
+	opacity: 0;
+	filter: alpha(opacity=0);
+	/*-webkit-transition: opacity .6s ease-in;*/
+	   /*-moz-transition: opacity .6s ease-in;*/
+		/*-ms-transition: opacity .6s ease-in;*/
+		 /*-o-transition: opacity .6s ease-in;*/
+			/*transition: opacity .6s ease-in;*/
+}
+.fade_link:hover{
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.inline_block, .section .buttons a{
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+body, input, button, textarea{
+	font-size: 12px;
+	line-height: 22px;
+	font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft Yahei",Arial,sans-serif;
+}
+body{
+	color: #621300;
+	background: #970000;
+}
+#top{
+	width: 100%;
+	background: url(../../../images/activity/newuser_prize/top_bg.jpg) center -34px no-repeat;
+}
+
+#header, .part, #content .wrap{
+	width: 1000px;
+	margin: 0 auto;
+	position: relative;
+}
+
+/*header*/
+#header{
+	width: 1000px;
+	height: 446px;
+	margin: 0 auto;
+	background: url(../../../images/activity/newuser_prize/top_main_bg_1.jpg) center -34px no-repeat;
+}
+#header h2 {
+	position: absolute;
+	top: 350px;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	font-size: 21px;
+	font-weight: normal;
+}
+#header .tips{
+	width: 200px;
+	position: absolute;
+	right: 40px;
+	top: 0;
+	font-size: 14px;
+	color: #fff8dc;
+	text-align: center;
+	line-height: 30px;
+}
+#header .date {
+	position: absolute;
+	bottom: 5px;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	font-size: 20px;
+	font-weight: normal;
+	line-height: 40px;
+	color: #fff;
+}
+
+/* PART */
+.button a,
+.part h2 i{
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-image: url(../../../images/activity/newuser_prize/sprite.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+}
+
+.part{
+	width: 830px;
+	padding: 0 85px;
+}
+.part h2{
+	display: block;
+	font-size: 25px;
+	color: #fff;
+	line-height: 50px;
+	height: 50px;
+	padding: 10px 0;
+	font-weight: normal;
+}
+.part h2 span{
+	font-size: 21px;
+}
+.part h2 i{
+	width: 13px;
+	height: 13px;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	vertical-align: middle;
+	background-color: #fff;
+	margin: -2px 10px 0 6px;
+	background-position: -387px 0;
+	/*text-indent: -9999em;*/
+}
+.part .content{
+	position: relative;
+}
+#part1{
+	height: 472px;
+	background: url(../../../images/activity/newuser_prize/top_main_bg_2.jpg) center top no-repeat;
+}
+#part1 .button{
+	position: absolute;
+	left: 290px;
+	top: 10px;
+}
+#part1 .button li{
+	width: 110px;
+	height: 43px;
+	padding: 30px 0;
+}
+#part1 .button a{
+	line-height: 42px;
+	background-position: 0 0;
+}
+#part1 .button a:hover,
+#part1 .button a:active{
+	text-decoration: none;
+	background-position: -111px 0;
+}
+#part1 .button a.done{
+	cursor: not-allowed;
+	background-position: -222px 0!important;
+}
+
+.prize-list{
+	position: absolute;
+	width: 402px;
+	left: 416px;
+	top: 121px;
+}
+.prize-list li{
+	position: relative;
+	display: block;
+	width: 100%;
+}
+.prize-list p{
+	position: relative;
+	z-index: 2;
+	padding-left: 90px;
+	color: #fff;
+	font-size: 16px;
+	line-height: 40px;
+}
+.prize-list p strong{
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	padding-left: 15px;
+	font-size: 30px;
+	vertical-align: top;
+	line-height: 40px;
+}
+.prize-list p strong i{
+	font-size: 20px;
+	font-style: normal;
+	vertical-align: top;
+}
+.prize-list .list1 p{
+	line-height: 50px;
+}
+.prize-list .list1 p strong{
+	padding-top: 5px;
+}
+.prize-list .list4 p{
+	line-height: 44px;
+}
+.prize-list .list4 p strong{
+	padding-top: 2px;
+}
+.prize-list .list-bg{
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	background-image: url(../../../images/activity/newuser_prize/prize-list.png);
+	background-repeat: no-repeat;
+	display: none;
+}
+/*.prize-list li:hover .list-bg,*/
+.prize-list li.active .list-bg{
+	display: block;
+}
+.prize-list li.active p{
+	color: #830800;
+}
+
+.list1{
+	height: 52px;
+}
+.list2{
+	height: 49px;
+}
+.list3{
+	height: 49px;
+}
+.list4{
+	height: 44px;
+}
+.list1 .list-bg{
+	height: 60px;
+	background-position: 0 0;
+}
+.list2 .list-bg{
+	height: 57px;
+	background-position: 0 -61px;
+}
+.list3 .list-bg{
+	height: 57px;
+	background-position: 0 -120px;
+}
+.list4 .list-bg{
+	height: 44px;
+	background-position: 0 -180px;
+}
+
+
+#content{
+	width: 100%;
+	background: url(../../../images/activity/newuser_prize/content_bg.jpg) center top no-repeat;
+}
+#content .wrap{
+	background: url(../../../images/activity/newuser_prize/content_bg.jpg) center top no-repeat;
+	height: 780px;
+}
+#part2 h2{
+	padding-top: 0;
+}
+#part2 .button{
+	padding-top: 90px;
+	overflow: hidden;
+	*zoom: 1;
+}
+#part2 .button li{
+	float: left;
+	/*width: 33.33%;*/
+	width: 276px;
+	/*text-align: center;*/
+}
+#part2 .button a{
+	width: 110px;
+	height: 34px;
+	line-height: 34px;
+	background-position: 0 -45px;
+	margin-left: 50px;
+}
+#part2 .button a:hover,
+#part2 .button a:active{
+	text-decoration: none;
+	background-position: -111px -45px;
+}
+#part2 .button a.done{
+	cursor: not-allowed;
+	background-position: -222px -45px!important;
+}
+#part2 .button li p{
+	padding-top: 15px;
+	color: #fdebd7;
+	line-height: 36px;
+	text-align: center;
+}
+#part2 .button li p a{
+	background: transparent;
+	text-decoration: underline;
+	display: inline;
+	width: auto;
+	margin: 0;
+}
+
+#part3{
+	padding-top: 140px;
+}
+#part3 h2{
+	width: 715px;
+	border-bottom: 1px solid  #917658;
+	margin-bottom: 20px;
+}
+#part3 ul li{
+	color: #fdebd7;
+	list-style: disc;
+	margin-left: 20px;
+	font-size: 14px;
+	margin-bottom: 6px;
+}
+
+#footer{
+	padding: 20px 0;
+	text-align: center;
+	color: #717171;
+	font-weight: bold;
+	background-color: #000;
+}
+#footer a{
+	color: #e6ba8d;
+}

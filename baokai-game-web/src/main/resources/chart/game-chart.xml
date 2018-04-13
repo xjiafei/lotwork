@@ -1,0 +1,91 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="basicChart" class="com.winterframework.firefrog.game.web.chart.entity.Chart">
+		<property name="template" ref="basicChartTemplate" />
+		<property name="body" ref="chartBody" />
+	</bean>
+	
+	<bean id="basicChartTitle" class="com.winterframework.firefrog.game.web.chart.entity.ChartTitle">
+		<property name="template" ref="basicChartTitleTemplate" />
+	</bean>
+	
+	<bean id="chartBody" class="com.winterframework.firefrog.game.web.chart.entity.ChartBody">
+		<property name="template" ref="basicChartBodyTemplate" />
+		<property name="rows">
+			<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartBodyRow">
+				<property name="template" ref="basicChartBodyRowTemplate" />
+				<property name="formatter" ref="chartChartLoopFormatter" />
+				<property name="groups">
+					<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartBodyRowGroup">
+						<property name="template" ref="basicChartBodyRowGroupTemplate" />
+						<property name="selector" ref="chartBodyRowGroupDataSelector" />
+						<property name="formatter" ref="chartChartLoopFormatter" />
+						<property name="panes">
+							<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartBodyRowGroupPane">
+								<property name="templates">
+									<bean class="java.util.HashMap">
+										<constructor-arg>
+											<map>
+												<entry>
+													<key><value>webissuecode</value></key>
+													<ref bean="basicChartBodyRowGroupPaneWEBISSUECODETemplate" />
+												</entry>
+												<entry>
+													<key><value>numberrecord</value></key>
+													<ref bean="basicChartBodyRowGroupPaneNUMBERRECORDTemplate" />
+												</entry>
+												<entry>
+													<key><value>weishufenbu</value></key>
+													<ref bean="basicChartBodyRowGroupPaneWEISHUFENBUTemplate" />
+												</entry>
+												<entry>
+													<key><value>haomafenbu</value></key>
+													<ref bean="basicChartBodyRowGroupPaneHAOMAFENBUTemplate" />
+												</entry>
+												<entry>
+													<key><value>zuxuan</value></key>
+													<ref bean="basicChartBodyRowGroupPaneZUKXUANTemplate" />
+												</entry>
+												<entry>
+													<key><value>hezhi</value></key>
+													<ref bean="basicChartBodyRowGroupPaneHEZHITemplate" />
+												</entry>
+												<entry>
+													<key><value>kuadu</value></key>
+													<ref bean="basicChartBodyRowGroupPaneKUADUTemplate" />
+												</entry>
+												<entry>
+													<key><value>danshuang</value></key>
+													<ref bean="basicChartBodyRowGroupPaneLiteralsTemplate" />
+												</entry>
+												<entry>
+													<key><value>zhongwei</value></key>
+													<ref bean="basicChartBodyRowGroupPaneLiteralsTemplate" />
+												</entry>
+												<entry>
+													<key><value>jiou</value></key>
+													<ref bean="basicChartBodyRowGroupPaneLiteralsTemplate" />
+												</entry>
+												<entry>
+													<key><value>daxiao</value></key>
+													<ref bean="basicChartBodyRowGroupPaneLiteralsTemplate" />
+												</entry>
+											</map>
+										</constructor-arg>
+									</bean>
+								</property>
+								<property name="selector" ref="chartBodyRowGroupPaneDataSelector" />
+								<property name="formatter" ref="chartChartLoopFormatter" />
+							</bean>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+</beans>

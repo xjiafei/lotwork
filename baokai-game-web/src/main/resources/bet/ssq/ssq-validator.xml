@@ -1,0 +1,76 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	<bean id="betTotalMoneyValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.money.BetTotalMoneyValidateExecutor" />
+	<bean id="ssqDSFormatValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.SSQFormatDSValidateExecutor" />
+	<bean id="ssqFSFormatValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.SSQFormatFSValidateExecutor" />
+	<bean id="ssqDTFormatValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.SSQFormatDTValidateExecutor" />
+	<bean id="ssqDSNumberValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.SSQNumberDSValidateExecutor" />
+	<bean id="ssqFSNumberValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.SSQNumberFSValidateExecutor" />
+	<bean id="ssqDTNumberValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.SSQNumberDTValidateExecutor" />
+	<bean id="ssqValidators" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.SSQDS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="ssqDSFormatValidateExecutor" />
+								<ref bean="ssqDSNumberValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.SSQFS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="ssqFSFormatValidateExecutor" />
+								<ref bean="ssqFSNumberValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="methodCode" value="${methodCode.SSQDT}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="ssqDTFormatValidateExecutor" />
+								<ref bean="ssqDTNumberValidateExecutor" />
+								<ref bean="betTotalMoneyValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+		</map>
+		</constructor-arg>
+		</bean>
+</beans>

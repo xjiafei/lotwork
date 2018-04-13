@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* bet-detail */
+.bet-detail{padding:10px;border-bottom:1px solid #E3E3E3;background-color:#FAFAFA;}
+.bet-detail .table th,.bet-detail .table td{border:0 none;padding:6px 16px;}
+.bet-detail .ico-lottery-num,.bet-detail .ico-lottery-num-blue,.bet-detail .ico-lottery-num-green{display:inline-block;width:22px;height:21px;line-height:20px;margin:5px;text-align:center;font-style:normal;font-weight:700;color:#FFF;background:url(../common/ui-proxy.png) 0 -20px no-repeat;}
+.bet-detail .ico-lottery-num-blue{background-position:0 -50px;}
+.bet-detail .ico-lottery-num-green{background-position: -30px -50px;}
+/* chas-detail */
+.chas-detail{padding:10px;border-bottom:1px solid #E3E3E3;background-color:#FAFAFA;}
+.chas-detail .table-title{font-size:16px;font-weight:700;vertical-align:top;}
+.chas-detail .table th,.chas-detail .table td{border:0 none;padding:6px 16px;}
+.chas-detail-table{height:90px;border:1px solid #E3E3E3;background-color:#FFF;overflow-y:scroll;}
+.chas-detail-table th,.chas-detail-table td{text-align:center;}
+.chas-detail-table th{font-weight:700;}
+.ico-phase-current{display:inline-block;width:44px;height:17px;margin-left:-50px;margin-right:5px;padding-left:5px;line-height:16px;font-style:normal;color:#FFF;background:url(../common/ui-proxy.png) -30px -20px no-repeat;text-align:left;}
+
+/* sreach-bet*/
+.search-bet .time{padding-left:40px;padding-right:4px;}
+
+/*ucenter-bet-details*/
+.ucenter-bet-details{max-height: 150px;_height: 150px;overflow: auto;}
+
+/*ucenter-Current-report*/
+#crowdname{
+   cursor:default;
+   background:url(../arrow_select.gif) no-repeat right top;
+   background-color:#FFFFFF;
+   border:1px solid #CECECE;
+   height:34px;
+   padding-left:6px;
+   display:inline;
+	width:115px;
+}	
+#method_message{
+    position:absolute;
+    top:48px!important;top:48px;
+    left:422px;
+    display:none;
+    border:1px solid #7F9DB9;
+    background:#FFFFFF;
+    color:#000000;
+    width:143px!important;width:143px;
+    padding-top:3px;
+    min-height:80px;
+    max-height:350px;
+    list-style:none;
+    overflow-y:auto;
+	overflow-x:hidden;
+}
+#method_message .allcrowd{
+}
+#method_message .crowdid{
+    cursor:default;
+    color:#008ad8;
+    padding-left:5px;
+    font-weight:bold;
+    heigth:16px;
+    line-height:16px;
+}
+#method_message .allgroup{
+    display:none;
+}
+#method_message .groupid{
+    color:#0000FF;
+    cursor:default;
+    padding-left:10px;
+    heigth:16px;
+    line-height:16px;
+}
+#method_message .allset{
+    display:none;
+}
+#method_message .setid{
+    color:#FF0000;
+    cursor:default;
+    padding-left:15px;
+    heigth:16px;
+    line-height:16px;
+}
+#method_message .allmethod{
+    display:none;
+}
+#method_message .methodid{
+    color:#000000;
+    cursor:default;
+    padding-left:20px;
+    heigth:16px;
+    line-height:16px;
+}
+#method_message .select{
+    background:#316AC5;
+    color:#FFFFFF;
+}

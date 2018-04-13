@@ -1,0 +1,145 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="SSCAbstractBetOperator" class="com.winterframework.firefrog.game.web.bet.operator.impl.AbstractBetOperator" parent="betSupport" abstract="true">
+		<property name="view" value="/bet/ssc/bet" />
+		<property name="defaultMethod" value="13,10,10" />
+		<property name="lotterySeries" value="SSC" />
+		<property name="extendedProperties" ref="sscBetProperties" />
+		<property name="trendCharts">
+			<bean class="java.util.HashMap">
+				<constructor-arg>
+					<map>
+						<entry>
+							<key><value>cqssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>jxssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>xjssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>tjssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>hljssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>llssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>jlffc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>txffc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>shssl</value></key>
+							<ref bean="shsslTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>slmmc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+					</map>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="cqssc" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="cqssc" />
+		<property name="lotteryId" value="99101" />
+		<property name="lotteryName" value="重庆时时彩" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=869" />
+	</bean>	
+	<bean id="jxssc" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="jxssc" />
+		<property name="lotteryId" value="99102" />
+		<property name="lotteryName" value="江西时时彩" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=871" />
+	</bean>
+	<bean id="xjssc" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="xjssc" />
+		<property name="lotteryId" value="99103" />
+		<property name="lotteryName" value="新疆时时彩" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=872" />
+	</bean>
+	<bean id="tjssc" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="tjssc" />
+		<property name="lotteryId" value="99104" />
+		<property name="lotteryName" value="天津时时彩" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=873" />
+	</bean>
+	<bean id="hljssc" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="hljssc" />
+		<property name="lotteryId" value="99105" />
+		<property name="lotteryName" value="黑龙江时时彩" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=870" />
+	</bean>
+	<bean id="llssc" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="llssc" />
+		<property name="lotterySeries" value="LLSSC" />
+		<property name="lotteryId" value="99106" />
+		<property name="lotteryName" value="宝开时时彩" />
+		<property name="view" value="/bet/ssc/llbet" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=874" />
+		<property name="videoSourceList">  
+    		<list>  
+      			<value>1.2.3.4</value>
+      			<value>12345</value>
+      			<value>12345</value>
+    		</list>  
+  		</property>  
+	</bean>
+	<bean id="shssl" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="shssl" />
+		<property name="lotteryId" value="99107" />
+		<property name="lotteryName" value="上海时时乐" />
+		<property name="view" value="/bet/ssc/sslbet" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=878" />
+		<property name="bnConvertor">
+			<bean class="com.winterframework.firefrog.game.web.bet.convertor.impl.BetNameConvertor">
+				<property name="gameGroups" ref="sslGameGroups" />
+				<property name="gameSets" ref="sslGameSets" />
+				<property name="betMethods" ref="sslSetMethods" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="jlffc" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="jlffc" />
+		<property name="lotteryId" value="99111" />
+		<property name="lotterySeries" value="FFC" />
+		<property name="lotteryName" value="宝开一分彩" />
+		<property name="view" value="/bet/ssc/ffcbet" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=876" />
+	</bean>
+	<bean id="txffc" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="txffc" />
+		<property name="lotteryId" value="99114" />
+		<property name="lotterySeries" value="FFC" />
+		<property name="lotteryName" value="腾讯分分彩" />
+		<property name="view" value="/bet/ssc/txffcbet" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=1865" />
+	</bean>
+	<bean id="slmmc" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSCBetOperator" parent="SSCAbstractBetOperator">
+		<property name="lotteryCode" value="slmmc" />
+		<property name="lotteryId" value="99112" />
+		<property name="lotterySeries" value="SSC" />
+		<property name="lotteryName" value="秒开时时彩" />
+		<property name="view" value="/bet/ssc/mmcbet" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=877" />
+	</bean>
+</beans>

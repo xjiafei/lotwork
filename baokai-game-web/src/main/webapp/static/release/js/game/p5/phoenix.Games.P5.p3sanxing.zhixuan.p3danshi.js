@@ -1,0 +1,1 @@
+!function(a,b){var c={name:"p3sanxing.zhixuan.p3danshi",tips:"五星直选单式玩法提示",exampleTip:"这是单式弹出层提示",exampleText:"264<br />184<br />270<br />629<br />235"},d=a.Games,e=d.P5.getInstance(),f={init:function(){var a=this;setTimeout(function(){a.initFrame()},25)}},g=a.Class(f,b);g.defConfig=c,e[c.name]=new g}(phoenix,phoenix.Games.P5.Danshi);

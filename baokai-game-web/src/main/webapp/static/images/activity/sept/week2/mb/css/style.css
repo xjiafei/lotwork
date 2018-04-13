@@ -1,0 +1,289 @@
+@charset "UTF-8";
+
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+img{border:none;}
+body{
+    font:12px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;
+    font-family: 'Microsoft Yahei',Tahoma,Arial,Helvetica,Simsun,STHeiti;
+    background:#0e0c1b;
+}
+
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+
+
+.all{
+    margin: 0 auto;
+    max-width: 720px;
+}
+
+
+.banner {
+    background: url(../images/bg.jpg) center top no-repeat;
+    background-size: 100% auto;
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 21.5rem;
+}
+
+
+.main {
+    position: relative;
+    background: #0e0c1b;
+    color: #908dc3;
+    line-height: 0.40rem;
+    font-size: 0.2rem;
+}
+.main .rclose {
+    right: 1rem;
+    top: 0.6rem;
+}
+
+.rule {
+    background: url(../images/rulebg.jpg) no-repeat;
+    background-size: 100% auto;
+    padding: 1.4rem 0.5rem;
+    position: relative;
+    display: none;
+}
+.content {
+    background: url(../images/readbg.jpg) no-repeat;
+    background-size: 100% auto;
+    padding: 1.4rem 0.5rem;
+    position: relative;
+    display: none;
+}
+.content img {
+    width: 100%;
+}
+.join {
+    position: absolute;
+    width: 2.18rem;
+    height: 0.85rem;
+    left: 2.6rem;
+    top: 4.7rem;
+    z-index:999;
+}
+.joinGame {
+    width: 2.18rem;
+    height: 0.85rem;
+    background-image: url(../images/join.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    display: block;
+}
+.joinGame:hover {
+    background-position: left -85px;
+}
+.joinStatus {
+    display: block;
+    width: 2.18rem;
+    height: 0.85rem;
+    background: url(../images/join.jpg) no-repeat left -1.7rem;
+    background-size: 100% auto;
+    line-height: 1.1rem;
+    font-size: 0.11rem;
+    text-indent: 0.71rem;
+    color: #151007;
+}
+
+
+.pop {
+    background: url(../images/pop.png) no-repeat;
+    background-size: 100% auto;
+    width: 4rem;
+    height: 2.63rem;
+    position: fixed;
+    left: 0px;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    margin-left: -2rem;
+    margin-top: -1.5rem;
+    display: none;
+}
+.pop .close {
+    display: block;
+    background: url(../images/close.png);
+    width: 0.37rem;
+    height: 0.37rem;
+    position: absolute;
+    right: -0.3rem;
+    top: -0.2rem;
+    background-size: 100% auto;
+}
+
+.pop .confirm {
+    display: inline-block;
+    background-image: url(../images/confirm.png);
+    background-repeat: no-repeat;
+    width: 1.34rem;
+    height: 0.48rem;
+    text-indent: -999em;
+    position: absolute;
+    left: 1.34rem;
+    bottom: 0.4rem;
+    background-size: 100% auto;
+}
+.pop .confirm:hover {
+    background-position: left bottom;
+}
+.popContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.popContent .money {
+    position: absolute;
+    color: #fbf937;
+    width: 1.70rem;
+    left: 1.61rem;
+    top: 0.55rem;
+    font-size: 0.34rem;
+}
+
+.tower {
+    position: absolute;
+    width: 100%;
+    height: 15.72rem;
+    top: 4.82rem;
+}
+.tower .floor {
+    width: 100%;
+    position: relative;
+}
+.fbg {
+    background-image: url(../images/light.png);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    background-size: 100% auto;
+}
+
+.floor7 {
+    height: 2.6rem;
+}
+.floor6,
+.floor5,
+.floor4,
+.floor3,
+.floor2,
+.floor1{
+    height: 1.57rem;
+}
+.floorTop {
+    width: 100%;
+    position: relative;
+    height: 3.32rem;
+}
+.floorTop .fbg {
+    background-position: 0 0;
+}
+.floor1 .fbg {
+    background-position: 0 -3.32rem;
+}
+.floor2 .fbg {
+    background-position: 0 -4.89rem;
+}
+.floor3 .fbg {
+    background-position: 0 -6.46rem;
+}
+.floor4 .fbg {
+    background-position: 0 -8.03rem;
+}
+.floor5 .fbg {
+    background-position: 0 -9.6rem;
+}
+.floor6 .fbg {
+    background-position: 0 -11.17rem;
+}
+.floor7 .fbg {
+    background-position: 0 -12.74rem;
+}
+.light .fbg {
+    display: block;
+}
+.flash .fbg {
+    -webkit-animation:hand 4s  ease both infinite;
+    -moz-animation:hand 4s  ease both infinite;
+    display: block;
+}
+
+@-webkit-keyframes hand{
+    0%,50%,100%{
+        opacity: 1;
+    }
+    25%,75%{ opacity: 0.2;
+    }
+}
+@-moz-keyframes hand{
+    0%,50%,100%{opacity: 1;}
+    25%,75%{opacity: 0.2; }
+}
+.tip {
+    background-image: url(../images/tip2.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 100% auto;
+    width: 1.73rem;
+    height: 1.01rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 100px;
+    display: none;
+}
+.tips2 {
+    background-position: left -1.58rem;
+
+}
+.tips2 span {
+    position: absolute;
+    width: 0.9rem;
+    height: 0.3rem;
+    left: 0.04rem;
+    top: 0.36rem;
+    text-align: right;
+    line-height: 0.3rem;
+    color: #5941b2;
+}
+
+.topTip {
+    background: url(../images/tip1.png) no-repeat;
+    width: 2.35rem;
+    height: 1rem;
+    position: absolute;
+    right: 0.75rem;
+    top: 1.3rem;
+    background-size: 100% auto;
+}
+.sbtn {
+    background: url(../images/sbtn.jpg) no-repeat;
+    width: 1.34rem;
+    height: 0.48rem;
+    position: absolute;
+    line-height: 0.48rem;
+    text-align: center;
+    background-size: 100% auto;
+    color: #151007;
+    text-decoration: none;
+    z-index: 999;
+}
+.showRead {
+    left: 0.8rem;
+    top: 4.8rem;
+}
+.showRule {
+    left: 5.3rem;
+    top: 4.8rem;
+}

@@ -1,0 +1,722 @@
+@charset "UTF-8";
+*{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+em{font-style:normal}
+ol,ul{list-style:none}
+fieldset,img,abbr,acronym{border:0}
+input,select{font-family:Microsoft YaHei}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+body{font:normal 12px/1.6em Microsoft YaHei,Tahoma,simsun;color:#fff;margin:0 auto;}
+.clearfix{*zoom:1}
+.clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+a{text-decoration:none}
+a:hover{text-decoration:none;}
+
+
+
+.allbg {
+    width: 100%;
+    background: url(../images/allbg.jpg) no-repeat center top;
+}
+
+.act{
+    margin: 0 auto;
+    width: 1000px;
+    position: relative;
+}
+.act .more {
+    background: url(../images/more.png) no-repeat;
+    width: 37px;
+    height: 37px;
+    position: absolute;
+    right: 3px;
+    top: 632px;
+    text-indent: -999em;
+    z-index: 33;
+}
+
+.act1 {
+    background: url(../images/act1.jpg) no-repeat center top;
+    height: 829px;
+}
+.s2 {
+    background: url(../images/act1-2.jpg) no-repeat center top;
+    height: 829px;
+}
+.act2 {
+    background: url(../images/act2.jpg) no-repeat center top;
+    height: 690px;
+}
+.act3 {
+    background: url(../images/act3.jpg) no-repeat center top;
+    height: 667px;
+}
+.act4 {
+    background: url(../images/act4.jpg) no-repeat center top;
+    height: 714px;
+}
+
+.act1 .logo {
+    width: 200px;
+    height: 90px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.floatPop {
+    background: url(../images/pop_1.png) no-repeat;
+    position: absolute;
+    width: 181px;
+    height: 182px;
+    -webkit-animation: scaleA 2s infinite;
+    -moz-animation: scaleA 2s infinite;
+    -o-animation: scaleA 2s infinite;
+    animation: scaleA 2s infinite ;
+    left: 580px;
+    top: 0px;
+}
+.floatPop.pop2 {
+    left: 280px;
+    top: 220px;
+    background: url(../images/pop_2.png) no-repeat;
+    width: 184px;
+    -webkit-animation: scaleA 2s 1s infinite;
+    -moz-animation: scaleA 2s 1s infinite;
+    -o-animation: scaleA 2s 1s infinite;
+    animation: scaleA 2s 1s infinite ;
+}
+
+@keyframes scaleA
+{
+    0% { transform: scale(1);}
+    50%  {transform: scale(0.9);}
+    100% {transform: scale(1);}
+}
+
+@-moz-keyframes scaleA /* Firefox */
+{
+    0% { -moz-transform: scale(1);}
+    50%  {-moz-transform: scale(0.9);}
+    100% {-moz-transform: scale(1);}
+}
+
+@-webkit-keyframes scaleA /* Safari 和 Chrome */
+{
+    0% {  -webkit-transform: scale(1);}
+    50%  { -webkit-transform: scale(0.9);}
+    100% { -webkit-transform: scale(1);}
+}
+
+@-o-keyframes scaleA /* Opera */
+{
+    0% { -o-transform: scale(1);}
+    50%  {-o-transform: scale(0.9);}
+    100% {-o-transform: scale(1);}
+}
+
+
+.timeStatues {
+    background-position: left top;
+    background: url(../images/timestatus1.png) no-repeat;
+    width: 718px;
+    height: 101px;
+    left: 256px;
+    top: 390px;
+    position: absolute;
+}
+.timeStatues.status2 {
+    background: url(../images/timestatus2.png) no-repeat;
+    width: 718px;
+    height: 101px;
+    left: 27px;
+    top: 390px;
+}
+
+.act1Money {
+    width: 342px;
+    height: 86px;
+    line-height: 86px;
+    position: absolute;
+    text-align: center;
+    font-size: 50px;
+    color: #bc1a3a;
+    left: 50%;
+    top: 511px;
+    margin-left: -172px;
+}
+
+.amountBox {
+    position: absolute;
+    width: 700px;
+    height: 150px;
+    top: 674px;
+    left: 144px;
+}
+
+
+.amountLine {
+    width: 700px;
+    background: #3d000a;
+    height: 40px;
+    border-bottom: 1px solid #bc375b;
+    border-radius: 20px;
+    overflow: hidden;
+    position: absolute;
+}
+.lineInside {
+    width: 700px;
+    background: #ffee3d;
+    height: 40px;
+    left: 0;
+    top: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    position: absolute;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.5);
+}
+.lineInside.completed {
+    border-radius: 20px;
+}
+
+.userAmount {
+    font-size: 20px;
+    color: #ffee3d;
+    text-shadow: 0 2px 1px rgba(0,0,0,.3);
+    top: 50px;
+    position: absolute;
+    left: 0;
+}
+.totalAmount {
+    font-size: 20px;
+    color: #fff;
+    top: 10px;
+    position: absolute;
+    left: 710px;
+}
+.btn {
+    background-image: url(../images/btn1.png);
+    background-repeat: no-repeat;
+    width: 260px;
+    height: 105px;
+    display: block;
+    position: absolute;
+    text-indent: -999em;
+    z-index: 22;
+}
+.btn:hover {
+    -webkit-filter: brightness(1.08);
+    filter: brightness(1.08);
+}
+
+.recharge {
+    left: 222px;
+    top: 770px;
+}
+.getmoney {
+    left: 500px;
+    top: 770px;
+    background-position: -300px top;
+}
+.recharge:active {
+    background-position: left -115px;
+}
+
+.getmoney:active {
+    background-position: -300px -115px;
+}
+
+
+.act2 .more {
+    top: 40px;
+}
+.countTime {
+    font-size: 34px;
+    line-height: 34px;
+    color: #ffee3d;
+    position: absolute;
+    left: 30px;
+    top: 210px;
+}
+.prizeBox {
+    width: 531px;
+    height: 171px;
+    position: absolute;
+    left: 190px;
+    top: 124px;
+}
+.prizePic {
+    width: 516px;
+    height: 158px;
+    position: absolute;
+    left: 6px;
+    top: 7px;
+    overflow: hidden;
+}
+.picMove {
+    background: url(../images/price.png) repeat-x;
+    width: 1980px;
+    height: 160px;
+    position: absolute;
+}
+.prizeCover {
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: url(../images/cover1.png) no-repeat;
+}
+.prizeCover2 {
+    position: absolute;
+    background: url(../images/cover2.png) no-repeat;
+    width: 190px;
+    height: 196px;
+    left: 166px;
+    top: -9px;
+}
+
+.winnerList {
+    height: 192px;
+    width: 230px;
+    overflow: hidden;
+    position: absolute;
+    left: 753px;
+    top: 115px;
+}
+.winnerList li {
+    line-height: 32px;
+    line-height: 32px;
+}
+
+.prizeResult {
+    width: 100%;
+    height: 260px;
+    position: absolute;
+    left: 0px;
+    top: 398px;
+}
+.prizeResult p {
+    line-height: 58px;
+    float: left;
+    font-size: 24px;
+}
+.prizeResult .tips {
+    font-size: 20px;
+    color: #f0e57e;
+    float: right;
+}
+.prizeNum {
+    width: 1120px;
+    margin-left: -4px;
+    overflow: hidden;
+}
+.prizeNum span {
+    float: left;
+    width: 36px;
+    height: 100px;
+    line-height: 102px;
+    padding-left: 166px;
+    font-size: 20px;
+}
+
+.startMove {
+    background: url(../images/startmove.png) no-repeat;
+    width: 263px;
+    height: 105px;
+    left: 322px;
+    top: 323px;
+}
+.startMove:active {
+    background-position: left -105px;
+}
+
+.act3 .more {
+    top: 60px;
+}
+.act3p1 {
+    position: absolute;
+    font-size: 22px;
+    left: 530px;
+    top: 120px;
+}
+.act3p1 span {
+    font-size: 30px;
+    padding: 0 6px;
+}
+.obtainLeft {
+    font-size: 36px;
+    width: 184px;
+    height: 72px;
+    line-height: 72px;
+    position: absolute;
+    display: block;
+    left: 698px;
+    top: 166px;
+    text-align: center;
+    color: #ffee3d;
+}
+.startRed {
+    background-image: url(../images/act3btn.png);
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 85px;
+    left: 530px;
+    top: 260px;
+}
+.startRed:active {
+    background-position: left bottom;
+}
+.startCharge {
+    background-image: url(../images/act3btn.png);
+    background-repeat: no-repeat;
+    background-position: -157px top;
+    width: 150px;
+    height: 85px;
+    left: 690px;
+    top: 260px;
+}
+.act3p2 {
+    width: 840px;
+    line-height: 30px;
+    height: 120px;
+    padding: 10px 20px;
+    position: absolute;
+    left: 60px;
+    top: 400px;
+    font-size: 16px;
+    color: #9f8e53;
+}
+.startCharge:active {
+    background-position: -157px bottom;
+}
+
+
+.act4 .more {
+    top: 50px;
+}
+
+.bettingDay {
+    position: absolute;
+    width: 900px;
+    left: 140px;
+    top: 109px;
+}
+.bettingDay li {
+    float: left;
+    width: 101px;
+    height: 101px;
+    background-image: url(../images/daybg.png);
+    background-repeat: no-repeat;
+    text-align: center;
+    line-height: 101px;
+    font-size: 26px;
+    color: #7a7979;
+    position: relative;
+    font-weight: bold;
+    margin-right: 20px;
+    display: inline;
+}
+.bettingDay li.betted {
+    color: #8a0017;
+    background-position: -120px 0;
+}
+.bettingDay li.today span{
+    display: block;
+    position: absolute;
+    background: url(../images/todaybg.png) no-repeat;
+    width: 95px;
+    height: 111px;
+    left: 1px;
+    top: -15px;
+}
+
+
+.redpacketList {
+    position: absolute;
+    width: 1000px;
+    top: 290px;
+}
+.packetbox {
+    width: 200px;
+    text-align: center;
+    float: left;
+}
+.packetbox .redpacket {
+    background: url(../images/redbox.png) no-repeat;
+    width: 199px;
+    height: 100px;
+
+    position: relative;
+}
+.packetbox .redpacket.disable {
+    background: url(../images/redbox2.png) no-repeat;
+}
+.packetbox h3 {
+    font-size: 18px;
+    line-height: 40px;
+    color: #fff000;
+}
+.packetbox p {
+    color: #cb9472;
+    font-size: 14px;
+    padding: 5px 50px;
+}
+.redpacketList .info {
+    position: absolute;
+    width: 588px;
+    left: 206px;
+    top: 144px;
+    font-size: 14px;
+    color: #cb9472;
+    text-align: center;
+}
+.redpacketList .info span {
+    color: #fff;
+    padding: 0 10px;
+}
+.redpacket .result {
+    background: url(../images/opened.png) no-repeat;
+    width: 199px;
+    height: 139px;
+    position: absolute;
+    top: -38px;
+    display: none;
+    color: #600012;
+    font-size: 18px;
+    line-height: 40px;
+}
+.redpacket .result h2 {
+    font-size: 22px;
+    line-height: 22px;
+}
+.redpacket.showresult .result{
+    display: block;
+
+}
+
+
+.mask {
+    position: fixed;
+    z-index: 988;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
+    overflow: hidden;
+    background-color: #000;
+    display: none;
+}
+
+.popbox {
+    width: 881px;
+    position: absolute;
+    left: 50%;
+    margin-left: -440px;
+    z-index: 999;
+    display: none;
+    margin-top: 50px;
+}
+.popbox .poptitle {
+    background: url(../images/poptop.png) no-repeat;
+    width: 881px;
+    height: 269px;
+}
+.poptitle h3 {
+    height: 85px;
+    line-height: 85px;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 30px;
+}
+.popbox .popcontent {
+    background: #f6e2b5;
+    width: 840px;
+    margin-left: 21px;
+    position: relative;
+    padding-top: 30px;
+
+}
+.popcontent .contentbox {
+    margin-top: -130px;
+    color: #40050c;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-bottom: 20px;
+    font-size: 24px;
+    line-height: 34px;
+}
+.contentbox li {
+    list-style: decimal;
+    margin-bottom: 20px;
+}
+.contentbox table {
+    border-collapse: collapse;
+    width: 115%;
+    margin-left: -7%;
+    margin-bottom: 20px;
+}
+
+.contentbox table th,
+.contentbox table td{
+    padding: 5px 10px;
+    font-size: 13px;
+    color: #6d4d07;
+    text-align: center;
+    border: 2px solid #f6e2b5;
+}
+.contentbox table th {
+    background: #dcc186;
+}
+.contentbox table td {
+    background: #e6cf9c;
+}
+.popcontent .confirmbtn {
+
+    position: relative;
+    height: 80px;
+}
+.popcontent .confirmbtn .btn {
+    background-image: url(../images/confirm.png);
+    background-repeat: no-repeat;
+    width: 160px;
+    height: 65px;
+    left: 50%;
+    margin-left: -80px;
+}
+.popcontent .confirmbtn .btn:active {
+    background-position: left bottom;
+}
+.popbox .popbottom {
+    background: url(../images/popbottom.png) no-repeat;
+    width: 881px;
+    height: 32px;
+}
+.popbox .popclose {
+    background: url(../images/close.png) no-repeat;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    position: absolute;
+    right: -30px;
+    top: -30px;
+}
+
+.alert {
+    background: url(../images/alert.png) no-repeat;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 517px;
+    height: 332px;
+    margin-left: -268px;
+    margin-top: -166px;
+    text-align: center;
+    z-index: 999;
+    display: none;
+}
+.alert .content {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.alert h3 {
+    color: #ad0015;
+    font-size: 30px;
+    padding-top: 30px;
+    line-height: 40px;
+}
+.alert .contenttext {
+    font-size: 24px;
+    color: #40050c;
+    line-height: 30px;
+    height: 120px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 517px;
+}
+.alert .btnbox {
+    position: absolute;
+    width: 100%;
+    bottom: 40px;
+}
+.alert .btnbox a {
+    display: inline-block;
+    background-repeat: no-repeat;
+    text-indent: -999em;
+}
+.alert .btnbox a:hover {
+    -webkit-filter: brightness(1.08);
+    filter: brightness(1.08);
+}
+.alert .btnbox .confirm {
+    background-image: url(../images/confirm.png);
+    width: 160px;
+    height: 65px;
+}
+
+.alert .btnbox .charge {
+    background-image: url(../images/chargebtn.png);
+    width: 160px;
+    height: 65px;
+    display: none;
+}
+.alert .btnbox .confirm:active,
+.alert .btnbox .charge:active {
+    background-position: left bottom;
+}
+.alertclose {
+    background-image: url(../images/close.png);
+    background-repeat: no-repeat;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    right: -34px;
+    top: -34px;
+    z-index: 2;
+}
+
+
+
+.przieAni{
+
+    -webkit-animation: scaleF 1s ;
+    -moz-animation: scaleF 1s ;
+    -o-animation: scaleF 1s ;
+    animation: scaleF 1s;
+    transform-origin:50% 50%;
+    -ms-transform-origin:50% 50%; 		/* IE 9 */
+    -webkit-transform-origin:50% 50%;	/* Safari 和 Chrome */
+    -moz-transform-origin:50% 50%;		/* Firefox */
+    -o-transform-origin:50% 50%;		/* Opera */
+}
+
+@keyframes scaleF
+{
+    0% { font-size: 130px; opacity: 0;}
+    100% {font-size: 20px; opacity: 1;}
+}
+
+@-moz-keyframes scaleF /* Firefox */
+{
+    0% { font-size: 130px;opacity: 0;}
+    100% {font-size: 20px;opacity: 1;}
+}
+
+@-webkit-keyframes scaleF /* Safari 和 Chrome */
+{
+    0% { font-size: 130px;opacity: 0;}
+    100% { font-size: 20px;opacity: 1;}
+}
+
+@-o-keyframes scaleF /* Opera */
+{
+    0% { font-size: 130px;opacity: 0;}
+    100% {font-size: 20px;opacity: 1;}
+}

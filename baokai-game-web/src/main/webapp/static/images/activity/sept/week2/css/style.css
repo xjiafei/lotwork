@@ -1,0 +1,245 @@
+@charset "UTF-8";
+
+*{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+em{font-style:normal}
+ol,ul{list-style:none}
+fieldset,img,abbr,acronym{border:0}
+input,select{font-family:Microsoft YaHei}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+body{font:normal 20px/2em Microsoft YaHei,Tahoma,simsun;color:#bbc7e7;margin:0 auto;background: #260e00;}
+.clearfix{*zoom:1}
+.clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+a{text-decoration:none; color: #575c69;}
+a:hover{text-decoration:none; color: #abc6eb;}
+.tc { text-align: center}
+
+
+.allBg {
+	background: url(../images/bg.jpg) center top no-repeat;
+}
+.banner {
+	background: url(../images/banner.jpg) center top no-repeat;
+	position: relative;
+	margin: 0 auto;
+	width: 1280px;
+	height: 1469px;
+}
+
+
+.main {
+	width: 1280px;
+	background: url(../images/main.jpg) center top no-repeat;
+	height: 683px;
+	margin: 0 auto;
+	position: relative;
+}
+.join {
+	position: absolute;
+	width: 218px;
+	height: 85px;
+	left: 290px;
+	top: 460px;
+}
+.joinGame {
+	width: 218px;
+	height: 85px;
+	background-image: url(../images/join.jpg);
+	background-repeat: no-repeat;
+	display: block;
+}
+.joinGame:hover {
+	background-position: left -85px;
+}
+.joinStatus {
+	display: block;
+	width: 218px;
+	height: 85px;
+	background: url(../images/join.jpg) no-repeat left -170px;
+	line-height: 110px;
+	font-size: 14px;
+	text-indent: 76px;
+	color: #151007;
+}
+
+.footer p{
+	font-size: 12px;
+	position: relative;
+	color: #908dc3;
+	text-align: center;
+	line-height: 60px;
+}
+
+.pop {
+	background: url(../images/pop.png) no-repeat;
+	width: 400px;
+	height: 263px;
+	position: fixed;
+	left: 0px;
+	top: 100px;
+	text-align: center;
+	left: 50%;
+	top: 50%;
+	margin-left: -470px;
+	margin-top: -150px;
+	display: none;
+}
+.pop .close {
+	display: block;
+	background: url(../images/close.png);
+	width: 37px;
+	height: 37px;
+	position: absolute;
+	right: -30px;
+	top: -20px;
+}
+
+.pop .confirm {
+	display: inline-block;
+	background-image: url(../images/confirm.png);
+	background-repeat: no-repeat;
+	width: 134px;
+	height: 48px;
+	text-indent: -999em;
+	position: absolute;
+	left: 134px;
+	bottom: 40px;
+}
+.pop .confirm:hover {
+	background-position: left bottom;
+}
+.popContent {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.popContent .money {
+	position: absolute;
+	color: #fbf937;
+	width: 170px;
+	left: 161px;
+	top: 55px;
+	font-size: 34px;
+}
+
+.tower {
+	position: absolute;
+	width: 680px;
+	height: 1552px;
+	right: -89px;
+	top: -25px;
+}
+.tower .floor {
+	width: 100%;
+	position: relative;
+}
+.fbg {
+	background-image: url(../images/light.png);
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+}
+
+.floor7 {
+	height: 260px;
+}
+.floor6,
+.floor5,
+.floor4,
+.floor3,
+.floor2,
+.floor1{
+	height: 157px;
+}
+.floorTop {
+	width: 100%;
+	position: relative;
+	height: 296px;
+}
+.floorTop .fbg {
+	background-position: 0 0;
+}
+.floor1 .fbg {
+	background-position: 0 -296px;
+}
+.floor2 .fbg {
+	background-position: 0 -453px;
+}
+.floor3 .fbg {
+	background-position: 0 -610px;
+}
+.floor4 .fbg {
+	background-position: 0 -767px;
+}
+.floor5 .fbg {
+	background-position: 0 -924px;
+}
+.floor6 .fbg {
+	background-position: 0 -1081px;
+}
+.floor7 .fbg {
+	background-position: 0 -1238px;
+}
+.light .fbg {
+	display: block;
+}
+.flash .fbg {
+	-webkit-animation:hand 4s  ease both infinite;
+	-moz-animation:hand 4s  ease both infinite;
+	display: block;
+}
+
+@-webkit-keyframes hand{
+	0%,50%,100%{
+		opacity: 1;
+	}
+	25%,75%{ opacity: 0.2;
+	}
+}
+@-moz-keyframes hand{
+	0%,50%,100%{opacity: 1;}
+	25%,75%{opacity: 0.2; }
+}
+.tip {
+	background-image: url(../images/tip2.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	width: 173px;
+	height: 101px;
+	position: absolute;
+	left: 10px;
+	top: 100px;
+	display: none;
+}
+.tips2 {
+	background-position: left -158px;
+
+}
+.tips2 span {
+	position: absolute;
+	width: 90px;
+	height: 30px;
+	left: 4px;
+	top: 36px;
+	text-align: right;
+	line-height: 30px;
+	color: #5941b2;
+}
+.rule {
+	padding: 100px 0 40px 70px;
+	font-size: 16px;
+	line-height: 40px;
+	color: #908dc3;
+}
+.topTip {
+	background: url(../images/tip1.png) no-repeat;
+	width: 235px;
+	height: 100px;
+	position: absolute;
+	right: 75px;
+	top: 70px;
+}

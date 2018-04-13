@@ -1,0 +1,55 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+<!-- 	<bean id="ssqGameGroups" class="java.util.ArrayList"> -->
+<!-- 		<constructor-arg> -->
+<!-- 			<list> -->
+<!-- 				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup"> -->
+<!-- 					<property name="code" value="32" /> -->
+<!-- 					<property name="title" value="标准玩法" /> -->
+<!-- 					<property name="name" value="biaozhuntouzhu" /> -->
+<!-- 				</bean> -->
+				
+<!-- 			</list> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="ssqGameSets" class="java.util.ArrayList"> -->
+<!-- 		<constructor-arg> -->
+<!-- 			<list> -->
+<!-- 				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameSet"> -->
+<!-- 					<property name="code" value="71" /> -->
+<!-- 					<property name="title" value="标准" /> -->
+<!-- 					<property name="name" value="biaozhun" /> -->
+<!-- 				</bean> -->
+				
+<!-- 			</list> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="ssqSetMethods" class="java.util.ArrayList"> -->
+<!-- 		<constructor-arg> -->
+<!-- 			<list> -->
+<!-- 				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!-- 					<property name="code" value="67" /> -->
+<!-- 					<property name="title" value="复式" /> -->
+<!-- 					<property name="name" value="fushi" /> -->
+<!-- 				</bean> -->
+<!-- 					<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!-- 					<property name="code" value="68" /> -->
+<!-- 					<property name="title" value="单式" /> -->
+<!-- 					<property name="name" value="danshi" /> -->
+<!-- 				</bean> -->
+<!-- 					<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!-- 					<property name="code" value="69" /> -->
+<!-- 					<property name="title" value="胆拖" /> -->
+<!-- 					<property name="name" value="dantuo" /> -->
+<!-- 				</bean> -->
+<!-- 			</list> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+	
+</beans>

@@ -1,0 +1,167 @@
+* {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nov_curtion {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: url(nov-bg.png);
+		display:none;
+		z-index:200;
+    }
+    
+    .nov_curtion .nov-center {
+/*        width: 541px;*/
+        width:655px;
+/*        height: 727px;*/
+        height: 721px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 85px;
+        margin: auto;
+    }
+    
+    .nov_curtion .lock,.nov_curtion .open {
+        width: 423px;
+        height: 378px;
+        background: url(rp-lock.png) no-repeat center center;
+        position: absolute;
+       top: 215px;
+        left: 112px;
+        font-family: 微软雅黑;
+        z-index: 2;
+    }
+    .nov_curtion .open{
+        background: url(rp-open-3.png) no-repeat center center;
+    }
+    
+    .nov_curtion .lock h1,.nov_curtion .open h1{
+        font-size:26px;
+        text-align: center;
+        color:#ffd70f;
+        margin-top: 140px;
+    line-height: 50px;
+    }
+    .nov_curtion .lock p,.nov_curtion .open p{
+        font-size:18px;
+        text-align: center;
+        color:#ffffff;
+        margin-top: 10px;
+    }
+    .nov_curtion .lock .btnRed,.nov_curtion .open .btnRed{
+        width:208px;
+        height: 56px;
+        background: url(rp-btn.png) no-repeat center center;
+        position: absolute;
+        top:280px;
+        left:107px;
+        font-size:24px;
+        text-align: center;
+        line-height: 45px;
+    }
+    .nov_curtion .open .btnRed.left{
+	   width: 169px;
+        left: 25px;
+        background-size: contain;
+        font-size: 20px;
+        line-height: 48px;
+    }
+     .nov_curtion .open .btnRed.right{
+	     width: 169px;
+		 left:220px;
+		background-size: contain;
+		font-size: 20px;
+		line-height: 48px;
+    }
+    
+    .nov_curtion .lock .btnRed:hover,.nov_curtion .open .btnRed:hover{
+        cursor: pointer;
+        /*width:208px;
+        height: 56px;
+        left:100px;
+        top:285px;*/
+        line-height: 50px;
+		background-size: contain;
+        background: url(rp-btn-hover.png) no-repeat center center;
+		
+    }
+    .nov_curtion .open .btnRed.left:hover{
+        background-size: contain;
+    }
+    .nov_curtion .open .btnRed.right:hover{
+         background-size: contain;
+    }
+	@keyframes anim{
+		from{
+			top:340px;
+		}
+		to{
+			top:310px;
+		}
+	}
+    .nov_curtion .lock .hand{
+        width:62px;
+        height: 52px;
+        background: url(hand.png) no-repeat center center;
+        position: absolute; 
+        left: 250px;
+        top: 340px;
+    }
+	.nov_curtion .lock .hand.anim{
+		animation:anim 0.8s infinite ease alternate;
+	}
+    
+    .nov_curtion .open{
+        display: none;
+        background: none;
+    }
+    .nov_curtion .cong{
+        width:100%;
+        position: absolute;
+        left: 0px;
+        top: -40px;
+        text-align: center;
+        font-size:20px;
+        color:#1c0000;
+    }
+    .nov_curtion .cong strong{
+        color:#df3400;
+        font-size:48px;
+        margin:0 10px;
+    }
+    
+    .redbow0close{
+        width:33px;
+        height: 33px;
+        background: url(close.png) no-repeat center center;
+        position: absolute; 
+        top: -120px;
+        right: -15px;
+    }
+    @keyframes rota{
+		from{
+			transform:rotate(0deg);
+            -webkit-transform:rotate(0deg);
+		}
+		to{
+			transform:rotate(360deg);
+            -webkit-transform:rotate(360deg);
+		}
+	}
+    .nov_curtion .rotate {
+	    width:528px;
+        height:410px;
+        background: url(lights.png) no-repeat center center;
+        position: absolute;
+        left:0; 
+        right: 0;
+        top:55px;
+        margin:auto;
+        animation: rota 15s normal infinite linear;
+        display: none;
+}

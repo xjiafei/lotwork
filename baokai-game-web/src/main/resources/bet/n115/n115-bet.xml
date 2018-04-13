@@ -1,0 +1,111 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="N115AbstractBetOperator" class="com.winterframework.firefrog.game.web.bet.operator.impl.AbstractBetOperator" parent="betSupport" abstract="true">
+		<property name="view" value="/bet/n115/bet" />
+<!-- 		<property name="defaultMethod" value="xuanwu.renxuanwuzhongwu.fushi" /> -->
+        <property name="defaultMethod" value="26,24,10" />
+		<property name="lotterySeries" value="N115" />
+<!-- 		<property name="bnConvertor"> -->
+<!-- 			<bean class="com.winterframework.firefrog.game.web.bet.convertor.impl.BetNameConvertor"> -->
+<!-- 				<property name="gameGroups" ref="n115GameGroups" /> -->
+<!-- 				<property name="gameSets" ref="n115GameSets" /> -->
+<!-- 				<property name="betMethods" ref="n115SetMethods" /> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+		<property name="extendedProperties" ref="n115BetProperties" />
+				<property name="trendCharts">
+			<bean class="java.util.HashMap">
+				<constructor-arg>
+					<map>
+                         <entry>
+                            <key><value>sd115</value></key>
+                            <ref bean="115TrendCharts" />
+                        </entry>
+                        <entry>
+                            <key><value>jx115</value></key>
+                            <ref bean="115TrendCharts" />
+                        </entry>
+                        <entry>
+                            <key><value>gd115</value></key>
+                            <ref bean="115TrendCharts" />
+                        </entry>
+                        <entry>
+                            <key><value>cq115</value></key>
+                            <ref bean="115TrendCharts" />
+                        </entry>
+                        <entry>
+                            <key><value>ll115</value></key>
+                            <ref bean="115TrendCharts" />
+                        </entry>
+                        <entry>
+                            <key><value>js115</value></key>
+                            <ref bean="115TrendCharts" />
+                        </entry>
+                        <entry>
+                            <key><value>sl115</value></key>
+                            <ref bean="115TrendCharts" />
+                        </entry>
+					</map>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="sd115" class="com.winterframework.firefrog.game.web.bet.operator.impl.N115BetOperator" parent="N115AbstractBetOperator">
+		<property name="lotteryCode" value="sd115" />
+		<property name="lotteryId" value="99301" />
+		<property name="lotteryName" value="山东11选5" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=880" />
+	</bean>
+	<bean id="jx115" class="com.winterframework.firefrog.game.web.bet.operator.impl.N115BetOperator" parent="N115AbstractBetOperator">
+		<property name="lotteryCode" value="jx115" />
+		<property name="lotteryId" value="99302" />
+		<property name="lotteryName" value="江西11选5" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=893" />
+	</bean>	
+	<bean id="gd115" class="com.winterframework.firefrog.game.web.bet.operator.impl.N115BetOperator" parent="N115AbstractBetOperator">
+		<property name="lotteryCode" value="gd115" />
+		<property name="lotteryId" value="99303" />
+		<property name="lotteryName" value="广东11选5" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=898" />
+	</bean>	
+	<bean id="cq115" class="com.winterframework.firefrog.game.web.bet.operator.impl.N115BetOperator" parent="N115AbstractBetOperator">
+		<property name="lotteryCode" value="cq115" />
+		<property name="lotteryId" value="99304" />
+		<property name="lotteryName" value="重庆11选5" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=884" />
+	</bean>
+	<bean id="ll115" class="com.winterframework.firefrog.game.web.bet.operator.impl.N115BetOperator" parent="N115AbstractBetOperator">
+		<property name="lotteryCode" value="ll115" />
+		<property name="lotteryId" value="99305" />
+		<property name="lotteryName" value="宝开11选5" />
+		<property name="view" value="/bet/n115/lln115bet" />
+		<property name="lotterySeries" value="LLN115" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=887" />
+		<property name="videoSourceList">  
+    		<list>  
+      			<value>1.2.3.4</value>
+      			<value>12345</value>
+      			<value>12345</value>
+    		</list>  
+  		</property>  
+	</bean>	
+	<bean id="js115" class="com.winterframework.firefrog.game.web.bet.operator.impl.N115BetOperator" parent="N115AbstractBetOperator">
+		<property name="lotteryCode" value="js115" />
+		<property name="lotteryId" value="99307" />
+		<property name="lotteryName" value="江苏11选5" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=887" />
+	</bean>	
+	<bean id="sl115" class="com.winterframework.firefrog.game.web.bet.operator.impl.N115BetOperator" parent="N115AbstractBetOperator">
+		<property name="lotteryCode" value="sl115" />
+		<property name="lotteryId" value="99306" />
+		<property name="lotteryName" value="秒开11选5" />
+		<property name="view" value="/bet/n115/mmc115bet" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=884" />
+	</bean>
+	
+</beans>

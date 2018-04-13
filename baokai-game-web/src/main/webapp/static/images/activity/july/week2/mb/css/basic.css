@@ -1,0 +1,233 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2014-06-19 15:57:02
+ * @version $Id$
+ */
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+img{border:none;}
+body {
+    position: relative;
+    background: #F5F5F5;
+    font-size: .24rem;
+    line-height:1.5;
+    color: #333;
+    width: 100%;
+    min-width: 320px;
+    overflow-x: hidden;
+    -webkit-text-size-adjust:none;
+}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+
+html{
+    width: 100%;
+}
+body{
+    max-width: 750px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+body,
+input,
+select{
+    font-family: 'Microsoft Yahei',Tahoma,Arial,Helvetica,Simsun,STHeiti;
+}
+
+.hide{
+    display: none;
+}
+.layout{
+    width: 7rem;
+    margin: 0px auto;
+    position: relative;
+}
+.layout:after{content:'';display:block;overflow:hidden;clear:both;}
+
+
+
+header{
+    position: relative;
+    width: 7.5rem;
+    height: 4.62rem;
+    background: #4C3009 url(../images/banner.jpg) center 0 no-repeat;
+    background-size: 7.5rem 4.62rem;
+}
+.btn-register{
+    position: absolute;
+    left: 50%;
+    bottom: .3rem;
+    margin-left: -1.45rem;
+    width: 2.9rem;
+    height: 1.45rem;
+    background: url(../images/btn-register.png) center 0 no-repeat;
+    background-size: 2.9rem 1.45rem;
+    text-decoration: none;
+}
+.enrollments{
+    position: absolute;
+    left: 50%;
+    bottom: .5rem;
+    width: 2.9rem;
+    margin-left: -1.45rem;
+    text-align: center;
+
+    font-size: .28rem;
+    line-height: 2;
+    color: #FFF;
+    border-radius: 25px;
+}
+.enrollments-current{
+    background-color: rgba(0,0,0,.75);
+}
+.enrollments strong{
+    font-weight: 100;
+    color: #F9D613;
+}
+
+
+/*article*/
+
+.activity-content{
+    padding:.4rem 0;
+    background-color: #4B2F0A;
+    overflow: hidden;
+    color: #FFF;
+}
+h3{
+    width: 1.4rem;
+    height: .5rem;
+    line-height: .5rem;
+    margin-bottom: .1rem;
+    text-align: center;
+    font-size: .28rem;
+    color: #4B2F0A;
+    background-color: #FFF;
+    border-radius: .25rem;
+}
+p{
+    line-height: 2;
+    
+}
+p strong{
+    color: #FF664E;
+}
+.table-info{
+    
+}
+.table{
+    margin: .3rem 0 .3rem;
+}
+.table-title{
+    color: #FF664E;
+}
+.table-title strong{
+    float: left;
+    padding: .03rem .06rem;
+    margin-right: .1rem;
+    background-color: #FFF;
+    color: #4B2F0A;
+    border-radius: .05rem .05rem 0 0;
+}
+.table-content{
+    border-collapse:collapse;
+}
+.table-content td{
+    padding: .08rem .16rem;
+    border:1px solid #FFF;
+    text-indent: 0;
+    text-align: center;
+    line-height: 2;
+    color: #FFF;
+}
+
+.activity-rules{
+    padding:.4rem 0;
+    background-color: #FF654C;
+    overflow: hidden;
+    color: #4B2F0A;
+}
+.activity-rules h3{
+    background-color: #4B2F0A;
+    color: #FF654C;
+}
+
+.activity-rules .list li{
+    position: relative;
+    padding-left: .34rem;
+    line-height: 2;
+}
+.activity-rules .list i{
+    position: absolute;
+    left: 0;
+    top: .08rem;
+    width: .3rem;
+    height: .3rem;
+    line-height: .3rem;
+    text-align: center;
+    font-style: normal;
+    background-color: #4B2F0A;
+    color: #FF654C;
+    border-radius: 50%;
+}
+
+/*footer*/
+.footer{
+    background-color: #4B2F0A;
+}
+.footer .copy-right{
+    overflow: hidden;
+    font-size: .22rem;
+    color: #FFF;
+    line-height: .5rem;
+    text-align: center;
+}
+.mask{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+}
+.pop{
+    display: none;
+    position: fixed;
+    z-index: 111;
+    left: 50%;
+    top:50%;
+    width: 5rem;
+    height: 2.3rem;
+    margin: -1.15rem 0 0 -2.5rem;
+    background-color: #4B2F0A;
+    border-radius: .2rem;
+}
+.pop .close{
+    position: absolute;
+    right: .15rem;
+    top: .15rem;
+    width: .48rem;
+    height: .48rem;
+    background: url(../images/close.png);
+    background-size: .48rem .48rem;
+    transition: .3s;
+}
+.pop .close:hover{
+    transform:rotate(90deg);
+}
+.pop p{
+    width: 4rem;
+    height: .46rem;
+    margin: 1rem auto 0;
+    background: url(../images/pop-text.png);
+    background-size: 4rem .46rem;
+}

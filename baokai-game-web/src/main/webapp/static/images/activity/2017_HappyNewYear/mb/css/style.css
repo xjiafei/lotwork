@@ -1,0 +1,722 @@
+@charset "UTF-8";
+*{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+em{font-style:normal}
+ol,ul{list-style:none}
+fieldset,img,abbr,acronym{border:0}
+input,select{font-family:Microsoft YaHei}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+body{font:normal 12px/1.6em Microsoft YaHei,Tahoma,simsun;color:#fff;margin:0 auto;}
+.clearfix{*zoom:1}
+.clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+a{text-decoration:none}
+a:hover{text-decoration:none;}
+
+
+html{
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+
+body{
+    width: 100%;
+    background-color: #081122;
+    color: #fff;
+    position: relative;
+    overflow-x: hidden;
+}
+body,
+input,
+select{
+    font-family: "Microsoft YaHei","tahoma";
+}
+
+
+.act{
+    width: 100%;
+    position: relative;
+    background-size: 100% auto;
+}
+.act .more {
+    background: url(../images/more.png) no-repeat;
+    background-size: 100% auto;
+    width: 0.37rem;
+    height: 0.37rem;
+    position: absolute;
+    right: 0.03rem;
+    top: 5.50rem;
+    text-indent: -999em;
+    z-index: 33;
+}
+
+.act1 {
+    background: url(../images/act1.jpg) no-repeat center top;
+    height: 6.97rem;
+    background-size: 100% auto;
+}
+.s2 {
+    background: url(../images/act1-2.jpg) no-repeat center top;
+    height: 6.97rem;
+    background-size: 100% auto;
+}
+.act2 {
+    background: url(../images/act2.jpg) no-repeat center top;
+    height: 5.67rem;
+    background-size: 100% auto;
+}
+.act3 {
+    background: url(../images/act3.jpg) no-repeat center top;
+    height: 5.19rem;
+    background-size: 100% auto;
+}
+.act4 {
+    background: url(../images/act4.jpg) no-repeat center top;
+    height: 5.17rem;
+    background-size: 100% auto;
+}
+
+
+
+.timeStatues {
+    background-position: left top;
+    background: url(../images/timestatus1.png) no-repeat;
+    background-size: 100% auto;
+    width: 5.75rem;
+    height: 0.89rem;
+    left: 1.49rem;
+    top: 2.94rem;
+    position: absolute;
+}
+.timeStatues.status2 {
+    background: url(../images/timestatus2.png) no-repeat;
+    background-size: 100% auto;
+    width: 5.64rem;
+    height: 0.89rem;
+    left: 0;
+    top: 2.94rem;
+}
+
+.act1Money {
+    width: 3.42rem;
+    height: 0.86rem;
+    line-height: 0.86rem;
+    position: absolute;
+    text-align: center;
+    font-size: 0.5rem;
+    color: #bc1a3a;
+    left: 50%;
+    top: 4.14rem;
+    margin-left: -1.72rem;
+}
+
+.amountBox {
+    position: absolute;
+    width: 5rem;
+    height: 0.3rem;
+    top: 5.6rem;
+    left: 1.07rem;
+}
+
+
+.amountLine {
+    width: 5rem;
+    background: #3d000a;
+    height: 0.28rem;
+    border-bottom: 1px solid #bc375b;
+    border-radius: 0.14rem;
+    overflow: hidden;
+    position: absolute;
+}
+.lineInside {
+    width: 5rem;
+    background: #ffee3d;
+    height: 0.28rem;
+    left: 0;
+    top: 0;
+    border-radius: 0.14rem;
+    overflow: hidden;
+    position: absolute;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: inset 0 0.03rem 0.05rem rgba(0,0,0,.5);
+}
+.lineInside.completed {
+    border-radius: 0.14rem;
+}
+.moneyP {
+    text-align: center;
+    padding-top: 0rem;
+    margin-top: -0.4rem;
+    font-size: 0.2rem;
+    color: #fff;
+    width: 100%;
+}
+.userAmount {
+    color: #ffee3d;
+    text-shadow: 0 0.02rem 1px rgba(0,0,0,.3);
+}
+
+.btn {
+    background-image: url(../images/btn1.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    width: 2.6rem;
+    height: 1.05rem;
+    display: block;
+    position: absolute;
+    text-indent: -999em;
+    z-index: 22;
+}
+.btn:hover {
+    -webkit-filter: brightness(1.08);
+    filter: brightness(1.08);
+}
+
+.recharge {
+    background-size: 5.62rem auto;
+    left: 0.9rem;
+    top: 6.1rem;
+}
+.getmoney {
+    background-size: 5.62rem auto;
+    left: 3.8rem;
+    top: 6.1rem;
+    background-position: -3rem top;
+}
+.recharge:active {
+    background-position: left -1.15rem;
+}
+
+.getmoney:active {
+    background-position: -3rem -1.15rem;
+}
+
+
+.act2 .more {
+    top: 0rem;
+}
+.countTime {
+    font-size: 0.24rem;
+    line-height: 0.24rem;
+    color: #ffee3d;
+    position: absolute;
+    left: 3.26rem;
+    top: 0.28rem;
+}
+.prizeBox {
+    width: 6.82rem;
+    height: 1.51rem;
+    position: absolute;
+    left: 0.19rem;
+    top: 0.55rem;
+}
+.prizePic {
+    width: 6.55rem;
+    height: 1.22rem;
+    position: absolute;
+    left: 0.13rem;
+    top: 0.13rem;
+    overflow: hidden;
+}
+.picMove {
+    background: url(../images/price.png) repeat-x;
+    background-size: 14.41rem auto;
+    width: 14.41rem;
+    height: 1.22rem;
+    position: absolute;
+}
+.prizeCover {
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: url(../images/cover1.png) no-repeat center center;
+    background-size: 100% auto;
+
+}
+.prizeCover2 {
+    position: absolute;
+    background: url(../images/cover2.png) no-repeat;
+    background-size: 100% auto;
+    width: 1.36rem;
+    height: 1.4rem;
+    left: 2.72rem;
+    top: 0.04rem;
+}
+
+.winnerList {
+    height: 0.4rem;
+    width: 6.78rem;
+    overflow: hidden;
+    position: absolute;
+    left: 0.2rem;
+    top: 2.94rem;
+}
+.winnerList li {
+    height: 0.4rem;
+    line-height: 0.4rem;
+    float: left;
+    padding-right: 0.2rem;
+    font-size: 0.12rem;
+}
+
+.prizeResult {
+    width: 100%;
+    height: 260px;
+    position: absolute;
+    left: 0px;
+    top: 3.5rem;
+    color: #fff;
+}
+.prizeResult p {
+    line-height: 0.38rem;
+    font-size: 0.16rem;
+    padding-left: 0.1rem;
+}
+.prizeResult .tips {
+    font-size: 20px;
+    color: #f0e57e;
+    float: right;
+}
+.prizeNum {
+    width: 7.4rem;
+    margin-left: 0rem;
+    overflow: hidden;
+}
+.prizeNum span {
+    float: left;
+    width: 0.23rem;
+    height: 0.71rem;
+    line-height: 0.72rem;
+    padding-left: 1.22rem;
+    font-size: 0.2rem;
+    color: #fff;
+}
+
+.startMove {
+    background: url(../images/startmove.png) no-repeat;
+    background-size: 100% auto;
+    width: 2.63rem;
+    height: 1.05rem;
+    left: 2.25rem;
+    top: 2.04rem;
+}
+.startMove:active {
+    background-position: left -1.05rem;
+}
+
+.act3 .more {
+    top: 0.15rem;
+}
+.act3p1 {
+    position: absolute;
+    font-size: 0.2rem;
+    left: 4.73rem;
+    top: 0.54rem;
+    text-align: center;
+    width: 0.74rem;
+}
+.act3p1 span {
+    font-size: 0.3rem;
+    padding: 0 0.06rem;
+    color: #fff;
+}
+.obtainLeft {
+    font-size: 0.36rem;
+    width: 1.3rem;
+    height: 0.52rem;
+    line-height: 0.52rem;
+    position: absolute;
+    display: block;
+    left: 5.04rem;
+    top:  1.05rem;
+    text-align: center;
+    color: #ffee3d;
+}
+.startRed {
+    background-image: url(../images/act3btn.png);
+    background-repeat: no-repeat;
+    background-size: 3.03rem auto;
+    width: 1.5rem;
+    height: 0.85rem;
+    left: 3.54rem;
+    top: 1.74rem;
+}
+.startRed:active {
+    background-position: left bottom;
+}
+.startCharge {
+    background-image: url(../images/act3btn.png);
+    background-repeat: no-repeat;
+    background-size: 3.03rem auto;
+    background-position: -1.57rem top;
+    width: 1.5rem;
+    height: 0.85rem;
+    left: 5.1rem;
+    top: 1.74rem;
+}
+.startCharge:active {
+    background-position: -1.57rem bottom;
+}
+.act3p2 {
+    width: 840px;
+    line-height: 30px;
+    height: 120px;
+    padding: 10px 20px;
+    position: absolute;
+    left: 60px;
+    top: 400px;
+    font-size: 16px;
+    color: #9f8e53;
+}
+.startCharge:active {
+    background-position: -1.57rem bottom;
+}
+
+
+.act4 .more {
+    top: 0.2rem;
+}
+
+.bettingDay {
+    position: absolute;
+    width: 7rem;
+    left: 1.12rem;
+    top: 0.73rem;
+}
+.bettingDay li {
+    float: left;
+    width: 0.67rem;
+    height: 0.67rem;
+    background-image: url(../images/daybg.png);
+    background-repeat: no-repeat;
+    background-size: 1.45rem auto;
+    text-align: center;
+    line-height: 0.67rem;
+    font-size: 0.2rem;
+    color: #7a7979;
+    position: relative;
+    font-weight: bold;
+    margin-right: 0.1rem;
+    display: inline;
+}
+.bettingDay li.betted {
+    color: #8a0017;
+    background-position: -0.8rem 0;
+}
+.bettingDay li.today span{
+    display: block;
+    position: absolute;
+    background: url(../images/todaybg.png) no-repeat;
+    background-size: 100% auto;
+    width: 0.64rem;
+    height: 0.75rem;
+    left: 0rem;
+    top: -0.11rem;
+}
+
+
+.redpacketList {
+    position: absolute;
+    width: 100%;
+    top: 1.96rem;
+    padding-left: 0.23rem;
+}
+.packetbox {
+    width: 1.35rem;
+    text-align: center;
+    float: left;
+}
+.packetbox .redpacket {
+    background: url(../images/redbox.png) no-repeat;
+    background-size: 100% auto;
+    width: 1.33rem;
+    height: 0.67rem;
+    position: relative;
+}
+.packetbox .redpacket.disable {
+    background: url(../images/redbox2.png) no-repeat;
+    background-size: 100% auto;
+}
+.packetbox h3 {
+    font-size: 18px;
+    line-height: 40px;
+    color: #fff000;
+}
+.packetbox p {
+    color: #cb9472;
+    font-size: 14px;
+    padding: 5px 50px;
+}
+.redpacketList .info {
+    position: absolute;
+    width: 588px;
+    left: 206px;
+    top: 144px;
+    font-size: 14px;
+    color: #cb9472;
+    text-align: center;
+}
+.redpacketList .info span {
+    color: #fff;
+    padding: 0 10px;
+}
+.redpacket .result {
+    background: url(../images/opened.png) no-repeat;
+
+    background-size: 100% auto;
+    width: 1.33rem;
+    height: 0.93rem;
+    position: absolute;
+    top: -0.25rem;
+    display: none;
+    color: #600012;
+    font-size: 0.16rem;
+    line-height: 0.22rem;
+}
+.redpacket .result h2 {
+    font-size: 0.2rem;
+    line-height: 0.2rem;
+}
+.redpacket.showresult .result{
+    display: block;
+
+}
+
+
+.mask {
+    position: fixed;
+    z-index: 988;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
+    overflow: hidden;
+    background-color: #000;
+    display: none;
+}
+
+.popbox {
+    width: 6.4rem;
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    margin-left: -3.2rem;
+    z-index: 999;
+    display: none;
+}
+.popbox .poptitle {
+    background: url(../images/poptop.png) no-repeat;
+    background-size: 100% auto;
+    width: 6.4rem;
+    height: 1.94rem;
+}
+.poptitle h3 {
+    height: 0.64rem;
+    line-height: 0.64rem;
+    text-align: center;
+    font-size: 0.24rem;
+    padding-top: 0.2rem;
+}
+.popbox .popcontent {
+    background: #f6e2b5;
+    width: 6.1rem;
+    margin-left: 0.16rem;
+    position: relative;
+    padding-top: 0.3rem;
+
+}
+.popcontent .contentbox {
+    margin-top: -1.3rem;
+    color: #40050c;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    padding-bottom: 0.2rem;
+    font-size: 0.2rem;
+    line-height: 0.3rem;
+    overflow-y: auto;
+    height: 3rem;
+
+}
+.contentbox li {
+    list-style: decimal;
+    margin-bottom: 0.14rem;
+}
+.contentbox table {
+    border-collapse: collapse;
+    width: 115%;
+    margin-left: -7%;
+    margin-bottom: 0.2rem;
+}
+
+.contentbox table th,
+.contentbox table td{
+    padding: 0.05rem 0.1rem;
+    font-size: 0.13rem;
+    color: #6d4d07;
+    text-align: center;
+    border: 2px solid #f6e2b5;
+}
+.contentbox table th {
+    background: #dcc186;
+}
+.contentbox table td {
+    background: #e6cf9c;
+}
+.popcontent .confirmbtn {
+
+    position: relative;
+    height: 0.8rem;
+}
+.popcontent .confirmbtn .btn {
+    background-image: url(../images/confirm.png);
+    background-repeat: no-repeat;
+    background-size: 1.6rem auto;
+    width: 1.6rem;
+    height: 0.65rem;
+    left: 50%;
+    margin-left: -0.8rem;
+}
+.popcontent .confirmbtn .btn:active {
+    background-position: left bottom;
+}
+.popbox .popbottom {
+    background: url(../images/popbottom.png) no-repeat;
+    background-size: 6.4rem auto;
+    width: 6.4rem;
+    height: 0.23rem;
+}
+.popbox .popclose {
+    background: url(../images/close.png) no-repeat;
+    background-size: 100% auto;
+    width: 0.36rem;
+    height: 0.36rem;
+    cursor: pointer;
+    position: absolute;
+    right: -0.3rem;
+    top: -0.3rem;
+
+}
+
+.alert {
+    background: url(../images/alert.png) no-repeat;
+    background-size: 100% auto;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 5.17rem;
+    height: 3.32rem;
+    margin-left: -2.68rem;
+    margin-top: -1.66rem;
+    text-align: center;
+    z-index: 999;
+    display: none;
+}
+.alert .content {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.alert h3 {
+    color: #ad0015;
+    font-size: 0.2rem;
+    padding-top: 0.1rem;
+    line-height: 0.4rem;
+}
+.alert .contenttext {
+    font-size: 0.24rem;
+    color: #40050c;
+    line-height: 0.3rem;
+    height: 1.20rem;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 5.17rem;
+}
+.alert .btnbox {
+    position: absolute;
+    width: 100%;
+    bottom: 0.2rem;
+}
+.alert .btnbox a {
+    display: inline-block;
+    background-repeat: no-repeat;
+    text-indent: -999em;
+}
+.alert .btnbox a:hover {
+    -webkit-filter: brightness(1.08);
+    filter: brightness(1.08);
+}
+.alert .btnbox .confirm {
+    background-image: url(../images/confirm.png);
+    background-size: 100% auto;
+    width: 1.6rem;
+    height: 0.65rem;
+}
+
+.alert .btnbox .charge {
+    background-image: url(../images/chargebtn.png);
+    width: 1.6rem;
+    background-size: 100% auto;
+    height: 0.65rem;
+    display: none;
+}
+.alert .btnbox .confirm:active,
+.alert .btnbox .charge:active {
+    background-position: left bottom;
+}
+.alertclose {
+    background-image: url(../images/close.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    width: 0.36rem;
+    height: 0.36rem;
+    position: absolute;
+    right: -0.34rem;
+    top: -0.34rem;
+    z-index: 2;
+}
+
+
+
+.przieAni{
+
+    -webkit-animation: scaleF 1s ;
+    -moz-animation: scaleF 1s ;
+    -o-animation: scaleF 1s ;
+    animation: scaleF 1s;
+    transform-origin:50% 50%;
+    -ms-transform-origin:50% 50%; 		/* IE 9 */
+    -webkit-transform-origin:50% 50%;	/* Safari 和 Chrome */
+    -moz-transform-origin:50% 50%;		/* Firefox */
+    -o-transform-origin:50% 50%;		/* Opera */
+}
+
+@keyframes scaleF
+{
+    0% { font-size: 130px; opacity: 0;}
+    100% {font-size: 20px; opacity: 1;}
+}
+
+@-moz-keyframes scaleF /* Firefox */
+{
+    0% { font-size: 130px;opacity: 0;}
+    100% {font-size: 20px;opacity: 1;}
+}
+
+@-webkit-keyframes scaleF /* Safari 和 Chrome */
+{
+    0% { font-size: 130px;opacity: 0;}
+    100% { font-size: 20px;opacity: 1;}
+}
+
+@-o-keyframes scaleF /* Opera */
+{
+    0% { font-size: 130px;opacity: 0;}
+    100% {font-size: 20px;opacity: 1;}
+}

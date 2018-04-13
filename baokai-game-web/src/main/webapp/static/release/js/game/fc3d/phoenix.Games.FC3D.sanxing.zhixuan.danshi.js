@@ -1,0 +1,1 @@
+!function(a,b){var c={name:"sanxing.zhixuan.danshi",tips:"五星直选单式玩法提示",exampleTip:"这是单式弹出层提示",exampleText:"123<br />233<br />235<br />678"},d=a.Games,e=d.FC3D.getInstance(),f={init:function(){var a=this;setTimeout(function(){a.initFrame()},25)}},g=a.Class(f,b);g.defConfig=c,e[c.name]=new g}(phoenix,phoenix.Games.FC3D.Danshi);

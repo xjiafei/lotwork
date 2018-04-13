@@ -1,0 +1,212 @@
+@charset "utf-8";
+
+
+/* S header */
+.header{height:0;}
+/* E header */
+
+.main{position:relative;border-width:0 1px 1px;border-style:none solid solid;border-color:transparent #C2C2D2 #C2C2D2;background-color:#FFF;}
+.select-section{padding:15px 25px;}
+.select-section-content{padding:12px 25px;border-top:1px solid #E3E3E3;padding-right:60px;}
+.select-section-content .input{width:120px;}
+.select-section-content .title{float:left;height:34px;line-height:34px;padding-right:10px;}
+.select-section-content .function{float:left;height:34px;line-height:34px;}
+.select-section-content .function .label{padding:0 10px;vertical-align:baseline;}
+.select-section-content .time{float:left;height:34px;line-height:34px;}
+.select-section-content .time a{padding:0 10px;}
+.select-section-content .select{float:left;padding-right:10px;}
+.select-section-content .select .ui-label{width:72px;}
+.select-section-content .select .ui-select{width:72px;}
+.select-section-content .search{float:right;}
+.select-function{float:right;}
+.select-function i{display:inline-block;width:13px;height:8px;margin-left:5px;vertical-align:middle;background-image:url("un-arrow.png");background-repeat:no-repeat;overflow:hidden;}
+.select-function .arrow-down{background-position:0 0;}
+.select-function .arrow-up{background-position:0 -10px;;}
+.select-title{float:left;height:28px;margin-right:20px;line-height:26px;line-height:28px\9;}
+.select-list{float:left;}
+.select-list li{display:inline-block;*display:inline;*zoom:1;margin:0 4px;height:30px;line-height:30px;line-height:30px\9;font-size:14px;font-weight:700;cursor:pointer;
+border-radius:4px;
+}
+.select-list li.current,.select-list li.current:hover{background-color:#008ad8;color:#FFF;cursor:default;
+box-shadow:1px 2px 3px rgba(0, 0, 0, 0.2) inset;
+}
+.select-list li a {color:#008ad8;display:block;padding:3px 12px;height:24px;line-height:24px;}
+.select-list li:hover a {color:#FFF; text-decoration:none;}
+.select-list li:hover{background-color:#008ad8;color:#FFF;}
+.select-list li.current a,.select-list li.current:hover a:hover {color:#FFF;}
+
+.select-download {display:inline-block;margin:0 50px; text-decoration:underline;}
+
+/*chart-area*/
+
+
+/* S chart-section */
+.chart-section{position: relative;border:1px solid #CCC;border-top:1px solid #CCC;}
+.chart-table{width:100%;}
+.chart-table .title-text th{font-weight:700;white-space:nowrap;word-wrap: break-word;}
+.chart-table .title-number th{padding-top:0;}
+.border-top {border-top:1px solid #E6E6E6}
+.chart-table .title-text .border-bottom-header,.chart-table .title-number .border-bottom-header ,.chart-table thead .border-bottom ,#J-ball-content .border-bottom , .title-text .border-bottom , .tbody-footer-header .border-bottom , .J-ball-content border-bottom, .tbody-footer-header border-bottom, #J-select-content .border-bottom {border-bottom: 1px solid #CCC;}
+.chart-table .tbody{color:#888;}
+.chart-table th{padding:5px 0;background-color:#F2F2F2;text-align:center;}
+.chart-table td{padding:5px 0;border-bottom: 1px solid #fff;border-top: 1px solid #fff;background-color:#FFF;text-align:center;}
+.chart-table .issue-numbers,.chart-table .lottery-numbers{width:auto;}
+.chart-table .size-numbers,.chart-table .parity-numbers{color:#0A94E3;}
+.chart-table .border-right{border-right:1px solid #CCC;}
+.chart-table .ball-none,.chart-table .title-number .ball-none{width:4px;}
+.chart-table th .ball-noraml {color:#333;}
+.ball-noraml{display:inline-block;width:15px;height:15px;line-height:14px;text-align:center;font-style:normal;color:#B7B7B7;position:relative;}
+.chart-table .ball-red,
+.chart-table .ball-orange,
+.chart-table .ball-blue,
+.chart-table .ball-green,
+.chart-table .ball-purple,
+.chart-table .group-current{
+background-image:url("un-chart.png");background-repeat:no-repeat;color:#FFF;
+}
+.chart-table .ball-red{background-position:0 0;}
+.chart-table .ball-orange{background-position:-20px 0;}
+.chart-table .ball-blue{background-position:-40px 0;}
+.chart-table .ball-green{background-position:-60px 0;}
+.chart-table .ball-purple{background-position:-80px 0;}
+.chart-table .ball-mark {
+    background-color: #00a2ff;
+    border-radius: 50%;
+    color: #fff;
+    font-style: normal;
+    height: 12px;
+    line-height: 12px;
+    position: absolute;
+    right: -6px;
+    text-align: center;
+    top: -6px;
+    width: 12px;
+}
+.chart-table .group-current{display:inline-block;width:18px;height:12px;line-height:12px;text-align:center;font-style:normal;background-position:-100px 0;}
+.chart-table .tbody .bg-red{background-color:#F53F00;color:#FFF;}
+.chart-table .tbody .bg-blue{background-color:#00A2FF;color:#FFF;}
+.chart-table .tbody .bg-blue .ball-noraml {color:#FFF;}
+.chart-table .tbody .bg-green{background-color:#34BC0F;color:#FFF;}
+.chart-table .tbody .compare{background-color:#7999F3;color:#FFF;}
+.chart-table .tbody .lost{background-color:#E1F9F7;color:#CCC;}
+.auxiliary-area td{background-color:#F7F7F7;border-top:1px solid #E6E6E6;}
+.select-area td{background-color:#CCC;}
+.select-area .ico-add,.select-area .ico-del{display:inline-block;width:15px;height:15px;margin-right:4px;background-image:url("un-select-area.png");background-repeat:no-repeat;vertical-align:middle; cursor:pointer;}
+.select-area .ico-add{background-position:0 0;}
+.select-area .ico-del{background-position:-20px 0;}
+/* E chart-section */
+
+
+
+/** 样式名称规则直接使用号码属性拼接 //array(遗漏次数, 当前开奖号数字, 号温, 遗漏条) **/
+
+/** 当前开奖球数字 和 冷热号数字 **/
+.c-0-1,.c-0-2,.c-0-3 {background-image:url("un-chart.png");background-repeat:no-repeat;color:#FFF;}
+.c-0-1,.c-0-2,.c-0-3 {background-position:0 0;}
+
+.table-temperature .c-0-1 {background-position:-40px 0;}
+.table-temperature .c-0-2 {background-position:-20px 0;}
+.table-temperature .c-0-3 {background-position:0 0;}
+
+/** 遗漏条样式 **/
+.table-lost-post .l-1 {background-color:#E1F9F7;}
+.table-lost-post .l-1 .ball-noraml {color:#B7B7B7;}
+
+/** 辅助线 **/
+.table-guides .border-bottom {border-bottom:1px solid #CCC;}
+
+/** 遗漏数 **/
+.table-lost .ball-noraml {color:#FFF;}
+
+/** 选球区域放置样式被覆盖 **/
+.table-lost .auxiliary-area .ball-noraml,.table-lost .select-area .ball-noraml {color:#B7B7B7;}
+.table-lost .select-area .ball-orange {color:#FFF;}
+
+
+/** 号码分布样式 **/
+.f-1,.f-2,.f-3,.f-4,.f-5{background-image:url("un-chart.png");background-repeat:no-repeat;color: #fff;}
+/*出现单次*/
+.f-1{background-position:-60px 0}
+/*出现多次*/
+.f-2,.f-3,.f-4,.f-5{background-position:-80px 0}
+
+/*走势图*/
+body canvas{
+	display: none;
+}
+.table-trend canvas,
+.table-trend canvas div{
+	display: block;
+}
+
+
+/** 选球区域选球相关样式 **/
+.select-area i { cursor:pointer;}
+
+
+
+
+
+/** 五星综合 **/
+/** 分布 **/
+.zh-0-1,.zh-0-2,.zhkd-1 {background-image:url("un-chart.png");background-repeat:no-repeat;color:#FFF;}
+.zh-0-1 {background-position:-60px 0;}
+.zh-0-2 {background-position:-80px 0;}
+/** 跨度 **/
+.zhkd-1 {background-position:-80px 0;}
+/** 大小比 **/
+.chart-table .zhdx-0 {background:#7999F3;}
+.chart-table .zhdx-0 .ball-noraml {color:#FFF;}
+/** 单双比 **/
+.chart-table .zhds-0 {background:#7999F3;}
+.chart-table .zhds-0 .ball-noraml {color:#FFF;}
+/** 质合比 **/
+.chart-table .zhzh-0 {background:#7999F3;}
+.chart-table .zhzh-0 .ball-noraml {color:#FFF;}
+/** 遗漏条 **/
+
+
+/* 快三 */
+.chart-table .ball-mark{position:absolute;width:12px;height:12px;text-align:center;line-height:12px;background-color:#00A2FF;color:#FFF;}
+
+
+
+
+
+
+.myrightsss{
+    color: green;
+    font-weight: bold;
+}
+.mycorrectsss{
+    color: red;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

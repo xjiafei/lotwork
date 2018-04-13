@@ -1,0 +1,782 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+	<bean id="basicBetMessages" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+						<value>gameIssueError</value>
+					</key>
+					<value><![CDATA[您好，{0}期 已截止销售，当前期为{1}期 ，请留意！]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>gameMethodPaused</value>
+					</key>
+					<value><![CDATA[您的投注内容中“{0}”已暂停销售，是否完成剩余投注内容]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>betSuccess</value>
+					</key>
+					<value><![CDATA[恭喜您投注成功~!]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>serverError</value>
+					</key>
+					<value><![CDATA[服务器错误请稍后再试!]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>betFailed</value>
+					</key>
+					<value><![CDATA[方案提交失败，请检查网络并重新提交！]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>betLimited</value>
+					</key>
+					<value><![CDATA[您的投注内容 超出倍数限制，请调整！]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>betPaused</value>
+					</key>
+					<value><![CDATA[您的投注内容中有投注方式暂停，请确认！]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>insufficientBalance</value>
+					</key>
+					<value><![CDATA[您的余额不足，请确认！]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>generalAgent</value>
+					</key>
+					<value><![CDATA[总代不能投注，请确认！]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>awardGroupError</value>
+					</key>
+					<value><![CDATA[您的投注奖金组数据配置错误，请核实！]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>defaultError</value>
+					</key>
+					<value><![CDATA[方案提交失败，请检查网络并重新提交！]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>betFileScript</value>
+					</key>
+					<value><![CDATA[<script>(function(){var Games = window.parent.phoenix.Games,current = Games.getCurrentGame().getCurrentGameMethod(),data='{0}'; current.getFile(data)})()</script>]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>ssqAwardExample</value>
+					</key>
+					<value><![CDATA[<table class='table table-border'><thead><tr><th rowspan='2'>奖级</th><th colspan='2'>中奖条件</th><th rowspan='2'>单注奖金</th></tr><tr><th>红球</th><th>蓝球</th></tr></thead><tbody><tr><td>一等奖</td><td class='text-left'><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span></td><td><span class='ball blue'></span></td><td id='lv3Bonus'>{0}</td></tr><tr><td>二等奖</td><td class='text-left'><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span></td><td></td><td id='lv3Bonus'>{1}</td></tr><tr><td>三等奖</td><td class='text-left'><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span></td><td><span class='ball blue'></span></td><td id='lv3Bonus'>{2}</td></tr><tr><td rowspan='2'>四等奖</td><td class='text-left'><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span></td><td></td><td id='lv41Bonus'>{3}</td></tr><tr><td class='text-left'><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span></td><td><span class='ball blue'></span></td><td id='lv42Bonus'>{4}</td></tr><tr><td rowspan='2'>五等奖</td><td class='text-left'><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span></td><td></td><td id='lv51Bonus'>{5}</td></tr><tr><td class='text-left'><span class='ball red'></span><span class='ball red'></span><span class='ball red'></span></td><td><span class='ball blue'></span></td><td id='lv52Bonus'>{6}</td></tr><tr><td rowspan='3'>六等奖</td><td class='text-left'><span class='ball red'></span><span class='ball red'></span></td><td><span class='ball blue'></span></td><td id='lv61Bonus'>{7}</td></tr><tr><td class='text-left'><span class='ball red'></span></td><td><span class='ball blue'></span></td><td id='lv62Bonus'>{8}</td></tr><tr><td class='text-left'></td><td><span class='ball blue'></span></td><td id='lv63Bonus'>{9}</td></tr></tbody></table>]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>errorConfigJs</value>
+					</key>
+					<value><![CDATA[ (function(host, name, Event, undefined){})(phoenix, "Config", phoenix.Event); ]]></value>
+				</entry>
+				<entry>
+					<key>
+						<value>configJs</value>
+					</key>
+					<value><![CDATA[ (function(host, name, Event, undefined){
+							var gameConfigData = {0};
+							var defConfig = {
+								//当前彩种名称
+								gameType : gameConfigData['gameType'],
+								gameTypeCn : gameConfigData['gameTypeCn'],
+								lotteryId : gameConfigData['lotteryId'],
+								awardGroups: gameConfigData['awardGroups'],
+								userId: gameConfigData['userId'],
+								userName: gameConfigData['userName'],
+								userLvl: gameConfigData['userLvl'],
+								awardRetStatus: gameConfigData['awardRetStatus'],
+								awardGroupRetStatus: gameConfigData['awardGroupRetStatus'],
+								backOutStartFee: gameConfigData['backOutStartFee'],
+								backOutRadio: gameConfigData['backOutRadio'],
+								isSupport2000: gameConfigData['isSupport2000'],
+								isLotteryStopSale: gameConfigData['isLotteryStopSale'],
+								isfirstimeuse2000: gameConfigData['isfirstimeuse2000'],
+								isfirstimeusediamond2000: gameConfigData['isfirstimeusediamond2000'],
+								helpLink: gameConfigData['helpLink'],
+								sourceList: gameConfigData['sourceList']
+							},
+							instance;
+							var pros = {
+								init:function(){
+									var me = this;
+									me.types = gameConfigData['gameMethods'];
+								},
+								//获取玩法类型
+								getTypes:function(isFilterClose){
+									return this.types;
+								},
+								getGameTypeCn:function(){
+									return this.defConfig.gameTypeCn;
+								},
+								getDefaultMethod:function(){
+									return gameConfigData['defaultMethod'];
+								},
+								//获取动态配置接口地址
+								getDynamicConfigUrl:function(){
+									return gameConfigData['dynamicConfigUrl'];
+								},
+								//获取单式上传接口地址
+								getUploadPath:function(){
+									return gameConfigData['uploadPath'];
+								},
+								//获取用户余额
+								getUserBalUrl:function(){
+									return gameConfigData['queryUserBalUrl'];
+								},
+									//获取投注页面显示订单接口地址
+								getUserOrdersUrl:function(){
+									return gameConfigData['getUserOrdersUrl'];
+								},
+									//获取单式上传接口地址
+								getUserPlansUrl:function(){
+									return gameConfigData['getUserPlansUrl'];
+								},
+									//获取撤销手续费接口地址
+								getHandingChargeUrl:function(){
+									return gameConfigData['getHandingChargeUrl'];
+								},
+								//获取彩种logo地址
+								getLotteryLogoPath:function(){
+									return gameConfigData['getLotteryLogoPath'];
+								},
+									//获取玩法走势图接口地址
+								trendChartUrl:function(){
+									return gameConfigData['trendChartUrl'];
+								},
+						        //查询玩法描述和默认冷热球及用户投注方式奖金接口地址
+								getBetAwardUrl:function(){
+									return gameConfigData['getBetAwardUrl'];
+								},
+								//获取冷热遗漏接口地址
+								getHotColdUrl:function(){
+									return gameConfigData['getHotColdUrl'];
+								},
+								//查询奖金组
+								getQueryGameUserAwardGroupByLotteryIdUrl:function(){
+									return gameConfigData['queryGameUserAwardGroupByLotteryIdUrl'];
+								},
+								//保存代理投注奖金组
+								getSaveProxyBetGameAwardGroupUrl:function(){
+									return gameConfigData['saveProxyBetGameAwardGroupUrl'];
+								},
+									//获取投注提交接口地址
+								submitUrl:function(){
+									return gameConfigData['sumbitUrl'];
+								},
+								//获取首页接口
+								indexInitUrl:function(){
+									return gameConfigData['indexInit'];
+								},
+								//获取最新开奖号码
+								lastNumberUrl:function(){
+									return gameConfigData['lastNumberUrl'];
+								},
+								//name  wuxing.zhixuan.fushi
+								getTitleByName:function(name){
+									var me = this,
+										nameArr = name.split('.'),
+										nameLen = nameArr.length,
+										types = me.types,
+										i = 0,
+										len = types.length,
+										i2,
+										len2,
+										i3,
+										len3,
+										tempArr = [],
+										result = [];
+									//循环一级
+									for(;i < len;i++){
+										if(types[i]['name'] == nameArr[0]){
+										    if(gameConfigData['gameType'].indexOf('115')<0){
+												result.push(types[i]['title'].replace(/&nbsp;/g,''));
+											}
+											if(nameLen > 1 && types[i]['childs'].length > 0){
+												tempArr = types[i]['childs'];
+												len2 = tempArr.length;
+												//循环二级
+												for(i2 = 0;i2 < len2;i2++){
+													//console.log(tempArr[i2]['name']);
+													if(tempArr[i2]['name'] == nameArr[1]){
+													    if(gameConfigData['gameType'].indexOf('115')>0){
+														result.push(tempArr[i2]['title'].replace(/&nbsp;/g,''));
+														}
+														if(nameLen > 2 && tempArr[i2]['childs'].length > 0){
+															tempArr = tempArr[i2]['childs'];
+															len3 = tempArr.length;
+															//循环三级
+															for(i3 = 0;i3 < len3;i3++){
+																if(tempArr[i3]['name'] == nameArr[2]){
+																	if(tempArr[i3]['headline']){
+																		return tempArr[i3]['headline'];
+																	}
+																	if($.inArray(tempArr[i3]['title'].replace(/&nbsp;/g,''),result)==-1)
+																	{
+																	   result.push(tempArr[i3]['title'].replace(/&nbsp;/g,''));
+																	}
+																	return result;
+																}
+															}
+														}else{
+															return result;
+														}
+													}
+												}
+											}else{
+												return result;
+											}
+										}
+									}
+									return '';
+								}
+								
+							};
+							
+							var Main = host.Class(pros, Event);
+							Main.defConfig = defConfig;
+							Main.getInstance = function(cfg){
+								return instance || (instance = new Main(cfg));
+							};
+							
+							host.Games.{1}[name] = Main;
+							
+						})(phoenix, "Config", phoenix.Event); ]]></value>
+				</entry>
+
+
+				<entry>
+					<key>
+						<value>ssqConfigJs</value>
+					</key>
+					<value><![CDATA[ (function(host, name, Event, undefined){
+							var gameConfigData = {0};
+							var defConfig = {
+								//当前彩种名称
+								gameType : gameConfigData['gameType'],
+								gameTypeCn : gameConfigData['gameTypeCn'],
+								lotteryId : gameConfigData['lotteryId'],
+								awardGroups: gameConfigData['awardGroups'],
+								userId: gameConfigData['userId'],
+								userName: gameConfigData['userName'],
+								userLvl: gameConfigData['userLvl'],
+								poolBouns: gameConfigData['poolBouns'],
+								backOutStartFee: gameConfigData['backOutStartFee'],
+								backOutRadio: gameConfigData['backOutRadio'],
+								isLotteryStopSale: gameConfigData['isLotteryStopSale'],
+								helpLink: gameConfigData['helpLink'],
+								isfirstimeuse2000: gameConfigData['isfirstimeuse2000'],
+								sourceList: gameConfigData['sourceList']
+							},
+							instance;
+							var pros = {
+								init:function(){
+									var me = this;
+									me.types = gameConfigData['gameMethods'];
+								},
+								//获取玩法类型
+								getTypes:function(isFilterClose){
+									return this.types;
+								},
+								getGameTypeCn:function(){
+									return this.defConfig.gameTypeCn;
+								},
+								getDefaultMethod:function(){
+									return gameConfigData['defaultMethod'];
+								},
+								//获取动态配置接口地址
+								getDynamicConfigUrl:function(){
+									return gameConfigData['dynamicConfigUrl'];
+								},
+								//获取单式上传接口地址
+								getUploadPath:function(){
+									return gameConfigData['uploadPath'];
+								},
+								//获取用户余额
+								getUserBalUrl:function(){
+									return gameConfigData['queryUserBalUrl'];
+								},
+									//获取投注页面显示订单接口地址
+								getUserOrdersUrl:function(){
+									return gameConfigData['getUserOrdersUrl'];
+								},
+									//获取单式上传接口地址
+								getUserPlansUrl:function(){
+									return gameConfigData['getUserPlansUrl'];
+								},
+									//获取撤销手续费接口地址
+								getHandingChargeUrl:function(){
+									return gameConfigData['getHandingChargeUrl'];
+								},
+								//获取彩种logo地址
+								getLotteryLogoPath:function(){
+									return gameConfigData['getLotteryLogoPath'];
+								},
+									//获取玩法走势图接口地址
+								trendChartUrl:function(){
+									return gameConfigData['trendChartUrl'];
+								},
+						        //查询玩法描述和默认冷热球及用户投注方式奖金接口地址
+								getBetAwardUrl:function(){
+									return gameConfigData['getBetAwardUrl'];
+								},
+								//获取冷热遗漏接口地址
+								getHotColdUrl:function(){
+									return gameConfigData['getHotColdUrl'];
+								},
+								//查询奖金组
+								getQueryGameUserAwardGroupByLotteryIdUrl:function(){
+									return gameConfigData['queryGameUserAwardGroupByLotteryIdUrl'];
+								},
+								//保存代理投注奖金组
+								getSaveProxyBetGameAwardGroupUrl:function(){
+									return gameConfigData['saveProxyBetGameAwardGroupUrl'];
+								},
+									//获取投注提交接口地址
+								submitUrl:function(){
+									return gameConfigData['sumbitUrl'];
+								},
+								//获取首页接口
+								indexInitUrl:function(){
+									return gameConfigData['indexInit'];
+								},
+								//获取最新开奖号码
+								lastNumberUrl:function(){
+									return gameConfigData['lastNumberUrl'];
+								},
+								//name  wuxing.zhixuan.fushi
+								getTitleByName:function(name){
+			var me = this,
+				nameArr = name.split('.'),
+				nameLen = nameArr.length,
+				types = me.types,
+				i = 0,
+				len = types.length,
+				i2,
+				len2,
+				i3,
+				len3,
+				tempArr = [],
+				result = [];
+			//循环一级
+			for(;i < len;i++){
+				if(types[i]['name'] == nameArr[0]){
+					result.push(types[i]['title'].replace(/&nbsp;/g,''));
+					if(nameLen > 1 && types[i]['childs'].length > 0){
+						tempArr = types[i]['childs'];
+						len2 = tempArr.length;
+						//循环二级
+						for(i2 = 0;i2 < len2;i2++){
+							if(tempArr[i2]['name'] == nameArr[1]){
+								//result.push(tempArr[i2]['title'].replace(/&nbsp;/g,''));
+								if(nameLen > 2 && tempArr[i2]['childs'].length > 0){
+									tempArr = tempArr[i2]['childs'];
+									len3 = tempArr.length;
+									//循环三级
+									for(i3 = 0;i3 < len3;i3++){
+										if(tempArr[i3]['name'] == nameArr[2]){
+											if(tempArr[i3]['headline']){
+												return tempArr[i3]['headline'];
+											}
+											result.push(tempArr[i3]['title'].replace(/&nbsp;/g,''));
+											return result;
+										}
+									}
+								}else{
+									return result;
+								}
+							}
+						}
+					}else{
+						return result;
+					}
+				}
+			}
+			return '';
+		}
+		
+	};
+							var Main = host.Class(pros, Event);
+							Main.defConfig = defConfig;
+							Main.getInstance = function(cfg){
+								return instance || (instance = new Main(cfg));
+							};
+							
+							host.Games.{1}[name] = Main;
+							
+						})(phoenix, "Config", phoenix.Event); ]]></value>
+				</entry>
+				
+				
+				
+				<entry>
+					<key>
+						<value>configK3diceJs</value>
+					</key>
+					<value><![CDATA[ (function(host, undefined) {
+	var gameConfigData = {0};
+	var defConfig = {
+			//当前彩种名称
+			gameType: gameConfigData['gameType'],
+			gameTypeCn: gameConfigData['gameTypeCn'],
+			lotteryId: gameConfigData['lotteryId'],
+			awardGroups: gameConfigData['awardGroups'],
+			userId: gameConfigData['userId'],
+			userName: gameConfigData['userName'],
+			userLvl: gameConfigData['userLvl'],
+			awardRetStatus: gameConfigData['awardRetStatus'],
+			backOutStartFee: gameConfigData['backOutStartFee'],
+			backOutRadio: gameConfigData['backOutRadio'],
+			isLotteryStopSale: gameConfigData['isLotteryStopSale'],
+			isfirstimeuse2000: gameConfigData['isfirstimeuse2000'],
+			helpLink: gameConfigData['helpLink'],
+			sourceList: gameConfigData['sourceList']
+		},
+		instance;
+	var pros = {
+		init: function() {
+			var me = this;
+			me.types = gameConfigData['gameMethods'];
+		},
+		getConfig: function(){
+			return this.config = gameConfigData;
+		},
+		//获取玩法类型
+		getTypes: function(isFilterClose) {
+			return this.types;
+		},
+		getBallLists: function() {
+			return gameConfigData['ballLists'];
+		},
+		getBallType: function(idx) {
+			var balls = this.getBallLists(),
+				ball = balls[idx],
+				name = '';
+			if( ball && ball.name ){
+				name = ball.name;
+			}
+			return name;
+		},
+		getBallOrder: function(idx) {
+			var balls = this.getBallLists(),
+				ball = balls[idx],
+				order = '';
+			if( ball && ball.order ){
+				order = ball.order;
+			}
+			return order;
+		},
+		getGameType: function() {
+			return defConfig['gameType'];
+		},
+		getGameTypeCn: function() {
+			return defConfig['gameTypeCn'];
+		},
+		getDefaultMethod: function() {
+			return gameConfigData['defaultMethod'];
+		},
+		//获取动态配置接口地址
+		getDynamicConfigUrl: function() {
+			return gameConfigData['dynamicConfigUrl'];
+		},
+		//获取单式上传接口地址
+		getUploadPath: function() {
+			return gameConfigData['uploadPath'];
+		},
+		//获取用户余额
+		getUserBalUrl: function() {
+			return gameConfigData['queryUserBalUrl'];
+		},
+		//获取投注页面显示订单接口地址
+		getUserOrdersUrl: function() {
+			return gameConfigData['getUserOrdersUrl'];
+		},
+		//获取单式上传接口地址
+		getUserPlansUrl: function() {
+			return gameConfigData['getUserPlansUrl'];
+		},
+		//获取撤销手续费接口地址
+		getHandingChargeUrl: function() {
+			return gameConfigData['getHandingChargeUrl'];
+		},
+		//获取彩种logo地址
+		getLotteryLogoPath: function() {
+			return gameConfigData['getLotteryLogoPath'];
+		},
+		//获取玩法走势图接口地址
+		trendChartUrl: function() {
+			return gameConfigData['trendChartUrl'];
+		},
+		//查询玩法描述和默认冷热球及用户投注方式奖金接口地址
+		getBetAwardUrl: function() {
+			return gameConfigData['getBetAwardUrl'];
+		},
+		//获取冷热遗漏接口地址
+		getHotColdUrl: function() {
+			return gameConfigData['getHotColdUrl'];
+		},
+		//查询奖金组
+		getQueryGameUserAwardGroupByLotteryIdUrl: function() {
+			return gameConfigData['queryGameUserAwardGroupByLotteryIdUrl'];
+		},
+		//保存代理投注奖金组
+		getSaveProxyBetGameAwardGroupUrl: function() {
+			return gameConfigData['saveProxyBetGameAwardGroupUrl'];
+		},
+		//获取投注提交接口地址
+		submitUrl: function() {
+			return gameConfigData['sumbitUrl'];
+		},
+		//获取首页接口
+		indexInitUrl: function() {
+			return gameConfigData['indexInit'];
+		},
+		//获取最新开奖号码
+		lastNumberUrl: function() {
+			return gameConfigData['lastNumberUrl'];
+		},
+		//获取其他玩家投注信息
+		getPlayerBetUrl: function() {
+			return gameConfigData['playerBetUrl'];
+		},
+		getWinningListUrl: function() {
+			return gameConfigData['winningListUrl'];
+		},
+		//获取其他玩家投注信息
+		uploadUserInfo: function() {
+			return gameConfigData['uploadUserInfo'];
+		},
+		//name  wuxing.zhixuan.fushi
+		getTitleByName: function(name) {
+			var me = this,
+				types = me.types,
+				i = 0,
+				len = types.length,
+				nameArr = name.split('.'),
+				nameLen = nameArr.length;
+			for(; i<len; i++){
+				if( types[i]['gameType'] == nameArr[nameLen-1] ){
+					return types[i]['gameTypeCn'];
+				}
+			}
+			return '';
+		}
+
+	};
+
+	function GameConfig(){
+		this.init();
+	};
+	GameConfig.prototype = pros;
+
+	return host.GameConfig = GameConfig;
+
+})(window); ]]></value>
+				</entry>
+				
+				
+				<entry>
+					<key>
+						<value>lhcConfigJs</value>
+					</key>
+					<value><![CDATA[ (function(host, name, Event, undefined){
+							var gameConfigData = {0};
+							var defConfig = {
+								//当前彩种名称
+								gameType : gameConfigData['gameType'],
+					            gameTypeCn : gameConfigData['gameTypeCn'],
+					            lotteryId : gameConfigData['lotteryId'],
+					            userId: gameConfigData['userId'],
+					            userName: gameConfigData['userName'],
+					            userLvl: gameConfigData['userLvl'],
+					            awardRetStatus: gameConfigData['awardRetStatus'],
+					            awardGroupRetStatus: gameConfigData['awardGroupRetStatus'],
+					            backOutStartFee: gameConfigData['backOutStartFee'],
+					            backOutRadio: gameConfigData['backOutRadio'],
+					            isLotteryStopSale: gameConfigData['isLotteryStopSale'],
+					            helpLink: gameConfigData['helpLink'],
+					            sourceList: gameConfigData['sourceList'],
+					            lhcStatus: gameConfigData['lhcStatus'],
+					            awardGroups: gameConfigData['awardGroups']
+							},
+							instance;
+							var pros = {
+								init:function(){
+									var me = this;
+									me.types = gameConfigData['gameMethods'];
+								},
+								//获取玩法类型
+								getTypes:function(isFilterClose){
+									return this.types;
+								},
+								getGameTypeCn:function(){
+									return this.defConfig.gameTypeCn;
+								},
+								getDefaultMethod:function(){
+									return gameConfigData['defaultMethod'];
+								},
+								//获取动态配置接口地址
+								getDynamicConfigUrl:function(){
+									return gameConfigData['dynamicConfigUrl'];
+								},
+								//获取生肖配置
+						        getZoadiacList: function(){
+						            return gameConfigData['gameZodiac'];
+						        },
+						        //获取特码直选赔率接口地址
+						        getStraightOddsUrl:function(){
+						            return gameConfigData['queryStraightOddsUrl'];
+						        },
+						        //获取游戏赔率
+						        getGameOdds: function(){
+						            return gameConfigData['gameOdds'];
+						        },
+						        //获取玩法提示
+						        getGameTips: function(){
+						            return gameConfigData['gameTips'];
+						        },
+								//获取单式上传接口地址
+								getUploadPath:function(){
+									return gameConfigData['uploadPath'];
+								},
+								//获取用户余额
+								getUserBalUrl:function(){
+									return gameConfigData['queryUserBalUrl'];
+								},
+									//获取投注页面显示订单接口地址
+								getUserOrdersUrl:function(){
+									return gameConfigData['getUserOrdersUrl'];
+								},
+									//获取单式上传接口地址
+								getUserPlansUrl:function(){
+									return gameConfigData['getUserPlansUrl'];
+								},
+									//获取撤销手续费接口地址
+								getHandingChargeUrl:function(){
+									return gameConfigData['getHandingChargeUrl'];
+								},
+								//获取彩种logo地址
+								getLotteryLogoPath:function(){
+									return gameConfigData['getLotteryLogoPath'];
+								},
+									//获取玩法走势图接口地址
+								trendChartUrl:function(){
+									return gameConfigData['trendChartUrl'];
+								},
+						        //查询玩法描述和默认冷热球及用户投注方式奖金接口地址
+								getBetAwardUrl:function(){
+									return gameConfigData['getBetAwardUrl'];
+								},
+								//获取冷热遗漏接口地址
+								getHotColdUrl:function(){
+									return gameConfigData['getHotColdUrl'];
+								},
+								//查询奖金组
+								getQueryGameUserAwardGroupByLotteryIdUrl:function(){
+									return gameConfigData['queryGameUserAwardGroupByLotteryIdUrl'];
+								},
+								//保存代理投注奖金组
+								getSaveProxyBetGameAwardGroupUrl:function(){
+									return gameConfigData['saveProxyBetGameAwardGroupUrl'];
+								},
+									//获取投注提交接口地址
+								submitUrl:function(){
+									return gameConfigData['sumbitUrl'];
+								},
+								//获取首页接口
+								indexInitUrl:function(){
+									return gameConfigData['indexInit'];
+								},
+								//获取最新开奖号码
+								lastNumberUrl:function(){
+									return gameConfigData['lastNumberUrl'];
+								},
+								//獲取六合彩狀態
+								getLhcStatus:function(){
+									return this.defConfig.lhcStatus;
+								},
+								//獲取历史开奖记录
+								getHistoryLotteryAwardUrl:function(){
+									return gameConfigData['historyLotteryAwardUrl'];
+								},
+								//name  wuxing.zhixuan.fushi
+								//name转中文
+						        getTitleByName:function(name,plus){
+						            var me = this,
+						                nameArr = name.split('.'),
+						                nameLen = nameArr.length,
+						                types = me.types,
+						                i = 0,
+						                len = types.length,
+						                i2,
+						                len2,
+						                tempArr = [],
+						                result = [],
+						                plusMap = {'saishai':'生肖','liangmian':'两面','sapo':'色波','zhixuanema':'直选'};
+						            //循环一级
+						            for(;i < len;i++){
+						                if(types[i]['name'] == nameArr[0]){
+						                    result.push(types[i]['title'].replace(/&nbsp;/g,''));
+						                    if(nameLen > 1 && types[i]['childs'].length > 0){
+						                        tempArr = types[i]['childs'];
+						                        len2 = tempArr.length;
+						                        //循环二级
+						                        for(i2 = 0;i2 < len2;i2++){
+						                            if(tempArr[i2]['name'] == nameArr[1]){
+						                                result.push(tempArr[i2]['title'].replace(/&nbsp;/g,''));
+						                                if(!!plus){
+						                                    result.pop();
+						                                    result.push(plusMap[plus]);
+						                                    return result;
+						
+						                                }else{
+						                                    return result;
+						                                }
+						                            }
+						                        }
+						                    }else{
+						                        return result;
+						                    }
+						                }
+						            }
+						            return '';
+						        }
+								
+							};
+							
+							var Main = host.Class(pros, Event);
+							Main.defConfig = defConfig;
+							Main.getInstance = function(cfg){
+								return instance || (instance = new Main(cfg));
+							};
+							
+							host.Games.LHC[name] = Main;
+							
+						})(phoenix, "Config", phoenix.Event); ]]></value>
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
+</beans>

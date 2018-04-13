@@ -1,0 +1,218 @@
+.header {
+    background: none;
+}
+body {
+    background: #06223d url(bg-ele.jpg) no-repeat;
+}
+.g_34 {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+}
+/* footer */
+.footer {
+    height: auto;
+    background: none;
+    font-family: microsoft yahei;
+    line-height: 1.5;
+}
+
+.footer-help {
+    height: 108px;
+    background: #dde5f2;
+    overflow: hidden;
+}
+.footer-help .footer-m {
+    width: 1200px;
+    margin: 0 auto;
+    background:  url(../indexv2/bg-sprite.jpg) no-repeat center -982px;
+    height: 110px;
+}
+
+.footer-help-link {
+    padding-top: 55px;
+    padding-left: 910px;
+}
+
+.footer-help-link a {
+    float: left;
+    width: 69px;
+    color: #7C7C7C;
+}
+
+.footer-link {
+    text-align: center;
+    padding: 18px 0;
+    background-color: #3A3F59;
+}
+
+.footer-link a {
+    margin: 0;
+    vertical-align: middle;
+}
+
+.footer-link span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1px;
+    height: 10px;
+    overflow: hidden;
+    margin: 0 6px;
+    background-color: #DDD;
+}
+
+.footer-copyright {
+    margin-top: 8px;
+    color: #8A8C99;
+}
+
+.game-content {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+.pt-fhx {
+    width: 1048px;
+    height: 382px;
+    background: url(bg-pt-fhx.png) no-repeat center top;
+    margin: 0 auto;
+    position: relative;
+}
+.game-pt {
+    position: absolute;
+    left: 31px;
+    top: 85px;
+    background: url(bg-pt.jpg) no-repeat;
+    width: 480px;
+    height: 80px;
+    padding-top: 190px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,.3);
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+.game-fhx {
+    position: absolute;
+    left: 540px;
+    top: 85px;
+    background: url(bg-fhx.jpg) no-repeat;
+    width: 480px;
+    height: 80px;
+    padding-top: 190px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+}
+.game-pt:hover {
+    transform:scale(1.02);
+    -moz-transform:scale(1.02);
+    -webkit-transform:scale(1.02);
+    -o-transform:scale(1.02);
+}
+.game-fhx:hover {
+    transform:scale(1.02);
+    -moz-transform:scale(1.02);
+    -webkit-transform:scale(1.02);
+    -o-transform:scale(1.02);
+}
+
+.cover-fhx {
+    background: url(cover-fhx.jpg);
+    width: 480px;
+    height: 270px;
+    position: absolute;
+    left: 540px;
+    top: 85px;
+}
+.link-btn {
+    width: 180px;
+    height: 50px;
+    background-image: url(ele-btn.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    box-shadow: 0px 4px 6px rgba(0,0,0,.4);
+    background-position: left top;
+}
+.goto-pt:active {
+    background-position: left bottom;
+    margin-top: 2px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,.4);
+}
+.goto-fhx {
+    background-position: right top;
+}
+.goto-fhx:active {
+    background-position: right bottom;
+    margin-top: 2px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,.4);
+}
+
+.casual-game {
+    background: url(bg-cgame.png);
+    margin: 20px auto 60px auto;
+    width: 1020px;
+    height: 388px;
+    position: relative;
+}
+.casual-game-list {
+    overflow: hidden;
+    _zoom: 1;
+    padding: 80px 0px 30px 25px;
+}
+.casual-game-list li {
+    float: left;
+    background: url(gameborder.png) no-repeat;
+    width: 178px;
+    height: 145px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.casual-game-list li a {
+    width: 170px;
+    height: 137px;
+    display: block;
+    margin: 4px auto;
+    position: relative;
+    overflow: hidden;
+}
+.casual-game-list li img {
+    width: 170px;
+    height: 137px;
+}
+.cover-cgame {
+    background: url(cover-cgame.jpg);
+    width: 1020px;
+    height: 332px;
+    position: absolute;
+    left: 0px;
+    top: 56px;
+}
+.casual-game-list li .link-title {
+    width: 100%;
+    height: 100%;
+    background: rgba(6, 23, 39, 0.8);
+    filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#CC062339,endColorStr=#CC062339);
+    position: absolute;
+    top: 0px;
+    opacity: 0;
+    filter:alpha(opacity:0);
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+}
+.link-title span {
+    border: 1px solid #7b7c6d;
+    border-radius: 4px;
+    padding:  6px 12px;
+    color: #fff8e6;
+    margin-top: 40px;
+    vertical-align: middle;
+    line-height: 137px;
+}
+.casual-game-list li a:hover .link-title{
+    opacity: 100;
+    filter:alpha(opacity:1);
+}
+

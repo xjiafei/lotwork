@@ -1,0 +1,247 @@
+@charset "UTF-8";
+
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+img{border:none;}
+body{
+    font:12px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;
+    font-family: 'Microsoft Yahei',Tahoma,Arial,Helvetica,Simsun,STHeiti;
+}
+
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+
+
+.top {
+    width: 100%;
+    background: url(topBg.jpg) no-repeat center top;
+}
+.rule {
+    width: 100%;
+    background: url(ruleBg.jpg) no-repeat center top;
+}
+.topM {
+    width: 1280px;
+    margin: 0 auto;
+    background: url(topMbg.jpg) no-repeat center top;
+    height: 1000px;
+    overflow: hidden;
+    position: relative;
+}
+
+.gameStatus {
+    background-image: url(status.png);
+    background-repeat:  no-repeat;
+    width: 156px;
+    height: 56px;
+    background-position: left bottom;
+    right: 38px;
+    top: 323px;
+    position: absolute;
+}
+.gameStatus.active {
+    background-position: left top;
+}
+.gameBox {
+    width: 894px;
+    height: 394px;
+    position: absolute;
+    left: 373px;
+    top: 390px;
+}
+.gameTips {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #6f8ec0;
+    font-size: 15px;
+    top: 18px;
+    left: 40px;
+}
+.cardList {
+    width: 100%;
+    left: 26px;
+    top: 56px;
+    position: absolute;
+}
+.cardList li {
+    float: left;
+    background: url(cardbg.png) no-repeat;
+    width: 209px;
+    height: 258px;
+    position: relative;
+}
+.cardList li a {
+    display: block;
+    position: absolute;
+}
+.cardList li .back {
+    background-image: url(cardBack.png);
+    width: 186px;
+    height: 249px;
+    background-position: -186px 0;
+    left: 11px;
+    top: 4px;
+}
+.cardList li .back:hover {
+    background-position: 0 0;
+}
+.cardList.disable .back:hover,
+.cardList.disable .back {
+    background-position: -372px 0;
+}
+.cardList li .front {
+    background-image: url(cardNum.png);
+    background-repeat: no-repeat;
+    height: 221px;
+    width: 158px;
+    left: 26px;
+    top: 17px;
+}
+
+.cardList li .cardNum1 {
+    background-position: left top;
+}
+.cardList li .cardNum2 {
+    background-position: -158px top;
+}
+.cardList li .cardNum3 {
+    background-position: -316px top;
+}
+.cardList li .cardNum4 {
+    background-position: -474px top;
+}
+.cardList li .cardNum5 {
+    background-position: -632px top;
+}
+.cardList li .cardNum6 {
+    background-position: -790px top;
+}
+.cardList li .cardNum7 {
+    background-position: -948px top;
+}
+.cardList li .cardNum8 {
+    background-position: -1106px top;
+}
+.cardList li .cardNum9 {
+    background-position: -1264px top;
+}
+.cardList li .cardNum0 {
+    background-position: -1422px top;
+}
+.cardFun {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+}
+.cardFun div{
+    background: #0b172a;
+    height: 42px;
+    line-height: 42px;
+    border-radius: 21px;
+    box-shadow: 0 0 3px rgba(255,255,255,.3);
+    display: inline-block;
+    padding: 0px 20px;
+    color: #9cb3d6;
+    font-size: 15px;
+}
+.cardFun div span {
+    color: #44d3d6;
+    margin-left: 4px;
+}
+.cardFun .funLeft {
+    float: left;
+    display: none;
+}
+.funRight {
+    float: right;
+}
+.rule {
+    color: #697fa2;
+    font-size: 15px;
+    line-height: 30px;
+}
+.ruleM {
+    width: 1280px;
+    height: 526px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 57px;
+    background: url(ruleMbg.jpg) no-repeat center top;
+}
+.rule p {
+    padding-left: 240px;
+    padding-bottom: 71px;
+}
+.rule p span {
+    color: #9d8e79;
+}
+.rule ul {
+    padding-top: 20px;
+    padding-left: 240px;
+}
+.rule ul li {
+    text-align: left;
+
+}
+.rule ul li span {
+    display: inline-block;
+    width: 21px;
+    heigh: 21px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.pop {
+    padding:  30px 45px;
+    width: 300px;
+    border-radius: 10px;
+    background: #34425b;
+    color: #fff;
+    font-size: 20px;
+    left: 50%;
+    margin-left: -150px;
+    top: 50%;
+    margin-top: -100px;
+    line-height: 36px;
+    position: fixed;
+    z-index: 999;
+    display: none;
+}
+.pop a {
+    color: #ffe48e;
+    text-decoration: none;
+}
+.pop p span {
+    color: #44d3d6;
+}
+.pop .confirm {
+    color: #000;
+    display: block;
+    margin: 10px auto 0;
+    background: #ffe48e;
+    text-align: center;
+    width: 100px;
+    border-radius: 5px;
+    text-decoration: none;
+
+}
+.pop .confirm:hover {
+    background: #efc84d;
+}
+
+/*footer*/
+.footer{
+    background: #242325;
+    width: 100%;
+    line-height: 60px;
+    text-align: center;
+    font-size: 14px;
+    color: #4c5562;
+}

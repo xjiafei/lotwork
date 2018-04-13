@@ -1,0 +1,316 @@
+@charset "UTF-8";
+
+body{
+	-webkit-text-size-adjust:none;
+}
+
+.header .logo{
+	margin-top:1px;
+background-image: none;
+}
+
+.logo a{
+	width:100px;
+	padding-top:80px;
+	background:url("logo-ssq.png") no-repeat 0 0;
+}
+
+.lottery{
+	float: right;
+	width:520px;
+	height: 51px;
+	margin-left: auto;
+	padding-top: 11px;
+	background:url("bg-header-box.png") 0 -80px no-repeat\9;
+}
+
+.deadline{
+	margin-left:25px;
+	width:320px;
+	background:url("bg-header-box.png") 0 0 no-repeat\9;
+}
+
+.lottery-number{
+	height: 37px;
+}
+
+.lottery-number em{
+	*display: inline;
+	width: 37px;
+	height: 100%;
+	line-height: 36px;
+	color: #fff;
+	background-image: url(un-lottery-number-red.png);
+	background-position: 0 0;
+	margin: 0 3px;
+	font-size: 20px;
+	overflow: hidden;
+}
+.lottery-number .blue-ball{
+	background-image: url(un-lottery-number-blue.png);
+}
+
+.number-select-content{
+	margin-top: 10px;
+}
+.number-select-title{
+	padding: 10px 0;
+}
+
+.ball-section{
+	background-color: #e7e7e7;
+	border-radius: 5px;
+	position: relative;
+	padding: 0 15px 15px;
+	text-align: center;
+}
+.dantuo-number-select-content .ball-section{
+	margin-top: 20px;
+}
+.blue-ball-section{
+	width: 300px;
+	float: right;
+}
+.red-ball-section{
+	width: 550px;
+	float: left;
+}
+
+.ball-title{
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	width: auto;
+	min-width: 100px;
+	_width: auto;
+	height: 24px;
+	line-height: 24px;
+	position: relative;
+	top: -2px;
+	text-align: center;
+	padding: 0 20px;
+	color: #fff;
+	border-radius: 0 0 3px 3px;
+}
+.blue-ball-section .ball-title,
+.tuodanblue-ball-section .ball-title{
+	background-color: #3a9aea;
+}
+.red-ball-section .ball-title,
+.dan-ball-section .ball-title,
+.tuo-ball-section .ball-title{
+	background-color: #f7482b;
+}
+.ball-title strong{
+	font-size: 12px;
+	font-weight: 700;
+	color: #fff;
+	display: inline;
+	padding-bottom: 0;
+}
+.ball-title span{
+	display: inline;
+	background-color: transparent;
+	color: #dbdbdb;
+	white-space: nowrap;
+}
+
+.ball-content{
+	margin-top: 10px;
+	background-color: transparent;
+	margin-left: 0;
+	text-align: left;
+}
+
+.ball-section li{	
+	background-color: transparent;
+	padding: 0 5px;
+}
+.ball-row{
+	padding: 6px 0;
+	border-bottom: 1px solid #fff;
+	overflow: hidden;
+	*zoom: 1;
+}
+.ball-row:last-child{
+	/*border-bottom: none;*/
+}
+.ball-number{
+	background-image: url(un-ball-number.png);
+	background-position: 0 0;
+}
+.blue-ball-section .ball-number-current,
+.tuodanblue-ball-section .ball-number-current,.blue-ball-section a.ball-number.ball-number-current:hover{
+	background-position: -100px 0;
+}
+.red-ball-section .ball-number-current,
+.dan-ball-section .ball-number-current,
+.tuo-ball-section .ball-number-current{
+	background-position: -50px 0;
+}
+
+.ball-control{
+	padding-top: 10px;
+	display: block;
+	text-align: center;
+	margin-left: 0;
+}
+.ball-control a{
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	float: none;
+	background: #fcfcfc;
+	border-color: #cfd3df;
+	color: #9c9c9c;
+	width: auto;
+	height: auto;
+	line-height: 24px;
+	padding: 0 10px;
+	margin-left: 10px;
+	font-size: 12px;
+	border-radius: 3px;
+}
+.ball-control .choose-list a{
+	display: block;
+	margin: 3px 0;
+	padding: 0 14px;
+	height: 20px;
+	line-height: 20px;
+	text-align: left;
+	font-weight: normal;
+}
+.ball-control .choose-list a:hover{
+	border-radius: 0;
+}
+.ball-control .random-color-blue{
+	background-color: #3a9aea;
+	color: #fff;
+}
+.ball-control .random-color-red{
+	background-color: #f7482b;
+	color: #fff;
+}
+
+#J-balls-statistics-panel{
+	clear: both;
+}
+
+.bet-statistics em,
+.choose-model input,
+.bet-statistics .price,
+.choose-list a{
+	color: #ef8d00;
+}
+.choose-list a:hover{
+	background-color: #ef8d00;
+}
+
+.chart-table .ball-noraml,
+.chart-table .issue-numbers{
+	font-size: 11px;
+}
+
+.prize-poll{
+	display: none;
+	height: 47px;
+	position:fixed;
+	top: 0;
+	right: 50%;
+	margin-right: -510px;
+	padding-right: 20px;
+	padding-left:78px;padding-top:1px;
+	color: #fff;
+	border-radius: 2px;
+	overflow: hidden;
+	z-index: 111;
+	background:url("bg-countdown.png") no-repeat;
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/game/ssq/bg-countdown.png");
+	/*filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#efffba00',EndColorStr='#efffba00');*/
+	_position: absolute;
+	/*_top: expression(eval(document.documentElement.scrollTop));*/
+}
+.prize-poll-text{
+	height:41px;padding-right:5px;
+	text-align: center;background-color:#ffc000;
+}
+.prize-poll span{
+	display: block;
+	font-weight: bold;text-align:left;
+}
+.prize-poll strong{
+	display: block;
+	font-weight: normal;
+	font-size: 12px;
+	font-family: arial;
+}
+.prize-poll strong em{
+	font-weight: normal;
+	font-size: 15px;
+	vertical-align: middle;
+	padding-right: 5px;
+}
+.prize-poll a{
+	position: absolute;
+	right: 0;
+	top: 1px;
+	width: 20px;
+	height:41px;
+	background:#F0B500 url('un-countdown.png') 6px -45px no-repeat;
+	border-radius: 0 5px 5px 0;
+	text-decoration: none;
+}
+.prize-poll-fold a{
+	background-position: 6px -94px;
+}
+.prize-poll-fold .prize-poll-text{
+	display: none;
+}
+
+/**/
+.program-chase{
+	position: relative;
+}
+
+
+.play-section{
+	background: #fff;
+}
+
+.play-section dt{
+	display: none;
+}
+
+.play-select-content dl{
+	padding: 1px 0 1px 0px;
+}
+
+.play-select-content dd{
+	margin-left: 18px;
+}
+
+.play-select-title{
+	border: none;
+}
+
+.play-select-content{
+	height: 44px;
+}
+
+.play-select-title li.current,
+.play-select-title li.current:hover{
+	color: #076a5b;
+	background: none;
+	box-shadow: none;
+}
+
+a.ball-number:hover {
+    background-position: -152px 0px;
+}
+
+
+a.ball-number.ball-number-current:hover {
+    background-position: -50px 0;
+}
+

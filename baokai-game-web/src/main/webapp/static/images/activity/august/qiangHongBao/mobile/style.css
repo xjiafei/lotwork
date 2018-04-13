@@ -1,0 +1,223 @@
+@charset "UTF-8";
+
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+img{border:none;}
+body{
+    font:12px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;
+    font-family: 'Microsoft Yahei',Tahoma,Arial,Helvetica,Simsun,STHeiti;
+}
+
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+
+
+.main{
+    margin: 0 auto;
+    max-width: 720px;
+}
+.imgbg {
+    width: 100%;
+    display: block;
+    vertical-align: top;
+}
+.top {
+    width: 100%;
+    position: relative;
+}
+.rule {
+    width: 100%;
+}
+
+
+.gameStatus {
+    background-image: url(gamestop.png);
+    background-repeat:  no-repeat;
+    width: 2.66rem;
+    height: 0.97rem;
+    left: 0rem;
+    top: 0rem;
+    position: absolute;
+    background-size: 100%;
+}
+.gameStatus.active {
+    background-image: url(gaming.png);
+}
+.gameBox {
+    width: 100%;
+    height: 3.25rem;
+    position: absolute;
+    left: 0;
+    top: 2.2rem;
+}
+.gameTips {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #6f8ec0;
+    font-size: 15px;
+    top: 18px;
+    left: 40px;
+    display: none;
+}
+.cardList {
+    width: 100%;
+    left: 0.1rem;
+    top: 0;
+    position: absolute;
+}
+.cardList li {
+    float: left;
+    background: url(cardBg.png) no-repeat;
+    width: 1.74rem;
+    height: 2.15rem;
+    position: relative;
+    background-size: 100%;
+}
+.cardList li a {
+    display: block;
+    position: absolute;
+}
+.cardList li .back {
+    background-image: url(cardBack.png);
+    background-repeat: no-repeat;
+    width: 1.26rem;
+    height: 1.76rem;
+    left: 0.25rem;
+    top: 0.19rem;
+    background-size: 100%;
+}
+.cardList li .back:hover {
+    background-position: 0 0;
+}
+.cardList.disable .back:hover,
+.cardList.disable .back {
+    background-image: url(cardBackDis.png);
+}
+.cardList li .front {
+    background-image: url(cardNum.png);
+    background-repeat: no-repeat;
+    width: 1.26rem;
+    height: 1.76rem;
+    left: 0.25rem;
+    top: 0.19rem;
+    background-size: 12.6rem;
+}
+
+.cardList li .cardNum1 {
+    background-position: left top;
+}
+.cardList li .cardNum2 {
+    background-position: -1.26rem top;
+}
+.cardList li .cardNum3 {
+    background-position: -2.52rem top;
+}
+.cardList li .cardNum4 {
+    background-position: -3.78rem top;
+}
+.cardList li .cardNum5 {
+    background-position: -5.04rem top;
+}
+.cardList li .cardNum6 {
+    background-position: -6.3rem top;
+}
+.cardList li .cardNum7 {
+    background-position: -7.56rem top;
+}
+.cardList li .cardNum8 {
+    background-position: -8.82rem top;
+}
+.cardList li .cardNum9 {
+    background-position: -10.08rem top;
+}
+.cardList li .cardNum0 {
+    background-position: -11.34rem top;
+}
+.cardFun {
+    position: absolute;
+    bottom: 0.5rem;
+    width: 90%;
+    left: 5%;
+}
+.cardFun div{
+    background: #0b172a;
+    height: 0.42rem;
+    line-height: 0.42rem;
+    border-radius: 0.21rem;
+    box-shadow: 0 0 0.03rem rgba(255,255,255,.3);
+    display: inline-block;
+    padding: 0px 0.2rem;
+    color: #9cb3d6;
+    font-size: 0.15rem;
+}
+.cardFun div span {
+    color: #44d3d6;
+    margin-left: 0.04rem;
+}
+.cardFun .funLeft {
+    float: left;
+    display: none;
+}
+.funRight {
+    float: right;
+}
+.rule {
+    color: #697fa2;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+
+.pop {
+    padding: 0.4rem 5%;
+    width: 60%;
+    border-radius: 0.1rem;
+    background: #34425b;
+    color: #fff;
+    font-size: 0.2rem;
+    left: 15%;
+    top: 50%;
+    margin-top: -100px;
+    line-height: 0.36rem;
+    position: fixed;
+    z-index: 999;
+    display: none;
+}
+.pop a {
+    color: #ffe48e;
+    text-decoration: none;
+}
+.pop p span {
+    color: #44d3d6;
+}
+.pop .confirm {
+    color: #000;
+    display: block;
+    margin: 0.1rem auto 0;
+    background: #ffe48e;
+    text-align: center;
+    width: 1rem;
+    border-radius: 0.05rem;
+    text-decoration: none;
+
+}
+.pop .confirm:hover {
+    background: #efc84d;
+}
+
+/*footer*/
+.footer{
+    background: #242325;
+    width: 100%;
+    line-height: 0.8rem;
+    text-align: center;
+    font-size: 0.14rem;
+    color: #4c5562;
+}

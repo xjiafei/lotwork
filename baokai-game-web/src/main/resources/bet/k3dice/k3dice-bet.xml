@@ -1,0 +1,128 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="K3diceAbstractBetOperator" class="com.winterframework.firefrog.game.web.bet.operator.impl.AbstractBetOperator" parent="betSupport" abstract="true">
+		<property name="view" value="/bet/k3dice/bet" />
+		<!--  <property name="defaultMethod" value="housan.zhixuan.fushi" />-->
+		<property name="defaultMethod" value="34,28,71" />
+		<property name="lotterySeries" value="k3dice" />
+		<property name="extendedProperties" ref="k3diceBetProperties" />
+		<property name="trendCharts">
+			<bean class="java.util.HashMap">
+				<constructor-arg>
+					<map>
+						<entry>
+							<key><value>cqssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>jxssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>xjssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>tjssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>hljssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>llssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>jlffc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>shssl</value></key>
+							<ref bean="shsslTrendCharts" />
+						</entry>
+					</map>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="jsdice" class="com.winterframework.firefrog.game.web.bet.operator.impl.K3DiceBetOperator" parent="K3diceAbstractBetOperator">
+		<property name="lotteryCode" value="jsdice" />
+		<property name="lotteryId" value="99601" />
+		<property name="lotteryName" value="江苏骰宝" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=1143" />
+	</bean>	
+	
+	
+	
+	
+	<bean id="jldiceAbstractBetOperator" class="com.winterframework.firefrog.game.web.bet.operator.impl.AbstractBetOperator" parent="betSupport" abstract="true">
+		<property name="view" value="/bet/jldice/bet" />
+		<!--  <property name="defaultMethod" value="housan.zhixuan.fushi" />-->
+		<property name="defaultMethod" value="34,28,71" />
+		<property name="lotterySeries" value="jldice" />
+		<property name="extendedProperties" ref="k3diceBetProperties" />
+		<property name="trendCharts">
+			<bean class="java.util.HashMap">
+				<constructor-arg>
+					<map>
+						<entry>
+							<key><value>cqssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>jxssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>xjssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>tjssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>hljssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>llssc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>jlffc</value></key>
+							<ref bean="sscTrendCharts" />
+						</entry>
+						<entry>
+							<key><value>shssl</value></key>
+							<ref bean="shsslTrendCharts" />
+						</entry>
+					</map>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<bean id="jldice1" class="com.winterframework.firefrog.game.web.bet.operator.impl.K3DiceBetOperator" parent="jldiceAbstractBetOperator">
+		<property name="lotteryCode" value="jldice1" />
+		<property name="lotteryId" value="99602" />
+		<property name="lotteryName" value="高频骰宝(娱乐厅)" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=1843" />
+	</bean>
+	
+	<bean id="jldice2" class="com.winterframework.firefrog.game.web.bet.operator.impl.K3DiceBetOperator" parent="jldiceAbstractBetOperator">
+		<property name="lotteryCode" value="jldice2" />
+		<property name="lotteryId" value="99603" />
+		<property name="lotteryName" value="高频骰宝(至尊厅)" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=1844" />
+	</bean>
+	
+</beans>

@@ -1,0 +1,344 @@
+*{
+    margin:0;
+    padding:0;
+}
+body
+{
+    width: 100%;
+    background: url(MergedLayers.png) center top;
+    background-repeat: no-repeat;
+    height: 3000px;
+}
+
+.model{
+    display: none;
+    position: absolute;
+    width: 1920px;
+    height: 3000px;
+    background: url(model_bg.png);
+    background-repeat: repeat;
+    z-index: 30;
+
+}
+.ModelBody {
+    background: url(model.png);
+    width: 679px;
+    height: 343px;
+    margin: 0 auto;
+    margin-top: 591px;
+
+    position: relative;
+}
+.btn_add {
+    display: block;
+    width: 176px;
+    height: 46px;
+    position: absolute;
+    top:253px;
+    left: 353px;
+}
+.btn_later {
+    display: block;
+    width: 180px;
+    height: 50px;
+    position: absolute;
+    top:250px;
+    left: 142px;
+}
+.SideNav {
+    position: fixed;
+    width: 110px;
+    height: auto;
+    right: 50px;
+    top: 385px;
+    z-index: 20;
+}
+.SideNavBody {
+    position: relative;
+    background: url(line.png);
+    background-position: center;
+    background-repeat: repeat-y;
+}
+
+.SideNavBody .nav-btn
+{
+    width: 40px;
+    height: 40px;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+
+    text-align: center;
+    border-radius: 50%;
+    border-color: #ffffff;
+    background-color: #ffffff;
+    color: #4fc7d3;
+    font: 18px / 40px FZY4JW;
+
+    cursor: pointer;
+
+    -moz-transform-origin:0;
+    -moz-transition: all 200ms ease-out;
+    -webkit-transform-origin:0;
+    -webkit-transition: all 200ms ease-out;
+    -o-transform-origin:0;
+    -o-transition: all 200ms ease-out;
+    -ms-transform-origin:0;
+    -ms-transition: all 200ms ease-out;
+    transform-origin:0;
+    transition: all 200ms ease-out;
+}
+.GOcom4 {
+    color: #4fc7d3;
+    font: 16px / 40px FZY4JW;
+}
+.GOcom3 {
+    color: #4fc7d3;
+    font: 18px / 40px FZY4JW;
+}
+.GOcom2.nav-btn.action,.GOcom3.nav-btn.action
+{
+    background-color: #4fc7d3;
+    border-radius: 50%;
+    border: #ffffff 5px solid;
+
+    width: 100px;
+    height: 70px;
+    color: #fefefe;
+    font: 20px / 20px FZLTCHJW;
+    padding-top: 30px;
+}
+.GOcom4.nav-btn.action,.GOtop.nav-btn.action
+{
+    background-color: #4fc7d3;
+    border-radius: 50%;
+    border: #ffffff 5px solid;
+
+    width: 100px;
+    height: 100px;
+    color: #fefefe;
+    font: 20px / 100px FZLTCHJW;
+}
+
+
+.main {
+    width: 1054px;
+    padding-top: 803px;
+    text-align: center;
+    margin: 0 auto;
+}
+.main>div
+{
+    margin-left: -50px;
+}
+.com1{
+    width: 100%;
+    height: 123px;
+}
+
+.signup
+{
+    font-weight: 400;
+    height: 123px;
+    background: url(btn_normal.png);
+    background-repeat: no-repeat;
+    margin-left: 140px;
+}
+
+.signdone
+{
+    font-weight: 400;
+    height: 123px;
+    background: url(btn_done.png);
+    background-repeat: no-repeat;
+    margin-left: 140px;
+}
+
+.singupBtn {
+    width: 482px;
+    height: 95px;
+    margin-left: 176px;
+    padding-top: 20px;
+
+}
+.singupBtn {
+    display: block;
+}
+
+
+.com2 {
+    margin-top: 35px;
+    width: 1054px;
+    height: 771px;
+    background: url(MergedLayers-con1.png);
+
+    position: relative;
+}
+.TodayDeposit {
+    color: #4c2e00;
+    font: 700 34px / 30px 'Microsoft YaHei';
+    text-align: center;
+
+    position: absolute;
+    width: 120px;
+    height: 30px;
+    left: 281px;
+    top: 135px;
+}
+.TodayBets {
+    color: #4c2e00;
+    font: 700 34px / 30px 'Microsoft YaHei';
+    text-align: center;
+
+    position: absolute;
+    width: 120px;
+    height: 30px;
+    left: 490px;
+    top: 135px;
+}
+.TodayPrize {
+    color: #ea3713;
+    font: 700 34px / 30px 'Microsoft YaHei';
+    text-align: center;
+
+    position: absolute;
+    width: 120px;
+    height: 30px;
+    left: 695px;
+    top: 135px;
+}
+.btn_deposit {
+    width: 118px;
+    height: 126px;
+
+    position: absolute;
+    left: 871px;
+    top: 69px;
+}
+
+.com3 {
+    width: 1076px;
+    height: 606px;
+    background: url(MergedLayers-con2.png);
+    position: relative;
+}
+
+
+.sign1 {
+    display: none;
+    width: 258px;
+    height: 179px;
+    background: url(sign1.png);
+
+    position: absolute;
+    left: 125px;
+    top: 205px;
+}
+.sign1num
+{
+    text-align: center;
+    margin-top: 112px;
+    margin-left: 3px;
+    width: 180px;
+    line-height: 26px;
+    color: #885505;
+    font: 30px / 26px FZLTCHJW;
+}
+.gift1 {
+    display: none;
+    width: 244px;
+    height: 129px;
+    background: url(gift1.png);
+
+    position: absolute;
+    left: 370px;
+    top: 183px;
+}
+
+.sign2 {
+    display: none;
+    width: 288px;
+    height: 139px;
+    background: url(sign2.png);
+
+    position: absolute;
+    left: 385px;
+    top: 70px;
+}
+.sign2num
+{
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 5px;
+    width: 180px;
+    line-height: 26px;
+    color: #885505;
+    font: 30px / 26px FZLTCHJW;
+}
+.gift2 {
+    display: none;
+    width: 244px;
+    height: 162px;
+    background: url(gift2.png);
+    position: absolute;
+    left: 591px;
+    top:11px;
+}
+.sign3 {
+    display: none;
+    width: 195px;
+    height: 165px;
+    background: url(sign3.png);
+
+    position: absolute;
+    left: 866px;
+    top: 32px;
+}
+.sign3num
+{
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 5px;
+    width: 180px;
+    line-height: 26px;
+    color: #885505;
+    font: 30px / 26px FZLTCHJW;
+}
+.btn_ChangeAddress {
+    display: none;
+    width: 118px;
+    height: 126px;
+
+    position: absolute;
+    left: 885px;
+    top: 460px;
+}
+.gift3 {
+    display: none;
+    width: 248px;
+    height: 191px;
+    background: url(gift3.png);
+
+    position: absolute;
+    left: 805px;
+    top:182px;
+}
+.com4 {
+    margin-top: 35px;
+    width: 951px;
+    height: 524px;
+    background: url(com-3.png);
+}
+.sign4
+{
+    display: none;
+    width: 195px;
+    height: 157px;
+    background: url(sign4.png);
+
+    position: absolute;
+    left: 866px;
+    top: 32px;
+}
+

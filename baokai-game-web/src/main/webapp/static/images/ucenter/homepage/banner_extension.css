@@ -1,0 +1,124 @@
+#topbar .topbar-bg{
+    background-color: #f4f4f4;
+}
+
+#topbar {
+
+     color: #555;
+    border-bottom: solid 1px #e5e5e5;
+    box-shadow: 1px 1px 2px #e5e5e5;
+}
+
+#topbar a {
+    color: #555;
+}
+#topbar a.msg-title{
+    color: white;
+}
+
+.g_34{
+    width: 1000px;
+}
+
+.topbar .balance-box{
+    border-color: gray;
+}
+
+#topbar .balance-box{
+    border: none;
+}
+
+#header.header{
+    display: none;
+}
+
+.news-list{
+    border: 1px solid #e1e1e1;
+    width: 228px;
+}
+.news-list-hd{
+    border-bottom: none;
+    height: 30px;
+    line-height: 29px;
+    font-size: 12px;
+}
+
+.news-list-hd li{
+    background-color: #f3f3f3;
+    border-right: 1px solid #e1e1e1;
+    margin-right: 0px;
+    border-bottom: 1px solid #e1e1e1;
+
+}
+
+.news-list-hd .active {
+    background-color: white;
+    height: 30px;
+    line-height: 29px;
+     border-bottom: none;
+     color: #F13131;
+}
+.news-list-hd li a {
+
+    display: inline-block;
+    width: 75px;
+     overflow: inherit;
+    text-align: center;
+}
+.news-list{
+    padding: 0px;
+    height: 196px;
+    border: 1px solid #e1e1e1;
+    position: absolute;
+    z-index: 1;
+    top: 260px;
+
+}
+
+.news-list-hd .li-last {
+    width: 76px;
+    border-right: none;
+}
+.news-list-bd li{
+    font-size: 12px;
+    padding-left: 6px;
+}
+
+.news-list-bd li a span {
+
+    padding-right: 6px;
+}
+
+.col-sub {
+    margin-top: 0px;
+}
+
+#headerUsername.icon-user{
+background: url(arrow.png) right center no-repeat;
+}
+
+ul.bar-menu li.help{
+    background: url(problem.png) 4px 6px no-repeat;
+    background-size: 28% 58%;
+}
+
+.topbar li.client-service{
+
+    background: url(gift.png) 1px 6px no-repeat;
+    background-position: 3px 7px;
+    background-size: 18% 53%;
+}
+
+i.refreshBall{
+    position: relative;
+    background: url(refresh.png) 0px -1px no-repeat;
+    top: 4px;
+    background-size: 82% 106%;
+}
+
+
+.news-list-hd li .icon-notice {
+
+    right: 3px;
+    top: 5px;
+}

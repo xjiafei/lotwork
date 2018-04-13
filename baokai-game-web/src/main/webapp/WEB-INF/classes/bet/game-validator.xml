@@ -1,0 +1,132 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+   <!--北京快乐8趣味验证-->
+    <bean id="bjkl8FormatQuweiValidateExecutor"
+          class="com.winterframework.firefrog.game.web.validate.composite.format.Bjkl8FormatQuweiValidateExecutor">
+    </bean>
+	<bean id="gameBetNumberValidatorFactory"
+		class="com.winterframework.firefrog.game.web.validate.business.BetValidatorFactory">
+		<property name="executorMaps">
+			<bean class="java.util.HashMap">
+				<constructor-arg>
+					<map>
+						<entry>
+							<key><value>cqssc</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+						<entry>
+							<key><value>jxssc</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+						<entry>
+							<key><value>xjssc</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+						<entry>
+							<key><value>tjssc</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+						<entry>
+							<key><value>hljssc</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+						<entry>
+							<key><value>jlffc</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+						<entry>
+							<key><value>txffc</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+						<entry>
+							<key><value>llssc</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+						<entry>
+							<key><value>slmmc</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+						<entry>
+							<key><value>shssl</value></key>
+							<ref bean="sscValidators" />
+						</entry>
+                        <entry>
+                            <key><value>bjkl8</value></key>
+                            <ref bean="bjkl8Validate" />
+                        </entry>
+                         <entry>
+                            <key><value>sd115</value></key>
+                            <ref bean="n115Validate" />
+                        </entry>
+                        <entry>
+                            <key><value>jx115</value></key>
+                            <ref bean="n115Validate" />
+                        </entry>
+                        <entry>
+                            <key><value>gd115</value></key>
+                            <ref bean="n115Validate" />
+                        </entry>
+                        <entry>
+                            <key><value>cq115</value></key>
+                            <ref bean="n115Validate" />
+                        </entry>
+                         <entry>
+                            <key><value>ll115</value></key>
+                            <ref bean="n115Validate" />
+                        </entry>
+                        <entry>
+                            <key><value>js115</value></key>
+                            <ref bean="n115Validate" />
+                        </entry>
+                        <entry>
+                            <key><value>sl115</value></key>
+                            <ref bean="n115Validate" />
+                        </entry>
+                        <entry>
+                            <key><value>p5</value></key>
+                            <ref bean="p5Validate" />
+                        </entry>
+                        <entry>
+                            <key><value>fc3d</value></key>
+                            <ref bean="fc3dValidate" />
+                        </entry>
+                        <entry>
+                            <key><value>ssq</value></key>
+                            <ref bean="ssqValidators" />
+                        </entry>
+                         <entry>
+                            <key><value>jsk3</value></key>
+                            <ref bean="k3Validators" />
+                        </entry>
+                        <entry>
+                            <key><value>ahk3</value></key>
+                            <ref bean="k3Validators" />
+                        </entry>
+                         <entry>
+                            <key><value>jsdice</value></key>
+                            <ref bean="k3diceValidators" />
+                        </entry>
+                        <entry>
+                            <key><value>lhc</value></key>
+                            <ref bean="lhcValidators" />
+                        </entry>
+                         <entry>
+                            <key><value>jldice1</value></key>
+                            <ref bean="k3diceValidators" />
+                        </entry>
+                        <entry>
+                            <key><value>jldice2</value></key>
+                            <ref bean="k3diceValidators" />
+                        </entry>
+					</map>
+				</constructor-arg>
+			</bean>
+			
+		</property>
+	</bean>
+
+</beans>

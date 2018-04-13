@@ -1,0 +1,183 @@
+/*collectDiamonds*/
+.collectMission {
+    position: fixed;
+    right: 0px;
+    top: 100px;
+    width: 370px;
+    height: 200px;
+    color: #a69f85;
+    font-size: 12px;
+    z-index: 9999;
+    transition:All 0.5s ease-in-out;
+    -webkit-transition:All 0.5s ease-out;
+    -moz-transition:All 0.5s ease-out;
+    -o-transition:All 0.5s ease-out;
+}
+.collectBar {
+    background: url(collectBar.png);
+    width: 65px;
+    height: 124px;
+    position: absolute;
+    left: -43px;
+    top: 39px;
+    transition:All 0.5s ease-in-out;
+    -webkit-transition:All 0.5s ease-out;
+    -moz-transition:All 0.5s ease-out;
+    -o-transition:All 0.5s ease-out;
+}
+.gameInstruction {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: 0;
+    top: 0;
+}
+.missionOpen {
+    position: absolute;
+    width: 22px;
+    height: 78px;
+    right: 0;
+    top: 24px;
+}
+.collectMain {
+    background: url("collectMain.png") no-repeat;
+    width: 370px;
+    height: 200px;
+    position: relative;
+
+}
+.close.collectMission{
+    width: 0px;
+}
+.close .collectBar{
+    left: -65px;
+}
+
+
+
+.collectBox {
+    position: absolute;
+    width: 280px;
+    height: 47px;
+    left: 69px;
+}
+.collectBox.prizes1 {
+    top: 146px;
+}
+.collectBox.prizes2 {
+    top: 83px;
+}
+.collectBox.prizes3 {
+    top: 19px;
+}
+.progressBar {
+    background: url(bar.png) no-repeat;
+    width: 0%;
+    height: 20px;
+    margin: 2px 0px 0px 4px;
+}
+.collectBox .status {
+    color: #7a7a57;
+    line-height: 22px;
+    width: 100%;
+    text-align: right;
+}
+.btnBox {
+    position: absolute;
+    width: 60px;
+    height: 46px;
+    right: 0px;
+    top: 0px;
+    line-height: 23px;
+    text-align: center;
+}
+.btnBox p {
+    height: 23px;
+    line-height: 26px;
+}
+.btnBox .btn {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0px;
+    background-color: inherit;
+    border-radius: 0;
+    border: none;
+    background-image: url(collectBtn.png);
+    background-repeat: no-repeat;
+    display: none;
+}
+.prizes1 .btnBox .btn {
+    background-position: left -132px;
+}
+.prizes1 .btnBox .btn:hover {
+    background-position: -70px -132px;
+}
+.prizes1 .btnBox .btn:active {
+    background-position: -140px -132px;
+
+}
+.prizes2 .btnBox .btn {
+    background-position: left -66px;
+}
+.prizes2 .btnBox .btn:hover {
+    background-position: -70px -66px;
+}
+.prizes2 .btnBox .btn:active {
+    background-position: -140px -66px;
+}
+.prizes3 .btnBox .btn {
+    background-position: left top;
+
+}
+.prizes3 .btnBox .btn:hover {
+    background-position: -70px top;
+}
+.prizes3 .btnBox .btn:active {
+    background-position: -140px top;
+}
+.prizes2 .btnBox .btn.complete,
+.prizes3 .btnBox .btn.complete {
+    display: block;
+    background-position: -210px 0px;
+    cursor: not-allowed;
+}
+.prizes1 .btnBox .btn.complete {
+    display: block;
+    background-position: -210px -132px;
+    cursor: not-allowed;
+}
+.prizes1 .btnBox .btn.prizing,
+.prizes2 .btnBox .btn.prizing,
+.prizes3 .btnBox .btn.prizing {
+    display: block;
+}
+
+
+.collectMain .gameInstruction {
+    position: absolute;
+    left: 152px;
+    width: 68px;
+    height: 22px;
+    top: 190px;
+    background-image: url(collectBtn.png);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+}
+.collectMain .gameInstruction:hover {
+    background-position: -78px bottom;
+}
+.missionClose {
+    position: absolute;
+    width: 22px;
+    height: 78px;
+    left: 0;
+    top: 60px;
+}
+.not-activebtn {
+   pointer-events: none;
+   cursor: default;
+}

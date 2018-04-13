@@ -1,0 +1,62 @@
+@charset "UTF-8";
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+input,button,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
+input,button,textarea,select{*font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+ul,li{list-style:none;}
+img{border:none;}
+body{font:12px/1.5 arial,simsun,Helvetica,sans-serif;color:#333;}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+
+
+.animation{-webkit-animation-duration:1s;-webkit-animation-delay:.2s;-webkit-animation-timing-function:ease;-webkit-animation-fill-mode:both;-moz-animation-duration:1s;-moz-animation-delay:.2s;-moz-animation-timing-function:ease;-moz-animation-fill-mode:both}
+
+@-webkit-keyframes fadeInLeft{0%{opacity:0;-webkit-transform:translateX(-20px)}
+100%{opacity:1;-webkit-transform:translateX(0)}}
+@-moz-keyframes fadeInLeft{0%{opacity:0;-moz-transform:translateX(-20px)}
+100%{opacity:1;-moz-transform:translateX(0)}}
+.fadeInLeft{-webkit-animation-name:fadeInLeft;-moz-animation-name:fadeInLeft}
+
+@-webkit-keyframes hand{
+0%{-webkit-transform:translateX(10px) translateY(10px)}
+100%{-webkit-transform:translateX(0)}
+}
+@-moz-keyframes hand{
+0%{-moz-transform:translateX(10px) translateY(10px)}
+100%{-moz-transform:translateX(0)}
+}
+@-webkit-keyframes number1{
+0%{opacity:0;}
+100%{opacity:1;}
+}
+@-moz-keyframes number1{
+0%{opacity:0;}
+100%{opacity:1;}
+}
+
+
+.banner{position:relative;z-index:1;height:501px;background:#1A0004 url("../../../images/activity/recharge/banner.jpg") no-repeat center 0;}
+.btn{position:absolute;left:50%;bottom:0;margin-left:21px;width:156px;height:132px;background:url("../../../images/activity/recharge/btn.jpg") no-repeat center 0;opacity:0;
+transition:opacity .3s;
+}
+.btn:hover{opacity:1;}
+.hand{position:absolute;left:50%;bottom:-20px;width:89px;height:73px;margin-left:100px;background:url("../../../images/activity/recharge/hand.png") no-repeat center 0;
+-webkit-animation:hand .5s infinite ease-in alternate;
+-moz-animation:hand .5s infinite ease-in alternate;
+}
+
+.content{position:relative;height:999px;background:url("../../../images/activity/recharge/content.jpg") no-repeat center 0;}
+.number1{position:absolute;left:50%;top:389px;margin-left:-42px;width:54px;height:38px;background:url("../../../images/activity/recharge/number1.png") no-repeat 0 0;
+-webkit-animation:number1 .5s infinite linear alternate;
+-moz-animation:number1 .5s infinite linear alternate;
+}
+.number2{position:absolute;left:50%;top:389px;margin-left:264px;width:81px;height:38px;background:url("../../../images/activity/recharge/number2.png") no-repeat 0 0;
+-webkit-animation:number1 .5s infinite linear alternate;
+-moz-animation:number1 .5s infinite linear alternate;
+}
+
+.footer{position:absolute;bottom:80px;width:100%;width:}
+.footer-copyright{width:980px;margin:0 auto;color:#E47BBD;}
+.footer-copyright a{float:right;color:#E47BBD;text-decoration:none;}
+.footer-copyright a:hover{text-decoration:underline;}

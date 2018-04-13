@@ -1,0 +1,274 @@
+@charset "UTF-8";
+
+*{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+em{font-style:normal}
+ol,ul{list-style:none}
+fieldset,img,abbr,acronym{border:0}
+input,select{font-family:Microsoft YaHei}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+body{font:normal 20px/2em Microsoft YaHei,Tahoma,simsun;color:#bbc7e7;margin:0 auto;}
+.clearfix{*zoom:1}
+.clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+a{text-decoration:none; color: #575c69;}
+a:hover{text-decoration:none; color: #abc6eb;}
+.tc { text-align: center}
+.topbar,
+.banner,
+.info1,
+.info2,
+.info3,
+.info4,
+.info5{
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: center top;
+	border-bottom: 1px solid #2c3f64;
+}
+.topbarM,
+.bannerM,
+.info1M,
+.info2M,
+.info3M,
+.info4M,
+.info5M{
+	width: 1000px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-position: center top;
+	position: relative;
+}
+
+
+.banner {
+	background-image: url(/static/images/activity/jldice/bg_banner.jpg);
+	margin-top: 64px;
+}
+.info1 {
+	background-image: url(/static/images/activity/jldice/bg1.jpg);
+}
+.info2 {
+	background-image: url(/static/images/activity/jldice/bg2.jpg);
+}
+.info3 {
+	background-image: url(/static/images/activity/jldice/bg3.jpg);
+}
+.info4 {
+	background-image: url(/static/images/activity/jldice/bg4.jpg);
+}
+.info5 {
+	background-image: url(/static/images/activity/jldice/bg5.jpg);
+}
+
+.topbar {
+	background: #0d0d0f;
+	border: none;
+	position: fixed;
+	z-index: 222;
+	top: 0px;
+}
+.topbarM {
+	height: 64px;
+}
+.topbarM .logo {
+	float: left;
+}
+.menu {
+	height: 64px;
+	line-height: 64px;
+	overflow: hidden;;
+	float:right;
+	zoom: 1;
+}
+.menu li {
+	margin: 0px 20px;
+	float: left;
+}
+.menu .active a ,
+.menu li a:hover{
+	color: #abc6eb;
+}
+.bannerM {
+	background-image: url(/static/images/activity/jldice/banner.jpg);
+	height: 919px;
+}
+.info1M {
+	background-image: url(/static/images/activity/jldice/info1.jpg);
+	height: 636px;
+}
+.info2M {
+	background-image: url(/static/images/activity/jldice/info2.jpg);
+	height: 2230px;
+	padding-top: 183px;
+}
+.info3M {
+	background-image: url(/static/images/activity/jldice/info3.jpg);
+	height: 484px;
+	padding-top: 150px;
+}
+.info4M {
+	background-image: url(/static/images/activity/jldice/info4.jpg);
+	height: 748px;
+	padding-top: 180px;
+}
+.info5M {
+	background-image: url(/static/images/activity/jldice/info5.jpg);
+	height: 552px;
+	padding-top: 180px;
+}
+
+.info1M p {
+	width: 420px;
+	font-size: 20px;
+	padding-top: 450px;
+	float: left;
+	line-height: 30px;
+}
+.info1M .p2 {
+	padding-left: 140px;
+	color: #bbc7e7;
+}
+
+.tpl1 {
+	margin-left: 55px;
+}
+.info2M p {
+	padding-left: 55px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+.title {
+	background-repeat: no-repeat;
+	background-image: url(/static/images/activity/jldice/title.png);
+	height: 60px;
+	text-indent: -999em;
+	margin-bottom: 20px;
+}
+.title.t2 {
+	 background-position: 0px -60px;
+ }
+.title.t3 {
+	background-position: 0px -120px;
+}
+.title.t4 {
+	background-position: 0px -168px;
+}
+.title.t5 {
+	background-position: 0px -228px;
+}
+.title.t6 {
+	background-position: 0px -288px;
+}
+.info2M dl {
+	padding-left: 95px;
+	padding-bottom: 20px;
+}
+.info2M dl dt{
+	color: #8ca5e8;
+}
+.info2M dl dt span {
+	border-radius: 15px;
+	display: inline-block;
+	margin-left: -40px;
+	margin-right: 10px;
+	height: 30px;
+	width: 30px;
+	line-height: 30px;
+	text-align: center;
+	background: #8ca5e8;
+	color: #050d1b;
+}
+
+.info3M dl {
+	width: 300px;
+	float: left;
+	margin: 0px 10px;
+}
+.info3M dl dd {
+	font-size: 13px;
+	line-height: 26px;
+}
+.info3M .gifbox {
+	position: relative;
+}
+.info3M .gifbox span{
+	position: absolute;
+	width: 34px;
+	height: 24px;
+	line-height: 24px;
+	background: #78adef;
+	color: #fff;
+	font-weight: bold;
+	right: 0px;
+	bottom: 0px;
+	display: block;
+	text-align: center;
+}
+
+.info3M dl .gif {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+}
+.info3M .gifbox:hover .gif {
+	display: block;
+}
+.info3M .title {
+	height: 40px;
+}
+.info4M dl {
+	margin-bottom: 20px;
+}
+
+.info4M dl dt {
+	color: #8ca5e8;
+}
+
+.info5M dl {
+	width: 460px;
+	padding-right: 35px;
+	float: left;
+}
+
+.info5M dl dt {
+	height: 140px;
+}
+.info5M img {
+	border: 1px solid #2c3649;
+}
+.info5M .btn {
+	background-repeat: no-repeat;
+	background-image: url(/static/images/activity/jldice/btn1.jpg);
+	width: 166px;
+	height: 50px;
+	display: inline-block;
+	text-indent: -999em;
+}
+.info5M .btn:hover {
+	height: 49px;
+	margin-top: 1px;
+}
+.info5M .btn2 {
+	background-image: url(/static/images/activity/jldice/btn2.jpg);
+}
+.copyright {
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	font-size: 14px;
+	color: #414b64;
+	text-align: center;
+	background: #070e19;
+}
+.readMore {
+	padding-bottom:14px;
+	font-size: 14px;
+	color: #abc6eb;
+	background: url(/static/images/activity/jldice/down.png) no-repeat center bottom;
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	margin-top: -60px;
+}

@@ -1,0 +1,103 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="chartBodyRowGroupDataSelector" class="com.winterframework.firefrog.game.web.chart.selector.ChartBodyRowGroupDataSelector" />
+	
+	<bean id="chartBodyRowGroupPaneDataSelector" class="com.winterframework.firefrog.game.web.chart.selector.ChartBodyRowGroupPaneDataSelector">
+		<property name="styles">
+			<bean class="java.util.HashMap">
+				<constructor-arg>
+					<map>
+						<entry>
+							<key><value>normalStyle</value></key>
+							<value><![CDATA[ball-noraml]]></value>
+						</entry>
+						<entry>
+							<key><value>orangeStyle</value></key>
+							<value><![CDATA[ball-noraml ball-orange]]></value>
+						</entry>
+						<entry>
+							<key><value>purpleStyle</value></key>
+							<value><![CDATA[ball-noraml ball-purple]]></value>
+						</entry>
+						<entry>
+							<key><value>zuxuanHighLightPane</value></key>
+							<value><![CDATA[<i class="group-current"></i>]]></value>
+						</entry>
+						<entry>
+							<key><value>hezhiTdStyle</value></key>
+							<value><![CDATA[ class="sum"]]></value>
+						</entry>
+						<entry>
+							<key><value>kuaduTdStyle</value></key>
+							<value><![CDATA[ class="span"]]></value>
+						</entry>
+						<entry>
+							<key><value>numberRecordHighlightStart</value></key>
+							<value><![CDATA[<span class="lottery-numbers">]]></value>
+						</entry>
+						<entry>
+							<key><value>numberRecordHighlightEnd</value></key>
+							<value><![CDATA[</span>]]></value>
+						</entry>
+					</map>
+				</constructor-arg>
+			</bean>
+		</property>
+		<property name="assemblers">
+			<bean class="java.util.HashMap">
+				<constructor-arg>
+					<map>
+						<entry>
+							<key><value>webissuecode</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.WebIssueCodePaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>numberrecord</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.NumberRecordPaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>weishufenbu</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.WsfbPaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>haomafenbu</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.HmfbPaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>zuxuan</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.ZuxuanPaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>hezhi</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.HezhiPaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>kuadu</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.KuaduPaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>danshuang</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.LiteralsPaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>zhongwei</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.LiteralsPaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>jiou</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.LiteralsPaneDataAssembler"></bean>
+						</entry>
+						<entry>
+							<key><value>daxiao</value></key>
+							<bean class="com.winterframework.firefrog.game.web.chart.assembler.LiteralsPaneDataAssembler"></bean>
+						</entry>												
+					</map>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+</beans>

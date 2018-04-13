@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+/* ui-table-group */
+.table-toggle .ico-up,
+.table-toggle .ico-down,
+.table-tool a{
+background-image:url(ui-table-group.png);
+background-repeat:no-repeat;
+}
+
+/* statistical  */
+.statistical {}
+.statistical .ui-tab-content{padding:20px 30px;}
+.statistical-info{padding:10px;background-color:#FAFAFA;}
+.statistical-info .table td{border:0 none;}
+.statistical-data{width:768px;overflow:hidden;padding-bottom:20px;border-bottom:1px solid #E3E3E3;}
+.statistical-data ul{width:770px;}
+.statistical-data li{float:left;width:153px;height:56px;padding-top:4px;border-right:1px solid #E3E3E3;text-align:center;}
+.statistical-data span{display:block;font-size:24px;color:#008ad8;}
+.statistical-radio{padding:20px 10px;}
+.statistical-radio span{float:right;}
+.statistical-radio label{cursor:pointer;margin-right:15px;}
+.statistical-radio .radio{margin-right:3px;vertical-align:middle;}
+.statistical-graph{height:420px;}
+.statistical .calendar .input{width:104px;}
+
+.statistical-graph .tickLabel {font-size:12px;}
+.statistical-graph .legendLabel {color:#999;font-size:12px;}
+.chart-tip {position:absolute;left:0;top:2px;z-index:500;background:#FFF;border:1px solid #CCC;padding:5px;line-height:150%;display:none;}
+.chart-tip span {position:absolute;width:8px;height:13px;background:url(../common/gray-sj.gif);font-size:0;overflow:hidden;left:-8px;top:50%;margin-top:-7px}
+
+/* table-group */
+.table-group .table-toggle{cursor:pointer;}
+.table-toggle .ico-up,.table-toggle .ico-down{display:inline-block;width:11px;height:7px;margin-left:5px;overflow:hidden;}
+.table-toggle .ico-up{background-position:-100px 0}
+.table-toggle .ico-down{background-position:-100px -10px}
+.table-tool a{display:inline-block;width:18px;height:18px;margin:0 8px;vertical-align:middle;overflow:hidden;}
+.table-tool .ico-note{width:14px;height:16px;background-position:0 0;}
+.table-tool .ico-info{width:18px;height:14px;background-position:-20px 0;}
+.table-tool .ico-msg{width:18px;height:14px;background-position:-40px 0;}
+.table-tool .ico-recharge{width:14px;height:16px;background-position:-60px 0;}
+.table-tool .ico-change{width:16px;height:16px;background-position:-80px 0;}
+.table-tool .ico-note:hover{background-position:0 -20px;}
+.table-tool .ico-info:hover{background-position:-20px -20px;}
+.table-tool .ico-msg:hover{background-position:-40px -20px;}
+.table-tool .ico-recharge:hover{background-position:-60px -20px;}
+.table-tool .ico-change:hover{background-position:-80px -20px;}
+
+/* search-proxy */
+.search-proxy .ui-select{width:94px;}
+.search-proxy .name{padding-left:27px;}
+.search-proxy .number{padding-left:22px;}
+.search-proxy .name,.search-proxy .lower,.search-proxy .number,.search-proxy .button{padding-top:0;}
+
+/* bet-detail */
+.bet-detail{padding:10px;border-bottom:1px solid #E3E3E3;background-color:#FAFAFA;}
+.bet-detail .table th,.bet-detail .table td{border:0 none;padding:6px 16px;}
+.bet-detail .ico-lottery-num{display:inline-block;width:22px;height:21px;margin:0 5px;text-align:center;font-style:normal;font-weight:700;color:#FFF;background:#333;}
+
+/* chas-detail */
+.chas-detail{padding:10px;border-bottom:1px solid #E3E3E3;background-color:#FAFAFA;}
+.chas-detail .table-title{font-size:16px;font-weight:700;vertical-align:top;}
+.chas-detail .table th,.chas-detail .table td{border:0 none;padding:6px 16px;}
+.chas-detail-table{height:90px;border:1px solid #E3E3E3;background-color:#FFF;overflow-y:scroll;}
+.chas-detail-table th,.chas-detail-table td{text-align:center;}
+.chas-detail-table th{font-weight:700;}
+.ico-phase-current{display:inline-block;width:44px;height:17px;margin-left:-50px;margin-right:5px;padding-left:5px;line-height:16px;font-style:normal;color:#FFF;background:url(../common/ui-proxy.png) -30px -20px no-repeat;text-align:left;}
+
+/* rebate-list */
+.common-article .rebate-list{padding:20px 40px;}
+
+/* prompt */
+.rebate-list .prompt{border:1px solid #F8E2B9;margin-left:76px;padding:10px;background-color:#FFFDEB;color:#F46E00;}
+.rebate-list .prompt dt{font-weight:700;margin-bottom:10px;}
+.rebate-list .prompt dd{padding-left:12px;line-height:24px;}

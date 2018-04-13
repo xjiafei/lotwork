@@ -1,0 +1,91 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="basicBetProperties" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key><value>ordersNum</value></key><!-- 投注页面我的方案显示条数+1 -->
+					<value>3</value>
+				</entry>
+				<entry>
+					<key><value>plansNum</value></key><!-- 投注页面我的追号显示条数 +1-->
+					<value>3</value>
+				</entry>
+				<entry>
+					<key><value>traceMaxTimes</value></key><!-- 彩种最大追号期数 -->
+					<value>360</value>
+				</entry>
+				<entry>
+					<key><value>moneyMultiple</value></key>
+					<value>10000</value> <!-- 金额倍数 -->
+				</entry>
+				<entry>
+					<key><value>betFileCharset</value></key>
+					<value>GB2312</value> <!-- 单式文件编码 -->
+				</entry>								
+				<entry>
+					<key><value>fileModeMethodTypes</value></key>
+					<value>danshi,hunhezuxuan</value> <!-- 单式文件玩法类型 -->
+				</entry>
+				<entry>
+					<key><value>jsViewDataFormat</value></key>
+					<value>yyyy/MM/dd HH:mm:ss</value> <!-- JS时间格式 -->
+				</entry>
+				<entry>
+					<key><value>jsViewDataTimeFormat</value></key>
+					<value>yyyy/MM/dd</value> <!-- JS不帶時分秒-->
+				</entry>
+				<entry>
+					<key><value>serverIP</value></key>
+					<value>127.0.0.1</value> <!-- 服务器IP地址 -->
+				</entry>
+				<entry>
+					<key><value>keySeperator</value></key>
+					<value>_$_</value> <!-- 分隔符 -->
+				</entry>
+				<entry>
+					<key><value>logoPath</value></key>
+					<value>/static/images/game/logos/</value> <!-- 彩种logo路径-->
+				</entry>
+				<entry>
+					<key><value>LogoSuffix</value></key>
+					<value>.png</value> <!-- 彩种logo图标后缀-->
+				</entry>
+<!-- 				渠道ID 1 WEB 2 IOS 3 IPAD 4 android 5 WAC 6 WAP 这两个配置数据存在package中-->
+				<entry>
+					<key><value>channelId</value></key>
+					<value>1</value> 
+				</entry>
+				<entry>
+					<key><value>channelWapId</value></key>
+					<value>6</value> 
+				</entry>
+				<entry>
+					<key><value>channelVersion</value></key>
+					<value>4.0</value> 
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	
+	<bean id="groupCodeList2000" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>51</value>
+				<value>50</value>
+				<value>49</value>
+				<value>48</value>
+				<value>47</value>
+				<value>46</value>
+				<value>45</value>
+				<value>44</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+</beans>

@@ -1,0 +1,30 @@
+#login_security_form_pwd{
+    display:none;
+}
+#login_security_form_pwd p{
+    font-size: 24px;
+    text-align: left;
+    line-height: 40px;
+    color: rgb(153,153,153);
+    font-weight: 200;
+    margin-bottom: 8px;
+    text-indent: 20px;
+}
+#login_security_form_username .inputOL li b{
+    background-image: url(icon_right.png);
+    visibility:hidden;
+}
+
+#login_security_form_pwd p span{
+    color:rgb(61,153,138);
+}
+
+#username{
+    text-indent: 30px;
+}
+#login{
+    display: none;
+}
+.inputOL li b{
+    visibility: hidden;
+}

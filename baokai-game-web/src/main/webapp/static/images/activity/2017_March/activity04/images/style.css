@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+*{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+em{font-style:normal}
+ol,ul{list-style:none}
+fieldset,img,abbr,acronym{border:0}
+input,select{font-family:Microsoft YaHei}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+body{font:normal 15px/2em Microsoft YaHei,Tahoma,simsun;color:#fee4fe;margin:0 auto; background: #060510;}
+.clearfix{*zoom:1}
+.clearfix:after{content:'\20';display:block;height:0;line-height:0;visibility:hidden;clear:both}
+a{text-decoration:none; color: #fff;}
+a:hover{text-decoration:none; color: #abc6eb;}
+.tc { text-align: center}
+
+
+
+.allbg {
+	width: 100%;
+	background: #2d0b47 url(../images/allbg.jpg) no-repeat center top;
+}
+.middle {
+	background: #2d0b47 url(../images/banner.jpg) no-repeat center top;
+	width: 1200px;
+	margin: 0 auto;
+}
+.banner {
+	height: 802px;
+	position: relative;
+}
+.banner .gold {
+	background: url(../images/gold.png) no-repeat;
+	width: 228px;
+	height: 211px;
+	position: absolute;
+	top: 970px;
+	left: -151px;
+}
+.banner .btn_box {
+	position: absolute;
+	width: 294px;
+	height: 200px;
+	left: 461px;
+	top: 611px;
+}
+.banner .btn {
+	display: block;
+	width: 294px;
+	height: 134px;
+	background-image: url(../images/btn.png);
+	background-repeat: no-repeat;
+	text-indent: -909em;
+}
+.banner .btn_join:hover {
+	background-position: -295px top;
+}
+.banner .btn_join:active {
+	background-position: -590px top;
+}
+.banner .btn_finish {
+	background-position: left -138px;
+}
+.banner .btn_end {
+	background-position: -295px -138px;
+	cursor: default;
+}
+
+.rule {
+	padding-top: 20px;
+}
+.footer {
+	color: #cf939a;
+	height: 60px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 12px;
+	padding: 30px 0;
+}
+
+.banner .logo {
+	width: 202px;
+	height: 59px;
+	position: absolute;
+	left: 496px;
+	top: 26px;
+	text-indent: -999em;
+	cursor: pointer;
+}
+
+.banner .time {
+	color: #f5f5f9;
+	font-size: 28px;
+	text-shadow: 0 2px 3px rgba(0,0,0,.4);
+	font-family: "KaiTi";
+	text-align: center;
+	height: 56px;
+	position: absolute;
+	top: 746px;
+	width: 100%;
+	line-height: 56px;
+	font-style:italic;
+}
+
+.rule h3 {
+	font-size: 22px;
+	background: url(../images/title.png) no-repeat;
+	line-height: 20px;
+	color: #fff;
+	width: 234px;
+	text-align: center;
+}
+.rule p {
+	line-height: 30px;
+	padding-left: 5px;
+	margin: 30px 0px;
+	margin-left: 15px;
+}
+.rule .border-dot {
+	border: 1px dashed #eacfec;
+	border-radius: 5px;
+	padding-left: 15px;
+	width: 1048px;
+}
+
+.rule table {
+	border-collapse: collapse;
+	width: 1060px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+.rule table td,
+.rule table th {
+	padding: 10px 30px;
+	border: 2px solid #280840;
+	text-align: center;
+
+}
+.rule table th,
+.rule table .strong {
+	background: #601769;
+	color:#e9ceeb;
+}
+.rule table td {
+	background: #dcbaeb;
+	color: #5b1665;
+}
+.rule ul {
+	padding-left: 34px;
+	padding-top: 20px;
+	list-style: decimal;
+}
+.rule li {
+	line-height: 30px;
+}
+
+.customer {
+	position: fixed;
+	right: 50%;
+	margin-right: -600px;
+	display: block;
+	background: url(../images/customer.png) no-repeat;
+	width: 75px;
+	height: 75px;
+	text-indent: -999em;
+	top: 64%;
+	margin-top: -35px;
+}
+

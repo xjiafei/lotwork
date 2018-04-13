@@ -1,0 +1,24 @@
+.inputOL li input.vcode{
+    width:250px;
+    text-indent: 0;
+    margin-left:0;
+}
+
+#findpwd_username .inputOL li b{
+    background-image: url(icon_right.png);
+    visibility:hidden;
+}
+
+#findpwd_username p span{
+    color:rgb(61,153,138);
+}
+
+#username{
+    text-indent: 30px;
+}
+#login{
+    display: none;
+}
+.inputOL li b{
+    visibility: hidden;
+}

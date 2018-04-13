@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+    <!-- 自动扫描且只扫描@Controller -->
+    <context:component-scan base-package="com.winterframework.firefrog.*"
+                            use-default-filters="false">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <mvc:annotation-driven />
+    <bean class="com.winterframework.modules.utils.SpringContextHolder"/>
+    <context:component-scan base-package="com.winterframework.modules.spring.exetend" />
+    <context:component-scan base-package="com.winterframework.modules.spring.console" />
+
+    <!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
+    <mvc:default-servlet-handler />
+
+    <bean id="propertyConfigurer"
+          class="com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath:/application.properties</value>
+                <value>classpath:/serverUrlPath.properties</value>
+                 <value>classpath:/activity.properties</value>               
+                <value>classpath:/game-type.properties</value>
+                <value>classpath:/pt.properties</value>
+				<value>classpath:/shortlived.properties</value>
+                <value>file:/usr/local/config/gameui.properties</value>
+                <value>file:C:/config/gameui.properties</value>
+                <value>classpath:/gwebversion.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器,顺序执行 -->
+          <mvc:interceptor>
+            <mvc:mapping path="/**" /> <!-- 如果不配置或/*,将拦截所有的Controller -->
+            <bean class="com.winterframework.firefrog.session.interceptor.PathInterceptor">
+                <property name="pathMap">
+                    <map>
+                        <entry key="staticFileContextPath"><value>${static.resources.path}</value></entry>
+                        <entry key="userContextPath"><value>${user.resources.path}</value></entry>
+                        <entry key="adminContextPath"><value>${admin.resources.path}</value></entry>
+                        <entry key="chartContextPath"><value>${url.connect.chart}</value></entry>
+                        <entry key="projectName"><value>${project.name}</value></entry>
+                        <entry key="ptGameServer"><value>${pt.server.path}</value></entry>
+                         <entry key="ptadminServer"><value>${pt.adminr.path}</value></entry>
+                    </map>
+                </property>
+            </bean>
+        </mvc:interceptor> 
+		<!-- <mvc:interceptor>
+             <mvc:mapping path="/gameBet/**" />
+            <bean class="com.winterframework.firefrog.game.web.interceptor.WapInterceptor">
+             
+            </bean>
+        </mvc:interceptor> -->
+        <bean id="localeChangeInterceptor"
+              class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang" />
+        </bean>
+
+       
+   <!-- 前台界面访问的拦截器 -->
+         <mvc:interceptor>
+            <mvc:mapping path="/gameBet/**" />
+             <mvc:mapping path="/info2/**" />
+            <mvc:mapping path="/gamePrize2/**" />
+            <mvc:mapping path="/poolking2/**" />
+            <mvc:mapping path="/monkeyActivity2/**" />
+            <mvc:mapping path="/wanGuo2/**" />
+            <mvc:mapping path="/gameActive/labar/sub2" />
+            <mvc:mapping path="/lottery/queryStopLotteryList2" />
+            <mvc:exclude-mapping path="/gameoa/queryUserGameAward2*"/>
+            
+             <bean class="com.winterframework.firefrog.game.web.interceptor.LoginCookieInterceptor">
+            </bean>
+        </mvc:interceptor>  
+                <mvc:interceptor>
+            <mvc:mapping path="/gameUserCenter2/**" />
+           
+            <bean class="com.winterframework.firefrog.session.interceptor.FrontUserAclInterceptor">
+            </bean>
+        </mvc:interceptor>
+		<!-- 前台界面指定IP白名單访问的拦截器攔截清單同 前台界面访问的拦截器 -->
+		<mvc:interceptor>
+            <mvc:mapping path="/gameBet2/**" />
+             <mvc:mapping path="/info2/**" />
+            <mvc:mapping path="/gameUserCenter2/**" />
+            <mvc:mapping path="/gamePrize2/**" />
+            <mvc:mapping path="/poolking2/**" />
+            <mvc:mapping path="/monkeyActivity2/**" />
+            <mvc:mapping path="/wanGuo2/**" />
+            <mvc:mapping path="/gameActive/labar/sub2" />
+            <mvc:mapping path="/lottery/queryStopLotteryList2" />
+            <mvc:exclude-mapping path="/gameoa/queryUserGameAward2*"/>
+            
+            <bean class="com.winterframework.firefrog.session.interceptor.FrontUserWhiteListIpAclInterceptor">
+            </bean>
+        </mvc:interceptor> 
+        <!-- 后台界面访问的拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/gameoa2/**" />
+            <mvc:mapping path="/gameRisk2/**" />
+            <mvc:exclude-mapping path="/gameoa/queryUserGameAward*"/>
+            
+            <!-- <mvc:mapping path="/gameUserCenter/*" /> -->
+            <bean class="com.winterframework.firefrog.session.interceptor.AdminUserAclInterceptor">
+            </bean>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+
+    <!-- Allow Exceptions to be handled in annotated methods if desired. Otherwise
+        fallback to the 'restExceptionResolver' below: -->
+    <bean id="annotationMethodHandlerExceptionResolver"
+          class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver" >
+        <property name="order" value="1" />
+    </bean>
+    <bean id="defaultExceptionResolver"
+          class="org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver">
+        <property name="order" value="0" />
+
+    </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+
+
+</beans>
+ 

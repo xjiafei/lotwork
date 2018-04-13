@@ -1,0 +1,347 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+<!-- 	<bean id="p5GameGroups" class="java.util.ArrayList"> -->
+<!-- 		<constructor-arg> -->
+<!-- 			<list> -->
+<!-- 				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup"> -->
+<!-- 					<property name="code" value="${groupCode.QS}" /> -->
+<!-- 					<property name="title" value="三星" /> -->
+<!-- 					<property name="name" value="p3sanxing" /> -->
+<!-- 				</bean> -->
+<!-- 				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup"> -->
+<!-- 					<property name="code" value="${groupCode.QE}" /> -->
+<!-- 					<property name="title" value="前二" /> -->
+<!-- 					<property name="name" value="p3qianer" /> -->
+<!-- 				</bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup"> -->
+<!--                     <property name="code" value="${groupCode.HE}" /> -->
+<!--                     <property name="title" value="后二" /> -->
+<!--                     <property name="name" value="p3houer" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup"> -->
+<!--                     <property name="code" value="${groupCode.P5HE}" /> -->
+<!--                     <property name="title" value="P5后二" /> -->
+<!--                     <property name="name" value="p5houer" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameGroup"> -->
+<!--                     <property name="code" value="${groupCode.P5YX}" /> -->
+<!--                     <property name="title" value="P5一星" /> -->
+<!--                     <property name="name" value="p5yixing" /> -->
+<!--                 </bean> -->
+<!-- 			</list> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="p5GameSets" class="java.util.ArrayList"> -->
+<!-- 		<constructor-arg> -->
+<!-- 			<list> -->
+<!-- 				<bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameSet"> -->
+<!-- 					<property name="code" value="${setCode.ZHX}" /> -->
+<!-- 					<property name="title" value="直选" /> -->
+<!-- 					<property name="name" value="zhixuan" /> -->
+<!-- 				</bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameSet"> -->
+<!--                     <property name="code" value="${setCode.ZX}" /> -->
+<!--                     <property name="title" value="组选" /> -->
+<!--                     <property name="name" value="zuxuan" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameSet"> -->
+<!--                     <property name="code" value="${setCode.BDW}" /> -->
+<!--                     <property name="title" value="不定位" /> -->
+<!--                     <property name="name" value="budingwei" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryGameSet"> -->
+<!--                     <property name="code" value="${setCode.DWD}" /> -->
+<!--                     <property name="title" value="定位胆" /> -->
+<!--                     <property name="name" value="dingweidan" /> -->
+<!--                 </bean> -->
+<!-- 			</list> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="p5SetMethods" class="java.util.ArrayList"> -->
+<!-- 		<constructor-arg> -->
+<!-- 			<list> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.FS}" /> -->
+<!--                     <property name="title" value="复式" /> -->
+<!--                     <property name="name" value="p3fushi" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.FS}" /> -->
+<!--                     <property name="title" value="复式" /> -->
+<!--                     <property name="name" value="zhixuanp3qianerfushi" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p3qianer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.FS}" /> -->
+<!--                     <property name="title" value="复式" /> -->
+<!--                     <property name="name" value="fushi" /> -->
+<!--                     <property name="parent" value="dingweidan"/> -->
+<!--                     <property name="mode" value="p5yixing"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.FS}" /> -->
+<!--                     <property name="title" value="复式" /> -->
+<!--                     <property name="name" value="zhixuanp3houerfushi" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p3houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.FS}" /> -->
+<!--                     <property name="title" value="复式" /> -->
+<!--                     <property name="name" value="zhixuanp5houerfushi" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p5houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.FS}" /> -->
+<!--                     <property name="title" value="复式" /> -->
+<!--                     <property name="name" value="zuxuanp3qianerfushi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p3qianer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.FS}" /> -->
+<!--                     <property name="title" value="复式" /> -->
+<!--                     <property name="name" value="zuxuanp3houerfushi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p3houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.FS}" /> -->
+<!--                     <property name="title" value="复式" /> -->
+<!--                     <property name="name" value="zuxuanp5houerfushi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p5houer"/> -->
+<!--                 </bean> -->
+
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.DS}" /> -->
+<!--                     <property name="title" value="单式" /> -->
+<!--                     <property name="name" value="p3danshi" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.DS}" /> -->
+<!--                     <property name="title" value="单式" /> -->
+<!--                     <property name="name" value="zhixuanp3qianerdanshi" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p3qianer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.DS}" /> -->
+<!--                     <property name="title" value="单式" /> -->
+<!--                     <property name="name" value="zhixuanp3houerdanshi" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p3houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.DS}" /> -->
+<!--                     <property name="title" value="单式" /> -->
+<!--                     <property name="name" value="zhixuanp5houerdanshi" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p5houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.DS}" /> -->
+<!--                     <property name="title" value="单式" /> -->
+<!--                     <property name="name" value="zuxuanp3qianerdanshi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p3qianer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.DS}" /> -->
+<!--                     <property name="title" value="单式" /> -->
+<!--                     <property name="name" value="zuxuanp3houerdanshi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p3houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.DS}" /> -->
+<!--                     <property name="title" value="单式" /> -->
+<!--                     <property name="name" value="zuxuanp5houerdanshi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p5houer"/> -->
+<!--                 </bean> -->
+
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.HZ}" /> -->
+<!--                     <property name="title" value="和值" /> -->
+<!--                     <property name="name" value="p3hezhi" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.HZ}" /> -->
+<!--                     <property name="title" value="和值" /> -->
+<!--                     <property name="name" value="zhixuanp3qianerhezhi" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p3qianer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.HZ}" /> -->
+<!--                     <property name="title" value="和值" /> -->
+<!--                     <property name="name" value="zhixuanp3houerhezhi" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p3houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.HZ}" /> -->
+<!--                     <property name="title" value="和值" /> -->
+<!--                     <property name="name" value="zhixuanp5houerhezhi" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p5houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.HZ}" /> -->
+<!--                     <property name="title" value="和值" /> -->
+<!--                     <property name="name" value="zuxuanp3qianerhezhi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p3qianer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.HZ}" /> -->
+<!--                     <property name="title" value="和值" /> -->
+<!--                     <property name="name" value="zuxuanp3houerhezhi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p3houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.HZ}" /> -->
+<!--                     <property name="title" value="和值" /> -->
+<!--                     <property name="name" value="zuxuanp5houerhezhi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p5houer"/> -->
+<!--                 </bean> -->
+
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.KD}" /> -->
+<!--                     <property name="title" value="跨度" /> -->
+<!--                     <property name="name" value="p3kuadu" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.KD}" /> -->
+<!--                     <property name="title" value="跨度" /> -->
+<!--                     <property name="name" value="zhixuanp3qianerkuadu" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p3qianer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.KD}" /> -->
+<!--                     <property name="title" value="跨度" /> -->
+<!--                     <property name="name" value="zhixuanp3houerkuadu" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p3houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.KD}" /> -->
+<!--                     <property name="title" value="跨度" /> -->
+<!--                     <property name="name" value="zhixuanp5houerkuadu" /> -->
+<!--                     <property name="parent" value="zhixuan"/> -->
+<!--                     <property name="mode" value="p5houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.KD}" /> -->
+<!--                     <property name="title" value="跨度" /> -->
+<!--                     <property name="name" value="zuxuanp3qianerkuadu" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p3qianer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.KD}" /> -->
+<!--                     <property name="title" value="跨度" /> -->
+<!--                     <property name="name" value="zuxuanp3houerkuadu" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p3houer"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.KD}" /> -->
+<!--                     <property name="title" value="跨度" /> -->
+<!--                     <property name="name" value="zuxuanp5houerkuadu" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p5houer"/> -->
+<!--                 </bean> -->
+
+
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.Z3}" /> -->
+<!--                     <property name="title" value="组三" /> -->
+<!--                     <property name="name" value="p3zusan" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.Z6}" /> -->
+<!--                     <property name="title" value="组六" /> -->
+<!--                     <property name="name" value="p3zuliu" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.ZSDS}" /> -->
+<!--                     <property name="title" value="组三单式" /> -->
+<!--                     <property name="name" value="p3zusandanshi" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.ZLDS}" /> -->
+<!--                     <property name="title" value="组六单式" /> -->
+<!--                     <property name="name" value="p3zuliudanshi" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.HHZX}" /> -->
+<!--                     <property name="title" value="混合组选" /> -->
+<!--                     <property name="name" value="p3hunhezuxuan" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.HZ}" /> -->
+<!--                     <property name="title" value="组选和值" /> -->
+<!--                     <property name="name" value="p3zuxuanhezhi" /> -->
+<!--                     <property name="parent" value="zuxuan"/> -->
+<!--                     <property name="mode" value="p3sanxing" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.BD}" /> -->
+<!--                     <property name="title" value="包胆" /> -->
+<!--                     <property name="name" value="zuxuanp3houerbaodan" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.BD}" /> -->
+<!--                     <property name="title" value="包胆" /> -->
+<!--                     <property name="name" value="zuxuanp3houerbaodan" /> -->
+<!--                     <property name="parent" value="zuxuan" /> -->
+<!--                     <property name="mode" value="p3houer" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.BD}" /> -->
+<!--                     <property name="title" value="包胆" /> -->
+<!--                     <property name="name" value="zuxuanp3qianerbaodan" /> -->
+<!--                     <property name="parent" value="zuxuan" /> -->
+<!--                     <property name="mode" value="p3qianer" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.BD}" /> -->
+<!--                     <property name="title" value="组选包胆" /> -->
+<!--                     <property name="name" value="p3zuxuanbaodan" /> -->
+<!--                     <property name="parent" value="zuxuan" /> -->
+<!--                     <property name="mode" value="p3sanxing" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.BD}" /> -->
+<!--                     <property name="title" value="包胆" /> -->
+<!--                     <property name="name" value="zuxuanp5houerbaodan" /> -->
+<!--                     <property name="parent" value="zuxuan" /> -->
+<!--                     <property name="mode" value="p5houer" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.YMBDW}" /> -->
+<!--                     <property name="title" value="一码不定位" /> -->
+<!--                     <property name="name" value="yimabudingwei" /> -->
+<!--                 </bean> -->
+<!--                 <bean class="com.winterframework.firefrog.game.web.bet.entity.LotteryBetMethod"> -->
+<!--                     <property name="code" value="${methodCode.EMBDW}" /> -->
+<!--                     <property name="title" value="二码不定位" /> -->
+<!--                     <property name="name" value="ermabudingwei" /> -->
+<!--                 </bean> -->
+<!-- 			</list> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+</beans>

@@ -1,0 +1,6 @@
+{
+	"releaseDir": "../../release",
+	"developDir": "../../",
+	"jsReleaseDir": "../../release/js",
+	"cssReleaseDir": "../../release/style"
+}

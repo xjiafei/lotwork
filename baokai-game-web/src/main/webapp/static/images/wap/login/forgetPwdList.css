@@ -1,0 +1,43 @@
+.step{
+    background:url(step2.png) no-repeat center center;
+}
+.v{
+    visibility: visible;
+}
+.tipinput{
+    color:rgb(153,153,153);
+}
+.tipinput span{
+    color:rgb(107,216,196);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.inputOL li{
+    text-indent: 100px;
+    color: rgb(91,91,91);
+    font-weight: normal;
+    font-size: 24px;
+    background-image: url(icon_ways.png);
+    background-repeat:no-repeat ;
+    background-position: 25px -55px;
+}
+.inputOL li.changeBg{
+    background-image: url(icon_ways_un.png);
+}
+
+.inputOL li:first-child{
+    background-position:25px 35px;
+}
+.inputOL li:last-child{
+    background-position:25px -145px;
+}
+
+.tip{
+    margin:60px 0;
+}
+
+.tip .tipinput{
+    color:rgb(127,127,127);
+    font-weight: bold;
+}

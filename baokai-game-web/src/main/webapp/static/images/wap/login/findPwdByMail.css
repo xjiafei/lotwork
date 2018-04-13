@@ -1,0 +1,49 @@
+.step{
+    background:url(step2.png) no-repeat center center;
+}
+.v{
+    visibility: visible;
+}
+.tipinput{
+    color:rgb(153,153,153);
+}
+.tipinput span{
+    color:rgb(107,216,196);
+    font-size: 24px;
+    font-weight: bold;
+}
+.tiptext{
+    width:370px;
+    margin:12px auto;
+    text-align: left;
+}
+.checkMail{
+    width: 235px;
+    height: 80px;
+    letter-spacing: 0px;
+    margin: 50px auto;
+}
+.middleP{
+    margin-top: 120px;
+    margin-bottom: -40px;
+}
+.unbtn{
+    background: none;
+    background-color:rgb(240,240,240);
+    color:rgb(201,201,201);
+    border:1px solid rgb(191,191,191);
+}
+.count{
+    display: block;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: rgb(47,190,167);
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: absolute;
+    right: 130px;
+    top:710px;
+}
+
+

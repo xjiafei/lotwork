@@ -1,0 +1,131 @@
+.title{
+    width:640px;
+    height: 360px;
+    background:url(index_bg.jpg) no-repeat center center;
+}
+.title .logo{
+    width:120px;
+    height: 120px;
+    top:70px;
+    background:url(head.png) no-repeat center center;
+    border-radius: 50%;
+}
+.title .balance{
+    font-size: 26px;
+    position: absolute;
+    width: 640px;
+    top: 195px;
+}
+.title div{
+    width: 300px;
+    height: 80px;
+    position: absolute;
+    top: 280px;
+    left: 12px;
+}
+.title div.withdraw{
+    left:330px;
+}
+#oplist .inputOL{
+   /*  background:url(../imgs/oplist.jpg) no-repeat center center; */
+}
+
+#oplist .inputOL li{
+	text-indent:-9999px;
+    border: none;
+    height: 85px;
+    margin: 0 atuo;
+	background:url(oplist.jpg) no-repeat left top;
+}
+#oplist .inputOL li.one{
+	background:url(oplist.jpg) no-repeat left 7px;
+}
+#oplist .inputOL li.two{
+	background:url(oplist.jpg) no-repeat left -75px;
+}
+#oplist .inputOL li.three{
+	background:url(oplist.jpg) no-repeat left -156px;
+}
+#oplist .inputOL li.four{
+	background:url(oplist.jpg) no-repeat left -236px;
+}
+#oplist .inputOL li.five{
+	background:url(oplist.jpg) no-repeat left -316px;
+}
+
+#oplist{
+    border:none;
+    height:auto;
+    overflow: hidden;
+}
+.logout{
+    color: rgb(102,102,102);
+    width: 640px;
+    height: 80px;
+    background: #fff;
+    margin: 35px 0;
+    text-align: center;
+    font-size: 30px;
+    line-height: 80px;
+    letter-spacing: 2px;
+    font-weight: 400;
+    border-top: 1px solid rgb(204,204,204);
+    border-bottom: 1px solid rgb(204,204,204);
+    overflow: hidden;
+}
+.bottom{
+    width:300px;
+    height: 97px;
+    background:url(bottom.png) no-repeat center right;
+    margin:0 auto;
+    overflow: hidden;
+}
+.bottom li{
+    width:150px;
+    height: 97px;
+    float:left;
+}
+.bottom li:first-child{
+	display:none;
+}
+
+.v{
+    visibility: visible;
+}
+.tipinput{
+    color:rgb(153,153,153);
+}
+.tipinput span{
+    color:rgb(107,216,196);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.inputOL li{
+    text-indent: 100px;
+    color: rgb(91,91,91);
+    font-weight: normal;
+    font-size: 24px;
+    background-image: url(icon_ways.png);
+    background-repeat:no-repeat ;
+    background-position: 25px -55px;
+}
+.inputOL li.changeBg{
+    background-image: url(icon_ways_un.png);
+}
+
+.inputOL li:first-child{
+    background-position:25px 35px;
+}
+.inputOL li:last-child{
+    background-position:25px -145px;
+}
+
+.tip{
+    margin:60px 0;
+}
+
+.tip .tipinput{
+    color:rgb(127,127,127);
+    font-weight: bold;
+}

@@ -1,0 +1,99 @@
+/**
+彩种介绍
+**/
+
+.help-lottery-info {
+    border-bottom: 1px dotted #E3E3E3;
+    padding: 20px 0;
+    word-wrap: break-word;
+}
+
+.help-lotter-info-left {
+    float: left;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold
+}
+
+.help-lotter-info-left img {
+    display: block;
+}
+
+.help-lotter-info-right {
+    float: left;
+    padding: 0 0 0 20px;
+    font-size: 14px;
+    line-height: 200%;
+    text-indent: 2em;
+}
+
+.help-lottery-control {
+    border-bottom: 1px dotted #E3E3E3;
+    padding: 20px 0;
+}
+
+.help-lottery-control ul {
+    float: left;
+}
+
+.help-lottery-control li {
+    width: 70px;
+    height: 54px;
+    background: url(circle-bg.png) no-repeat;
+    text-align: center;
+    padding: 16px 0 0 0;
+    float: left;
+    margin: 0 10px 0 0;
+    display: inline;
+}
+
+.help-lottery-control li a {
+    color: #FFF;
+    display: block;
+}
+
+.help-lottery-control .btn-important {
+    float: right;
+    margin-top: 20px
+}
+
+.help-lotter-text {
+    border-bottom: 1px dotted #E3E3E3;
+    padding: 20px 0 10px 0;
+}
+
+.help-lotter-text-title {
+    float: left;
+    clear: both;
+    border: 1px solid #E3E3E3;
+    padding: 5px 15px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.help-lotter-content {
+    clear: both;
+    font-size: 14px;
+    padding: 10px 0;
+}
+a {
+    color: #009B7D;
+    text-decoration: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 98%;
+    border: 1px solid #000;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 12px;
+}
+table td {
+    border: 1px solid #000;
+    vertical-align: middle;
+}
+.help-container img{
+  max-width: 100%;
+}

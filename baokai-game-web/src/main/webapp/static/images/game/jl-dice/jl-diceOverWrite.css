@@ -1,0 +1,383 @@
+.dice-ctrl{
+	position: relative;
+	bottom: auto;
+	left: 0px;
+	width: 100%;
+	z-index: 2;
+	background: url(bg.jpg) bottom center;
+	height: auto;
+}
+.dice-bar-wrap{
+	
+	background: url(bgDicefoot.png) bottom no-repeat;
+}
+.dice-bar{
+	width: 1000px;
+	margin: 0 auto;
+	padding: 10px 0;
+	color: #8b8b8b;
+	position: relative;
+	height: 116px;
+	background: rgba(0, 0, 0, 0.30);
+	border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.action-buttons {
+    position: absolute;
+    right: 10px;
+    top: 53px;
+}
+.action-buttons a.ui-button-primary {
+    background-position: 0px 0px;
+    margin-right: 10px;
+    background-image: url(diceBtn.png);
+    width: 150px;
+    height: 55px;
+}
+.action-buttons a.button-clear {
+    background-position: -160px 0px;
+    background-image: url(diceBtn.png);
+    width: 65px;
+    height: 26px;
+}
+.action-buttons a.button-revocation {
+    position: absolute;
+    right: 0px;
+    top: 46px;
+    background-position: -160px -32px;
+    background-image: url(diceBtn.png);
+    width: 65px;
+    height: 26px;
+}
+.ui-button-primary:active{
+    background-position: 0px 0px;
+}
+.ui-button-primary:hover{
+    opacity:.9;
+}
+.ui-button-primary.disabled:active {
+    background-position: 0px 0px;
+}
+
+.button-revocation:active {
+      background-position: -160px -32px;
+}
+.button-revocation:hover {
+    opacity:.9;
+}
+.button-revocation.disabled:active {
+      background-position: -160px -32px;
+}
+
+.button-clear:active {
+ background-position: -160px 0px;
+}
+.button-clear:hover {
+ opacity:.9;
+}
+.button-clear.disabled:active {
+ background-position: -160px 0px;
+}
+.ui-simulation-wrap{
+    width: 80px;
+}
+
+.ui-simulation-wrap .ui-icon {
+    right: 6px;
+    top: 6px;
+}
+.ui-simulation-wrap.continus-counter {
+    left: 24px;
+    padding-left: 0px;
+    top: 0px;
+}
+.ui-simulation-wrap.multiple-counter {
+    padding-right: 0px;
+    left: 23px;
+    top: 0px;
+}
+.ui-simulation-title {
+    text-align: left;
+    line-height: 30px;
+    font-size: 12px;
+    padding:0px 0px 0px 22px;
+    color: #828282;
+}
+.ui-simulation-counter input {
+    width: 32px;
+    padding: 0;
+    text-align: center;
+    font-size: 15px;
+    color: #ffde42;
+    
+}
+
+.ui-simulation-counter .counter-action {
+    width: 18px;
+    height: 18px;
+  margin-top: 0px;
+
+}
+.ui-simulation-counter .counter-decrease {
+    background-position: 0px 0px;
+    background: url(decreaseBtn.png);
+}
+.ui-simulation-counter .counter-increase {
+    background-position: 0px 0px;
+    background: url(increaseBtn.png);
+}
+.dice-chip-wrap {
+    width: 522px;
+    height: 92px;
+    margin-top: 0px;
+    top: 9px;
+    left: 3px;
+}
+.dice-chip {
+    width: 38px;
+    height: 40px;
+    background-image: url(newChips.png);
+}
+.dice-sheet .dice-chip { margin-left:-19px; }
+.dice-chip-2 {
+    background-position: -38px 0;
+}
+.dice-chip-5 {
+    background-position: -77px 0;
+}
+.dice-chip-10 { background-position: -116px 0; }
+.dice-chip-20 { background-position: -154px 0; }
+.dice-chip-50 { background-position: -191px 0; }
+.dice-chip-100 { background-position: -230px 0; }
+.dice-chip-500 { background-position: -268px 0; }
+.dice-chip-1000 { background-position: -307px 0; }
+.dice-chip-5000 { background-position: -346px 0; }
+.dice-chip-choose {
+    padding: 0px 5px;
+    width: 470px;
+    height: 92px;
+    margin-top: 0px;
+    position: relative;
+}
+.dice-chip-choose .dice-chip {
+    width: 87px;
+    height: 94px;
+    background-image: url(bigChips.png);
+    margin: 0px 1px;
+}
+.dice-chip-choose .dice-chip-1 {background-position: 0px 0px;}
+.dice-chip-choose .dice-chip-2 {background-position:-91px 0px;}
+.dice-chip-choose .dice-chip-5 {background-position: -181px 0px;}
+.dice-chip-choose .dice-chip-10 {background-position: -271px 0px;}
+.dice-chip-choose .dice-chip-20 {background-position: -359px 0px; }
+.dice-chip-choose .dice-chip-50 {background-position: -448px 0px;}
+.dice-chip-choose .dice-chip-100 {background-position: -538px 0px;}
+.dice-chip-choose .dice-chip-500 {background-position: -625px 0px;}
+.dice-chip-choose .dice-chip-1000 {background-position: -714px 0px;}
+.dice-chip-choose .dice-chip-5000 {background-position: -804px 0px;}
+.dice-chip-wrap .dice-chip-button {
+    width: 87px;
+    height: 92px;
+    background: url(moreChips.png) no-repeat 0px 0px;
+    position: absolute;
+    right: -17px;
+    top: 2px;
+    text-indent: -9999em;
+    z-index: 2;
+    cursor: pointer;
+}
+.dice-chip-choose .dice-chip-shadow { display: none; }
+.dice-chip-choose .dice-chip-selected {
+    position: relative;
+    z-index: 3;
+    margin-top: -36px;
+}
+.dice-balance {
+    line-height: 26px;
+    font-size: 14px;
+    width: 218px;
+    margin-top: 36px;
+    position: relative;
+    left: 10px;
+}
+.dice-balance .bet-amount {
+    overflow: hidden;
+    padding: 4px 0px 6px;
+    margin-bottom: 15px;
+}
+.dice-balance label {
+    float: left;
+    font-size: 12px;
+}
+.bet-amount .value_box {
+    margin-left: 8px;
+    width: 106px;
+}
+.bet-balance .value_box {
+    margin-left: 20px;
+}
+.value_box {
+    color: #ffde42;
+    padding: 2px 5px;
+    margin-top: 3px;
+    background: #191919;
+    border: none;
+    box-shadow: none;
+}
+.bet-balance-refresh {
+    background-position: 0px 0px;
+    background: url(refreshBtn.png);
+}
+.bet-balance-refresh:hover {
+    background-position: 0px 0px;
+    background: url(refreshHoverBtn.png);
+}
+.bet-balance-refresh:active {
+    background-position: 0px 0px;
+    background: url(refreshPressBtn.png);
+}
+.bet-balance-recharge {
+    background-position: 0px 0px;
+    background: url(increaseBtn.png);
+}
+.bet-balance-recharge:hover{
+     background-position: 0px 0px;
+    background: url(increaseHoverBtn.png);
+}
+.bet-balance-recharge:active{
+     background-position: 0px 0px;
+    background: url(increasePressBtn.png);
+}
+.ui-simulation-counter .counter-decrease:hover{
+     background-position: 0px 0px;
+     background: url(decreaseHoverBtn.png);
+}
+
+.ui-simulation-counter .counter-increase:hover{
+     background-position: 0px 0px;
+    background: url(increaseHoverBtn.png);
+}
+.ui-simulation-counter .counter-decrease:active{
+     background-position: 0px 0px;
+     background: url(decreasePressBtn.png);
+}
+
+.ui-simulation-counter .counter-increase:active{
+     background-position: 0px 0px;
+    background: url(increasePressBtn.png);
+}
+.bet-balance .ui-icon {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    float: left;
+    margin-top: 4px;
+    margin-left: 5px;
+}
+.dice-chip-custom .dice-chip-mirror {width: 87px;height:94px;background-image: url(bigChips.png);margin-right: 5px;}
+.dice-chip-custom .dice-chip-hide {}
+.dice-chip-custom {background: rgba(0, 0, 0, 0.84);height: 100px;width: 927px;padding: 18px 10px 10px 20px;left: -200px;border-radius: 20px;}
+.dice-chip-custom .dice-chip-1 { background-position:0px 0px; }
+.dice-chip-custom .dice-chip-2 {background-position: -89px 0px;}
+.dice-chip-custom .dice-chip-5 {background-position: -180px 0px;}
+.dice-chip-custom .dice-chip-10 {background-position: -270px 0px;}
+.dice-chip-custom .dice-chip-20 {background-position: -360px 0px;}
+.dice-chip-custom .dice-chip-50 {background-position: -449px 0px;}
+.dice-chip-custom .dice-chip-100 {background-position: -538px 0px;}
+.dice-chip-custom .dice-chip-500 {background-position: -626px 0px;}
+.dice-chip-custom .dice-chip-1000 {background-position: -714px 0px;}
+.dice-chip-custom .dice-chip-5000 {background-position: -804px 0px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-1 {background-position: 0px 98px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-2 {background-position: -89px 98px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-5 {background-position: -180px 98px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-10 {background-position: -270px 98px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-20 {background-position: -360px 97px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-50 {background-position: -449px 97px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-100 {background-position: -538px 97px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-500 {background-position: -626px 97px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-1000 {background-position: -714px 97px;}
+.dice-chip-custom .dice-chip-hide.dice-chip-5000 {background-position: -804px 95px;}
+/*.dice-chip-custom::after {
+    content: "";
+    width: 41px;
+    height: 21px;
+    background: url(bubbleEnd.png) no-repeat;
+    clear: both;
+    position: relative;
+    display: block;
+    left: 670px;
+    top: 16px;
+}*/
+.dice-chip-custom::after {
+    content: "";
+    width: 41px;
+    height: 21px;
+    background: url(bubbleEnd.png) no-repeat;
+    clear: both;
+    position: absolute;
+    display: block;
+    left: 685px;
+    bottom: -21px;
+}
+.game-history-wrap {
+    background-color: rgba(0, 0, 0, 0.84);
+    width: 1150px;
+    margin-left: -570px;
+    left: 50%;
+    bottom: 44px;
+    border-radius: 30px;
+}
+
+.history-close {
+    position: absolute;
+    top: -6px;
+    padding: 0px 5px;
+    background: rgba(175, 157, 157, 0.24);
+    line-height: 20px;
+    display: block;
+    height: 25px;
+    border-radius: 60px;
+    right: -67px;
+}
+.history-close:hover{
+    color: #ffffff;
+}
+.program-chase-list-header li { color: #fff47f;  }
+.main a.history-more {
+    color: #fff47f;
+}
+.main a.history-more:hover {
+    color: #f3eca8;
+}
+.history-content {
+    padding-bottom: 20px;
+}
+.history-toggle {
+    cursor: pointer;
+    width: 67px;
+    position: absolute;
+    right: 14px;
+    top: -35px;
+    height: 27px;
+    text-indent: -999em;
+    background: url(history-toggle.png) 0px 0px;
+    opacity: 1;
+}
+.game-history-wrap::after {
+    content: "";
+    width: 41px;
+    height: 21px;
+    background: url(bubbleEnd.png) no-repeat;
+    clear: both;
+    position: absolute;
+    display: block;
+    right: 49px;
+    bottom: -21px;
+}
+.user-head {
+    width: 169px;
+    height: 75px;
+    background-position: 0px 0px;
+}
+
+.user-head .head-name { line-height: 31px }

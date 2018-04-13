@@ -1,0 +1,286 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	<bean id="betLHCTotalMoneyValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.money.LHCBetTotalMoneyValidateExecutor" />
+	<bean id="lhcNumberZhixuanValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.LHCNumberZhixuanValidateExecutor">
+		<property name="numMap" ref="lhcValidateMap" />
+	</bean>
+	<bean id="lhcFormatZhixuanValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.LHCFormatZhixuanValidateExecutor">
+		<property name="numMap" ref="lhcValidateMap" />
+	</bean>
+	<bean id="lhcFormatQuweiValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.LHCFormatQuweiValidateExecutor" />
+	<bean id="lhcNumberQuweiValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.BetNumberSimplexValidateExecutor"/>
+	
+	<!-- 色波格式 -->
+	<bean id="lhcFormatSapoValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.LHCFormatSapoValidateExecutor"/>
+	<!-- 半波格式 -->
+	<bean id="lhcFormatBanboValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.LHCFormatBanboValidateExecutor"/>
+	<!-- 兩面格式 -->
+	<bean id="lhcFormatLiangmianValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.LHCFormatLiangmianValidateExecutor"/>
+	<!-- 生肖格式 -->
+	<bean id="lhcFormatXiaoValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.LHCFormatXiaoValidateExecutor"/>
+	<!-- 不中, 連碼, 格式 -->
+	<bean id="lhcFormatBuzhongValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.LHCFormatBuzhongValidateExecutor"/>
+	<!-- 不中, 連碼, 賠率 -->
+	<bean id="lhcMutipleBetTotalMoneyValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.money.LHCMutipleBetTotalMoneyValidateExecutor"/>
+	<!-- 不中, 連碼, 注數檢核 -->
+	<bean id="lhcTotalBetValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.LHCTotalBetValidateExecutor"/>
+	<bean id="lhcValidateMap" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="${methodCode.ZHXONE}" value="1"/>
+                <entry key="${methodCode.ZXLM}" value="1"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    
+	<bean id="lhcValidators" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<!-- 正碼(ZM)-平碼(PINGMA)-直選六碼(ZXLM) -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZM}"/>
+                            <property name="setCode" value="${setCode.PINGMA}"/>
+							<property name="methodCode" value="${methodCode.ZXLM}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatZhixuanValidateExecutor"/>
+                                <ref bean="betLHCTotalMoneyValidateExecutor" />
+								<ref bean="lhcNumberZhixuanValidateExecutor" />
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 特码(TM)-直選(ZHX)-直選一碼(ZHXONE) -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}"/>
+                            <property name="setCode" value="${setCode.ZHX}"/>
+                            <property name="methodCode" value="${methodCode.ZHXONE}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatZhixuanValidateExecutor" />
+                                <ref bean="betLHCTotalMoneyValidateExecutor" />
+                                <ref bean="lhcNumberQuweiValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 特码(TM)-特肖(TX)-特肖(TX) -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}"/>
+                            <property name="setCode" value="${setCode.TX}"/>
+                            <property name="methodCode" value="${methodCode.TX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatXiaoValidateExecutor" />
+                                <ref bean="betLHCTotalMoneyValidateExecutor" />
+                                <ref bean="lhcNumberQuweiValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 特码(TM)-色波(SB)-色波(SB)-->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}"/>
+                            <property name="setCode" value="${setCode.SB}"/>
+                            <property name="methodCode" value="${methodCode.SB}"/>
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatSapoValidateExecutor" />
+                                <ref bean="betLHCTotalMoneyValidateExecutor" />
+                                <ref bean="lhcNumberQuweiValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 特码(TM)-色波(SB)-半波(SB)-->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}"/>
+                            <property name="setCode" value="${setCode.SB}"/>
+                            <property name="methodCode" value="${methodCode.BB}"/>
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatBanboValidateExecutor" />
+                                <ref bean="betLHCTotalMoneyValidateExecutor" />
+                                <ref bean="lhcNumberQuweiValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 特码(TM)-兩面(LIANGMIAN)-兩面(LIANGMIAN) -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}"/>
+                            <property name="setCode" value="${setCode.LIANGMIAN}"/>
+                            <property name="methodCode" value="${methodCode.LIANGMIAN}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatLiangmianValidateExecutor" />
+                                <ref bean="betLHCTotalMoneyValidateExecutor" />
+                                <ref bean="lhcNumberQuweiValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 正特码(ZTM)-一肖(YX)-一肖(YX) -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}"/>
+                            <property name="setCode" value="${setCode.YX}"/>
+                            <property name="methodCode" value="${methodCode.YX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatXiaoValidateExecutor" />
+                                <ref bean="betLHCTotalMoneyValidateExecutor" />
+                                <ref bean="lhcNumberQuweiValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 正特码(ZTM)-不中(BZ) -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}"/>
+                            <property name="setCode" value="${setCode.BZ}"/>
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<!-- 格式驗證 -->
+								<ref bean="lhcFormatBuzhongValidateExecutor" />
+								<!-- 倍數驗證 -->
+								<ref bean="lhcMutipleBetTotalMoneyValidateExecutor"/>
+								<!-- 金額驗證 -->
+								<ref bean="lhcTotalBetValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 正特码(ZTM)-連肖中(LXZ) -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}"/>
+                            <property name="setCode" value="${setCode.LXZ}"/>
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatXiaoValidateExecutor" />
+                                <ref bean="lhcMutipleBetTotalMoneyValidateExecutor" />
+                                <ref bean="lhcTotalBetValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 正特码(ZTM)-連肖不中(LXBZ) -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}"/>
+                            <property name="setCode" value="${setCode.LXBZ}"/>
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatXiaoValidateExecutor" />
+                                <ref bean="lhcMutipleBetTotalMoneyValidateExecutor" />
+                                <ref bean="lhcTotalBetValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<!-- 連码(LM)-連碼(LM) -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.LM}"/>
+                            <property name="setCode" value="${setCode.LM}"/>
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+						<property name="validateExecutors">
+							<list>
+								<ref bean="lhcFormatBuzhongValidateExecutor" />
+                                <ref bean="lhcMutipleBetTotalMoneyValidateExecutor" />
+                                <ref bean="lhcTotalBetValidateExecutor"/>
+							</list>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>

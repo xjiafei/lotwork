@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/views/">
+	<excludes>
+		<pattern>/static/*</pattern>
+		<pattern>/gameTrend/historyballs</pattern>
+		<pattern>/gameTrend/createNumberChartsDom*</pattern>
+		<pattern>/gameBet/*/betFile</pattern>
+		<pattern>/gameBet/*/config</pattern>
+		<pattern>/gameBet/*/trendChart*</pattern>
+		<pattern>/gameBet/fc3d/submit/**</pattern>
+		<pattern>/gameBet/ssq/submit/**</pattern>
+		<pattern>/gameBet/p5/submit/**</pattern>
+		<pattern>/gameBet/lhc/submit/**</pattern>
+		
+		
+		<!-- 2016.03.14 Tool Bar 整合 Start
+		
+			<pattern>/gameBet/fc3d**</pattern>
+			<pattern>/gameBet/bjkl8**</pattern> 	
+			<pattern>/gameBet/jsk3**</pattern>
+			<pattern>/gameBet/ahk3**</pattern>
+			<pattern>/gameBet/sd115**</pattern>
+			<pattern>/gameBet/jx115**</pattern>
+			<pattern>/gameBet/gd115**</pattern>
+			<pattern>/gameBet/sl115**</pattern>
+			<pattern>/gameBet/ll115**</pattern>
+		<pattern>/gameBet/llssc**</pattern>
+		<pattern>/gameBet/cqssc**</pattern>
+		<pattern>/gameBet/jxssc**</pattern>
+		<pattern>/gameBet/xjssc**</pattern>
+		<pattern>/gameBet/tjssc**</pattern>
+		<pattern>/gameBet/hljssc**</pattern>
+		<pattern>/gameBet/shssl**</pattern>
+		<pattern>/gameBet/jlffc**</pattern>
+		<pattern>/gameBet/slmmc**</pattern>
+		<pattern>/gameBet/ssq**</pattern>
+		<pattern>/gameBet/p5**</pattern>
+		<pattern>/gameBet/jldice**</pattern>
+			
+		2016.03.14 Tool Bar 整合 End-->
+		
+
+	</excludes>
+	
+	<decorator name="operationsAdmin" page="operations/layouts/operationsMain.jsp">
+		<pattern>/gameoa/*</pattern>
+		<pattern>/gameRemove/*</pattern>
+	</decorator>
+	
+	<decorator name="gameUserCenter" page="userCenter/layouts/userCenterMain.jsp">
+		<pattern>/gameUserCenter/*</pattern>
+	</decorator>
+	
+	<decorator name="gameBet" page="bet/layouts/betMain.jsp">
+		<pattern>/gameBet/*</pattern>
+	</decorator>
+	
+	<decorator name="gameRisk" page="risk/layouts/riskMain.jsp">
+		<pattern>/gameRisk/*</pattern>
+	</decorator>
+	
+	<!-- 
+	<decorator name="default" page="default.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	 -->
+</decorators>

@@ -1,0 +1,406 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+   <!--复式注数验证-->
+    <bean id="fc3dNumberFushiValidateExecutor"
+          class="com.winterframework.firefrog.game.web.validate.composite.number.BetNumberDoubleValidateExecutor">
+    </bean>
+    <bean id="fc3dFushiregexFormatValidateExecutor"
+          class="com.winterframework.firefrog.game.web.validate.composite.format.RegexFormatValidateExecutor">
+        <property name="regex">
+            <map key-type="java.lang.String">
+                <entry key="${groupCode.QS}${setCode.ZHX}${methodCode.FS}" value="${fc3dRegex.sanxing.fushi}"/>
+                <entry key="${groupCode.HE}${setCode.ZHX}${methodCode.FS}" value="${fc3dRegex.houer.fushi}"/>
+                <entry key="${groupCode.QE}${setCode.ZHX}${methodCode.FS}" value="${fc3dRegex.qianer.fushi}"/>
+                <entry key="${groupCode.YX}${setCode.DWD}${methodCode.FS}" value="${fc3dRegex.yixing.fushi}"/>
+            </map>
+        </property>
+    </bean>
+    <!-- 单式注数验证 -->
+    <bean id="fc3dNumberSimplexValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.BetNumberSimplexValidateExecutor" />
+    <!-- 符合由空格分割的大部分验证-单选(不含组三组六) -->
+    <bean id="fc3dFormatSplitBySpaceValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.BetFormatSplitBySpaceValidateExecutor">
+        <property name="groupCodeSingleBetNumberMapConfig">
+            <!-- format 组件包bean 结束 -->
+            <bean class="com.winterframework.firefrog.game.web.validate.business.GroupCodeSingleBetNumberMapConfig">
+                <property name="groupCodeSingleBetNumberMap">
+                    <map>
+                        <entry key="${groupCode.QS}">
+                            <value>${singleBetNumber.three}</value>
+                        </entry>
+                        <entry key="${groupCode.QE}">
+                            <value>${singleBetNumber.two}</value>
+                        </entry>
+                        <entry key="${groupCode.HE}">
+                            <value>${singleBetNumber.two}</value>
+                        </entry>
+                        <entry key="${groupCode.YX}">
+                            <value>${singleBetNumber.one}</value>
+                        </entry>
+                    </map>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <!-- 和值和跨度格式验证 -->
+    <bean id="fc3dFormatHZandKDValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.BetFormatHZandKDValidateExecutor">
+        <property name="HZandKDRangeMapConfig">
+            <bean class="com.winterframework.firefrog.game.web.validate.business.HZandKDRangeMapConfig">
+                <property name="HZandKDRangeMap">
+                    <map>
+                        <entry key="${groupCode.QS}${setCode.ZHX}${methodCode.HZ}">
+                            <value>${range.qs.zhx.hz}</value>
+                        </entry>
+                        <entry key="${groupCode.QS}${setCode.ZHX}${methodCode.KD}">
+                            <value>${range.qs.zhx.kd}</value>
+                        </entry>
+                        <entry key="${groupCode.QS}${setCode.ZX}${methodCode.HZ}">
+                            <value>${range.qs.zx.hz}</value>
+                        </entry>
+                        <entry key="${groupCode.HE}${setCode.ZHX}${methodCode.HZ}">
+                            <value>${range.he.zhx.hz}</value>
+                        </entry>
+                        <entry key="${groupCode.HE}${setCode.ZHX}${methodCode.KD}">
+                            <value>${range.he.zhx.kd}</value>
+                        </entry>
+                        <entry key="${groupCode.HE}${setCode.ZX}${methodCode.HZ}">
+                            <value>${range.he.zx.hz}</value>
+                        </entry>
+                        <entry key="${groupCode.QE}${setCode.ZHX}${methodCode.HZ}">
+                            <value>${range.qe.zhx.hz}</value>
+                        </entry>
+                        <entry key="${groupCode.QE}${setCode.ZHX}${methodCode.KD}">
+                            <value>${range.qe.zhx.kd}</value>
+                        </entry>
+                        <entry key="${groupCode.QE}${setCode.ZX}${methodCode.HZ}">
+                            <value>${range.qe.zx.hz}</value>
+                        </entry>
+                    </map>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <!-- 和值跨度规则参数map映射结束 -->
+    <!-- 和值和跨度包胆注数验证 -->
+    <bean id="fc3dNumberHZAndKDValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.BetNumberHZAndKDAndBDValidateExecutor" />
+
+    <!-- 不定位及趣味注数验证 -->
+    <bean id="fc3dNumberBDWAndQWValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.BetNumberBDWAndQWValidateExecutor">
+        <property name="methodCodeSingleBetNumberMap" ref="fc3dMethodCodeSingleBetNumberMapConfig" />
+    </bean>
+    <!-- 不定位和趣味格式验证 -->
+    <bean id="fc3dFormatBDWandQWValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.BetFormatBDWandQWValidateExecutor">
+        <property name="methodCodeSingleBetNumberMap" ref="fc3dMethodCodeSingleBetNumberMapConfig"/>
+    </bean>
+    <bean id="fc3dMethodCodeSingleBetNumberMapConfig" class="com.winterframework.firefrog.game.web.validate.business.MethodCodeSingleBetNumberMapConfig">
+        <property name="methodCodeSingleBetNumberMap">
+            <map>
+                <!-- 不定位趣味参数配置开始 -->
+                <entry key="${methodCode.YMBDW}">
+                    <value>${singleBetNumber.one}</value>
+                </entry>
+                <entry key="${methodCode.EMBDW}">
+                    <value>${singleBetNumber.two}</value>
+                </entry>
+                <entry key="${methodCode.Z3}">
+                    <value>${singleBetNumber.two}</value>
+                </entry>
+                <entry key="${methodCode.Z6}">
+                    <value>${singleBetNumber.three}</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 分割由逗号隔开的投注的内容，每个逗号隔开的都是一个数字，包含多个投注项，如五星组选120,4星组选24 -->
+    <bean id="fc3dFormatSplitByCommaValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.BetFormatSplitByCommaValidateExecutor">
+        <property name="methodCodeSingleBetNumberMap" ref="fc3dMethodCodeSingleBetNumberMapConfig"></property>
+    </bean>
+    <!-- 组3注数验证 -->
+    <bean id="fc3dNumberGroup3ValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.BetNumberGroup3ValidateExecutor" />
+
+    <!-- 三星组6注数验证 -->
+    <bean id="fc3dNumberZ6ValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.BetNumberZ6ValidateExecutor" />
+    <!-- 组三单式 -->
+    <bean id="fc3dFormatZ3DSValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.BetFormatZ3DSValidateExecutor"/>
+    <!-- 组六单式 -->
+    <bean id="fc3dFormatZ6DSValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.BetFormatZ6DSValidateExecutor"/>
+    <!-- 二星组选复式注数验证 -->
+    <bean id="fc3dNumber2XZXFSValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.BetNumber2XZXFSValidateExecutor" />
+    <!-- 二星组选复式复式 -->
+    <bean id="fc3dFormat2XZXFSValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.BetFormat2XZXFSValidateExecutor" />
+    <!-- 混合组选 -->
+    <bean id="fc3dFormatHHZXValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.BetFormatHHZXValidateExecutor"></bean>
+    <!-- 包胆 -->
+    <bean id="fc3dFormatBDValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.BetFormatBDValidateExecutor"></bean>
+
+    <bean id="fc3dValidate" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <!--复式-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.FS}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFushiregexFormatValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                                <ref bean="fc3dNumberFushiValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--单式-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.DS}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatSplitBySpaceValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                                <ref bean="fc3dNumberSimplexValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--和值-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.HZ}"/>
+                            <property name="seperator" value="${key.seperator}"/>
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatHZandKDValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                                <ref bean="fc3dNumberHZAndKDValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--跨度-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.KD}"/>
+                            <property name="seperator" value="${key.seperator}"/>
+                        </bean>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatHZandKDValidateExecutor" />
+                                <ref bean="fc3dNumberHZAndKDValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--一码不定位-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.YMBDW}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatBDWandQWValidateExecutor" />
+                                <ref bean="fc3dNumberBDWAndQWValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--二码不定位-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.EMBDW}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean
+                            class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatBDWandQWValidateExecutor" />
+                                <ref bean="fc3dNumberBDWAndQWValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--组三-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.Z3}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatSplitByCommaValidateExecutor" />
+                                <ref bean="fc3dNumberGroup3ValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--组六-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.Z6}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatSplitByCommaValidateExecutor" />
+                                <ref bean="fc3dNumberZ6ValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--组三单式-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.ZSDS}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatZ3DSValidateExecutor" />
+                                <ref bean="fc3dNumberSimplexValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--组六单式-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.ZLDS}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatZ6DSValidateExecutor" />
+                                <ref bean="fc3dNumberSimplexValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--混合组选-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.HHZX}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatHHZXValidateExecutor" />
+                                <ref bean="fc3dNumberSimplexValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--包胆-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="methodCode" value="${methodCode.BD}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormatBDValidateExecutor" />
+                                <ref bean="fc3dNumberHZAndKDValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+
+                <!-- 前二组选复式 -->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="groupCode" value="${groupCode.QE}" />
+                            <property name="setCode" value="${setCode.ZX}" />
+                            <property name="methodCode" value="${methodCode.FS}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormat2XZXFSValidateExecutor" />
+                                <ref bean="fc3dNumber2XZXFSValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!-- 后二组选复式 -->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="groupCode" value="${groupCode.HE}" />
+                            <property name="setCode" value="${setCode.ZX}" />
+                            <property name="methodCode" value="${methodCode.FS}" />
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="fc3dFormat2XZXFSValidateExecutor" />
+                                <ref bean="fc3dNumber2XZXFSValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+</beans>

@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+img{border:none;}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+a { text-decoration: none; color: #71a0f0;}
+
+html{
+	width: 100%;
+	max-width: 720px;
+	margin: 0 auto;
+	font-size: 50px;
+}
+
+
+body{
+	width: 100%;
+	background-color: #000;
+	color: #4f6ea2;
+	font-size: 12px;
+	position: relative;
+	max-width: 720px;
+}
+body,
+input,
+select{
+	font-family: "Microsoft YaHei","tahoma";
+}
+
+.banner {
+	width: 100%;
+	position: relative;
+	background: url(../images/mobile1.jpg);
+	background-size: 100% auto;
+	height: 9.83rem;
+}
+
+
+.rule {
+	background: #1f1f1f;
+	color: #ffffff;
+	font-size: 0.16rem;
+	padding: 0.2rem 0;
+}
+.rule h3 {
+	font-size: 0.24rem;
+	display: inline-block;
+	padding: 0.08rem 0.1rem;
+	background: #fff;
+	border-radius: 0.05rem;
+	color: #000;
+	line-height: 0.2rem;
+	margin-left: 0.3rem;
+}
+.rule ul {
+	padding: 0.2rem 0.5rem;
+}
+.rule li{
+	line-height: 0.3rem;
+	font-size: 0.16rem;
+	list-style: decimal;
+}
+
+
+.banner .btn {
+	position: absolute;
+
+	width: 2.5rem;
+	height: 0.98rem;
+	left: 2.2rem;
+	top: 3.2rem;
+	background-size: 100% auto;
+}
+
+/* .banner .btn.reg {
+	background: url(../images/regbtn.png) no-repeat;
+	-webkit-animation:hand 3s  ease both infinite;
+	-moz-animation:hand 3s  ease both infinite;
+	background-size: 100% auto;
+
+} */
+#regbtn{
+	background: url(../images/regbtn.png) no-repeat;;
+	-webkit-animation:hand 3s  ease both infinite;
+	-moz-animation:hand 3s  ease both infinite;
+	background-size: 100% auto;
+	position: absolute;
+    margin-top: 10px;
+}
+#regbtn1 {
+	background: url(../images/joinbtn.png) no-repeat;
+	-webkit-animation:hand 3s  ease both infinite;
+	-moz-animation:hand 3s  ease both infinite;
+	background-size: 100% auto;
+	position: absolute;
+    margin-top: 10px;
+}
+#regbtn2 {
+	background: url(../images/overbtn.png) no-repeat;
+	-webkit-animation:hand 3s  ease both infinite;
+	-moz-animation:hand 3s  ease both infinite;
+	background-size: 100% auto;
+	position: absolute;
+    margin-top: 10px;
+}
+.banner .btn.joined {
+	background: url(../images/joinbtn.png);
+	background-size: 100% auto;
+}
+
+.banner .btn.end {
+	background: url(../images/overbtn.png);
+	background-size: 100% auto;
+}
+
+.main img {
+	width: 100%;
+	display: block;
+}
+
+@-webkit-keyframes hand{
+	0%,50%,100%{;
+		-webkit-transform: scale(1.05,1.05);
+	}
+	25%,75%{ -webkit-transform: scale(1,1);
+	}
+}
+@-moz-keyframes hand{
+	0%,50%,100%{-moz-transform:scale(1.05,1.05);}
+	25%,75%{-moz-transform:  scale(1,1); }
+}
+
+
+.footer {
+	background: #000;
+	color: #8d8d8d;
+	font-size: 0.12rem;
+	line-height: 0.4rem;
+	text-align: center;
+}

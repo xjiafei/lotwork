@@ -1,0 +1,19 @@
+.v{
+    visibility: visible;
+}
+.step{
+    background:url('step3.png') no-repeat center center;
+}
+.text{
+    text-indent: 40px;
+    color: rgb(153,153,153);
+    font-size: 24px;
+    margin: 15px 0px;
+}
+
+.login_tips span{
+   /*display: inline-block;*/
+}
+.inputOL li input{
+    text-indent: 25px;
+}

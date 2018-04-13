@@ -1,0 +1,40 @@
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+table{border-collapse:collapse;border-spacing:0;}
+body{min-width:320px;max-width:640px;margin:0 auto;background:url('./bg.jpg') #0E7076 no-repeat center 0;background-size: cover;-webkit-text-size-adjust:none;}
+h3{font-size:24px;color:#E0E9EA;margin:140px 0 20px;text-align:center;font-weight:100;}
+.input{float:left;width:72%;height:40px;border:none;background-color:transparent;color:#5E959A;}
+.input-focus, .input-focus:hover{color:#EEE;}
+.ui-label{float:left;width:28%;height:40px;line-height:40px;font-size:12px;color:#FFF;}
+.register{width:80%;margin:0 auto;}
+.register li{display:block;width:100%;height:42px;margin-top:15px;padding:0 10px;border:1px solid #FFF9F1;border-radius:20px;box-sizing: border-box;overflow:hidden;}
+.register .submit{margin-top:25px;padding:0;border-color:#FFF9F1;text-align:center;
+background-image:-webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.06));
+background-image:-moz-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.06));
+background-image:-o-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.06));
+background-image:linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.06));
+background-color:#EBFEFF;
+}
+.register .submit .btn{display:block;width:100%;height:100%;line-height:40px;}
+#J-panel-vcode .input{width:42%;}
+#J-panel-vcode img{width:30%;height:30px;float:right;margin-top:5px;}
+
+.bg-success{background:url('./bg-success.jpg') #0E7076 no-repeat center 0;background-size: cover;}
+h4{font-size:14px;color:#E0E9EA;margin:120px 0 20px;text-align:center;font-weight:100;}
+h4 strong{display:block;font-size:24px;font-weight:100;line-height:2;}
+h5{color:#E0E9EA;margin:50px 0 20px;text-align:center;font-weight:100;}
+h5 strong{display:block;font-size:20px;font-weight:100;line-height:2;}
+h5 a{display:block;width:60%;height:50px;line-height:50px;font-size:18px;margin:0 auto;color:#297175;border-radius:5px;text-decoration:none;font-weight:700;
+background-image:-webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.1));
+background-image:-moz-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.1));
+background-image:-o-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.1));
+background-image:linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,.1));
+background-color:#F2FEFF;
+box-shadow:1px 1px 10px rgba(0,0,0,.5)
+}
+
+
+/* iphone4 */
+ @media screen and (device-height:480px) and (-webkit-min-device-pixel-ratio:2) {
+ h3{margin-top:100px;}
+ }

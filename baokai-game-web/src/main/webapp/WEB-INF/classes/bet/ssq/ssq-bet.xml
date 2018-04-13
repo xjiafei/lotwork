@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="ssqAbstractBetOperator" class="com.winterframework.firefrog.game.web.bet.operator.impl.AbstractBetOperator" parent="betSupport" abstract="true">
+		<property name="view" value="/bet/ssq/ssqbet" />
+		<property name="defaultMethod" value="biaozhuntouzhu.biaozhun.fushi" />
+		<property name="lotterySeries" value="SSQ" />
+<!-- 		<property name="bnConvertor"> -->
+<!-- 			<bean class="com.winterframework.firefrog.game.web.bet.convertor.impl.BetNameConvertor"> -->
+<!-- 				<property name="gameGroups" ref="ssqGameGroups" /> -->
+<!-- 				<property name="gameSets" ref="ssqGameSets" /> -->
+<!-- 				<property name="betMethods" ref="ssqSetMethods" /> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+	
+	</bean>
+	
+	<bean id="ssq" class="com.winterframework.firefrog.game.web.bet.operator.impl.SSQBetOperator" parent="ssqAbstractBetOperator">
+		<property name="lotteryCode" value="ssq" />
+		<property name="lotteryId" value="99401" />
+		<property name="lotteryName" value="双色球" />
+		<property name="helpLink" value="/help/queryLotteryDetail?helpId=903" />
+	</bean>
+<!--     <bean id="ssqBnConvertor" class="com.winterframework.firefrog.game.web.bet.convertor.impl.BetNameConvertor"> -->
+<!--         <property name="gameGroups" ref="ssqGameGroups" /> -->
+<!--         <property name="gameSets" ref="ssqGameSets" /> -->
+<!--         <property name="betMethods" ref="ssqSetMethods" /> -->
+<!--     </bean> -->
+</beans>

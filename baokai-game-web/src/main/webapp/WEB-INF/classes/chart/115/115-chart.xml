@@ -1,0 +1,448 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="115TrendCharts" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<!-- 选一 -->
+				<entry>
+					<key><value>xuanyi.renxuanyizhongyi.fushi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuanyi.renxuanyizhongyi.danshi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				
+				<entry>
+					<key><value>xuanyi.dingweidan.fushi</value></key>
+					<ref bean="xuanyi.dingweidan" />
+				</entry>
+				<entry>
+					<key><value>xuanyi.qiansanyimabudingwei.fushi</value></key>
+					<ref bean="xuanyi.budingwei" />
+				</entry>				
+						
+				<!-- 选二 -->
+				<entry>
+					<key><value>xuaner.renxuanerzhonger.renxuanfushi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuaner.renxuanerzhonger.renxuandanshi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuaner.renxuanerzhonger.renxuandantuo</value></key>
+					<ref bean="renxuan" />
+				</entry>		
+				<entry>
+					<key><value>xuaner.qianerzhixuan.zhixuanfushi</value></key>
+					<ref bean="qianerzhixuan" />
+				</entry>
+				<entry>
+					<key><value>xuaner.qianerzhixuan.zhixuandanshi</value></key>
+					<ref bean="qianerzhixuan" />
+				</entry>
+				
+				<entry>
+					<key><value>xuaner.qianerzuxuan.zuxuanfushi</value></key>
+					<ref bean="qianerzuxuan" />
+				</entry>
+				<entry>
+					<key><value>xuaner.qianerzuxuan.zuxuandanshi</value></key>
+					<ref bean="qianerzuxuan" />
+				</entry>
+				<entry>
+					<key><value>xuaner.qianerzuxuan.zuxuandantuo</value></key>
+					<ref bean="qianerzuxuan" />
+				</entry>	
+				
+				<!-- 选三 -->	
+				<entry>
+					<key><value>xuansan.renxuansanzhongsan.renxuanfushi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuansan.renxuansanzhongsan.renxuandanshi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuansan.renxuansanzhongsan.renxuandantuo</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuansan.qiansanzhixuan.zhixuanfushi</value></key>
+					<ref bean="qiansanzhixuan" />
+				</entry>
+				<entry>
+					<key><value>xuansan.qiansanzhixuan.zhixuandanshi</value></key>
+					<ref bean="qiansanzhixuan" />
+				</entry>
+				<entry>
+					<key><value>xuansan.qiansanzuxuan.zuxuanfushi</value></key>
+					<ref bean="qiansanzuxuan" />
+				</entry>
+				<entry>
+					<key><value>xuansan.qiansanzuxuan.zuxuandanshi</value></key>
+					<ref bean="qiansanzuxuan" />
+				</entry>
+				<entry>
+					<key><value>xuansan.qiansanzuxuan.zuxuandantuo</value></key>
+					<ref bean="qiansanzuxuan" />
+				</entry>
+				
+				<!-- 选四 -->
+				<entry>
+					<key><value>xuansi.renxuansizhongsi.fushi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuansi.renxuansizhongsi.danshi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuansi.renxuansizhongsi.dantuo</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				
+				<!-- 选五 -->
+				<entry>
+					<key><value>xuanwu.renxuanwuzhongwu.fushi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuanwu.renxuanwuzhongwu.danshi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuanwu.renxuanwuzhongwu.dantuo</value></key>
+					<ref bean="renxuan" />
+				</entry>							
+
+				<!-- 选六 -->
+				<entry>
+					<key><value>xuanliu.renxuanliuzhongwu.fushi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuanliu.renxuanliuzhongwu.danshi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuanliu.renxuanliuzhongwu.dantuo</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				
+				<!-- 选七 -->
+				<entry>
+					<key><value>xuanqi.renxuanqizhongwu.fushi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuanqi.renxuanqizhongwu.danshi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuanqi.renxuanqizhongwu.dantuo</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				
+				<!-- 选八 -->
+				<entry>
+					<key><value>xuanba.renxuanbazhongwu.fushi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuanba.renxuanbazhongwu.danshi</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				<entry>
+					<key><value>xuanba.renxuanbazhongwu.dantuo</value></key>
+					<ref bean="renxuan" />
+				</entry>
+				
+				<!-- 趣味 -->
+				<entry>
+					<key><value>quwei.normal.dingdanshuang</value></key>
+					<ref bean="quwei" />
+				</entry>
+				<entry>
+					<key><value>quwei.normal.caizhongwei</value></key>
+					<ref bean="quwei" />
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="renxuan" class="com.winterframework.firefrog.game.web.chart.entity.Chart" parent="basicChart">
+		<property name="title">
+			<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitle" parent="basicChartTitle">
+				<property name="texts">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleTextIssueCode" />
+								<ref bean="chartTitleTextNumber115" />
+								<ref bean="chartTitleTextHAOMAFENBU115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+				<property name="items">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="selector">
+			<bean class="com.winterframework.firefrog.game.web.chart.selector.ChartDataSelector">
+				<property name="numberRecordFormat" value="#####" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="xuanyi.dingweidan" class="com.winterframework.firefrog.game.web.chart.entity.Chart" parent="basicChart">
+		<property name="title">
+			<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitle" parent="basicChartTitle">
+				<property name="texts">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleTextIssueCode" />
+								<ref bean="chartTitleTextNumber115" />
+								<ref bean="chartTitleTextYi" />
+								<ref bean="chartTitleTextEr" />
+								<ref bean="chartTitleTextSan" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+				<property name="items">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+								<ref bean="chartTitleItemWEISHUFENBULast115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="selector">
+			<bean class="com.winterframework.firefrog.game.web.chart.selector.ChartDataSelector">
+				<property name="numberRecordFormat" value="###**" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="xuanyi.budingwei" class="com.winterframework.firefrog.game.web.chart.entity.Chart" parent="basicChart">
+		<property name="title">
+			<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitle" parent="basicChartTitle">
+				<property name="texts">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleTextIssueCode" />
+								<ref bean="chartTitleTextNumber115" />
+								<ref bean="chartTitleTextHAOMAFENBU115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+				<property name="items">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="selector">
+			<bean class="com.winterframework.firefrog.game.web.chart.selector.ChartDataSelector">
+				<property name="numberRecordFormat" value="###**" />
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="qianerzhixuan" class="com.winterframework.firefrog.game.web.chart.entity.Chart" parent="basicChart">
+		<property name="title">
+			<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitle" parent="basicChartTitle">
+				<property name="texts">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleTextIssueCode" />
+								<ref bean="chartTitleTextNumber115" />
+								<ref bean="chartTitleTextYi" />
+								<ref bean="chartTitleTextEr" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+				<property name="items">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+								<ref bean="chartTitleItemWEISHUFENBULast115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="selector">
+			<bean class="com.winterframework.firefrog.game.web.chart.selector.ChartDataSelector">
+				<property name="numberRecordFormat" value="##***" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="qianerzuxuan" class="com.winterframework.firefrog.game.web.chart.entity.Chart" parent="basicChart">
+		<property name="title">
+			<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitle" parent="basicChartTitle">
+				<property name="texts">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleTextIssueCode" />
+								<ref bean="chartTitleTextNumber115" />
+								<ref bean="chartTitleTextHAOMAFENBU115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+				<property name="items">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="selector">
+			<bean class="com.winterframework.firefrog.game.web.chart.selector.ChartDataSelector">
+				<property name="numberRecordFormat" value="##***" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="qiansanzhixuan" class="com.winterframework.firefrog.game.web.chart.entity.Chart" parent="basicChart">
+		<property name="title">
+			<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitle" parent="basicChartTitle">
+				<property name="texts">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleTextIssueCode" />
+								<ref bean="chartTitleTextNumber115" />
+								<ref bean="chartTitleTextYi" />
+								<ref bean="chartTitleTextEr" />
+								<ref bean="chartTitleTextSan" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+				<property name="items">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+								<ref bean="chartTitleItemWEISHUFENBULast115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="selector">
+			<bean class="com.winterframework.firefrog.game.web.chart.selector.ChartDataSelector">
+				<property name="numberRecordFormat" value="###**" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="qiansanzuxuan" class="com.winterframework.firefrog.game.web.chart.entity.Chart" parent="basicChart">
+		<property name="title">
+			<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitle" parent="basicChartTitle">
+				<property name="texts">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleTextIssueCode" />
+								<ref bean="chartTitleTextNumber115" />
+								<ref bean="chartTitleTextHAOMAFENBU115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+				<property name="items">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="selector">
+			<bean class="com.winterframework.firefrog.game.web.chart.selector.ChartDataSelector">
+				<property name="numberRecordFormat" value="###**" />
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="quwei" class="com.winterframework.firefrog.game.web.chart.entity.Chart" parent="basicChart">
+		<property name="title">
+			<bean class="com.winterframework.firefrog.game.web.chart.entity.ChartTitle" parent="basicChartTitle">
+				<property name="texts">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleTextIssueCode" />
+								<ref bean="chartTitleTextNumber115" />
+								<ref bean="chartTitleTextHAOMAFENBU115" />
+								<ref bean="chartTitleTextDANSHUANG"/>
+								<ref bean="chartTitleTextZHONGWEI"/>
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+				<property name="items">
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<ref bean="chartTitleItemWEISHUFENBU115" />
+							</list>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>
+		<property name="selector">
+			<bean class="com.winterframework.firefrog.game.web.chart.selector.ChartDataSelector">
+				<property name="numberRecordFormat" value="*****" />
+			</bean>
+		</property>
+	</bean>	
+</beans>

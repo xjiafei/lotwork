@@ -1,0 +1,298 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	
+	<bean id="basicChartTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+	<table class="chart-table">
+		@{title}
+		@{body}
+	</table>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+		<thead class="thead">
+			<tr class="title-text">
+				@{texts}
+			</tr>
+			<tr class="title-number">
+				@{items}
+			</tr>
+		</thead>
+			]]></value>
+		</property>
+	</bean>
+		
+	<bean id="basicChartTitleTextIssueCodeAndNumberTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th rowspan="2" class="ball-none border-bottom"></th>
+				<th rowspan="2" class="border-bottom">@{text}</th>
+				<th rowspan="2" class="ball-none border-bottom border-right"></th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextIssueCodeAndNumberTemplate115" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th rowspan="6" class="ball-none border-bottom"></th>
+				<th rowspan="6" class="border-bottom">@{text}</th>
+				<th rowspan="6" class="ball-none border-bottom border-right"></th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextWEISHUFENBUTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="12" class="border-right">@{text}</th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextWEISHUFENBUTemplate115" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="13" class="border-right">@{text}</th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextWEISHUFENBULastTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="12">@{text}</th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextWEISHUFENBULastTemplate115" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="13">@{text}</th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleItemWEISHUFENBUTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th class="ball-none border-bottom"></th>
+				@{panes}
+				<th class="ball-none border-bottom border-right"></th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleItemWEISHUFENBULastTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th class="ball-none border-bottom"></th>
+				@{panes}
+				<th class="ball-none border-bottom"></th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleItemPaneWEISHUFENBUTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th class="border-bottom"><i class="ball-noraml">@{pane}</i></th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextHAOMAFENBUTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="12" class="border-right">@{text}</th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextHAOMAFENBUTemplate115" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="13" class="border-right">@{text}</th>
+			]]></value>
+		</property>
+	</bean>
+	
+	
+	<bean id="basicChartTitleTextZUXUANTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th rowspan="2" class="ball-none border-bottom"></th>
+				<th rowspan="2" class="border-bottom">@{text}</th>
+				<th rowspan="2" class="ball-none border-bottom border-right"></th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextZUXUANLastTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th rowspan="2" class="ball-none border-bottom"></th>
+				<th rowspan="2" class="border-bottom">@{text}</th>
+				<th rowspan="2" class="ball-none border-bottom"></th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextLiteralsLastTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th rowspan="2" class="ball-none border-bottom"></th>
+				<th rowspan="2" class="border-bottom">@{text}</th>
+				<th rowspan="2" class="ball-none border-bottom"></th>
+			]]></value>
+		</property>
+	</bean>	
+	
+	<bean id="basicChartTitleTextSanXingZhiXuanHEZHITemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="30" class="border-right">@{text}</th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartTitleTextSanXingZuXuanHEZHITemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="28" class="border-right">@{text}</th>
+			]]></value>
+		</property>
+	</bean>	
+	
+	
+	<bean id="basicChartTitleTextErXingZhiXuanHEZHITemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="21" class="border-right">@{text}</th>
+			]]></value>
+		</property>
+	</bean>	
+	
+	<bean id="basicChartTitleTextErXingZuXuanHEZHITemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="19" class="border-right">@{text}</th>
+			]]></value>
+		</property>
+	</bean>		
+	
+	<bean id="basicChartTitleTextKUADUTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<th colspan="12" class="border-right">@{text}</th>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+		<tbody class="tbody">
+			@{rows}
+		</tbody>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyRowTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+				<tr>
+					@{groups}
+				</tr>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyRowGroupTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+					<td class="ball-none"></td>
+					@{panes}
+					<td class="ball-none border-right"></td>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyRowGroupPaneWEBISSUECODETemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+					<td class="issue-numbers">@{data:pane}</td>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyRowGroupPaneNUMBERRECORDTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+					<td>@{data:pane}</td>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyRowGroupPaneWEISHUFENBUTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+					<td><i class="@{data:styleClass}">@{data:pane}</i></td>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyRowGroupPaneHAOMAFENBUTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+					<td><i class="@{data:styleClass}">@{data:pane}</i></td>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyRowGroupPaneZUKXUANTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+					<td>@{data:pane}</td>
+					<boolean:!last>
+					<td class="ball-none border-right"></td>
+					<td class="ball-none"></td>
+					</boolean>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyRowGroupPaneHEZHITemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+					<td@{data:styleClass}><i class="ball-noraml w-auto">@{data:pane}</i></td>
+			]]></value>
+		</property>
+	</bean>
+	
+	<bean id="basicChartBodyRowGroupPaneKUADUTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+					<td@{data:styleClass}><i class="ball-noraml">@{data:pane}</i></td>
+			]]></value>
+		</property>
+	</bean>
+
+	<bean id="basicChartBodyRowGroupPaneLiteralsTemplate" class="com.winterframework.firefrog.game.web.chart.ChartTemplate">
+		<property name="body">
+			<value><![CDATA[
+					<td><i class="size-numbers">@{data:pane}</i></td>
+			]]></value>
+		</property>
+	</bean>
+</beans>

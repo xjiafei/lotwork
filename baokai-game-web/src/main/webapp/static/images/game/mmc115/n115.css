@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.logo a{/*background:url("logo-n115.png") no-repeat 0 0;
+_background-image:none;
+_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/game/n115/logo-n115.png");*/ }
+
+.dingdanshuang .ball-number{
+	width: 105px;
+	background:url("un-ball-number.png") 0px -46px no-repeat;
+}
+.dingdanshuang .ball-number-current,ul.dingdanshuang a.ball-number-current:hover{
+	background-position:-108px -46px;font-size:16px;color:#FFF;
+}
+
+.ball-content li{padding:0 3px;}

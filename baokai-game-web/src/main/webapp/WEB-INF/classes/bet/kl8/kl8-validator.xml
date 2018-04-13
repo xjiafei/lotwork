@@ -1,0 +1,79 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+    <bean id="bjkl8RegexFormatValidateExecutor"
+          class="com.winterframework.firefrog.game.web.validate.composite.format.Bjkl8FormatValidateExecutor">
+    </bean>
+   <!--北京快乐8趣味验证-->
+    <bean id="bjkl8FormatQuweiValidateExecutor"
+          class="com.winterframework.firefrog.game.web.validate.composite.format.Bjkl8FormatQuweiValidateExecutor">
+    </bean>
+    <bean id="bjkl8FormatRenxuanValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.format.Bjkl8FormatRenxuanValidateExecutor">
+        <property name="numMap" ref="bjklbValidateMap" />
+    </bean>
+    <bean id="bjklbValidateMap" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="${methodCode.RX1}" value="1"/>
+                <entry key="${methodCode.RX2}" value="2"/>
+                <entry key="${methodCode.RX3}" value="3"/>
+                <entry key="${methodCode.RX4}" value="4"/>
+                <entry key="${methodCode.RX5}" value="5"/>
+                <entry key="${methodCode.RX6}" value="6"/>
+                <entry key="${methodCode.RX7}" value="7"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean id="bjkl8NumberRenxuanValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.Bjkl8NumberRenxuanValidateExecutor">
+        <property name="numMap" ref="bjklbValidateMap"/>
+    </bean>
+
+    <bean id="bjkl8NumberQuweiValidateExecutor" class="com.winterframework.firefrog.game.web.validate.composite.number.BetNumberSimplexValidateExecutor"/>
+    <bean id="bjkl8Validate" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <!--北京快乐8 start-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="groupCode" value="${groupCode.QW}"/>
+                            <property name="setCode" value="${setCode.PM}"/>
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="bjkl8RegexFormatValidateExecutor" />
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                                <ref bean="bjkl8NumberQuweiValidateExecutor"/>
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--北京快乐8任选-->
+                <entry>
+                    <key>
+                        <bean class="com.winterframework.firefrog.game.web.validate.business.LotteryPlayMethodKeyGenerator">
+                            <property name="groupCode" value="${groupCode.RX}"/>
+                            <property name="setCode" value="${setCode.PTRX}"/>
+                            <property name="seperator" value="${key.seperator}" />
+                        </bean>
+                    </key>
+                    <bean class="com.winterframework.firefrog.game.web.validate.business.BaseCompositeValidateExecutor">
+                        <property name="validateExecutors">
+                            <list>
+                                <ref bean="bjkl8FormatRenxuanValidateExecutor"/>
+                                <ref bean="betTotalMoneyValidateExecutor" />
+                                <ref bean="bjkl8NumberRenxuanValidateExecutor"/>
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <!--北京快乐8 end-->
+            </map>
+        </constructor-arg>
+    </bean>
+</beans>

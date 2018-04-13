@@ -1,0 +1,45 @@
+@charset "utf-8";
+/* msg-error */
+.msg-error{position:absolute;left:70px;top:42px;color:#E20000;font-family:Tahoma,Arial,Simsun;}
+.msg-error .error{display:inline-block;width:14px;height:14px;margin-right:4px;background-position:-60px -100px;overflow:hidden;vertical-align:-3px;*vertical-align:-1px;}
+
+/* bg-content */
+.bg-content{background:url(bg-header.jpg) repeat;}
+
+/* ui-login*/
+.login-logo,
+.safe-login .login-logo,
+.login-btn,
+.login-mark,
+.msg-error .error,
+.check-error .error,
+.check-error .tri,
+.check-info .tri,
+.slider-num li,
+.ico-name,
+.ico-pwd,
+.login-list-input
+{background-image:url(ui-login.png);background-repeat:no-repeat;}
+
+/* login-content */
+.login-content{width:324px;margin:200px auto;padding:20px 20px;font-family:Microsoft Yahei;}
+.login-logo{width:316px;height:46px;margin:0 auto;background-position:0 0;}
+.login-list{margin-top:40px;}
+.login-list-input{position:relative;height:34px;padding:8px 8px 8px 50px;margin-top:10px;background-position:0 -50px;}
+.login-input{width:100%;height:34px;padding:0;border:0 none;line-height:34px;font-family:Microsoft Yahei;font-size:16px;color:#BDBDBD;outline:none;background:transparent;}
+.login-input:focus,.login-input-focus{color:#FFF;}
+.login-btn{width:100%;height:54px;margin-top:20px;padding-bottom:3px;line-height:50px;border:0 none;font-family:Microsoft Yahei;font-size:20px;color:#03695A;cursor:pointer;border-radius:3px;
+box-shadow:0 1px 3px rgba(0,0,0,0.5);
+background:-webkit-linear-gradient(top,#FFDE00,#D9BE04) #EBCD02;
+background:    -moz-linear-gradient(top,#FFDE00,#D9BE04) #EBCD02;
+background:         -o-linear-gradient(top,#FFDE00,#D9BE04) #EBCD02;
+background:              linear-gradient(top,#FFDE00,#D9BE04) #EBCD02;
+background-position:0 -110px\9;
+background-color:transparent\9;
+}
+.ico-name{position:absolute;left:18px;top:16px;width:20px;height:18px;background-position:0 -170px;}
+.ico-pwd{position:absolute;left:20px;top:16px;width:13px;height:17px;background-position:-20px -170px;}
+.copy{margin-top:15px;text-align:center;color:#FFF;}
+
+
+

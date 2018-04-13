@@ -1,0 +1,239 @@
+@charset "UTF-8";
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+img{border:none;}
+body{font:12px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;color:#333;}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+.hide{display: none;}
+
+html,
+body,
+.content,
+.content .background{
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+body,
+input,
+select{
+	font-size: 14px;
+	font-family: 'Microsoft Yahei',Tahoma,Arial,Helvetica,Simsun,STHeiti;
+}
+
+body{
+	background: url(../../../images/activity/video_help/bottom-bg.jpg) repeat;
+}
+
+header{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+	header .logo{
+		display: block;
+		width: 157px;
+		height: 42px;
+		background: url(../../../images/activity/video_help/logo.png) no-repeat;
+	}
+
+.content{
+	position: relative;
+	background: url(../../../images/activity/video_help/blackboard.jpg) no-repeat center 0;
+}
+
+	.content .background{
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: url(../../../images/activity/video_help/background.png) no-repeat center 0;
+	}
+
+	.content .video-area{
+		position: absolute;
+		top: 205px;
+		left: 50%;
+		width: 639px;
+		height: 522px;
+		margin: 0 0 0 -280px;
+		background: url(../../../images/activity/video_help/video.png) no-repeat;
+	}
+		.video-area nav{
+			position: absolute;
+			right: -302px;
+			width: 310px;
+		}
+
+		.video-area a{
+			display: block;
+			height: 45px;
+			width: 350px;
+			background: url(../../../images/activity/video_help/menu.png) no-repeat;
+			-webkit-transition: margin 0.2s ease-in;
+			   -moz-transition: margin 0.2s ease-in;
+			     -o-transition: margin 0.2s ease-in;
+			        transition: margin 0.2s ease-in;
+		}
+
+		nav .video:hover{
+			margin-left: 10px;
+		}
+
+		nav .control{
+			background-position: 0px 0px;
+		}
+
+		nav .control i{
+			margin-right: 110px;
+		}
+
+		nav .guest{
+			background-position: 0px -46px;
+		}
+
+		nav .guest i{
+			margin-right: 155px;
+		}
+
+		nav .safe{
+			margin-top: 10px;
+			background-position: 0px -102px;
+		}
+
+		nav .safe i{
+			margin-right: 10px;
+		}
+
+		nav .bet{
+			margin-top: 5px;
+			background-position: 0 -155px;
+		}
+
+		nav .bet i{
+			margin-right: 105px;
+		}
+
+		nav .dream{
+			margin-top: 10px;
+			background-position: 0 -207px;
+		}
+
+		nav .dream i{
+			margin-right: 50px;
+		}
+
+		nav .guide{
+			position: relative;
+			width: 185px;
+			height: 47px;
+			margin-top: 67px;
+			background-position: 0 -313px;
+		}
+
+		nav .proxy{
+			position: relative;
+			width: 188px;
+			height: 47px;
+			margin-top: 14px;
+			background-position: 0px -372px;
+		}
+
+		.guide:hover i,
+		.proxy:hover i{
+			animation: buttons 0.7s ease-in-out infinite;
+			-webkit-animation: buttons 0.7s ease-in-out infinite; /* Safari 和 Chrome */
+			-moz-animation: buttons 0.7s ease infinite;
+		}
+
+
+		@keyframes buttons {
+			0%, 100%{ margin-right: -10px; }
+			50%{ margin-right: 10px }
+		}
+
+		@-webkit-keyframes buttons {
+			0%, 100%{ margin-right: -10px; }
+			50%{ margin-right: 10px }
+		}
+
+		@-moz-keyframes buttons {
+			0%, 100%{ margin-right: -10px; }
+			50%{ margin-right: 10px }
+		}
+
+		.guide i,
+		.proxy i{
+			position: absolute;
+			top: 0;
+			margin-right: -10px;
+			right: -166px;
+			display: block;
+			width: 166px;
+			height: 47px;
+			background: url(../../../images/activity/video_help/menu.png) no-repeat;
+			-webkit-transition: margin 1s ease-in;
+			   -moz-transition: margin 1s ease-in;
+			     -o-transition: margin 1s ease-in;
+			        transition: margin 1s ease-in;
+		}
+
+		.guide i{
+			background-position: -186px -313px;
+		}
+
+		.proxy i{
+			background-position: -190px -372px;
+		}
+
+	.content .bingo i{
+		display: block;
+		width: 49px;
+		height: 34px;
+		float: right;
+		margin-top: -5px;
+		background: url(../../../images/activity/video_help/bingo.png) no-repeat;
+	}
+
+	
+
+	.content .video-play{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 593px;
+		height: 372px;
+		z-index: 3;
+		border-radius: 10px 10px 0 0;
+		overflow: hidden;
+		background: #000;
+	}
+
+	.content .girl{
+		position: absolute;
+		top: -106px;
+		left: -430px;
+		width: 510px;
+		height: 985px;
+		background: url(../../../images/activity/video_help/girl.png) no-repeat;
+		z-index: 2;
+	}
+
+footer{
+	position: absolute;
+	top: 760px;
+	left: 50%;
+	width: 300px;
+	height: 30px;
+	color: #abc0d7;
+	margin: 0 0 0 -120px;
+}
+

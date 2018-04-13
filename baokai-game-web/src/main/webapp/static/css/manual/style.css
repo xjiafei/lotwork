@@ -1,0 +1,2056 @@
+@charset "UTF-8";
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+img{border:none;}
+body{font:12px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;color:#333;}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+.hide{display: none;}
+
+html{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+body,
+input,
+select{
+	font-size: 14px;
+	font-family: 'Microsoft Yahei',Tahoma,Arial,Helvetica,Simsun,STHeiti;
+}
+/*导航*/
+header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	line-height: 60px;
+	background: url(../../images/manual/nav/nav-bg.png) repeat-x;
+	z-index: 100;
+	-webkit-transition: top 0.3s ease 0s;
+	   -moz-transition: top 0.3s ease 0s;
+	     -o-transition: top 0.3s ease 0s;
+	     	transition: top 0.3s ease 0s;
+}
+
+header.shrink{
+	top: -82px;
+}
+
+	header .layout{
+		width: 1120px;
+		margin: 0 auto;
+	}
+
+	.logo{
+		-webkit-transition: 1s ease .5s;
+	   	  -moz-transition:  1s ease .5s;
+	        -o-transition:  1s ease .5s;
+	     	   transition:  1s ease .5s;
+	}
+
+		.white .logo{
+			float: left;
+			width: 137px;
+			height: 45px;
+			margin: 9px 0 0 0;
+			background: url(../../images/manual/nav/logo-w.png) 0 0 no-repeat;
+		}
+
+		.black .logo{
+			float: left;
+			width: 137px;
+			height: 45px;
+			margin: 9px 0 0 0;
+			background: url(../../images/manual/nav/logo-b.png) 0 0 no-repeat;
+		}
+
+		header nav{
+			float: right;
+			background: url(../../images/manual/nav/line-bg.png) right 22px no-repeat;
+		}
+
+		.black nav{
+			background: url(../../images/manual/nav/line-black.png) right 22px no-repeat;
+		}
+
+		nav li{ 
+			float: left;
+			height: 60px;
+		}
+			nav li .first{
+				border-left: none;
+			}
+
+			nav li a{
+				display: inline-block;
+				*zoom: 1;
+				*display: inline;
+				height: 18px;
+				margin: 21px 0 0 0;
+				padding: 0px 15px;
+				line-height: 18px;
+				text-decoration: none;
+				color: #2a1990;
+				background: url(../../images/manual/nav/line-bg.png) 0 2px no-repeat;
+				-webkit-transition: all 1.2s ease 0s;
+				   -moz-transition: all 1.2s ease 0s;
+				     -o-transition: all 1.2s ease 0s;
+				     	transition: all 1.2s ease 0s;
+			}
+
+			nav li a:hover{
+				opacity: 0.8
+			}
+
+			.black li a{
+				background: url(../../images/manual/nav/line-black.png) 0 2px no-repeat;
+			}
+
+			.white li a{
+				color: #fff;
+				color: rgba(255,255,255,0.6);
+			}
+
+			.black li a{
+				color: #979797;
+				color: rgba(0,0,0,0.5);
+			}
+
+
+
+
+.page-control{
+	position: fixed;
+	margin-top:-120px;
+	top: 50%;
+	right: 20px;
+	width: 15px;
+	z-index: 30;
+}
+
+.page-control li{
+	position:relative;
+	width: 15px;
+	height: 15px;
+	margin-top:5px;
+	cursor: pointer;
+	background: url(../../images/manual/side-button-blur.png) no-repeat;
+}
+
+.page-control .current{
+	background: url(../../images/manual/side-bar.png) no-repeat;
+}
+.page-control li a{
+	position: absolute;
+	display: block;
+	top: 0;
+	right: -1000px;
+	width: auto;
+	opacity: 0;
+	white-space: nowrap;
+	line-height: 15px;
+	text-decoration: none;
+	color:#333;
+	color: rgba(0,0,0,.6);
+	-webkit-transition: opacity 0.5s ease 0s;
+	   -moz-transition: opacity 0.5s ease 0s;
+	     -o-transition: opacity 0.5s ease 0s;
+	     	transition: opacity 0.5s ease 0s;
+}
+
+.page-control li:hover a{
+	right: 20px;
+	opacity: 1;
+}
+
+.globa-loading{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-size: cover;
+	background: url(../../images/manual/step-1/step-1-bg.png) repeat-x 0 center;
+}
+	
+	.globa-loading .loading-tag{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 266px;
+		height: 150px;
+		margin: -75px 0 0 -133px;
+	}
+
+	@keyframes tick {
+		to { transform: rotate(360deg) }
+	}
+
+	@-webkit-keyframes tick {
+		to { 
+			transform: rotate(360deg) }
+		}
+
+	@-moz-keyframes tick {
+	    to { transform: rotate(360deg) }
+	}
+
+	.globa-loading .logo{
+		width: 66px;
+		height: 64px;
+		margin: 0px auto;
+		background: url(../../images/manual/loading/loading-logo.png) no-repeat;
+		animation: tick 1.2s ease-in-out infinite;
+		-webkit-animation: tick 1.2s ease-in-out infinite; /* Safari 和 Chrome */
+		-moz-animation: tick 1.2s ease infinite;
+	}
+
+	.globa-loading .slogan{
+		width: 266px;
+		height: 55px;
+		margin-top: 5px;
+		background: url(../../images/manual/loading/load-slogan.png) no-repeat;
+	}
+
+	.globa-loading p,
+	.globa-loading h2{
+		text-indent: -9999em;
+	}
+
+/*page control*/
+.prev_prev,
+.prev_next{
+	top: 50%;
+	width: 26px;
+	height: 49px;
+	opacity: 0.2;
+	text-indent: -9999em;
+	z-index: 150;
+	background: url(../../images/manual/page-control.png) -68px -77px no-repeat;
+	opacity: 0;
+	-webkit-transition: all 0.3s ease 0s,left 1s ease 1.2s, right 1s ease 1.2s;
+	   -moz-transition: all 0.3s ease 0s,left 1s ease 1.2s, right 1s ease 1.2s;
+	     -o-transition: all 0.3s ease 0s,left 1s ease 1.2s, right 1s ease 1.2s;
+	     	transition: all 0.3s ease 0s,left 1s ease 1.2s, right 1s ease 1.2s;
+}
+
+.prev_prev:hover,
+.current .prev_prev:hover,
+.prev_next:hover,
+.current .prev_next:hover{
+	opacity: 1;
+}
+.prev_prev{background-position: -7px -77px;}
+.prev_prev{left: -15%;}
+.prev_next{right: -15%;}
+
+.white-prev{background-position: -7px -8px;}
+.white-next{background-position: -68px -8px;}
+
+.current .prev_prev{
+	left: 10%;
+	opacity: 0.3;
+}
+
+.current .prev_next{
+	right: 10%;
+	opacity: 0.3;
+}
+
+.animate-show-area,
+.step-wrap,
+.step-bg{
+	width: 100%;
+	height: 100%;
+}
+	.step-wrap{
+		top: 0;
+		left: 0;
+		position: absolute;
+		/*transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1)!important;
+		-moz-transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1)!important;
+		-webkit-transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1)!important; 
+		-o-transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1)!important; */
+	}
+
+	.animate-show-area .current{z-index: 10;
+	}
+	
+	.step-bg{background-size: cover!important;}
+	.step-wrap .am{position: absolute;}
+	.step-wrap{position: absolute;}
+	.step-1-bg{height:100%;background: url(../../images/manual/step-1/step-1-bg.png) repeat-x 0 center;}
+
+		.step-one .plane{
+			top: 50%;
+			left: 100%;
+			margin-left: -621px;
+			width: 621px;
+			height: 378px;
+			background: url(../../images/manual/step-1/plane.png) no-repeat;
+			background-size: cover!important;
+			z-index: 1;
+		}
+
+		.step-one .line{
+			top: 58%;
+			left: 62%;
+			width: 1137px;
+			height: 505px;
+			background: url(../../images/manual/step-1/line.png) no-repeat;
+			z-index: 1;
+			opacity: 0.1
+		}
+
+		.step-one .slogan{
+			bottom: 5%;
+			left: 50%;
+			width: 817px;
+			height: 500px;
+			margin: 0 0 0 -408px;
+			background: url(../../images/manual/step-1/step-1-slogan.png) no-repeat;
+			opacity: 0;
+		}
+
+		.step-one .desc{
+			top: 150px;
+			left: 50%;
+			width: 499px;
+			height: 44px;
+			margin-left: -250px;
+			background: url(../../images/manual/step-1/desc.png) no-repeat;
+			opacity: 0;
+		}
+
+		.step-one .process{
+			top: 250px;
+			left: 50%;
+			margin-left: -495px;
+			width: 991px;
+			height: 59px;
+			background: url(../../images/manual/step-1/process.png) no-repeat;
+			opacity: 0;
+		}
+
+		.step-one .button{
+			top: 350px;
+			left: 50%;
+			width: 79px;
+			height: 78px;
+			margin-left: -40px;
+			background: url(../../images/manual/step-1/button.png) no-repeat;
+			opacity: 0;
+		}
+		
+
+		.step-one.current .slogan{
+			opacity: 1;
+			bottom: 10%;
+			-webkit-transition: all 1.2s ease .2s;
+			   -moz-transition: all 1.2s ease .2s;
+			     -o-transition: all 1.2s ease .2s;
+			     	transition: all 1.2s ease .2s;
+		}
+
+		.step-one.current .desc{
+			opacity: 1;
+			top: 110px;
+			-webkit-transition: all 1.2s ease .8s;
+			   -moz-transition: all 1.2s ease .8s;
+			     -o-transition: all 1.2s ease .8s;
+			     	transition: all 1.2s ease .8s;
+		}
+
+		.step-one.current .process{
+			opacity: 1;
+			top: 210px;
+			-webkit-transition: all 1.2s ease 1.2s;
+			   -moz-transition: all 1.2s ease 1.2s;
+			     -o-transition: all 1.2s ease 1.2s;
+			     	transition: all 1.2s ease 1.2s;
+		}
+
+		.step-one.current .button{
+			opacity: 1;
+			top: 300px;
+			-webkit-transition: all 1.2s ease 1.8s;
+			   -moz-transition: all 1.2s ease 1.8s;
+			     -o-transition: all 1.2s ease 1.8s;
+			     	transition: all 1.2s ease 1.8s;
+		}
+
+		.step-one .ball{opacity:0;
+		
+		-webkit-transition: opacity 3s ease-in;
+			   -moz-transition: opacity 3s ease-in;
+			     -o-transition: opacity 3s ease-in;
+			     	transition: opacity 3s ease-in ;
+		
+		}
+		.step-one .currentBall .ball{opacity:1;}
+		.step-one .currentBall .ball-1{width:254px;height:255px;top:-230px;left:500px;background: url(../../images/manual/step-1/ball-1.png) no-repeat;
+		animation: ball-1 20s linear infinite;
+		-moz-animation: ball-1 20s linear  infinite;
+		-webkit-animation: ball-1 20s linear  infinite;
+		}
+		.step-one .currentBall .ball-2{width:179px;height:179px;top:-30px;left:-250px;background: url(../../images/manual/step-1/ball-2.png) no-repeat;
+		animation: ball-2 20s linear infinite;
+		-moz-animation: ball-2 20s linear infinite;
+		-webkit-animation: ball-2 20s linear infinite;
+		}
+		.step-one .currentBall .ball-3{width:152px;height:152px;top:100px;left:860px;background: url(../../images/manual/step-1/ball-3.png) no-repeat;
+		animation: ball-3 20s linear infinite;
+		-moz-animation: ball-3 120s linear infinite;
+		-webkit-animation: ball-3 20s linear infinite;
+		}
+		.step-one .currentBall .ball-4{width:184px;height:184px;top:320px;left:530px;background: url(../../images/manual/step-1/ball-4.png) no-repeat;
+		animation: ball-4 20s linear infinite;
+		-moz-animation: ball-4 20s linear infinite;
+		-webkit-animation: ball-4 20s linear infinite;
+		}
+		.step-one .currentBall .ball-5{width:159px;height:158px;top:260px;left:100px;background: url(../../images/manual/step-1/ball-5.png) no-repeat;
+		animation: ball-1 20s linear infinite;
+		-moz-animation: ball-1 20s linear infinite;
+		-webkit-animation: ball-1 20s linear infinite;
+		}
+		.step-one .currentBall .ball-6{width:118px;height:117px;top:320px;left:-250px;background: url(../../images/manual/step-1/ball-6.png) no-repeat;
+		animation: ball-2 20s linear infinite;
+		-moz-animation: ball-2 20s linear infinite;
+		-webkit-animation: ball-2 20s linear infinite;
+		}
+		.step-one .currentBall .ball-7{width:118px;height:117px;top:100px;left:560px;background: url(../../images/manual/step-1/ball-6.png) no-repeat;
+		animation: ball-4 20s linear infinite;
+		-moz-animation: ball-4 20s linear infinite;
+		-webkit-animation: ball-4 20s linear infinite;
+		}
+		.step-one .currentBall .ball-8{width:118px;height:117px;top:360px;left:860px;background: url(../../images/manual/step-1/ball-6.png) no-repeat;
+		animation: ball-4 20s linear infinite;
+		-moz-animation: ball-4 20s linear infinite;
+		-webkit-animation: ball-4 20s linear infinite;
+		}
+		.step-one .currentBall .ball-9{width:68px;height:68px;top:160px;left:60px;background: url(../../images/manual/step-1/ball-7.png) no-repeat;
+		animation: ball-1 20s linear infinite;
+		-moz-animation: ball-1 20s linear infinite;
+		-webkit-animation: ball-1 20s linear infinite;
+		}
+		.step-one .currentBall .ball-10{width:68px;height:68px;top:260px;left:1060px;background: url(../../images/manual/step-1/ball-7.png) no-repeat;
+		animation: ball-2 20s linear infinite;
+		-moz-animation: ball-2 20s linear infinite;
+		-webkit-animation: ball-2 20s linear infinite;
+		}
+		
+		@-moz-keyframes ball-1{
+				0% { 
+					-moz-transform: translateX(0px) translateY(0px);
+				}
+				12.5%{
+					-moz-transform: translateX(30px) translateY(30px);
+				}
+				25%{
+					-moz-transform: translateX(45px) translateY(45px);
+				}
+				37.5%{
+					-moz-transform: translateX(30px) translateY(75px);
+				}
+				50%{
+					-moz-transform: translateX(0px) translateY(90px);
+				}
+				62.5%{
+					-moz-transform: translateX(-30px) translateY(75px);
+				}
+				75%{
+					-moz-transform: translateX(-45px) translateY(45px);
+				}
+				87.5%{
+					-moz-transform: translateX(-30px) translateY(30px);
+				}
+				100%{
+					-moz-transform: translateX(0px) translateY(0px);
+				}
+			}
+			@-webkit-keyframes ball-1{
+				0% { 
+					-webkit-transform: translateX(0px) translateY(0px);
+				}
+				12.5%{
+					-webkit-transform: translateX(30px) translateY(30px);
+				}
+				25%{
+					-webkit-transform: translateX(45px) translateY(45px);
+				}
+				37.5%{
+					-webkit-transform: translateX(30px) translateY(75px);
+				}
+				50%{
+					-webkit-transform: translateX(0px) translateY(90px);
+				}
+				62.5%{
+					-webkit-transform: translateX(-30px) translateY(75px);
+				}
+				75%{
+					-webkit-transform: translateX(-45px) translateY(45px);
+				}
+				87.5%{
+					-webkit-transform: translateX(-30px) translateY(30px);
+				}
+				100%{
+					-webkit-transform: translateX(0px) translateY(0px);
+				}
+			}
+			@-moz-keyframes ball-2{
+				0%{
+					-moz-transform: translateX(30px) translateY(30px);
+				}
+				12.5%{
+					-moz-transform: translateX(45px) translateY(45px);
+				}
+				25%{
+					-moz-transform: translateX(30px) translateY(75px);
+				}
+				37.5%{
+					-moz-transform: translateX(0px) translateY(90px);
+				}
+				50%{
+					-moz-transform: translateX(-30px) translateY(75px);
+				}
+				62.5%{
+					-moz-transform: translateX(-45px) translateY(45px);
+				}
+				75%{
+					-moz-transform: translateX(-30px) translateY(30px);
+				}
+				87.5%{
+					-moz-transform: translateX(0px) translateY(0px);
+				}
+				100%{
+					-moz-transform: translateX(30px) translateY(30px);
+				}
+			}
+			@-webkit-keyframes ball-2{
+				0%{
+					-webkit-transform: translateX(30px) translateY(30px);
+				}
+				12.5%{
+					-webkit-transform: translateX(45px) translateY(45px);
+				}
+				25%{
+					-webkit-transform: translateX(30px) translateY(75px);
+				}
+				37.5%{
+					-webkit-transform: translateX(0px) translateY(90px);
+				}
+				50%{
+					-webkit-transform: translateX(-30px) translateY(75px);
+				}
+				62.5%{
+					-webkit-transform: translateX(-45px) translateY(45px);
+				}
+				75%{
+					-webkit-transform: translateX(-30px) translateY(30px);
+				}
+				87.5%{
+					-webkit-transform: translateX(0px) translateY(0px);
+				}
+				100%{
+					-webkit-transform: translateX(30px) translateY(30px);
+				}
+			}
+			@-moz-keyframes ball-3{
+				0%{
+					-moz-transform: translateX(45px) translateY(45px);
+				}
+				12.5%{
+					-moz-transform: translateX(30px) translateY(75px);
+				}
+				25%{
+					-moz-transform: translateX(0px) translateY(90px);
+				}
+				37.5%{
+					-moz-transform: translateX(-30px) translateY(75px);
+				}
+				50%{
+					-moz-transform: translateX(-45px) translateY(45px);
+				}
+				62.5%{
+					-moz-transform: translateX(-30px) translateY(30px);
+				}
+				75%{
+					-moz-transform: translateX(0px) translateY(0px);
+				}
+				87.5%{
+					-moz-transform: translateX(30px) translateY(30px);
+				}
+				100%{
+					-moz-transform: translateX(45px) translateY(45px);
+				}
+			}
+			@-webkit-keyframes ball-3{
+				0%{
+					-webkit-transform: translateX(45px) translateY(45px);
+				}
+				12.5%{
+					-webkit-transform: translateX(30px) translateY(75px);
+				}
+				25%{
+					-webkit-transform: translateX(0px) translateY(90px);
+				}
+				37.5%{
+					-webkit-transform: translateX(-30px) translateY(75px);
+				}
+				50%{
+					-webkit-transform: translateX(-45px) translateY(45px);
+				}
+				62.5%{
+					-webkit-transform: translateX(-30px) translateY(30px);
+				}
+				75%{
+					-webkit-transform: translateX(0px) translateY(0px);
+				}
+				87.5%{
+					-webkit-transform: translateX(30px) translateY(30px);
+				}
+				100%{
+					-webkit-transform: translateX(45px) translateY(45px);
+				}
+			}
+			@-moz-keyframes ball-4{
+				0%{
+					-moz-transform: translateX(30px) translateY(75px);
+				}
+				12.5%{
+					-moz-transform: translateX(0px) translateY(90px);
+				}
+				25%{
+					-moz-transform: translateX(-30px) translateY(75px);
+				}
+				37.5%{
+					-moz-transform: translateX(-45px) translateY(45px);
+				}
+				50%{
+					-moz-transform: translateX(-30px) translateY(30px);
+				}
+				62.5%{
+					-moz-transform: translateX(0px) translateY(0px);
+				}
+				75%{
+					-moz-transform: translateX(30px) translateY(30px);
+				}
+				87.5%{
+					-moz-transform: translateX(45px) translateY(45px);
+				}
+				100%{
+					-moz-transform: translateX(30px) translateY(75px);
+				}
+			}
+			@-webkit-keyframes ball-4{
+				0%{
+					-webkit-transform: translateX(30px) translateY(75px);
+				}
+				12.5%{
+					-webkit-transform: translateX(0px) translateY(90px);
+				}
+				25%{
+					-webkit-transform: translateX(-30px) translateY(75px);
+				}
+				37.5%{
+					-webkit-transform: translateX(-45px) translateY(45px);
+				}
+				50%{
+					-webkit-transform: translateX(-30px) translateY(30px);
+				}
+				62.5%{
+					-webkit-transform: translateX(0px) translateY(0px);
+				}
+				75%{
+					-webkit-transform: translateX(30px) translateY(30px);
+				}
+				87.5%{
+					-webkit-transform: translateX(45px) translateY(45px);
+				}
+				100%{
+					-webkit-transform: translateX(30px) translateY(75px);
+				}
+			}
+
+	.step-2-bg{
+		background: #f3f3f3;
+	}
+
+		.step-2-title{
+			top: 15%;
+			left: 50%;
+			width: 511px;
+			height: 72px;
+			margin-left: -511px;
+			background: url(../../images/manual/step-2/step-2-title.png) no-repeat;
+		}
+
+		.step-2-control{
+			top: 30%;
+			left: 50%;
+			height: 72px;
+			margin-left: -511px;
+		}
+
+			.step-2-control li{
+				position: relative;
+				float: left;
+				width: 340px;
+			}
+
+			.step-2-control .desc{
+				position: absolute;
+				top: 0;
+				left: 60px;
+				height: 46px;
+				line-height: 46px;
+				font-size: 16px;
+				color: #6b4092;
+			}
+
+			.current .desc{
+				color: #555555;
+			}
+
+			.step-2-control .num{
+				display: block;
+				width: 46px;
+				height: 46px;
+				text-align: center;
+				color: #7b4893;
+				line-height: 46px;
+				font-size: 25px;
+				background: url(../../images/manual/step-2/step2-num.png) no-repeat;
+			}
+
+			.step-2-control .current .num{
+				color: #fff;
+				background: url(../../images/manual/step-2/step2-num-current.png) 0 0 no-repeat;
+			}
+
+			.step-2-control .first{
+
+			}
+
+			.step-2-control .process{
+				position: relative;
+				width: 100%;
+				height: 10px;
+				margin-top: 10px;
+				background: url(../../images/manual/step-2/step-2-pointer.png)  18px 0 no-repeat;
+			}
+
+			.step-2-control .process .gray,
+			.step-2-control .shadow{
+				position: absolute;
+				top: 0;
+				left: 33px;
+				width: 320px;
+				height: 6px;
+				margin-top: 2px;
+				background: #e9e9e9;
+				border-radius: 10px;
+			}
+
+			.step-2-control .shadow{
+				width: 0;
+				background: #e9e9e9;
+				-webkit-transition: all 1.2s ease 0s;
+				   -moz-transition: all 1.2s ease 0s;
+				     -o-transition: all 1.2s ease 0s;
+				     	transition: all 1.2s ease 0s;
+			}
+
+			.step-2-control .current .shadow{
+				width: 320px;
+				background: #7b4893;
+			}
+
+		.step-2-slide{
+			opacity:0;
+			top: 170%;
+			left: 50%;
+			width: 1200px;
+			height: 580px;
+			margin: 0 auto 0 -600px;
+			overflow: hidden;
+			-webkit-transition: all 0.5s ease 1.2s;
+-moz-transition: all 0.5s ease 1.2s;
+-o-transition: all 0.5s ease 1.2s;
+transition: all 0.5s ease 1.2s;
+		}
+
+		.current .step-2-slide{opacity:1;top:150%;}
+		.step-2-slide .item{
+			width: 100%;
+			text-align: center;
+		}
+
+		.step-two-one{
+			position: relative;
+			width: 100%;
+			height: 546px;
+			overflow: hidden;
+			transition: height 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+			-webkit-transition: height 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+			-moz-transition: height 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+			-o-transition: height 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+		}
+
+		.step-2-1-bg{
+			background: url(../../images/manual/step-2-1/step-two-one-bgc.jpg) 0px 0px no-repeat;
+		}
+
+		.step-two-one .arrow{
+			top: -23px;
+			left: 20%;
+			width: 47px;
+			height: 23px;
+			background: url(../../images/manual/step-2-1/step-two-one-arrow.png) no-repeat;
+		}
+
+		.step-two-one .title{
+			top: 5%;
+			left: 50%;
+			width: 565px;
+			height: 98px;
+			margin-left: -610px;
+			background: url(../../images/manual/step-2-1/step-2-1-title.png) no-repeat;
+		}
+
+		.step-two-one .current-slide{
+			bottom: 5%;
+			left: 50%;
+			width: 370px;
+			height: 36px;
+			border-radius: 30px;
+			margin-left: -185px;
+			line-height: 36px;
+			background: rgba(0,0,0,0.2);
+			padding-left: 50px;
+		}
+
+		.step-2-1-slide{
+			top: 106px;
+			left: 50%;
+			width: 1121px;
+			height: 380px;
+			margin-left: -561px;
+			text-align: center;
+		}
+
+		.step-two-one .item{
+			width: 1121px;
+			height: 340px;
+			overflow: hidden;
+		}
+
+		.step-two-one .first{
+			margin-top: 36px;
+		}
+
+		.current-slide li{
+			float: left;
+			width: 120px;
+			font-size: 16px;
+			color: #6d6d6d;
+			background: url(../../images/manual/step-2-1/step-arrow.png)  77px 10px no-repeat;
+			-webkit-transition: all 0.3s ease 0s;
+			   -moz-transition: all 0.3s ease 0s;
+			     -o-transition: all 0.3s ease 0s;
+			     	transition: all 0.3s ease 0s;
+		}
+
+		.current-slide .current{
+			color: #fff;
+			background-position: 77px -47px;
+		}
+
+	.step-3-bg{
+		background: url(../../images/manual/step-3/step-3-bg.jpg) no-repeat;
+	}
+
+		.step-three .lights{
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: url(../../images/manual/step-3/step-3-lights.png) no-repeat center center;
+			opacity: 0;
+			-webkit-transition: all 0.3s ease 0.5s;
+			   -moz-transition: all 0.3s ease 0.5s;
+			     -o-transition: all 0.3s ease 0.5s;
+			     	transition: all 0.3s ease 0.5s;
+		}
+
+		.step-three .computer{
+			top: 35%;
+			left: 50%;
+			width: 690px;
+			height: 520px;
+			margin-left: -580px;
+			background: url(../../images/manual/step-3/computer.png) no-repeat;
+			opacity: 0;
+			-webkit-transition: all 0.5s ease 1s;
+			   -moz-transition: all 0.5s ease 1s;
+			     -o-transition: all 0.5s ease 1s;
+			     	transition: all 0.5s ease 1s;
+		}
+
+		.current .computer,
+		.current .lights{
+			opacity: 1;
+		}
+
+		.current .computer{
+			top: 27%;
+		}
+
+		.step-three .slogan{
+			top: 2%;
+			left: 60%;
+			width: 627px;
+			height: 528px;
+			margin-left: 330px;
+			background: url(../../images/manual/step-3/step-3-slogan.png) no-repeat;
+			opacity: 0;
+			-webkit-transition: all 0.5s ease 1.5s;
+			   -moz-transition: all 0.5s ease 1.5s;
+			     -o-transition: all 0.5s ease 1.5s;
+			     	transition: all 0.5s ease 1.5s;
+		}
+
+		.current .slogan{
+			opacity: 1;
+			left: 50%;
+		}
+
+		.step-three .mark-01{
+			top: 55%;
+			left: 50%;
+			width: 119px;
+			height: 189px;
+			margin-left: 335px;
+			background: url(../../images/manual/step-3/step-3-icon1.png) no-repeat;
+			opacity: 0;
+			-webkit-transition: all 0.3s ease 2s, margin 0.3s ease 0s;
+			   -moz-transition: all 0.3s ease 2s, margin 0.3s ease 0s;
+			     -o-transition: all 0.3s ease 2s, margin 0.3s ease 0s;
+			     	transition: all 0.3s ease 2s, margin 0.3s ease 0s;
+		}
+
+		.step-three .mark-02{
+			top: 55%;
+			left: 50%;
+			width: 136px;
+			height: 189px;
+			margin-left: 450px;
+			background: url(../../images/manual/step-3/step-3-icon2.png) no-repeat;
+			opacity: 0;
+			-webkit-transition: all 0.3s ease 2.3s, margin 0.3s ease 0s;
+			   -moz-transition: all 0.3s ease 2.3s, margin 0.3s ease 0s;
+			     -o-transition: all 0.3s ease 2.3s, margin 0.3s ease 0s;
+			     	transition: all 0.3s ease 2.3s, margin 0.3s ease 0s;
+		}
+
+		.step-three .mark-03{
+			top: 55%;
+			left: 50%;
+			width: 146px;
+			height: 189px;
+			margin-left: 585px;
+			background: url(../../images/manual/step-3/step-3-icon3.png) no-repeat;
+			opacity: 0;
+			-webkit-transition: all 0.3s ease 2.6s, margin 0.3s ease 0s;
+			   -moz-transition: all 0.3s ease 2.6s, margin 0.3s ease 0s;
+			     -o-transition: all 0.3s ease 2.6s, margin 0.3s ease 0s;
+			     	transition: all 0.3s ease 2.6s, margin 0.3s ease 0s;
+		}
+
+		.step-three .mark-04{
+			top: 55%;
+			left: 50%;
+			width: 137px;
+			height: 189px;
+			margin-left: 730px;
+			background: url(../../images/manual/step-3/step-3-icon4.png) no-repeat;
+			opacity: 0;
+			-webkit-transition: all 0.3s ease 2.9s,margin 0.3s ease 0s;
+			   -moz-transition: all 0.3s ease 2.9s,margin 0.3s ease 0s;
+			     -o-transition: all 0.3s ease 2.9s,margin 0.3s ease 0s;
+			     	transition: all 0.3s ease 2.9s,margin 0.3s ease 0s;
+		}
+
+		.current .mark-01,
+		.current .mark-02,
+		.current .mark-03,
+		.current .mark-04{
+			opacity: 1;
+			top: 48%;
+		}
+
+		.step-three .mark-01:hover,
+		.step-three .mark-02:hover,
+		.step-three .mark-03:hover,
+		.step-three .mark-04:hover{
+			margin-top: 15px;
+		}
+
+		.step-three .mouse{
+			top: 50%;
+			left: 50%;
+			width: 171px;
+			height: 189px;
+			margin: -125px 0 0 -85px;
+			background: url(../../images/manual/step-3/mouse.png) no-repeat;
+			opacity: 0;
+		}
+
+	.step-four{
+		height: 2850px;
+	}
+
+	.step-4-bg{
+		background: #fcf4f8;
+	}
+
+		.step-four .road{
+			top: 2%;
+			left: 50%;
+			width: 1244px;
+			height: 2777px;
+			margin-left: -622px;
+			background: url(../../images/manual/step-4/step-4-road.png) no-repeat;
+		}
+			.step-four .car{
+				top: 225px;
+				left: 100px;
+				width: 210px;
+				height: 127px;
+				background: url(../../images/manual/step-4/car.png) no-repeat;
+			}
+
+			@keyframes car-one {
+				0%{
+					transform: rotate(0deg);
+					top: 225px;
+					left: 100px;
+				}
+				70% {
+					transform: rotate(0deg);
+					top: 225px;
+					left: 755px;
+				}
+				to { 
+					transform: rotate(90deg);
+					top: 205px;
+					left: 755px;
+				}
+			}
+
+			@-webkit-keyframes car-one {
+				0%{
+					transform: rotate(0deg);
+					top: 225px;
+					left: 100px;
+				}
+				70% {
+					transform: rotate(0deg);
+					top: 225px;
+					left: 755px;
+				}
+				to { 
+					transform: rotate(90deg);
+					top: 205px;
+					left: 755px;
+				}
+			}
+			@-moz-keyframes car-one {
+			 	0%{
+					transform: rotate(0deg);
+					top: 225px;
+					left: 100px;
+				}
+				70% {
+					transform: rotate(0deg);
+					top: 225px;
+					left: 755px;
+				}
+				to { 
+					transform: rotate(90deg);
+					top: 205px;
+					left: 755px;
+				}
+			}
+
+			/*car animate*/
+			.step-four .step-car-1{
+				top: 205px;
+				left: 755px;
+				animation: car-one 2s ease-in 1;
+				-webkit-animation: car-one 2s ease-in 1; /* Safari 和 Chrome */
+				-moz-animation: car-one 2s ease-in 1;
+				transform: rotate(90deg);
+				transform-origin: 50% 230%;
+			}
+
+			@keyframes car-two {
+				0%{
+					transform: rotate(0deg);
+					top: 225px;
+					left: 100px;
+				}
+				70% {
+					transform: rotate(0deg);
+					top: 225px;
+					left: 755px;
+				}
+				to { 
+					transform: rotate(90deg);
+					top: 205px;
+					left: 755px;
+				}
+			}
+
+			@-webkit-keyframes car-two {
+				0%{
+					top: 205px;
+					left: 755px;
+					transform: rotate(90deg);
+					transform-origin: 50% 230%;
+				}
+				25% {
+					top: 150px;
+					left: 755px;
+					transform: rotate(180deg);
+					transform-origin: 50% 230%;
+				}
+				75% {
+					transform: rotate(180deg);
+					top: 150px;
+					left: 755px;
+					transform-origin: -50% 230%;
+				}
+				to { 
+				}
+			}
+			@-moz-keyframes car-two {
+			 	0%{
+					transform: rotate(0deg);
+					top: 225px;
+					left: 100px;
+				}
+				70% {
+					transform: rotate(0deg);
+					top: 225px;
+					left: 755px;
+				}
+				to { 
+					transform: rotate(90deg);
+					top: 590px;
+					left: -235px;
+				}
+			}
+
+			.step-four .step-car-2{
+				transform: rotate(90deg);
+				top: 150px;
+				left: 755px;
+				transform-origin: -50% 230%;
+				animation: car-two 2s ease-in 1;
+				-webkit-animation: car-two 2s ease-in 1; /* Safari 和 Chrome */
+				-moz-animation: car-two 2s ease-in 1;
+			}
+
+			.step-four .first{
+				top: 420px;
+				left: 180px;
+				width: 301px;
+				height: 197px;
+				background: url(../../images/manual/step-4/desc-first.png) no-repeat;
+			}
+
+			.step-four .second{
+				top: 810px;
+				left: 678px;
+				width: 298px;
+				height: 158px;
+				background: url(../../images/manual/step-4/desc-second.png) no-repeat;
+			}
+
+			.step-four .third{
+				top: 1180px;
+				left: 140px;
+				width: 413px;
+				height: 190px;
+				background: url(../../images/manual/step-4/desc-third.png) no-repeat;
+			}
+
+			.step-four .four{
+				top: 1580px;
+				left: 725px;
+				width: 348px;
+				height: 220px;
+				background: url(../../images/manual/step-4/desc-four.png) no-repeat;
+			}
+
+			.step-four .five{
+				top: 1970px;
+				left: 150px;
+				width: 329px;
+				height: 212px;
+				background: url(../../images/manual/step-4/desc-five.png) no-repeat;
+			}
+
+			.step-four .six{
+				top: 2380px;
+				left: 735px;
+				width: 403px;
+				height: 209px;
+				background: url(../../images/manual/step-4/desc-six.png) no-repeat;
+			}
+
+		.step-four-one{
+			position: relative;
+			width: 100%;
+			height: 314px;
+			overflow: hidden;
+		}
+
+		.step-4-1-bg{
+			background: url(../../images/manual/step-2-1/step-two-one-bgc.png) 0px 0px no-repeat;
+		}
+
+		.step-four-one .arrow{
+			top: -23px;
+			left: 20%;
+			width: 47px;
+			height: 23px;
+			background: url(../../images/manual/step-2-1/step-two-one-arrow.png) no-repeat;
+		}
+
+		.step-four-one .slogan{
+			top: 50px;
+			left: 50%;
+			width: 983px;
+			height: 237px;
+			margin-left: -492px;
+			background: url(../../images/manual/step-4-1/slogan.png) no-repeat;
+		}
+
+	.step-5-bg{
+		background: url(../../images/manual/step-5/step-5-bg.jpg) no-repeat;
+	}
+
+		.step-five .slogan{
+			top: 10%;
+			left: 50%;
+			width:234px;
+			height: 56px;
+			margin-left: -117px;
+			background: url(../../images/manual/step-5/slogan.png) no-repeat;
+		}
+		
+		
+		.step-five .page-area{
+			opacity:0;
+			top: 25%;
+			left: 50%;
+			width: 559px;
+			height: 660px;
+			margin-left: -280px;
+			background: url(../../images/manual/step-5/page.jpg) no-repeat;
+			-webkit-transition: all 0.5s ease 1.2s;
+			-moz-transition: all 0.5s ease 1.2s;
+			-o-transition: all 0.5s ease 1.2s;
+			transition: all 0.5s ease 1.2s;
+		}
+		.current .page-area{top:22%;opacity:1;}
+		.step-five .slogan-hover{
+			top: 0;
+			left: 0;
+			width: 559px;
+			height:0;
+			opacity:0;
+			background: url(../../images/manual/step-5/change-bg.jpg) no-repeat;
+		}
+		.current .slogan-hover{
+		height:660px;
+		opacity:1;
+		-webkit-transition: all 2.5s ease 1.5s;
+		-moz-transition: all 2.5s ease 1.5s;
+		transition: all 2.5s ease 1.5s;
+		}
+		
+		
+		.step-five .text-hover{
+			top: 0;
+			left: -166px;
+			width: 916px;
+			height:0;
+			opacity:0;
+			background: url(../../images/manual/step-5/text.png) no-repeat;
+		}
+		.current .text-hover{
+		height:660px;
+		opacity:1;
+		-webkit-transition: all 3.5s ease 1.5s;
+		-moz-transition: all 3.5s ease 1.5s;
+		transition: all 3.5s ease 1.5s;
+		}
+		.step-five .shadow{
+			bottom: -92px;
+			left: -70px;
+			width: 777px;
+			height: 92px;
+			background: url(../../images/manual/step-5/shadow.png) no-repeat;
+		}
+
+		.step-five .details{
+			display: block;
+			top: 30%;
+			right: -100px;
+			width: 42px;
+			height: 192px;
+			background: url(../../images/manual/step-5/details.png) no-repeat;
+		}
+
+	.step-six .step-bg{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+		.step-six .step-6-1-bg{
+			background: url(../../images/manual/step-6/6-bg-1.jpg) no-repeat;
+		}
+
+		.step-six .step-6-2-bg{
+			background: url(../../images/manual/step-6/6-bg-2.jpg) no-repeat;
+		}
+
+		.step-six .step-6-3-bg{
+			background: url(../../images/manual/step-6/6-bg-3.jpg) no-repeat;
+		}
+
+		.step-six .step-6-4-bg{
+			background: url(../../images/manual/step-6/6-bg-4.jpg) no-repeat;
+		}
+
+		.step-six .step-6-prev,
+		.step-six .step-6-next{
+			top: 50%;
+			width: 26px;
+			height: 49px;
+			text-indent: -9999em;
+			background: url(../../images/manual/step-6/6-arrow.png) -21px -30px no-repeat;
+		}
+
+		.pic-1 .step-6-next{
+			background-position: -117px -30px;
+		}
+
+		.pic-2 .step-6-prev{
+			background-position: -21px -130px;
+		}
+
+		.pic-2 .step-6-next{
+			background-position: -117px -130px;
+		}
+
+		.pic-3 .step-6-prev{
+			background-position: -21px -230px;
+		}
+
+		.pic-3 .step-6-next{
+			background-position: -117px -230px;
+		}
+
+		.pic-4 .step-6-prev{
+			background-position: -21px -330px;
+		}
+
+		.pic-4 .step-6-next{
+			background-position: -117px -330px;
+		}
+		/*
+		.step-six .step-6-prev{
+			left: 5%;
+		}
+
+		.step-six .step-6-next{
+			right: 5%;
+		}
+		*/
+		.step-six .step-6-slide{
+			opacity:0;
+			top: 55%;
+			left: 50%;
+			width: 981px;
+			height: 724px;
+			margin: -362px 0 0 -490px;
+			-webkit-transition: all 0.5s ease 1.2s;
+-moz-transition: all 0.5s ease 1.2s;
+-o-transition: all 0.5s ease 1.2s;
+transition: all 0.5s ease 1.2s;
+		}
+.current .step-6-slide{opacity:1;top:50%;}
+	.step-7-bg{background: url(../../images/manual/step-7/bg.jpg) no-repeat;}
+
+		.step-seven .title{
+			top: 12%;
+			left: 50%;
+			width: 653px;
+			height: 48px;
+			margin-left: -327px;
+			text-indent: -9999em;
+			background: url(../../images/manual/step-7/title.png) 0 0 no-repeat;
+		}
+
+		.step-seven .round-area{
+			top: 58%;
+			left: 50%;
+			width: 600px;
+			height: 600px;
+			margin: -300px 0 0 -300px;
+		}
+
+			.round-area .logo{
+				top: 50%;
+				left: 50%;
+				width: 80px;
+				height: 80px;
+				margin: -40px 0 0 -40px;
+				background: url(../../images/manual/step-7/logo.png) 0 0 no-repeat;
+			}
+
+			.round-area .font{
+				border: 1px solid rgba(255,255,255,0.25);
+				border-radius: 100%;
+			}
+
+			@keyframes rr {
+				0%{
+					transform: rotate(0deg);
+				}
+				to { 
+					transform: rotate(360deg);
+				}
+			}
+
+			@-webkit-keyframes rr {
+				0%{
+					-webkit-transform: rotate(0deg);
+				}
+				to { 
+					-webkit-transform: rotate(360deg);
+				}
+			}
+
+			@-moz-keyframes rr {
+			    	0%{
+					transform: rotate(0deg);
+				}
+				to { 
+					transform: rotate(360deg);
+				}
+			}
+
+			@keyframes rrf {
+				0%{
+					transform: rotate(360deg);
+				}
+				to { 
+					transform: rotate(0deg);
+				}
+			}
+
+			@-webkit-keyframes rrf {
+				0%{
+					-webkit-transform: rotate(360deg);
+				}
+				to { 
+					-webkit-transform: rotate(0deg);
+				}
+			}
+
+			@-moz-keyframes rrf {
+			    0%{
+					transform: rotate(360deg);
+				}
+				to { 
+					transform: rotate(0deg);
+				}
+			}
+
+			@keyframes lights {
+				0%{
+					transform: rotate(360deg);
+				}
+				to { 
+					transform: rotate(0deg);
+				}
+			}
+
+			@-webkit-keyframes lights {
+				19%, 39%, 59%, 79%{
+					opacity: 0;
+				}
+				20%, 40%, 60%, 80%{
+					width: 110%;
+					height: 110%;
+					opacity: 0.5;
+					margin: -55% 0 0 -55%;
+				}
+				30%, 50%, 70%, 90%{
+					width: 300%;
+					height: 300%;
+					opacity: 0;
+					margin: -150% 0 0 -150%;
+					box-shadow: 0 0 20px rgba(255,255, 255,0.2);
+				}
+			}
+
+			@-moz-keyframes lights {
+			    0%{
+					transform: rotate(360deg);
+				}
+				to { 
+					transform: rotate(0deg);
+				}
+			}
+
+			.round-area .round-out{
+				top: 50%;
+				left: 50%;
+				width: 110%;
+				height: 110%;
+				margin: -55% 0 0 -55%;
+				animation: lights 10s ease infinite;
+				-webkit-animation: lights 10s ease infinite; /* Safari 和 Chrome */
+				-moz-animation: lights 10s ease infinite;
+				opacity: 0;
+				z-index: 1;
+			}
+
+			.round-area .size-1{
+				top: 50%;
+				left: 50%;
+				width: 110%;
+				height: 110%;
+				margin: -55% 0 0 -55%;
+				background: url(../../images/manual/step-7/round-1.png) center center no-repeat;
+				animation: rr 8s linear infinite;
+				-webkit-animation: rr 8s linear infinite; /* Safari 和 Chrome */
+				-moz-animation: rr 8s linear infinite;
+			}
+
+			.round-area .size-2{
+				top: 50%;
+				left: 50%;
+				width: 86%;
+				height: 86%;
+				margin: -43% 0 0 -43%;
+				background: url(../../images/manual/step-7/round-2.png) center center no-repeat;
+				animation: rrf 7s linear infinite;
+				-webkit-animation: rrf 7s linear infinite; /* Safari 和 Chrome */
+				-moz-animation: rrf 7s linear infinite;
+			}
+
+			.round-area .size-3{
+				top: 50%;
+				left: 50%;
+				width: 64%;
+				height: 64%;
+				margin: -32% 0 0 -32%;
+				background: url(../../images/manual/step-7/round-4.png) center center no-repeat;
+				animation: rr 6s linear infinite;
+				-webkit-animation: rr 6s linear infinite; /* Safari 和 Chrome */
+				-moz-animation: rr 6s linear infinite;
+			}
+
+			.round-area .size-4{
+				top: 50%;
+				left: 50%;
+				width: 40%;
+				height: 40%;
+				margin: -20% 0 0 -20%;
+				background: url(../../images/manual/step-7/round-3.png) center center no-repeat;
+				animation: rrf 9s linear infinite;
+				-webkit-animation: rrf 9s linear infinite; /* Safari 和 Chrome */
+				-moz-animation: rrf 9s linear infinite;
+			}
+
+			.round-area .size-5{
+				top: 50%;
+				left: 50%;
+				width: 20%;
+				height: 20%;
+				margin: -10% 0 0 -10%;
+			}
+
+			@keyframes acclost {
+				0%{
+					top: 0px;
+					left: -100px;
+				}
+				20%{
+					top: 5px;
+					left: -130px;
+				}
+				40%{
+					top: 20px;
+					left: -110px;
+				}
+				60%{
+					top: 5px;
+					left: -18px;
+				}
+				65%{
+					top: -10px;
+					left: -130px;
+				}
+				to { 
+					top: 0px;
+					left: -100px;
+				}
+			}
+
+			@-webkit-keyframes acclost {
+				0%{
+					top: 0px;
+					left: -100px;
+				}
+				20%{
+					top: 5px;
+					left: -130px;
+				}
+				40%{
+					top: 20px;
+					left: -110px;
+				}
+				60%{
+					top: 5px;
+					left: -18px;
+				}
+				65%{
+					top: -10px;
+					left: -130px;
+				}
+				to { 
+					top: 0px;
+					left: -100px;
+				}
+			}
+
+			@-moz-keyframes acclost {
+				0%{
+					top: 0px;
+					left: -100px;
+				}
+				20%{
+					top: 5px;
+					left: -130px;
+				}
+				40%{
+					top: 20px;
+					left: -110px;
+				}
+				60%{
+					top: 5px;
+					left: -18px;
+				}
+				65%{
+					top: -10px;
+					left: -130px;
+				}
+				to { 
+					top: 0px;
+					left: -100px;
+				}
+			}
+
+			.round-area .acc-lost{
+				top: 0;
+				left: -100px;
+				width: 142px;
+				height: 38px;
+				background: url(../../images/manual/step-7/acc-lost.png) no-repeat;
+				animation: acclost 10s ease-in-out infinite;
+				-webkit-animation: acclost 10s ease-in-out infinite; /* Safari 和 Chrome */
+				-moz-animation: acclost 10s ease-in-out infinite;
+			}
+
+			@-webkit-keyframes amountlost {
+				0%{
+					bottom: 150px;
+					left: -260px;
+				}
+				20%{
+					bottom: 120px;
+					left: -200px;
+				}
+				40%{
+					bottom: 130px;
+					left: -130px;
+				}
+				50%{
+					bottom: 200px;
+					left: -280px;
+				}
+				to { 
+					bottom: 150px;
+					left: -260px;
+				}
+			}
+
+			@-moz-keyframes amountlost {
+				0%{
+					bottom: 150px;
+					left: -260px;
+				}
+				20%{
+					bottom: 120px;
+					left: -200px;
+				}
+				40%{
+					bottom: 130px;
+					left: -130px;
+				}
+				50%{
+					bottom: 200px;
+					left: -280px;
+				}
+				to { 
+					bottom: 150px;
+					left: -260px;
+				}
+			}
+
+			.round-area .amount-lost{
+				bottom: 150px;
+				left: -260px;
+				width: 142px;
+				height: 38px;
+				background: url(../../images/manual/step-7/amount-lost.png) no-repeat;
+				animation: amountlost 10s ease-in-out infinite;
+				-webkit-animation: amountlost 10s ease-in-out infinite; /* Safari 和 Chrome */
+				-moz-animation: amountlost 10s ease-in-out infinite;
+			}
+
+			@-webkit-keyframes dummyname {
+				0%{
+					top: 50px;
+					right: -200px;
+				}
+				20%{
+					top: 20px;
+					right: -5px;
+				}
+				25%{
+					top: 0px;
+					right: -200px;
+				}
+				50%{
+					top: 20px;
+					right: -230px;
+				}
+				to { 
+					top: 50px;
+					right: -200px;
+				}
+			}
+
+			@-moz-keyframes dummyname {
+				0%{
+					top: 50px;
+					right: -200px;
+				}
+				20%{
+					top: 20px;
+					right: -5px;
+				}
+				25%{
+					top: 0px;
+					right: -200px;
+				}
+				50%{
+					top: 20px;
+					right: -230px;
+				}
+				to { 
+					top: 50px;
+					right: -200px;
+				}
+			}
+
+			.round-area .dummy-name{
+				top: 50px;
+				right: -200px;
+				width: 106px;
+				height: 41px;
+				background: url(../../images/manual/step-7/dummy-name.png) no-repeat;
+				animation: dummyname 10s ease-in-out infinite;
+				-webkit-animation: dummyname 10s ease-in-out infinite; /* Safari 和 Chrome */
+				-moz-animation: dummyname 10s ease-in-out infinite;
+			}
+
+			@-webkit-keyframes infoLost {
+				0%{
+					bottom: 30px;
+					right: -150px;
+				}
+				50%{
+					bottom: 50px;
+					right: -220px;
+				}
+				80%{
+					bottom: 75px;
+					right: -90px;
+				}
+				85%{
+					bottom: 0px;
+					right: -120px;
+				}
+				to { 
+					bottom: 30px;
+					right: -150px;
+				}
+			}
+
+			@-moz-keyframes infoLost {
+				0%{
+					bottom: 30px;
+					right: -150px;
+				}
+				50%{
+					bottom: 50px;
+					right: -220px;
+				}
+				80%{
+					bottom: 75px;
+					right: -90px;
+				}
+				85%{
+					bottom: 0px;
+					right: -120px;
+				}
+				to { 
+					bottom: 30px;
+					right: -150px;
+				}
+			}
+
+			.round-area .info-lost{
+				bottom: 30px;
+				right: -150px;
+				width: 136px;
+				height: 39px;
+				background: url(../../images/manual/step-7/info-lost.png) no-repeat;
+				animation: infoLost 10s ease-in-out infinite;
+				-webkit-animation: infoLost 10s ease-in-out infinite; 
+				-moz-animation: infoLost 10s ease-in-out infinite;
+			}
+
+		.step-seven .safe-center{
+			bottom: 0;
+			right: 30px;
+			width: 210px;
+			height: 52px;
+			background: url(../../images/manual/step-7/safe-center.png) no-repeat;
+		}
+
+	.step-8-bg{
+		background: url(../../images/manual/step-7/bg.jpg) no-repeat;
+	}
+	.step-thirteen-bg{
+		background: url(../../images/manual/step-13/bg.jpg) no-repeat;
+	}
+
+		.step-eight .thumb{
+			opacity:0;
+			top: 55%;
+			left: 50%;
+			width: 1120px;
+			height: 800px;
+			margin: -350px 0 0 -560px;
+			background: url(../../images/manual/step-8/bg.png) no-repeat;
+			-webkit-transition: all 0.5s ease 1.2s;
+-moz-transition: all 0.5s ease 1.2s;
+-o-transition: all 0.5s ease 1.2s;
+transition: all 0.5s ease 1.2s;
+		}
+
+	
+	.step-9-bg{
+		background: url(../../images/manual/step-7/bg.jpg) no-repeat;
+	}
+
+		.step-nine .step-9-slide{
+			opacity:0;
+			top: 65%;
+			left: 50%;
+			width: 1120px;
+			height: 800px;
+			margin: -400px 0 0 -560px;
+			-webkit-transition: all 0.5s ease 1.2s;
+-moz-transition: all 0.5s ease 1.2s;
+-o-transition: all 0.5s ease 1.2s;
+transition: all 0.5s ease 1.2s;
+		}
+		.current .step-9-slide{opacity:1;top: 60%}
+	.step-ten-bg{background: url(../../images/manual/step-7/bg.jpg) no-repeat;}
+
+		.step-ten .step-ten-slide{
+		opacity:0;
+			top: 60%;
+			left: 50%;
+			width: 1120px;
+			height: 800px;
+			margin: -400px 0 0 -560px;
+			-webkit-transition: all 0.5s ease 1.2s;
+-moz-transition: all 0.5s ease 1.2s;
+-o-transition: all 0.5s ease 1.2s;
+transition: all 0.5s ease 1.2s;
+		}
+.current .step-ten-slide{top:55%;opacity:1;}
+	.step-11-bg{background: url(../../images/manual/step-11/bg.jpg) no-repeat;}
+	.step-11-bg2{position:absolute;left:50%;top:60%;width:677px;height:581px;margin-left:-339px;margin-top:-290px;background: url(../../images/manual/step-11/step-11-bg2.png) no-repeat;}
+	.step-elven .title{
+		top: 12%;
+			left: 50%;
+			width: 489px;
+			height: 97px;
+			margin-left: -245px;
+			background: url(../../images/manual/step-11/title.png) no-repeat;
+			
+	}
+
+
+		.step-elven .step-elven-slide{
+			opacity:1;
+			top: 60%;
+			left: 50%;
+			width: 582px;
+			height: 634px;
+			margin:-317px 0 0 -291px;overflow:hidden;
+		}
+	.step-12-bg{background: url(../../images/manual/step-7/bg.jpg) no-repeat;}
+	
+
+
+	.step-twelve .thumb{
+			opacity:0;
+			top: 55%;
+			left: 50%;
+			width: 1087px;
+			height: 806px;
+			margin: -403px 0 0 -544px;
+			background: url(../../images/manual/step-12/bg.png) no-repeat;
+			-webkit-transition: all 0.5s ease 1.2s;
+-moz-transition: all 0.5s ease 1.2s;
+-o-transition: all 0.5s ease 1.2s;
+transition: all 0.5s ease 1.2s;
+		}
+		.step-thirteen .thumb{
+			opacity:0;
+			top: 55%;
+			left: 50%;
+			width: 981px;
+			height: 718px;
+			margin: -359px 0 0 -491px;
+			background: url(../../images/manual/step-13/bg.png) no-repeat;
+			-webkit-transition: all 0.5s ease 1.2s;
+-moz-transition: all 0.5s ease 1.2s;
+-o-transition: all 0.5s ease 1.2s;
+transition: all 0.5s ease 1.2s;
+		}
+		.current .thumb{opacity:1;top: 50%}
+	
+	.step-14-bg{background: url(../../images/manual/step-14/bg.jpg) no-repeat center center;}
+	.step-14 .step-14-slide {
+	opacity:0;
+    height: 707px;
+    left: 50%;
+    margin: -354px 0 0 -540px;
+    top: 60%;
+    width: 1200px;
+	-webkit-transition: all 0.5s ease 1.2s;
+	-moz-transition: all 0.5s ease 1.2s;
+	-o-transition: all 0.5s ease 1.2s;
+	transition: all 0.5s ease 1.2s;
+}
+.current .step-14-slide{top: 50%;opacity:1;}
+	.scale-top{
+		-webkit-transform-origin:top center;
+		   -moz-transform-origin:top center;
+		    -ms-transform-origin:top center;
+		   		transform-origin:top center;
+	}
+
+	.scale-middle{
+		-webkit-transform-origin:center center;
+		   -moz-transform-origin:center center;
+		    -ms-transform-origin:center center;
+		   		transform-origin:center center;
+	}
+
+	.scale-bottom{
+		-webkit-transform-origin:bottom center;
+		   -moz-transform-origin:bottom center;
+		    -ms-transform-origin:bottom center;
+		   		transform-origin:bottom center;
+	}
+
+	@media all and (max-height: 710px) {
+		.scale{
+			-webkit-transform:scale(0.85);
+			   -moz-transform:scale(0.85);
+			    -ms-transform:scale(0.85);
+			    	transform:scale(0.85);
+		}
+	}
+
+	@media all and (max-height: 690px) {
+		.scale{
+			-webkit-transform:scale(0.8);
+			   -moz-transform:scale(0.8);
+			    -ms-transform:scale(0.8);
+			    	transform:scale(0.8);
+		}
+	}
+
+	@media all and (max-height: 670px) {
+
+		.scale{
+			-webkit-transform:scale(0.75);
+			   -moz-transform:scale(0.75);
+			    -ms-transform:scale(0.75);
+			    	transform:scale(0.75);
+			
+		}
+	}
+
+	.scale{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+	.step-bg{overflow:hidden;}
+	.step-bg img{
+		display: none;
+	}

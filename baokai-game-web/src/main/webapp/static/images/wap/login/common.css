@@ -1,0 +1,322 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a{
+	text-decoration: none;
+}
+input,textarea{
+	outline: none;
+}
+input:-webkit-autofill {                                /*谷歌浏览器自动填表单禁止*/
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+/* container style */
+.container{
+	background:rgb(247,247,247);
+    display: none;
+}
+
+.page{
+	width:640px;
+	height: auto;
+	overflow: hidden;
+}
+/** title 组件*/
+.title{
+	width: 640px;
+    height: 88px;
+    background: url('title_bg.jpg') repeat-x center center;
+    text-align: center;
+    line-height: 88px;
+    font-size: 36px;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+.title span{
+    display: block;
+    width: 88px;
+    height: 88px;
+    background: url('back.png') no-repeat center center;
+    position: absolute;
+}
+
+/** logo组件 */
+.logo {
+	width: 118px;
+    height: 142px;
+    margin: 0 auto;
+    background: url(logo.png) no-repeat center bottom;
+    position:relative;
+}
+
+.v1{
+    width: 44px;
+    height: 44px;
+    background: url(v1.png) no-repeat center center;
+    position: absolute;
+    right: -2px;
+    bottom: -5px;
+}
+
+.v2{
+    width: 44px;
+    height: 44px;
+    background: url(v2.png) no-repeat center center;
+    position: absolute;
+    right: -2px;
+    bottom: -5px;
+}
+
+.v3{
+    width: 44px;
+    height: 44px;
+    background: url(v3.png) no-repeat center center;
+    position: absolute;
+    right: -2px;
+    bottom: -5px;
+}
+
+.v4{
+    width: 44px;
+    height: 44px;
+    background: url(v4.png) no-repeat center center;
+    position: absolute;
+    right: -2px;
+    bottom: -5px;
+}
+
+/** 普通登录or安全登录按钮组件 */
+.input_box{
+    width: 275px;
+    height: 70px;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: block;
+}
+
+.btn_loginType{
+    width: 115px;
+    height: 50px;
+    font-size: 28px;
+    line-height: 60px;
+    text-align: center;
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+    color: rgb(153,153,153);
+    margin: 0 10px;
+}
+
+.btn_loginType_active{
+    border-bottom: 5px solid rgb(38,191,166);
+    color:rgb(38,191,166);
+}
+
+/* 用户名和密码输入框组件 */
+.login_form{
+	width:640px;
+	height: auto;
+	background: #fff;
+	border-top:1px solid rgb(204,204,204);
+	border-bottom:1px solid rgb(204,204,204);
+}
+
+.inputOL li{
+	width: 610px;
+    margin: 0 auto;
+    height: 88px;
+    border-bottom: 5px solid rgb(238,238,238);
+    line-height: 88px;
+    font-size: 30px;
+    color: rgb(181,181,181);
+    font-weight: bold;
+}
+.inputOL li input{
+	width: 500px;
+    height: 70px;
+    text-indent: 50px;
+    border: none;
+    font-size: 30px;
+}
+
+.inputOL li img {
+	width: 130px;
+    height: 60px;
+    background: rgb(191,191,191);
+    display: inline-block;
+    float: right;
+    line-height: 60px;
+    font-size: 40px;
+    letter-spacing: 10px;
+    color: rgb(77,178,160);
+    text-align: center;
+    margin-top: 15px;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.inputOL li i{
+	display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: url(icon_refresh.png) no-repeat center center;
+    float: right;
+    margin: 19px;
+
+}
+.inputOL li:last-child{
+	border-bottom:0px;
+}
+
+.inputOL li b{
+	display: block;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    left: 547px;
+    top: -67px;
+    background: url(icon_cancel.png) no-repeat center center;
+    text-align: center;
+}
+
+
+/* 信息提示组件 */
+.login_tips{
+	width: 610px;
+    height: 60px;
+    margin: 0 auto;
+    margin-top: 5px;
+    line-height: 65px;
+    text-indent: 40px;
+    font-size: 22px;
+    color: red;
+}
+
+.login_tips span{
+	width:440px;
+	height: 60px;
+	float: left;
+	background: url(icon_err.png) no-repeat center left;
+	display:none;
+}
+
+.login_tips a{
+	float: right;
+    margin-right: 15px;
+    font-size: 24px;
+    color: rgb(153,153,153);
+}
+
+
+/* 登录或下一步按钮组件 */
+.btn_login{
+	width: 600px;
+    height: 79px;
+    margin: 0 auto;
+    background: url(btn_bg.jpg) repeat-x center 6px;
+    line-height: 79px;
+    text-align: center;
+    color: rgb(247,247,247);
+    font-weight: bold;
+    font-size: 34px;
+    letter-spacing: 10px;
+    margin-top: 100px;
+    border-radius: 5px;
+    display: block;
+}
+
+
+
+/* 下载app组件 */
+.link_downLoadApp{
+    width: 165px;
+    height: 65px;
+    text-align: right;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 60px;
+    font-size: 24px;
+    line-height: 70px;
+    color: rgb(153,153,153);
+    background: url(icon_phone.png) no-repeat left center;
+    margin-bottom: 20px;
+}
+
+.link_downLoadApp a {
+    color: rgb(181,181,181);
+    text-decoration: none;
+    font-size: 24px;
+    line-height: 50px;
+}
+.inputOL li input.vcode{
+    margin-left: 55px;
+    width: 300px;
+}
+
+.step{
+    width:571px;
+    height: 35px;
+    background:url(step1.png) no-repeat center right;
+    margin:20px auto;
+}
+.tipinput{
+    width: 640px;
+    height: 35px;
+    text-align: center;
+    margin: 15px 0;
+    font-size: 24px;
+    color: rgb(212,212,212);
+}
+.backIndex{
+    width: 175px;
+    height: 55px;
+    text-indent: 37px;
+    line-height: 55px;
+    background: url(backlogin.png) left center no-repeat;
+    margin: 80px 30px;
+    font-size: 24px;
+    color: rgb(215,215,215);
+}

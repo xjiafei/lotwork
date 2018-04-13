@@ -1,0 +1,35 @@
+{
+  "<%= pkg.jsReleaseDir %>/util.min.js": [
+  	"<%= pkg.developDir %>js/game/util/jquery-1.9.1.js",
+  	"<%= pkg.developDir %>js/game/util/jquery.tmpl.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.base.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.Class.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.Event.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.util.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.Tab.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.Hover.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.Select.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.cookie.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.Countdown.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.Timer.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.Mask.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.MiniWindow.js",
+  	"<%= pkg.developDir %>js/game/util/phoenix.Tip.js"
+  ],
+  "<%= pkg.jsReleaseDir %>/game.min.js": [
+  	"<%= pkg.developDir %>js/game/phoenix.Games.js",
+  	"<%= pkg.developDir %>js/game/phoenix.Game.js",
+  	"<%= pkg.developDir %>js/game/phoenix.GameMethod.js",
+  	"<%= pkg.developDir %>js/game/phoenix.GameMessage.js",
+  	"<%= pkg.developDir %>js/game/phoenix.GameTypes.js",
+  	"<%= pkg.developDir %>js/game/phoenix.GameStatistics.js",
+  	"<%= pkg.developDir %>js/game/phoenix.GameOrder.js",
+  	"<%= pkg.developDir %>js/game/phoenix.GameTrace.js",
+  	"<%= pkg.developDir %>js/game/phoenix.GameSubmit.js"
+  ],
+  "<%= pkg.jsReleaseDir %>/game-ssc.min.js": [
+  	"<%= pkg.developDir %>js/game/ssc/phoenix.Games.SSC.js",
+  	"<%= pkg.developDir %>js/game/ssc/phoenix.Games.SSC.Message.js",
+  	"<%= pkg.developDir %>js/game/ssc/phoenix.Games.SSC.Danshi.js"
+  ]
+}

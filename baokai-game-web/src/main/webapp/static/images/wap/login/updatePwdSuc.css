@@ -1,0 +1,20 @@
+.v{
+    visibility: visible;
+}
+.step{
+    background:url('step4.png') no-repeat center left;
+}
+.complete{
+    width:103px;
+    height: 102px;
+    background: url(complete.png) no-repeat center center;
+    margin:0 auto;
+    margin-top:50px;
+}
+.comwords{
+    text-align: center;
+    color:rgb(38,191,166);
+    font-size:30px;
+    font-weight: bold;
+    margin-top:30px;
+}
