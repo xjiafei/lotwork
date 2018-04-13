@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameLockParam">
+	<resultMap id="GameLockParamResult" type="com.winterframework.firefrog.game.dao.vo.GameLockParam">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameLockParamColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	GAME_ID as gameId,
+	        	STATUS as status,
+	        	MIN_VAL as minVal,
+	        	START_TIME as startTime,
+	        	END_TIME as endTime,
+	        	MIN_VAL_PROCESS as minValProcess,
+	        	START_TIME_PROCESS as startTimeProcess,
+	        	END_TIME_PROCESS as endTimeProcess,
+	        	OPERATOR as operator,
+	        	MODIFIER as modifierStr
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameLockParam" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_LOCK_PARAM (
+	        	ID ,
+	        	GAME_ID ,
+	        	STATUS ,
+	        	MIN_VAL ,
+	        	START_TIME ,
+	        	END_TIME ,
+	        	MIN_VAL_PROCESS ,
+	        	START_TIME_PROCESS ,
+	        	END_TIME_PROCESS
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{minVal,javaType=long,jdbcType=DECIMAL} ,
+	        	#{startTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{endTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{minValProcess,javaType=long,jdbcType=DECIMAL} ,
+	        	#{startTimeProcess,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{endTimeProcess,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameLockParam">
+
+	        UPDATE GAME_LOCK_PARAM 
+	        <set>
+	        <if test="@Ognl@isNotEmpty(gameId)">
+		        GAME_ID = #{gameId,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(status)">
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(minVal)">
+		        MIN_VAL = #{minVal,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(startTime)">
+		        START_TIME = #{startTime,javaType=object,jdbcType=OTHER} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(endTime)">
+		        END_TIME = #{endTime,javaType=object,jdbcType=OTHER} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(minValProcess)">
+		        MIN_VAL_PROCESS = #{minValProcess,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(startTimeProcess)">
+		        START_TIME_PROCESS = #{startTimeProcess,javaType=object,jdbcType=OTHER} ,
+		        </if>
+		        <if test="@Ognl@isNotEmpty(endTimeProcess)">
+		        END_TIME_PROCESS = #{endTimeProcess,javaType=object,jdbcType=OTHER},
+		        </if>
+		        <if test="@Ognl@isNotEmpty(operator)">
+		        OPERATOR = #{operator,javaType=string,jdbcType=DECIMAL},
+		        </if>
+		        <if test="@Ognl@isNotEmpty(modifierStr)">
+		        MODIFIER = #{modifierStr,javaType=string,jdbcType=DECIMAL}
+		        </if>
+		    </set>
+	        WHERE 
+		        ID = #{id} 
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_LOCK_PARAM where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameLockParamResult" flushCache="false">
+			select <include refid="gameLockParamColumns" />
+		    <![CDATA[
+			    from GAME_LOCK_PARAM 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		 <select id="queryGameLockParam" parameterType="long" resultMap="GameLockParamResult" flushCache="false">
+			select <include refid="gameLockParamColumns" />
+		    <![CDATA[
+			    from GAME_LOCK_PARAM 
+		        where 
+		        GAME_ID = #{gameId} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameLockParamResult" flushCache="false">
+			select <include refid="gameLockParamColumns" />
+			    from GAME_LOCK_PARAM 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameLockParamDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameId)">
+				and GAME_ID = #{gameId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(minVal)">
+				and MIN_VAL = #{minVal}
+			</if>
+	       <if test="@Ognl@isNotEmpty(startTime)">
+				and START_TIME = #{startTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(endTime)">
+				and END_TIME = #{endTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(minValProcess)">
+				and MIN_VAL_PROCESS = #{minValProcess}
+			</if>
+	       <if test="@Ognl@isNotEmpty(startTimeProcess)">
+				and START_TIME_PROCESS = #{startTimeProcess}
+			</if>
+	       <if test="@Ognl@isNotEmpty(endTimeProcess)">
+				and END_TIME_PROCESS = #{endTimeProcess}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameLockParamResult"  flushCache="false">
+    	select <include refid="gameLockParamColumns" />
+	    from GAME_LOCK_PARAM 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_LOCK_PARAM 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_LOCK_PARAM 
+		<include refid="gameLockParamDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameLockParamResult">
+    	select <include refid="gameLockParamColumns" />
+	    from GAME_LOCK_PARAM 
+		<include refid="gameLockParamDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameAwardGroupCheck">
+	<resultMap id="GameAwardGroupCheckResult" type="com.winterframework.firefrog.game.dao.vo.GameAwardGroupCheck">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameAwardGroupCheckColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	AWARD_NAME as awardName,
+	        	DIRECT_RET as directRet,
+	        	THREEONE_RET as threeoneRet,
+	        	STATUS as status,
+	        	SYS_AWARD_GROUP as sysAwardGroup,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	AWARD_GROUP_ID as awardGroupid
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameAwardGroupCheck" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_AWARD_GROUP_CHECK (
+	        	ID ,
+	        	LOTTERYID ,
+	        	AWARD_NAME ,
+	        	DIRECT_RET ,
+	        	THREEONE_RET ,
+	        	STATUS ,
+	        	SYS_AWARD_GROUP ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	AWARD_GROUP_ID
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{awardName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{directRet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{threeoneRet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sysAwardGroup,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{awardGroupid,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameAwardGroupCheck">
+	    <![CDATA[
+	        UPDATE GAME_AWARD_GROUP_CHECK SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        AWARD_NAME = #{awardName,javaType=string,jdbcType=VARCHAR} ,
+		        DIRECT_RET = #{directRet,javaType=long,jdbcType=DECIMAL} ,
+		        THREEONE_RET = #{threeoneRet,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        SYS_AWARD_GROUP = #{sysAwardGroup,javaType=integer,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_AWARD_GROUP_CHECK where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameAwardGroupCheckResult" flushCache="false">
+			select <include refid="gameAwardGroupCheckColumns" />
+		    <![CDATA[
+			    from GAME_AWARD_GROUP_CHECK 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameAwardGroupCheckResult" flushCache="false">
+			select <include refid="gameAwardGroupCheckColumns" />
+			    from GAME_AWARD_GROUP_CHECK 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+		<select id="queryGameAwardGroupCheckByLIdAndGId" parameterType="HashMap" resultMap="GameAwardGroupCheckResult" flushCache="false">
+			select <include refid="gameAwardGroupCheckColumns" />
+		    <![CDATA[
+			    from GAME_AWARD_GROUP_CHECK 
+		        where 
+		        LOTTERYID = #{lotteryId} 
+		        And
+		        ID = #{id}
+		    ]]>
+		</select>
+		
+		<select resultType="long" id="getGameAwardGroupId">
+			select SEQ_GAME_AWARD_GROUP_CHECK.Nextval from dual
+		</select>
+		
+		<select id="queryGameAwardGroupChecks" parameterType="hashMap" resultMap="GameAwardGroupCheckResult" flushCache="false">
+			select <include refid="gameAwardGroupCheckColumns" />
+			    from GAME_AWARD_GROUP_CHECK 
+		        where 
+		        LOTTERYID = #{lotteryId} 
+		        <if test="@Ognl@isNotEmpty(checkStatus)">
+					and STATUS = #{checkStatus}
+				</if>
+				<if test="@Ognl@isNotEmpty(id)">
+					and ID = #{id}
+				</if>
+		</select> 
+
+	<sql id="gameAwardGroupCheckDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(awardName)">
+				and AWARD_NAME = #{awardName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(directRet)">
+				and DIRECT_RET = #{directRet}
+			</if>
+	       <if test="@Ognl@isNotEmpty(threeoneRet)">
+				and THREEONE_RET = #{threeoneRet}
+			</if>
+	       <if test="@Ognl@isNotEmpty(checkStatus)">
+				and STATUS = #{checkStatus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sysAwardGroup)">
+				and SYS_AWARD_GROUP = #{sysAwardGroup}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameAwardGroupCheckResult"  flushCache="false">
+    	select <include refid="gameAwardGroupCheckColumns" />
+	    from GAME_AWARD_GROUP_CHECK 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_AWARD_GROUP_CHECK 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_AWARD_GROUP_CHECK 
+		<include refid="gameAwardGroupCheckDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameAwardGroupCheckResult">
+    	select <include refid="gameAwardGroupCheckColumns" />
+	    from GAME_AWARD_GROUP_CHECK 
+		<include refid="gameAwardGroupCheckDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="queryGameGroupCheckByLotteryIdAndName" resultMap="GameAwardGroupCheckResult">
+    	select <include refid="gameAwardGroupCheckColumns" />
+	    from GAME_AWARD_GROUP_CHECK where
+	    LOTTERYID = ${lotteryid}
+	    and AWARD_NAME = '${awardName}'
+    </select>
+	
+	<select id="checkIsExistAwardName" parameterType="hashMap" resultType="long">
+		select count(*) from (
+		select count(*) as counts from game_award_group g where g.lotteryid=${lotteryId} and g.award_name = '${awardName}'
+		union all
+		select count(*) as counts from game_award_group_check t where t.lotteryid = ${lotteryId} and t.award_name = '${awardName}'
+		) where counts > 0
+	</select>
+	
+</mapper>

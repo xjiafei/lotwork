@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameAwardGroup">
+	<resultMap id="GameAwardGroupResult" type="com.winterframework.firefrog.game.dao.vo.GameAwardGroup">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameAwardGroupColumns">
+	    <![CDATA[
+	        	ID 					as id,
+	        	LOTTERYID 			as lotteryid,
+	        	AWARD_NAME 			as awardName,
+	        	DIRECT_RET 			as directRet,
+	        	THREEONE_RET 		as threeoneRet,
+	        	STATUS 				as status,
+	        	SYS_AWARD_GROUP 	as sysAwardGroup,
+	        	CREATE_TIME 		as createTime,
+	        	UPDATE_TIME 		as updateTime,
+	        	AWARD_RET_STATUS 	as awardRetStatus,
+	        	SUPER_RET 			as superRet,
+	        	LHC_YEAR 			as lhcYear,
+	        	LHC_COLOR as lhcColor,
+	        	SB_THREE_ONE as sbThreeoneRet,
+	        	LHC_FLATCODE as lhcFlatcode,
+	        	LHC_HALFWAVE  as lhcHalfwave,
+	        	LHC_ONEYEAR as lhcOneyear,
+	        	LHC_NOTIN as lhcNotin,
+	        	LHC_CONTINUEIN23 as lhcContinuein23,
+	        	LHC_CONTINUEIN4 as lhcContinuein4,
+	        	LHC_CONTINUEIN5 as lhcContinuein5,
+	        	LHC_CONTINUENOTIN23 as lhcContinuenotin23,
+	        	LHC_CONTINUENOTIN4 as lhcContinuenotin4,
+	        	LHC_CONTINUENOTIN5 as lhcContinuenotin5,
+	        	LHC_CONTINUECODE as lhcContinuecode	
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameAwardGroup" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_AWARD_GROUP.Nextval from dual
+		</selectKey>
+		 
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_AWARD_GROUP (
+	        	ID ,
+	        	LOTTERYID ,
+	        	AWARD_NAME ,
+	        	DIRECT_RET ,
+	        	THREEONE_RET ,
+	        	SUPER_RET,
+	        	STATUS ,
+	        	SYS_AWARD_GROUP ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME,             
+				LHC_FLATCODE,        
+				LHC_HALFWAVE,        
+				LHC_ONEYEAR,         
+				LHC_NOTIN,           
+				LHC_CONTINUEIN23,    
+				LHC_CONTINUEIN4,     
+				LHC_CONTINUEIN5,     
+				LHC_CONTINUENOTIN23, 
+				LHC_CONTINUENOTIN4,  
+				LHC_CONTINUENOTIN5,  
+				LHC_CONTINUECODE    
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{awardName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{directRet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{threeoneRet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{superRet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sysAwardGroup,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,           
+				#{lhcFlatcode,javaType=long,jdbcType=DECIMAL} ,       
+				#{lhcHalfwave,javaType=long,jdbcType=DECIMAL} ,       
+				#{lhcOneyear,javaType=long,jdbcType=DECIMAL} ,        
+				#{lhcNotin,javaType=long,jdbcType=DECIMAL} ,          
+				#{lhcContinuein23,javaType=long,jdbcType=DECIMAL} ,   
+				#{lhcContinuein4,javaType=long,jdbcType=DECIMAL} ,    
+				#{lhcContinuein5,javaType=long,jdbcType=DECIMAL} ,    
+				#{lhcContinuenotin23,javaType=long,jdbcType=DECIMAL} ,
+				#{lhcContinuenotin4,javaType=long,jdbcType=DECIMAL} , 
+				#{lhcContinuenotin5,javaType=long,jdbcType=DECIMAL} , 
+				#{lhcContinuecode,javaType=long,jdbcType=DECIMAL}     
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameAwardGroup">
+	    <![CDATA[
+	        UPDATE GAME_AWARD_GROUP SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        AWARD_NAME = #{awardName,javaType=string,jdbcType=VARCHAR} ,
+		        DIRECT_RET = #{directRet,javaType=long,jdbcType=DECIMAL} ,
+		        THREEONE_RET = #{threeoneRet,javaType=long,jdbcType=DECIMAL} ,
+		        SUPER_RET = #{superRet,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        SYS_AWARD_GROUP = #{sysAwardGroup,javaType=integer,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_AWARD_GROUP where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameAwardGroupResult" flushCache="false">
+			select <include refid="gameAwardGroupColumns" />
+		    <![CDATA[
+			    from GAME_AWARD_GROUP 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		
+		<select id="getAwardGroupIdByAwardGroupName" parameterType="String" resultType="long" flushCache="false">
+			select ID 
+		      from GAME_AWARD_GROUP g
+			 where AWARD_NAME = #{awardName}
+			   and exists (select 1
+			          from game_series s
+			         where s.lotteryid = g.lotteryid
+			           and s.status = 1	<!-- 可销售  -->
+			           ) 
+		</select>
+		
+		<select id="getByIds" parameterType="list"  resultMap="GameAwardGroupResult" flushCache="false">
+			select <include refid="gameAwardGroupColumns" />
+			    from GAME_AWARD_GROUP 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+		
+		<select id="queryGameAwardGroup" parameterType="hashMap" resultMap="GameAwardGroupResult">
+			select <include refid="gameAwardGroupColumns" />
+			from GAME_AWARD_GROUP
+			where t.lotteryid = #{lotteryid} 
+			 <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+		</select>
+		
+		<select id="queryGameAwardGroupByLotteryId" parameterType="hashMap" resultMap="GameAwardGroupResult">
+		select 
+				 g.id as id,
+				 g.lotteryid        as lotteryid,
+		         g.award_name     as awardName,
+		         DIRECT_RET       as directRet,
+		         THREEONE_RET     as threeoneRet,
+		         SUPER_RET as superRet,
+		         STATUS           as status,
+		         g.sys_award_group as sysAwardGroup,
+		         CREATE_TIME      as createTime,
+		         UPDATE_TIME      as updateTime,
+		         LHC_YEAR as lhcYear,
+				 LHC_COLOR as lhcColor,
+				 SB_THREE_ONE as sbThreeoneRet,
+				 g.LHC_FLATCODE        as lhcFlatcode,
+				 g.LHC_HALFWAVE        as lhcHalfwave,
+				 g.LHC_ONEYEAR         as lhcOneyear,
+				 g.LHC_NOTIN           as lhcNotin,
+				 g.LHC_CONTINUEIN23    as lhcContinuein23,
+				 g.LHC_CONTINUEIN4     as lhcContinuein4,
+				 g.LHC_CONTINUEIN5     as lhcContinuein5,
+				 g.LHC_CONTINUENOTIN23 as lhcContinuenotin23,
+				 g.LHC_CONTINUENOTIN4  as lhcContinuenotin4,
+				 g.LHC_CONTINUENOTIN5  as lhcContinuenotin5,
+				 g.LHC_CONTINUECODE    as lhcContinuecode
+			    from GAME_AWARD_GROUP g
+			   	where g.award_name not in (select award_name from game_award_group_check where lotteryid = #{lotteryid})
+  				and g.lotteryid = #{lotteryid}	
+		</select>
+		
+		<!-- 
+		<select id="getMaxAwardMoney" parameterType="long" resultType="long">
+			select game_group_code from (select distinct max(ACTUAL_BONUS) as bonus, g.game_group_code
+ 		from game_award g
+ 		where g.game_group_code in
+     	  (select Id from game_award_group t where t.lotteryid = #{lotteryId})
+ 			group by g.game_group_code ) 
+		</select>
+		 -->
+		 <select id="getMaxAwardMoney" parameterType="long" resultType="long">
+		     <!--  2013-12-09 获取指定1800的彩种信息。
+		        select award_group_id from
+				  (select  rownum ,a.* from (
+				   select max(g.actual_bonus) as cc , g.award_group_id
+				          from game_award g
+				         where g.award_group_id in
+				               (select Id from game_award_group t where t.lotteryid = #{lotteryId}) 
+				         group by g.award_group_id order by max(g.actual_bonus) desc 
+				         )a where rownum=1)
+			 -->
+			 <!-- select id from game_award_group t where  t.award_name like '%1800%' and t.lotteryid = #{lotteryId} -->
+			 select g.AWARD_GROUP_ID from game_award g where g.ACTUAL_BONUS = ( select max(t.ACTUAL_BONUS) from game_award t where t.lotteryid = #{lotteryId}) and LOTTERYID=#{lotteryId} and ROWNUM=1
+		</select>
+		 
+
+	<sql id="gameAwardGroupDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(rewardName)">
+				and AWARD_NAME = #{awardName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(directRet)">
+				and DIRECT_RET = #{directRet}
+			</if>
+	       <if test="@Ognl@isNotEmpty(threeoneRet)">
+				and THREEONE_RET = #{threeoneRet}
+			</if>
+			 <if test="@Ognl@isNotEmpty(threeoneRet)">
+				and SUPER_RET = #{superRet}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sysRewardGroup)">
+				and SYS_AWARD_GROUP = #{sysAwardGroup}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameAwardGroupResult"  flushCache="false">
+    	select <include refid="gameAwardGroupColumns" />
+	    from GAME_AWARD_GROUP 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_AWARD_GROUP 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_AWARD_GROUP 
+		<include refid="gameAwardGroupDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameAwardGroupResult">
+    	select <include refid="gameAwardGroupColumns" />
+	    from GAME_AWARD_GROUP 
+		<include refid="gameAwardGroupDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+	
+	<select id="queryGameGroupByLotteryIdAndName" resultMap="GameAwardGroupResult">
+		select <include refid="gameAwardGroupColumns" />
+	    from GAME_AWARD_GROUP
+	    where LOTTERYID = ${lotteryid}
+				and AWARD_NAME = '${awardName}'
+	</select>
+	
+	<select id="getGameAwardGroupByUserId" resultMap="GameAwardGroupResult">
+		select t.ID as id,
+            t.LOTTERYID as lotteryid,
+            t.AWARD_NAME as awardName,
+            t.DIRECT_RET as directRet,
+            t.THREEONE_RET as threeoneRet,
+            t.SUPER_RET as superRet,
+            t.STATUS as status,
+            t.SYS_AWARD_GROUP as sysAwardGroup,
+            t.CREATE_TIME as createTime,
+            t.UPDATE_TIME as updateTime,
+			s.lottery_series_code as lotterySeriesCode,
+			s.lottery_series_name as lotterySeriesName,
+			s.lottery_name as lotteryName,
+			t.lhc_year as lhcYear,
+      		t.lhc_color as lhcColor,
+      		t.SB_THREE_ONE as sbThreeoneRet,
+		 	t.LHC_FLATCODE        as lhcFlatcode,
+		 	t.LHC_HALFWAVE        as lhcHalfwave,
+		 	t.LHC_ONEYEAR         as lhcOneyear,
+		 	t.LHC_NOTIN           as lhcNotin,
+		 	t.LHC_CONTINUEIN23    as lhcContinuein23,
+		 	t.LHC_CONTINUEIN4     as lhcContinuein4,
+		 	t.LHC_CONTINUEIN5     as lhcContinuein5,
+		 	t.LHC_CONTINUENOTIN23 as lhcContinuenotin23,
+		 	t.LHC_CONTINUENOTIN4  as lhcContinuenotin4,
+		 	t.LHC_CONTINUENOTIN5  as lhcContinuenotin5,
+		 	t.LHC_CONTINUECODE    as lhcContinuecode
+	    from GAME_AWARD_GROUP t,game_series s
+		where t.lotteryid = s.lotteryid
+		  and s.status=1	<!-- 可销售  -->
+		order by lottery_series_code
+	</select>
+	
+	<select id="queryGameAwardGroupbyGameAwardGroupID" parameterType="hashMap" resultMap="GameAwardGroupResult"> 
+		 select g.ID              as id,
+		        g.LOTTERYID       as lotteryid,
+		        g.AWARD_NAME      as awardName,
+		        g.DIRECT_RET      as directRet,
+		        g.THREEONE_RET    as threeoneRet,
+		        g.SUPER_RET    as superRet,
+		        g.STATUS          as status,
+		        g.SYS_AWARD_GROUP as sysAwardGroup,
+		        g.CREATE_TIME     as createTime,
+		        g.UPDATE_TIME     as updateTime,
+				g.LHC_FLATCODE        as lhcFlatcode,
+				g.LHC_HALFWAVE        as lhcHalfwave,
+				g.LHC_ONEYEAR         as lhcOneyear,
+				g.LHC_NOTIN           as lhcNotin,
+				g.LHC_CONTINUEIN23    as lhcContinuein23,
+				g.LHC_CONTINUEIN4     as lhcContinuein4,
+				g.LHC_CONTINUEIN5     as lhcContinuein5,
+				g.LHC_CONTINUENOTIN23 as lhcContinuenotin23,
+				g.LHC_CONTINUENOTIN4  as lhcContinuenotin4,
+				g.LHC_CONTINUENOTIN5  as lhcContinuenotin5,
+				g.LHC_CONTINUECODE    as lhcContinuecode
+		   from game_award_group g
+		  where exists (select 1
+		           from game_series s
+		          where s.lottery_series_code = #{lotterySeriesCodes}
+		            and g.lotteryid = s.lotteryid
+		            and s.status=1	<!-- 可销售  -->
+		            )
+		    and exists (select 1
+		           from game_award_group g2
+		          where g2.id = #{groupid}
+		            and g2.award_name = g.award_name)
+	</select>
+	
+	<select id="queryAwardCountByLotteryId" parameterType="long" resultType="long">
+		select count(id) from game_award_group t where t.lotteryid = #{lotteryid}
+	</select>
+	
+	<select id="queryUserAwardRet" parameterType="hashMap" resultMap="GameAwardGroupResult" >
+			select A.ID as id,
+	        	A.LOTTERYID as lotteryid,
+	        	A.AWARD_NAME as awardName,
+	        	A.DIRECT_RET as directRet,
+	        	A.THREEONE_RET as threeoneRet,
+	        	A.STATUS as status,
+	        	A.SYS_AWARD_GROUP as sysAwardGroup,
+	        	A.CREATE_TIME as createTime,
+	        	A.UPDATE_TIME as updateTime,
+	        	A.AWARD_RET_STATUS as awardRetStatus,
+	        	A.LHC_YEAR as lhcYear,
+	        	A.LHC_COLOR as lhcColor,
+	        	A.SB_THREE_ONE as sbThreeoneRet,
+				A.LHC_FLATCODE        as lhcFlatcode,
+				A.LHC_HALFWAVE        as lhcHalfwave,
+				A.LHC_ONEYEAR         as lhcOneyear,
+				A.LHC_NOTIN           as lhcNotin,
+				A.LHC_CONTINUEIN23    as lhcContinuein23,
+				A.LHC_CONTINUEIN4     as lhcContinuein4,
+				A.LHC_CONTINUEIN5     as lhcContinuein5,
+				A.LHC_CONTINUENOTIN23 as lhcContinuenotin23,
+				A.LHC_CONTINUENOTIN4  as lhcContinuenotin4,
+				A.LHC_CONTINUENOTIN5  as lhcContinuenotin5,
+				A.LHC_CONTINUECODE    as lhcContinuecode
+		    <![CDATA[
+			    from GAME_AWARD_GROUP A,GAME_AWARD_USER_GROUP B
+		        WHERE A.ID = B.SYS_AWARD_GROUP_ID
+				AND B.BET_TYPE = 1
+				AND B.LOTTERYID = #{lotteryid}
+				AND B.USERID = #{userid}
+		    ]]>
+	</select>	
+	
+</mapper>

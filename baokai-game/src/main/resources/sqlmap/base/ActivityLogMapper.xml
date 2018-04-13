@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.ActivityLog">
+	<resultMap id="ActivityLog" type="com.winterframework.firefrog.game.dao.vo.ActivityLog">
+	</resultMap>
+	
+	 
+    <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.ActivityLog" 
+			useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_ACTIVITY_LOG_ID.Nextval from dual
+			   	    </selectKey>
+		<![CDATA[
+	        INSERT INTO
+	        ACTIVITY_LOG (
+	        	ID ,
+	        	USER_ID,
+	        	ACTIVITY_ID,
+	        	PRIZE,
+	        	CREATE_TIME,
+				AWARD_TIME  ,
+				STATUS, 
+				MEMO
+			) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{prize,javaType=float,jdbcType=FLOAT} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP} ,	        
+	        	#{awardTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,       	
+	        	#{memo,javaType=string,jdbcType=VARCHAR}        
+	        )
+	    ]]>	
+	
+		</insert>
+		
+		<select id="queryTodayActivityLogCount" resultType="long">
+	    	select count(*) from activity_log where user_id =#{userId}
+	    	<choose>
+                <when test="@Ognl@isNotEmpty(beginTime)">
+                    AND create_time between  #{beginTime} and #{endTime} 
+                </when>
+                <otherwise>
+                    <![CDATA[
+			    		AND create_time between trunc(sysdate) and trunc(sysdate+1)
+			    	]]>	 
+                </otherwise>
+            </choose>
+            and activity_id = #{activityId}
+	    	
+	    </select>
+	    
+	    <select id="queryPrizeTotal" resultType="float">
+	    	select NVL(SUM(PRIZE),0) from activity_log where user_id =#{userId}
+	    	<choose>
+                <when test="@Ognl@isNotEmpty(beginTime)">
+                    AND create_time between  #{beginTime} and #{endTime} 
+                </when>
+                <otherwise>
+                    <![CDATA[
+			    		AND create_time between trunc(sysdate) and trunc(sysdate+1)
+			    	]]>	 
+                </otherwise>
+            </choose>
+            and activity_id = #{activityId}
+	    	
+	    </select>
+
+
+</mapper>

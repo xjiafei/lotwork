@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameAwardCheck">
+	<resultMap id="GameAwardCheckResult" type="com.winterframework.firefrog.game.dao.vo.GameAwardCheck">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameAwardCheckColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	ACTUAL_BONUS as actualBonus,
+	        	AWARD_GROUP_ID as awardGroupId,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	STATUS as status
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameAwardCheck" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_AWARD_CHECK.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_AWARD_CHECK (
+	        	ID ,
+	        	LOTTERYID ,
+	        	BET_TYPE_CODE ,
+	        	ACTUAL_BONUS ,
+	        	AWARD_GROUP_ID ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	STATUS 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{actualBonus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{awardGroupId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=integer,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameAwardCheck">
+	    <![CDATA[
+	        UPDATE GAME_AWARD_CHECK SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        BET_TYPE_CODE = #{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+		        ACTUAL_BONUS = #{actualBonus,javaType=long,jdbcType=DECIMAL} ,
+		        AWARD_GROUP_ID = #{awardGroupId,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=integer,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+		<update id="updataStatusByGroupId" parameterType="HashMap">
+			<![CDATA[
+	        	UPDATE GAME_AWARD_CHECK SET
+	        	 STATUS = #{status}
+	        	where 
+	        	AWARD_GROUP_ID = #{awardGroupId}
+	        	and 
+	        	LOTTERYID = #{lotteryid}
+	        ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_AWARD_CHECK where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <delete id="delByAwardGroupId" parameterType="java.lang.Long">
+	    	 <![CDATA[
+	        delete from GAME_AWARD_CHECK where
+		        AWARD_GROUP_ID = #{awardId} 
+	    	]]>
+	    </delete>
+	    <select id="getById" parameterType="long" resultMap="GameAwardCheckResult" flushCache="false">
+			select <include refid="gameAwardCheckColumns" />
+		    <![CDATA[
+			    from GAME_AWARD_CHECK 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameAwardCheckResult" flushCache="false">
+			select <include refid="gameAwardCheckColumns" />
+			    from GAME_AWARD_CHECK 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>
+		
+		<select id="queryGameAwardCheckByGroupId" parameterType="HashMap" resultMap="GameAwardCheckResult">
+			select <include refid="gameAwardCheckColumns" />
+			    from GAME_AWARD_CHECK 
+			    where 
+			    AWARD_GROUP_ID = #{awardGroupId}
+			    <if test="@Ognl@isNotEmpty(lotteryId)">
+			    	and LOTTERYID = #{lotteryId}
+			    </if>
+			      <if test="@Ognl@isNotEmpty(status)">
+					and STATUS = #{status}
+				</if>
+				order by BET_TYPE_CODE
+		</select>	
+
+	<sql id="gameAwardCheckDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameGroupCode)">
+				and GAME_GROUP_CODE = #{gameGroupCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameSetCode)">
+				and GAME_SET_CODE = #{gameSetCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betMethodCode)">
+				and BET_METHOD_CODE = #{betMethodCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(actualBonus)">
+				and ACTUAL_BONUS = #{actualBonus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(awardGroupId)">
+				and AWARD_GROUP_ID = #{awardGroupId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(checkStatus)">
+				and CHECK_STATUS = #{checkStatus}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameAwardCheckResult"  flushCache="false">
+    	select <include refid="gameAwardCheckColumns" />
+	    from GAME_AWARD_CHECK 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_AWARD_CHECK 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_AWARD_CHECK 
+		<include refid="gameAwardCheckDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameAwardCheckResult">
+    	select <include refid="gameAwardCheckColumns" />
+	    from GAME_AWARD_CHECK 
+		<include refid="gameAwardCheckDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

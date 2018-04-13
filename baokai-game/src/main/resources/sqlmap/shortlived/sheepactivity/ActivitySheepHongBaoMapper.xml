@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepHongBao">
+	<resultMap id="ConfigResult" type="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepHongBao">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="configColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	SIGN_TIME as signTime ,
+				REACH_TIME  as  reachTime, 
+				GET_TIME  as  getTime,
+				VERIFY_TIME as   verifyTime, 
+			  	VERIFY_NAME  as verifyName, 
+				VERIFY_REASON  as  verifyReason, 
+				VERIFY_STATUS as verifyStatus,
+				STATUS  as  status,
+				(select t.VIP_LVL from USER_CUSTOMER  t where t.id = USER_ID) as vip,
+				UPDATE_STATUS  as  updateStatus,
+				UPDATE_AWARD as  updateAward, 
+				UPDATE_NAME as  updateName,
+				UPDATE_REASON  as  updateReason,
+				USER_NAME   as  userName,
+				USER_ID as userId,		
+				AWARD   as  award,
+				AWARD_TYPE   as  awardType,
+				TARGET_AWARD   as  targetAward,
+				ALL_AWARD   as  allAward,
+				CHANNEL   as  channel,
+				INDEXHB   as  indexHb,
+				DEAD_TIME as deadTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepHongBao" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_ACTIVITY_SHEEP_HONG_BAO_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVITY_SHEEP_HONG_BAO (
+	        	ID ,
+	        	SIGN_TIME  ,
+				REACH_TIME  , 
+				GET_TIME  ,
+				VERIFY_TIME , 
+			  	VERIFY_NAME , 
+				VERIFY_REASON  , 
+				VERIFY_STATUS ,
+				STATUS ,
+				UPDATE_STATUS  ,
+				UPDATE_AWARD , 
+				UPDATE_NAME ,
+				UPDATE_REASON  ,
+				USER_NAME  ,
+				USER_ID,				
+				AWARD ,
+				AWARD_TYPE ,
+				TARGET_AWARD ,
+				ALL_AWARD ,
+				CHANNEL,
+				INDEXHB,
+				DEAD_TIME
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{signTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{reachTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{getTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{verifyTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{verifyName,javaType=string,jdbcType=VARCHAR} ,	
+	        	#{verifyReason,javaType=string,jdbcType=VARCHAR} ,
+	        	#{verifyStatus,javaType=long,jdbcType=DECIMAL} ,	
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{updateStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{updateAward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{updateName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{updateReason,javaType=string,jdbcType=VARCHAR} ,	  
+	        	#{userName,javaType=string,jdbcType=VARCHAR} ,	
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,      	
+	        	#{award,javaType=long,jdbcType=DECIMAL} ,
+	        	#{awardType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{targetAward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{allAward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{channel,javaType=long,jdbcType=DECIMAL}, 
+	        	#{indexHb,javaType=long,jdbcType=DECIMAL} ,
+	        	#{deadTime,javaType=object,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepHongBao">
+	    <![CDATA[
+	        UPDATE ACTIVITY_SHEEP_HONG_BAO SET
+	        	
+	        	SIGN_TIME = #{signTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	REACH_TIME = #{reachTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	GET_TIME = #{getTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	VERIFY_TIME = #{verifyTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	VERIFY_NAME = #{verifyName,javaType=string,jdbcType=VARCHAR} ,	
+	        	VERIFY_REASON = #{verifyReason,javaType=string,jdbcType=VARCHAR} ,	
+	        	VERIFY_STATUS = #{verifyStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+	        	UPDATE_STATUS = #{updateStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	UPDATE_AWARD = #{updateAward,javaType=long,jdbcType=DECIMAL} ,
+	        	UPDATE_NAME = #{updateName,javaType=string,jdbcType=VARCHAR} ,
+	        	UPDATE_REASON = #{updateReason,javaType=string,jdbcType=VARCHAR} ,	  
+	        	USER_NAME = #{userName,javaType=string,jdbcType=VARCHAR} ,	 
+	        	USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,         	
+	        	AWARD = #{award,javaType=long,jdbcType=DECIMAL} ,
+	        	AWARD_TYPE = #{awardType,javaType=long,jdbcType=DECIMAL} ,
+	        	TARGET_AWARD = #{targetAward,javaType=long,jdbcType=DECIMAL} ,
+	        	ALL_AWARD = #{allAward,javaType=long,jdbcType=DECIMAL} ,
+	        	CHANNEL = #{channel,javaType=long,jdbcType=DECIMAL},
+	        	INDEXHB = #{indexHb,javaType=long,jdbcType=DECIMAL} ,
+	        	DEAD_TIME = #{deadTime,javaType=object,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACTIVITY_SHEEP_HONG_BAO where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+		    <![CDATA[
+			    from ACTIVITY_SHEEP_HONG_BAO 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		
+		<select id="getUncheckNum" parameterType="long" resultType="long" flushCache="false">
+			select count(*)  from ACTIVITY_SHEEP_HONG_BAO  where 
+		        VERIFY_STATUS =1 
+		    
+		</select>
+		
+		<select id="getByIds" parameterType="list"  resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+			    from ACTIVITY_SHEEP_HONG_BAO 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="configDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userName)">
+				and USER_NAME = #{userName}
+			</if>	    			
+			<if test="@Ognl@isNotEmpty(signTimeBegin)">
+				<![CDATA[
+				and SIGN_TIME >= #{signTimeBegin}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(signTimEnd)">
+				<![CDATA[
+				and SIGN_TIME <= #{signTimEnd}
+				]]>
+			</if>			
+			 <if test="@Ognl@isNotEmpty(verifyStatus)">
+				and VERIFY_STATUS = #{verifyStatus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateStatus)">
+				and UPDATE_STATUS = #{updateStatus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(channel)">
+				and CHANNEL = #{channel}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="ConfigResult"  flushCache="false">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_HONG_BAO 
+
+		
+			ORDER BY SIGN_TIME desc ,INDEXHB asc 
+		
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACTIVITY_SHEEP_HONG_BAO 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ACTIVITY_SHEEP_HONG_BAO 
+		<include refid="configDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="ConfigResult">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_HONG_BAO 
+		<include refid="configDynamicWhere"/>
+			ORDER BY  SIGN_TIME desc ,INDEXHB asc 
+    </select>
+    
+    <select id="getUserHongBaoList" parameterType="long" resultMap="ConfigResult">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_HONG_BAO  where user_id=#{userId}
+	    ORDER BY INDEXHB asc 
+    </select>
+    
+     <select id="getUserHongBaoInfo" parameterType="hashmap" resultMap="ConfigResult">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_HONG_BAO  where user_id=#{userId} and INDEXHB=#{index}
+    </select>
+    
+    <update id="applyUserHongbao" parameterType="hashmap">
+       update ACTIVITY_SHEEP_HONG_BAO set SIGN_TIME=#{applyDate},DEAD_TIME=#{deadDate},AWARD=#{award},status=5,target_award=#{targetAward}
+       where user_id=#{userId} and INDEXHB=#{indexHb} and status=2
+    </update>
+    
+    <select id="getUserValideBetAmount" parameterType="hashmap" resultType="Long">
+<!--     	select sum(amount) form ACTIVITY_USER_CHARGE where userid=#{userId} and type=0 and  (<![CDATA[ to_date(money_date,'yyyy-MM-dd hh24:mi:ss')>#{applyDate}]]> or money_date=to_char(#{applyDate},'yyyy-MM-dd')) -->
+            select decode(sum(totAmount),null,0,sum(totAmount)) from game_order where userid=#{userId} and  status in(2,3) and <![CDATA[order_time>#{applyDate}]]>
+    </select>
+  	<update id="abortUserHongBao" parameterType="hashmap">
+       update ACTIVITY_SHEEP_HONG_BAO set status=3
+       where user_id=#{userId} and INDEXHB=#{indexHb} and status=5
+    </update>
+    
+     <update id="openUserHongBao" parameterType="hashmap">
+       update ACTIVITY_SHEEP_HONG_BAO set status=2
+       where user_id=#{userId} and INDEXHB=#{index} and status=1
+    </update>
+    
+     <update id="drawUserHongBao" parameterType="hashmap">
+     <![CDATA[
+       update ACTIVITY_SHEEP_HONG_BAO set VERIFY_STATUS=1,status=7,get_time=sysDate
+       where user_id=#{userId} and INDEXHB=#{index} and status=6 and VERIFY_STATUS=0
+       ]]>
+    </update>
+    
+    
+    	<select id="getSheepHongBaoCounts" parameterType ="hashMap"  resultMap="CountResult">	
+	select 
+		<if test="@Ognl@isNotEmpty(isGroupByChannel)">
+		channel,
+		</if>	
+         sum(case
+               when SIGN_TIME >= #{beginTime} and SIGN_TIME <![CDATA[<=]]> #{endTime} then
+                1
+               else
+                0
+             end) as sighNum,
+         sum(case
+               when REACH_TIME >= #{beginTime} and REACH_TIME <![CDATA[<=]]> #{endTime} then
+                1
+               else
+                0
+             end) as reachNum,
+          sum(case
+               when VERIFY_TIME >= #{beginTime} and VERIFY_TIME <![CDATA[<=]]> #{endTime} and status = 8 then
+                1
+               else
+                0
+             end) as getNum   
+    	from ACTIVITY_SHEEP_HONG_BAO
+   		<if test="@Ognl@isNotEmpty(isGroupByChannel)">
+   		group by channel
+		</if>		
+    </select>
+    
+    <select id="getUserValidHongBaoInfo" parameterType="long" resultMap="ConfigResult">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_HONG_BAO  where user_id=#{userId} and status=5
+    </select>
+    
+    
+    
+    	
+	<resultMap id="CountResult" type="com.winterframework.firefrog.shortlived.sheepactivity.dto.ActivitySheepHongBaoCount">
+	</resultMap>
+</mapper>

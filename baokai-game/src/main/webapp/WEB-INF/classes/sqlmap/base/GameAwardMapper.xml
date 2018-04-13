@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameAward">
+	<resultMap id="GameAwardResult" type="com.winterframework.firefrog.game.dao.vo.GameAward">
+	</resultMap>
+	<resultMap id="GameAwardBetTypeResult" type="com.winterframework.firefrog.game.dao.vo.GameLhcOdds">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameAwardColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	ACTUAL_BONUS as actualBonus,
+	        	AWARD_GROUP_ID as awardGroupId,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	STATUS as status,
+	        	RET_VALUE as retValue,
+	        	ACTUAL_BONUS_DOWN as actualBonusDown,
+				LHC_CODE as lhcCode,
+	        	LHC_THEORY_BONUS as lhcTheoryBonus	    ]]>
+	</sql>
+	<sql id="gameAwardUserColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	ACTUAL_BONUS as actualBonus,
+	        	AWARD_GROUP_ID as awardGroupId,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	STATUS as status,
+	        	RET_VALUE as retValue,
+	        	ACTUAL_BONUS_DOWN as actualBonusDown	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameAward" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_AWARD.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_AWARD (
+	        	ID ,
+	        	LOTTERYID ,
+	        	BET_TYPE_CODE,
+	        	ACTUAL_BONUS ,
+	        	AWARD_GROUP_ID ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	STATUS,
+	        	RET_VALUE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{actualBonus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{awardGroupId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status, javaType=integer,jdbcType=DECIMAL},
+	        	#{retValue,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameAward">
+	    <![CDATA[
+	        UPDATE GAME_AWARD SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        BET_TYPE_CODE = #{betTypeCode,javaType=string,jdbcType=DECIMAL} ,
+		        ACTUAL_BONUS = #{actualBonus,javaType=long,jdbcType=DECIMAL} ,
+		        AWARD_GROUP_ID = #{awardGroupId,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS =#{status,javaType=integer,jdbcType=DECIMAL},
+		        RET_VALUE = #{retValue,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_AWARD where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameAwardResult" flushCache="false">
+			select <include refid="gameAwardColumns" />
+		    <![CDATA[
+			    from GAME_AWARD 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameAwardResult" flushCache="false">
+			select <include refid="gameAwardColumns" />
+			    from GAME_AWARD 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+		<select id="queryGameAwardByGroupId" parameterType="HashMap" resultMap="GameAwardResult">
+			select <include refid="gameAwardColumns" />
+			    from GAME_AWARD 
+			    where 
+			    LOTTERYID = #{lotteryId}
+			    and AWARD_GROUP_ID = #{awardGroupId}
+			    <if test="@Ognl@isNotEmpty(status)">
+			    	and STATUS = #{status}
+			    </if>
+			    order by BET_TYPE_CODE,ID
+		</select>
+		
+		<select id="queryUserGameAwardByGroupId" parameterType="HashMap" resultMap="GameAwardResult">
+			select <include refid="gameAwardColumns" />
+			    from (
+				SELECT GA.ID, 
+				GA.LOTTERYID,
+				 GA.BET_TYPE_CODE,
+				  GA.ACTUAL_BONUS,
+				   GA.AWARD_GROUP_ID, 
+				   GA.CREATE_TIME, 
+				   GA.UPDATE_TIME, 
+				   GA.STATUS, 
+				   -1 as RET_VALUE , 
+				   GA.ACTUAL_BONUS_DOWN ,
+				   GA.LHC_CODE ,
+				   GA.LHC_THEORY_BONUS
+				from GAME_AWARD ga
+				where GA.LOTTERYID = #{lotteryId} 
+				and GA.AWARD_GROUP_ID=(SELECT gaug.SYS_AWARD_GROUP_ID from GAME_AWARD_USER_GROUP gaug where gaug.id=#{awardGroupId}) 
+				and GA.status=1
+				ORDER BY ga.BET_TYPE_CODE,GA.ACTUAL_BONUS
+			    )
+		</select>
+		
+		
+		<select id="queryUserRetValueGameAwardByGroupId" parameterType="HashMap" resultMap="GameAwardResult">
+			select <include refid="gameAwardUserColumns" />
+			    from (
+				SELECT GA.ID, 
+				GA.LOTTERYID,
+				 GA.BET_TYPE_CODE,
+				  0 as ACTUAL_BONUS,
+				  0 as AWARD_GROUP_ID, 
+				   SYSDATE as CREATE_TIME, 
+				   SYSDATE as UPDATE_TIME, 
+				   GA.STATUS, 
+				   ga.RET_VALUE as RET_VALUE , 
+				   0 as ACTUAL_BONUS_DOWN 
+				from GAME_AWARD_USER ga
+				where GA.LOTTERYID = #{lotteryId} 
+				and GA.USERID=(SELECT gaug.USERID from GAME_AWARD_USER_GROUP gaug where gaug.id=#{awardGroupId}) 
+				and status =1
+				ORDER BY ga.BET_TYPE_CODE
+			    )
+		</select>
+		
+		<select id="getGameAwardByGroupId" parameterType="long" resultMap="GameAwardResult">
+			select 
+				ID as id,
+	        	LOTTERYID as lotteryid,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	ACTUAL_BONUS as actualBonus,
+	        	AWARD_GROUP_ID as awardGroupId,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	STATUS as status,
+	        	RET_VALUE as retValue,
+	        	(select distinct gs.lottery_series_code from game_series gs where gs.lotteryid = ga.LOTTERYID) as lotterySeriesCode
+			  from GAME_AWARD ga
+			 where AWARD_GROUP_ID = #{awardGroupId}
+			   and exists (select 1
+			          from game_series sr
+			         where sr.lotteryid = ga.lotteryid
+			           and sr.status = 1	<!-- 可销售  -->
+			           )
+			 order by BET_TYPE_CODE
+
+		</select>
+		
+		<select id="getGameAwardByLotterys"  parameterType="HashMap" resultMap="GameAwardResult">
+			select <include refid="gameAwardColumns" />
+			    from GAME_AWARD 
+			    where 
+			    LOTTERYID = #{lotteryId}
+			    and AWARD_GROUP_ID = #{awardGroupId}
+			    and BET_TYPE_CODE = #{betTypeCode}
+			    
+		</select>
+
+	<sql id="gameAwardDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betTypeCode)">
+				and BET_TYPE_CODE = #{betTypeCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(actualBonus)">
+				and ACTUAL_BONUS = #{actualBonus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(awardGroupId)">
+				and AWARD_GROUP_ID = #{awardGroupId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameAwardResult"  flushCache="false">
+    	select <include refid="gameAwardColumns" />
+	    from GAME_AWARD 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_AWARD 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_AWARD 
+		<include refid="gameAwardDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameAwardResult">
+    	select <include refid="gameAwardColumns" />
+	    from GAME_AWARD 
+		<include refid="gameAwardDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    <select id="getActualBonus" resultType="long" parameterType="hashmap">
+    	select p.actual_bonus from game_award p where p.bet_type_code = #{betTypeCode} and p.award_group_id =
+    	 (select t.sys_award_group_id from game_award_user_group t where t.lotteryid = #{lotteryId} and t.userid = #{userId} and status=1 and bet_type=1)
+    	 and p.lotteryid = #{lotteryId}
+    </select>
+    <select id="getActualBonusDown" resultType="long" parameterType="hashmap">
+    	select p.actual_bonus_down from game_award p where p.bet_type_code = #{betTypeCode} and p.award_group_id =
+    	 (select t.sys_award_group_id from game_award_user_group t where t.lotteryid = #{lotteryId} and t.userid = #{userId} and status=1 and bet_type=1)
+    	 and p.lotteryid = #{lotteryId}
+    </select>
+     <select id="queryIdBySysAwardGroupAndUser" resultType="long" parameterType="hashmap">
+	     select id
+		  from GAME_AWARD_USER_GROUP t
+		 where t.SYS_AWARD_GROUP_ID = #{sysAwardGroupId}
+		   and t.USERID = #{userId}
+		   and exists (select 1
+		          from game_series sr
+		         where sr.lotteryid = t.lotteryid
+		           and sr.status = 1	<!-- 可销售  -->
+		           )
+      </select>
+    
+    <select id="getGameAwardByBetTypeAndLotteryId" resultMap="GameAwardResult" parameterType="hashmap">
+    	select <include refid="gameAwardColumns" />
+    	 from game_award p where p.bet_type_code = #{betTypeCode} and p.award_group_id =#{awardGroupId}
+    	 and p.lotteryid = #{lotteryId}
+    	 and p.status=1
+    	 and rownum = 1
+    </select>
+    
+    <select id="getGameAwardListByBetCodeParent" resultMap="GameAwardResult" parameterType="hashmap">
+    	select <include refid="gameAwardColumns" />
+    	<![CDATA[
+    	 from game_award p where p.bet_type_code_parent = #{betTypeCode} and p.bet_type_code != #{betTypeCode} and p.award_group_id in
+    	 (select t.sys_award_group_id from game_award_user_group t where t.lotteryid = #{lotteryId} and t.userid = #{userId} and status=1 and bet_type=1)
+    	 and p.lotteryid = #{lotteryId}
+    	 ]]>
+    </select>
+    <select id="getValidByLotteryIdAndGroupIdAndBetTypeCodeParent" resultMap="GameAwardResult" parameterType="hashmap">
+    	select <include refid="gameAwardColumns" />
+    	<![CDATA[
+    	  from game_award p
+		 where p.lotteryid = #{lotteryId}
+		   and p.award_group_id = #{awardGroupId}
+		   and p.bet_type_code_parent = #{betTypeCode}
+		   and p.bet_type_code <> #{betTypeCode}
+		   and p.status=1
+    	 ]]>
+    </select>
+    
+    <select id="getByLotteryId" resultMap="GameAwardBetTypeResult" parameterType="hashmap">
+    	select 
+    		B.ID,
+    		B.ACTUAL_BONUS as actualBonus,
+    		B.LHC_CODE as lhcCode,
+			A.GROUP_CODE_NAME as groupCodeName,
+			A.SET_CODE_NAME as setCodeName,
+			A.METHOD_CODE_NAME as methodCodeName,
+			(case when B.ACTUAL_BONUS = 0 then rpad(B.BET_TYPE_CODE, 2) else null end) as methodTypeName
+    <![CDATA[
+		from GAME_BETTYPE_STATUS A left join game_award B on A.BET_TYPE_CODE = b.BET_TYPE_CODE_PARENT
+		where A.lotteryid = #{lotteryId}
+			and B.STATUS <> 0
+		order by A.orderby, B.bet_type_code, B.lhc_code, B.actual_bonus
+    ]]>
+    </select>
+    
+    <select id="getAwardBetTypeForOne" resultType="string" parameterType="long">
+    	select BET_TYPE_CODE from game_award where 
+    		lotteryid = #{lotteryId} and ACTUAL_BONUS > 0 and rownum = 1
+    </select>
+    
+    <select id="getActualBonusByAwardGroupId" resultType="long" parameterType="hashmap">
+    	select p.actual_bonus from game_award p where p.bet_type_code = #{betTypeCode} and p.award_group_id =
+    	 #{sysGroupId} and p.lotteryid = #{lotteryId}
+    </select>
+    
+</mapper>

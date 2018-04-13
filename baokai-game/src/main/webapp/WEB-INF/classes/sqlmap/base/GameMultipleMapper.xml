@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameMultiple">
+	<resultMap id="GameMultipleResult"
+		type="com.winterframework.firefrog.game.dao.vo.GameMultiple">
+	</resultMap>
+
+	<resultMap id="GameMultipleAssistResult"
+		type="com.winterframework.firefrog.game.entity.BetLimitAssist">
+	</resultMap>
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameMultipleColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	MAX_MULTIPLE as maxMultiple,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	SPECIAL_MULTIPLE as specialMultiple
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameMultiple"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			     SELECT SEQ_GAME_MULTIPLE.Nextval from dual
+   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_MULTIPLE (
+	        	ID ,
+	        	LOTTERYID ,
+	        	BET_TYPE_CODE ,
+	        	MAX_MULTIPLE ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{maxMultiple,javaType=int,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameMultiple">
+	    <![CDATA[
+	        UPDATE GAME_MULTIPLE SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        BET_TYPE_CODE = #{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+		        MAX_MULTIPLE = #{maxMultiple,javaType=int,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	
+	<update id="updateAssist"
+		parameterType="com.winterframework.firefrog.game.entity.BetLimitAssist">
+
+	        UPDATE GAME_MULTIPLE_ASSIST 
+	        	<set>
+		       <if test="@Ognl@isNotEmpty(maxMultiple_bak)">
+		        MULTIPLE_BAK = #{maxMultiple_bak,javaType=long,jdbcType=DECIMAL} ,
+		       </if>
+		       <if test="@Ognl@isNotEmpty(maxMultiple)">
+		        MULTIPLE = #{maxMultiple,javaType=long,jdbcType=DECIMAL} 
+		        </if>
+		        </set>
+		       
+	        WHERE 
+		        ID = #{id} 
+	    
+	</update>
+	
+	
+	<update id="updateForPublish"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameMultiple">
+	    <![CDATA[
+	        UPDATE GAME_MULTIPLE SET
+		        MAX_MULTIPLE = #{maxMultiple,javaType=int,jdbcType=DECIMAL} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SPECIAL_MULTIPLE = #{specialMultiple,javaType=string,jdbcType=VARCHAR}  
+	        WHERE 
+		        LOTTERYID = #{lotteryid} and
+		        BET_TYPE_CODE = #{betTypeCode}
+	    ]]>
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_MULTIPLE where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="GameMultipleResult"
+		flushCache="false">
+		select
+		<include refid="gameMultipleColumns" />
+		    <![CDATA[
+			    from GAME_MULTIPLE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+
+	<select id="getByLotteryId" parameterType="long"
+		resultMap="GameMultipleResult" flushCache="false">
+		select
+		<include refid="gameMultipleColumns" />
+		    <![CDATA[
+			    from GAME_MULTIPLE t
+		        where 
+		        t.lotteryid = #{lotteryid} 
+		        order by t.BET_TYPE_CODE
+		    ]]>
+	</select>
+	
+	<select id="getGameMultipleAssistParentId" parameterType="long"
+		resultMap="GameMultipleAssistResult" flushCache="false">
+		select
+		ID,PARENT_ID as parentId,ASSIT_CODE as assitCode,MULTIPLE as maxMultiple,REMARK as remark, MULTIPLE_BAK as maxMultiple_bak
+		    <![CDATA[
+			    from GAME_MULTIPLE_ASSIST t
+		        where 
+		        t.PARENT_ID = #{parentId} 
+		        order by t.ASSIT_CODE
+		    ]]>
+	</select>
+	
+	
+	
+
+	<select id="getByIds" parameterType="list" resultMap="GameMultipleResult"
+		flushCache="false">
+		select
+		<include refid="gameMultipleColumns" />
+		from GAME_MULTIPLE
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="gameMultipleDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(betTypeCode)">
+				and BET_TYPE_CODE = #{betTypeCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(maxMultiple)">
+				and MAX_MULTIPLE = #{maxMultiple}
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameMultipleResult" flushCache="false">
+		select
+		<include refid="gameMultipleColumns" />
+		from GAME_MULTIPLE
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from GAME_MULTIPLE
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_MULTIPLE
+		<include refid="gameMultipleDynamicWhere" />
+	</select>
+
+	<select id="getGameMultilple" resultMap="GameMultipleResult">
+		select
+		<include refid="gameMultipleColumns" />
+		from GAME_MULTIPLE
+		<include refid="gameMultipleDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameMultipleResult">
+		select
+		<include refid="gameMultipleColumns" />
+		from GAME_MULTIPLE
+		<include refid="gameMultipleDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+</mapper>

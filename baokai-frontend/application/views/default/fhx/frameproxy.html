@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+
+   
+</head>
+<body>
+ <script type="text/javascript">
+  var i = location.href.indexOf("?");
+
+    var qs = i > 0 ? location.href.substring(i + 1, location.href.length) : "";
+
+    var func = parent.parent.setIframeSize;
+
+    if (func) func(qs);
+</script>
+</body>
+</html>

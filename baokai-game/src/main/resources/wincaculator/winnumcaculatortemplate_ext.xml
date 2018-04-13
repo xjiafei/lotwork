@@ -1,0 +1,267 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="false">
+	
+	<bean id="lotteryWinSlipNumContextParamsConfigWx" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumContextParamsConfig" >
+		<property name="resultCodeBeginIndex" value="0"></property>
+		<property name="resultCodeEndIndex" value="5"></property>		
+	</bean>
+	<bean id="lotteryWinSlipNumContextParamsConfigSx" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumContextParamsConfig" >
+		<property name="resultCodeBeginIndex" value="1"></property>
+		<property name="resultCodeEndIndex" value="5"></property>		
+	</bean>	
+	<bean id="lotteryWinSlipNumContextParamsConfigQs" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumContextParamsConfig" >
+		<property name="resultCodeBeginIndex" value="0"></property>
+		<property name="resultCodeEndIndex" value="3"></property>		
+	</bean>
+	<bean id="lotteryWinSlipNumContextParamsConfigHs" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumContextParamsConfig" >
+		<property name="resultCodeBeginIndex" value="2"></property>
+		<property name="resultCodeEndIndex" value="5"></property>		
+	</bean>
+	<bean id="lotteryWinSlipNumContextParamsConfigQe" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumContextParamsConfig" >
+		<property name="resultCodeBeginIndex" value="0"></property>
+		<property name="resultCodeEndIndex" value="2"></property>		
+	</bean>
+	<bean id="lotteryWinSlipNumContextParamsConfigHe" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumContextParamsConfig" >
+		<property name="resultCodeBeginIndex" value="3"></property>
+		<property name="resultCodeEndIndex" value="5"></property>		
+	</bean>
+	<bean id="lotteryWinSlipNumContextParamsConfigZs" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumContextParamsConfig" >
+		<property name="resultCodeBeginIndex" value="1"></property>
+		<property name="resultCodeEndIndex" value="4"></property>		
+	</bean>
+	<!-- 豹子的验证处理 -->
+	<bean id="lotteryWinNotSameValidateChain" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker" >
+		<property name="notSameNum" value="1"></property>
+		<property name="compareRule" value="ne"></property>
+	</bean>
+
+	<!-- 最大重复数验证 -->
+	<bean id="lotteryWinMaxRepeatValidateChainEq1" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinMaxRepeatChainChecker">
+		<property name="maxRepeatNum" value="1"></property>
+		<property name="compareRule" value="eq"></property>
+	</bean>
+	<bean id="lotteryWinMaxRepeatValidateChainEq2" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinMaxRepeatChainChecker">
+		<property name="maxRepeatNum" value="2"></property>
+		<property name="compareRule" value="eq"></property>
+	</bean>
+	<bean id="lotteryWinMaxRepeatValidateChainEq3" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinMaxRepeatChainChecker">
+		<property name="maxRepeatNum" value="3"></property>
+		<property name="compareRule" value="eq"></property>
+	</bean>
+	<bean id="lotteryWinMaxRepeatValidateChainEq4" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinMaxRepeatChainChecker">
+		<property name="maxRepeatNum" value="4"></property>
+		<property name="compareRule" value="eq"></property>
+	</bean>
+	<bean id="lotteryWinMaxRepeatValidateChainGe2" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinMaxRepeatChainChecker">
+		<property name="maxRepeatNum" value="2"></property>
+		<property name="compareRule" value="ge"></property>
+	</bean>
+	<bean id="lotteryWinMaxRepeatValidateChainGe3" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinMaxRepeatChainChecker">
+		<property name="maxRepeatNum" value="3"></property>
+		<property name="compareRule" value="ge"></property>
+	</bean>
+	<bean id="lotteryWinMaxRepeatValidateChainGe4" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinMaxRepeatChainChecker">
+		<property name="maxRepeatNum" value="4"></property>
+		<property name="compareRule" value="ge"></property>
+	</bean>
+	<!-- 不同数验证 -->
+	<bean id="lotteryWinNotSameValidateChainEq5A1" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="5"></property>
+		<property name="compareRule" value="eq"></property>
+		<property name="nextChecker" ref="lotteryWinMaxRepeatValidateChainEq1"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainEq4A2" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="4"></property>
+		<property name="compareRule" value="eq"></property>
+		<property name="nextChecker" ref="lotteryWinMaxRepeatValidateChainEq2"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainEq3A2" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="3"></property>
+		<property name="compareRule" value="eq"></property>
+		<property name="nextChecker" ref="lotteryWinMaxRepeatValidateChainEq2"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainEq3A3" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="3"></property>
+		<property name="compareRule" value="eq"></property>
+		<property name="nextChecker" ref="lotteryWinMaxRepeatValidateChainEq3"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainEq2A3" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="2"></property>
+		<property name="compareRule" value="eq"></property>
+		<property name="nextChecker" ref="lotteryWinMaxRepeatValidateChainEq3"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainEq2A4" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="2"></property>
+		<property name="compareRule" value="eq"></property>
+		<property name="nextChecker" ref="lotteryWinMaxRepeatValidateChainEq4"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainEq4A1" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="4"></property>
+		<property name="compareRule" value="eq"></property>
+		<property name="nextChecker" ref="lotteryWinMaxRepeatValidateChainEq1"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainEq2A2" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="2"></property>
+		<property name="compareRule" value="eq"></property>
+		<property name="nextChecker" ref="lotteryWinMaxRepeatValidateChainEq2"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainEq1" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="1"></property>
+		<property name="compareRule" value="eq"></property>
+	</bean>
+	<bean id="lotteryWinNotSameValidateChainGt0" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="0"></property>
+		<property name="compareRule" value="gt"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainGt1" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="1"></property>
+		<property name="compareRule" value="gt"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainGt2" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="2"></property>
+		<property name="compareRule" value="gt"></property>
+	</bean>
+	<bean id="lotteryWinNotSameValidateChainLe0" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="0"></property>
+		<property name="compareRule" value="le"></property>
+	</bean>
+	<bean id="lotteryWinNotSameValidateChainLe1" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="1"></property>
+		<property name="compareRule" value="le"></property>
+	</bean>
+	<bean id="lotteryWinNotSameValidateChainNe1" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="1"></property>
+		<property name="compareRule" value="ne"></property>
+	</bean>
+	<bean id="lotteryWinNotSameValidateChainLe2" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="2"></property>
+		<property name="compareRule" value="le"></property>
+	</bean>
+	<bean id="lotteryWinNotSameValidateChainNe2" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="2"></property>
+		<property name="compareRule" value="ne"></property>
+	</bean>
+	<bean id="lotteryWinNotSameValidateChainNe3" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="3"></property>
+		<property name="compareRule" value="ne"></property>
+	</bean>
+	
+	<bean id="lotteryWinNotSameValidateChainEq2" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="2"></property>
+		<property name="compareRule" value="eq"></property>
+	</bean>
+	<bean id="lotteryWinNotSameValidateChainEq3" class="com.winterframework.firefrog.game.service.wincaculate.nowinchecker.LotterySlipNoWinNotSameChainChecker">
+		<property name="notSameNum" value="3"></property>
+		<property name="compareRule" value="eq"></property>
+	</bean>
+	
+	<!-- he zhi chu li -->
+	<bean id="lotteryWinNumHZCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumHZCaculator"></bean>
+	<!-- ding wei dan chu li -->
+	<bean id="lotteryWinNumDWDCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumDWDCaculator"></bean>
+	<!-- 45 xing zu xuan -->
+	<bean id="lotteryWinNum45ZXCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNum45ZXCaculator">
+		<property name="specileType" value="0"></property>
+	</bean>
+	<bean id="lotteryWinNum45ZXCaculator1" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNum45ZXCaculator">
+	<property name="specileType" value="1"></property>
+	</bean>
+	<bean id="lotteryWinNum45ZXCaculator2" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNum45ZXCaculator">
+		<property name="specileType" value="2"></property>
+	</bean>
+	<bean id="lotteryWinNum45ZXCaculator3" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNum45ZXCaculator">
+		<property name="specileType" value="3"></property>
+	</bean>
+	<bean id="lotteryWinNum45ZXCaculator4" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNum45ZXCaculator">
+		<property name="specileType" value="4"></property>
+	</bean>
+	<!-- 不定位 -->
+	<bean id="lotteryWinNumBDWCaculator1" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumBDWCaculator">
+	<property name="checkFirst" value="1"></property>
+	</bean>
+	<bean id="lotteryWinNumBDWCaculator2" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumBDWCaculator">
+	<property name="checkFirst" value="2"></property>
+	</bean>
+	<bean id="lotteryWinNumBDWCaculator3" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumBDWCaculator">
+	<property name="checkFirst" value="3"></property>
+	</bean>
+	<!-- 趣味 -->
+	<bean id="lotteryWinNumQWCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumQWCaculator">
+	</bean>
+	
+	<bean id="lotteryWinNumQWCaculator3" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumQWCaculator">	
+		<property name="type" value="3"></property>
+	</bean>
+	<!-- 后二组选复式, 后二组选复式3,5,1,1 * 前二组选复式0,2,1,2 * 后二组选单式3,5,1,3 * 前二组选单式0,2,1,3 -->
+	
+	<bean id="lotteryWinNumZSLCaculator1" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZSLCaculator">
+		<property name="lotteryType" value="1"></property>
+	</bean>
+	<bean id="lotteryWinNumZSLCaculator2" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZSLCaculator">
+		<property name="lotteryType" value="2"></property>
+	</bean>
+	<!--  * 前三组选组选包胆  0, 3 * 后三组选组选包胆 2,5*  后二组选包胆 3,5*  前二组选包胆 0, 2 -->
+	<bean id="lotteryWinNumZXBDCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXBDCaculator">
+	</bean>
+	<!-- 后三/前三/前二/后二直选跨度 -->
+	<bean id="lotteryWinNumZXKDCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXKDCaculator">
+	</bean>
+	<!-- 五星直选复式  1 -->
+	<bean id="lotteryWinNumZXFSCaculator1" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXFSCaculator">
+		<property name="lotteryType" value="1"></property>
+	</bean>
+	<!-- 四星直选复式 2 -->
+	<bean id="lotteryWinNumZXFSCaculator2" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXFSCaculator">
+		<property name="lotteryType" value="2"></property>
+	</bean>
+	<!-- 前三直选复式 3 -->
+	<bean id="lotteryWinNumZXFSCaculator3" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXFSCaculator">
+		<property name="lotteryType" value="3"></property>
+	</bean>
+	<!-- 后三直选复式 4 -->
+	<bean id="lotteryWinNumZXFSCaculator4" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXFSCaculator">
+		<property name="lotteryType" value="4"></property>
+	</bean>
+	<!-- 后二直选复式 5-->
+	<bean id="lotteryWinNumZXFSCaculator5" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXFSCaculator">
+		<property name="lotteryType" value="5"></property>
+	</bean>
+	<!-- 前二直选复式 6 -->
+	<bean id="lotteryWinNumZXFSCaculator6" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXFSCaculator">
+		<property name="lotteryType" value="6"></property>
+	</bean>
+	<!-- 中三直选复式 7 -->
+	<bean id="lotteryWinNumZXFSCaculator7" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXFSCaculator">
+		<property name="lotteryType" value="7"></property>
+	</bean>
+	
+	<!-- 五星直选单式   四星直选单式   前三直选单式  后三直选单式 后二直选单式   前二直选单式 6 -->
+	<bean id="lotteryWinNumZXDSCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXDSCaculator">
+	</bean>
+	
+	<!--  * 前三组选组三单式 0, 3，true，2 * 前三组选组六单式 0, 3，true，3 * 后三组选组三单式2,5，true，2 * 后三组选组六单式2,5，true，3  -->
+	<bean id="lotteryWinNumZSLDSCaculator1" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZSLDSCaculator">
+		<property name="checkCountNum" value="true"></property>
+	</bean>
+	<!-- * 前三组选混合组选2,5，false  前三组选混合组选0, 3，false-->
+	<bean id="lotteryWinNumZSLDSCaculator2" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZSLDSCaculator">
+		<property name="checkCountNum" value="false"></property>
+	</bean>
+	<!--  * 前三组选组三 0,3,2 * 前三组选组六0,3,3 * 后三组选组三2,5,2 * 后三组选组六2,5,3 -->
+	<bean id="lotteryWinNumZXLCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumZXLCaculator">
+	</bean>
+	<!-- 和值跨度规则参数map映射结束 -->
+</beans>

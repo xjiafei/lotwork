@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.winterframework.firefrog.shortlived.poolking.dao.vo.LeaderboardVO">
+	<resultMap id="leaderboardResult"
+		type="com.winterframework.firefrog.shortlived.poolking.dao.vo.LeaderboardVO">
+	</resultMap>
+	
+	<select id="queryScoresHistory" resultMap="leaderboardResult" flushCache="false">
+		SELECT
+			ID AS id,
+			ROWNO AS rowNo,
+	    	USER_ID AS userId,
+	    	USER_ACCOUNT AS userAccount,
+	    	TOTAL_AMOUNT AS totAmount,
+	    	CREATE_TIME AS createTime,
+	    	LV AS lv
+		FROM SL_GAMEORDER_Leaderboard
+		 <![CDATA[
+		WHERE user_id = #{id} and lv != 11 and CREATE_TIME >= #{stardDate} and CREATE_TIME <= #{endDate}
+		ORDER BY CREATE_TIME DESC
+		 ]]>
+	</select>
+</mapper>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.shortlived.gamemission.dao.entity.GameMission">
+	<resultMap id="result" type="com.winterframework.firefrog.shortlived.gamemission.dao.entity.GameMission">
+		<result column="ID" property="id"/>
+		<result column="CODE" property="code"/>
+		<result column="ITEM_SEQ" property="itemSeq"/>
+		<result column="NAME" property="name"/>
+		<result column="START_TIME" property="startTime"/>
+		<result column="END_TIME" property="endTime"/>
+		<result column="PARAMS" property="params"/>
+		<result column="IS_ACTIVE" property="isActive"/>
+		<result column="CREATE_DATE" property="createDate"/>
+
+	</resultMap>
+	<sql id="fields">
+		ID,
+		CODE,
+		ITEM_SEQ,
+		NAME,
+		START_TIME,
+		END_TIME,
+		PARAMS,
+		IS_ACTIVE,
+		CREATE_DATE
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+			<if test="targetId != null">
+				AND ID = #{targetId}
+			</if>
+			<if test="targetCode != null">
+				AND CODE = #{targetCode}
+			</if>
+			<if test="targetItemSeq != null">
+				AND ITEM_SEQ = #{targetItemSeq}
+			</if>
+			<if test="targetName != null">
+				AND NAME = #{targetName}
+			</if>
+			<if test="targetStartTimeStart != null">
+				AND START_TIME >= #{targetStartTimeStart}
+			</if>
+			<if test="targetStartTimeEnd != null">
+			<![CDATA[
+				AND START_TIME < #{targetStartTimeEnd}
+			]]>
+			</if>
+			<if test="targetEndTimeStart != null">
+				AND END_TIME >= #{targetEndTimeStart}
+			</if>
+			<if test="targetEndTimeEnd != null">
+			<![CDATA[
+				AND END_TIME < #{targetEndTimeEnd}
+			]]>
+			</if>
+			<if test="targetParams != null">
+				AND PARAMS = #{targetParams}
+			</if>
+			<if test="targetIsActive != null">
+				AND IS_ACTIVE = #{targetIsActive}
+			</if>
+			<if test="targetCreateDate != null">
+				AND CREATE_DATE = #{targetCreateDate}
+			</if>
+		</where>
+	</sql>
+	<select id="queryMissions" resultMap="result" parameterType="com.winterframework.firefrog.shortlived.gamemission.dao.entity.GameMission">
+		SELECT <include refid="fields"/>
+				FROM GAME_MISSION
+		<include refid="whereCondition"/>
+	</select>
+	
+	<select id="queryMission" resultMap="result" parameterType="com.winterframework.firefrog.shortlived.gamemission.dao.entity.GameMission">
+		SELECT <include refid="fields"/>
+				FROM GAME_MISSION
+		WHERE CODE = #{targetCode}
+		AND ITEM_SEQ = #{targetItemSeq}
+		AND IS_ACTIVE = #{targetIsActive}
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		SELECT COUNT(1) 
+				FROM GAME_MISSION
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		SELECT COUNT(1) 
+				FROM GAME_MISSION
+	</select>
+</mapper>

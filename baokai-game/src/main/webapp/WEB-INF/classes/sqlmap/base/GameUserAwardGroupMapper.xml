@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameUserAwardGroup">
+	<resultMap id="GameUserAwardGroupResult" type="com.winterframework.firefrog.game.dao.vo.GameUserAwardGroup">
+	</resultMap>
+	<resultMap id="GameBetAwardGroupResult" type="com.winterframework.firefrog.game.dao.vo.GameBetAwardGroup">
+	</resultMap>
+	<resultMap id="userMap" type="java.util.HashMap">
+	</resultMap>
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameUserAwardGroupColumns">
+	    <![CDATA[
+	        	ID 					as id,
+	        	LOTTERYID 			as lotteryId,
+	        	DIRECT_RET 			as directRet,
+	        	THREEONE_RET 		as threeoneRet,
+	        	CREATE_TIME 		as createTime,
+	        	UPDATE_TIME 		as updateTime,
+	        	USERID 				as userid,
+	        	SET_TYPE 			as setType,
+	        	STATUS 				as status,
+	        	BET_TYPE 			as betType,  
+	        	SYS_AWARD_GROUP_ID  as sysGroupAwardId,
+	        	SUPER_RET 			as superRet,
+	        	LHC_YEAR 			as lhcYear,
+	        	LHC_COLOR as lhcColor,
+	        	SB_THREE_ONE as sbThreeoneRet,
+	        	LHC_FLATCODE		as lhcFlatcode,
+				LHC_HALFWAVE        as lhcHalfwave,
+				LHC_ONEYEAR         as lhcOneyear,
+				LHC_NOTIN           as lhcNotin,
+				LHC_CONTINUEIN23    as lhcContinuein23,
+				LHC_CONTINUEIN4     as lhcContinuein4,
+				LHC_CONTINUEIN5     as lhcContinuein5,
+				LHC_CONTINUENOTIN23 as lhcContinuenotin23,
+				LHC_CONTINUENOTIN4  as lhcContinuenotin4,
+				LHC_CONTINUENOTIN5  as lhcContinuenotin5,
+				LHC_CONTINUECODE    as lhcContinuecode
+	        	
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameUserAwardGroup" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+				SELECT   SEQ_GAME_AWARD_USER_GROUP_ID.Nextval from dual
+		 </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_AWARD_USER_GROUP (
+	        	ID ,
+	        	LOTTERYID ,
+	        	DIRECT_RET ,
+	        	THREEONE_RET ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	USERID ,
+	        	SET_TYPE ,
+	        	STATUS ,
+	        	BET_TYPE ,
+	        	SYS_AWARD_GROUP_ID ,
+	        	SUPER_RET ,
+	        	LHC_YEAR ,
+	        	LHC_COLOR ,
+	        	SB_THREE_ONE,
+				LHC_FLATCODE,		
+				LHC_HALFWAVE,        
+				LHC_ONEYEAR,         
+				LHC_NOTIN,           
+				LHC_CONTINUEIN23,    
+				LHC_CONTINUEIN4,     
+				LHC_CONTINUEIN5,     
+				LHC_CONTINUENOTIN23, 
+				LHC_CONTINUENOTIN4,  
+				LHC_CONTINUENOTIN5,  
+				LHC_CONTINUECODE    
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{directRet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{threeoneRet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{setType,javaType=int,jdbcType=DECIMAL} ,
+	        	#{status,javaType=int,jdbcType=DECIMAL} ,
+	        	#{betType,javaType=int,jdbcType=DECIMAL} ,
+	        	#{sysGroupAwardId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{superRet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lhcYear,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lhcColor,javaType=long,jdbcType=DECIMAL},
+	        	#{sbThreeoneRet,javaType=long,jdbcType=DECIMAL},
+	        	#{lhcFlatcode,javaType=long,jdbcType=DECIMAL} ,       
+				#{lhcHalfwave,javaType=long,jdbcType=DECIMAL} ,       
+				#{lhcOneyear,javaType=long,jdbcType=DECIMAL} ,        
+				#{lhcNotin,javaType=long,jdbcType=DECIMAL} ,          
+				#{lhcContinuein23,javaType=long,jdbcType=DECIMAL} ,   
+				#{lhcContinuein4,javaType=long,jdbcType=DECIMAL} ,    
+				#{lhcContinuein5,javaType=long,jdbcType=DECIMAL} ,    
+				#{lhcContinuenotin23,javaType=long,jdbcType=DECIMAL} ,
+				#{lhcContinuenotin4,javaType=long,jdbcType=DECIMAL} , 
+				#{lhcContinuenotin5,javaType=long,jdbcType=DECIMAL} , 
+				#{lhcContinuecode,javaType=long,jdbcType=DECIMAL}   
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameUserAwardGroup">
+	    <![CDATA[
+	        UPDATE GAME_AWARD_USER_GROUP SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        DIRECT_RET = #{directRet,javaType=long,jdbcType=DECIMAL} ,
+		        THREEONE_RET = #{threeoneRet,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        SET_TYPE = #{setType,javaType=int,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=int,jdbcType=DECIMAL} ,
+		        BET_TYPE = #{betType,javaType=int,jdbcType=DECIMAL} ,
+		        SYS_AWARD_GROUP_ID = #{sysGroupAwardId,javaType=long,jdbcType=DECIMAL},
+		        SUPER_RET = #{superRet,javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+		<update id="updateRet" parameterType="com.winterframework.firefrog.game.dao.vo.GameUserAwardGroup">
+	    <![CDATA[
+	        UPDATE GAME_AWARD_USER_GROUP SET
+		        DIRECT_RET = #{directRet,javaType=long,jdbcType=DECIMAL} ,
+		        THREEONE_RET = #{threeoneRet,javaType=long,jdbcType=DECIMAL} ,
+		        SUPER_RET = #{superRet,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=int,jdbcType=DECIMAL},
+		        update_time = #{updateTime,javaType=date,jdbcType=TIMESTAMP},
+		        LHC_YEAR = #{lhcYear,javaType=long,jdbcType=DECIMAL} ,
+		        LHC_COLOR = #{lhcColor,javaType=long,jdbcType=DECIMAL} ,
+		        SB_THREE_ONE = #{sbThreeoneRet,javaType=long,jdbcType=DECIMAL},
+		        LHC_FLATCODE = #{lhcFlatcode,javaType=long,jdbcType=DECIMAL} , 
+				LHC_HALFWAVE = #{lhcHalfwave,javaType=long,jdbcType=DECIMAL} ,    
+				LHC_ONEYEAR = #{lhcOneyear,javaType=long,jdbcType=DECIMAL} ,  
+				LHC_NOTIN = #{lhcNotin,javaType=long,jdbcType=DECIMAL} , 
+				LHC_CONTINUEIN23 = #{lhcContinuein23,javaType=long,jdbcType=DECIMAL} ,
+				LHC_CONTINUEIN4 = #{lhcContinuein4,javaType=long,jdbcType=DECIMAL} ,
+				LHC_CONTINUEIN5 = #{lhcContinuein5,javaType=long,jdbcType=DECIMAL} , 
+				LHC_CONTINUENOTIN23 = #{lhcContinuenotin23,javaType=long,jdbcType=DECIMAL} ,
+				LHC_CONTINUENOTIN4 = #{lhcContinuenotin4,javaType=long,jdbcType=DECIMAL} , 
+				LHC_CONTINUENOTIN5 = #{lhcContinuenotin5,javaType=long,jdbcType=DECIMAL} ,
+				LHC_CONTINUECODE = #{lhcContinuecode,javaType=long,jdbcType=DECIMAL}   		
+	        WHERE LOTTERYID = #{lotteryid} 
+	        	and USERID = #{userid}
+	        	and sys_award_group_id= #{sysGroupAwardId}
+	    ]]>
+		</update>
+		
+		<update id="updateUserAwardGroup" parameterType="com.winterframework.firefrog.game.dao.vo.GameUserAwardGroup">
+	    <![CDATA[
+	       UPDATE GAME_AWARD_USER_GROUP SET
+		        DIRECT_RET = #{directRet,javaType=int,jdbcType=DECIMAL} ,
+		        THREEONE_RET = #{threeoneRet,javaType=int,jdbcType=DECIMAL} ,
+		        SUPER_RET = #{superRet,javaType=int,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SET_TYPE = #{setType,javaType=int,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=int,jdbcType=DECIMAL} ,
+		        BET_TYPE = #{betType,javaType=int,jdbcType=DECIMAL}
+	        WHERE 
+		        LOTTERYID = #{lotteryid} and
+		        USERID = #{userid}
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_AWARD_USER_GROUP where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameUserAwardGroupResult" flushCache="false">
+			select <include refid="gameUserAwardGroupColumns" />
+		    <![CDATA[
+			    from GAME_AWARD_USER_GROUP 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameUserAwardGroupResult" flushCache="false">
+			select <include refid="gameUserAwardGroupColumns" />
+			    from GAME_AWARD_USER_GROUP 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+		
+		<select id="getGameUserAwardGroupByUserId" parameterType="long" resultMap="GameUserAwardGroupResult" flushCache="false">
+			select <include refid="gameUserAwardGroupColumns" /> 
+	    	  from GAME_AWARD_USER_GROUP g
+	         where USERID = #{userid}
+	           and exists (select 1
+	                  from game_series s
+	                 where s.lotteryid = g.lotteryid
+	                   and s.status = 1	<!-- 可销售  --> 
+	                   ) 
+		</select>	
+		
+		<select id="getGameUserAwardGroupByUserIdAndLotteryIds" parameterType="hashmap" resultMap="GameUserAwardGroupResult" flushCache="false">
+		    select <include refid="gameUserAwardGroupColumns" />
+		    <![CDATA[
+		    ,( select G.AWARD_NAME  from GAME_AWARD_GROUP G where  G.ID = T.SYS_AWARD_GROUP_ID) as awardName
+			    from GAME_AWARD_USER_GROUP T
+		        where 
+		        USERID = #{userid}  and T.lotteryid in ( #{lotteryid} ) 
+		    ]]>
+		</select>
+		
+		<select id="getLotteryGameUserAwardGroupByUserIdAndLotteryId" parameterType="hashmap" resultMap="GameUserAwardGroupResult" flushCache="false">
+		    select <include refid="gameUserAwardGroupColumns" />
+		    <![CDATA[
+		    ,( select G.AWARD_NAME  from GAME_AWARD_GROUP G where  G.ID = T.SYS_AWARD_GROUP_ID) as awardName
+			    from GAME_AWARD_USER_GROUP T
+		        where 
+		        USERID = #{userid}  and T.lotteryid =#{lotteryid} order by awardName asc
+		    ]]>
+		</select>
+
+	<sql id="gameUserAwardGroupDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotterySeriesCode)">
+				and LOTTERYID = #{lotteryId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(directRet)">
+				and DIRECT_RET = #{directRet}
+			</if>
+	       <if test="@Ognl@isNotEmpty(threeoneRet)">
+				and THREEONE_RET = #{threeoneRet}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(setType)">
+				and SET_TYPE = #{setType}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+		   <if test="@Ognl@isNotEmpty(betType)">
+				and BET_TYPE = #{betType}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(sysGroupAwardId)">
+				and SYS_AWARD_GROUP_ID = #{sysGroupAwardId}
+			</if>
+			<if test="@Ognl@isNotEmpty(superRet)">
+				and SUPER_RET = #{superRet}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameUserAwardGroupResult"  flushCache="false">
+    	select <include refid="gameUserAwardGroupColumns" />
+	    from GAME_AWARD_USER_GROUP 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_AWARD_USER_GROUP 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_AWARD_USER_GROUP 
+		<include refid="gameUserAwardGroupDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameUserAwardGroupResult">
+    	select <include refid="gameUserAwardGroupColumns" />
+	    from GAME_AWARD_USER_GROUP 
+		<include refid="gameUserAwardGroupDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="getGameUserAwardGroupByUserIdAndLotteryId" parameterType="hashmap" resultMap="GameUserAwardGroupResult" >
+    select <include refid="gameUserAwardGroupColumns" />
+	    from GAME_AWARD_USER_GROUP 
+	    where LOTTERYID=#{lotteryId} and userid=#{userId} and status=1 and BET_TYPE=1
+    </select>
+
+	<select id="queryUsedAwardGroupUserSum" parameterType="hashmap" resultType="int">
+	<![CDATA[
+		select COUNT(userid)
+		  from GAME_AWARD_USER_GROUP
+		 where LOTTERYID = #{lotteryId}
+		   and userid in
+		       (select ID
+		          from USER_CUSTOMER
+		         where USER_CHAIN like
+		               (select USER_CHAIN from USER_CUSTOMER t where t.id = #{userid})||'%')
+	]]>
+	</select>
+	
+	<select id="getGameBetAwardGroupByUserId" parameterType="long" resultMap="GameBetAwardGroupResult" flushCache="false">
+		  select t2.lotteryid as lotteryid,
+		  		t1.bet_type as betType,
+		  		t1.id as awardGroupid,
+                t2.lottery_name as awardName
+		   from GAME_AWARD_USER_GROUP t1, GAME_SERIES t2
+		   where t1.USERID = #{userid} 
+		     and t1.bet_type = 1
+		     and t1.lotteryid=t2.lotteryid
+		     and t2.status = 1	<!-- 可销售  -->
+		     order by t2.lotteryid
+	</select>
+	
+	<select id="getGameBetAwardGroupByUserIdAndLotteryid" parameterType="hashmap" resultMap="GameBetAwardGroupResult" flushCache="false">
+		  select t2.lotteryid as lotteryid,
+		  		t2.lottery_series_code as lotterySeriesCode,
+		  		t1.bet_type as betType,
+		  		t1.id as awardGroupid,
+		  		t1.SYS_AWARD_GROUP_ID as sysAwardGroupId,
+		  		(select tt.award_name from game_award_group tt where tt.id = t1.sys_award_group_id) as awardName,
+		  		(select tt.award_ret_status from game_award_group tt where tt.id = t1.sys_award_group_id) as awardRetStatus
+		   from GAME_AWARD_USER_GROUP t1, GAME_SERIES t2
+		   where t1.USERID = #{userid} and t2.lotteryid = #{lotteryid}
+		     and t2.lotteryid = t1.lotteryid
+		     order by t2.lotteryid
+	</select>
+	
+	<select id="getGameUserAwardGroupByUserIdAndBetType" parameterType="hashmap" resultMap="GameUserAwardGroupResult" flushCache="false">
+		  select <include refid="gameUserAwardGroupColumns" />
+		  ,( select G.AWARD_NAME  from GAME_AWARD_GROUP G where  G.ID = T.SYS_AWARD_GROUP_ID) as awardName
+		   from GAME_AWARD_USER_GROUP T
+		 where userid = #{userid}
+		   and exists (select 1
+		          from game_series s
+		         where s.lotteryid = t.lotteryid
+		           and s.status = 1	<!-- 可销售  -->
+		           )
+			<if test="@Ognl@isNotEmpty(betType)">
+				and BET_TYPE = #{betType}
+			</if>
+	</select>
+	
+	<select id="getAllByLotterySeriesCodeAndUserIdAndAwardName" parameterType="hashmap" resultMap="GameUserAwardGroupResult" flushCache="false">
+		  select <include refid="gameUserAwardGroupColumns" />
+			from GAME_AWARD_USER_GROUP t
+			where lottery_series_code = #{lotterySeriesCode}
+			and userid = #{userid}
+			and exists (select 1
+		          from game_series s
+		         where s.lotteryid = t.lotteryid
+		           and s.status = 1	<!-- 可销售  -->
+		           )
+	</select>
+	<select id="getAwardByUserIdAndLryIdAndSysAwardId" parameterType="hashmap" resultMap="GameUserAwardGroupResult" >
+    	select <include refid="gameUserAwardGroupColumns" />
+	    from GAME_AWARD_USER_GROUP 
+	    where LOTTERYID=#{lotteryid} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and status=1 and BET_TYPE=1 and userid in
+   		<foreach item="item" index="index" collection="userIds" open="(" separator="," close=")" >
+			#{item}				
+		</foreach>	
+    </select>
+    
+    <select id="getUserAwardGroupDirPoint" parameterType="hashmap" resultMap="userMap" flushCache="true">
+    	select  AUG.USERID as userId, AUG.DIRECT_RET as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID=#{userAwardGroupIds}
+<!--    		<foreach item="item" index="index" collection="userAwardGroupIds" open="(" separator="," close=")" > -->
+<!-- 			#{item}				 -->
+<!-- 		</foreach>	 -->
+    </select>
+    <select id="getUserAwardGroupThreeOnePoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.THREEONE_RET as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds}
+<!--    		<foreach item="item" index="index" collection="userAwardGroupIds" open="(" separator="," close=")" > -->
+<!-- 			#{item}				 -->
+<!-- 		</foreach>	 -->
+    </select>
+    <select id="getUserAwardGroupSuperPoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.SUPER_RET as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupYearPoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_YEAR as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupColorPoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_COLOR as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupSbThreeOnePoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.SB_THREE_ONE as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupFlatcodePoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_FLATCODE as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupHalfwavePoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_HALFWAVE as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupOneyearPoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_ONEYEAR as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupNotinPoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_NOTIN as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupContinuein23Point" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_CONTINUEIN23 as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupContinuein4Point" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_CONTINUEIN4 as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupContinuein5Point" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_CONTINUEIN5 as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupContinuenotin23Point" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_CONTINUEINNOT23 as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupContinuenotin4Point" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_CONTINUENOTIN4 as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupContinuenotin5Point" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_CONTINUENOTIN5 as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    <select id="getUserAwardGroupContinuecodePoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.LHC_CONTINUECODE as RETVALUE
+    	 from GAME_AWARD_USER_GROUP AUG where LOTTERYID=#{lotteryId} and SYS_AWARD_GROUP_ID=#{sysAwardGroupId} and USERID =#{userAwardGroupIds} 
+    </select>
+    
+    <select id="getUserAwardPoint" parameterType="hashmap" resultMap="userMap" >
+    	select  AUG.USERID as userId, AUG.RET_VALUE as RETVALUE
+    	 from GAME_AWARD_USER AUG where status=1 and bet_type_code=#{gameBetType} and lotteryId=#{lotteryId} and USERID =#{userId}
+    </select>
+    
+    <select id="getUserAwardGroupByUserAndSysAwardId" parameterType="hashmap" resultMap="GameUserAwardGroupResult">
+    	select <include refid="gameUserAwardGroupColumns" />
+	    from GAME_AWARD_USER_GROUP g
+	    where USERID = #{userid}
+   			and SYS_AWARD_GROUP_ID =#{sysGroupAwardId}
+   		  and exists (select 1
+                  from game_series s
+                 where s.lotteryid = g.lotteryid
+                   and s.status = 1	<!-- 可销售  -->
+                   )
+	    
+    </select>
+    
+    <select id="getGameUserAwardGroupByGroupId" parameterType="long" resultMap="GameUserAwardGroupResult">
+    	select <include refid="gameUserAwardGroupColumns" />
+	    from GAME_AWARD_USER_GROUP  where id = #{id}
+    </select>
+    
+    
+    <select id="getDirectRetValueRange" parameterType="hashmap" resultMap="GameUserAwardGroupResult">
+    	select max(s.ret_value) as directRet, min(s.ret_value) as minDirectRet
+		  from (select *
+		          from GAME_AWARD_USER t
+		         where t.AWARD_GROUP_ID = #{awardGroupId}
+		           and t.USERID = #{userid}
+		           and substr(t.bet_type_code,1,2) not in('44','45','46','47','48','49','50','51'
+		           and exists (select 1
+		                  from game_series sr
+		                 where sr.lotteryid = t.lotteryid
+		                   and sr.status = 1	<!-- 可销售  -->
+		                   )) s
+		 WHERE s.id not in (SELECT id
+		                      from GAME_AWARD_USER
+		                     where bet_type_code like '12_%_40'
+		                        or bet_type_code like '13_%_40'
+		                        or bet_type_code like '18_%')
+    </select>
+    
+    <select id="getThreeoneRetValueRange" parameterType="hashmap" resultMap="GameUserAwardGroupResult">
+    	select max(s.ret_value) as threeoneRet, min(s.ret_value) as minThreeoneRet
+		  from (select *
+		          from GAME_AWARD_USER t
+		         where t.AWARD_GROUP_ID = #{awardGroupId}
+		           and t.USERID = #{userid}
+		           and exists (select 1
+		                  from game_series sr
+		                 where sr.lotteryid = t.lotteryid
+		                   and sr.status = 1	<!-- 可销售  -->
+		                   )) s
+		 WHERE s.id in (SELECT id
+		                  from GAME_AWARD_USER
+		                 where bet_type_code like '12_%_40'
+		                    or bet_type_code like '13_%_40'
+		                    or bet_type_code like '18_%')
+    </select>
+    <select id="getSuperRetValueRange" parameterType="hashmap" resultMap="GameUserAwardGroupResult">
+    	select max(s.ret_value) as superRet, min(s.ret_value) as minSuperRet
+		  from (select *
+		          from GAME_AWARD_USER t
+		         where t.AWARD_GROUP_ID = #{awardGroupId}
+		           and t.USERID = #{userid}
+		           and substr(t.bet_type_code,1,2) in('44','45','46','47','48','49','50','51')
+		           and exists (select 1
+		                  from game_series sr
+		                 where sr.lotteryid = t.lotteryid
+		                   and sr.status = 1	<!-- 可销售  -->
+		                   )) s
+    </select>
+    
+</mapper>

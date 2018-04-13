@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundTransfer">
+	<resultMap id="FundTransferResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundTransfer">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundTransferColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USER_ID as userId,
+	        	GMT_CREATED as gmtCreated,
+	        	TRANSFER_AMT as transferAmt,
+	        	RCV_USER_ID as rcvUserId,
+	        	IS_UPWARD as isUpward,
+	        	USER_CHAIN as userChain,
+	        	SN as sn,
+	        	RCV_ACCOUNT as rcvAccount
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundTransfer"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+			<selectKey resultType="long" order="BEFORE" keyProperty="id">
+				SELECT   SEQ_FUND_TRANSFER_ID.Nextval from dual
+			 </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_TRANSFER (
+	        	ID ,
+	        	USER_ID ,
+	        	GMT_CREATED ,
+	        	TRANSFER_AMT ,
+	        	RCV_USER_ID ,
+	        	IS_UPWARD ,
+	        	USER_CHAIN ,
+	        	SN ,
+	        	RCV_ACCOUNT 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{transferAmt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rcvUserId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{isUpward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userChain,javaType=string,jdbcType=VARCHAR} ,
+	        	#{sn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{rcvAccount,javaType=string,jdbcType=VARCHAR} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundTransfer">
+	    <![CDATA[
+	        UPDATE FUND_TRANSFER SET
+		        USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,
+		        TRANSFER_AMT = #{transferAmt,javaType=long,jdbcType=DECIMAL} ,
+		        RCV_USER_ID = #{rcvUserId,javaType=long,jdbcType=DECIMAL} ,
+		        IS_UPWARD = #{isUpward,javaType=long,jdbcType=DECIMAL} ,
+		        USER_CHAIN = #{userChain,javaType=string,jdbcType=VARCHAR} ,
+		        SN = #{sn,javaType=string,jdbcType=VARCHAR} ,
+		        RCV_ACCOUNT = #{rcvAccount,javaType=string,jdbcType=VARCHAR} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_TRANSFER where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="FundTransferResult"
+		flushCache="false">
+		select
+		<include refid="fundTransferColumns" />
+		    <![CDATA[
+			    from FUND_TRANSFER 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="FundTransferResult"
+		flushCache="false">
+		select
+		<include refid="fundTransferColumns" />
+		from FUND_TRANSFER
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="fundTransferDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+			<if test="@Ognl@isNotEmpty(transferAmt)">
+				and TRANSFER_AMT = #{transferAmt}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcvUserId)">
+				and RCV_USER_ID = #{rcvUserId}
+			</if>
+			<if test="@Ognl@isNotEmpty(isUpward)">
+				and IS_UPWARD = #{isUpward}
+			</if>
+			<if test="@Ognl@isNotEmpty(userChain)">
+				and USER_CHAIN = #{userChain}
+			</if>
+			<if test="@Ognl@isNotEmpty(sn)">
+				and SN = #{sn}
+			</if>
+			<if test="@Ognl@isNotEmpty(rcvAccount)">
+				and RCV_ACCOUNT = #{rcvAccount}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="FundTransferResult" flushCache="false">
+		select
+		<include refid="fundTransferColumns" />
+		from FUND_TRANSFER
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from FUND_TRANSFER
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from FUND_TRANSFER
+		<include refid="fundTransferDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="FundTransferResult">
+		select
+		<include refid="fundTransferColumns" />
+		from FUND_TRANSFER
+		<include refid="fundTransferDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="queryTransferRecordList" resultMap="FundTransferResult"
+		parameterType="HashMap">
+		select
+		<include refid="fundTransferColumns" />
+		from FUND_TRANSFER
+		<include refid="queryDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="getCountByTransferRecordList" resultType="long"
+		parameterType="HashMap">
+		select count(*) counts from FUND_TRANSFER
+		<include refid="queryDynamicWhere" />
+	</select>
+	<sql id="queryDynamicWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(sn)">
+				and SN=#{sn}
+			</if>
+			<if test="@Ognl@isNotEmpty(fromDate)">
+			<![CDATA[
+				and GMT_CREATED >= #{fromDate}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toDate)">
+			<![CDATA[
+				and GMT_CREATED <= #{toDate}
+				]]>
+			</if>
+
+		</where>
+	</sql>
+
+
+</mapper>

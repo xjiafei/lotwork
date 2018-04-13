@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.winterframework.firefrog.shortlived.poolking.dao.vo.PoolKingRequestVo">
+	<resultMap id="poolkingResult"
+		type="com.winterframework.firefrog.shortlived.poolking.dto.PoolKingScore">
+	</resultMap>
+	
+	<select id="queryPoolKingScore"
+		parameterType="com.winterframework.firefrog.shortlived.poolking.dao.vo.PoolKingRequestVo"
+		resultMap="poolkingResult" flushCache="false">
+		SELECT
+			ROWNUM AS rowNo,
+	    	USER_ID AS userId,
+	    	USER_ACCOUNT AS userName,
+	    	TOTAL_AMOUNT AS totalAmount
+		FROM (
+			SELECT 
+				USER_ID,USER_ACCOUNT,SUM(TOTAL_AMOUNT)AS TOTAL_AMOUNT
+			FROM SL_POOLKING_GAMEORDER
+			WHERE CREATE_TIME >= #{startDate,javaType=date,jdbcType=TIMESTAMP}
+			<![CDATA[
+				AND CREATE_TIME <= #{endDate,javaType=date,jdbcType=TIMESTAMP}
+			]]>
+			GROUP BY USER_ID,USER_ACCOUNT
+			ORDER BY TOTAL_AMOUNT DESC
+		)RESULT
+		<where>
+			<if test="@Ognl@isNotEmpty(startNo)">
+				AND ROWNUM >= #{startNo}
+			</if>
+			<if test="@Ognl@isNotEmpty(endNo)">
+				<![CDATA[
+					AND ROWNUM <= #{endNo}
+				]]>
+			</if>
+		</where>
+	</select>
+	<select id="queryPoolKingUserScore"
+		parameterType="com.winterframework.firefrog.shortlived.poolking.dao.vo.PoolKingRequestVo"
+		resultMap="poolkingResult" flushCache="false">
+		SELECT
+			ROW_NUM AS rowNo,
+	    	USER_ID AS userId,
+	    	USER_ACCOUNT AS userName,
+	    	TOTAL_AMOUNT AS totalAmount
+		FROM (
+			SELECT 
+				ROWNUM AS ROW_NUM,USER_ID,USER_ACCOUNT,TOTAL_AMOUNT 
+			FROM (
+				SELECT 
+					USER_ID,USER_ACCOUNT,SUM(TOTAL_AMOUNT)AS TOTAL_AMOUNT
+				FROM SL_POOLKING_GAMEORDER
+				WHERE CREATE_TIME >= #{startDate,javaType=date,jdbcType=TIMESTAMP}
+				<![CDATA[
+					AND CREATE_TIME <= #{endDate,javaType=date,jdbcType=TIMESTAMP}
+				]]>
+				GROUP BY USER_ID,USER_ACCOUNT
+				ORDER BY TOTAL_AMOUNT DESC
+			)R
+		)R
+		WHERE USER_ID = #{userId}
+	</select>
+
+
+	<select id="queryMonkeyActivityScore" parameterType="com.winterframework.firefrog.shortlived.poolking.dao.vo.PoolKingRequestVo"
+		resultMap="poolkingResult" flushCache="false">
+		SELECT
+			ROWNUM AS rowNo,
+	    	USER_ID AS userId,
+	    	USER_ACCOUNT AS userName,
+	    	TOTAL_AMOUNT AS totalAmount
+		FROM (
+			SELECT 
+				USER_ID,USER_ACCOUNT,SUM(TOTAL_AMOUNT)AS TOTAL_AMOUNT
+			FROM SL_POOLKING_GAMEORDER
+			<![CDATA[
+			WHERE CREATE_TIME >= #{startDate,javaType=date,jdbcType=TIMESTAMP}
+				AND CREATE_TIME <= #{endDate,javaType=date,jdbcType=TIMESTAMP}
+			GROUP BY USER_ID,USER_ACCOUNT
+			ORDER BY TOTAL_AMOUNT DESC,USER_ACCOUNT DESC
+		) where ROWNUM  <= 50
+			]]>
+	</select>
+</mapper>

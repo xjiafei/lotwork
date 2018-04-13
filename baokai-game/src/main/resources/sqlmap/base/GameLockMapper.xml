@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameLock">
+	<resultMap id="GameLockResult" type="com.winterframework.firefrog.game.dao.vo.GameLock">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameLockColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	GAME_ID as gameId,
+	        	UP_VAL as upVal,
+	        	UP_VAL_PROCESS as upValProcess,
+	        	UP_VAL2 as upVal2,
+	        	UP_VAL_PROCESS2 as upValProcess2,
+	        	STATUS as status,
+	        	RED_SLIP_VAL as redSlipVal,
+	        	RED_SLIP_VAL_PROCESS as redSlipValProcess,
+	        	BLUE_SLIP_VAL as blueSlipVal,
+	        	BLUE_SLIP_VAL_PROCESS as blueSlipValProcess,
+	        	UP_VAL3 as upVal3,
+	        	UP_VAL_PROCESS3 as upValProcess3
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameLock" 
+		useGeneratedKeys="false" keyProperty="id" 
+	 flushCache="true">
+    <![CDATA[
+        INSERT INTO
+        GAME_LOCK (
+        	ID ,
+        	GAME_ID ,
+        	UP_VAL ,
+        	UP_VAL_PROCESS ,
+        	UP_VAL2 ,
+        	UP_VAL_PROCESS2 ,
+        	STATUS ,
+        	RED_SLIP_VAL,
+        	RED_SLIP_VAL_PROCESS,
+        	BLUE_SLIP_VAL,
+        	BLUE_SLIP_VAL_PROCESS,
+        	UP_VAL3,
+        	UP_VAL_PROCESS3
+        ) VALUES (
+        	#{id,javaType=long,jdbcType=DECIMAL} ,
+        	#{gameId,javaType=long,jdbcType=DECIMAL} ,
+        	#{upVal,javaType=long,jdbcType=DECIMAL} ,
+        	#{upValProcess,javaType=long,jdbcType=DECIMAL} ,
+        	#{upVal2,javaType=long,jdbcType=DECIMAL} ,
+        	#{upValProcess2,javaType=long,jdbcType=DECIMAL} ,
+        	#{status,javaType=long,jdbcType=DECIMAL} ,
+        	#{redSlipVal,javaType=long,jdbcType=DECIMAL} ,
+        	#{redSlipValProcess,javaType=long,jdbcType=DECIMAL} ,
+        	#{blueSlipVal,javaType=long,jdbcType=DECIMAL} ,
+        	#{blueSlipValProcess,javaType=long,jdbcType=DECIMAL},
+        	#{upVal3,javaType=long,jdbcType=DECIMAL},
+        	#{upValProcess3,javaType=long,jdbcType=DECIMAL}
+        )
+    ]]>	
+
+	</insert>
+    
+	<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameLock">
+	UPDATE GAME_LOCK
+	<set>
+        <if test="@Ognl@isNotEmpty(gameId)">
+	        GAME_ID = #{gameId,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	    <if test="@Ognl@isNotEmpty(upVal)">
+	        UP_VAL = #{upVal,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	    <if test="@Ognl@isNotEmpty(upValProcess)">
+	        UP_VAL_PROCESS = #{upValProcess,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	    <if test="@Ognl@isNotEmpty(upVal2)">
+	        UP_VAL2 = #{upVal2,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	    <if test="@Ognl@isNotEmpty(upValProcess2)">
+	        UP_VAL_PROCESS2 = #{upValProcess2,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	    <if test="@Ognl@isNotEmpty(status)">
+	        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	    <if test="@Ognl@isNotEmpty(redSlipVal)">
+	        RED_SLIP_VAL = #{redSlipVal,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	     <if test="@Ognl@isNotEmpty(redSlipValProcess)">
+	        RED_SLIP_VAL_PROCESS = #{redSlipValProcess,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	    <if test="@Ognl@isNotEmpty(blueSlipVal)">
+	        BLUE_SLIP_VAL = #{blueSlipVal,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	    <if test="@Ognl@isNotEmpty(blueSlipValProcess)">
+	        BLUE_SLIP_VAL_PROCESS = #{blueSlipValProcess,javaType=long,jdbcType=DECIMAL} , 
+	    </if>
+	    <if test="@Ognl@isNotEmpty(upVal3)">
+	        UP_VAL3 = #{upVal3,javaType=long,jdbcType=DECIMAL} ,
+	    </if>
+	    <if test="@Ognl@isNotEmpty(upValProcess3)">
+	        UP_VAL_PROCESS3 = #{upValProcess3,javaType=long,jdbcType=DECIMAL}
+	    </if>
+    </set>
+	WHERE 
+		ID = #{id} 
+	</update>
+	
+	<select id="getByLotteryId" parameterType="long" resultMap="GameLockResult" flushCache="false">
+		select <include refid="gameLockColumns" />
+	    <![CDATA[
+		    from GAME_LOCK 
+	        where 
+	        GAME_ID = #{gameId} 
+	    ]]>
+	</select>
+	
+	<select id="getTotalRetPoint" resultType="String" flushCache="false">
+		select t.ret_point_chain
+		  from game_ret_point t
+		 where t.game_order_id in
+		       (select id
+		          from game_order o
+		         where o.lotteryid = #{lotteryId}
+		           and o.issue_code =  #{issueCode}
+		           and o.status in (1,2,3)) 
+		   and t.status <![CDATA[<>]]> 4	 
+	</select>		
+   <delete id="delete" parameterType="java.lang.Long">
+    <![CDATA[
+        delete from GAME_LOCK where
+	        ID = #{id} 
+    ]]>
+    </delete>   
+    <select id="getById" parameterType="long" resultMap="GameLockResult" flushCache="false">
+		select <include refid="gameLockColumns" />
+	    <![CDATA[
+		    from GAME_LOCK 
+	        where 
+	        ID = #{id} 
+	    ]]>
+	</select>	
+	<select id="getByIds" parameterType="list"  resultMap="GameLockResult" flushCache="false">
+		select <include refid="gameLockColumns" />
+		    from GAME_LOCK 
+	        where id in
+			<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>					
+	</select>	
+
+	<sql id="gameLockDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameId)">
+				and GAME_ID = #{gameId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(upVal)">
+				and UP_VAL = #{upVal}
+			</if>
+	       <if test="@Ognl@isNotEmpty(upValProcess)">
+				and UP_VAL_PROCESS = #{upValProcess}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameLockResult"  flushCache="false">
+    	select <include refid="gameLockColumns" />
+	    from GAME_LOCK 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_LOCK 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_LOCK 
+		<include refid="gameLockDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameLockResult">
+    	select <include refid="gameLockColumns" />
+	    from GAME_LOCK 
+		<include refid="gameLockDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+	
+</mapper>

@@ -1,0 +1,2456 @@
+set feedback off
+set define off
+
+update GAME_BETTYPE_STATUS set ORDERBY = ORDERBY*10;
+
+-------------------------99101----------------------------begin
+
+--GAME_BETTYPE_STATUS
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual), 99101,	33,	10,	11,	1,	 sysdate,	 sysdate,	20000000,	'33_10_11',	35,	'zhongsan',	'zhixuan',	'danshi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	10,	34,	1, sysdate,	 sysdate,	20000000,	'33_10_34',	35,	'zhongsan',	'zhixuan',	'kuadu',	'����',	'ֱѡ',	'���');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	11,	35,	1,	 sysdate,	 sysdate,	6660670,	'33_11_35',	35,	'zhongsan',	'zuxuan',	'zusan',	'����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	11,	37,	1,	 sysdate, sysdate,	6666700,	'33_11_37',	35,	'zhongsan',	'zuxuan',	'hunhezuxuan',	'����',	'��ѡ',	'�����ѡ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	11,	62,	1,	 sysdate, sysdate,	6660670,	'33_11_62',	35,	'zhongsan',	'zuxuan',	'zusandanshi',	'����',	'��ѡ',	'������ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	12,	40,	1,	 sysdate, sysdate,	73000,	'33_12_40',	35,	'zhongsan',	'budingwei',	'yimabudingwei',	'����','����λ',	'һ�벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	12,	41,	1,	 sysdate, sysdate,	370400,	'33_12_41',	35,	'zhongsan',	'budingwei',	'ermabudingwei',	'����',	'����λ',	'���벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	10,	10,	1,	 sysdate, sysdate,	20000000,	'33_10_10',	35,	'zhongsan',	'zhixuan',	'fushi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	10,	33,	1,	 sysdate, sysdate,	20000000,	'33_10_33',	35,	'zhongsan',	'zhixuan',	'hezhi',	'����','ֱѡ',	'ֱѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	11,	36,	1,	 sysdate, sysdate,	3333300,	'33_11_36',	35,	'zhongsan',	'zuxuan',	'zuliu', '����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	11,	33,	1,	 sysdate, sysdate,	6666700,	'33_11_33',	35,	'zhongsan',	'zuxuan',	'hezhi',	'����',	'��ѡ',	'��ѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	11,	39,	1,	 sysdate, sysdate,	6666700,	'33_11_39',	35,	'zhongsan',	'zuxuan',	'baodan',	'����',	'��ѡ',	'��ѡ����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99101,	33,	11,	63,	1,	 sysdate, sysdate,	3330330,	'33_11_63',	35,	'zhongsan',	'zuxuan',	'zuliudanshi',	'����',	'��ѡ',	'������ʽ');
+
+
+
+
+--GAME_BETTYPE_ASSIST
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99101),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99101),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99101),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99101),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99101),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99101),	 sysdate, sysdate,	3333300,	63);
+
+
+
+--GAME_AWARD
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_10', 15000000, 10, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_11', 15000000, 10, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_33', 15000000, 10, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_34', 15000000, 10, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_33', 0, 10, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_33_62', 5000000, 10, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_33_63', 2500000, 10, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_35', 5000000, 10, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_36', 2500000, 10, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_37', 0, 10, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_37_62', 5000000, 10, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_37_63', 2500000, 10, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_39', 0, 10, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_39_62', 5000000, 10, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_39_63', 2500000, 10, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_62', 5000000, 10, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_63', 2500000, 10, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_12_40', 60000, 10, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 1300, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_12_41', 275000, 10, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_10', 18000000, 12, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_11', 18000000, 12, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_33', 18000000, 12, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_34', 18000000, 12, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_33', 0, 12, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_33_62', 6000000, 12, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_33_63', 3000000, 12, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_35', 6000000, 12, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_36', 3000000, 12, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_37', 0, 12, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_37_62', 6000000, 12, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_37_63', 3000000, 12, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_39', 0, 12, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_39_62', 6000000, 12, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_39_63', 3000000, 12, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_62', 6000000, 12, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_63', 3000000, 12, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_12_40', 66000, 12, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_12_41', 330000, 12, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_10', 17000000, 1, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_11', 17000000, 1, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_33', 17000000, 1, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_10_34', 17000000, 1, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_33', 0, 1, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_33_62', 5700000, 1, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_33_63', 2800000, 1, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_35', 5700000, 1, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_36', 2800000, 1, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_37', 0, 1, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_37_62', 5700000, 1, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_37_63', 2800000, 1, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_39', 0, 1, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_39_62', 5700000, 1, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_39_63', 2800000, 1, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_62', 5700000, 1, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_11_63', 2800000, 1, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_12_40', 66000, 1, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99101, '33_12_41', 310000, 1, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_12_41', null);
+
+
+
+
+
+
+
+
+--game_help
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_10_10', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.26.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_10_11', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_10_33', '����ѡ��һ����ֵ�����¿�����������λ����֮�ͣ�����"bonus"Ԫ', 'Ͷע����ֵ1</br>������*001*,*010*,*100*</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_10_34', '��ѡ��ֵ���ڿ����������3λ�������С�������֮���Ϊ�н�������"bonus"Ԫ', 'Ͷע�����8</br>������(1)��������08x������˳Ѱ��,x��9;</br>(2)��������19x������˳Ѱ����x��0</br>����"bonus"Ԫ', '18-JUL-14 04.39.54.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_11_33', '����ѡ��һ����ֵ�����¿�����������λ����֮��(�������Ӻ�)���������"bonus_62"Ԫ', 'Ͷע����ֵ6</br>������(1) *015*������˳�򣩣�����"bonus_63"Ԫ</br>(2) *033*������˳�򣩣�����"bonus_62"Ԫ', '18-JUL-14 04.40.13.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_11_35', '��0-9��ѡ��2�����������ע����ѡ�����뿪�����������λ��ͬ����˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*��1Ϊ���غţ�2Ϊ���ţ�</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_11_36', '��0-9������ѡ��3���������һע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_11_37', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ���Ϊ�н����������"bonus_62"Ԫ', 'Ͷע��(001),(123)</br>������(1)*001*������˳�򣩣�����"bonus_62"Ԫ��</br>(2)**123������˳�򣩣�����"bonus_63"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_11_39', '��0-9������ѡ��1���������룬�������������λ������1λ����ѡ����������ͬ(�������Ӻ�)����Ϊ�н����������"bonus_62"Ԫ', 'Ͷע������3</br>������(1) *3xx*����*33x*������˳��,����"bonus_62"Ԫ</br>(2) *3xy*������˳��,����"bonus_63"Ԫ</br>ע��x��y��3', '18-JUL-14 04.40.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_11_62', '�ֶ�������룬�������� 1 ����λ�����롣(�������ֵ����ж���������ͬ),˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_11_63', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_12_40', '��0-9������ѡ��1������Ͷע�����¿�����������λ�а���������룬�������н�������"bonus"Ԫ', 'Ͷע��1</br>������*1xx*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.31.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99101, '33_12_41', '��0-9������ѡ��2������Ͷע�����¿�����������λ�а�����2�����룬�������н�������"bonus"Ԫ', 'Ͷע��1��2</br>������*12x*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.39.56.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+
+
+
+
+
+--game_multiple
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_10_10', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_10_11', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_10_33', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_10_34', 222, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_11_33', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_11_35', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_11_36', 1333, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_11_37', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_11_39', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_11_62', 666, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_11_63', 1333, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_12_40', 60606, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99101, '33_12_41', 12121, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+
+
+
+
+-------------------------99101----------------------------end
+
+
+
+
+-------------------------99102----------------------------begin
+
+--GAME_BETTYPE_STATUS
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual), 99102,	33,	10,	11,	1,	 sysdate,	 sysdate,	20000000,	'33_10_11',	35,	'zhongsan',	'zhixuan',	'danshi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	10,	34,	1, sysdate,	 sysdate,	20000000,	'33_10_34',	35,	'zhongsan',	'zhixuan',	'kuadu',	'����',	'ֱѡ',	'���');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	11,	35,	1,	 sysdate,	 sysdate,	6660670,	'33_11_35',	35,	'zhongsan',	'zuxuan',	'zusan',	'����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	11,	37,	1,	 sysdate, sysdate,	6666700,	'33_11_37',	35,	'zhongsan',	'zuxuan',	'hunhezuxuan',	'����',	'��ѡ',	'�����ѡ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	11,	62,	1,	 sysdate, sysdate,	6660670,	'33_11_62',	35,	'zhongsan',	'zuxuan',	'zusandanshi',	'����',	'��ѡ',	'������ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	12,	40,	1,	 sysdate, sysdate,	73000,	'33_12_40',	35,	'zhongsan',	'budingwei',	'yimabudingwei',	'����','����λ',	'һ�벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	12,	41,	1,	 sysdate, sysdate,	370400,	'33_12_41',	35,	'zhongsan',	'budingwei',	'ermabudingwei',	'����',	'����λ',	'���벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	10,	10,	1,	 sysdate, sysdate,	20000000,	'33_10_10',	35,	'zhongsan',	'zhixuan',	'fushi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	10,	33,	1,	 sysdate, sysdate,	20000000,	'33_10_33',	35,	'zhongsan',	'zhixuan',	'hezhi',	'����','ֱѡ',	'ֱѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	11,	36,	1,	 sysdate, sysdate,	3333300,	'33_11_36',	35,	'zhongsan',	'zuxuan',	'zuliu', '����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	11,	33,	1,	 sysdate, sysdate,	6666700,	'33_11_33',	35,	'zhongsan',	'zuxuan',	'hezhi',	'����',	'��ѡ',	'��ѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	11,	39,	1,	 sysdate, sysdate,	6666700,	'33_11_39',	35,	'zhongsan',	'zuxuan',	'baodan',	'����',	'��ѡ',	'��ѡ����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99102,	33,	11,	63,	1,	 sysdate, sysdate,	3330330,	'33_11_63',	35,	'zhongsan',	'zuxuan',	'zuliudanshi',	'����',	'��ѡ',	'������ʽ');
+
+
+
+
+--GAME_BETTYPE_ASSIST
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99102),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99102),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99102),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99102),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99102),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99102),	 sysdate, sysdate,	3333300,	63);
+
+
+
+--GAME_AWARD
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_10', 15000000, 17, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_11', 15000000, 17, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_33', 15000000, 17, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_34', 15000000, 17, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_33', 0, 17, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_33_62', 5000000, 17, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_33_63', 2500000, 17, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_35', 5000000, 17, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_36', 2500000, 17, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_37', 0, 17, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_37_62', 5000000, 17, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_37_63', 2500000, 17, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_39', 0, 17, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_39_62', 5000000, 17, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_39_63', 2500000, 17, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_62', 5000000, 17, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_63', 2500000, 17, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_12_40', 60000, 17, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 1300, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_12_41', 275000, 17, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_10', 18000000, 14, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_11', 18000000, 14, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_33', 18000000, 14, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_34', 18000000, 14, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_33', 0, 14, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_33_62', 6000000, 14, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_33_63', 3000000, 14, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_35', 6000000, 14, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_36', 3000000, 14, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_37', 0, 14, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_37_62', 6000000, 14, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_37_63', 3000000, 14, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_39', 0, 14, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_39_62', 6000000, 14, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_39_63', 3000000, 14, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_62', 6000000, 14, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_63', 3000000, 14, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_12_40', 66000, 14, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_12_41', 330000, 14, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_10', 17000000, 7, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_11', 17000000, 7, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_33', 17000000, 7, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_10_34', 17000000, 7, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_33', 0, 7, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_33_62', 5700000, 7, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_33_63', 2800000, 7, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_35', 5700000, 7, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_36', 2800000, 7, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_37', 0, 7, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_37_62', 5700000, 7, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_37_63', 2800000, 7, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_39', 0, 7, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_39_62', 5700000, 7, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_39_63', 2800000, 7, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_62', 5700000, 7, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_11_63', 2800000, 7, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_12_40', 66000, 7, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99102, '33_12_41', 310000, 7, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_12_41', null);
+
+
+
+
+
+
+
+
+--game_help
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_10_10', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.26.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_10_11', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_10_33', '����ѡ��һ����ֵ�����¿�����������λ����֮�ͣ�����"bonus"Ԫ', 'Ͷע����ֵ1</br>������*001*,*010*,*100*</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_10_34', '��ѡ��ֵ���ڿ����������3λ�������С�������֮���Ϊ�н�������"bonus"Ԫ', 'Ͷע�����8</br>������(1)��������08x������˳Ѱ��,x��9;</br>(2)��������19x������˳Ѱ����x��0</br>����"bonus"Ԫ', '18-JUL-14 04.39.54.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_11_33', '����ѡ��һ����ֵ�����¿�����������λ����֮��(�������Ӻ�)���������"bonus_62"Ԫ', 'Ͷע����ֵ6</br>������(1) *015*������˳�򣩣�����"bonus_63"Ԫ</br>(2) *033*������˳�򣩣�����"bonus_62"Ԫ', '18-JUL-14 04.40.13.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_11_35', '��0-9��ѡ��2�����������ע����ѡ�����뿪�����������λ��ͬ����˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*��1Ϊ���غţ�2Ϊ���ţ�</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_11_36', '��0-9������ѡ��3���������һע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_11_37', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ���Ϊ�н����������"bonus_62"Ԫ', 'Ͷע��(001),(123)</br>������(1)*001*������˳�򣩣�����"bonus_62"Ԫ��</br>(2)**123������˳�򣩣�����"bonus_63"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_11_39', '��0-9������ѡ��1���������룬�������������λ������1λ����ѡ����������ͬ(�������Ӻ�)����Ϊ�н����������"bonus_62"Ԫ', 'Ͷע������3</br>������(1) *3xx*����*33x*������˳��,����"bonus_62"Ԫ</br>(2) *3xy*������˳��,����"bonus_63"Ԫ</br>ע��x��y��3', '18-JUL-14 04.40.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_11_62', '�ֶ�������룬�������� 1 ����λ�����롣(�������ֵ����ж���������ͬ),˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_11_63', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_12_40', '��0-9������ѡ��1������Ͷע�����¿�����������λ�а���������룬�������н�������"bonus"Ԫ', 'Ͷע��1</br>������*1xx*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.31.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99102, '33_12_41', '��0-9������ѡ��2������Ͷע�����¿�����������λ�а�����2�����룬�������н�������"bonus"Ԫ', 'Ͷע��1��2</br>������*12x*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.39.56.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+
+
+
+
+
+--game_multiple
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_10_10', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_10_11', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_10_33', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_10_34', 222, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_11_33', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_11_35', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_11_36', 1333, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_11_37', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_11_39', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_11_62', 666, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_11_63', 1333, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_12_40', 60606, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99102, '33_12_41', 12121, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+
+
+
+
+-------------------------99102----------------------------end
+
+
+
+-------------------------99103----------------------------begin
+
+--GAME_BETTYPE_STATUS
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual), 99103,	33,	10,	11,	1,	 sysdate,	 sysdate,	20000000,	'33_10_11',	35,	'zhongsan',	'zhixuan',	'danshi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	10,	34,	1, sysdate,	 sysdate,	20000000,	'33_10_34',	35,	'zhongsan',	'zhixuan',	'kuadu',	'����',	'ֱѡ',	'���');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	11,	35,	1,	 sysdate,	 sysdate,	6660670,	'33_11_35',	35,	'zhongsan',	'zuxuan',	'zusan',	'����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	11,	37,	1,	 sysdate, sysdate,	6666700,	'33_11_37',	35,	'zhongsan',	'zuxuan',	'hunhezuxuan',	'����',	'��ѡ',	'�����ѡ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	11,	62,	1,	 sysdate, sysdate,	6660670,	'33_11_62',	35,	'zhongsan',	'zuxuan',	'zusandanshi',	'����',	'��ѡ',	'������ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	12,	40,	1,	 sysdate, sysdate,	73000,	'33_12_40',	35,	'zhongsan',	'budingwei',	'yimabudingwei',	'����','����λ',	'һ�벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	12,	41,	1,	 sysdate, sysdate,	370400,	'33_12_41',	35,	'zhongsan',	'budingwei',	'ermabudingwei',	'����',	'����λ',	'���벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	10,	10,	1,	 sysdate, sysdate,	20000000,	'33_10_10',	35,	'zhongsan',	'zhixuan',	'fushi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	10,	33,	1,	 sysdate, sysdate,	20000000,	'33_10_33',	35,	'zhongsan',	'zhixuan',	'hezhi',	'����','ֱѡ',	'ֱѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	11,	36,	1,	 sysdate, sysdate,	3333300,	'33_11_36',	35,	'zhongsan',	'zuxuan',	'zuliu', '����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	11,	33,	1,	 sysdate, sysdate,	6666700,	'33_11_33',	35,	'zhongsan',	'zuxuan',	'hezhi',	'����',	'��ѡ',	'��ѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	11,	39,	1,	 sysdate, sysdate,	6666700,	'33_11_39',	35,	'zhongsan',	'zuxuan',	'baodan',	'����',	'��ѡ',	'��ѡ����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99103,	33,	11,	63,	1,	 sysdate, sysdate,	3330330,	'33_11_63',	35,	'zhongsan',	'zuxuan',	'zuliudanshi',	'����',	'��ѡ',	'������ʽ');
+
+
+
+
+--GAME_BETTYPE_ASSIST
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99103),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99103),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99103),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99103),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99103),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99103),	 sysdate, sysdate,	3333300,	63);
+
+
+
+--GAME_AWARD
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_10', 15000000, 21, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_11', 15000000, 21, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_33', 15000000, 21, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_34', 15000000, 21, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_33', 0, 21, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_33_62', 5000000, 21, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_33_63', 2500000, 21, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_35', 5000000, 21, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_36', 2500000, 21, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_37', 0, 21, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_37_62', 5000000, 21, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_37_63', 2500000, 21, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_39', 0, 21, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_39_62', 5000000, 21, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_39_63', 2500000, 21, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_62', 5000000, 21, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_63', 2500000, 21, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_12_40', 60000, 21, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 1300, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_12_41', 275000, 21, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_10', 18000000, 19, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_11', 18000000, 19, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_33', 18000000, 19, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_34', 18000000, 19, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_33', 0, 19, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_33_62', 6000000, 19, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_33_63', 3000000, 19, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_35', 6000000, 19, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_36', 3000000, 19, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_37', 0, 19, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_37_62', 6000000, 19, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_37_63', 3000000, 19, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_39', 0, 19, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_39_62', 6000000, 19, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_39_63', 3000000, 19, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_62', 6000000, 19, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_63', 3000000, 19, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_12_40', 66000, 19, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_12_41', 330000, 19, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_10', 17000000, 20, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_11', 17000000, 20, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_33', 17000000, 20, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_10_34', 17000000, 20, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_33', 0, 20, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_33_62', 5700000, 20, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_33_63', 2800000, 20, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_35', 5700000, 20, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_36', 2800000, 20, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_37', 0, 20, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_37_62', 5700000, 20, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_37_63', 2800000, 20, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_39', 0, 20, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_39_62', 5700000, 20, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_39_63', 2800000, 20, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_62', 5700000, 20, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_11_63', 2800000, 20, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_12_40', 66000, 20, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99103, '33_12_41', 310000, 20, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_12_41', null);
+
+
+
+
+
+
+
+
+--game_help
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_10_10', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.26.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_10_11', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_10_33', '����ѡ��һ����ֵ�����¿�����������λ����֮�ͣ�����"bonus"Ԫ', 'Ͷע����ֵ1</br>������*001*,*010*,*100*</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_10_34', '��ѡ��ֵ���ڿ����������3λ�������С�������֮���Ϊ�н�������"bonus"Ԫ', 'Ͷע�����8</br>������(1)��������08x������˳Ѱ��,x��9;</br>(2)��������19x������˳Ѱ����x��0</br>����"bonus"Ԫ', '18-JUL-14 04.39.54.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_11_33', '����ѡ��һ����ֵ�����¿�����������λ����֮��(�������Ӻ�)���������"bonus_62"Ԫ', 'Ͷע����ֵ6</br>������(1) *015*������˳�򣩣�����"bonus_63"Ԫ</br>(2) *033*������˳�򣩣�����"bonus_62"Ԫ', '18-JUL-14 04.40.13.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_11_35', '��0-9��ѡ��2�����������ע����ѡ�����뿪�����������λ��ͬ����˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*��1Ϊ���غţ�2Ϊ���ţ�</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_11_36', '��0-9������ѡ��3���������һע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_11_37', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ���Ϊ�н����������"bonus_62"Ԫ', 'Ͷע��(001),(123)</br>������(1)*001*������˳�򣩣�����"bonus_62"Ԫ��</br>(2)**123������˳�򣩣�����"bonus_63"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_11_39', '��0-9������ѡ��1���������룬�������������λ������1λ����ѡ����������ͬ(�������Ӻ�)����Ϊ�н����������"bonus_62"Ԫ', 'Ͷע������3</br>������(1) *3xx*����*33x*������˳��,����"bonus_62"Ԫ</br>(2) *3xy*������˳��,����"bonus_63"Ԫ</br>ע��x��y��3', '18-JUL-14 04.40.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_11_62', '�ֶ�������룬�������� 1 ����λ�����롣(�������ֵ����ж���������ͬ),˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_11_63', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_12_40', '��0-9������ѡ��1������Ͷע�����¿�����������λ�а���������룬�������н�������"bonus"Ԫ', 'Ͷע��1</br>������*1xx*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.31.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99103, '33_12_41', '��0-9������ѡ��2������Ͷע�����¿�����������λ�а�����2�����룬�������н�������"bonus"Ԫ', 'Ͷע��1��2</br>������*12x*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.39.56.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+
+
+
+
+
+--game_multiple
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_10_10', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_10_11', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_10_33', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_10_34', 222, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_11_33', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_11_35', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_11_36', 1333, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_11_37', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_11_39', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_11_62', 666, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_11_63', 1333, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_12_40', 60606, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99103, '33_12_41', 12121, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+
+
+
+
+-------------------------99103----------------------------end
+
+
+
+-------------------------99104----------------------------begin
+
+--GAME_BETTYPE_STATUS
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual), 99104,	33,	10,	11,	1,	 sysdate,	 sysdate,	20000000,	'33_10_11',	35,	'zhongsan',	'zhixuan',	'danshi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	10,	34,	1, sysdate,	 sysdate,	20000000,	'33_10_34',	35,	'zhongsan',	'zhixuan',	'kuadu',	'����',	'ֱѡ',	'���');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	11,	35,	1,	 sysdate,	 sysdate,	6660670,	'33_11_35',	35,	'zhongsan',	'zuxuan',	'zusan',	'����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	11,	37,	1,	 sysdate, sysdate,	6666700,	'33_11_37',	35,	'zhongsan',	'zuxuan',	'hunhezuxuan',	'����',	'��ѡ',	'�����ѡ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	11,	62,	1,	 sysdate, sysdate,	6660670,	'33_11_62',	35,	'zhongsan',	'zuxuan',	'zusandanshi',	'����',	'��ѡ',	'������ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	12,	40,	1,	 sysdate, sysdate,	73000,	'33_12_40',	35,	'zhongsan',	'budingwei',	'yimabudingwei',	'����','����λ',	'һ�벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	12,	41,	1,	 sysdate, sysdate,	370400,	'33_12_41',	35,	'zhongsan',	'budingwei',	'ermabudingwei',	'����',	'����λ',	'���벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	10,	10,	1,	 sysdate, sysdate,	20000000,	'33_10_10',	35,	'zhongsan',	'zhixuan',	'fushi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	10,	33,	1,	 sysdate, sysdate,	20000000,	'33_10_33',	35,	'zhongsan',	'zhixuan',	'hezhi',	'����','ֱѡ',	'ֱѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	11,	36,	1,	 sysdate, sysdate,	3333300,	'33_11_36',	35,	'zhongsan',	'zuxuan',	'zuliu', '����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	11,	33,	1,	 sysdate, sysdate,	6666700,	'33_11_33',	35,	'zhongsan',	'zuxuan',	'hezhi',	'����',	'��ѡ',	'��ѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	11,	39,	1,	 sysdate, sysdate,	6666700,	'33_11_39',	35,	'zhongsan',	'zuxuan',	'baodan',	'����',	'��ѡ',	'��ѡ����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99104,	33,	11,	63,	1,	 sysdate, sysdate,	3330330,	'33_11_63',	35,	'zhongsan',	'zuxuan',	'zuliudanshi',	'����',	'��ѡ',	'������ʽ');
+
+
+
+
+--GAME_BETTYPE_ASSIST
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99104),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99104),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99104),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99104),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99104),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99104),	 sysdate, sysdate,	3333300,	63);
+
+
+
+--GAME_AWARD
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_10', 15000000, 38, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_11', 15000000, 38, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_33', 15000000, 38, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_34', 15000000, 38, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_33', 0, 38, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_33_62', 5000000, 38, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_33_63', 2500000, 38, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_35', 5000000, 38, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_36', 2500000, 38, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_37', 0, 38, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_37_62', 5000000, 38, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_37_63', 2500000, 38, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_39', 0, 38, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_39_62', 5000000, 38, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_39_63', 2500000, 38, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_62', 5000000, 38, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_63', 2500000, 38, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_12_40', 60000, 38, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 1300, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_12_41', 275000, 38, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_10', 18000000, 36, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_11', 18000000, 36, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_33', 18000000, 36, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_34', 18000000, 36, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_33', 0, 36, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_33_62', 6000000, 36, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_33_63', 3000000, 36, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_35', 6000000, 36, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_36', 3000000, 36, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_37', 0, 36, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_37_62', 6000000, 36, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_37_63', 3000000, 36, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_39', 0, 36, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_39_62', 6000000, 36, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_39_63', 3000000, 36, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_62', 6000000, 36, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_63', 3000000, 36, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_12_40', 66000, 36, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_12_41', 330000, 36, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_10', 17000000, 37, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_11', 17000000, 37, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_33', 17000000, 37, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_10_34', 17000000, 37, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_33', 0, 37, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_33_62', 5700000, 37, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_33_63', 2800000, 37, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_35', 5700000, 37, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_36', 2800000, 37, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_37', 0, 37, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_37_62', 5700000, 37, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_37_63', 2800000, 37, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_39', 0, 37, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_39_62', 5700000, 37, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_39_63', 2800000, 37, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_62', 5700000, 37, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_11_63', 2800000, 37, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_12_40', 66000, 37, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99104, '33_12_41', 310000, 37, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_12_41', null);
+
+
+
+
+
+
+
+
+--game_help
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_10_10', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.26.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_10_11', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_10_33', '����ѡ��һ����ֵ�����¿�����������λ����֮�ͣ�����"bonus"Ԫ', 'Ͷע����ֵ1</br>������*001*,*010*,*100*</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_10_34', '��ѡ��ֵ���ڿ����������3λ�������С�������֮���Ϊ�н�������"bonus"Ԫ', 'Ͷע�����8</br>������(1)��������08x������˳Ѱ��,x��9;</br>(2)��������19x������˳Ѱ����x��0</br>����"bonus"Ԫ', '18-JUL-14 04.39.54.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_11_33', '����ѡ��һ����ֵ�����¿�����������λ����֮��(�������Ӻ�)���������"bonus_62"Ԫ', 'Ͷע����ֵ6</br>������(1) *015*������˳�򣩣�����"bonus_63"Ԫ</br>(2) *033*������˳�򣩣�����"bonus_62"Ԫ', '18-JUL-14 04.40.13.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_11_35', '��0-9��ѡ��2�����������ע����ѡ�����뿪�����������λ��ͬ����˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*��1Ϊ���غţ�2Ϊ���ţ�</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_11_36', '��0-9������ѡ��3���������һע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_11_37', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ���Ϊ�н����������"bonus_62"Ԫ', 'Ͷע��(001),(123)</br>������(1)*001*������˳�򣩣�����"bonus_62"Ԫ��</br>(2)**123������˳�򣩣�����"bonus_63"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_11_39', '��0-9������ѡ��1���������룬�������������λ������1λ����ѡ����������ͬ(�������Ӻ�)����Ϊ�н����������"bonus_62"Ԫ', 'Ͷע������3</br>������(1) *3xx*����*33x*������˳��,����"bonus_62"Ԫ</br>(2) *3xy*������˳��,����"bonus_63"Ԫ</br>ע��x��y��3', '18-JUL-14 04.40.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_11_62', '�ֶ�������룬�������� 1 ����λ�����롣(�������ֵ����ж���������ͬ),˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_11_63', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_12_40', '��0-9������ѡ��1������Ͷע�����¿�����������λ�а���������룬�������н�������"bonus"Ԫ', 'Ͷע��1</br>������*1xx*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.31.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99104, '33_12_41', '��0-9������ѡ��2������Ͷע�����¿�����������λ�а�����2�����룬�������н�������"bonus"Ԫ', 'Ͷע��1��2</br>������*12x*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.39.56.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+
+
+
+
+
+--game_multiple
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_10_10', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_10_11', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_10_33', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_10_34', 222, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_11_33', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_11_35', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_11_36', 1333, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_11_37', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_11_39', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_11_62', 666, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_11_63', 1333, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_12_40', 60606, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99104, '33_12_41', 12121, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+
+
+
+
+-------------------------99104----------------------------end
+
+
+
+
+-------------------------99105----------------------------begin
+
+--GAME_BETTYPE_STATUS
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual), 99105,	33,	10,	11,	1,	 sysdate,	 sysdate,	20000000,	'33_10_11',	35,	'zhongsan',	'zhixuan',	'danshi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	10,	34,	1, sysdate,	 sysdate,	20000000,	'33_10_34',	35,	'zhongsan',	'zhixuan',	'kuadu',	'����',	'ֱѡ',	'���');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	11,	35,	1,	 sysdate,	 sysdate,	6660670,	'33_11_35',	35,	'zhongsan',	'zuxuan',	'zusan',	'����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	11,	37,	1,	 sysdate, sysdate,	6666700,	'33_11_37',	35,	'zhongsan',	'zuxuan',	'hunhezuxuan',	'����',	'��ѡ',	'�����ѡ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	11,	62,	1,	 sysdate, sysdate,	6660670,	'33_11_62',	35,	'zhongsan',	'zuxuan',	'zusandanshi',	'����',	'��ѡ',	'������ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	12,	40,	1,	 sysdate, sysdate,	73000,	'33_12_40',	35,	'zhongsan',	'budingwei',	'yimabudingwei',	'����','����λ',	'һ�벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	12,	41,	1,	 sysdate, sysdate,	370400,	'33_12_41',	35,	'zhongsan',	'budingwei',	'ermabudingwei',	'����',	'����λ',	'���벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	10,	10,	1,	 sysdate, sysdate,	20000000,	'33_10_10',	35,	'zhongsan',	'zhixuan',	'fushi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	10,	33,	1,	 sysdate, sysdate,	20000000,	'33_10_33',	35,	'zhongsan',	'zhixuan',	'hezhi',	'����','ֱѡ',	'ֱѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	11,	36,	1,	 sysdate, sysdate,	3333300,	'33_11_36',	35,	'zhongsan',	'zuxuan',	'zuliu', '����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	11,	33,	1,	 sysdate, sysdate,	6666700,	'33_11_33',	35,	'zhongsan',	'zuxuan',	'hezhi',	'����',	'��ѡ',	'��ѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	11,	39,	1,	 sysdate, sysdate,	6666700,	'33_11_39',	35,	'zhongsan',	'zuxuan',	'baodan',	'����',	'��ѡ',	'��ѡ����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99105,	33,	11,	63,	1,	 sysdate, sysdate,	3330330,	'33_11_63',	35,	'zhongsan',	'zuxuan',	'zuliudanshi',	'����',	'��ѡ',	'������ʽ');
+
+
+
+
+--GAME_BETTYPE_ASSIST
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99105),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99105),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99105),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99105),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99105),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99105),	 sysdate, sysdate,	3333300,	63);
+
+
+
+--GAME_AWARD
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_10', 15000000, 16, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_11', 15000000, 16, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_33', 15000000, 16, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_34', 15000000, 16, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_33', 0, 16, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_33_62', 5000000, 16, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_33_63', 2500000, 16, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_35', 5000000, 16, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_36', 2500000, 16, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_37', 0, 16, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_37_62', 5000000, 16, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_37_63', 2500000, 16, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_39', 0, 16, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_39_62', 5000000, 16, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_39_63', 2500000, 16, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_62', 5000000, 16, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_63', 2500000, 16, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_12_40', 60000, 16, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 1300, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_12_41', 275000, 16, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_10', 18000000, 13, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_11', 18000000, 13, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_33', 18000000, 13, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_34', 18000000, 13, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_33', 0, 13, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_33_62', 6000000, 13, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_33_63', 3000000, 13, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_35', 6000000, 13, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_36', 3000000, 13, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_37', 0, 13, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_37_62', 6000000, 13, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_37_63', 3000000, 13, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_39', 0, 13, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_39_62', 6000000, 13, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_39_63', 3000000, 13, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_62', 6000000, 13, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_63', 3000000, 13, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_12_40', 66000, 13, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_12_41', 330000, 13, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_10', 17000000, 5, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_11', 17000000, 5, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_33', 17000000, 5, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_10_34', 17000000, 5, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_33', 0, 5, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_33_62', 5700000, 5, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_33_63', 2800000, 5, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_35', 5700000, 5, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_36', 2800000, 5, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_37', 0, 5, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_37_62', 5700000, 5, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_37_63', 2800000, 5, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_39', 0, 5, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_39_62', 5700000, 5, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_39_63', 2800000, 5, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_62', 5700000, 5, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_11_63', 2800000, 5, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_12_40', 66000, 5, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99105, '33_12_41', 310000, 5, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_12_41', null);
+
+
+
+
+
+
+
+
+--game_help
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_10_10', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.26.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_10_11', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_10_33', '����ѡ��һ����ֵ�����¿�����������λ����֮�ͣ�����"bonus"Ԫ', 'Ͷע����ֵ1</br>������*001*,*010*,*100*</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_10_34', '��ѡ��ֵ���ڿ����������3λ�������С�������֮���Ϊ�н�������"bonus"Ԫ', 'Ͷע�����8</br>������(1)��������08x������˳Ѱ��,x��9;</br>(2)��������19x������˳Ѱ����x��0</br>����"bonus"Ԫ', '18-JUL-14 04.39.54.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_11_33', '����ѡ��һ����ֵ�����¿�����������λ����֮��(�������Ӻ�)���������"bonus_62"Ԫ', 'Ͷע����ֵ6</br>������(1) *015*������˳�򣩣�����"bonus_63"Ԫ</br>(2) *033*������˳�򣩣�����"bonus_62"Ԫ', '18-JUL-14 04.40.13.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_11_35', '��0-9��ѡ��2�����������ע����ѡ�����뿪�����������λ��ͬ����˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*��1Ϊ���غţ�2Ϊ���ţ�</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_11_36', '��0-9������ѡ��3���������һע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_11_37', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ���Ϊ�н����������"bonus_62"Ԫ', 'Ͷע��(001),(123)</br>������(1)*001*������˳�򣩣�����"bonus_62"Ԫ��</br>(2)**123������˳�򣩣�����"bonus_63"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_11_39', '��0-9������ѡ��1���������룬�������������λ������1λ����ѡ����������ͬ(�������Ӻ�)����Ϊ�н����������"bonus_62"Ԫ', 'Ͷע������3</br>������(1) *3xx*����*33x*������˳��,����"bonus_62"Ԫ</br>(2) *3xy*������˳��,����"bonus_63"Ԫ</br>ע��x��y��3', '18-JUL-14 04.40.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_11_62', '�ֶ�������룬�������� 1 ����λ�����롣(�������ֵ����ж���������ͬ),˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_11_63', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_12_40', '��0-9������ѡ��1������Ͷע�����¿�����������λ�а���������룬�������н�������"bonus"Ԫ', 'Ͷע��1</br>������*1xx*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.31.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99105, '33_12_41', '��0-9������ѡ��2������Ͷע�����¿�����������λ�а�����2�����룬�������н�������"bonus"Ԫ', 'Ͷע��1��2</br>������*12x*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.39.56.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+
+
+
+
+
+--game_multiple
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_10_10', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_10_11', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_10_33', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_10_34', 222, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_11_33', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_11_35', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_11_36', 1333, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_11_37', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_11_39', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_11_62', 666, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_11_63', 1333, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_12_40', 60606, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99105, '33_12_41', 12121, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+
+
+
+
+-------------------------99105----------------------------end
+
+
+
+
+
+-------------------------99106----------------------------begin
+
+--GAME_BETTYPE_STATUS
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual), 99106,	33,	10,	11,	1,	 sysdate,	 sysdate,	20000000,	'33_10_11',	35,	'zhongsan',	'zhixuan',	'danshi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	10,	34,	1, sysdate,	 sysdate,	20000000,	'33_10_34',	35,	'zhongsan',	'zhixuan',	'kuadu',	'����',	'ֱѡ',	'���');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	11,	35,	1,	 sysdate,	 sysdate,	6660670,	'33_11_35',	35,	'zhongsan',	'zuxuan',	'zusan',	'����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	11,	37,	1,	 sysdate, sysdate,	6666700,	'33_11_37',	35,	'zhongsan',	'zuxuan',	'hunhezuxuan',	'����',	'��ѡ',	'�����ѡ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	11,	62,	1,	 sysdate, sysdate,	6660670,	'33_11_62',	35,	'zhongsan',	'zuxuan',	'zusandanshi',	'����',	'��ѡ',	'������ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	12,	40,	1,	 sysdate, sysdate,	73000,	'33_12_40',	35,	'zhongsan',	'budingwei',	'yimabudingwei',	'����','����λ',	'һ�벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	12,	41,	1,	 sysdate, sysdate,	370400,	'33_12_41',	35,	'zhongsan',	'budingwei',	'ermabudingwei',	'����',	'����λ',	'���벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	10,	10,	1,	 sysdate, sysdate,	20000000,	'33_10_10',	35,	'zhongsan',	'zhixuan',	'fushi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	10,	33,	1,	 sysdate, sysdate,	20000000,	'33_10_33',	35,	'zhongsan',	'zhixuan',	'hezhi',	'����','ֱѡ',	'ֱѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	11,	36,	1,	 sysdate, sysdate,	3333300,	'33_11_36',	35,	'zhongsan',	'zuxuan',	'zuliu', '����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	11,	33,	1,	 sysdate, sysdate,	6666700,	'33_11_33',	35,	'zhongsan',	'zuxuan',	'hezhi',	'����',	'��ѡ',	'��ѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	11,	39,	1,	 sysdate, sysdate,	6666700,	'33_11_39',	35,	'zhongsan',	'zuxuan',	'baodan',	'����',	'��ѡ',	'��ѡ����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99106,	33,	11,	63,	1,	 sysdate, sysdate,	3330330,	'33_11_63',	35,	'zhongsan',	'zuxuan',	'zuliudanshi',	'����',	'��ѡ',	'������ʽ');
+
+
+
+
+--GAME_BETTYPE_ASSIST
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99106),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99106),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99106),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99106),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99106),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99106),	 sysdate, sysdate,	3333300,	63);
+
+
+
+--GAME_AWARD
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_10', 15000000, 35, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_11', 15000000, 35, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_33', 15000000, 35, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_34', 15000000, 35, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_33', 0, 35, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_33_62', 5000000, 35, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_33_63', 2500000, 35, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_35', 5000000, 35, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_36', 2500000, 35, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_37', 0, 35, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_37_62', 5000000, 35, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_37_63', 2500000, 35, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_39', 0, 35, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_39_62', 5000000, 35, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_39_63', 2500000, 35, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_62', 5000000, 35, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_63', 2500000, 35, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_12_40', 60000, 35, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 1300, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_12_41', 275000, 35, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_10', 18000000, 33, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_11', 18000000, 33, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_33', 18000000, 33, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_34', 18000000, 33, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_33', 0, 33, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_33_62', 6000000, 33, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_33_63', 3000000, 33, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_35', 6000000, 33, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_36', 3000000, 33, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_37', 0, 33, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_37_62', 6000000, 33, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_37_63', 3000000, 33, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_39', 0, 33, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_39_62', 6000000, 33, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_39_63', 3000000, 33, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_62', 6000000, 33, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_63', 3000000, 33, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_12_40', 66000, 33, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_12_41', 330000, 33, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_10', 17000000, 34, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_11', 17000000, 34, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_33', 17000000, 34, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_10_34', 17000000, 34, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_33', 0, 34, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_33_62', 5700000, 34, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_33_63', 2800000, 34, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_35', 5700000, 34, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_36', 2800000, 34, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_37', 0, 34, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_37_62', 5700000, 34, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_37_63', 2800000, 34, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_39', 0, 34, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_39_62', 5700000, 34, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_39_63', 2800000, 34, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_62', 5700000, 34, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_11_63', 2800000, 34, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_12_40', 66000, 34, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99106, '33_12_41', 310000, 34, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_12_41', null);
+
+
+
+
+
+
+
+
+--game_help
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_10_10', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.26.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_10_11', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_10_33', '����ѡ��һ����ֵ�����¿�����������λ����֮�ͣ�����"bonus"Ԫ', 'Ͷע����ֵ1</br>������*001*,*010*,*100*</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_10_34', '��ѡ��ֵ���ڿ����������3λ�������С�������֮���Ϊ�н�������"bonus"Ԫ', 'Ͷע�����8</br>������(1)��������08x������˳Ѱ��,x��9;</br>(2)��������19x������˳Ѱ����x��0</br>����"bonus"Ԫ', '18-JUL-14 04.39.54.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_11_33', '����ѡ��һ����ֵ�����¿�����������λ����֮��(�������Ӻ�)���������"bonus_62"Ԫ', 'Ͷע����ֵ6</br>������(1) *015*������˳�򣩣�����"bonus_63"Ԫ</br>(2) *033*������˳�򣩣�����"bonus_62"Ԫ', '18-JUL-14 04.40.13.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_11_35', '��0-9��ѡ��2�����������ע����ѡ�����뿪�����������λ��ͬ����˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*��1Ϊ���غţ�2Ϊ���ţ�</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_11_36', '��0-9������ѡ��3���������һע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_11_37', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ���Ϊ�н����������"bonus_62"Ԫ', 'Ͷע��(001),(123)</br>������(1)*001*������˳�򣩣�����"bonus_62"Ԫ��</br>(2)**123������˳�򣩣�����"bonus_63"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_11_39', '��0-9������ѡ��1���������룬�������������λ������1λ����ѡ����������ͬ(�������Ӻ�)����Ϊ�н����������"bonus_62"Ԫ', 'Ͷע������3</br>������(1) *3xx*����*33x*������˳��,����"bonus_62"Ԫ</br>(2) *3xy*������˳��,����"bonus_63"Ԫ</br>ע��x��y��3', '18-JUL-14 04.40.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_11_62', '�ֶ�������룬�������� 1 ����λ�����롣(�������ֵ����ж���������ͬ),˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_11_63', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_12_40', '��0-9������ѡ��1������Ͷע�����¿�����������λ�а���������룬�������н�������"bonus"Ԫ', 'Ͷע��1</br>������*1xx*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.31.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99106, '33_12_41', '��0-9������ѡ��2������Ͷע�����¿�����������λ�а�����2�����룬�������н�������"bonus"Ԫ', 'Ͷע��1��2</br>������*12x*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.39.56.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+
+
+
+
+
+--game_multiple
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_10_10', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_10_11', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_10_33', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_10_34', 222, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_11_33', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_11_35', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_11_36', 1333, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_11_37', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_11_39', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_11_62', 666, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_11_63', 1333, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_12_40', 60606, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99106, '33_12_41', 12121, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+
+
+
+
+-------------------------99106----------------------------end
+
+
+
+
+-------------------------99111----------------------------begin
+
+--GAME_BETTYPE_STATUS
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual), 99111,	33,	10,	11,	1,	 sysdate,	 sysdate,	20000000,	'33_10_11',	35,	'zhongsan',	'zhixuan',	'danshi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	10,	34,	1, sysdate,	 sysdate,	20000000,	'33_10_34',	35,	'zhongsan',	'zhixuan',	'kuadu',	'����',	'ֱѡ',	'���');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	11,	35,	1,	 sysdate,	 sysdate,	6660670,	'33_11_35',	35,	'zhongsan',	'zuxuan',	'zusan',	'����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	11,	37,	1,	 sysdate, sysdate,	6666700,	'33_11_37',	35,	'zhongsan',	'zuxuan',	'hunhezuxuan',	'����',	'��ѡ',	'�����ѡ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	11,	62,	1,	 sysdate, sysdate,	6660670,	'33_11_62',	35,	'zhongsan',	'zuxuan',	'zusandanshi',	'����',	'��ѡ',	'������ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	12,	40,	1,	 sysdate, sysdate,	73000,	'33_12_40',	35,	'zhongsan',	'budingwei',	'yimabudingwei',	'����','����λ',	'һ�벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	12,	41,	1,	 sysdate, sysdate,	370400,	'33_12_41',	35,	'zhongsan',	'budingwei',	'ermabudingwei',	'����',	'����λ',	'���벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	10,	10,	1,	 sysdate, sysdate,	20000000,	'33_10_10',	35,	'zhongsan',	'zhixuan',	'fushi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	10,	33,	1,	 sysdate, sysdate,	20000000,	'33_10_33',	35,	'zhongsan',	'zhixuan',	'hezhi',	'����','ֱѡ',	'ֱѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	11,	36,	1,	 sysdate, sysdate,	3333300,	'33_11_36',	35,	'zhongsan',	'zuxuan',	'zuliu', '����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	11,	33,	1,	 sysdate, sysdate,	6666700,	'33_11_33',	35,	'zhongsan',	'zuxuan',	'hezhi',	'����',	'��ѡ',	'��ѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	11,	39,	1,	 sysdate, sysdate,	6666700,	'33_11_39',	35,	'zhongsan',	'zuxuan',	'baodan',	'����',	'��ѡ',	'��ѡ����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99111,	33,	11,	63,	1,	 sysdate, sysdate,	3330330,	'33_11_63',	35,	'zhongsan',	'zuxuan',	'zuliudanshi',	'����',	'��ѡ',	'������ʽ');
+
+
+
+
+--GAME_BETTYPE_ASSIST
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99111),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99111),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99111),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99111),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99111),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99111),	 sysdate, sysdate,	3333300,	63);
+
+
+
+--GAME_AWARD
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_10', 15000000, 43, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_11', 15000000, 43, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_33', 15000000, 43, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_34', 15000000, 43, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_33', 0, 43, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_33_62', 5000000, 43, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_33_63', 2500000, 43, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_35', 5000000, 43, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_36', 2500000, 43, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_37', 0, 43, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_37_62', 5000000, 43, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_37_63', 2500000, 43, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_39', 0, 43, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_39_62', 5000000, 43, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_39_63', 2500000, 43, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_62', 5000000, 43, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_63', 2500000, 43, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_12_40', 60000, 43, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 1300, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_12_41', 275000, 43, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_10', 18000000, 41, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_11', 18000000, 41, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_33', 18000000, 41, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_34', 18000000, 41, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_33', 0, 41, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_33_62', 6000000, 41, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_33_63', 3000000, 41, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_35', 6000000, 41, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_36', 3000000, 41, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_37', 0, 41, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_37_62', 6000000, 41, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_37_63', 3000000, 41, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_39', 0, 41, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_39_62', 6000000, 41, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_39_63', 3000000, 41, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_62', 6000000, 41, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_63', 3000000, 41, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_12_40', 66000, 41, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_12_41', 330000, 41, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_10', 17000000, 42, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_11', 17000000, 42, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_33', 17000000, 42, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_10_34', 17000000, 42, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_33', 0, 42, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_33_62', 5700000, 42, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_33_63', 2800000, 42, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_35', 5700000, 42, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_36', 2800000, 42, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_37', 0, 42, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_37_62', 5700000, 42, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_37_63', 2800000, 42, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_39', 0, 42, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_39_62', 5700000, 42, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_39_63', 2800000, 42, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_62', 5700000, 42, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_11_63', 2800000, 42, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_12_40', 66000, 42, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99111, '33_12_41', 310000, 42, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_12_41', null);
+
+
+
+
+
+
+
+
+--game_help
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_10_10', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.26.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_10_11', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_10_33', '����ѡ��һ����ֵ�����¿�����������λ����֮�ͣ�����"bonus"Ԫ', 'Ͷע����ֵ1</br>������*001*,*010*,*100*</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_10_34', '��ѡ��ֵ���ڿ����������3λ�������С�������֮���Ϊ�н�������"bonus"Ԫ', 'Ͷע�����8</br>������(1)��������08x������˳Ѱ��,x��9;</br>(2)��������19x������˳Ѱ����x��0</br>����"bonus"Ԫ', '18-JUL-14 04.39.54.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_11_33', '����ѡ��һ����ֵ�����¿�����������λ����֮��(�������Ӻ�)���������"bonus_62"Ԫ', 'Ͷע����ֵ6</br>������(1) *015*������˳�򣩣�����"bonus_63"Ԫ</br>(2) *033*������˳�򣩣�����"bonus_62"Ԫ', '18-JUL-14 04.40.13.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_11_35', '��0-9��ѡ��2�����������ע����ѡ�����뿪�����������λ��ͬ����˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*��1Ϊ���غţ�2Ϊ���ţ�</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_11_36', '��0-9������ѡ��3���������һע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_11_37', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ���Ϊ�н����������"bonus_62"Ԫ', 'Ͷע��(001),(123)</br>������(1)*001*������˳�򣩣�����"bonus_62"Ԫ��</br>(2)**123������˳�򣩣�����"bonus_63"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_11_39', '��0-9������ѡ��1���������룬�������������λ������1λ����ѡ����������ͬ(�������Ӻ�)����Ϊ�н����������"bonus_62"Ԫ', 'Ͷע������3</br>������(1) *3xx*����*33x*������˳��,����"bonus_62"Ԫ</br>(2) *3xy*������˳��,����"bonus_63"Ԫ</br>ע��x��y��3', '18-JUL-14 04.40.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_11_62', '�ֶ�������룬�������� 1 ����λ�����롣(�������ֵ����ж���������ͬ),˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_11_63', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_12_40', '��0-9������ѡ��1������Ͷע�����¿�����������λ�а���������룬�������н�������"bonus"Ԫ', 'Ͷע��1</br>������*1xx*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.31.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99111, '33_12_41', '��0-9������ѡ��2������Ͷע�����¿�����������λ�а�����2�����룬�������н�������"bonus"Ԫ', 'Ͷע��1��2</br>������*12x*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.39.56.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+
+
+
+
+
+--game_multiple
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_10_10', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_10_11', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_10_33', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_10_34', 222, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_11_33', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_11_35', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_11_36', 1333, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_11_37', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_11_39', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_11_62', 666, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_11_63', 1333, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_12_40', 60606, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99111, '33_12_41', 12121, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+
+
+
+
+-------------------------99111----------------------------end
+
+
+
+
+
+
+-------------------------99112----------------------------begin
+
+--GAME_BETTYPE_STATUS
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual), 99112,	33,	10,	11,	1,	 sysdate,	 sysdate,	20000000,	'33_10_11',	35,	'zhongsan',	'zhixuan',	'danshi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	10,	34,	1, sysdate,	 sysdate,	20000000,	'33_10_34',	35,	'zhongsan',	'zhixuan',	'kuadu',	'����',	'ֱѡ',	'���');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	11,	35,	1,	 sysdate,	 sysdate,	6660670,	'33_11_35',	35,	'zhongsan',	'zuxuan',	'zusan',	'����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	11,	37,	1,	 sysdate, sysdate,	6666700,	'33_11_37',	35,	'zhongsan',	'zuxuan',	'hunhezuxuan',	'����',	'��ѡ',	'�����ѡ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	11,	62,	1,	 sysdate, sysdate,	6660670,	'33_11_62',	35,	'zhongsan',	'zuxuan',	'zusandanshi',	'����',	'��ѡ',	'������ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	12,	40,	1,	 sysdate, sysdate,	73000,	'33_12_40',	35,	'zhongsan',	'budingwei',	'yimabudingwei',	'����','����λ',	'һ�벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	12,	41,	1,	 sysdate, sysdate,	370400,	'33_12_41',	35,	'zhongsan',	'budingwei',	'ermabudingwei',	'����',	'����λ',	'���벻��λ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	10,	10,	1,	 sysdate, sysdate,	20000000,	'33_10_10',	35,	'zhongsan',	'zhixuan',	'fushi',	'����',	'ֱѡ',	'��ʽ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	10,	33,	1,	 sysdate, sysdate,	20000000,	'33_10_33',	35,	'zhongsan',	'zhixuan',	'hezhi',	'����','ֱѡ',	'ֱѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	11,	36,	1,	 sysdate, sysdate,	3333300,	'33_11_36',	35,	'zhongsan',	'zuxuan',	'zuliu', '����',	'��ѡ',	'����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	11,	33,	1,	 sysdate, sysdate,	6666700,	'33_11_33',	35,	'zhongsan',	'zuxuan',	'hezhi',	'����',	'��ѡ',	'��ѡ��ֵ');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	11,	39,	1,	 sysdate, sysdate,	6666700,	'33_11_39',	35,	'zhongsan',	'zuxuan',	'baodan',	'����',	'��ѡ',	'��ѡ����');
+insert into GAME_BETTYPE_STATUS values ((SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual),	99112,	33,	11,	63,	1,	 sysdate, sysdate,	3330330,	'33_11_63',	35,	'zhongsan',	'zuxuan',	'zuliudanshi',	'����',	'��ѡ',	'������ʽ');
+
+
+
+
+--GAME_BETTYPE_ASSIST
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99112),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_37' and lotteryid=99112),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99112),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_33' and lotteryid=99112),	 sysdate, sysdate,	3333300,	63);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99112),	 sysdate, sysdate,	6666700,	62);
+insert into GAME_BETTYPE_ASSIST values ((select max(id)+1 FROM	GAME_BETTYPE_ASSIST),	(SELECT id from GAME_BETTYPE_STATUS where BET_TYPE_CODE='33_11_39' and lotteryid=99112),	 sysdate, sysdate,	3333300,	63);
+
+
+
+--GAME_AWARD
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_10', 15000000, 58, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_11', 15000000, 58, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_33', 15000000, 58, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_34', 15000000, 58, '23-NOV-14 08.59.47.000 PM', '23-NOV-14 08.59.47.000 PM', 1, 2000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_33', 0, 58, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_33_62', 5000000, 58, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_33_63', 2500000, 58, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_35', 5000000, 58, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_36', 2500000, 58, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_37', 0, 58, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_37_62', 5000000, 58, '23-NOV-14 08.59.48.000 PM', '23-NOV-14 08.59.48.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_37_63', 2500000, 58, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_39', 0, 58, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_39_62', 5000000, 58, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_39_63', 2500000, 58, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_62', 5000000, 58, '23-NOV-14 08.59.49.000 PM', '23-NOV-14 08.59.49.000 PM', 1, 2000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_63', 2500000, 58, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_12_40', 60000, 58, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 1300, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_12_41', 275000, 58, '23-NOV-14 08.59.53.000 PM', '23-NOV-14 08.59.53.000 PM', 1, 2000, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_10', 18000000, 56, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_11', 18000000, 56, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_33', 18000000, 56, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_34', 18000000, 56, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_33', 0, 56, '23-NOV-14 09.00.07.000 PM', '23-NOV-14 09.00.07.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_33_62', 6000000, 56, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_33_63', 3000000, 56, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_35', 6000000, 56, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_36', 3000000, 56, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_37', 0, 56, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_37_62', 6000000, 56, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_37_63', 3000000, 56, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_39', 0, 56, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_39_62', 6000000, 56, '23-NOV-14 09.00.08.000 PM', '23-NOV-14 09.00.08.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_39_63', 3000000, 56, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_62', 6000000, 56, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_63', 3000000, 56, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_12_40', 66000, 56, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_12_41', 330000, 56, '23-NOV-14 09.00.09.000 PM', '23-NOV-14 09.00.09.000 PM', 1, 500, '33_12_41', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_10', 17000000, 57, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_10', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_11', 17000000, 57, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_11', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_33', 17000000, 57, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_10_34', 17000000, 57, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_10_34', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_33', 0, 57, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_33_62', 5700000, 57, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_33_63', 2800000, 57, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_33', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_35', 5700000, 57, '23-NOV-14 08.59.33.000 PM', '23-NOV-14 08.59.33.000 PM', 1, 1000, '33_11_35', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_36', 2800000, 57, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_36', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_37', 0, 57, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_37_62', 5700000, 57, '23-NOV-14 08.59.36.000 PM', '23-NOV-14 08.59.36.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_37_63', 2800000, 57, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_37', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_39', 0, 57, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_39_62', 5700000, 57, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_39_63', 2800000, 57, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_39', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_62', 5700000, 57, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_62', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_11_63', 2800000, 57, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_11_63', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_12_40', 66000, 57, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 500, '33_12_40', null);
+
+insert into game_award (ID, LOTTERYID, BET_TYPE_CODE, ACTUAL_BONUS, AWARD_GROUP_ID, CREATE_TIME, UPDATE_TIME, STATUS, RET_VALUE, BET_TYPE_CODE_PARENT, ACTUAL_BONUS_DOWN)
+values ((SELECT SEQ_GAME_AWARD.Nextval from duall), 99112, '33_12_41', 310000, 57, '23-NOV-14 08.59.37.000 PM', '23-NOV-14 08.59.37.000 PM', 1, 1000, '33_12_41', null);
+
+
+
+
+
+
+
+
+--game_help
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_10_10', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.26.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_10_11', 'ÿλ����ѡ��һ�����룬���¿������������λ�������λ�ö���Ӧ���н�������"bonus"Ԫ', 'Ͷע��*456*</br>������*456*</br>����"bonus"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.353 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_10_33', '����ѡ��һ����ֵ�����¿�����������λ����֮�ͣ�����"bonus"Ԫ', 'Ͷע����ֵ1</br>������*001*,*010*,*100*</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_10_34', '��ѡ��ֵ���ڿ����������3λ�������С�������֮���Ϊ�н�������"bonus"Ԫ', 'Ͷע�����8</br>������(1)��������08x������˳Ѱ��,x��9;</br>(2)��������19x������˳Ѱ����x��0</br>����"bonus"Ԫ', '18-JUL-14 04.39.54.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_11_33', '����ѡ��һ����ֵ�����¿�����������λ����֮��(�������Ӻ�)���������"bonus_62"Ԫ', 'Ͷע����ֵ6</br>������(1) *015*������˳�򣩣�����"bonus_63"Ԫ</br>(2) *033*������˳�򣩣�����"bonus_62"Ԫ', '18-JUL-14 04.40.13.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_11_35', '��0-9��ѡ��2�����������ע����ѡ�����뿪�����������λ��ͬ����˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*��1Ϊ���غţ�2Ϊ���ţ�</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_11_36', '��0-9������ѡ��3���������һע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.28.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_11_37', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ���Ϊ�н����������"bonus_62"Ԫ', 'Ͷע��(001),(123)</br>������(1)*001*������˳�򣩣�����"bonus_62"Ԫ��</br>(2)**123������˳�򣩣�����"bonus_63"Ԫ', '18-JUL-14 04.40.10.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_11_39', '��0-9������ѡ��1���������룬�������������λ������1λ����ѡ����������ͬ(�������Ӻ�)����Ϊ�н����������"bonus_62"Ԫ', 'Ͷע������3</br>������(1) *3xx*����*33x*������˳��,����"bonus_62"Ԫ</br>(2) *3xy*������˳��,����"bonus_63"Ԫ</br>ע��x��y��3', '18-JUL-14 04.40.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_11_62', '�ֶ�������룬�������� 1 ����λ�����롣(�������ֵ����ж���������ͬ),˳���ޣ�����"bonus"Ԫ', 'Ͷע��*112*</br>������*112*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_11_63', '�ֶ�������룬3������Ϊһע����ѡ�����뿪�����������λ��ͬ��˳���ޣ�����"bonus"Ԫ', 'Ͷע��*123*</br>������*123*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.41.14.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_12_40', '��0-9������ѡ��1������Ͷע�����¿�����������λ�а���������룬�������н�������"bonus"Ԫ', 'Ͷע��1</br>������*1xx*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.40.31.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+insert into game_help (ID, LOTTERYID, BET_TYPE_CODE, GAME_PROMPT_DES, GAME_EXAMPLES_DES, CRETEAT_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_HELP.Nextval from dual), 99112, '33_12_41', '��0-9������ѡ��2������Ͷע�����¿�����������λ�а�����2�����룬�������н�������"bonus"Ԫ', 'Ͷע��1��2</br>������*12x*������˳��</br>����"bonus"Ԫ', '18-JUL-14 04.39.56.000 PM', '13-JAN-15 04.12.58.354 PM');
+
+
+
+
+
+
+--game_multiple
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_10_10', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_10_11', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_10_33', 222, '12-JUN-14 04.20.52.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_10_34', 222, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_11_33', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_11_35', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_11_36', 1333, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_11_37', 666, '12-JUN-14 04.20.53.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_11_39', 666, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_11_62', 666, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_11_63', 1333, '12-JUN-14 04.21.03.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_12_40', 60606, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+insert into game_multiple (ID, LOTTERYID, BET_TYPE_CODE, MAX_MULTIPLE, CREATE_TIME, UPDATE_TIME)
+values ((SELECT SEQ_GAME_MULTIPLE_CHECK.Nextval from dual), 99112, '33_12_41', 12121, '12-JUN-14 04.20.54.000 PM', '19-DEC-14 04.23.47.345 PM');
+
+
+
+
+
+-------------------------99112----------------------------end
+
+
+-----�ر���������-------
+
+
+update GAME_BETTYPE_STATUS set status=0 where BET_TYPE_CODE like '33%' and game_group_code=33

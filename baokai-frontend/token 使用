@@ -1,0 +1,9 @@
+注：表单token 使用实例
+		if($this->_request->isPost()) {
+			if($this->_request->getPost('token') == $this->_token->performance[$this->_request->getControllerName()]["提交token的action"]['token']) {
+				echo "success"; //成功执行的逻辑
+				$this->_token->performance[$this->_request->getControllerName()]["index"]['token'] = null ;
+			}else{
+				echo "fail";//失败执行的逻辑
+			}
+		}	

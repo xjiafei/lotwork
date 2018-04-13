@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameControlEvent">
+	<resultMap id="GameControlEventResult" type="com.winterframework.firefrog.game.dao.vo.GameControlEvent">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameControlEventColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	START_ISSUE_CODE as startIssueCode,
+	        	END_ISSUE_CODE as endIssueCode,
+	        	SALE_START_TIME as saleStartTime,
+	        	SALE_END_TIME as saleEndTime,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	ENENT_TYPE as enentType,
+	        	WARN_ISSUE_ID as warnIssueId,
+	        	MESSAGE as message,
+	        	CREATOR as creator,
+	        	PARAMS as params
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameControlEvent" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			     SELECT   SEQ_GAME_CONTROL_EVENT_ID.Nextval from dual
+   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_CONTROL_EVENT (
+	        	ID ,
+	        	LOTTERYID ,
+	        	START_ISSUE_CODE ,
+	        	END_ISSUE_CODE ,
+	        	SALE_START_TIME ,
+	        	SALE_END_TIME ,
+	        	STATUS ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	ENENT_TYPE ,
+	        	WARN_ISSUE_ID,
+	        	MESSAGE,
+	        	CREATOR,
+	        	PARAMS
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{startIssueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{endIssueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{saleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{saleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{enentType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{warnIssueId,javaType=long,jdbcType=DECIMAL},
+	        	#{message,javaType=string,jdbcType=VARCHAR} ,
+	        	#{creator,javaType=long,jdbcType=DECIMAL} ,
+	        	#{params,javaType=string,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameControlEvent">
+	    <![CDATA[
+	        UPDATE GAME_CONTROL_EVENT SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        START_ISSUE_CODE = #{startIssueCode,javaType=long,jdbcType=DECIMAL} ,
+		        END_ISSUE_CODE = #{endIssueCode,javaType=long,jdbcType=DECIMAL} ,
+		        SALE_START_TIME = #{saleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SALE_END_TIME = #{saleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        ENENT_TYPE = #{enentType,javaType=long,jdbcType=DECIMAL} ,
+		        WARN_ISSUE_ID=#{warnIssueId,javaType=long,jdbcType=DECIMAL},
+		        MESSAGE = #{message,javaType=string,jdbcType=DECIMAL},
+		        CREATOR = #{creator,javaType=long,jdbcType=DECIMAL} ,
+		        PARAMS = #{params,javaType=string,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_CONTROL_EVENT where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameControlEventResult" flushCache="false">
+			select <include refid="gameControlEventColumns" />
+		    <![CDATA[
+			    from GAME_CONTROL_EVENT 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameControlEventResult" flushCache="false">
+			select <include refid="gameControlEventColumns" />
+			    from GAME_CONTROL_EVENT 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameControlEventDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(startIssueCode)">
+				and START_ISSUE_CODE = #{startIssueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(endIssueCode)">
+				and END_ISSUE_CODE = #{endIssueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(saleStartTime)">
+				and SALE_START_TIME = #{saleStartTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(saleEndTime)">
+				and SALE_END_TIME = #{saleEndTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(enentType)">
+				and ENENT_TYPE = #{enentType}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameControlEventResult"  flushCache="false">
+    	select <include refid="gameControlEventColumns" />
+	    from GAME_CONTROL_EVENT 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_CONTROL_EVENT 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_CONTROL_EVENT 
+		<include refid="gameControlEventDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameControlEventResult">
+    	select <include refid="gameControlEventColumns" />
+	    from GAME_CONTROL_EVENT 
+		<include refid="gameControlEventDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<select id="queryEventByCondition" parameterType="hashmap" resultMap="GameControlEventResult">
+		select <include refid="gameControlEventColumns" />
+		from GAME_CONTROL_EVENT
+		where 1=1 
+		<if test="@Ognl@isNotEmpty(lotteryid)">
+			and LOTTERYID = #{lotteryid}
+		</if>
+	      <if test="@Ognl@isNotEmpty(startIssueCode)">
+			and START_ISSUE_CODE = #{startIssueCode}
+		</if>
+	      <if test="@Ognl@isNotEmpty(endIssueCode)">
+			and END_ISSUE_CODE = #{endIssueCode}
+		</if>
+	</select>
+	
+	
+		<update id="retryByLotteryIssueCode"  parameterType="hashmap">
+	    <![CDATA[
+	        UPDATE GAME_CONTROL_EVENT SET		       
+		        STATUS = 0 
+	        WHERE 
+		        LOTTERYID = #{lotteryid} 
+		        and START_ISSUE_CODE = #{issueCode} 
+		        and STATUS = 3 and ENENT_TYPE=2
+	    ]]> 
+		</update>
+	<update id="changeStatus"  parameterType="hashmap"> 
+       UPDATE GAME_CONTROL_EVENT SET		       
+        STATUS = #{toStatus},UPDATE_TIME= #{curDate}
+       WHERE LOTTERYID = #{lotteryId} 
+        and START_ISSUE_CODE = #{startIssueCode} 
+        and ENENT_TYPE=#{eventType}
+        and STATUS =#{fromStatus}
+        <if test="@Ognl@isNotEmpty(realLotteryId)">
+			and END_ISSUE_CODE = #{realLotteryId}
+		</if>
+	</update>
+	<select id="getUnexecByLotteryIdAndIssueCodeAndEventType" resultMap="GameControlEventResult">
+    	select <include refid="gameControlEventColumns" /> 
+	     from GAME_CONTROL_EVENT 
+	    where lotteryid=#{lotteryId} 
+	      and start_issue_code=#{issueCode}
+	      and end_issue_code=#{realLotteryId} 
+	      and enent_type=#{eventType}  
+	      and status=0
+	      and rownum=1
+    </select>
+</mapper>

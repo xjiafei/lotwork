@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GamePlanDetail">
+	<resultMap id="GamePlanDetailResult" type="com.winterframework.firefrog.game.dao.vo.GamePlanDetail">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gamePlanDetailColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	PLANID as planid,
+	        	ISSUE_CODE as issueCode,
+	        	MUTIPLE as mutiple,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	CANCEL_TIME as cancelTime,
+	        	cancel_fee as cancelFee,
+	        	RUM_TIME as rumTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GamePlanDetail" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_PLAN_DETAIL_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_PLAN_DETAIL (
+	        	ID ,
+	        	PLANID ,
+	        	ISSUE_CODE ,
+	        	MUTIPLE ,
+	        	TOTAMOUNT ,
+	        	STATUS ,
+	        	CREATE_TIME ,
+	        	CANCEL_TIME ,
+	        	CANCEL_FEE,
+	        	RUM_TIME
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{planid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{mutiple,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totamount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{cancelTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{cancelFee,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rumTime,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GamePlanDetail">
+	    <![CDATA[
+	        UPDATE GAME_PLAN_DETAIL SET
+		        PLANID = #{planid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        MUTIPLE = #{mutiple,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAMOUNT = #{totamount,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=integer,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CANCEL_TIME = #{cancelTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CANCEL_FEE = #{cancelFee,javaType=long,jdbcType=DECIMAL} ,
+	        	RUM_TIME = #{rumTime,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_PLAN_DETAIL where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    
+	    <select id="getGamePlanDetailByPlanIdAndIssueCode" parameterType="hashMap"  resultMap="GamePlanDetailResult">
+	    	select <include refid="gamePlanDetailColumns" />
+		    <![CDATA[
+			    from GAME_PLAN_DETAIL 
+		        where 
+		        ISSUE_CODE = #{issueCode}
+		        and PLANID = #{planid}
+		     ]]>
+	    </select>
+	    <select id="getById" parameterType="long" resultMap="GamePlanDetailResult" flushCache="false">
+			select <include refid="gamePlanDetailColumns" />
+		    <![CDATA[
+			    from GAME_PLAN_DETAIL 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GamePlanDetailResult" flushCache="false">
+			select <include refid="gamePlanDetailColumns" />
+			    from GAME_PLAN_DETAIL 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gamePlanDetailDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(planid)">
+				and PLANID = #{planid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mutiple)">
+				and MUTIPLE = #{mutiple}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totamount)">
+				and TOTAMOUNT = #{totamount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(cancelTime)">
+				and CANCEL_TIME = #{cancelTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(rumTime)">
+				and RUM_TIME = #{rumTime}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GamePlanDetailResult"  flushCache="false">
+    	select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_PLAN_DETAIL 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_PLAN_DETAIL 
+		<include refid="gamePlanDetailDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GamePlanDetailResult">
+    	select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+		<include refid="gamePlanDetailDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<!-- 根据追号计划ID来查询 -->
+	<select id="getPlanDetailsByPlanId" parameterType="long" resultMap="GamePlanDetailResult">
+	select
+		ID as id,
+		PLANID as planid,
+		ISSUE_CODE as issueCode,
+		(select web_issue_code from game_issue g where g.issue_code=y.ISSUE_CODE) as webIssueCode,
+		MUTIPLE as mutiple,
+		TOTAMOUNT as totamount,
+		STATUS as status,
+		CREATE_TIME as createTime,
+		CANCEL_TIME as cancelTime,
+		cancel_fee as cancelFee,
+		RUM_TIME as rumTime
+	from GAME_PLAN_DETAIL y
+	where y.PLANID = #{planid}
+	order by y.ISSUE_CODE
+    </select>
+    
+    <select id="getLastPlanCanStopTime" parameterType="long" resultType="java.util.Date">
+     <![CDATA[
+    	select sale_end_Time from game_issue where status<2 and issue_code=(   
+		select issue_code from(    
+		select issue_code from game_plan_detail where PLANID = #{planid} and status=0 order by issue_code desc) where rownum=1)]]>
+    </select>
+    <select id="getUnExeuAndIssueBeforeCurrentPlanDetailsCountByPlanId" parameterType="long" resultMap="GamePlanDetailResult">
+    	select count(1)
+	    from GAME_PLAN_DETAIL g left join game_issue i on g.issue_code=i.issue_code
+	    <![CDATA[
+		where i.status<2 and g.PLANID = #{planId} and g.status=0 and i.SALE_END_TIME<=SYSDATE]]>
+    </select>
+    
+    <select id="getUnExeuPlanDetailsByPlanId" parameterType="long" resultMap="GamePlanDetailResult"> 
+    	select 	g.ID as id,
+		g.PLANID as planid,
+		g.ISSUE_CODE as issueCode,
+		(select web_issue_code from game_issue s where s.issue_code=g.ISSUE_CODE) as webIssueCode,
+		g.MUTIPLE as mutiple,
+		g.TOTAMOUNT as totamount,
+		g.STATUS as status,
+		g.CREATE_TIME as createTime,
+		g.cancel_fee as cancelFee,
+		g.CANCEL_TIME as cancelTime,
+		g.RUM_TIME as rumTime
+	    from GAME_PLAN_DETAIL g left join game_issue i on g.issue_code=i.issue_code
+	    <![CDATA[
+		where g.PLANID = #{planId} and g.status=0 and i.SALE_START_TIME>SYSDATE]]>
+    </select>
+     <select id="getUnExeuPlanDetailsByPlanIdDate" parameterType="hashMap" resultMap="GamePlanDetailResult"> 
+    	select 	g.ID as id,
+		g.PLANID as planid,
+		g.ISSUE_CODE as issueCode,
+		(select web_issue_code from game_issue s where s.issue_code=g.ISSUE_CODE) as webIssueCode,
+		g.MUTIPLE as mutiple,
+		g.TOTAMOUNT as totamount,
+		g.STATUS as status,
+		g.CREATE_TIME as createTime,
+		g.cancel_fee as cancelFee,
+		g.CANCEL_TIME as cancelTime,
+		g.RUM_TIME as rumTime
+	    from GAME_PLAN_DETAIL g left join game_issue i on g.issue_code=i.issue_code
+	    <![CDATA[
+		where g.PLANID = #{planId} and g.status=0 and i.SALE_START_TIME>#{date}]]>
+    </select>
+    <select id="queryGamePlanDetailByPlanID" parameterType="hashMap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+		where PLANID = #{planId} and issue_code = #{issueCode} and status = 0
+	</select>
+	
+	<select id="queryGamePlanDetailByPlanIDForUndo" parameterType="hashMap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+		where PLANID = #{planId} and issue_code = #{issueCode}
+	</select>
+	
+	 <update id="updateGamePlanDetailByPlanIdAndIssueCode" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL SET
+			STATUS = #{status},
+			CANCEL_TIME = #{cancelTime},
+			CANCEL_USER = #{cancelUser}
+		WHERE
+		   PLANID = #{planid} 
+		   AND STATUS = 4
+		   <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	</update>
+	
+	<update id="updateGamePlanDetailStatusByPlanIdAndIssueCode" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL SET
+			STATUS = #{status}
+		WHERE
+		   PLANID = #{planid} 
+		   AND STATUS = 0
+		   <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE in 
+				<foreach item="item" index="index" collection="issueCode" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			
+	</update>
+	
+	<update id="updateReservationCalledErrorStatusByPlanIdAndIssueCode" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL SET
+			STATUS = #{status},
+			CANCEL_TIME = sysdate
+		WHERE
+		   PLANID = #{planid} 
+		   AND STATUS = 5
+		   AND ISSUE_CODE = #{issueCode}
+			
+	</update>
+	
+	<update id="updateGamePlanDetailStatusByPlanIdAndIssueCodeForOrderCancel" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL SET
+			STATUS = #{status}
+		WHERE
+		   PLANID = #{planid} 
+		   AND STATUS = 1
+		   <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE in 
+				<foreach item="item" index="index" collection="issueCode" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			
+	</update>
+	
+   	<update id="updateGamePlanDetailByPlanId" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL p SET
+			p.STATUS = #{status},
+			p.CANCEL_TIME = #{cancelTime},
+			p.CANCEL_USER = #{cancelUser}
+		WHERE
+		   p.PLANID = #{planid} 
+		   AND p.STATUS = 0
+		   and (select g.SALE_START_TIME from game_issue g where g.issue_code = p.issue_code)>SYSDATE
+		   <if test="@Ognl@isNotEmpty(issueCode)">
+				and p.ISSUE_CODE = #{issueCode}
+			</if>
+	</update>
+	<update id="updateGamePlanDetailByPlanIdCancel" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL p SET
+			p.STATUS = #{status},
+			p.CANCEL_TIME = #{cancelTime},
+			p.CANCEL_USER = #{cancelUser}
+		WHERE
+		   p.PLANID = #{planid} 
+		   AND p.STATUS = 5
+		   and (select g.SALE_START_TIME from game_issue g where g.issue_code = p.issue_code)>SYSDATE
+		   <if test="@Ognl@isNotEmpty(issueCode)">
+				and p.ISSUE_CODE = #{issueCode}
+			</if>
+	</update>
+	<update id="updateGamePlanDetailByPlanIdCancelForOrderCancel" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL p SET
+			p.STATUS = #{status},
+			p.CANCEL_TIME = #{cancelTime},
+			p.CANCEL_USER = #{cancelUser}
+		WHERE
+		   p.PLANID = #{planid} 
+		   AND p.STATUS = 5
+	</update>
+	<update id="updateGamePlanDetailByPlanIdDate" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL p SET
+			p.STATUS = #{status},
+			p.CANCEL_TIME = #{cancelTime},
+			p.CANCEL_USER = #{cancelUser}
+		WHERE
+		   p.PLANID = #{planid} 
+		   AND p.STATUS = 0
+		   and (select g.SALE_START_TIME from game_issue g where g.issue_code = p.issue_code)>#{date}
+		   <if test="@Ognl@isNotEmpty(issueCode)">
+				and p.ISSUE_CODE = #{issueCode}
+			</if>
+	</update>
+   	<update id="updateGamePlanDetailStatusByPlanID" parameterType="hashMap">
+			UPDATE GAME_PLAN_DETAIL SET
+				STATUS = #{status},
+				RUM_TIME=#{runTime}
+			WHERE
+			   PLANID = #{planId} 
+			   AND STATUS = 0
+			   <if test="@Ognl@isNotEmpty(issueCode)">
+					and ISSUE_CODE = #{issueCode}
+			   </if>
+	</update>
+	
+   	<select id="queryGamePlanDetailByIssueCode" parameterType="hashMap" resultMap="GamePlanDetailResult">
+   	    select <include refid="gamePlanDetailColumns" />
+	    <![CDATA[ from GAME_PLAN_DETAIL  where  issue_code <= #{issueCode} and status = 0 and PLANID in (select id from GAME_PLAN p where p.lotteryId = #{lotteryId} and p.status = 1 )]]>
+   	</select>
+   	
+   	<select id="getPausePlanIdByIssueCode" parameterType="long" resultType="long">
+		select distinct gpd.planid
+		  from game_plan_detail gpd, game_plan gp
+		 where gpd.issue_code = #{issueCode}
+	     and gpd.planid = gp.id
+	     and gp.status = 4
+	</select> 
+	
+	<select id="queryGamePlanDetailByNoExecute" parameterType="hashMap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+		where PLANID = #{planId} and status = 0
+	</select>
+</mapper>

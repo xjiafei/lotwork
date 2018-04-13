@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameBonusPool">
+	<resultMap id="GameBonusPoolResult" type="com.winterframework.firefrog.game.dao.vo.GameBonusPool">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameBonusPoolColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ACTUAL_BONUS as actualBonus,
+	        	ACTUAL_BONUS_PROCESS as actualBonusProcess,
+	        	CHANGE_REASON as changeReason,
+	        	MINIMUM_BONUS as minimumBonus,
+	        	MINIMUM_BONUS_PROCESS as minimumBonusProcess,
+	        	DISTRIBUTE_1 as distribute1,
+	        	DISTRIBUTE_2 as distribute2,
+	        	DISTRIBUTE_1_PROCESS as distribute1process,
+	        	DISTRIBUTE_2_PROCESS as distribute2process,
+	        	STATUS as status
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameBonusPool" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_BONUS_POOL_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_BONUS_POOL (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ACTUAL_BONUS ,
+	        	ACTUAL_BONUS_PROCESS ,
+	        	CHANGE_REASON ,
+	        	MINIMUM_BONUS ,
+	        	MINIMUM_BONUS_PROCESS ,
+	        	DISTRIBUTE_1 ,
+	        	DISTRIBUTE_2 ,
+	        	DISTRIBUTE_1_PROCESS ,
+	        	DISTRIBUTE_2_PROCESS ,
+	        	STATUS 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{actualBonus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{actualBonusProcess,javaType=long,jdbcType=DECIMAL} ,
+	        	#{changeReason,javaType=string,jdbcType=VARCHAR} ,
+	        	#{minimumBonus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{minimumBonusProcess,javaType=long,jdbcType=DECIMAL} ,
+	        	#{distribute1,javaType=long,jdbcType=DECIMAL} ,
+	        	#{distribute2,javaType=long,jdbcType=DECIMAL} ,
+	        	#{distribute1process,javaType=long,jdbcType=DECIMAL} ,
+	        	#{distribute2process,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameBonusPool">
+
+	        UPDATE GAME_BONUS_POOL 
+	        <set>
+	        	<if test="@Ognl@isNotEmpty(lotteryid)">
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		    	</if>
+		     	<if test="@Ognl@isNotEmpty(actualBonus)">
+		        ACTUAL_BONUS = #{actualBonus,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(actualBonusProcess)">
+		        ACTUAL_BONUS_PROCESS = #{actualBonusProcess,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(changeReason)">
+		        CHANGE_REASON = #{changeReason,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(minimumBonus)">
+		        MINIMUM_BONUS = #{minimumBonus,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(minimumBonusProcess)">
+		        MINIMUM_BONUS_PROCESS = #{minimumBonusProcess,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(distribute1)">
+		        DISTRIBUTE_1 = #{distribute1,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(distribute2)">
+		        DISTRIBUTE_2 = #{distribute2,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(distribute1process)">
+		        DISTRIBUTE_1_PROCESS = #{distribute1process,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(distribute2process)">
+		        DISTRIBUTE_2_PROCESS = #{distribute2process,javaType=long,jdbcType=DECIMAL} ,
+		        </if>
+		         <if test="@Ognl@isNotEmpty(status)">
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} 
+		        </if>
+		    </set>
+	        WHERE 
+		        ID = #{id} 
+
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_BONUS_POOL where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameBonusPoolResult" flushCache="false">
+			select <include refid="gameBonusPoolColumns" />
+		    <![CDATA[
+			    from GAME_BONUS_POOL 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>
+		
+		<select id="getByLotteryId" parameterType="long" resultMap="GameBonusPoolResult" flushCache="false">
+			select <include refid="gameBonusPoolColumns" />
+		    <![CDATA[
+			    from GAME_BONUS_POOL 
+		        where 
+		        LOTTERYID = #{lotteryId} 
+		    ]]>
+		</select>
+			
+		<select id="getByIds" parameterType="list"  resultMap="GameBonusPoolResult" flushCache="false">
+			select <include refid="gameBonusPoolColumns" />
+			    from GAME_BONUS_POOL 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameBonusPoolDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(actualBonus)">
+				and ACTUAL_BONUS = #{actualBonus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(actualBonusProcess)">
+				and ACTUAL_BONUS_PROCESS = #{actualBonusProcess}
+			</if>
+	       <if test="@Ognl@isNotEmpty(changeReason)">
+				and CHANGE_REASON = #{changeReason}
+			</if>
+	       <if test="@Ognl@isNotEmpty(minimumBonus)">
+				and MINIMUM_BONUS = #{minimumBonus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(minimumBonusProcess)">
+				and MINIMUM_BONUS_PROCESS = #{minimumBonusProcess}
+			</if>
+	       <if test="@Ognl@isNotEmpty(distribute1)">
+				and DISTRIBUTE_1 = #{distribute1}
+			</if>
+	       <if test="@Ognl@isNotEmpty(distribute2)">
+				and DISTRIBUTE_2 = #{distribute2}
+			</if>
+	       <if test="@Ognl@isNotEmpty(distribute1process)">
+				and DISTRIBUTE_1_PROCESS = #{distribute1process}
+			</if>
+	       <if test="@Ognl@isNotEmpty(distribute2process)">
+				and DISTRIBUTE_2_PROCESS = #{distribute2process}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameBonusPoolResult"  flushCache="false">
+    	select <include refid="gameBonusPoolColumns" />
+	    from GAME_BONUS_POOL 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_BONUS_POOL 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_BONUS_POOL 
+		<include refid="gameBonusPoolDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameBonusPoolResult">
+    	select <include refid="gameBonusPoolColumns" />
+	    from GAME_BONUS_POOL 
+		<include refid="gameBonusPoolDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

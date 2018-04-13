@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GamePoint">
+	<resultMap id="GamePointResult" type="com.winterframework.firefrog.game.dao.vo.GamePoint">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gamePointColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	SLIP_ID as slipId,
+	        	POINT as point,
+	        	MULT as mult,
+	        	RETVALUE as retValue,
+	        	PLAN_DETAIL_ID as planDetailId,
+	        	pkg_detail_id as pkgDetailId
+	    ]]>
+	</sql>
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GamePoint" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+  	     <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			     SELECT SEQ_GAME_POINT_ID.Nextval from dual
+   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_POINT (
+	        	ID,
+	        	SLIP_ID,
+	        	POINT,
+	        	MULT,
+	        	RETVALUE,
+	        	PLAN_DETAIL_ID,
+	        	pkg_detail_id,
+	        	SINGLEBET
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{slipId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{point,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mult,javaType=long,jdbcType=DECIMAL} ,
+	        	#{retValue,javaType=long,jdbcType=DECIMAL},
+	        	#{planDetailId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{pkgDetailId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{singleBet,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>	
+	
+		</insert>
+		<insert id="batchInsert" parameterType="com.winterframework.firefrog.game.dao.vo.GamePoint">
+	        INSERT  ALL
+	        <foreach collection="list" item="model" separator=" "> 
+	        INTO
+	        GAME_POINT (
+	        	ID,
+	        	SLIP_ID,
+	        	POINT,
+	        	MULT,
+	        	RETVALUE,
+	        	PLAN_DETAIL_ID,
+	        	pkg_detail_id,
+	        	SINGLEBET
+	        ) 
+	        VALUES
+	         
+	         (
+	        	SEQ_GAME_POINT_ID.Nextval,
+	        	#{model.slipId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{model.point,javaType=string,jdbcType=VARCHAR} ,
+	        	#{model.mult,javaType=long,jdbcType=DECIMAL} ,
+	        	#{model.retValue,javaType=long,jdbcType=DECIMAL},
+	        	#{model.planDetailId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{model.pkgDetailId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{model.singleBet,javaType=long,jdbcType=DECIMAL}
+	        )
+	        </foreach>
+	         select * from dual
+
+		</insert>
+	    <select id="getBySlipId" parameterType="long" resultMap="GamePointResult" flushCache="false">
+			select <include refid="gamePointColumns" />
+		    <![CDATA[
+			    from GAME_POINT 
+		        where 
+		        SLIP_ID = #{slipId} order by RETVALUE
+		    ]]>
+		</select>	
+		
+		<update id="insertGamePointSlipId" parameterType="hashMap" flushCache="false">
+			update GAME_POINT set SLIP_ID = #{slipId,javaType=long,jdbcType=DECIMAL} 
+			where plan_detail_id=#{planDetailId}
+			and   pkg_detail_id =#{pkgDetailId}
+		</update>
+</mapper>

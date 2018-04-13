@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameManualRecord">
+	<resultMap id="GameManualRecordResult" type="com.winterframework.firefrog.game.dao.vo.GameManualRecord">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameManualRecordColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryId,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	SALE_END_TIME as saleEndTime,
+	        	CONFIRM_RESULD as confirmResuld,
+	        	STATUS as status,
+	        	FIRST_USER_ID as firstUserId,
+	        	FIRST_RESULD as firstResuld,
+	        	FIRST_ENCODING_TIME as firstEncodingTime,
+	        	SENCOND_USER_ID as sencondUserId,
+	        	SENCOND_RESULD as sencondResuld,
+	        	SENCOND_ENCODING_TIME as sencondEncodingTime,
+	        	DEAL_USER_ID as dealUserId,
+	        	first_username as firstUserName,
+	        	second_username as sencondUserName,
+	        	GMT_CREATED as gmtCreated,
+	        	GMT_MODIFIED as gmtModified	        	
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameManualRecord"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_MANUAL_RECORD_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_MANUAL_RECORD (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_CODE ,
+	        	WEB_ISSUE_CODE ,
+	        	SALE_END_TIME ,
+	        	CONFIRM_RESULD ,
+	        	STATUS ,
+	        	FIRST_USER_ID ,
+	        	FIRST_RESULD ,
+	        	FIRST_ENCODING_TIME ,
+	        	SENCOND_USER_ID ,
+	        	SENCOND_RESULD ,
+	        	SENCOND_ENCODING_TIME ,
+	        	DEAL_USER_ID ,
+	        	GMT_CREATED ,
+	        	GMT_MODIFIED 	  
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,	     
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR} ,	        	
+	        	#{saleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{confirmResuld,javaType=string,jdbcType=VARCHAR} ,	
+	        	#{status,javaType=int,jdbcType=DECIMAL} ,	        	
+				#{firstUserId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{firstResuld,javaType=string,jdbcType=VARCHAR} ,
+	        	#{firstEncodingTime,javaType=date,jdbcType=TIMESTAMP} ,	        	
+	        	#{sencondUserId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sencondResuld,javaType=string,jdbcType=VARCHAR} ,
+	        	#{sencondEncodingTime,javaType=date,jdbcType=TIMESTAMP} ,	        	
+	        	#{dealUserId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{gmtModified,javaType=date,jdbcType=TIMESTAMP}	        	
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameManualRecord">
+	    <![CDATA[
+	        UPDATE GAME_MANUAL_RECORD SET
+		        LOTTERYID = #{lotteryId,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        SALE_END_TIME = #{saleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CONFIRM_RESULD = #{confirmResuld,javaType=string,jdbcType=VARCHAR} ,	
+	        	STATUS = #{status,javaType=int,jdbcType=DECIMAL} ,	        	
+				FIRST_USER_ID = #{firstUserId,javaType=long,jdbcType=DECIMAL} ,
+	        	FIRST_RESULD = #{firstResuld,javaType=string,jdbcType=VARCHAR} ,
+	        	FIRST_ENCODING_TIME = #{firstEncodingTime,javaType=date,jdbcType=TIMESTAMP} ,	        	
+	        	SENCOND_USER_ID = #{sencondUserId,javaType=long,jdbcType=DECIMAL} ,
+	        	SENCOND_RESULD = #{sencondResuld,javaType=string,jdbcType=VARCHAR} ,
+	        	SENCOND_ENCODING_TIME = #{sencondEncodingTime,javaType=date,jdbcType=TIMESTAMP} ,	        	
+	        	DEAL_USER_ID = #{dealUserId,javaType=long,jdbcType=DECIMAL} ,
+	        	GMT_CREATED = #{gmtCreated,javaType=date,jdbcType=TIMESTAMP} ,
+	        	GMT_MODIFIED = #{gmtModified,javaType=date,jdbcType=TIMESTAMP}	   
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>	
+	 
+	 
+	<select id="getGameManualRecordByIssue" parameterType="long" resultMap="GameManualRecordResult">
+		select <include refid="gameManualRecordColumns" />
+		from VIEW_GAME_MANUAL_RECORD where ISSUE_CODE = #{issueCode} 	
+	</select> 
+	 
+	<select id="getGameManualRecordsCountByLottery" parameterType="long" resultType="long">
+        select count(*) from VIEW_GAME_MANUAL_RECORD where LOTTERYID = #{lotteryId} 
+         <![CDATA[
+        order by ISSUE_CODE desc 
+        ]]>	
+    </select>
+    
+    <select id="getGameManualRecordsByLottery" parameterType="long" resultMap="GameManualRecordResult">
+    	select <include refid="gameManualRecordColumns" />
+		from VIEW_GAME_MANUAL_RECORD where LOTTERYID = #{lotteryId} 	
+		 <![CDATA[
+         order by ISSUE_CODE desc 
+        ]]>	
+    </select>
+	    
+</mapper>

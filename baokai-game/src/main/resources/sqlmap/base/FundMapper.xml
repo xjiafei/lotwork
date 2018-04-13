@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.Fund">
+	<resultMap id="FundResult" type="com.winterframework.firefrog.fund.dao.vo.Fund">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	BAL as bal,
+	        	DISABLE_AMT as disableAmt,
+	        	USER_ID as userId,
+	        	SECURITY as security,
+	        	FROZEN_AMT as frozenAmt
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.Fund" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_FUND_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        FUND (
+	        	ID ,
+	        	BAL ,
+	        	DISABLE_AMT ,
+	        	USER_ID ,
+	        	SECURITY ,
+	        	FROZEN_AMT 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bal,javaType=long,jdbcType=DECIMAL} ,
+	        	#{disableAmt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{security,javaType=string,jdbcType=VARCHAR} ,
+	        	#{frozenAmt,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.Fund">
+	    <![CDATA[
+	        UPDATE FUND SET
+		        BAL = #{bal,javaType=long,jdbcType=DECIMAL} ,
+		        DISABLE_AMT = #{disableAmt,javaType=long,jdbcType=DECIMAL} ,
+		        USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,
+		        SECURITY = #{security,javaType=string,jdbcType=VARCHAR} ,
+		        FROZEN_AMT = #{frozenAmt,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+		<update id="updateFundById" parameterType="hashMap">
+			UPDATE FUND SET FROZEN_AMT = #{frozenAmt} where ID = #{id}
+		</update>
+		
+		<update id="updateFund" parameterType="HashMap">
+	    <![CDATA[
+	        UPDATE FUND SET
+		        BAL =nvl(BAL,0)+ #{cbal,javaType=long,jdbcType=DECIMAL} ,
+		        DISABLE_AMT =(CASE WHEN(nvl(DISABLE_AMT,0) +#{cdisableAmt ,javaType=long,jdbcType=DECIMAL}) > 0 THEN nvl(DISABLE_AMT,0) +#{cdisableAmt ,javaType=long,jdbcType=DECIMAL}
+		         					 ELSE 0
+		         					 END),
+		        SECURITY = #{security,javaType=string,jdbcType=VARCHAR} ,
+		        FROZEN_AMT =nvl(FROZEN_AMT,0)+ #{cfrozenAmt,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		       ID = #{id}
+		         ]]>	
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="FundResult" flushCache="false">
+			select <include refid="fundColumns" />
+		    <![CDATA[
+			    from FUND 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		
+		  <select id="getByUserId" parameterType="long" resultMap="FundResult" flushCache="false">
+			select <include refid="fundColumns" />
+		    <![CDATA[
+			    from FUND 
+		        where 
+		        USER_ID = #{userId} 
+		    ]]>
+		</select>	
+		
+		<select id="getByUserIdTask" parameterType="long" resultMap="FundResult" flushCache="false">
+			select <include refid="fundColumns" />
+		    <![CDATA[
+			    from view_fund 
+		        where 
+		        USER_ID = #{userId} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="FundResult" flushCache="false">
+			select <include refid="fundColumns" />
+			    from FUND 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="fundDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(bal)">
+				and BAL = #{bal}
+			</if>
+	       <if test="@Ognl@isNotEmpty(disableAmt)">
+				and DISABLE_AMT = #{disableAmt}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(security)">
+				and SECURITY = #{security}
+			</if>
+	       <if test="@Ognl@isNotEmpty(frozenAmt)">
+				and FROZEN_AMT = #{frozenAmt}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="FundResult"  flushCache="false">
+    	select <include refid="fundColumns" />
+	    from FUND 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from FUND 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from FUND 
+		<include refid="fundDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="FundResult">
+    	select <include refid="fundColumns" />
+	    from FUND 
+		<include refid="fundDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

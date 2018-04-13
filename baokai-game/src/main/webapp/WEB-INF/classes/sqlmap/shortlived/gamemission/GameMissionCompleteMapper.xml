@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.shortlived.gamemission.dao.entity.GameMissionComplete">
+	<resultMap id="result" type="com.winterframework.firefrog.shortlived.gamemission.dao.entity.GameMissionComplete">
+		<result column="ID" property="id"/>
+		<result column="MISSION_ID" property="missionId"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="PARAM" property="param"/>
+		<result column="CREATE_DATE" property="createDate"/>
+
+	</resultMap>
+	<sql id="fields">
+		ID,
+		MISSION_ID,
+		USER_ID,
+		PARAM,
+		CREATE_DATE
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+			<if test="targetId != null">
+				AND ID = #{targetId}
+			</if>
+			<if test="targetMissionId != null">
+				AND MISSION_ID = #{targetMissionId}
+			</if>
+			<if test="targetUserId != null">
+				AND USER_ID = #{targetUserId}
+			</if>
+			<if test="targetParam != null">
+				AND PARAM = #{targetParam}
+			</if>
+			<if test="targetCreateDateStart != null">
+				AND CREATE_DATE >= #{targetCreateDateStart}
+			</if>
+			<if test="targetCreateDateEnd != null">
+			<![CDATA[
+				AND CREATE_DATE < #{targetCreateDateEnd}
+			]]>
+			</if>
+		</where>
+	</sql>
+	<select id="queryMissionCompletes" resultMap="result" parameterType="com.winterframework.firefrog.shortlived.gamemission.dao.entity.GameMissionComplete">
+		SELECT <include refid="fields"/>
+				FROM GAME_MISSION_COMPLETE
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		SELECT COUNT(1) 
+				FROM GAME_MISSION_COMPLETE
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		SELECT COUNT(1) 
+				FROM GAME_MISSION_COMPLETE
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.shortlived.gamemission.dao.entity.GameMissionComplete"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_MISSION_COMPLETE_ID.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        GAME_MISSION_COMPLETE (
+	        <include refid="fields"/>)
+	        VALUES (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{missionId,javaType=long,jdbcType=DECIMAL},
+	         #{userId,javaType=long,jdbcType=DECIMAL},
+	         #{param,javaType=string,jdbcType=VARCHAR},
+	         #{createDate,javaType=object,jdbcType=TIMESTAMP}
+	        )
+	</insert>
+
+	<select id="queryUserDiamondCount" resultType="Long">
+			SELECT COUNT(0) FROM (
+				SELECT
+				 	(SELECT SUM(TOTAMOUNT+DIAMOND_AMOUNT) 
+				 		FROM GAME_SLIP
+				 		WHERE LOTTERYID=99112 AND ORDERID = GO.ID AND DIAMOND_AMOUNT>0) AS DIAMOND_AMOUNT,
+					REGEXP_COUNT(GI.NUMBER_RECORD,SUBSTR(GI.NUMBER_RECORD,1,1))-1 AS DIAMONDS
+				FROM GAME_ORDER GO
+				JOIN GAME_ISSUE GI ON GI.ISSUE_CODE = GO.ISSUE_CODE AND GI.LOTTERYID = GO.LOTTERYID
+				WHERE GO.LOTTERYID = 99112 AND GO.USERID = #{targetUserId}
+				AND GO.SALE_TIME > #{targetStartTime}
+				<![CDATA[
+					AND GO.SALE_TIME <= #{targetEndTime}
+				]]>
+				AND GO.STATUS IN (2,3)
+			  	AND GO.SALE_TIME > (SELECT 
+					NVL(MAX(CREATE_DATE),#{targetStartTime}) 
+					FROM GAME_MISSION_COMPLETE WHERE USER_ID = #{targetUserId} 
+					AND MISSION_ID = #{targetMissionId})
+			)R WHERE DIAMONDS = #{targetDiamond}
+		  	AND DIAMOND_AMOUNT/10000 >= #{targetNeedPay}
+	</select>
+</mapper>

@@ -1,0 +1,139 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	<bean id="speciallotteryGameAwardtemplate"
+		class="com.winterframework.firefrog.game.service.assist.award.SpecialLotteryGameAwardMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+					<!-- 12_12_40 -->
+						<bean 
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.QS}" />
+							<property name="setCode" value="${setCode.BDW}" />
+							<property name="methodCode" value="${methodCode.YMBDW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<list>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.QS}" />
+							<property name="setCode" value="${setCode.BDW}" />
+							<property name="methodCode" value="${methodCode.YMBDW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</list>
+				</entry>
+				<entry>
+					<key>
+						<!-- 13_12_40 -->
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.HS}" />
+							<property name="setCode" value="${setCode.BDW}" />
+							<property name="methodCode" value="${methodCode.YMBDW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<list>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.HS}" />
+							<property name="setCode" value="${setCode.BDW}" />
+							<property name="methodCode" value="${methodCode.YMBDW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</list>
+				</entry>
+				<entry>
+					<key>
+						<!-- 33_12_40 -->
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZHONGSAN}" />
+							<property name="setCode" value="${setCode.BDW}" />
+							<property name="methodCode" value="${methodCode.YMBDW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<list>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZHONGSAN}" />
+							<property name="setCode" value="${setCode.BDW}" />
+							<property name="methodCode" value="${methodCode.YMBDW}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</list>
+				</entry>
+				<entry>
+					<key>
+					<!-- 18_16_70 -->
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.QW}" />
+							<property name="setCode" value="${setCode.PM}" />
+							<property name="methodCode" value="${methodCode.QUWEIB}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<list>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.QW}" />
+							<property name="setCode" value="${setCode.PM}" />
+							<property name="methodCode" value="${methodCode.QUWEIB}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</list>
+				</entry>
+				<entry>
+					<key>
+					<!-- 43_37_79 特殊两面大小  -->
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TS}" />
+							<property name="setCode" value="${setCode.LIANGMIAN}" />
+							<property name="methodCode" value="${methodCode.DAXIAO}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<list>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TS}" />
+							<property name="setCode" value="${setCode.LIANGMIAN}" />
+							<property name="methodCode" value="${methodCode.DAXIAO}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</list>
+				</entry>
+				<entry>
+					<key>
+					<!-- 43_37_80  特殊两面单双  -->
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TS}" />
+							<property name="setCode" value="${setCode.LIANGMIAN}" />
+							<property name="methodCode" value="${methodCode.DANSHUANG}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<list>
+						<bean
+							class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TS}" />
+							<property name="setCode" value="${setCode.LIANGMIAN}" />
+							<property name="methodCode" value="${methodCode.DANSHUANG}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</list>
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.LevelRecycle">
+	<resultMap id="levelRecycleResult"
+		type="com.winterframework.firefrog.user.dao.vo.LevelRecycle">
+	</resultMap>
+
+	<select id="queryLevelRecycleHistory"
+		parameterType="com.winterframework.firefrog.user.entity.LevelRecycleDTO"
+		resultMap="levelRecycleResult" flushCache="false">
+		SELECT
+			USER_ID AS userId,
+			ACCOUNT AS account,
+			TOP_AGENT AS topAgent,
+			AVAIL_BAL AS availBal,
+			RECYCLE_REASON AS recycleReason,
+			OPERATOR AS
+			operator,
+			CREATE_DATE AS createDate,
+			ACTIVITY_DATE AS activityDate,
+			TASK_STATUS AS taskStatus,
+			RECYCLE_STATUS AS recycleStatus
+		FROM
+		USER_LEVEL_RECYCLE
+		<where>
+			<if test="@Ognl@isNotEmpty(userId)">
+				AND USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				AND ACCOUNT = #{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(taskStatus)">
+				AND TASK_STATUS = #{taskStatus}
+			</if>
+			<if test="@Ognl@isNotEmpty(operator)">
+				AND OPERATOR = #{operator}
+			</if>
+			<if test="@Ognl@isNotEmpty(startNo)">
+				AND ROWNUM >= #{startNo}
+			</if>
+			<if test="@Ognl@isNotEmpty(endNo)">
+				<![CDATA[
+					AND ROWNUM <= #{endNo}
+				]]>
+			</if>
+		</where>
+		ORDER BY CREATE_DATE DESC
+	</select>
+
+
+</mapper>

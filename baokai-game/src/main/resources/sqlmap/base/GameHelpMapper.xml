@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameHelp">
+	<resultMap id="GameHelpResult"
+		type="com.winterframework.firefrog.game.dao.vo.GameHelp">
+	</resultMap>
+	
+	<resultMap id="GameHelpResultByBet"
+		type="com.winterframework.firefrog.game.dao.vo.GameHelpAndBonus">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameHelpColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	BET_TYPE_CODE     as betTypeCode,
+	        	GAME_PROMPT_DES as gamePromptDes,
+	        	GAME_EXAMPLES_DES as gameExamplesDes,
+	        	CRETEAT_TIME as creteatTime,
+	        	UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+	
+	<sql id="gameHelpColumnsAndUserid">
+	    <![CDATA[
+	        	t1.ID as id,
+	        	t1.LOTTERYID as lotteryid,
+	        	t2.BET_TYPE_CODE as betTypeCode,
+	        	t1.GAME_PROMPT_DES as gamePromptDes,
+	        	t1.GAME_EXAMPLES_DES as gameExamplesDes,
+	        	t1.CRETEAT_TIME as creteatTime,
+	        	t1.UPDATE_TIME as updateTime,
+	        	t2.ACTUAL_BONUS AS actualBonus,
+	        	t2.ACTUAL_BONUS_DOWN AS actualBonusDown
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameHelp"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_HELP.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_HELP (
+	        	ID ,
+	        	LOTTERYID ,
+	        	GAME_GROUP_CODE ,
+	        	GAME_SET_CODE ,
+	        	BET_METHOD_CODE ,
+	        	GAME_PROMPT_DES ,
+	        	GAME_EXAMPLES_DES ,
+	        	CRETEAT_TIME ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameGroupCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{gameSetCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{betMethodCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{gamePromptDes,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gameExamplesDes,javaType=string,jdbcType=VARCHAR} ,
+	        	#{creteatTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameHelp">
+	    <![CDATA[
+	        UPDATE GAME_HELP SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_GROUP_CODE = #{gameGroupCode,javaType=int,jdbcType=DECIMAL} ,
+		        GAME_SET_CODE = #{gameSetCode,javaType=int,jdbcType=DECIMAL} ,
+		        BET_METHOD_CODE = #{betMethodCode,javaType=int,jdbcType=DECIMAL} ,
+		        GAME_PROMPT_DES = #{gamePromptDes,javaType=string,jdbcType=VARCHAR} ,
+		        GAME_EXAMPLES_DES = #{gameExamplesDes,javaType=string,jdbcType=VARCHAR} ,
+		        CRETEAT_TIME = #{creteatTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+
+	<update id="updateForCheck" parameterType="com.winterframework.firefrog.game.dao.vo.GameHelp">
+	    <![CDATA[
+	        UPDATE GAME_HELP SET
+		        GAME_PROMPT_DES = #{gamePromptDes,javaType=string,jdbcType=VARCHAR} ,
+		        GAME_EXAMPLES_DES = #{gameExamplesDes,javaType=string,jdbcType=VARCHAR} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        LOTTERYID = #{lotteryid} AND
+		        BET_TYPE_CODE = #{betTypeCode}
+	    ]]>
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_HELP where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="GameHelpResult"
+		flushCache="false">
+		select
+		<include refid="gameHelpColumns" />
+		    <![CDATA[
+			    from GAME_HELP t1,game_bettype_status t2
+		        where 
+		        t1.ID = #{id} 
+		        and t2.bet_type_code = t1.bet_type_code
+ 				and t2.lotteryid = t1.lotteryid
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="GameHelpResult"
+		flushCache="false">
+		select
+		<include refid="gameHelpColumns" />
+		from GAME_HELP
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getGameHelpByLotteryId" parameterType="long"
+		resultMap="GameHelpResult">
+		select
+		t1.ID                as id,
+       t1.LOTTERYID         as lotteryid,
+       t1.BET_TYPE_CODE     as betTypeCode,
+       GAME_PROMPT_DES   as gamePromptDes,
+       GAME_EXAMPLES_DES as gameExamplesDes,
+       CRETEAT_TIME      as creteatTime,
+       t1.UPDATE_TIME       as updateTime
+		from GAME_HELP t1,game_bettype_status t2
+		where t1.LOTTERYID = #{lotteryid}   and t2.bet_type_code = t1.bet_type_code
+ 			and t2.lotteryid = t1.lotteryid
+		order by t1.BET_TYPE_CODE
+	</select>
+	
+	<select id="getByBetMethod" parameterType="hashmap"
+		resultMap="GameHelpResult">
+		select
+		<include refid="gameHelpColumns" />
+		from GAME_HELP t1, game_bettype_status t2
+		where t1.LOTTERYID = #{lotteryid} 
+		and t1.BET_TYPE_CODE = #{betTypeCode}
+		and t2.bet_type_code = t1.bet_type_code
+ 		and t2.lotteryid = t1.lotteryid
+	</select>
+
+	<sql id="gameHelpDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(betTypeCode)">
+				and BET_TYPE_CODE = #{betTypeCode}
+			</if>
+		
+			<if test="@Ognl@isNotEmpty(gamePromptDes)">
+				and GAME_PROMPT_DES = #{gamePromptDes}
+			</if>
+			<if test="@Ognl@isNotEmpty(gameExamplesDes)">
+				and GAME_EXAMPLES_DES = #{gameExamplesDes}
+			</if>
+			<if test="@Ognl@isNotEmpty(creteatTime)">
+				and CRETEAT_TIME = #{creteatTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameHelpResult" flushCache="false">
+		select
+		<include refid="gameHelpColumns" />
+		from GAME_HELP
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from GAME_HELP
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_HELP
+		<include refid="gameHelpDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameHelpResult">
+		select
+		<include refid="gameHelpColumns" />
+		from GAME_HELP
+		<include refid="gameHelpDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+    <select id="getByBetMethodByUserid" parameterType="hashmap"
+            resultMap="GameHelpResultByBet">
+        select
+        <include refid="gameHelpColumnsAndUserid" />
+        from game_help t1, GAME_AWARD t2, game_award_user_group t3
+        where t1.bet_type_code = t2.bet_type_code
+        and t1.lotteryid = #{lotteryid}
+        and t3.userid = #{userid}
+        and t1.bet_type_code = #{betTypeCode}
+        and T2.LOTTERYID = T1.LOTTERYID
+        and t2.award_group_id = t3.sys_award_group_id
+        and t3.bet_type=1
+    </select>
+    <select id="getByBetMethodByUseridList" parameterType="hashmap"
+            resultMap="GameHelpResultByBet">
+        select
+        <include refid="gameHelpColumnsAndUserid" />
+        from game_help t1, GAME_AWARD t2, game_award_user_group t3
+        where t2.award_group_id = t3.sys_award_group_id
+        and t1.lotteryid = #{lotteryid}
+        and t3.userid = #{userid}
+        and t2.bet_type_code like #{betTypeCode}||'_%'
+		and t1.bet_type_code = #{betTypeCode}
+        AND T2.LOTTERYID = T1.LOTTERYID
+        and t3.bet_type=1
+    </select>
+	<select id="getSpecialBetMethod"  parameterType="hashmap"
+		resultMap="GameHelpResultByBet">
+	    select 
+	    		t1.ID as id,
+	        	t1.LOTTERYID as lotteryid,
+	        	t1.BET_TYPE_CODE as betTypeCode,
+	        	t1.GAME_PROMPT_DES as gamePromptDes,
+	        	t1.GAME_EXAMPLES_DES as gameExamplesDes,
+	        	t1.CRETEAT_TIME as creteatTime,
+	        	t1.UPDATE_TIME as updateTime,
+	        	0 AS actualBonus
+	        	from game_help t1 where 
+	            t1.lotteryid = #{lotteryid}
+			    and t1.bet_type_code = #{betTypeCode}
+	</select>
+	
+	<select id="getTipsAndGameName"  parameterType="hashmap"
+		resultMap="GameHelpResultByBet">
+	    select 
+                b.GROUP_CODE_NAME as groupCodeName,
+                b.SET_CODE_NAME as setCodeName,
+                b.METHOD_CODE_NAME as methodCodeName,
+                b.BET_TYPE_CODE as betTypeCode,
+                a.GAME_PROMPT_DES as gamePromptDes,
+                a.GAME_EXAMPLES_DES as gameExamplesDes
+                from game_bettype_status b left join game_help a
+                on
+                a.BET_TYPE_CODE = b.BET_TYPE_CODE
+                where b.lotteryid = #{lotteryId}
+	</select>
+
+
+</mapper>

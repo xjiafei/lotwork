@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameWarnOrder">
+	<resultMap id="GameWarnOrderResult" type="com.winterframework.firefrog.game.dao.vo.GameWarnOrder">
+	</resultMap>
+	<resultMap type="com.winterframework.firefrog.game.dao.vo.RiskOrders" id="RiskOrders"></resultMap>
+	<resultMap type="com.winterframework.firefrog.game.dao.vo.SpiteOrders" id="SpiteOrders"></resultMap>
+	<resultMap type="com.winterframework.firefrog.game.dao.vo.RiskOrderDetail" id="RiskOrderDetail"></resultMap>
+	<resultMap type="com.winterframework.firefrog.game.entity.GameSpiteOperationsEntity" id="SpiteOrdersOperations"></resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameWarnOrderColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	ORDER_CODE as orderCode,
+	        	COUNT_WIN as countWin,
+	        	WINS_RATIO as winsRatio,
+	        	MAXSLIP_WINS as maxslipWins,
+	        	SLIP_WINSRATIO as slipWinsratio,
+	        	PARENT_TYPE as parentType,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	ORDER_ID as orderId,
+	        	USERID as userid,
+	        	TYPE as type,
+	        	SALE_TIME as saleTime,
+	        	CHANNEL_ID as channelId
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameWarnOrder" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_WARN_ORDER (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_CODE ,
+	        	WEB_ISSUE_CODE ,
+	        	ORDER_CODE ,
+	        	COUNT_WIN ,
+	        	WINS_RATIO ,
+	        	MAXSLIP_WINS ,
+	        	SLIP_WINSRATIO ,
+	        	PARENT_TYPE ,
+	        	STATUS ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	ORDER_ID ,
+	        	USERID ,
+	        	TYPE ,
+	        	SALE_TIME ,
+	        	CHANNEL_ID 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{orderCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{countWin,javaType=long,jdbcType=DECIMAL} ,
+	        	#{winsRatio,javaType=long,jdbcType=DECIMAL} ,
+	        	#{maxslipWins,javaType=long,jdbcType=DECIMAL} ,
+	        	#{slipWinsratio,javaType=long,jdbcType=DECIMAL} ,
+	        	#{parentType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{orderId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{saleTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{channelId,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameWarnOrder">
+	    <![CDATA[
+	        UPDATE GAME_WARN_ORDER SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        ORDER_CODE = #{orderCode,javaType=string,jdbcType=VARCHAR} ,
+		        COUNT_WIN = #{countWin,javaType=long,jdbcType=DECIMAL} ,
+		        WINS_RATIO = #{winsRatio,javaType=long,jdbcType=DECIMAL} ,
+		        MAXSLIP_WINS = #{maxslipWins,javaType=long,jdbcType=DECIMAL} ,
+		        SLIP_WINSRATIO = #{slipWinsratio,javaType=long,jdbcType=DECIMAL} ,
+		        PARENT_TYPE = #{parentType,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        ORDER_ID = #{orderId,javaType=long,jdbcType=DECIMAL} ,
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        TYPE = #{type,javaType=long,jdbcType=DECIMAL} ,
+		        SALE_TIME = #{saleTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CHANNEL_ID = #{channelId,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_WARN_ORDER where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameWarnOrderResult" flushCache="false">
+			select <include refid="gameWarnOrderColumns" />
+		    <![CDATA[
+			    from GAME_WARN_ORDER 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameWarnOrderResult" flushCache="false">
+			select <include refid="gameWarnOrderColumns" />
+			    from GAME_WARN_ORDER 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameWarnOrderDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(webIssueCode)">
+				and WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orderCode)">
+				and ORDER_CODE = #{orderCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(countWin)">
+				and COUNT_WIN = #{countWin}
+			</if>
+	       <if test="@Ognl@isNotEmpty(winsRatio)">
+				and WINS_RATIO = #{winsRatio}
+			</if>
+	       <if test="@Ognl@isNotEmpty(maxslipWins)">
+				and MAXSLIP_WINS = #{maxslipWins}
+			</if>
+	       <if test="@Ognl@isNotEmpty(slipWinsratio)">
+				and SLIP_WINSRATIO = #{slipWinsratio}
+			</if>
+	       <if test="@Ognl@isNotEmpty(parentType)">
+				and PARENT_TYPE = #{parentType}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orderId)">
+				and ORDER_ID = #{orderId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(saleTime)">
+				and SALE_TIME = #{saleTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(channelId)">
+				and CHANNEL_ID = #{channelId}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameWarnOrderResult"  flushCache="false">
+    	select <include refid="gameWarnOrderColumns" />
+	    from GAME_WARN_ORDER 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_WARN_ORDER 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_WARN_ORDER 
+		<include refid="gameWarnOrderDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameWarnOrderResult">
+    	select <include refid="gameWarnOrderColumns" />
+	    from GAME_WARN_ORDER 
+		<include refid="gameWarnOrderDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="queryGameWarnOrderDetail" resultMap="GameWarnOrderResult" parameterType="hashMap">
+        select <include refid="gameWarnOrderColumns" />
+	    from GAME_WARN_ORDER 
+	    where LOTTERYID = ${lotteryId}
+	  AND ISSUE_CODE = ${issueCode}
+    </select>
+    
+     <select id="getUndealGameWarnOrderByPlanId" resultMap="GameWarnOrderResult" parameterType="long">
+        select <include refid="gameWarnOrderColumns" />
+	    from game_warn_order where order_code in(select order_code from game_order where plan_id=#{planId} ) and status=0
+    </select>
+    
+    <select id= "queryGameWarnOrderDetailByLotteryIdAndIssueCode" resultMap="RiskOrderDetail" parameterType="hashMap">
+    	SELECT T.LOTTERYID as lotteryid,
+	       T.ISSUE_CODE as issueCode,
+	       T.USERID as userid,
+	       T.ORDER_CODE as orderCode,
+	       T.SALE_TIME as saleTime,
+	       T.COUNT_WIN as countWin,
+	       T.WINS_RATIO as winsRatio,
+	       T.MAXSLIP_WINS as maxslipWins,
+	       T.SLIP_WINSRATIO as slipWinsratio,
+	       T.PARENT_TYPE as parentType,
+	       T.CHANNEL_ID as channelId,
+	       T.STATUS as status,
+	       T.TOTAMOUNT as totamount,
+	       T.ORDER_ID as orderId
+	  FROM GAME_WARN_ORDER T
+	  WHERE T.LOTTERYID = ${lotteryId}
+	  AND T.ISSUE_CODE = ${issueCode}
+	  AND T.USERID = ${userId}
+	  AND T.Type = 1
+	  ORDER BY T.ID DESC
+    </select>
+    
+    <select id="queryGameWarnOrderByLotteryIdAndIssueCodeCount" resultType="long" parameterType="hashMap">
+         SELECT count(*) from  GAME_WARN_USER U
+                 WHERE U.LOTTERYID = ${lotteryId}
+                   and U.Issue_Code = ${issueCode}
+                 ORDER BY U.ID DESC
+    </select>
+	
+	<select id="queryGameWarnOrderByLotteryIdAndIssueCode" resultMap="RiskOrders" parameterType="hashMap">
+		<!-- SELECT T.LOTTERYID as lotteryid,
+	       T.ISSUE_CODE as issueCode,
+	       T.USERID as userid,
+	       U.USER_ACCOUNT AS account,
+	       T.COUNT_WIN as countWins,
+	       T.WINS_RATIO as issueWinsRatio,
+	       U.CONTINUOUS_WINS_ISSUE as orderwarnContinuousWins,
+	       U.CONTINUOUS_WINS_TIMES as continuousWinsTimes,
+	       U.USER_MAXSLIP_WINS as maxslipWins
+	  FROM GAME_WARN_USER U
+	  LEFT JOIN GAME_WARN_ORDER T
+	    ON (U.LOTTERYID = T.LOTTERYID AND U.ISSUE_CODE = T.ISSUE_CODE and U.ISSUE_CODE= ${issueCode})
+	    WHERE T.LOTTERYID = ${lotteryId}
+	    and T.Issue_Code = ${issueCode}
+	    and T.Type = 1
+	 ORDER BY T.ID DESC
+	  -->
+	  SELECT U.LOTTERYID             as lotteryid,
+                       U.ISSUE_CODE            as issueCode,
+                       U.USERID                as userid,
+                       U.USER_ACCOUNT          AS account,
+                       U.TOTAL_WINS            as countWins,
+                       U.WINS_RATIO            as issueWinsRatio,
+                       U.CONTINUOUS_WINS_ISSUE as orderwarnContinuousWins,
+                       U.CONTINUOUS_WINS_TIMES as continuousWinsTimes,
+                       U.USER_MAXSLIP_WINS     as maxslipWins
+                  FROM GAME_WARN_USER U 
+                 WHERE U.LOTTERYID = ${lotteryId}
+                   and U.Issue_Code = ${issueCode}
+                 ORDER BY U.ID DESC
+	</select>
+	
+	<select id="querySpiteOrderByLotteryIdAndIssueCode" resultMap="SpiteOrders" parameterType="hashMap">
+		SELECT U.LOTTERYID as lotteryid,
+	       U.ORDER_CODE as orderCode,
+	       U.ISSUE_CODE as issueCode,
+	       U.COUNT_WIN as totamount,
+	       U.USERID as userid,
+	       T.ACCOUNT as account, 
+	       T.IS_FREEZE AS isFreeze,
+	       U.SALE_TIME as saleTime,
+	       U.STATUS as status,
+	       U.ORDER_ID as orderId
+	  FROM GAME_WARN_ORDER U
+	  LEFT JOIN USER_CUSTOMER T
+	    ON (U.USERID = T.ID )
+	    WHERE U.LOTTERYID = ${lotteryId}
+	    and U.Issue_Code = ${issueCode}
+	    and U.Type = 2
+	 ORDER BY U.ID DESC
+	</select>
+	
+	<update id="updateGameWarnOrderByLotteryIdAndIssueCode" parameterType="hashMap">
+		UPDATE GAME_WARN_ORDER t 
+		set t.STATUS = ${status}
+		WHERE t.LOTTERYID = ${lotteryId}
+		AND t.ISSUE_CODE = ${issueCode}
+		AND t.STATUS = 0
+	</update>
+	<update id="updateGameWarnOrderByOrderCode" parameterType="hashMap">
+		UPDATE GAME_WARN_ORDER t 
+		set t.STATUS = #{status}
+		<if test="@Ognl@isNotEmpty(type)">
+			,t.type = ${type}
+		</if>
+		WHERE t.ORDER_CODE = #{orderCode}
+	</update>
+	
+	
+	
+	<!-- 恶意记录查询动态条件 -->
+	<sql id="gameSpiteOperationsQueryDynamicWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				<if test="lotteryid!=0">
+					and t.lotteryid = #{lotteryid}
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(startTime)">
+				<![CDATA[
+				and t.saleTime >= #{startTime}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(endTime)">
+				<![CDATA[
+				and t.saleTime <= #{endTime}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				<if test="status!=-1">
+					and t.status = #{status}
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				<if test="@Ognl@isNotEmpty(containSub)">
+					<if test="containSub==1">
+						and t.userChain like (select USER_CHAIN from USER_CUSTOMER where account=#{account})||'%'
+					</if>
+					<if test="containSub==0">
+						and t.account = #{account}
+					</if>
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(orderCode)">
+				and t.orderCode = #{orderCode}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="queryGameSpiteOrdersNumber" resultType="long" parameterType="HashMap">
+		select count(*) from (
+			select a.lotteryid      as lotteryid,
+		       (select c.lottery_name from Game_Series c where a.lotteryid = c.lotteryid)   as lotteryName,
+		       a.order_code     as orderCode,
+		       a.issue_code     as issueCode,
+		       a.web_issue_code as webIssueCode,
+		       (select b.totamount from Game_Order b where a.order_id = b.id)      as totamount,
+		       a.userid         as userId,
+		       (select d.account from User_Customer d where a.userid = d.id)        as account,
+		       (select d.user_chain from User_Customer d where a.userid = d.id) 	as userChain,
+		       a.sale_time      as saleTime,
+		       a.status         as status,
+		       (select d.is_freeze from User_Customer d where a.userid = d.id)      as userStatus
+		  from (select * from Game_Warn_Order where type = 2) a
+		    	) t
+	    	<include refid="gameSpiteOperationsQueryDynamicWhere" />
+	</select>
+	
+	<select id="queryGameSpiteOrders" resultMap="SpiteOrdersOperations" parameterType="HashMap">
+		select * from (
+			select a.lotteryid      as lotteryid,
+		        (select c.lottery_name from Game_Series c where a.lotteryid = c.lotteryid)   as lotteryName,
+		       a.order_code     as orderCode,
+		       a.order_id     as orderId,
+		       a.issue_code     as issueCode,
+		       a.web_issue_code as webIssueCode,
+		       (select b.totamount from Game_Order b where a.order_id = b.id)      as totamount,
+		       a.userid         as userId,
+		       (select d.account from User_Customer d where a.userid = d.id)        as account,
+		       (select d.user_chain from User_Customer d where a.userid = d.id) 	as userChain,
+		       a.sale_time      as saleTime,
+		       a.status         as status,
+		       (select d.is_freeze from User_Customer d where a.userid = d.id)      as userStatus
+		  from (select * from Game_Warn_Order where type = 2) a
+		    	) t
+	    	<include refid="gameSpiteOperationsQueryDynamicWhere" />
+			ORDER BY t.saleTime desc
+	</select>
+	
+	<!-- 风险记录查询动态条件 -->
+	<sql id="gameWarnOperationsQueryDynamicWhere1">
+		<where>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				<if test="lotteryid!=0">
+					and t.lotteryid = #{lotteryid}
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				<if test="@Ognl@isNotEmpty(containSub)">
+					<if test="containSub==1">
+						and (t.userChain like (select USER_CHAIN from USER_CUSTOMER where account=#{account})||'%')
+					</if>
+					<if test="containSub==0">
+						and t.account = #{account}
+					</if>
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(countWins)">
+				and t.countWins >= #{countWins}
+			</if>
+			<if test="@Ognl@isNotEmpty(issueWinsRatio)">
+				and t.issueWinsRatio >= #{issueWinsRatio}
+			</if>
+			<if test="@Ognl@isNotEmpty(continuousWinsTimes)">
+				and t.continuousWinsTimes >= #{continuousWinsTimes}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+					and t.status = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(startTime)">
+				<![CDATA[
+				and trunc(t.saleTime) >= trunc(#{startTime})
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(endTime)">
+				<![CDATA[
+				and trunc(t.saleTime)  <= trunc(#{endTime})
+				]]>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="queryGameWarnOrderByCondition" resultMap="RiskOrders" parameterType="hashMap">
+		<!-- select * from (
+			SELECT 
+         		T.ID as id,
+         		T.LOTTERYID as lotteryid,
+         		S.lottery_name as lotteryName,
+	       		T.ISSUE_CODE as issueCode,
+		       	T.USERID as userid,
+		       	U.USER_ACCOUNT AS account,
+		       	C.USER_CHAIN as userChain,
+		       	T.COUNT_WIN as countWins,
+		       	T.WINS_RATIO as issueWinsRatio,
+		       	U.CONTINUOUS_WINS_ISSUE as orderwarnContinuousWins,
+		       	U.CONTINUOUS_WINS_TIMES as continuousWinsTimes,
+		       	U.USER_MAXSLIP_WINS as maxslipWins,
+         		O.Status as status,
+         		O.Order_Code as orderCode
+	  		FROM GAME_WARN_USER U
+	  			LEFT JOIN GAME_WARN_ORDER T
+	    			ON (U.LOTTERYID = T.LOTTERYID AND U.ISSUE_CODE = U.ISSUE_CODE)
+      			left join Game_Order O 
+      				on T.Order_Id=O.Id
+      			left join Game_Series S
+      				on S.lotteryid=U.LOTTERYID
+      			left join User_Customer c 
+				on U.userid=c.id ) t -->
+				select *
+  from (SELECT DISTINCT U.ID as id,
+                        U.LOTTERYID as lotteryid,
+                        (SELECT LOTTERY_NAME
+                           FROM GAME_SERIES
+                          WHERE LOTTERYID = U.LOTTERYID) as lotteryName,
+                        U.ISSUE_CODE as issueCode,
+                        U.USERID as userid,
+                        U.USER_ACCOUNT AS account,
+                        (SELECT USER_CHAIN
+                           FROM USER_CUSTOMER C
+                          WHERE C.ID = U.USERID) as userChain,
+                        (SELECT SUM(COUNT_WIN)
+                           FROM GAME_WARN_ORDER O
+                          WHERE O.ISSUE_CODE = U.ISSUE_CODE
+                            AND O.LOTTERYID = U.LOTTERYID
+                            AND O.TYPE = 1
+                            AND U.USERID = O.USERID) as countWins,
+                        U.WINS_RATIO as issueWinsRatio,
+                        U.CONTINUOUS_WINS_ISSUE as orderwarnContinuousWins,
+                        U.CONTINUOUS_WINS_TIMES as continuousWinsTimes,
+                        U.USER_MAXSLIP_WINS as maxslipWins,
+                        T.saleTime as saleTime,
+                        T.status as status
+          FROM GAME_WARN_USER U
+         inner join (select LOTTERYID,
+                           userid,
+                           issue_code,
+                           type,
+                           min(Sale_Time) as saleTime,
+                           min(status) as status
+                      from GAME_WARN_ORDER
+                     where type = 1
+                     <if test="@Ognl@isNotEmpty(startTime)">
+				     <![CDATA[
+				     and trunc(sale_Time) >= trunc(#{startTime})
+				     ]]>
+			         </if>
+			         <if test="@Ognl@isNotEmpty(endTime)">
+				     <![CDATA[
+				     and trunc(sale_Time)  <= trunc(#{endTime})
+				     ]]>
+			         </if>
+                     group by LOTTERYID, userid, issue_code, type) T
+            on T.ISSUE_CODE = U.ISSUE_CODE
+           AND T.LOTTERYID = U.LOTTERYID
+           AND T.USERID = U.USERID
+           AND U.TYPE = 1
+         ) t
+      	<include refid="gameWarnOperationsQueryDynamicWhere1" />
+	 	ORDER BY t.ID DESC
+	</select>
+	
+	<select id="queryGameWarnOrderByConditionNumber" resultType="long" parameterType="hashMap">
+	    select count(*) from (
+				  select * from 
+                  (SELECT DISTINCT U.ID as id,
+                        U.LOTTERYID as lotteryid,
+                        (SELECT LOTTERY_NAME
+                           FROM GAME_SERIES
+                          WHERE LOTTERYID = U.LOTTERYID) as lotteryName,
+                        U.ISSUE_CODE as issueCode,
+                        U.USERID as userid,
+                        U.USER_ACCOUNT AS account,
+                        (SELECT USER_CHAIN
+                           FROM USER_CUSTOMER C
+                          WHERE C.ID = U.USERID) as userChain,
+                        (SELECT SUM(COUNT_WIN)
+                           FROM GAME_WARN_ORDER O
+                          WHERE O.ISSUE_CODE = U.ISSUE_CODE
+                            AND O.LOTTERYID = U.LOTTERYID
+                            AND O.TYPE = 1
+                            AND U.USERID = O.USERID) as countWins,
+                        U.WINS_RATIO as issueWinsRatio,
+                        U.CONTINUOUS_WINS_ISSUE as orderwarnContinuousWins,
+                        U.CONTINUOUS_WINS_TIMES as continuousWinsTimes,
+                        U.USER_MAXSLIP_WINS as maxslipWins,
+                        T.saleTime as saleTime,
+                        T.status as status
+          FROM GAME_WARN_USER U
+         inner join (select LOTTERYID,
+                           userid,
+                           issue_code,
+                           type,
+                           min(Sale_Time) as saleTime,
+                           min(status) as status
+                      from GAME_WARN_ORDER
+                     where type = 1
+                     <if test="@Ognl@isNotEmpty(startTime)">
+				     <![CDATA[
+				     and trunc(sale_Time) >= trunc(#{startTime})
+				     ]]>
+			         </if>
+			         <if test="@Ognl@isNotEmpty(endTime)">
+				     <![CDATA[
+				     and trunc(sale_Time)  <= trunc(#{endTime})
+				     ]]>
+			         </if>
+                     group by LOTTERYID, userid, issue_code, type) T
+            on T.ISSUE_CODE = U.ISSUE_CODE
+           AND T.LOTTERYID = U.LOTTERYID
+           AND T.USERID = U.USERID
+           AND U.TYPE = 1
+         ) t
+		           <include refid="gameWarnOperationsQueryDynamicWhere1" />
+				           ) 
+      	
+	</select>
+	
+	<sql id="gameWarnOperationsQueryDynamicWhere2">
+		<where>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and t.lotteryid = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(issueCode)">
+				and t.issueCode = #{issueCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and t.userid = #{userId}
+			</if>
+				<if test="@Ognl@isNotEmpty(startTime)">
+				<![CDATA[
+				and trunc(t.saleTime) >= trunc(#{startTime})
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(endTime)">
+				<![CDATA[
+				and  trunc(t.saleTime)  <= trunc(#{endTime})
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(countWin)">
+				and t.countWin >= #{countWin}
+			</if>
+			<if test="@Ognl@isNotEmpty(winsRatio)">
+				and t.winsRatio >= #{winsRatio}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and t.status = #{status}				
+			</if>
+			<if test="@Ognl@isNotEmpty(orderCode)">
+				and t.orderCode = #{orderCode}				
+			</if>
+		</where>
+	</sql>
+	
+	<select id="queryGameWarnOrderByCondition2" resultMap="RiskOrderDetail" parameterType="hashMap">
+		SELECT * FROM (
+			SELECT 
+			   T.ID as id,
+			   T.LOTTERYID as lotteryid,
+		       T.ISSUE_CODE as issueCode,
+		       T.USERID as userid,
+		       T.ORDER_CODE as orderCode,
+		       T.SALE_TIME as saleTime,
+		       (SELECT TOTAMOUNT FROM GAME_ORDER WHERE ID = T.ORDER_ID) AS totamount,
+		       T.COUNT_WIN as countWin,
+		       T.WINS_RATIO as winsRatio,
+		       T.MAXSLIP_WINS as maxslipWins,
+		       T.SLIP_WINSRATIO as slipWinsratio,
+		       T.PARENT_TYPE as parentType,
+		       T.CHANNEL_ID as channelId,
+		       T.Order_Id as orderId,
+		       T.STATUS as status,
+		       <!-- e.NUMBER_RECORD as numberRecord,-->
+		       (SELECT  NUMBER_RECORD FROM GAME_DRAW_RESULT R WHERE R.LOTTERYID = T.LOTTERYID AND R.ISSUE_CODE = T.ISSUE_CODE )as numberRecord,
+		       L.DISPOSE_USER as apprUser,
+		       L.CREATE_TIME as apprTime,
+		       L.DISPOSE_MEMO as apprMemo
+		  FROM GAME_WARN_ORDER T
+		 <!--   left join GAME_DRAW_RESULT e 
+				on T.LOTTERYID = e.LOTTERYID and T.ISSUE_CODE = e.ISSUE_CODE-->
+		  left join GAME_WARN_ORDER_LOG L
+		  		on L.WARN_ORDER_ID=T.ID) t
+		  <include refid="gameWarnOperationsQueryDynamicWhere2" />
+		  ORDER BY t.ID DESC
+	</select>
+	
+	<select id="getGameWarnOrderByOrderCode" parameterType="string" resultMap="GameWarnOrderResult">
+	    select <include refid="gameWarnOrderColumns" /> from GAME_WARN_ORDER t where t.order_code =#{orderCode}
+	</select>
+	
+</mapper>

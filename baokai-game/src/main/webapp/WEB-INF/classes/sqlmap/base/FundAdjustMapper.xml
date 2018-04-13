@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundAdjustVO">
+	<resultMap id="FundAdjustResult"
+		type="com.winterframework.firefrog.fund.dao.vo.FundAdjustVO">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundAdjustColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USER_ID as userId,
+	        	APPLY_MEMO as applyMemo,
+	        	USER_ACCOUNT as userAccount,
+	        	AMT as amt,
+	        	APPR_ACCOUNT as apprAccount,
+	        	INCREASE as increase,
+	        	APPR_TIME as apprTime,
+	        	TYPE as type,
+	        	APPLY_ACCOUNT as applyAccount,
+	        	APPLY_TIME as applyTime,
+	        	SN as sn,
+	        	APPR_MEMO as apprMemo,
+	        	APPR_STATUS as apprStatus
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundAdjustVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_FUND_ADJUST_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_ADJUST (
+	        	ID ,
+	        	USER_ID ,
+	        	APPLY_MEMO ,
+	        	USER_ACCOUNT ,
+	        	AMT ,
+	        	APPR_ACCOUNT ,
+	        	INCREASE ,
+	        	APPR_TIME ,
+	        	TYPE ,
+	        	APPLY_ACCOUNT ,
+	        	APPLY_TIME ,
+	        	SN ,
+	        	APPR_MEMO ,
+	        	APPR_STATUS 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{applyMemo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{userAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{amt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{apprAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{increase,javaType=long,jdbcType=DECIMAL} ,
+	        	#{apprTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{applyAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{applyTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{sn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{apprMemo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{apprStatus,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>
+
+	</insert>
+
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.fund.dao.vo.FundAdjustVO">
+	    <![CDATA[
+	        UPDATE FUND_ADJUST SET
+		        USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,
+		        APPLY_MEMO = #{applyMemo,javaType=string,jdbcType=VARCHAR} ,
+		        USER_ACCOUNT = #{userAccount,javaType=string,jdbcType=VARCHAR} ,
+		        AMT = #{amt,javaType=long,jdbcType=DECIMAL} ,
+		        APPR_ACCOUNT = #{apprAccount,javaType=string,jdbcType=VARCHAR} ,
+		        INCREASE = #{increase,javaType=long,jdbcType=DECIMAL} ,
+		        APPR_TIME = #{apprTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        TYPE = #{type,javaType=long,jdbcType=DECIMAL} ,
+		        APPLY_ACCOUNT = #{applyAccount,javaType=string,jdbcType=VARCHAR} ,
+		        APPLY_TIME = #{applyTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SN = #{sn,javaType=string,jdbcType=VARCHAR} ,
+		        APPR_MEMO = #{apprMemo,javaType=string,jdbcType=VARCHAR} ,
+		        APPR_STATUS = #{apprStatus,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_ADJUST where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+
+	<select id="getFundAdjustById" parameterType="long" resultMap="FundAdjustResult"
+		flushCache="false">
+		select
+		<include refid="fundAdjustColumns" />
+		    <![CDATA[
+			    from FUND_ADJUST 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	
+	<select id="getByIds" parameterType="list" resultMap="FundAdjustResult"
+		flushCache="false">
+		select
+		<include refid="fundAdjustColumns" />
+		from FUND_ADJUST
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="fundAdjustDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(applyMemo)">
+				and APPLY_MEMO = #{applyMemo}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userAccount)">
+				and USER_ACCOUNT = #{userAccount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(amt)">
+				and AMT = #{amt}
+			</if>
+	       <if test="@Ognl@isNotEmpty(apprAccount)">
+				and APPR_ACCOUNT = #{apprAccount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(increase)">
+				and INCREASE = #{increase}
+			</if>
+	       <if test="@Ognl@isNotEmpty(apprTime)">
+				and APPR_TIME = #{apprTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(applyAccount)">
+				and APPLY_ACCOUNT = #{applyAccount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(applyTime)">
+				and APPLY_TIME = #{applyTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sn)">
+				and SN = #{sn}
+			</if>
+	       <if test="@Ognl@isNotEmpty(apprMemo)">
+				and APPR_MEMO = #{apprMemo}
+			</if>
+	       <if test="@Ognl@isNotEmpty(apprStatus)">
+				and APPR_STATUS = #{apprStatus}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="FundAdjustResult"  flushCache="false">
+    	select <include refid="fundAdjustColumns" />
+	    from FUND_ADJUST 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from FUND_ADJUST 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from FUND_ADJUST 
+		<include refid="fundAdjustDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="FundAdjustResult">
+    	select <include refid="fundAdjustColumns" />
+	    from FUND_ADJUST 
+		<include refid="fundAdjustDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="getCountByFundAdjust" resultType="long"
+		parameterType="HashMap">
+		select count(*) from FUND_ADJUST
+		<include refid="fundAdjustDynamicWhere" />
+	</select>
+    
+	<select id="queryFundAdjustList" resultMap="FundAdjustResult"
+		parameterType="HashMap">
+		select
+		<include refid="fundAdjustColumns" />
+		from FUND_ADJUST
+		<include refid="fundAdjustDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameECLog">
+	<resultMap id="GameECLogResult" type="com.winterframework.firefrog.game.dao.vo.GameECLog">
+	</resultMap>
+	
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameECLog" 
+			useGeneratedKeys="true" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_EC_LOG_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        Game_EC_Log (
+	        	id,
+	        	CUSTOMER ,
+	        	RECORDID ,
+	        	LOTTERY ,
+	        	ISSUE ,
+	        	REQUEST_TIME ,
+	        	ISSUE_NUMBER,
+	        	VERIFIED_TIME ,
+	        	EARLIEST_TIME ,
+	        	STOPSALE_TIME ,
+	        	DRAWING_TIME ,
+	        	SAFESTR,
+	        	TYPE ,
+	        	STRUUID,
+	        	STATUS,
+	        	MESSAGE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{customer,javaType=string,jdbcType=VARCHAR} ,
+	        	#{recordID,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lottery,javaType=string,jdbcType=VARCHAR} ,
+	        	#{issue,javaType=string,jdbcType=VARCHAR} ,
+	        	#{requestTime,javaType=string,jdbcType=VARCHAR} ,
+	        	#{issueNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	#{verifiedTime,javaType=string,jdbcType=VARCHAR},
+	        	#{earliestTime,javaType=string,jdbcType=VARCHAR} ,
+	        	#{stopsaleTime,javaType=string,jdbcType=VARCHAR} ,
+	        	#{drawingTime,javaType=string,jdbcType=VARCHAR} ,
+	        	#{safeStr,javaType=string,jdbcType=VARCHAR} ,
+	        	#{type,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{strUUID,javaType=string,jdbcType=VARCHAR},
+	        	#{status,javaType=string,jdbcType=VARCHAR},
+	        	#{message,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>	
+	
+		</insert>
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameECLog">
+	    <![CDATA[
+	        UPDATE Game_EC_Log SET
+		       CUSTOMER= #{customer,javaType=string,jdbcType=VARCHAR} ,
+	        	RECORDID =#{recordID,javaType=long,jdbcType=DECIMAL} ,
+	        	LOTTERY =#{lottery,javaType=string,jdbcType=VARCHAR} ,
+	        	ISSUE=#{issue,javaType=string,jdbcType=VARCHAR} ,
+	        	REQUEST_TIME=#{requestTime,javaType=string,jdbcType=VARCHAR} ,
+	        	ISSUE_NUMBER=#{issueNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	VERIFIED_TIME=#{verifiedTime,javaType=string,jdbcType=VARCHAR},
+	        	EARLIEST_TIME=#{earliestTime,javaType=string,jdbcType=VARCHAR} ,
+	        	STOPSALE_TIME=#{stopsaleTime,javaType=string,jdbcType=VARCHAR} ,
+	        	DRAWING_TIME=#{drawingTime,javaType=string,jdbcType=VARCHAR} ,
+	        	SAFESTR=#{safeStr,javaType=string,jdbcType=VARCHAR} ,
+	        	TYPE=#{type,javaType=integer,jdbcType=DECIMAL} ,
+	        	STRUUID=#{strUUID,javaType=string,jdbcType=VARCHAR},
+	        	STATUS =#{status,javaType=string,jdbcType=VARCHAR},
+	        	MESSAGE =#{message,javaType=string,jdbcType=VARCHAR} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+		<update id="upGameECLog" parameterType="map">
+	    <![CDATA[
+	        UPDATE Game_EC_Log set
+	        	SAFESTR=#{safestr} ,
+				STATUS=#{status}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	    
+</mapper>

@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond $1 !^(index\.php|img|images|js|css|install|files|robots\.txt|.*\.html|.*\.jpg|.*\.JPG|.*\.css|.*\.png|.*\.js|.*\.swf|.*\.php|.*\.gif)
+RewriteRule ^(.*)$ index.php/$1 [L]

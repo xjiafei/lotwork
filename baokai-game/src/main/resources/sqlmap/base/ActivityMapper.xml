@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.Activity">
+	<resultMap id="Activity" type="com.winterframework.firefrog.game.dao.vo.Activity">
+	</resultMap>
+	<resultMap id="dailyActivityResult" type="com.winterframework.firefrog.game.dao.vo.DailyActivityVo">
+	</resultMap>
+	<resultMap id="redEnvelopeResult" type="com.winterframework.firefrog.game.web.dto.RedEnvelopeStruc">
+	</resultMap>
+	<resultMap id="lotteryRecordResult" type="com.winterframework.firefrog.game.web.dto.LotteryRecordStruc">
+	</resultMap>
+		<resultMap id="lotteryResultResult" type="com.winterframework.firefrog.game.web.dto.LotteryResultStruc">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="configColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACTIVITY_NAME as  activityName,
+				START_TIME as  startTime,
+				END_TIME  as endTime ,
+				STATUS as status, 
+				ACTIVITY_TYPE as activityType , 
+				GMT_CREATED as  gmtCreated, 
+				GMT_MODIFIED as  gmtModified
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.Activity" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_ACTIVITY_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVITY (
+	        	ID ,
+	        	ACTIVITY_NAME,
+				START_TIME,
+				END_TIME  ,
+				STATUS, 
+				ACTIVITY_TYPE  , 
+				GMT_CREATED , 
+				GMT_MODIFIED 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{startTime,javaType=object,jdbcType=TIMESTAMP} ,	        
+	        	#{endTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityType,javaType=long,jdbcType=DECIMAL} ,	        	
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,	        
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.Activity">
+	    <![CDATA[
+	        UPDATE ACTIVITY SET		      
+		        ACTIVITY_NAME = #{activityName,javaType=string,jdbcType=VARCHAR} ,
+	        	START_TIME = #{startTime,javaType=object,jdbcType=TIMESTAMP} ,	        
+	        	END_TIME = #{endTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+	        	ACTIVITY_TYPE = #{activityType,javaType=long,jdbcType=DECIMAL} ,	        	
+	        	GMT_CREATED = #{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,	        
+	        	GMT_MODIFIED = #{gmtModified,javaType=object,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACTIVITY where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="Activity" flushCache="false">
+			select <include refid="configColumns" />
+		    <![CDATA[
+			    from ACTIVITY 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="Activity" flushCache="false">
+			select <include refid="configColumns" />
+			    from ACTIVITY 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="configDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(activityName)">
+				and ACTIVITY_NAME = #{activityName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(startTime)">
+				and START_TIME = #{startTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(endTime)">
+				and END_TIME = #{endTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and status = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(activityType)">
+				and ACTIVITY_TYPE = #{activityType}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtModified)">
+				and GMT_MODIFIED = #{gmtModified}
+			</if>
+	      
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="Activity"  flushCache="false">
+    	select <include refid="configColumns" />
+	    from ACTIVITY 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACTIVITY 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ACTIVITY 
+		<include refid="configDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="Activity">
+    	select <include refid="configColumns" />
+	    from ACTIVITY 
+		<include refid="configDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    <select id="getDailyActivityStruc" resultMap="dailyActivityResult" parameterType="hashmap">
+		   select count(id) betCount,
+		       to_char(order_time, 'yyyy-MM-dd') betDate,
+		       (select a.id
+		          from activity_user_award_log a
+		         where a.user_id = #{userId}
+		           and a.activity_id = 2
+		           and a.daily_bet_award_time = to_char(order_time, 'yyyy-MM-dd')) as rewardLogid
+		  from game_order o
+		 where status in (2, 3)
+		   and userid = #{userId}
+		   and ((o.plan_id is not null and
+		       (select min(d.id)
+		            from game_plan_detail d
+		           where d.planid = o.plan_id) = o.plan_detail_id) or
+		       o.plan_id is null)
+		   and order_time between
+		       to_date(#{startTime}, 'yyyy-MM-dd hh24:mi:ss') and
+		       to_date(#{endTime}, 'yyyy-MM-dd hh24:mi:ss') and exists(select * from game_slip s where o.id=s.orderid and s.money_mode=1 )
+		 Group by to_char(order_time, 'yyyy-MM-dd')
+
+</select>
+
+    <select id="getBetDays" resultType="Long" parameterType="hashmap">
+    select count(*) from (
+		   select count(id) betCount,
+		       to_char(order_time, 'yyyy-MM-dd') betDate
+		  from game_order o
+		 where status in (2, 3)
+		   and userid = #{userId}
+<!-- 		   and ((o.plan_id is not null and -->
+<!-- 		       (select min(d.id) -->
+<!-- 		            from game_plan_detail d -->
+<!-- 		           where d.planid = o.plan_id) = o.plan_detail_id) or -->
+<!-- 		       o.plan_id is null) -->
+		   and order_time between
+		       to_date(#{startTime}, 'yyyy-MM-dd hh24:mi:ss') and
+		       to_date(#{endTime}, 'yyyy-MM-dd hh24:mi:ss') and exists(select * from game_slip s where o.id=s.orderid and s.money_mode=1 )
+		 Group by to_char(order_time, 'yyyy-MM-dd'))
+
+</select>
+    <select id="getRewardNumber" resultType="Long" parameterType="hashmap">
+    select count(*) from ACTIVITY_USER_AWARD_LOG where user_id = #{userId} and ACTIVITY_ID=1 
+</select>
+    <select id="getRedEnvelopsByCondition" resultMap="redEnvelopeResult" parameterType="hashmap">
+		  select sum(o.totamount) as betAmount,(select account from user_customer where id=o.userid) as account,
+           to_char(order_time, 'yyyy-MM-dd') as betDate,
+           decode((select a.id
+              from activity_user_award_log a
+             where a.user_id =o.userId
+               and a.activity_id = 2
+               and a.daily_bet_award_time = to_char(order_time, 'yyyy-MM-dd')),null,0,1) as status,
+              decode((select a.reward_channel
+              from activity_user_award_log a
+             where a.user_id =o.userId
+               and a.activity_id = 2
+               and a.daily_bet_award_time = to_char(order_time, 'yyyy-MM-dd')),null,0,1,1,2,2,0) as  channel,
+               2 as award
+      from game_order o
+     where status in (2, 3)
+       and ((o.plan_id is not null and
+           (select min(d.id)
+                from game_plan_detail d
+               where d.planid = o.plan_id) = o.plan_detail_id) or
+           o.plan_id is null)
+       and order_time between
+           #{startTime} and #{endTime} and exists(select * from game_slip s where o.id=s.orderid and s.money_mode=1 )
+         <if test="@Ognl@isNotEmpty(account)">
+			and o.userId=(select id from user_customer where account=#{account})
+		</if>
+		<if test="@Ognl@isNotEmpty(status)">
+		and	decode((select a.id
+              from activity_user_award_log a
+              where a.user_id =o.userId
+              and a.activity_id = 2
+              and a.daily_bet_award_time = to_char(o.order_time, 'yyyy-MM-dd')),null,0,1)=#{status}
+		</if>
+		<if test="@Ognl@isNotEmpty(channel)">
+			  and decode((select a.reward_channel
+              from activity_user_award_log a
+              where a.user_id =o.userId
+              and a.activity_id = 2
+              and a.daily_bet_award_time = to_char(o.order_time, 'yyyy-MM-dd')),null,0,1,1,2,2,0)=#{channel}
+		</if>
+		 Group by to_char(order_time, 'yyyy-MM-dd'),o.userid order by betDate desc
+</select>
+
+    <select id="getRedEnvelopTotalCount" resultType="long" parameterType="hashmap">
+    select count(*) from (
+		  select sum(o.totamount) as betAmount,(select account from user_customer where id=o.userid) as account,
+           to_char(order_time, 'yyyy-MM-dd') as betDate,
+           decode((select a.id
+              from activity_user_award_log a
+             where a.user_id =o.userId
+               and a.activity_id = 2
+               and a.daily_bet_award_time = to_char(order_time, 'yyyy-MM-dd')),null,0,1) as status,
+               0 as channel,
+               2 as award
+      from game_order o
+     where status in (2, 3)
+       and ((o.plan_id is not null and
+           (select min(d.id)
+                from game_plan_detail d
+               where d.planid = o.plan_id) = o.plan_detail_id) or
+           o.plan_id is null)
+       and order_time between
+           #{startTime} and #{endTime} and exists(select * from game_slip s where o.id=s.orderid and s.money_mode=1 )
+         <if test="@Ognl@isNotEmpty(account)">
+			and o.userId=(select id from user_customer where account=#{account})
+		</if>
+		<if test="@Ognl@isNotEmpty(status)">
+		and	decode((select a.id
+              from activity_user_award_log a
+              where a.user_id =o.userId
+              and a.activity_id = 2
+              and a.daily_bet_award_time = to_char(o.order_time, 'yyyy-MM-dd')),null,0,1)=#{status}
+		</if>
+		<if test="@Ognl@isNotEmpty(channel)">
+			  and decode((select a.reward_channel
+              from activity_user_award_log a
+              where a.user_id =o.userId
+              and a.activity_id = 2
+              and a.daily_bet_award_time = to_char(o.order_time, 'yyyy-MM-dd')),null,0,1,1,2,2,0)=#{channel}
+		</if>
+		 Group by to_char(order_time, 'yyyy-MM-dd'),o.userid)
+</select>
+
+
+    <select id="getLotteryRecordByCondition" resultMap="lotteryRecordResult" parameterType="hashmap">
+            select (select account from user_customer where id=s.userid) as account,
+            trunc(count(s.betDate)/2) as totalLotteryCount,(select count(*) from  activity_user_award_log a where a.user_id= s.userid and a.activity_id=1) as useCount
+            from ( 
+		   	select o.userid, to_char(order_time, 'yyyy-MM-dd') as betDate
+		  	from game_order o
+		 	where status in (2, 3) and  order_time between #{startTime} and #{endTime} and exists(select * from game_slip s where o.id=s.orderid and s.money_mode=1 )
+		 		<if test="@Ognl@isNotEmpty(account)">
+		 		and o.userid=(select id from user_customer where account=#{account})
+		 		</if>
+		 	Group by to_char(order_time, 'yyyy-MM-dd'),o.userid)s group by s.userId
+</select>
+
+<select id="getLotteryRecordTotalCount" resultType="long" parameterType="hashmap">
+			select count(*) from (
+            select (select account from user_customer where id=s.userid) as account,
+            trunc(count(s.betDate)/2) as totalLotteryCount,(select count(*) from  activity_user_award_log a where a.user_id= s.userid and a.activity_id=1) as useCount
+            from ( 
+		   	select o.userid, to_char(order_time, 'yyyy-MM-dd') as betDate
+		  	from game_order o
+		 	where status in (2, 3) and order_time between #{startTime} and #{endTime} and exists(select * from game_slip s where o.id=s.orderid and s.money_mode=1 )
+		 	<if test="@Ognl@isNotEmpty(account)">
+		 		and o.userid=(select id from user_customer where account=#{account})
+		 	</if>
+		 	Group by to_char(order_time, 'yyyy-MM-dd'),o.userid)s group by s.userId)
+</select>
+
+
+
+    <select id="getLotteryResultByCondition" resultMap="lotteryResultResult" parameterType="hashmap">
+            select a.gmt_created as rewardTime,
+                   (select account from user_customer where id=a.user_id) as account,
+                   (select award_Name from ACTIVITY_AWARD_CONFIG where id=a.ACTIVITY_AWARD_CONFIG_ID) as rewardName,
+                   decode(a.reward_channel,null,0,a.reward_channel) as channel
+             from ACTIVITY_USER_AWARD_LOG a  where activity_id=1
+            	<if test="@Ognl@isNotEmpty(account)">
+		 		and a.user_id=(select id from user_customer where account=#{account})
+		 		</if>
+		 		<if test="@Ognl@isNotEmpty(startTime)">
+		 		and a.gmt_created>#{startTime}
+		 		</if>
+		 		<if test="@Ognl@isNotEmpty(endTime)">
+		 		 <![CDATA[
+		 			and a.gmt_created<#{endTime}
+		 		]]>
+		 		</if>
+		 		<if test="@Ognl@isNotEmpty(awardId)">
+		 		and a.ACTIVITY_AWARD_CONFIG_ID=#{awardId}
+		 		</if>
+		 		<if test="@Ognl@isNotEmpty(channel)">
+		 		and reward_channel=#{channel}
+		 		</if>
+		 		order by a.GMT_CREATED desc
+</select>
+
+    <select id="getLotteryResultTotalCount" resultType="long" parameterType="hashmap">
+    select count(*) from (
+        select a.gmt_created as rewardTime,
+                   (select account from user_customer where id=a.user_id) as account,
+                   (select award_Name from ACTIVITY_AWARD_CONFIG where id=a.ACTIVITY_AWARD_CONFIG_ID) as rewardName,
+                   decode(a.reward_channel,null,0,a.reward_channel,null) as channel
+             from ACTIVITY_USER_AWARD_LOG a  where activity_id=1
+            	<if test="@Ognl@isNotEmpty(account)">
+		 		and a.user_id=(select id from user_customer where account=#{account})
+		 		</if>
+		 		<if test="@Ognl@isNotEmpty(startTime)">
+		 		and a.gmt_created>#{startTime}
+		 		</if>
+		 		<if test="@Ognl@isNotEmpty(endTime)">
+		 		 <![CDATA[
+		 			and a.gmt_created<#{endTime}
+		 		]]>
+		 		</if>
+		 		<if test="@Ognl@isNotEmpty(awardId)">
+		 		and a.ACTIVITY_AWARD_CONFIG_ID=#{awardId}
+		 		</if>
+		 		<if test="@Ognl@isNotEmpty(channel)">
+		 		and reward_channel=#{channel}
+		 		</if>
+		 		)
+</select>
+
+
+</mapper>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GamePackageAssist">
+	<resultMap id="GamePackageAssistResult" type="com.winterframework.firefrog.game.dao.vo.GamePackageAssist">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gamePackageAssistColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ITEMID as itemid,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	CREATE_TIME as createTime,
+	        	EVALUATE_AWARD as evaluateAward,
+	        	EVALUATE_AWARD_DOWN as evaluateAwardDown,
+	        	UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GamePackageAssist" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_PACKAGE_ITEM_ASSIST_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_PACKAGE_ASSIST (
+	        	ID ,
+	        	ITEMID ,
+	        	BET_TYPE_CODE ,
+	        	CREATE_TIME ,
+	        	EVALUATE_AWARD ,
+	        	EVALUATE_AWARD_DOWN ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{itemid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{evaluateAward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{evaluateAwardDown,javaType=long,jdbcType=DECIMAL} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GamePackageAssist">
+	    <![CDATA[
+	        UPDATE GAME_PACKAGE_ASSIST SET
+		        ITEMID = #{itemid,javaType=long,jdbcType=DECIMAL} ,
+		        BET_TYPE_CODE = #{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        EVALUATE_AWARD = #{evaluateAward,javaType=long,jdbcType=DECIMAL} ,
+		        EVALUATE_AWARD_DOWN = #{evaluateAwardDown,javaType=long,jdbcType=DECIMAL} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_PACKAGE_ASSIST where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getItemByOrderId" parameterType="long" resultMap="GamePackageAssistResult" flushCache="false">
+			select <include refid="gamePackageAssistColumns" />
+		    <![CDATA[
+			    from GAME_PACKAGE_ASSIST 
+		        where 
+		        ITEMID = #{packageId} 
+		    ]]>
+		</select>		
+</mapper>

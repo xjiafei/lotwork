@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameBettypeStatus">
+	<resultMap id="GameBettypeStatusResult" type="com.winterframework.firefrog.game.dao.vo.GameBettypeStatus">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameBettypeStatusColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	THEORY_BONUS as theoryBonus,
+	        	GROUP_CODE_NAME as groupCodeName,
+	        	SET_CODE_NAME as setCodeName,
+	        	METHOD_CODE_NAME as methodCodeName,
+	        	GROUP_CODE_TITLE as groupCodeTitle,
+	        	SET_CODE_TITLE as setCodeTitle,
+	        	METHOD_CODE_TITLE as methodCodeTitle
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameBettypeStatus" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_BETTYPE_STATUS_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_BETTYPE_STATUS (
+	        	ID ,
+	        	LOTTERYID ,
+	        	GAME_GROUP_CODE ,
+	        	GAME_SET_CODE ,
+	        	BET_METHOD_CODE ,
+	        	STATUS ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	THEORY_BONUS
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameGroupCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{gameSetCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{betMethodCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{status,javaType=int,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP},
+	        	#{theoryBonus, javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameBettypeStatus">
+	    <![CDATA[
+	        UPDATE GAME_BETTYPE_STATUS SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_GROUP_CODE = #{gameGroupCode,javaType=int,jdbcType=DECIMAL} ,
+		        GAME_SET_CODE = #{gameSetCode,javaType=int,jdbcType=DECIMAL} ,
+		        BET_METHOD_CODE = #{betMethodCode,javaType=int,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=int,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        THEORY_BONUS = #{theoryBonus, javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+		<update id="updateForPublish" parameterType="com.winterframework.firefrog.game.dao.vo.GameBettypeStatus">
+	    <![CDATA[
+	        UPDATE GAME_BETTYPE_STATUS SET
+		        STATUS = #{status,javaType=int,jdbcType=DECIMAL} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP}
+	        WHERE 
+		        LOTTERYID = #{lotteryid} and
+		        GAME_GROUP_CODE = #{gameGroupCode} and
+		        GAME_SET_CODE = #{gameSetCode} and
+		        BET_METHOD_CODE = #{betMethodCode}
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_BETTYPE_STATUS where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameBettypeStatusResult" flushCache="false">
+			select <include refid="gameBettypeStatusColumns" />
+		    <![CDATA[
+			    from GAME_BETTYPE_STATUS 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>
+		
+		<select id="getAllByLotteryId" parameterType="long" resultMap="GameBettypeStatusResult" flushCache="false">
+			select <include refid="gameBettypeStatusColumns" />
+		    <![CDATA[
+			    from GAME_BETTYPE_STATUS 
+		        where 		        
+		        LOTTERYID = #{lotteryid} 
+		        order by game_group_code,game_set_code,bet_method_code
+		    ]]>
+		</select>
+		
+		<select id="getTheoryByLotteryId" parameterType="long" resultMap="GameBettypeStatusResult" flushCache="false">
+			select <include refid="gameBettypeStatusColumns" />
+		    <![CDATA[
+			    from GAME_BETTYPE_STATUS 
+		        where 
+		        LOTTERYID = #{lotteryid} 
+		        and STATUS = 1
+		        order by game_group_code, game_set_code, bet_method_code
+		    ]]>
+		</select>
+			
+		<select id="getByIds" parameterType="list"  resultMap="GameBettypeStatusResult" flushCache="false">
+			select <include refid="gameBettypeStatusColumns" />
+			    from GAME_BETTYPE_STATUS 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+		<select id="getTheoryBonus" parameterType="hashMap" resultType="long">
+			select theory_bonus from game_bettype_status t where t.lotteryid = #{lotteryId} and t.game_group_code = #{gameGroupCode} and t.game_set_code = #{gameSetCode} and t.bet_method_code = #{betMethodCode}  
+		</select>
+		
+		<select id="getGameBettypeStatusByLottery" parameterType="hashMap" resultMap="GameBettypeStatusResult">
+			select <include refid="gameBettypeStatusColumns" />
+			 from game_bettype_status t where t.lotteryid = #{lotteryId} and t.game_group_code = #{gameGroupCode} and t.game_set_code = #{gameSetCode} and t.bet_method_code = #{betMethodCode}  
+		</select>
+		
+		<select id="getStatus" parameterType="hashMap" resultType="long">
+			select decode(status,null,0,status) from game_bettype_status t where t.lotteryid = #{lotteryId} and t.game_group_code = #{gameGroupCode} and t.game_set_code = #{gameSetCode} and t.bet_method_code = #{betMethodCode}  
+		</select>
+
+	<sql id="gameBettypeStatusDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameGroupCode)">
+				and GAME_GROUP_CODE = #{gameGroupCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameSetCode)">
+				and GAME_SET_CODE = #{gameSetCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betMethodCode)">
+				and BET_METHOD_CODE = #{betMethodCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameBettypeStatusResult"  flushCache="false">
+    	select <include refid="gameBettypeStatusColumns" />
+	    from GAME_BETTYPE_STATUS 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_BETTYPE_STATUS 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_BETTYPE_STATUS 
+		<include refid="gameBettypeStatusDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameBettypeStatusResult">
+    	select <include refid="gameBettypeStatusColumns" />
+	    from GAME_BETTYPE_STATUS 
+		<include refid="gameBettypeStatusDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="getValidBetMethodByLotteryId" parameterType="long" resultMap="GameBettypeStatusResult" flushCache="false">
+		select <include refid="gameBettypeStatusColumns" />
+	    <![CDATA[
+		    from GAME_BETTYPE_STATUS 
+	        where 
+	        LOTTERYID = #{lotteryid} and status=1 order by orderby,GAME_GROUP_CODE ,GAME_SET_CODE ,BET_METHOD_CODE
+	    ]]>
+	</select>
+	
+	
+	<select id="getTheoryBonusFromAssis" parameterType="hashMap" resultType="long">
+		select THEORY_BONUS from GAME_BETTYPE_ASSIST where BETTYPEID = #{betTypeId} and METHOD_TYPE = #{methodType}
+	</select>
+
+	<select id="getByLotteryIdAndBetTypeCode" resultMap="GameBettypeStatusResult">
+       select <include refid="gameBettypeStatusColumns" />
+	     from GAME_BETTYPE_STATUS 
+		where bet_type_code=#{betTypeCode}
+		  and lotteryid=#{lotteryId}
+    </select>
+    <!-- 抓super2000的玩法betTypeCode -->
+	<select id="getSuper2000BetTypeCode" resultType="java.lang.String">
+    	SELECT DISTINCT(BET_TYPE_CODE) FROM GAME_BETTYPE_STATUS 
+		WHERE GROUP_CODE_NAME like '%_2000' ORDER BY BET_TYPE_CODE DESC 
+    </select>
+    
+    <!-- 抓super2000四級玩法betTypeCode -->
+    <select id="getSuper2000FOURLvlBtc" resultType="java.lang.String">
+    	SELECT DISTINCT(a.GAME_GROUP_CODE||'_'||a.GAME_SET_CODE||'_'||a.BET_METHOD_CODE||'_'||b.METHOD_TYPE) AS betTypeCode
+		FROM GAME_BETTYPE_STATUS a , GAME_BETTYPE_ASSIST b 
+		WHERE a.ID = b.BETTYPEID AND a.GAME_GROUP_CODE in 
+		(SELECT DISTINCT(GAME_GROUP_CODE) FROM GAME_BETTYPE_STATUS WHERE GROUP_CODE_NAME LIKE '%_2000')
+    </select>
+</mapper>

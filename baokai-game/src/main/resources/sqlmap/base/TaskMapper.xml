@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.sample.entity.Task">
+	<resultMap id="TaskResult" type="com.winterframework.firefrog.sample.entity.Task">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="taskColumns">
+	    <![CDATA[
+	        	id as id,
+	        	title as title
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.sample.entity.Task" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+					<selectKey resultType="long" order="AFTER" keyProperty="id">
+						select LAST_INSERT_ID() as value  
+			   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        task (
+	        	title 
+	        ) VALUES (
+	        	#{title,javaType=string,jdbcType=VARCHAR} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.sample.entity.Task">
+	    <![CDATA[
+	        UPDATE task SET
+		        title = #{title,javaType=string,jdbcType=VARCHAR} 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from task where
+		        id = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="TaskResult" flushCache="false">
+			select <include refid="taskColumns" />
+		    <![CDATA[
+			    from task 
+		        where 
+		        id = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="TaskResult" flushCache="false">
+			select <include refid="taskColumns" />
+			    from task 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="taskDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and id = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(title)">
+				and title = #{title}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="TaskResult"  flushCache="false">
+    	select <include refid="taskColumns" />
+	    from task 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from task 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from task 
+		<include refid="taskDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="TaskResult">
+    	select <include refid="taskColumns" />
+	    from task 
+		<include refid="taskDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

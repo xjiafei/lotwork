@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameLockAppraise">
+	<resultMap id="GameLockAppraiseResult" type="com.winterframework.firefrog.game.dao.vo.GameLockAppraise">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameLockAppraiseColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	GAME_ID as gameId,
+	        	TITLE as title,
+	        	TEMPLETE as templete,
+	        	GMT_MODIFIED as gmtModified,
+	        	GMT_CREATED as gmtCreated,
+	        	STATUS as status,
+	        	MODIFIER as modifier,
+	        	MIN_VAL as minVal,
+	        	CHANGE_STRUC as changeStruc,
+	        	CURR_USE as currUse,
+	        	CHANGE_STRUC_PROCESS changeStrucProcess
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameLockAppraise" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			     SELECT   SEQ_GAMELOCK_APPRAISE_ID.Nextval from dual
+   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_LOCK_APPRAISE (
+	        	ID ,
+	        	GAME_ID ,
+	        	TITLE ,
+	        	TEMPLETE ,
+	        	GMT_MODIFIED ,
+	        	GMT_CREATED ,
+	        	STATUS ,
+	        	MODIFIER ,
+	        	MIN_VAL ,
+	        	CHANGE_STRUC ,
+	        	CURR_USE,
+	        	CHANGE_STRUC_PROCESS
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{title,javaType=string,jdbcType=VARCHAR} ,
+	        	#{templete,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtModified,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{gmtCreated,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{modifier,javaType=long,jdbcType=DECIMAL} ,
+	        	#{minVal,javaType=long,jdbcType=DECIMAL} ,
+	        	#{changeStruc,javaType=string,jdbcType=VARCHAR} ,
+	        	#{currUse,javaType=long,jdbcType=DECIMAL},
+	        	#{changeStrucProcess,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>	
+	
+		</insert>
+		
+		<update id="updateCurUser" parameterType="long">
+			UPDATE GAME_LOCK_APPRAISE set CURR_USE=0,STATUS=2
+			where GAME_ID = (select GAME_ID from GAME_LOCK_APPRAISE where id=#{id})
+			and STATUS=4
+		</update>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameLockAppraise">
+	        UPDATE GAME_LOCK_APPRAISE 
+	        <set>
+	        <if test="@Ognl@isNotEmpty(gameId)">
+		        GAME_ID = #{gameId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(title)">
+		        TITLE = #{title,javaType=string,jdbcType=VARCHAR} ,
+		        </if>
+		    <if test="@Ognl@isNotEmpty(templete)">    
+		        TEMPLETE = #{templete,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(gmtModified)">
+		        GMT_MODIFIED = #{gmtModified,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(status)">
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(modifier)">
+		        MODIFIER = #{modifier,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		     <if test="@Ognl@isNotEmpty(minVal)">
+		        MIN_VAL = #{minVal,javaType=long,jdbcType=DECIMAL} ,
+		     </if>
+		     <if test="@Ognl@isNotEmpty(changeStruc)">   
+		        CHANGE_STRUC = #{changeStruc,javaType=string,jdbcType=VARCHAR} ,
+		     </if>
+		     <if test="@Ognl@isNotEmpty(currUse)">
+		        CURR_USE = #{currUse,javaType=long,jdbcType=DECIMAL} 
+		     </if>
+		     <if test="@Ognl@isNotEmpty(changeStrucProcess)">   
+		        CHANGE_STRUC_PROCESS = #{changeStrucProcess,javaType=string,jdbcType=VARCHAR} ,
+		     </if>
+		    </set>
+	        WHERE 
+		        ID = #{id} 
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_LOCK_APPRAISE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameLockAppraiseResult" flushCache="false">
+			select <include refid="gameLockAppraiseColumns" />
+		    <![CDATA[
+			    from GAME_LOCK_APPRAISE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>
+		
+		
+		
+		<select id="getCurrUserGameLockAppraise" parameterType="long" resultMap="GameLockAppraiseResult" flushCache="false">
+			select <include refid="gameLockAppraiseColumns" />
+		    <![CDATA[
+			    from GAME_LOCK_APPRAISE 
+		        where 
+		        GAME_ID = #{lotteryId} and CURR_USE = 1
+		    ]]>
+		</select>
+		
+		<select id="getAllGameLockAppraise" parameterType="long" resultMap="GameLockAppraiseResult" flushCache="false">
+			select <include refid="gameLockAppraiseColumns" />
+		    <![CDATA[
+			    from GAME_LOCK_APPRAISE 
+		        where 
+		        GAME_ID = #{lotteryId} order by GMT_MODIFIED desc,CURR_USE desc
+		    ]]>
+		</select>	
+		
+		<select id="deleteAllGameLockAppraise" parameterType="list"  resultMap="GameLockAppraiseResult" flushCache="false">
+			delete
+			    from GAME_LOCK_APPRAISE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>
+		
+		<select id="getByIds" parameterType="list"  resultMap="GameLockAppraiseResult" flushCache="false">
+			select <include refid="gameLockAppraiseColumns" />
+			    from GAME_LOCK_APPRAISE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameLockAppraiseDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameId)">
+				and GAME_ID = #{gameId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(title)">
+				and TITLE = #{title}
+			</if>
+	       <if test="@Ognl@isNotEmpty(templete)">
+				and TEMPLETE = #{templete}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtModified)">
+				and GMT_MODIFIED = #{gmtModified}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(modifier)">
+				and MODIFIER = #{modifier}
+			</if>
+	       <if test="@Ognl@isNotEmpty(minVal)">
+				and MIN_VAL = #{minVal}
+			</if>
+	       <if test="@Ognl@isNotEmpty(changeStruc)">
+				and CHANGE_STRUC = #{changeStruc}
+			</if>
+	       <if test="@Ognl@isNotEmpty(currUse)">
+				and CURR_USE = #{currUse}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameLockAppraiseResult"  flushCache="false">
+    	select <include refid="gameLockAppraiseColumns" />
+	    from GAME_LOCK_APPRAISE 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_LOCK_APPRAISE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_LOCK_APPRAISE 
+		<include refid="gameLockAppraiseDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameLockAppraiseResult">
+    	select <include refid="gameLockAppraiseColumns" />
+	    from GAME_LOCK_APPRAISE 
+		<include refid="gameLockAppraiseDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.MMCRanking">
+	<resultMap id="mmcRankingResult" type="com.winterframework.firefrog.game.dao.vo.MMCRanking">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="mmcRankingColumns">
+	    <![CDATA[
+	        	RANK as rank,
+	        	ID as id ,
+				ACCOUNT  as  account, 
+				AMOUNT  as  amount,
+				CREATE_DATE as   creatDate, 
+			  	IS_DAYONE  as isDayOne ,
+			  	UPDATE_DATE as updateDate ,
+			  	ORDER_CODE as orderCode
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.MMCRanking" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_ACTIVITY_MMCRANKING_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVITY_MMCRANKING (
+	        	ID ,
+	        	ACCOUNT  ,
+				AMOUNT  , 
+				CREATE_DATE  ,
+				IS_DAYONE ,
+				UPDATE_DATE ,
+				ORDER_CODE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{account,javaType=string,jdbcType=VARCHAR} ,
+	        	#{amount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{creatDate,javaType=object,jdbcType=TIMESTAMP} ,	        	
+	        	#{isDayOne,javaType=long,jdbcType=DECIMAL},
+	        	#{updateDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{orderCode,javaType=string,jdbcType=VARCHAR}  
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.MMCRanking">
+	    <![CDATA[
+	        UPDATE ACTIVITY_MMCRANKING SET
+	        	 ID = #{id,javaType=long,jdbcType=DECIMAL} ,
+	        	 ACCOUNT = #{account,javaType=string,jdbcType=VARCHAR} ,
+	        	 AMOUNT = #{amount,javaType=long,jdbcType=DECIMAL} ,	        	
+	        	 CREATE_DATE = #{creatDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	 IS_DAYONE = #{isDayOne,javaType=long,jdbcType=DECIMAL} ,
+	        	 UPDATE_DATE = #{updateDate,javaType=object,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	    <select id="queryByAccount" parameterType="hashmap" resultMap="mmcRankingResult" flushCache="false">
+		    select <include refid="mmcRankingColumns" /> from (
+			select row_number() over (order by a.amount desc,a.update_date) rank,a.* from ACTIVITY_MMCRANKING a 
+			where 
+			<![CDATA[
+			create_date BETWEEN to_date(#{beginDate},'YYYY-MM-DD HH24:MI:SS')
+			and	to_date(#{endDate},'YYYY-MM-DD HH24:MI:SS') 
+			) b where
+			ACCOUNT = #{account} 
+			]]>	
+		</select>	
+		<select id="queryTop" parameterType="hashmap"  resultMap="mmcRankingResult" flushCache="false">
+			select <include refid="mmcRankingColumns" /> from (
+			select row_number() over (order by a.amount desc,a.update_date) rank,a.* from ACTIVITY_MMCRANKING a 
+			where 
+			<![CDATA[
+			create_date BETWEEN to_date(#{beginDate},'YYYY-MM-DD HH24:MI:SS')
+			and	to_date(#{endDate},'YYYY-MM-DD HH24:MI:SS') 
+			) b where 
+			]]>	
+			<if test="@Ognl@isNotEmpty(rank)">
+				b.rank in <foreach item="rank" index="index" collection="rank" open="(" separator="," close=")">
+#{rank}				</foreach>	
+			</if> 
+			<if test="@Ognl@isEmpty(rank)">
+				<![CDATA[
+					b.rank <=10
+				]]>	
+			</if>
+			
+		</select>	
+		
+		<select id="queryHistory" parameterType="hashmap"  resultMap="mmcRankingResult" flushCache="false">
+			SELECT amount,account,creatDate
+  			FROM (SELECT ROW_NUMBER ()
+               OVER (PARTITION BY TRUNC (CREATE_DATE) ORDER BY amount DESC, update_date)
+                  rnk,
+               account,
+               TRUNC (CREATE_DATE) creatDate,
+               amount
+          FROM ACTIVITY_MMCRANKING)
+ 			WHERE rnk = 1
+ 			<![CDATA[
+ 			and TRUNC(creatDate) <> TRUNC(sysdate)
+ 			]]>	
+ 			order by creatDate asc
+		</select>	
+
+	
+</mapper>
