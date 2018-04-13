@@ -1,0 +1,1 @@
+java -jar RabbitMQCheck.jar test test 10.13.22.131 5672

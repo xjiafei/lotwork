@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<bean class="com.winterframework.modules.utils.SpringContextHolder" />
+	<context:component-scan base-package="com.winterframework.modules.spring.exetend" />
+	<context:component-scan base-package="com.winterframework.modules.spring.console" />
+	
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.winterframework.adbox"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- 转换message为json类型输出 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="com.winterframework.adbox.http.HttpMessageConverter">
+				<!-- True only for the blog article - a production system would set this 
+					to false to reduce the number of bytes sent across the wire: -->
+				<property name="prettyPrint" value="true" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 拦截器 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*" />
+			<bean class="com.winterframework.adbox.web.controller.SpringMVCInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<bean id="propertyConfigurer"
+		class="com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/application.properties</value>
+				<value>classpath:/db.properties</value>
+				<value>classpath:/redis.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
+	<mvc:default-servlet-handler />
+	<!-- 定义无Controller的path<->view直接映射 -->
+	
+
+	
+	<mvc:interceptors>
+        <!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	</mvc:interceptors>
+	<!-- Saves a locale change using a session-->
+	<bean id="localeResolver"
+    	class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+	<!-- 国际化文件 -->
+	<bean id="messageSource"
+	class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    	<property name="basename" value="/language/language" />
+    	<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+	
+	<!-- Unfortunately we have to repeat an instance of this class here because 
+		the mvc:message-converters element above does not support <ref/> elements: -->
+	<bean id="jacksonHttpMessageConverter"
+		class="com.winterframework.adbox.http.HttpMessageConverter">
+		<!-- True only for the blog article - a production system would set this 
+					to false to reduce the number of bytes sent across the wire: -->
+		<property name="prettyPrint" value="true" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
+		
+		<property name="defaultContentType"
+			value="#{T(org.springframework.http.MediaType).APPLICATION_JSON}" />
+		
+	</bean>
+	<!--- StringHttpMessageConverter bean -->
+	<bean id = "stringHttpMessageConverter" class = "org.springframework.http.converter.StringHttpMessageConverter"/>
+	
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- Allow Exceptions to be handled in annotated methods if desired. Otherwise 
+		fallback to the 'restExceptionResolver' below: -->
+	<bean id="annotationMethodHandlerExceptionResolver"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
+		<property name= "messageConverters" >
+		<list>
+                 <!-- 新增的StringMessageConverter bean-->
+                 <ref bean= "stringHttpMessageConverter" />
+        </list>
+        </property>
+	</bean>
+	
+	<bean id="multipartResolver"  
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+    <property name="defaultEncoding" value="UTF-8" />  
+    <!-- 指定所上传文件的总大小不能超过204800000B。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->  
+    <property name="maxUploadSize" value="2097152000"></property>
+    <property name="maxInMemorySize" value="40960"></property>  
+  
+	</bean>
+	<!-- <bean id="restExceptionResolver"
+	class="com.winterframework.adbox.restful.RestExceptionHandler">
+		<property name="order" value="100" />
+		<property name="messageConverters">
+			<list>
+				<ref bean="jacksonHttpMessageConverter" />
+			</list>
+		</property> 
+		<property name="errorResolver">
+			<bean
+				class="com.winterframework.efamily.base.restful.DefaultRestErrorResolver">
+				<property name="localeResolver" ref="localeResolver" />
+				<property name="defaultMoreInfoUrl" value="mailto:support@mycompany.com" />
+			</bean>
+		</property>
+	</bean> -->
+	<aop:aspectj-autoproxy />
+</beans>
+ 

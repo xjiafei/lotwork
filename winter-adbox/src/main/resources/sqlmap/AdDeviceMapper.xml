@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.adbox.entity.AdDevice">
+	<resultMap id="AdDeviceResult" type="com.winterframework.adbox.entity.AdDevice">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="adDeviceColumns">
+	    <![CDATA[
+	        	id as id,
+	        	user_id as userId,
+	        	code as code,
+	        	address as address,
+	        	status as status,
+	        	onffline as onffline,
+	        	heartbeat_time as heartbeatTime,
+	        	battery as battery,
+	        	lock_screen as lockScreen,
+	        	remark as remark,
+	        	creator_id as creator,
+	        	create_time as gmtCreated,
+	        	updator_id as modifier,
+	        	update_time as gmtModified
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.adbox.entity.AdDevice" 
+			useGeneratedKeys="true" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        ad_device (
+	        	user_id ,
+	        	code ,
+	        	address ,
+	        	onffline ,
+	        	status,
+	        	heartbeat_time,
+	        	battery ,
+	        	lock_screen ,
+	        	remark ,
+	        	creator_id ,
+	        	create_time
+	        ) VALUES (
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{code,javaType=string,jdbcType=VARCHAR} ,
+	        	#{address,javaType=string,jdbcType=VARCHAR} ,
+	        	#{onffline,javaType=integer,jdbcType=INTEGER} ,
+	        	#{status,javaType=integer,jdbcType=INTEGER} ,
+	        	#{heartbeatTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{battery,javaType=integer,jdbcType=INTEGER} ,
+	        	#{lockScreen,javaType=integer,jdbcType=INTEGER} ,
+	        	#{remark,javaType=string,jdbcType=VARCHAR} ,
+	        	#{creator,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.adbox.entity.AdDevice">
+	    <![CDATA[
+	        UPDATE ad_device SET
+		        user_id = #{userId,javaType=long,jdbcType=DECIMAL} ,
+		        code = #{code,javaType=string,jdbcType=VARCHAR} ,
+		        address = #{address,javaType=string,jdbcType=VARCHAR} ,
+		        onffline = #{onffline,javaType=integer,jdbcType=INTEGER} ,
+		        heartbeat_time = #{heartbeatTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        status = #{status,javaType=integer,jdbcType=INTEGER} ,
+		        battery = #{battery,javaType=integer,jdbcType=INTEGER} ,
+		        lock_screen = #{lockScreen,javaType=integer,jdbcType=INTEGER} ,
+		        remark = #{remark,javaType=string,jdbcType=VARCHAR} ,
+		        updator_id = #{modifier,javaType=long,jdbcType=DECIMAL} ,
+		        update_time = #{gmtModified,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ad_device where
+		        id = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="AdDeviceResult" flushCache="false">
+			select <include refid="adDeviceColumns" />
+		    <![CDATA[
+			    from ad_device 
+		        where 
+		        id = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AdDeviceResult" flushCache="false">
+			select <include refid="adDeviceColumns" />
+			    from ad_device 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="adDeviceDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and id = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				and user_id = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(code)">
+				and code = #{code}
+			</if>
+	       <if test="@Ognl@isNotEmpty(address)">
+				and address = #{address}
+			</if>
+			
+			and status != 4
+
+	       <if test="@Ognl@isNotEmpty(onffline)">
+				and onffline = #{onffline}
+			</if>
+	       <if test="@Ognl@isNotEmpty(battery)">
+				and battery = #{battery}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lockScreen)">
+				and lock_screen = #{lockScreen}
+			</if>
+	       <if test="@Ognl@isNotEmpty(remark)">
+				and remark = #{remark}
+			</if>
+	       <if test="@Ognl@isNotEmpty(creator)">
+				and creator_id = #{creator}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and create_time = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(modifier)">
+				and updator_id = #{modifier}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtModified)">
+				and update_time = #{gmtModified}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AdDeviceResult"  flushCache="false">
+    	select <include refid="adDeviceColumns" />
+	    from ad_device 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ad_device 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ad_device 
+		<include refid="adDeviceDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AdDeviceResult">
+    	select <include refid="adDeviceColumns" />
+	    from ad_device 
+		<include refid="adDeviceDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+	<select id="getObjByAttribute" resultMap="AdDeviceResult">
+    	select <include refid="adDeviceColumns" />
+	    from ad_device 
+		<include refid="adDeviceDynamicWhere"/>
+    </select>
+    
+    
+    <select id="getAdDeviceList" resultMap="AdDeviceResult">
+    	select <include refid="adDeviceColumns" />
+	    from ad_device 
+		<include refid="adDeviceDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sort)">
+			order by ${sort}
+		</if>
+		<if test="@Ognl@isEmpty(sort)">
+			order by create_time desc,heartbeat_time asc ,status asc,battery asc
+		</if>
+		limit #{startNo},#{endNo}
+    </select>
+</mapper>

@@ -1,0 +1,30 @@
+[16/04/30 03:39:14][INFO] account:,startDate:2016/04/14,endDate:2016/04/22,types:撤销派奖,转入,
+[16/04/30 03:39:14][ERROR] java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.String;
+[16/04/30 03:40:36][INFO] account:,startDate:2016/04/13,endDate:2016/04/23,types:转入,管理员增,
+[16/04/30 03:40:36][ERROR] java.text.ParseException: Unparseable date: "2016/04/13"
+[16/04/30 03:41:51][INFO] account:,startDate:2016/04/19,endDate:2016/04/21,types:撤销派奖,转入,充值,
+[16/04/30 03:41:51][INFO] DB URL:jdbc:oracle:thin:@10.6.95.46:1521/gamebi,UserName:firefog
+[16/04/30 03:41:51][INFO] queryFundChangeLog start
+[16/04/30 03:41:51][INFO] getConnection...
+[16/04/30 03:41:51][INFO] DB URL:jdbc:oracle:thin:@10.6.95.46:1521/gamebi,UserName:firefog
+[16/04/30 03:41:51][INFO] queryFundChangeLog start
+[16/04/30 03:41:51][INFO] getConnection...
+[16/04/30 03:57:34][INFO] account:,startDate:2016/02/08,endDate:2016/04/30,types:撤销派奖,管理员增,充值,
+[16/04/30 03:58:33][INFO] account:,startDate:2016/02/08,endDate:2016/04/30,types:撤销派奖,管理员增,充值,
+[16/04/30 04:00:59][INFO] account:,startDate:2016/04/14,endDate:2016/04/20,types:客户理赔,转入,撤销派奖,充值,
+[16/04/30 04:01:01][INFO] progress:1/2
+[16/04/30 04:01:01][INFO] progress:1/2
+[16/04/30 04:03:08][INFO] account:,startDate:2016/04/07,endDate:2016/04/09,types:撤销派奖,
+[16/04/30 04:03:10][INFO] progress:1/2
+[16/04/30 04:03:10][INFO] progress:2/2
+[16/04/30 04:03:27][INFO] account:,startDate:2016/04/07,endDate:2016/04/09,types:撤销派奖,
+[16/04/30 04:03:29][INFO] progress:1/2
+[16/04/30 04:03:29][INFO] progress:2/2
+[16/04/30 04:09:33][INFO] account:,startDate:null,endDate:null,types:
+[16/04/30 04:09:33][INFO] account:,startDate:null,endDate:null,types:
+[16/04/30 04:09:35][INFO] account:,startDate:null,endDate:null,types:
+[16/04/30 04:14:53][INFO] account:,startDate:null,endDate:null,types:撤销派奖,转入,
+[16/04/30 04:14:58][INFO] account:,startDate:null,endDate:null,types:转入,管理员增,
+[16/04/30 04:15:01][INFO] account:,startDate:null,endDate:null,types:撤销派奖,
+[16/04/30 04:15:05][INFO] account:,startDate:null,endDate:null,types:客户理赔,撤销派奖,转入,管理员增,充值,
+[16/04/30 04:15:08][INFO] account:,startDate:null,endDate:null,types:客户理赔,撤销派奖,撤单费用,

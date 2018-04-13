@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="201.0" prefWidth="278.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="225.0" prefWidth="278.0" VBox.vgrow="ALWAYS">
+         <children>
+            <DatePicker layoutX="76.0" layoutY="54.0" />
+            <DatePicker layoutX="76.0" layoutY="88.0" />
+            <ComboBox layoutX="76.0" layoutY="122.0" prefHeight="26.0" prefWidth="190.0" />
+            <Label layoutX="11.0" layoutY="23.0" text="Account" />
+            <Label layoutX="23.0" layoutY="59.0" text="Start" />
+            <Label layoutX="25.0" layoutY="93.0" text="End" />
+            <Button layoutX="208.0" layoutY="160.0" mnemonicParsing="false" text="Export" />
+            <ProgressBar layoutX="24.0" layoutY="163.0" prefHeight="20.0" prefWidth="174.0" progress="0.0" />
+            <Label layoutX="20.0" layoutY="127.0" text="Type" />
+            <TextField layoutX="76.0" layoutY="18.0" prefHeight="26.0" prefWidth="190.0" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

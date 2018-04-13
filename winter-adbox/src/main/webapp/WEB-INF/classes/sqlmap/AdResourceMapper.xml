@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.adbox.entity.AdResource">
+	<resultMap id="AdResourceResult" type="com.winterframework.adbox.entity.AdResource">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="adResourceColumns">
+	    <![CDATA[
+	        	id as id,
+	        	user_id as userId,
+	        	ext_Type as extType,
+	        	file_Path as filePath,
+	        	file_Name as fileName,
+	        	remark as remark,
+	        	creator_id as creator,
+	        	create_time as gmtCreated,
+	        	updator_id as modifier,
+	        	update_time as gmtModified
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.adbox.entity.AdResource" 
+			useGeneratedKeys="true" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        ad_resource (
+	        	user_id ,
+	        	ext_Type ,
+	        	file_Path ,
+	        	file_Name ,
+	        	remark ,
+	        	creator_id ,
+	        	create_time 
+	        ) VALUES (
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{extType,javaType=string,jdbcType=VARCHAR} ,
+	        	#{filePath,javaType=string,jdbcType=VARCHAR} ,
+	        	#{fileName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{remark,javaType=string,jdbcType=VARCHAR} ,
+	        	#{creator,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.adbox.entity.AdResource">
+	    <![CDATA[
+	        UPDATE ad_resource SET
+		        ext_Type = #{extType,javaType=string,jdbcType=VARCHAR} ,
+		        user_id = #{userId,javaType=long,jdbcType=DECIMAL} ,
+		        file_Path = #{filePath,javaType=string,jdbcType=VARCHAR} ,
+		        file_Name = #{fileName,javaType=string,jdbcType=VARCHAR} ,
+		        remark = #{remark,javaType=string,jdbcType=VARCHAR} ,
+		        updator_id = #{modifier,javaType=long,jdbcType=DECIMAL} ,
+		        update_time = #{gmtModified,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ad_resource where
+		        id = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="AdResourceResult" flushCache="false">
+			select <include refid="adResourceColumns" />
+		    <![CDATA[
+			    from ad_resource 
+		        where 
+		        id = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AdResourceResult" flushCache="false">
+			select <include refid="adResourceColumns" />
+			    from ad_resource 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="adResourceDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and id = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and user_id = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(extType)">
+				and ext_Type = #{extType}
+			</if>
+	       <if test="@Ognl@isNotEmpty(filePath)">
+				and file_Path = #{filePath}
+			</if>
+	       <if test="@Ognl@isNotEmpty(fileName)">
+				and file_Name = #{fileName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(remark)">
+				and remark = #{remark}
+			</if>
+	       <if test="@Ognl@isNotEmpty(creator)">
+				and creator_id = #{creator}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and create_time = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(modifier)">
+				and updator_id = #{modifier}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtModified)">
+				and update_time = #{gmtModified}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AdResourceResult"  flushCache="false">
+    	select <include refid="adResourceColumns" />
+	    from ad_resource 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ad_resource 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ad_resource 
+		<include refid="adResourceDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AdResourceResult">
+    	select <include refid="adResourceColumns" />
+	    from ad_resource 
+		<include refid="adResourceDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+	<select id="getObjByAttribute" resultMap="AdResourceResult">
+    	select <include refid="adResourceColumns" />
+	    from ad_resource 
+		<include refid="adResourceDynamicWhere"/>
+		order by create_time desc
+    </select>
+
+
+	
+</mapper>

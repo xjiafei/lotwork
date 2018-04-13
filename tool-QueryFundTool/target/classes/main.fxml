@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="462.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="306.0" prefWidth="482.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label layoutX="12.0" layoutY="32.0" prefHeight="16.0" prefWidth="75.0" text="Account" />
+            <Label layoutX="22.0" layoutY="68.0" prefHeight="16.0" prefWidth="57.0" text="Start" />
+            <Label layoutX="24.0" layoutY="102.0" prefHeight="16.0" prefWidth="57.0" text="End" />
+            <Button fx:id="btnExport" layoutX="224.0" layoutY="137.0" mnemonicParsing="false" onAction="#btnExportOnClick" text="Export" />
+            <ProgressBar fx:id="progressbar" layoutX="8.0" layoutY="140.0" prefHeight="20.0" prefWidth="202.0" progress="0.0" />
+            <TextField fx:id="txtAccount" layoutX="92.0" layoutY="27.0" prefHeight="26.0" prefWidth="190.0" promptText="leotest (can null)" />
+            <ListView fx:id="listviewType" layoutX="299.0" layoutY="27.0" prefHeight="140.0" prefWidth="101.0" />
+            <TextField fx:id="txtStartDate" layoutX="92.0" layoutY="63.0" prefHeight="26.0" prefWidth="190.0" promptText="yyyy/MM/dd (not null)" />
+            <TextField fx:id="txtEndDate" layoutX="92.0" layoutY="97.0" prefHeight="26.0" prefWidth="190.0" promptText="yyyy/MM/dd (not null)" />
+            <TextArea fx:id="txtAreaAccount" layoutX="92.0" layoutY="201.0" prefHeight="53.0" prefWidth="307.0" promptText="leotest;leotest1d;sksk(not null)" />
+            <Label layoutX="15.0" layoutY="201.0" prefHeight="26.0" prefWidth="75.0" text="Account" />
+            <ProgressBar fx:id="progressbar2" layoutX="6.0" layoutY="267.0" prefHeight="20.0" prefWidth="202.0" progress="0.0" />
+            <Label layoutY="175.0" prefHeight="16.0" prefWidth="414.0" style="-fx-background-color: #ddd;" text="   Export Bank Card">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutY="3.0" prefHeight="16.0" prefWidth="414.0" style="-fx-background-color: #ddd;" text="   Export Fund Report">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnExport2" layoutX="224.0" layoutY="264.0" mnemonicParsing="false" onAction="#btnExport2OnClick" prefHeight="26.0" prefWidth="171.0" text="Export bank card" />
+            <Label layoutY="300.0" prefHeight="16.0" prefWidth="414.0" style="-fx-background-color: #ddd;" text="   Log">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txtAreaLog" editable="false" layoutY="316.0" prefHeight="148.0" prefWidth="414.0" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

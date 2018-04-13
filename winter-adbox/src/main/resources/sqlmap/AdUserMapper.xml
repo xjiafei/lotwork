@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.adbox.entity.AdUser">
+	<resultMap id="AdUserResult" type="com.winterframework.adbox.entity.AdUser">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="adUserColumns">
+	    <![CDATA[
+	        	id as id,
+	        	name as name,
+	        	password as password,
+	        	type as type,
+	        	status as status,
+	        	parent_id as parentId,
+	        	remark as remark,
+	        	creator_id as creator,
+	        	create_time as gmtCreated,
+	        	updator_id as modifier,
+	        	update_time as gmtModified
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.adbox.entity.AdUser" 
+			useGeneratedKeys="true" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        ad_user (
+	        	name ,
+	        	password ,
+	        	type ,
+	        	status ,
+	        	parent_id,
+	        	remark ,
+	        	creator_id ,
+	        	create_time 
+	        ) VALUES (
+	        	#{name,javaType=string,jdbcType=VARCHAR} ,
+	        	#{password,javaType=string,jdbcType=VARCHAR} ,
+	        	#{type,javaType=integer,jdbcType=INTEGER} ,
+	        	#{status,javaType=integer,jdbcType=INTEGER} ,
+	        	#{parentId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{remark,javaType=string,jdbcType=VARCHAR} ,
+	        	#{creator,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=date,jdbcType=TIMESTAMP}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.adbox.entity.AdUser">
+	    <![CDATA[
+	        UPDATE ad_user SET
+		        name = #{name,javaType=string,jdbcType=VARCHAR} ,
+		        password = #{password,javaType=string,jdbcType=VARCHAR} ,
+		        type = #{type,javaType=integer,jdbcType=INTEGER} ,
+		        status = #{status,javaType=integer,jdbcType=INTEGER} ,
+		        parent_id = #{parentId,javaType=long,jdbcType=DECIMAL} ,
+		        remark = #{remark,javaType=string,jdbcType=VARCHAR} ,
+		        updator_id = #{modifier,javaType=long,jdbcType=DECIMAL} ,
+		        update_time = #{gmtModified,javaType=date,jdbcType=TIMESTAMP} ,
+		        create_time = #{gmtModified,javaType=date,jdbcType=TIMESTAMP}
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ad_user where
+		        id = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="AdUserResult" flushCache="false">
+			select <include refid="adUserColumns" />
+		    <![CDATA[
+			    from ad_user 
+		        where 
+		        id = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="AdUserResult" flushCache="false">
+			select <include refid="adUserColumns" />
+			    from ad_user 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="adUserDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and id = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(name)">
+				and name = #{name}
+			</if>
+	       <if test="@Ognl@isNotEmpty(password)">
+				and password = #{password}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				and type = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and status = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(parentId)">
+				and parent_id = #{parentId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(remark)">
+				and remark = #{remark}
+			</if>
+	       <if test="@Ognl@isNotEmpty(creator)">
+				and creator_id = #{creator}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and create_time = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(modifier)">
+				and updator_id = #{modifier}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtModified)">
+				and update_time = #{gmtModified}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="AdUserResult"  flushCache="false">
+    	select <include refid="adUserColumns" />
+	    from ad_user 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ad_user 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ad_user 
+		<include refid="adUserDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="AdUserResult">
+    	select <include refid="adUserColumns" />
+	    from ad_user 
+		<include refid="adUserDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+	<select id="getObjByAttribute" resultMap="AdUserResult">
+    	select <include refid="adUserColumns" />
+	    from ad_user 
+		<include refid="adUserDynamicWhere"/>
+		order by create_time desc
+    </select>
+    
+    
+    <select id="getUserList" resultMap="AdUserResult">
+    	select <include refid="adUserColumns" />
+	    from ad_user 
+	    <if test="@Ognl@isNotEmpty(userName)">
+			and name = #{userName}
+		</if>
+		order by create_time desc
+    </select>
+
+
+	
+</mapper>

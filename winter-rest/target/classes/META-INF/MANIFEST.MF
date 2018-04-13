@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: ibm
+Build-Jdk: 1.8.0_121
+Specification-Title: winter-rest
+Specification-Version: 1.1
+Implementation-Title: winter-rest
+Implementation-Version: 1.1
+Implementation-Vendor-Id: com.winterframework
+Created-By: Maven Integration for Eclipse
+
