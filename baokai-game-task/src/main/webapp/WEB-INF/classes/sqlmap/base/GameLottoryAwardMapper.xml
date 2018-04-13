@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.entity.GameLottoryAward">
+	<resultMap id="GameLottoryAwardResult" type="com.winterframework.firefrog.user.entity.GameLottoryAward">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameLottoryAwardColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTORYID as lottoryid,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	ACTUAL_BONUS as actualBonus,
+	        	THEORY_BONUS as theoryBonus,
+	        	AWARD_GROUP_ID as awardGroupId,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.user.entity.GameLottoryAward" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_LOTTORY_AWARD_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_LOTTORY_AWARD (
+	        	ID ,
+	        	LOTTORYID ,
+	        	GAME_GROUP_CODE ,
+	        	GAME_SET_CODE ,
+	        	BET_METHOD_CODE ,
+	        	ACTUAL_BONUS ,
+	        	THEORY_BONUS ,
+	        	AWARD_GROUP_ID ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lottoryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameGroupCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameSetCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betMethodCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{actualBonus,javaType=string,jdbcType=VARCHAR} ,
+	        	#{theoryBonus,javaType=string,jdbcType=VARCHAR} ,
+	        	#{awardGroupId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=object,jdbcType=OTHER} ,
+	        	#{updateTime,javaType=object,jdbcType=OTHER} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.user.entity.GameLottoryAward">
+	    <![CDATA[
+	        UPDATE GAME_LOTTORY_AWARD SET
+		        LOTTORYID = #{lottoryid,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_GROUP_CODE = #{gameGroupCode,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_SET_CODE = #{gameSetCode,javaType=long,jdbcType=DECIMAL} ,
+		        BET_METHOD_CODE = #{betMethodCode,javaType=long,jdbcType=DECIMAL} ,
+		        ACTUAL_BONUS = #{actualBonus,javaType=string,jdbcType=VARCHAR} ,
+		        THEORY_BONUS = #{theoryBonus,javaType=string,jdbcType=VARCHAR} ,
+		        AWARD_GROUP_ID = #{awardGroupId,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=object,jdbcType=OTHER} ,
+		        UPDATE_TIME = #{updateTime,javaType=object,jdbcType=OTHER} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_LOTTORY_AWARD where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameLottoryAwardResult" flushCache="false">
+			select <include refid="gameLottoryAwardColumns" />
+		    <![CDATA[
+			    from GAME_LOTTORY_AWARD 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameLottoryAwardResult" flushCache="false">
+			select <include refid="gameLottoryAwardColumns" />
+			    from GAME_LOTTORY_AWARD 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameLottoryAwardDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lottoryid)">
+				and LOTTORYID = #{lottoryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameGroupCode)">
+				and GAME_GROUP_CODE = #{gameGroupCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameSetCode)">
+				and GAME_SET_CODE = #{gameSetCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betMethodCode)">
+				and BET_METHOD_CODE = #{betMethodCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(actualBonus)">
+				and ACTUAL_BONUS = #{actualBonus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(theoryBonus)">
+				and THEORY_BONUS = #{theoryBonus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(awardGroupId)">
+				and AWARD_GROUP_ID = #{awardGroupId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameLottoryAwardResult"  flushCache="false">
+    	select <include refid="gameLottoryAwardColumns" />
+	    from GAME_LOTTORY_AWARD 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_LOTTORY_AWARD 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_LOTTORY_AWARD 
+		<include refid="gameLottoryAwardDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameLottoryAwardResult">
+    	select <include refid="gameLottoryAwardColumns" />
+	    from GAME_LOTTORY_AWARD 
+		<include refid="gameLottoryAwardDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

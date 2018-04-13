@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.winterframework.firefrog.active.dao.vo.ActivityConfig">
+
+	<resultMap id="result" type="com.winterframework.firefrog.active.dao.vo.ActivityConfig">
+			<result column="ID" property="id"/>
+			<result column="BEGIN_TIME" property="beginTime"/>
+			<result column="END_TIME" property="endTime"/>
+			<result column="MAX_PRIZE" property="maxPrize"/>
+			<result column="MIN_PRIZE" property="minPrize"/>
+			<result column="MEMO" property="memo"/>
+			<result column="ODDS" property="odds"/> 
+			<result column="ACTIVITYID" property="activityId"/>
+			<result column="TYPE" property="type"/>	
+			<result column="RULE" property="rule"/>	
+	</resultMap>
+	
+	<sql id="fields">ID,BEGIN_TIME,END_TIME,MAX_PRIZE,MIN_PRIZE,MEMO,ODDS,ACTIVITYID,TYPE,RULE
+	</sql>
+	
+	<sql id="DynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+
+			<if test="@Ognl@isNotEmpty(beginTime)">
+				and (BEGIN_TIME >= #{beginTime} or BEGIN_TIME is null)
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(endTime)">
+	       		<![CDATA[
+				and (END_TIME <= #{endTime} or END_TIME is null)
+				]]>
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(maxPrize)">
+				and MAX_PRIZE = #{maxPrize}
+			</if>
+			<if test="@Ognl@isNotEmpty(minPrize)">
+				and MIN_PRIZE = #{minPrize}
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				and MEMO = #{memo}
+			</if>
+			<if test="@Ognl@isNotEmpty(odds)">
+				and ODDS = #{odds}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(activityId)">
+				and ACTIVITYID = #{activityId}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+			<if test="@Ognl@isNotEmpty(rule)">
+				and RULE = #{rule}
+			</if>
+		</where>
+	</sql>
+	
+	 
+    <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.active.dao.vo.ActivityConfig" 
+			useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_ACTIVITY_CONFIG.Nextval from dual
+			   	    </selectKey>
+		<![CDATA[
+	        INSERT INTO
+	        ACTIVITY_CONFIG (
+	        	ID,
+	        	BEGIN_TIME,
+	        	END_TIME,
+	        	MAX_PRIZE,
+	        	MIN_PRIZE,
+				MEMO,
+				ODDS, 
+				ACTIVITYID,
+				TYPE,
+				RULE
+			) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{beginTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{endTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{maxPrize,javaType=long,jdbcType=DECIMAL} ,
+	        	#{minPrize,javaType=long,jdbcType=DECIMAL} ,	        
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{odds,javaType=long,jdbcType=DECIMAL} ,       	
+	        	#{activityId,javaType=long,jdbcType=DECIMAL},   
+	        	#{type,javaType=string,jdbcType=VARCHAR},    
+	        	#{rule,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>	
+	
+		</insert>
+				
+		<select id="queryActivityConfigByType" resultMap="result" 
+			parameterType="com.winterframework.firefrog.active.dao.vo.ActivityConfig" flushCache="false">
+	    	SELECT * from ACTIVITY_CONFIG
+	    	<where>
+	    		<if test="@Ognl@isNotEmpty(activityId)">
+				 	ACTIVITYID = #{activityId}
+				</if>
+				<if test="@Ognl@isNotEmpty(type)">
+				 	AND TYPE = #{type}
+				</if>
+	    	</where>
+	    </select>
+	    
+	    <select id="getActivityConfigByActivityIdAndBetAmount" parameterType="map" resultMap="result">
+	    	select <include refid="fields"/> from ACTIVITY_CONFIG where ACTIVITYID = #{activityId} and 
+	    <![CDATA[
+				MIN_PRIZE <= #{betAmount}
+		 ]]>	
+	    </select>
+	    
+	    <select id="queryActivityConfigByCondition" resultMap="result" 
+			parameterType="com.winterframework.firefrog.active.dao.vo.ActivityConfig" flushCache="false">
+	    	SELECT  <include refid="fields"/>
+			from ACTIVITY_CONFIG
+	    	<where>
+	    		<if test="@Ognl@isNotEmpty(activityId)">
+				 	ACTIVITYID = #{activityId}
+				</if>
+
+	    	</where>
+	    </select>	    
+</mapper>

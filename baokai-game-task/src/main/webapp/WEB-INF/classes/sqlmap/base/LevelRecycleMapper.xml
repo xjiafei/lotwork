@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.entity.LevelRecycle">
+	<resultMap id="levelRecycleResult"
+		type="com.winterframework.firefrog.user.entity.LevelRecycle">
+	</resultMap>
+
+	<insert id="applyLevelRecycle" parameterType="com.winterframework.firefrog.user.entity.LevelRecycleDTO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">		
+	    <![CDATA[
+	        INSERT INTO
+	        USER_LEVEL_RECYCLE (
+	        	ID ,
+	        	USER_ID ,
+	        	ACCOUNT ,
+	        	TOP_AGENT ,
+	        	AVAIL_BAL ,
+	        	RECYCLE_REASON ,
+	        	OPERATOR ,
+	        	CREATE_DATE ,
+	        	TASK_STATUS
+	        ) VALUES (
+	        	SEQ_USER_LEVEL_RECYCLE_ID.Nextval ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{account,javaType=string,jdbcType=VARCHAR} ,
+	        	#{topAgent,javaType=string,jdbcType=VARCHAR} ,
+	        	#{availBal,javaType=long,jdbcType=DECIMAL} ,
+	        	#{recycleReason,javaType=string,jdbcType=VARCHAR} ,
+	        	#{operator,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{taskStatus,javaType=integer,jdbcType=DECIMAL}
+	        )
+	    ]]>
+	</insert>
+
+	<select id="queryLevelRecycleHistory"
+		parameterType="com.winterframework.firefrog.user.entity.LevelRecycleDTO"
+		resultMap="levelRecycleResult" flushCache="false">
+		SELECT
+			ID AS id,
+			USER_ID AS userId,
+			ACCOUNT AS account,
+			TOP_AGENT AS topAgent,
+			AVAIL_BAL AS availBal,
+			RECYCLE_REASON AS recycleReason,
+			OPERATOR AS operator,
+			CREATE_DATE AS createDate,
+			ACTIVITY_DATE AS activityDate,
+			TASK_STATUS AS taskStatus,
+			RECYCLE_STATUS AS recycleStatus
+		FROM
+			USER_LEVEL_RECYCLE
+		<where>
+			<if test="@Ognl@isNotEmpty(userId)">
+				AND USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				AND ACCOUNT = #{account}
+			</if>
+			<if test="@Ognl@isNotEmpty(taskStatus)">
+				AND TASK_STATUS = #{taskStatus}
+			</if>
+			<if test="@Ognl@isNotEmpty(startNo)">
+				AND ROWNUM >= #{startNo}
+			</if>
+			<if test="@Ognl@isNotEmpty(endNo)">
+				<![CDATA[
+					AND ROWNUM <= #{endNo}
+				]]>
+			</if>
+		</where>
+	</select>
+
+	<update id="updateRecycleStatus"
+		parameterType="com.winterframework.firefrog.user.entity.LevelRecycleDTO">
+	        UPDATE USER_LEVEL_RECYCLE 
+	         <set> 
+	        	<if test="@Ognl@isNotEmpty(activityDate)">
+			        ACTIVITY_DATE=#{activityDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(taskStatus)">
+			        TASK_STATUS=#{taskStatus,javaType=integer,jdbcType=DECIMAL} ,
+	        	</if>
+	       		<if test="@Ognl@isNotEmpty(recycleStatus)">
+			        RECYCLE_STATUS=#{recycleStatus,javaType=string,jdbcType=VARCHAR},
+	        	</if>	       		
+	       		<if test="@Ognl@isNotEmpty(updateDate)">
+			        UPDATE_DATE=#{updateDate,javaType=object,jdbcType=TIMESTAMP}
+	        	</if>
+	        </set>
+	        <where>
+		        <if test="@Ognl@isNotEmpty(id)">
+					and ID = #{id}
+				</if>
+				<if test="@Ognl@isNotEmpty(userId)">
+					and USER_ID = #{userId}
+				</if>
+				<if test="@Ognl@isNotEmpty(account)">
+					and ACCOUNT = #{account}
+				</if>
+			</where>
+	</update>
+</mapper>

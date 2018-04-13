@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.0.xsd " 
+	default-autowire="byName" default-lazy-init="false"> 
+	
+	<!--订单根据状态选择撤销执行类 add by hugh-->
+	<bean id="revocationOrderMap" class="java.util.HashMap">  
+    	<constructor-arg>  
+        	<map > 		   	
+				<entry key="1" value="gameRevocationOrderBeforeDrawServiceImpl"  />
+				<entry key="3" value="gameRevocationOrderNotWinServiceImpl"  />
+				<!--<entry key="3" value="gameRevocationOrderOutRiskServiceImpl"  />-->				
+				<entry key="5" value="gameRevocationOrderRiskingServiceImpl"  />
+				<!--<entry key="8" value-ref="gameRevocationOrderRiskedFailServiceImpl"  />-->	
+				<entry key="2" value="gameRevocationOrderRiskedSuccessServiceImpl"  />
+			</map> 
+    	</constructor-arg>  
+	</bean>
+
+	<!--追号根据状态选择撤销执行类 add by hugh-->
+	<bean id="revocationPlanMap" class="java.util.HashMap">  
+    	<constructor-arg>  
+        	<map > 		   	
+				<entry key="0_0" value="gameRevocationPlanUndoServiceImpl"  />
+				<!--<entry key="0_1" value="gameRevocationPlanUndoServiceImpl"  />-->
+				<entry key="1_1" value="gameRevocationPlanDoneOrderNoResultServiceImpl"  />
+				<entry key="1_5" value="gameRevocationPlanDoneOrderNoResultServiceImpl"  />
+				<entry key="1_2" value="gameRevocationPlanDoneAndWinServiceImpl"  />
+				<entry key="1_3" value="gameRevocationPlanDoneNotWinServiceImpl"  />							
+			</map> 
+    	</constructor-arg>  
+	</bean>
+	<!-- //////////////////new///////////////////// -->
+	<!--订单撤销处理策略类-->
+	<bean id="revocationOrderStrategyMap" class="java.util.HashMap">  
+    	<constructor-arg>  
+        	<map> 		   	
+				<entry key="1" value="gameRevocationOrderWaitingServiceImpl" /> 
+				<entry key="2" value="gameRevocationOrderWinServiceImpl" />
+				<entry key="3" value="gameRevocationOrderUnWinServiceImpl" />  
+				<!-- <entry key="4" value="gameRevocationOrderCancelServiceImpl" />  -->
+				<entry key="5" value="gameRevocationOrderExcepServiceImpl" />
+				<!-- <entry key="6" value="gameRevocationOrderFileServiceImpl" />   -->
+			</map> 
+    	</constructor-arg>  
+	</bean>
+
+	<!--追号撤销处理策略类 -->
+	<bean id="revocationPlanStrategyMap" class="java.util.HashMap">  
+    	<constructor-arg>  
+        	<map> 		   	
+				<entry key="0" value="gameRevocationPlanUnexecServiceImpl"  /> 		
+				<entry key="1" value="gameRevocationPlanExecServiceImpl"  /> 							
+			</map> 
+    	</constructor-arg>  
+	</bean>
+	
+</beans>

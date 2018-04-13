@@ -1,0 +1,27 @@
+<div style="height: 150px; overflow-y: scroll;">
+    <div class="record-detailbox" ng-model="data.wifi">
+        <table class="table table-hover record-detail" cellpadding="0" cellspacing="0">
+            <tbody ng-repeat="item in recordetailData">
+            <tr>
+                <td><span class="d">{{item.betDetail.myreplace()}}</span></td>
+                <td><span class="d">投注</span></td>
+                <td><span class="d">{{item.totamount/10000 | number:2}}元</span></td>
+            </tr>
+            <tr>
+                <td><span class="d">（{{item.gamePlayName}} {{item.betDetail}}）</span></td>
+                <td><span class="d"> 奖金 </span></td>
+                <td><span class="d"> {{item.award ? ((item.award/10000 | number:2)+'元')   : '未中奖'}}</span></td>
+            </tr>
+
+
+            <tr class="emptys">
+                <td>空</td>
+                <td>空</td>
+                <td>空</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="whatsthat"><a ng-click="goexpation()">括号里的内容是什么？</a></div>
+</div>
+</div>

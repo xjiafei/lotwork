@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameWarnIssue">
+	<resultMap id="GameWarnIssueResult" type="com.winterframework.firefrog.game.dao.vo.GameWarnIssue">
+	</resultMap>
+	<resultMap type="com.winterframework.firefrog.game.dao.vo.GameWarnIssueList" id="GameWarnIssueList"></resultMap>
+	<resultMap type="com.winterframework.firefrog.game.entity.LotteryIssueMonitorLogs" id="LotteryIssueMonitorLogs"></resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameWarnIssueColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	ISSUE_WARN_ID as issueWarnId,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	READ_FLAG as readFlag,
+	        	WARN_PARAS as warnParas,
+	        	STATUS as status,
+	        	STATUS_ROUT as statusRout
+	        
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameWarnIssue" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			     SELECT SEQ_GAME_WARN_ISSUE.Nextval from dual
+   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_WARN_ISSUE (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_CODE ,
+	        	WEB_ISSUE_CODE ,
+	        	ISSUE_WARN_ID ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	READ_FLAG ,
+	        	WARN_PARAS ,
+	        	STATUS ,
+	        	STATUS_ROUT
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{issueWarnId,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{readFlag,javaType=long,jdbcType=DECIMAL} ,
+	        	#{warnParas,javaType=string,jdbcType=VARCHAR} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{statusRout,javaType=string,jdbcType=VARCHAR} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameWarnIssue">
+	    <![CDATA[
+	        UPDATE GAME_WARN_ISSUE SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        ISSUE_WARN_ID = #{issueWarnId,javaType=string,jdbcType=VARCHAR} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        READ_FLAG = #{readFlag,javaType=long,jdbcType=DECIMAL} ,
+		        WARN_PARAS = #{warnParas,javaType=string,jdbcType=VARCHAR} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS_ROUT = #{statusRout,javaType=string,jdbcType=VARCHAR} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_WARN_ISSUE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameWarnIssueResult" flushCache="false">
+			select <include refid="gameWarnIssueColumns" />
+		    <![CDATA[
+			    from GAME_WARN_ISSUE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameWarnIssueResult" flushCache="false">
+			select <include refid="gameWarnIssueColumns" />
+			    from GAME_WARN_ISSUE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameWarnIssueDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(webIssueCode)">
+				and WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueWarnId)">
+				and ISSUE_WARN_ID = #{issueWarnId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(readFlag)">
+				and READ_FLAG = #{readFlag}
+			</if>
+	       <if test="@Ognl@isNotEmpty(warnParas)">
+				and WARN_PARAS = #{warnParas}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(statusRout)">
+				and STATUS_ROUT = #{statusRout}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameWarnIssueResult"  flushCache="false">
+    	select <include refid="gameWarnIssueColumns" />
+	    from GAME_WARN_ISSUE 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_WARN_ISSUE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_WARN_ISSUE 
+		<include refid="gameWarnIssueDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameWarnIssueResult">
+    	select <include refid="gameWarnIssueColumns" />
+	    from GAME_WARN_ISSUE 
+		<include refid="gameWarnIssueDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    
+    <select id="queryGameWarnIssueByLotteryIdAndIssueCode" resultMap="GameWarnIssueResult" parameterType="hashMap">
+    	select <include refid="gameWarnIssueColumns" />
+	    from GAME_WARN_ISSUE 
+	    where LOTTERYID = ${lotteryId}
+	    and ISSUE_CODE = ${issueCode}
+    	
+    </select>
+
+	<!-- 彩种监控列表全部查询 -->
+	<select id="queryAllGameWarnIssueList" parameterType="hashMap" resultMap="GameWarnIssueList">
+	    <!-- 2013-12-10 edit
+	SELECT T.LOTTERYID as lotteryid,
+	       T.LOTTERY_NAME as lotteryName,
+	       S.WEB_ISSUE_CODE as webIssueCode,
+	       S.ISSUE_CODE as issueCode,
+	       S.SALE_START_TIME as saleStartTime,
+	       S.SALE_END_TIME as saleEndTime,
+	       S.OPEN_DRAW_TIME as openDrawTime,
+	       S.FACTION_DRAW_TIME as factionDrawTime,
+	       S.STATUS as status,
+	       R.NUMBER_RECORD as numberRecord,
+	       W.WARN_PARAS as warnParas,
+	       D.DES as des,
+	       D.WARN_TYPE as warnType,
+	       D.DISPOSE_MEMO as disposeMemo
+  FROM GAME_SERIES T,GAME_DRAW_RESULT R,GAME_WARN_DES D, GAME_ISSUE S left join GAME_WARN_ISSUE W on s.issue_code = w.issue_code
+  WHERE T.LOTTERYID = S.LOTTERYID
+        AND T.LOTTERYID  = R.LOTTERYID
+        AND T.LOTTERYID = W.LOTTERYID
+        AND S.ISSUE_CODE = R.ISSUE_CODE
+        AND W.ISSUE_WARN_ID = D.ID
+         <if test="@Ognl@isNotEmpty(lotteryid)">
+        	AND W.LOTTERYID = ${lotteryid}
+        </if>
+        <if test="@Ognl@isNotEmpty(startIssueTime)">
+        	AND W.CREATE_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+        </if>
+        <if test="@Ognl@isNotEmpty(endIssueTime)">
+        	<![CDATA[ AND W.CREATE_TIME <= TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+        </if>
+        order by  S.ISSUE_CODE DESC
+        -->
+        SELECT T.LOTTERYID as lotteryid,
+	       T.LOTTERY_NAME as lotteryName,
+	       S.PERIOD_STATUS as periodStatus,
+	       S.WEB_ISSUE_CODE as webIssueCode,
+	       S.ISSUE_CODE as issueCode,
+	       S.SALE_START_TIME as saleStartTime,
+	       S.SALE_END_TIME as saleEndTime,
+	       S.OPEN_DRAW_TIME as openDrawTime,
+	       R.Create_Time as factionDrawTime,
+	       S.STATUS as status,
+                      (case when S.STATUS >=3 THEN R.NUMBER_RECORD
+                           when S.STATUS =0 THEN ''
+                           WHEN S.STATUS =1 THEN '销售中'
+                           when S.STATUS =2 THEN '销售中'
+                      END ) as numberRecord,
+	       <!-- DECODE(R.NUMBER_RECORD, '', '销售中', R.NUMBER_RECORD) as numberRecord, -->
+	       DECODE(S.WARN_PARAS, NULL, '无异常', S.WARN_PARAS) as warnParas,
+	       DECODE(S.DES, NULL, '无异常', S.DES) AS DES,
+	       S.WARN_TYPE as warnType,
+	       DECODE(S.DISPOSE_MEMO, NULL, '无异常', S.DISPOSE_MEMO) as disposeMemo
+	  FROM (SELECT s1.LOTTERYID,
+	               s1.WEB_ISSUE_CODE,
+	               s1.ISSUE_CODE,
+	               s1.SALE_START_TIME,
+	               s1.SALE_END_TIME,
+	               s1.OPEN_DRAW_TIME,
+	               s1.FACTION_DRAW_TIME,
+	               s1.STATUS,
+	               s1.PERIOD_STATUS,
+	               s2.WARN_PARAS,
+	               s2.DES,
+	               s2.WARN_TYPE,
+	               s2.DISPOSE_MEMO,
+	               s1.create_time
+	          FROM GAME_ISSUE s1
+	          LEFT JOIN (SELECT s21.ISSUE_CODE,
+	                           s21.WARN_PARAS,
+	                           s22.DES,
+	                           s22.WARN_TYPE,
+	                           s22.DISPOSE_MEMO
+	                      FROM GAME_WARN_ISSUE s21, GAME_WARN_DES s22
+	                     WHERE s21.ISSUE_WARN_ID = s22.ID and S21.id in (select max(id) from GAME_WARN_ISSUE GROUP BY(ISSUE_CODE))) s2
+	            on s1.ISSUE_CODE = s2.ISSUE_CODE) S,
+	       GAME_SERIES T,
+	       GAME_DRAW_RESULT R
+	 WHERE S.LOTTERYID = T.LOTTERYID(+)
+	   AND S.ISSUE_CODE = R.ISSUE_CODE(+)
+         <if test="@Ognl@isNotEmpty(lotteryid)">
+        	AND S.LOTTERYID = ${lotteryid}
+        </if>
+        <if test="@Ognl@isNotEmpty(startIssueTime)">
+        	AND S.SALE_START_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+        </if>
+        <if test="@Ognl@isNotEmpty(endIssueTime)">
+        	<![CDATA[ AND S.SALE_START_TIME <= TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+        </if>
+        order by  S.ISSUE_CODE DESC
+	</select>
+	
+	<select id="queryCountGameWarnIssueList" resultType="long" parameterType="hashMap">
+		select count(*) from  (SELECT s1.LOTTERYID,
+	               s1.WEB_ISSUE_CODE,
+	               s1.ISSUE_CODE,
+	               s1.SALE_START_TIME,
+	               s1.SALE_END_TIME,
+	               s1.OPEN_DRAW_TIME,
+	               s1.FACTION_DRAW_TIME,
+	               s1.STATUS,
+	               s2.WARN_PARAS,
+	               s2.DES,
+	               s2.WARN_TYPE,
+	               s2.DISPOSE_MEMO,
+	               s1.create_time
+	          FROM GAME_ISSUE s1
+	          LEFT JOIN (SELECT s21.ISSUE_CODE,
+	                           s21.WARN_PARAS,
+	                           s22.DES,
+	                           s22.WARN_TYPE,
+	                           s22.DISPOSE_MEMO
+	                      FROM GAME_WARN_ISSUE s21, GAME_WARN_DES s22
+	                     WHERE s21.ISSUE_WARN_ID = s22.ID  and S21.id in (select max(id) from GAME_WARN_ISSUE GROUP BY(ISSUE_CODE))) s2
+	            on s1.ISSUE_CODE = s2.ISSUE_CODE) S,
+	       GAME_SERIES T,
+	       GAME_DRAW_RESULT R
+	 WHERE S.LOTTERYID = T.LOTTERYID(+)
+	   AND S.ISSUE_CODE = R.ISSUE_CODE(+)
+        <if test="@Ognl@isNotEmpty(lotteryid)">
+        	AND S.LOTTERYID = ${lotteryid}
+        </if>
+        <if test="@Ognl@isNotEmpty(startIssueTime)">
+        	AND S.SALE_START_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+        </if>
+        <if test="@Ognl@isNotEmpty(endIssueTime)">
+        	<![CDATA[ AND S.SALE_START_TIME <= TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+        </if>
+        order by  S.ISSUE_CODE DESC
+	</select>
+	
+	<!-- 仅查看尚未结束的奖期 -->
+	<select id="queryGameWarnIssueOnSale" parameterType="hashMap" resultMap="GameWarnIssueList">
+	    <!-- 
+		SELECT T.LOTTERYID as lotteryid,
+	       T.LOTTERY_NAME as lotteryName,
+	       S.WEB_ISSUE_CODE as webIssueCode,
+	       S.ISSUE_CODE as issueCode,
+	       S.SALE_START_TIME as saleStartTime,
+	       S.SALE_END_TIME as saleEndTime,
+	       S.OPEN_DRAW_TIME as openDrawTime,
+	       S.FACTION_DRAW_TIME as factionDrawTime,
+	       S.STATUS as status,
+	       R.NUMBER_RECORD as numberRecord,
+	       W.WARN_PARAS as warnParas,
+	       D.DES as des,
+	       D.WARN_TYPE as warnType,
+	       D.DISPOSE_MEMO as disposeMemo
+	  FROM GAME_SERIES T,GAME_DRAW_RESULT R,GAME_WARN_DES D, GAME_ISSUE S left join GAME_WARN_ISSUE W on s.issue_code = w.issue_code
+	  WHERE T.LOTTERYID = S.LOTTERYID
+	        AND T.LOTTERYID  = R.LOTTERYID
+	        AND T.LOTTERYID = W.LOTTERYID
+	        AND S.ISSUE_CODE = R.ISSUE_CODE
+	        AND S.PERIOD_STATUS IN (0,1,2)
+	        AND W.ISSUE_WARN_ID = D.ID 
+	        <if test="@Ognl@isNotEmpty(lotteryid)">
+	        	AND W.LOTTERYID = ${lotteryid}
+	        </if>
+	        <if test="@Ognl@isNotEmpty(startIssueTime)">
+	        	AND W.CREATE_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+	        </if>
+	        <if test="@Ognl@isNotEmpty(endIssueTime)">
+	        	<![CDATA[ AND W.CREATE_TIME <= TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+	        </if>
+	        order by  S.ISSUE_CODE DESC 
+	        -->
+	        SELECT T.LOTTERYID as lotteryid,
+                       T.LOTTERY_NAME as lotteryName,
+                       S.PERIOD_STATUS as periodStatus,
+                       S.WEB_ISSUE_CODE as webIssueCode,
+                       S.ISSUE_CODE as issueCode,
+                       S.SALE_START_TIME as saleStartTime,
+                       S.SALE_END_TIME as saleEndTime,
+                       S.OPEN_DRAW_TIME as openDrawTime,
+                       S.FACTION_DRAW_TIME as factionDrawTime,
+                       S.STATUS as status,
+                      (case when S.STATUS >=3 THEN R.NUMBER_RECORD
+                           when S.STATUS =0 THEN ''
+                           WHEN S.STATUS =1 THEN '销售中'
+                           when S.STATUS =2 THEN '销售中'
+                      END ) as numberRecord,
+                     <!-- DECODE(R.NUMBER_RECORD, '', '销售中', R.NUMBER_RECORD) as numberRecord, -->
+                       DECODE(S.WARN_PARAS, NULL, '无异常', S.WARN_PARAS) as warnParas,
+                       DECODE(S.DES, NULL, '无异常', S.DES) AS DES,
+                       S.WARN_TYPE as warnType,
+                       DECODE(S.DISPOSE_MEMO, NULL, '无异常', S.DISPOSE_MEMO) as disposeMemo
+                  FROM (SELECT s1.LOTTERYID,
+                               s1.WEB_ISSUE_CODE,
+                               s1.ISSUE_CODE,
+                               s1.SALE_START_TIME,
+                               s1.SALE_END_TIME,
+                               s1.OPEN_DRAW_TIME,
+                               s1.FACTION_DRAW_TIME,
+                               s1.STATUS,
+                               s2.WARN_PARAS,
+                               s2.DES,
+                               s2.WARN_TYPE,
+                               s2.DISPOSE_MEMO,
+                               s1.create_time,
+                               S1.PERIOD_STATUS
+                          FROM GAME_ISSUE s1
+                          LEFT JOIN (SELECT s21.ISSUE_CODE,
+                                           s21.WARN_PARAS,
+                                           s22.DES,
+                                           s22.WARN_TYPE,
+                                           s22.DISPOSE_MEMO
+                                      FROM GAME_WARN_ISSUE s21,
+                                           GAME_WARN_DES   s22
+                                     WHERE s21.ISSUE_WARN_ID = s22.ID) s2
+                            on s1.ISSUE_CODE = s2.ISSUE_CODE) S,
+                       GAME_SERIES T,
+                       GAME_DRAW_RESULT R
+                 WHERE S.LOTTERYID = T.LOTTERYID(+)
+                   AND S.ISSUE_CODE = R.ISSUE_CODE(+)
+                    AND S.PERIOD_STATUS IN (0,1,2)
+                    AND S.STATUS <![CDATA[<]]> 7
+	        <if test="@Ognl@isNotEmpty(lotteryid)">
+	        	AND S.LOTTERYID = ${lotteryid}
+	        </if>
+	        <if test="@Ognl@isNotEmpty(startIssueTime)">
+	        	AND S.SALE_START_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+	        </if>
+	        <if test="@Ognl@isNotEmpty(endIssueTime)">
+	        	<![CDATA[ AND S.SALE_START_TIME < TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+	        </if>
+	        order by  S.ISSUE_CODE DESC 
+	</select>
+	<select id="queryCountGameWarnIssueOnSale"  resultType="long" parameterType="hashMap">
+	    SELECT count(*)
+                  FROM (SELECT s1.LOTTERYID,
+                               s1.WEB_ISSUE_CODE,
+                               s1.ISSUE_CODE,
+                               s1.SALE_START_TIME,
+                               s1.SALE_END_TIME,
+                               s1.OPEN_DRAW_TIME,
+                               s1.FACTION_DRAW_TIME,
+                               s1.STATUS,
+                               s2.WARN_PARAS,
+                               s2.DES,
+                               s2.WARN_TYPE,
+                               s2.DISPOSE_MEMO,
+                               s1.create_time,
+                               S1.PERIOD_STATUS
+                          FROM GAME_ISSUE s1
+                          LEFT JOIN (SELECT s21.ISSUE_CODE,
+                                           s21.WARN_PARAS,
+                                           s22.DES,
+                                           s22.WARN_TYPE,
+                                           s22.DISPOSE_MEMO
+                                      FROM GAME_WARN_ISSUE s21,
+                                           GAME_WARN_DES   s22
+                                     WHERE s21.ISSUE_WARN_ID = s22.ID) s2
+                            on s1.ISSUE_CODE = s2.ISSUE_CODE) S,
+                       GAME_SERIES T,
+                       GAME_DRAW_RESULT R
+                 WHERE S.LOTTERYID = T.LOTTERYID(+)
+                   AND S.ISSUE_CODE = R.ISSUE_CODE(+)
+                    AND S.PERIOD_STATUS IN (0,1,2)
+                    AND S.STATUS <![CDATA[<]]> 7
+	        <if test="@Ognl@isNotEmpty(lotteryid)">
+	        	AND S.LOTTERYID = ${lotteryid}
+	        </if>
+	        <if test="@Ognl@isNotEmpty(startIssueTime)">
+	        	AND S.SALE_START_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+	        </if>
+	        <if test="@Ognl@isNotEmpty(endIssueTime)">
+	        	<![CDATA[ AND S.SALE_START_TIME <= TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+	        </if>
+	        order by  S.ISSUE_CODE DESC 
+	</select>
+	<!-- 仅查看存在异常的奖期 -->
+	<select id="queryGameWarnIssue" parameterType="hashMap" resultMap="GameWarnIssueList">
+	    <!-- 
+		SELECT T.LOTTERYID as lotteryid,
+	       T.LOTTERY_NAME as lotteryName,
+	       S.WEB_ISSUE_CODE as webIssueCode,
+	       S.ISSUE_CODE as issueCode,
+	       S.SALE_START_TIME as saleStartTime,
+	       S.SALE_END_TIME as saleEndTime,
+	       S.OPEN_DRAW_TIME as openDrawTime,
+	       S.FACTION_DRAW_TIME as factionDrawTime,
+	       S.STATUS as status,
+	       R.NUMBER_RECORD as numberRecord,
+	       W.WARN_PARAS as warnParas,
+	       D.DES as des,
+	       D.WARN_TYPE as warnType,
+	       D.DISPOSE_MEMO as disposeMemo
+	  FROM GAME_SERIES T,GAME_DRAW_RESULT R,GAME_WARN_DES D, GAME_ISSUE S left join GAME_WARN_ISSUE W on s.issue_code = w.issue_code
+	  WHERE T.LOTTERYID = S.LOTTERYID
+	        AND T.LOTTERYID  = R.LOTTERYID
+	        AND T.LOTTERYID = W.LOTTERYID
+	        AND S.ISSUE_CODE = R.ISSUE_CODE
+	        AND W.ISSUE_WARN_ID = D.ID
+	        <if test="@Ognl@isNotEmpty(lotteryid)">
+	        	AND W.LOTTERYID = ${lotteryid}
+	        </if>
+	        <if test="@Ognl@isNotEmpty(startIssueTime)">
+	        	AND W.CREATE_TIME >= TO_DATE(${startIssueTime}, 'YYYY-MM-DD')
+	        </if>
+	        <if test="@Ognl@isNotEmpty(endIssueTime)">
+	        	<![CDATA[ AND W.CREATE_TIME <= TO_DATE(${endIssueTime}, 'YYYY-MM-DD')  ]]>
+	        </if>
+	        order by  S.ISSUE_CODE DESC
+	         -->
+	         SELECT T.LOTTERYID as lotteryid,
+			       T.LOTTERY_NAME as lotteryName,
+			       S.PERIOD_STATUS as periodStatus,
+			       S.WEB_ISSUE_CODE as webIssueCode,
+			       S.ISSUE_CODE as issueCode,
+			       S.SALE_START_TIME as saleStartTime,
+			       S.SALE_END_TIME as saleEndTime,
+			       S.OPEN_DRAW_TIME as openDrawTime,
+			       S.FACTION_DRAW_TIME as factionDrawTime,
+			       S.STATUS as status,
+                      (case when S.STATUS >=3 THEN R.NUMBER_RECORD
+                           when S.STATUS =0 THEN ''
+                           WHEN S.STATUS =1 THEN '销售中'
+                           when S.STATUS =2 THEN '销售中'
+                      END ) as numberRecord,
+			       <!--DECODE(R.NUMBER_RECORD, '', '销售中', R.NUMBER_RECORD) as numberRecord, -->
+			       DECODE(S.WARN_PARAS, NULL, '无异常', S.WARN_PARAS) as warnParas,
+			       DECODE(S.DES, NULL, '无异常', S.DES) AS DES,
+			       S.WARN_TYPE as warnType,
+			       DECODE(S.DISPOSE_MEMO, NULL, '无异常', S.DISPOSE_MEMO) as disposeMemo
+			  FROM (SELECT s1.LOTTERYID,
+			               s1.WEB_ISSUE_CODE,
+			               s1.ISSUE_CODE,
+			               s1.SALE_START_TIME,
+			               s1.SALE_END_TIME,
+			               s1.OPEN_DRAW_TIME,
+			               s1.FACTION_DRAW_TIME,
+			               s1.STATUS,
+			               s2.WARN_PARAS,
+			               s2.DES,
+			               s2.WARN_TYPE,
+			               s2.DISPOSE_MEMO,
+			               s1.create_time,
+			               S1.PERIOD_STATUS
+			          FROM GAME_ISSUE s1
+			          LEFT JOIN (SELECT s21.ISSUE_CODE,
+			                           s21.WARN_PARAS,
+			                           s22.DES,
+			                           s22.WARN_TYPE,
+			                           s22.DISPOSE_MEMO
+			                      FROM GAME_WARN_ISSUE s21, GAME_WARN_DES s22
+			                     WHERE s21.ISSUE_WARN_ID = s22.ID) s2
+			            on s1.ISSUE_CODE = s2.ISSUE_CODE) S,
+			       GAME_SERIES T,
+			       GAME_DRAW_RESULT R
+			 WHERE S.LOTTERYID = T.LOTTERYID(+)
+			   AND S.ISSUE_CODE = R.ISSUE_CODE(+)
+			   AND S.WARN_TYPE IS NOT NULL
+               AND S.WARN_TYPE NOT IN (3, 6)
+			    <if test="@Ognl@isNotEmpty(lotteryid)">
+	        		AND S.LOTTERYID = ${lotteryid}
+		        </if>
+		        <if test="@Ognl@isNotEmpty(startIssueTime)">
+		        	AND S.SALE_START_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+		        </if>
+		        <if test="@Ognl@isNotEmpty(endIssueTime)">
+		        	<![CDATA[ AND S.SALE_START_TIME <= TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+		        </if>
+			 order by S.ISSUE_CODE DESC
+	</select>
+	<select id="queryCountGameWarnIssue" resultType="long" parameterType="hashMap">
+	     SELECT count(*)
+			  FROM (SELECT s1.LOTTERYID,
+			               s1.WEB_ISSUE_CODE,
+			               s1.ISSUE_CODE,
+			               s1.SALE_START_TIME,
+			               s1.SALE_END_TIME,
+			               s1.OPEN_DRAW_TIME,
+			               s1.FACTION_DRAW_TIME,
+			               s1.STATUS,
+			               s2.WARN_PARAS,
+			               s2.DES,
+			               s2.WARN_TYPE,
+			               s2.DISPOSE_MEMO,
+			               s1.create_time,
+			               S1.PERIOD_STATUS
+			          FROM GAME_ISSUE s1
+			          LEFT JOIN (SELECT s21.ISSUE_CODE,
+			                           s21.WARN_PARAS,
+			                           s22.DES,
+			                           s22.WARN_TYPE,
+			                           s22.DISPOSE_MEMO
+			                      FROM GAME_WARN_ISSUE s21, GAME_WARN_DES s22
+			                     WHERE s21.ISSUE_WARN_ID = s22.ID) s2
+			            on s1.ISSUE_CODE = s2.ISSUE_CODE) S,
+			       GAME_SERIES T,
+			       GAME_DRAW_RESULT R
+			 WHERE S.LOTTERYID = T.LOTTERYID(+)
+			   AND S.ISSUE_CODE = R.ISSUE_CODE(+)
+			   AND S.WARN_TYPE IS NOT NULL
+               AND S.WARN_TYPE NOT IN (3, 6)
+			    <if test="@Ognl@isNotEmpty(lotteryid)">
+	        		AND S.LOTTERYID = ${lotteryid}
+		        </if>
+		        <if test="@Ognl@isNotEmpty(startIssueTime)">
+		        	AND S.SALE_START_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+		        </if>
+		        <if test="@Ognl@isNotEmpty(endIssueTime)">
+		        	<![CDATA[ AND S.SALE_START_TIME <= TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+		        </if>
+			 order by S.ISSUE_CODE DESC
+	</select>
+	
+	<!-- 仅查看尚未结束的奖期并且仅查看存在异常的奖期-->
+	<select id="queryGameWarnOnlyCurrntIssue" resultMap="GameWarnIssueList" parameterType="hashMap" >
+	    <!--
+	    SELECT T.LOTTERYID as lotteryid,
+	       T.LOTTERY_NAME as lotteryName,
+	       S.WEB_ISSUE_CODE as webIssueCode,
+	       S.ISSUE_CODE as issueCode,
+	       S.SALE_START_TIME as saleStartTime,
+	       S.SALE_END_TIME as saleEndTime,
+	       S.OPEN_DRAW_TIME as openDrawTime,
+	       S.FACTION_DRAW_TIME as factionDrawTime,
+	       S.STATUS as status,
+	       R.NUMBER_RECORD as numberRecord,
+	       W.WARN_PARAS as warnParas,
+	       D.DES as des,
+	       D.WARN_TYPE as warnType,
+	       D.DISPOSE_MEMO as disposeMemo
+	  FROM GAME_SERIES T,GAME_DRAW_RESULT R,GAME_WARN_DES D, GAME_ISSUE S left join GAME_WARN_ISSUE W on s.issue_code = w.issue_code
+	  WHERE T.LOTTERYID = S.LOTTERYID
+	        AND T.LOTTERYID  = R.LOTTERYID
+	        AND T.LOTTERYID = W.LOTTERYID
+	        AND S.ISSUE_CODE = R.ISSUE_CODE
+	        AND W.ISSUE_WARN_ID = D.ID
+	        AND W.STATUS = 1
+	        <if test="@Ognl@isNotEmpty(lotteryid)">
+        		AND W.LOTTERYID = ${lotteryid}
+	        </if>
+	        <if test="@Ognl@isNotEmpty(startIssueTime)">
+	        	AND W.CREATE_TIME >= TO_DATE(${startIssueTime}, 'YYYY-MM-DD')
+	        </if>
+	        <if test="@Ognl@isNotEmpty(endIssueTime)">
+	        	<![CDATA[ AND W.CREATE_TIME <= TO_DATE(${endIssueTime}, 'YYYY-MM-DD')  ]]>
+	        </if>
+	        order by  S.ISSUE_CODE DESC
+	        -->
+	        SELECT T.LOTTERYID as lotteryid,
+		       T.LOTTERY_NAME as lotteryName,
+		       S.PERIOD_STATUS as periodStatus,
+		       S.WEB_ISSUE_CODE as webIssueCode,
+		       S.ISSUE_CODE as issueCode,
+		       S.SALE_START_TIME as saleStartTime,
+		       S.SALE_END_TIME as saleEndTime,
+		       S.OPEN_DRAW_TIME as openDrawTime,
+		       S.FACTION_DRAW_TIME as factionDrawTime,
+		       S.STATUS as status,
+               (case when S.STATUS >=3 THEN R.NUMBER_RECORD
+                    when S.STATUS =0 THEN ''
+                    WHEN S.STATUS =1 THEN '销售中'
+                    when S.STATUS =2 THEN '销售中'
+               END ) as numberRecord,
+		      <!-- DECODE(R.NUMBER_RECORD, '', '销售中', R.NUMBER_RECORD) as numberRecord, -->
+		       DECODE(S.WARN_PARAS, NULL, '无异常', S.WARN_PARAS) as warnParas,
+		       DECODE(S.DES, NULL, '无异常', S.DES) AS DES,
+		       S.WARN_TYPE as warnType,
+		       DECODE(S.DISPOSE_MEMO, NULL, '无异常', S.DISPOSE_MEMO) as disposeMemo
+		  FROM (SELECT s1.LOTTERYID,
+		               s1.WEB_ISSUE_CODE,
+		               s1.ISSUE_CODE,
+		               s1.SALE_START_TIME,
+		               s1.SALE_END_TIME,
+		               s1.OPEN_DRAW_TIME,
+		               s1.FACTION_DRAW_TIME,
+		               s1.STATUS,
+		               s2.WARN_PARAS,
+		               s2.DES,
+		               s2.WARN_TYPE,
+		               s2.DISPOSE_MEMO,
+		               s1.create_time,
+		               S1.PERIOD_STATUS
+		          FROM GAME_ISSUE s1
+		          LEFT JOIN (SELECT s21.ISSUE_CODE,
+		                           s21.WARN_PARAS,
+		                           s22.DES,
+		                           s22.WARN_TYPE,
+		                           s22.DISPOSE_MEMO
+		                      FROM GAME_WARN_ISSUE s21, GAME_WARN_DES s22
+		                     WHERE s21.ISSUE_WARN_ID = s22.ID) s2
+		            on s1.ISSUE_CODE = s2.ISSUE_CODE) S,
+		       GAME_SERIES T,
+		       GAME_DRAW_RESULT R
+		 WHERE S.LOTTERYID = T.LOTTERYID(+)
+		   AND S.ISSUE_CODE = R.ISSUE_CODE(+)
+		   AND S.WARN_TYPE IS NOT NULL
+           AND S.WARN_TYPE NOT IN (3, 6)
+           AND S.STATUS <![CDATA[<]]> 7
+		   AND S.PERIOD_STATUS IN (0,1,2)
+		    <if test="@Ognl@isNotEmpty(lotteryid)">
+        		AND S.LOTTERYID = ${lotteryid}
+	        </if>
+	        <if test="@Ognl@isNotEmpty(startIssueTime)">
+	        	AND S.SALE_START_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+	        </if>
+	        <if test="@Ognl@isNotEmpty(endIssueTime)">
+	        	<![CDATA[ AND S.SALE_START_TIME <= TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+	        </if>
+		 order by S.ISSUE_CODE DESC
+	</select>
+	
+	<select id="queryCountGameWarnOnlyCurrntIssue" resultType="long" parameterType="hashMap">
+	     SELECT count(*)
+		  FROM (SELECT s1.LOTTERYID,
+		               s1.WEB_ISSUE_CODE,
+		               s1.ISSUE_CODE,
+		               s1.SALE_START_TIME,
+		               s1.SALE_END_TIME,
+		               s1.OPEN_DRAW_TIME,
+		               s1.FACTION_DRAW_TIME,
+		               s1.STATUS,
+		               s2.WARN_PARAS,
+		               s2.DES,
+		               s2.WARN_TYPE,
+		               s2.DISPOSE_MEMO,
+		               s1.create_time,
+		               S1.PERIOD_STATUS
+		          FROM GAME_ISSUE s1
+		          LEFT JOIN (SELECT s21.ISSUE_CODE,
+		                           s21.WARN_PARAS,
+		                           s22.DES,
+		                           s22.WARN_TYPE,
+		                           s22.DISPOSE_MEMO
+		                      FROM GAME_WARN_ISSUE s21, GAME_WARN_DES s22
+		                     WHERE s21.ISSUE_WARN_ID = s22.ID) s2
+		            on s1.ISSUE_CODE = s2.ISSUE_CODE) S,
+		       GAME_SERIES T,
+		       GAME_DRAW_RESULT R
+		 WHERE S.LOTTERYID = T.LOTTERYID(+)
+		   AND S.ISSUE_CODE = R.ISSUE_CODE(+)
+		   AND S.WARN_TYPE IS NOT NULL
+		   AND S.PERIOD_STATUS IN (0,1,2)
+           AND S.WARN_TYPE NOT IN (3, 6)
+           AND S.STATUS <![CDATA[<]]> 7
+		    <if test="@Ognl@isNotEmpty(lotteryid)">
+        		AND S.LOTTERYID = ${lotteryid}
+	        </if>
+	        <if test="@Ognl@isNotEmpty(startIssueTime)">
+	        	AND S.SALE_START_TIME >= TO_DATE('${startIssueTime}', 'YYYY-MM-DD')
+	        </if>
+	        <if test="@Ognl@isNotEmpty(endIssueTime)">
+	        	<![CDATA[ AND S.SALE_START_TIME <= TO_DATE('${endIssueTime}', 'YYYY-MM-DD')  ]]>
+	        </if>
+		 order by S.ISSUE_CODE DESC
+	</select>
+	
+	<select id="queryLotteryIssueWarnLog" parameterType="hashMap" resultMap="LotteryIssueMonitorLogs">
+        SELECT * FROM (SELECT
+        (select s.LOTTERY_NAME from GAME_SERIES s where s.lotteryid=( select i.lotteryid from GAME_WARN_ISSUE i where
+        i.id=g.warn_issue_id )) AS lotteryName,
+        ( select I.WEB_ISSUE_CODE from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ) AS webIssueCode,
+        ( select I.CREATE_TIME from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ) as createTime,
+        (select d.des from GAME_WARN_DES d where d.id=(select i.issue_warn_id from GAME_WARN_ISSUE i where
+        i.id=g.warn_issue_id)) As warnDes,
+        (select d.name from GAME_WARN_DES d where d.id=(select i.issue_warn_id from GAME_WARN_ISSUE i where
+        i.id=g.warn_issue_id)) AS warnTypeName,
+        (select d.SUGGEST_MEMO from GAME_WARN_DES d where d.id=(select i.issue_warn_id from GAME_WARN_ISSUE i where
+        i.id=g.warn_issue_id)) AS disposeInfo,
+        G.DISPOSE_USER AS disposeUser,
+        G.STATUS AS status,
+        G.Dispose_Memo AS disposeMemo,
+        G.DISPOSE_INFO As doingMemo
+        FROM GAME_WARN_ISSUE_LOG G
+        WHERE 1=1
+        <if test="@Ognl@isNotEmpty(lotteryId)">AND ( select i.lotteryid from GAME_WARN_ISSUE i where
+            i.id=g.warn_issue_id ) = ${lotteryId}
+        <if test="@Ognl@isNotEmpty(warnType)">
+            AND (select d.WARN_TYPE from GAME_WARN_DES d where d.id=(select i.issue_warn_id from GAME_WARN_ISSUE i where
+            i.id=g.warn_issue_id)) = ${warnType}
+        </if>
+        </if>
+	        <if test="@Ognl@isNotEmpty(warnType)">
+                AND (select d.
+                WARN_TYPE from GAME_WARN_DES d where d.id=(select i.issue_warn_id from GAME_WARN_ISSUE i where
+                i.id=g.warn_issue_id)) = ${warnType}
+            </if>
+	         <if test="@Ognl@isNotEmpty(startCreateTime)">
+                 <![CDATA[AND ( select I.CREATE_TIME from GAME_WARN_ISSUE i where i.
+            id=g.warn_issue_id ) >= TO_DATE('${startCreateTime}', 'YYYY-MM-DD')]]>
+             </if>
+	        <if test="@Ognl@isNotEmpty(endCreateTime)">
+                <![CDATA[ AND ( select I.CREATE_TIME from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ) <= TO_DATE('${endCreateTime}', 'YYYY-MM-DD')  ]]>
+	        </if>
+	        <if test="@Ognl@isNotEmpty(todayTime)">
+	        	<![CDATA[ AND to_char(( select I.CREATE_TIME from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ),'YYYY-MM-DD') = '${todayTime}' ]]>
+	        </if>
+	        order by g.ID DESC
+        ) WHERE warnDes <![CDATA[<>]]> '无异常'
+	</select>
+	
+	<select id="queryLotteryIssueWarnLogCount" parameterType="hashMap" resultType="long">
+	SELECT COUNT(*) FROM (select * from (
+		SELECT 
+		   (select s.LOTTERY_NAME from GAME_SERIES s where s.lotteryid=( select i.lotteryid from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ))   AS lotteryName,
+	       ( select I.WEB_ISSUE_CODE from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ) AS webIssueCode,
+	       ( select I.CREATE_TIME from GAME_WARN_ISSUE i where i.id=g.warn_issue_id )    as createTime,
+	       (select d.des from GAME_WARN_DES d where d.id=(select i.issue_warn_id from GAME_WARN_ISSUE i where i.id=g.warn_issue_id)) As warnDes,
+           (select d.name from GAME_WARN_DES d where d.id=(select i.issue_warn_id from GAME_WARN_ISSUE i where i.id=g.warn_issue_id))           AS warnTypeName,
+	       (select d.SUGGEST_MEMO from GAME_WARN_DES d where d.id=(select i.issue_warn_id from GAME_WARN_ISSUE i where i.id=g.warn_issue_id))   AS disposeInfo,
+	       G.DISPOSE_USER   AS disposeUser,
+	       G.STATUS         AS status,
+	       G.Dispose_Memo   AS disposeMemo,
+	       G.DISPOSE_INFO   As doingMemo
+	  FROM   GAME_WARN_ISSUE_LOG G
+	  WHERE 1=1
+	        <if test="@Ognl@isNotEmpty(lotteryId)">
+	        	AND ( select i.lotteryid from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ) = ${lotteryId}
+	        </if>
+	        <if test="@Ognl@isNotEmpty(warnType)">
+	        	AND (select d.WARN_TYPE from GAME_WARN_DES d where d.id=(select i.issue_warn_id from GAME_WARN_ISSUE i where i.id=g.warn_issue_id)) = ${warnType}
+	        </if>
+	         <if test="@Ognl@isNotEmpty(startCreateTime)">
+	        	<![CDATA[AND ( select I.CREATE_TIME from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ) >= TO_DATE('${startCreateTime}', 'YYYY-MM-DD')]]>
+	        </if>
+	        <if test="@Ognl@isNotEmpty(endCreateTime)">
+	        	<![CDATA[ AND ( select I.CREATE_TIME from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ) <= TO_DATE('${endCreateTime}', 'YYYY-MM-DD')  ]]>
+	        </if>
+	        <if test="@Ognl@isNotEmpty(todayTime)">
+	        	<![CDATA[ AND to_char(( select I.CREATE_TIME from GAME_WARN_ISSUE i where i.id=g.warn_issue_id ),'YYYY-MM-DD') = '${todayTime}' ]]>
+	        </if>
+	        order by g.ID DESC))
+        WHERE warnDes <![CDATA[<>]]> '无异常'
+	</select>
+	
+	<select id="queryLotteryIssueNotices" resultMap="GameWarnIssueResult">
+		SELECT <include refid="gameWarnIssueColumns" />
+			FROM ( 
+			  SELECT ID ,
+		        	LOTTERYID ,
+		        	ISSUE_CODE,
+		        	WEB_ISSUE_CODE,
+		        	ISSUE_WARN_ID,
+		        	CREATE_TIME,
+		        	UPDATE_TIME,
+		        	READ_FLAG,
+		        	WARN_PARAS,
+		        	case when (select count(*) from GAME_WARN_ISSUE where lotteryid = t.lotteryid and status = 2 ) >= 1 then '2'
+	                 else '1' end status,
+		    RANK() OVER (PARTITION BY LOTTERYID ORDER BY id DESC) rank
+		    FROM GAME_WARN_ISSUE t
+		  ) where rank = 1
+	</select>
+</mapper>

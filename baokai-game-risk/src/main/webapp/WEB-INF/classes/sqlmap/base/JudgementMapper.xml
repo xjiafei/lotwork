@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.Judgement">
+	<resultMap id="JudgementResult" type="com.winterframework.firefrog.user.dao.vo.Judgement">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="judgementColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACCOUNT as account,
+	        	EFFECT_TIME as effectTime,
+	        	ACTION as action
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.user.dao.vo.Judgement" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_JUDGEMENT_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        JUDGEMENT (
+	        	ID ,
+	        	ACCOUNT ,
+	        	EFFECT_TIME ,
+	        	ACTION 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{account,javaType=string,jdbcType=VARCHAR} ,
+	        	#{effectTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{action,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.user.dao.vo.Judgement">
+	    <![CDATA[
+	        UPDATE JUDGEMENT SET
+		        ACCOUNT = #{account,javaType=string,jdbcType=VARCHAR} ,
+		        EFFECT_TIME = #{effectTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        ACTION = #{action,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+		<update id="updateJudgement" parameterType="com.winterframework.firefrog.user.dao.vo.Judgement">
+	    <![CDATA[
+	        UPDATE JUDGEMENT SET
+		        EFFECT_TIME = #{effectTime,javaType=object,jdbcType=TIMESTAMP}
+	        WHERE 
+		        ACCOUNT = #{account} and ACTION=#{action}
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from JUDGEMENT where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="JudgementResult" flushCache="false">
+			select <include refid="judgementColumns" />
+		    <![CDATA[
+			    from JUDGEMENT 
+		        where 
+		         ID = #{id}
+		    ]]>
+		</select>	
+		
+		<select id="getJudgement" parameterType="com.winterframework.firefrog.user.dao.vo.Judgement" resultMap="JudgementResult" flushCache="false">
+			select <include refid="judgementColumns" />
+		    <![CDATA[
+			    from JUDGEMENT 
+		        where 
+		        ACCOUNT = #{account} and ACTION=#{action}
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="JudgementResult" flushCache="false">
+			select <include refid="judgementColumns" />
+			    from JUDGEMENT 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="judgementDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT = #{account}
+			</if>
+	       <if test="@Ognl@isNotEmpty(effectTime)">
+				and EFFECT_TIME = #{effectTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(action)">
+				and ACTION = #{action}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="JudgementResult"  flushCache="false">
+    	select <include refid="judgementColumns" />
+	    from JUDGEMENT 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from JUDGEMENT 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from JUDGEMENT 
+		<include refid="judgementDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="JudgementResult">
+    	select <include refid="judgementColumns" />
+	    from JUDGEMENT 
+		<include refid="judgementDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

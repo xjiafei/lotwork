@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GamePlanDetail">
+	<resultMap id="GamePlanDetailResult" type="com.winterframework.firefrog.game.dao.vo.GamePlanDetail">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gamePlanDetailColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	PLANID as planid,
+	        	ISSUE_CODE as issueCode,
+	        	MUTIPLE as mutiple,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	CANCEL_TIME as cancelTime,
+	        	RUM_TIME as rumTime,
+	        	CANCEL_USER as cancelUser,
+	        	CANCEL_FEE as cancelFee
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GamePlanDetail" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_PLAN_DETAIL_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_PLAN_DETAIL (
+	        	ID ,
+	        	PLANID ,
+	        	ISSUE_CODE ,
+	        	MUTIPLE ,
+	        	TOTAMOUNT ,
+	        	STATUS ,
+	        	CREATE_TIME ,
+	        	CANCEL_TIME ,
+	        	RUM_TIME,
+	        	CANCEL_USER
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{planid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{mutiple,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totamount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{cancelTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{rumTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{cancelUser,javaType=string,jdbcType=VARCHAR} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GamePlanDetail">
+	    <![CDATA[
+	        UPDATE GAME_PLAN_DETAIL SET
+		        PLANID = #{planid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        MUTIPLE = #{mutiple,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAMOUNT = #{totamount,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=integer,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CANCEL_TIME = #{cancelTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	RUM_TIME = #{rumTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	CANCEL_USER = #{cancelUser,javaType=string,jdbcType=VARCHAR}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_PLAN_DETAIL where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    
+	    <select id="getGamePlanDetailByPlanIdAndIssueCode" parameterType="hashMap"  resultMap="GamePlanDetailResult">
+	    	select <include refid="gamePlanDetailColumns" />
+		    <![CDATA[
+			    from GAME_PLAN_DETAIL 
+		        where 
+		        ISSUE_CODE = #{issueCode}
+		        and PLANID = #{planId}
+		     ]]>
+	    </select>
+	    <select id="getById" parameterType="long" resultMap="GamePlanDetailResult" flushCache="false">
+			select <include refid="gamePlanDetailColumns" />
+		    <![CDATA[
+			    from GAME_PLAN_DETAIL 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GamePlanDetailResult" flushCache="false">
+			select <include refid="gamePlanDetailColumns" />
+			    from GAME_PLAN_DETAIL 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gamePlanDetailDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(planid)">
+				and PLANID = #{planid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mutiple)">
+				and MUTIPLE = #{mutiple}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totamount)">
+				and TOTAMOUNT = #{totamount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(cancelTime)">
+				and CANCEL_TIME = #{cancelTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(rumTime)">
+				and RUM_TIME = #{rumTime}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GamePlanDetailResult"  flushCache="false">
+    	select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_PLAN_DETAIL 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_PLAN_DETAIL 
+		<include refid="gamePlanDetailDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GamePlanDetailResult">
+    	select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+		<include refid="gamePlanDetailDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<!-- 根据追号计划ID来查询 -->
+	<select id="getPlanDetailsByPlanId" parameterType="long" resultMap="GamePlanDetailResult">
+	select
+		ID as id,
+		PLANID as planid,
+		ISSUE_CODE as issueCode,
+		(select web_issue_code from game_issue g where g.issue_code=y.ISSUE_CODE) as webIssueCode,
+		MUTIPLE as mutiple,
+		TOTAMOUNT as totamount,
+		STATUS as status,
+		CREATE_TIME as createTime,
+		CANCEL_TIME as cancelTime,
+		RUM_TIME as rumTime
+	from GAME_PLAN_DETAIL y
+	where y.PLANID = #{planid} 
+    </select>
+    
+    <select id="getUnExeuPlanDetailsByPlanId" parameterType="long" resultMap="GamePlanDetailResult">
+    	select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+		where PLANID = #{planid} and status=0
+    </select>
+    
+    <select id="queryGamePlanDetailByPlanID" parameterType="hashMap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+		where PLANID = #{planId} and issue_code = #{issueCode}
+	</select>
+	<select id="queryGamePlanDetailByPlanIDWithOutStatus" parameterType="hashMap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+	    from GAME_PLAN_DETAIL 
+		where PLANID = #{planId} and issue_code = #{issueCode}
+	</select>
+   	<update id="updateGamePlanDetailByPlanId" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL SET
+			STATUS = #{status},
+			CANCEL_TIME = #{cancelTime}
+		WHERE
+		   PLANID = #{planid} 
+		   AND STATUS = 0
+		   <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	</update>
+	
+	<update id="updateGamePlanDetailByPlanIdWithOutSatus" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL SET
+			STATUS = #{status},
+			CANCEL_TIME = #{cancelTime}
+		WHERE
+		   PLANID = #{planid} 
+		   <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	</update>
+	<update id="updateGamePlanDetailWithOutStatus" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL SET
+				STATUS = #{status},
+				RUM_TIME=#{runTime},
+				CANCEL_USER=#{cancelUser}
+			WHERE
+			   PLANID = #{planId} 
+			   <if test="@Ognl@isNotEmpty(issueCode)">
+					and ISSUE_CODE = #{issueCode}
+			   </if>
+	</update>
+		
+	
+   	<update id="updateGamePlanDetailStatusByPlanID" parameterType="hashMap">
+			UPDATE GAME_PLAN_DETAIL SET
+				STATUS = #{status},
+				RUM_TIME=#{runTime},
+				CANCEL_USER=#{cancelUser}
+			WHERE
+			   PLANID = #{planId}  
+			   <if test="@Ognl@isNotEmpty(issueCode)">
+					and ISSUE_CODE = #{issueCode}
+			   </if>
+			   <if test="@Ognl@isNotEmpty(needStatus)">
+					and STATUS = #{needStatus}
+			   </if>
+	</update>
+	
+	<select id="queryGamePlanDetailByIssueCode" parameterType="hashMap" resultMap="GamePlanDetailResult">
+   	    select <include refid="gamePlanDetailColumns" />
+	    <![CDATA[ from GAME_PLAN_DETAIL  where  issue_code = #{issueCode} and status = 0 and PLANID in (select id from GAME_PLAN p where p.lotteryId = #{lotteryId} and p.status = 1 )]]>
+   	</select>
+	
+	<update id="updateGamePlanDetailsByCondition" parameterType="hashmap">
+		UPDATE 
+			(
+			SELECT d.*,i.sale_start_time,i.sale_end_time 
+				from GAME_PLAN_DETAIL d 
+			left join GAME_PLAN p 
+				on p.lotteryid = #{lotteryid} and d.planid=p.id and d.status=0
+			left join GAME_ISSUE i
+				on d.issue_code=i.issue_code
+			)
+			t 
+		SET 
+			t.status = #{status},t.cancel_time = #{cancelTime} 
+		where 
+			t.sale_start_time <![CDATA[>=]]> (select sale_start_time from GAME_ISSUE where issue_code=#{startIssueCode})
+			<if test="@Ognl@isNotEmpty(endIssueCode)">
+			and t.sale_end_time <![CDATA[<=]]> (select sale_end_time from GAME_ISSUE where issue_code=#{endIssueCode})
+			</if>
+	</update>
+	
+	<select id="getPauseGamePlanDetailUniqueIssueCode" parameterType="long" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+		  from (SELECT t.*,
+		               RANK() OVER(PARTITION BY issue_code ORDER BY id) drank
+		          FROM game_plan_detail t
+		         where t.status = 0
+		           and t.planid in (select id
+		                              from game_plan t
+		                             where t.lotteryid = #{lotteryId}
+		                               and t.status = 4))
+		 where drank = 1 order by id 
+	</select>
+	
+	<update id="updateGamePlanDetailsStatusByPlanid" parameterType="hashmap">
+		UPDATE 
+			GAME_PLAN_DETAIL p 
+		SET 
+			p.STATUS = #{status} 
+		WHERE 
+			p.PLANID = #{planid} AND p.STATUS = 2
+	</update>
+	
+	<select id="getPlanIdByIssueCode" parameterType="long" resultType="long">
+		select distinct planid
+		  from game_plan_detail
+		 where issue_code = #{issueCode}
+	</select>
+	
+	<select id="getPausePlanIdByIssueCode" parameterType="long" resultType="long">
+		select distinct gpd.planid
+		  from game_plan_detail gpd, game_plan gp
+		 where gpd.issue_code = #{issueCode}
+	     and gpd.planid = gp.id
+	     and gp.status = 4
+	</select>
+	
+	<select id="selectGamePlanDetailsByPlanIdAndIssueCode" parameterType="hashmap" resultMap="GamePlanDetailResult">
+		 select <include refid="gamePlanDetailColumns" />
+		<![CDATA[	from game_plan_detail d 
+			where d.issue_code=#{issueCode} and d.planid=#{planId} and d.status <> 2
+			]]>
+	</select>
+	
+	<select id="getGamePlanDetailByLotteryId" parameterType="long" resultMap="GamePlanDetailResult">
+	    select <include refid="gamePlanDetailColumns"/>
+	    <![CDATA[
+	      from game_plan_detail p,(select id as pid from game_plan t where t.finish_issue =  0 and t.status < 2 and t.lotteryid= #{lotteryId}) tt
+ where  p.id in (select id from game_plan_detail p2 where p2.planid = tt.pid and rownum = 1 )
+ 		]]>
+	</select>
+	
+	<select id="selectOneIssueUndoGamePlanDetailsByLotteryIssue" parameterType="hashmap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+		  from game_plan_detail d
+		 where d.issue_code = #{issueCode}
+		   and exists(select 1 from GAME_PLAN p where d.planid = p.id and p.lotteryid = #{lotteryid})
+		   and d.status = 0
+	</select>
+	
+	<update id="updateGamePlanDetailContinue" parameterType="long">
+	     update game_plan_detail set status=0 where status = 3 and planid=#{planId}
+	</update>
+	<update id="updateGamePlanDetailPause" parameterType="long">
+	    update game_plan_detail set status = 3 where status=0 and planid = #{planId}
+	</update>
+	<update id="updateGamePlanDetailByPlanIdAfterIssue" parameterType="hashmap">
+	     <![CDATA[
+		UPDATE 
+			GAME_PLAN_DETAIL p 
+		SET 
+			p.STATUS = #{status} 
+		WHERE 
+			p.PLANID = #{planId} AND p.ISSUE_CODE >=#{issueCode}
+			and p.STATUS <> 1
+			]]>
+	</update>
+	<select id="getGamePlanDetailByLotteryIdAndIssueCode" parameterType="hashmap" resultMap="GamePlanDetailResult">
+	   select <include refid="gamePlanDetailColumns" /> 
+	     from game_plan_detail plandetail
+	    where exists (select 1
+	             from game_plan gameplan
+	            where gameplan.id = plandetail.planid
+	              and gameplan.lotteryid = #{lotteryid})
+	      and plandetail.issue_code = #{issueCode} 
+	</select>
+
+	<select id="getFollowIssueGamePlanDetailWithOutCancel" parameterType="hashmap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+		<![CDATA[
+			from game_plan_detail d 
+			where d.issue_code>=#{issueCode} and d.planid=#{planid}			
+			and (d.status<>2 and d.status <> 5 and d.status <> 6)
+		]]>
+	</select>
+
+	<update id="updateFollowIssueGamePlanDetailWithOutCancelToCancel" parameterType="hashMap">
+		<![CDATA[
+		UPDATE GAME_PLAN_DETAIL SET
+			STATUS = 2,
+			CANCEL_TIME = #{cancelTime},
+			CANCEL_USER = '-1'
+		WHERE
+		   PLANID = #{planid} 		  
+		   and ISSUE_CODE >= #{issueCode}
+		   and status<>2
+		   ]]>
+	</update>
+	
+	<select id="getGamePlanDetailByPlanIdAndIssueCodes" parameterType="hashMap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+		<![CDATA[
+		 	from game_plan_detail d 
+		 	where d.issue_code>=#{issueCode} and d.planid=#{planId}			
+			and d.status = 2
+			and d.CANCEL_USER = '-1'
+		]]>
+	</select>
+	
+	<select id="getGamePlanDetailFollowedByPlanAndIssue" parameterType="hashmap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+		  from game_plan_detail d 
+		 where d.issue_code<![CDATA[>]]>#{issueCode} and d.planid=#{planId}	  
+	</select>
+	
+	<select id="getResetGamePlanDetailList" parameterType="hashmap" resultMap="GamePlanDetailResult">
+		 select <include refid="gamePlanDetailColumns" /> 
+		 	from game_plan_detail d
+			where  cancel_user=-1 and planId in(
+			select distinct(planId) from game_plan_detail where id in(
+			select plan_detail_id from game_order where  issue_code=#{issueCode} and status=2 and lotteryId=#{lotteryId} and plan_detail_id is not null
+			and planId in(select id from game_plan where stop_mode=2 and lotteryId=#{lotteryId} ))) and issue_code in
+			(select issue_code from game_issue where status in(0,1) and lotteryId=#{lotteryId})
+	</select>
+	
+	<select id="getGamePlanDetailNeedCancelList" parameterType="hashmap" resultMap="GamePlanDetailResult">
+		 select <include refid="gamePlanDetailColumns" /> 
+		 	from game_plan_detail d
+			where  cancel_time >= sysdate-1 and  status = 6
+	</select>
+	
+	<update id="updateGamePlanDetailByIdCancel" parameterType="hashMap">
+		UPDATE GAME_PLAN_DETAIL p SET
+			p.STATUS = #{status},
+			p.CANCEL_TIME = #{cancelTime},
+			p.CANCEL_USER = #{cancelUser}
+		WHERE
+		   p.ID = #{planid} 
+		   AND p.STATUS = 6
+	</update>
+	<select id="getLastIssueGamePlanDetailWithoutCancel" parameterType="hashmap" resultMap="GamePlanDetailResult">
+		select <include refid="gamePlanDetailColumns" />
+		<![CDATA[
+		from (
+			select rownum as rn,d.*
+			from game_plan_detail d 
+			where d.issue_code<#{issueCode} and d.planid=#{planid}			
+			and d.status<>2 order by issue_code desc ) k where rn=1
+		]]>
+	</select>
+</mapper>

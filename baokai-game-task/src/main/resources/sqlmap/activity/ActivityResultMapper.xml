@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.winterframework.firefrog.active.dao.vo.ActivityResult">
+
+	<resultMap id="result" type="com.winterframework.firefrog.active.dao.vo.ActivityResult">
+			<result column="ID" property="id"/>
+			<result column="ACTIVITY_ID" property="activityId"/>
+			<result column="USERID" property="userId"/>
+			<result column="STATUS" property="status"/>
+			<result column="TYPE" property="type"/>
+			<result column="RESULT" property="result"/>
+			<result column="CREATEUSER" property="createUser"/>
+			<result column="CREATETIME" property="createTime"/>
+			<result column="MODIFYUSER" property="modifyUser"/>	
+			<result column="MODIFYTIME" property="modifyTime"/>	
+	</resultMap>
+	
+	<sql id="DynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(activityId)">
+				and ACTIVITY_ID = #{activityId}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and USERID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and (CREATETIME <![CDATA[>=]]> #{createTime} )
+			</if>
+		</where>
+	</sql>
+	
+	 
+    <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.active.dao.vo.ActivityResult" 
+			useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_ACTIVITY_RESULT.Nextval from dual
+			   	    </selectKey>
+		<![CDATA[
+	        INSERT INTO
+	        ACTIVITY_RESULT (
+	        	ID ,
+	        	ACTIVITY_ID,
+	        	USERID,
+	        	STATUS,
+	        	TYPE,
+				RESULT  ,
+				CREATEUSER, 
+				CREATETIME,
+				MODIFYUSER,
+				MODIFYTIME
+			) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{type,javaType=string,jdbcType=VARCHAR} ,	        
+	        	#{result,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createUser,javaType=long,jdbcType=DECIMAL} ,       	
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP},   
+	        	#{modifyUser,javaType=long,jdbcType=DECIMAL},
+	        	#{modifyTime,javaType=object,jdbcType=TIMESTAMP}     
+	        )
+	    ]]>	
+	
+		</insert>
+		
+		<select id="queryActivityResultToday" resultMap="result" 
+			parameterType="com.winterframework.firefrog.active.dao.vo.ActivityResult" flushCache="false">
+	    	SELECT * FROM ACTIVITY_RESULT 
+	    	WHERE STATUS = 1
+	    	AND CREATETIME <![CDATA[>=]]> TRUNC(sysdate)
+	    	AND CREATETIME <![CDATA[<]]> TRUNC(sysdate+1)
+	    	<if test="@Ognl@isNotEmpty(userId)">
+				AND USERID = ${userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(activityId)">
+				AND ACTIVITY_ID = ${activityId}
+			</if>
+	    </select>	
+	    
+	    <select id="queryActivityResultAwardToday" resultType="long"
+			parameterType="com.winterframework.firefrog.active.dao.vo.ActivityResult" >
+	    	SELECT COUNT(*) FROM ACTIVITY_RESULT 
+	    	WHERE STATUS = 1
+	    	<if test="@Ognl@isNotEmpty(activityId)">
+				AND ACTIVITY_ID = #{activityId}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				AND TYPE = #{type}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				AND USERID = #{userId}
+			</if>
+	    	<![CDATA[ 
+	    		AND  CREATETIME >= TRUNC(sysdate-1) 
+	    	 	AND  CREATETIME < TRUNC(sysdate) 
+	    	]]>
+	    	
+	    </select>	     
+	    
+	    
+	    <select id="queryActivityResultByUserIdAndType" resultMap="result" 
+			parameterType="map" flushCache="false">
+	    	SELECT * FROM ACTIVITY_RESULT 
+	    	WHERE STATUS = 1
+	    	AND CREATETIME <![CDATA[>=]]> TRUNC(sysdate)
+	    	AND CREATETIME <![CDATA[<]]> TRUNC(sysdate+1)
+			AND USERID = #{userId}
+			AND TYPE = #{type}
+	    </select>	
+
+	    <select id="queryActivityResultListAwardToday" resultMap="result" 
+			parameterType="com.winterframework.firefrog.active.dao.vo.ActivityResult" flushCache="false">
+	    	SELECT * FROM ACTIVITY_RESULT 
+	    	WHERE STATUS = 1
+	    	AND CREATETIME <![CDATA[>=]]> TRUNC(sysdate)
+	    	AND CREATETIME <![CDATA[<]]> TRUNC(sysdate+1)
+	    	<if test="@Ognl@isNotEmpty(userId)">
+				AND USERID = ${userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(activityId)">
+				AND ACTIVITY_ID = ${activityId}
+			</if>
+	    </select>	
+	    
+	    <update id="updateTypeByUseridAndActivityid"
+			parameterType="com.winterframework.firefrog.active.dao.vo.ActivityResult">
+				UPDATE ACTIVITY_RESULT 
+				 <set> 
+					<if test="@Ognl@isNotEmpty(sender)">
+						TYPE=#{type, javaType=string,jdbcType=VARCHAR} ,
+					</if>
+				</set>
+				WHERE STATUS = 1
+				<if test="@Ognl@isNotEmpty(userId)">
+						AND USERID = ${userId}
+				</if>
+				<if test="@Ognl@isNotEmpty(activityId)">
+					AND ACTIVITY_ID = ${activityId}
+				</if>
+		</update>
+		
+		<update id="updateTypeById" parameterType="map">
+				UPDATE ACTIVITY_RESULT 
+				<set> 
+					<if test="@Ognl@isNotEmpty(type)">
+						TYPE=#{type, javaType=string,jdbcType=VARCHAR} ,
+					</if>
+				</set>
+				WHERE ID = #{id}
+		</update>
+		
+		<update id="updateTypeAndStatusById" parameterType="map">
+				UPDATE ACTIVITY_RESULT 
+				<set> 
+					<if test="@Ognl@isNotEmpty(type)">
+						TYPE=#{type, javaType=string,jdbcType=VARCHAR} ,
+					</if>
+					<if test="@Ognl@isNotEmpty(status)">
+						STATUS=#{status, javaType=string,jdbcType=VARCHAR},
+					</if>
+				</set>
+				WHERE ID = #{id}
+		</update>
+		
+		<select id="queryActivityResultByUserIdAndActivityIdAndResult" resultMap="result" 
+			parameterType="map" flushCache="true">
+	    	SELECT * FROM ACTIVITY_RESULT 
+	    	WHERE USERID = #{userId}
+	    	AND ACTIVITY_ID = #{activityId} 
+	    	AND RESULT = #{result}
+	    </select>
+		
+		<select id="queryMinTypeByUserIdAndActivityIdAndLessThanResult" resultType="java.lang.String" 
+			parameterType="map" flushCache="true">
+	    	SELECT min(TYPE) FROM ACTIVITY_RESULT 
+	    	WHERE USERID = #{userId}
+	    	AND ACTIVITY_ID = #{activityId} 
+	    	AND RESULT <![CDATA[<]]> #{result}
+	    </select>
+	    
+	    <select id="queryStatusZeroByUserIdAndActivityId" resultType="java.lang.Long" 
+			parameterType="map" flushCache="true">
+	    	SELECT count(1) FROM ACTIVITY_RESULT 
+	    	WHERE STATUS = 0
+	    	AND USERID = #{userId}
+	    	AND ACTIVITY_ID = #{activityId} 
+	    </select>
+	    
+	    <select id="queryAllResultByUserIdAndActivityIdOrderByResult" resultMap="result" 
+			parameterType="map" flushCache="true">
+	    	SELECT * FROM ACTIVITY_RESULT 
+	    	WHERE USERID = #{userId}
+	    	AND ACTIVITY_ID = #{activityId} 
+	    	ORDER BY RESULT
+	    </select>
+	    
+	     <select id="getBeforeOneDayResultByActivityIdAndTypeAndUserIdAndActivityId" resultMap="result" 
+			parameterType="map" flushCache="false">
+	    	SELECT * FROM ACTIVITY_RESULT 
+	    	WHERE STATUS = 1
+	    	AND CREATETIME <![CDATA[>=]]> TRUNC(sysdate-1)
+	    	AND CREATETIME <![CDATA[<]]> TRUNC(sysdate)
+			AND USERID = #{userId}
+			AND TYPE = #{type}
+			AND ACTIVITY_ID = #{activityId} 
+	    </select>	
+	    
+</mapper>

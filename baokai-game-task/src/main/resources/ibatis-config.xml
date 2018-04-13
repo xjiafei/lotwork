@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+  "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+	<typeHandlers>
+		<typeHandler javaType="boolean" jdbcType="VARCHAR"
+			handler="com.winterframework.orm.dal.ibatis3.type.YesNoTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.DateTypeHandler"
+			javaType="java.util.Date" jdbcType="TIMESTAMP" />
+	</typeHandlers>
+
+
+	<plugins>
+
+		<plugin interceptor="com.winterframework.orm.page.plugin.OffsetLimitInterceptor">
+			<property name="dialectClass"
+				value="com.winterframework.orm.dialect.OracleDialect" />
+		</plugin>
+	</plugins>
+	
+	<mappers>
+		<mapper resource="sqlmap/base/UserCustomerMapper.xml" />
+		<mapper resource="sqlmap/base/UserLoginLogMapper.xml" />
+		<mapper resource="sqlmap/base/GamePackageMapper.xml"/>
+		<mapper resource="sqlmap/base/GamePackageItemMapper.xml"/>
+		<mapper resource="sqlmap/base/GamePlanMapper.xml"/>
+		<mapper resource="sqlmap/base/GamePlanDetailMapper.xml"/>
+		<mapper resource="sqlmap/base/GameOrderMapper.xml"/>
+		<mapper resource="sqlmap/base/GameIssueMapper.xml"/>
+		<mapper resource="sqlmap/base/GameSlipMapper.xml"/>
+		<mapper resource="sqlmap/base/GameDrawResultMapper.xml"/>
+		<mapper resource="sqlmap/base/GameMultipleMapper.xml"/>
+		<mapper resource="sqlmap/base/GameMultipleCheckMapper.xml"/>
+		<mapper resource="sqlmap/base/GameAwardGroupMapper.xml"/>
+		<mapper resource="sqlmap/base/GameAwardGroupCheckMapper.xml"/>
+		<mapper resource="sqlmap/base/GameAwardMapper.xml"/>
+		<mapper resource="sqlmap/base/GameAwardCheckMapper.xml"/>
+		<mapper resource="sqlmap/base/GameIssueRuleMapper.xml"/>
+		<mapper resource="sqlmap/base/GameIssueRuleCheckMapper.xml"/>
+		<mapper resource="sqlmap/base/GameIssueTemplateMapper.xml"/>
+		<mapper resource="sqlmap/base/GameIssueTemplateCheckMapper.xml"/>
+		<mapper resource="sqlmap/base/GameSeriesMapper.xml"/>
+		<mapper resource="sqlmap/base/GameSeriesCheckMapper.xml"/>
+		<mapper resource="sqlmap/base/GameBettypeStatusMapper.xml"/>
+		<mapper resource="sqlmap/base/GameBettypeStatusCheckMapper.xml"/>
+		<mapper resource="sqlmap/base/GameBettypeAssistMapper.xml"/>
+		<mapper resource="sqlmap/base/GameHelpMapper.xml"/>
+		<mapper resource="sqlmap/base/GameHelpCheckMapper.xml"/>
+		<mapper resource="sqlmap/base/GameTrendJbylMapper.xml"/>
+		<mapper resource="sqlmap/base/GameSeriesConfigCheckMapper.xml"/>
+		<mapper resource="sqlmap/base/GameSeriesConfigMapper.xml"/>
+		<mapper resource="sqlmap/base/GameUserAwardMapper.xml"/>
+		<mapper resource="sqlmap/base/GameUserAwardGroupMapper.xml"/>
+		<mapper resource="sqlmap/base/GameWarnOrderMapper.xml"/>
+		<mapper resource="sqlmap/base/GameWarnIssueLogMapper.xml"/>
+		<mapper resource="sqlmap/base/GameWarnIssueMapper.xml"/>
+		<mapper resource="sqlmap/base/GameWarnOrderLogMapper.xml"/>
+		<mapper resource="sqlmap/base/GameWarnUserMapper.xml"/>
+		<mapper resource="sqlmap/base/GameWinsReportMapper.xml"/>
+		<!-- 投注方式返點紀錄表 -->
+		<mapper resource="sqlmap/base/GameRetBetTypePointMapper.xml"/>
+		<mapper resource="sqlmap/base/GameRetPointMapper.xml"/>
+		<mapper resource="sqlmap/base/GameOrderWinMapper.xml"/>
+		<mapper resource="sqlmap/base/GameIssueRuleLogMapper.xml"/>
+		<mapper resource="sqlmap/base/GameIssueLogMapper.xml"/>
+		<mapper resource="sqlmap/base/GameControlEventMapper.xml"/>
+		<mapper resource="sqlmap/base/GameRiskConfigMapper.xml"/>
+		<mapper resource="sqlmap/base/GameSlipAssistMapper.xml"/>
+		<mapper resource="sqlmap/base/GamePackageAssistMapper.xml"/>
+		<mapper resource="sqlmap/base/GamePointsMapper.xml"/>		
+		<mapper resource="sqlmap/base/GameBonusPoolMapper.xml"/>
+		<mapper resource="sqlmap/base/GameOrderLogMapper.xml"/>
+		<mapper resource="sqlmap/base/GameSlipDetailMapper.xml"/>
+		<mapper resource="sqlmap/base/GameTrendBetMapper.xml"/> 
+		<mapper resource="sqlmap/base/UserSystemUpdateLogMapper.xml"/>
+		<mapper resource="sqlmap/base/GameFundQueueMapper.xml"/>
+		
+		<mapper resource="sqlmap/shortlived/sheepactivity/ActivitySheepOperateLogMapper.xml"/>
+		<mapper resource="sqlmap/shortlived/sheepactivity/ActivitySheepHongBaoMapper.xml"/>
+		<mapper resource="sqlmap/shortlived/sheepactivity/ActivitySheepBigLittleMapper.xml"/>
+		<mapper resource="sqlmap/shortlived/sheepactivity/ActivitySheepWheelSurfMapper.xml"/>
+		<mapper resource="sqlmap/shortlived/sheepactivity/ActivitySheepDetailMapper.xml"/>
+		<mapper resource="sqlmap/base/FundMapper.xml"/>
+		<mapper resource="sqlmap/base/FundChangeLogMapper.xml"/>
+		<mapper resource="sqlmap/base/ConfigMapper.xml"/>
+		<mapper resource="sqlmap/base/GameRiskFundMapper.xml"/>
+		
+		<mapper resource="sqlmap/base/GameTrendTaskMapper.xml"/>
+		
+		<!-- 一代回收 -->
+		<mapper resource="sqlmap/base/LevelRecycleMapper.xml"/>
+		<mapper resource="sqlmap/base/UserCustomerRecycleMapper.xml"/>
+		<mapper resource="sqlmap/base/UserBankMapper.xml"/>
+		<mapper resource="sqlmap/base/UserMessageMapper.xml"/>
+		
+		<mapper resource="sqlmap/base/GameMmcTaskMapper.xml"/>
+		<mapper resource="sqlmap/base/GameDiamondBettypeMapper.xml"/>
+
+		<!-- 新手任務 -->
+		<mapper resource="sqlmap/base/BeginNewChargeMapper.xml"/>	
+		<mapper resource="sqlmap/base/BeginNewDaybetMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginNewDayquesMapper.xml"/>				
+		<mapper resource="sqlmap/base/BeginNewTolbetMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginMissionMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginAwardMapper.xml"/>		
+		<mapper resource="sqlmap/base/BeginAwardLogMapper.xml"/>	
+		<mapper resource="sqlmap/base/BeginMissionVerMapper.xml"/>
+		<mapper resource="sqlmap/base/BeginNewMissionMapper.xml"/>	
+		<mapper resource="sqlmap/base/BeginAwardLotteryMapper.xml"/>	
+		<mapper resource="sqlmap/base/BeginMissionTaskLogMapper.xml"/>		
+		<mapper resource="sqlmap/base/BeginBindCardCheckMapper.xml"/>	
+		
+		<mapper resource="sqlmap/base/GameNumberConfigMapper.xml"/>	
+		<mapper resource="sqlmap/base/FundMowPayMapper.xml"/>	
+		<mapper resource="sqlmap/base/FundWithdrawMapper.xml"/>
+        <mapper resource="sqlmap/base/ImGroupUserMapper.xml"/>	
+		
+		<mapper resource="sqlmap/base/GameECLogMapper.xml"/>
+		
+		<!-- 活動Table -->
+		<mapper resource="sqlmap/activity/ActivityLogMapper.xml"/>
+		<mapper resource="sqlmap/activity/ActivityMapper.xml"/>
+		<mapper resource="sqlmap/activity/ActivityResultMapper.xml"/>
+		<mapper resource="sqlmap/activity/ActivitySignUpMapper.xml"/>
+		<mapper resource="sqlmap/activity/ActivityConfigMapper.xml"/>
+		<mapper resource="sqlmap/base/VipActivityMapper.xml"/>
+		
+	</mappers>
+
+</configuration>

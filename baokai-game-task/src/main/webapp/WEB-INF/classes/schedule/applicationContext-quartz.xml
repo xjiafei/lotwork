@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 要调用的工作类 -->
+
+	<import resource="control-task-job-cqssc.xml"/>
+	<import resource="control-task-job-hljssc.xml"/>
+	<import resource="control-task-job-jxssc.xml"/>
+	<import resource="control-task-job-llssc.xml"/>
+	<import resource="control-task-job-tjssc.xml"/>
+	<import resource="control-task-job-xjssc.xml"/>
+	<import resource="control-task-job-txpl5.xml"/>
+	<import resource="control-task-job-bjkl8.xml"/>
+	<import resource="control-task-job-fc3d.xml"/>
+	<import resource="control-task-job-cq115.xml"/>
+	<import resource="control-task-job-sd115.xml"/>
+	<import resource="control-task-job-jx115.xml"/>
+	<import resource="control-task-job-gd115.xml"/>
+	<import resource="control-task-job-ll115.xml"/>
+	<import resource="control-task-job-js115.xml"/>
+	<import resource="control-task-job-shssl.xml"/>
+	<import resource="control-task-job-jlffc.xml"/>
+	<import resource="control-task-job-ssq.xml"/>
+	<import resource="control-task-job-jsk3.xml"/>
+	<import resource="control-task-job-ahk3.xml"/>
+	<import resource="control-task-job-jssb.xml"/>
+	<import resource="control-task-job-lhc.xml"/>
+	<import resource="control-task-job-jlsb_comm.xml"/>
+	<import resource="control-task-job-jlsb_vip.xml"/>
+	<import resource="control-task-job-txffc.xml"/>
+	
+	<import resource="control-task-job-chart.xml"/>
+	<import resource="control-task-job-chart-jlffc.xml"/>
+	<import resource="control-task-job-chart-llssc.xml"/>
+	<import resource="control-task-job-chart-ll115.xml"/>	
+	<import resource="control-task-job-chart-js115.xml"/>
+	<import resource="control-task-job-chart-bjkl8.xml"/>
+	<import resource="control-task-job-chart-cqssc.xml"/>
+	<import resource="control-task-job-chart-xjssc.xml"/>
+	<import resource="control-task-job-chart-cq115.xml"/>
+	<import resource="control-task-job-chart-slmmc.xml"/>
+	<import resource="control-task-job-chart-sl115.xml"/>
+	<import resource="control-task-job-chart-jlsb_comm.xml"/>
+	<import resource="control-task-job-chart-jlsb_vip.xml"/>
+	<import resource="control-task-job-chart-txffc.xml"/>
+	
+	<!-- <import resource="control-task-job-fund.xml"/> -->
+	<import resource="control-task-job-issueEnd.xml"/>
+	<import resource="control-task-job-issueEnd-llssc.xml"/>
+	<import resource="control-task-job-issueEnd-jlffc.xml"/>
+	<import resource="control-task-job-issueEnd-ll115.xml"/>
+	<import resource="control-task-job-issueEnd-js115.xml"/>
+	<import resource="control-task-job-issueEnd-bjkl8.xml"/>
+	<import resource="control-task-job-issueEnd-cqssc.xml"/>
+	<import resource="control-task-job-issueEnd-xjssc.xml"/>
+	<import resource="control-task-job-issueEnd-cq115.xml"/>
+	<import resource="control-task-job-issueEnd-jlsb_comm.xml"/>
+	<import resource="control-task-job-issueEnd-jlsb_vip.xml"/> 
+	<import resource="control-task-job-issueEnd-txffc.xml"/>
+	
+	<import resource="control-task-job-orderFund.xml"/>
+	<import resource="control-task-job-orderFund-llssc.xml"/>
+	<import resource="control-task-job-orderFund-jlffc.xml"/>
+	<import resource="control-task-job-orderFund-ll115.xml"/>
+	<import resource="control-task-job-orderFund-js115.xml"/>
+	<import resource="control-task-job-orderFund-bjkl8.xml"/>
+	<import resource="control-task-job-orderFund-cqssc.xml"/>
+	<import resource="control-task-job-orderFund-xjssc.xml"/>
+	<import resource="control-task-job-orderFund-cq115.xml"/>
+	<import resource="control-task-job-orderFund-jlsb_comm.xml"/>
+	<import resource="control-task-job-orderFund-jlsb_vip.xml"/>
+	<import resource="control-task-job-orderFund-txffc.xml"/>
+	
+	<import resource="control-task-job-winRpt.xml"/>
+	<import resource="control-task-job-winRpt-llssc.xml"/>
+	<import resource="control-task-job-winRpt-jlffc.xml"/>
+	<import resource="control-task-job-winRpt-ll115.xml"/>
+	<import resource="control-task-job-winRpt-js115.xml"/>
+	<import resource="control-task-job-winRpt-bjkl8.xml"/>
+	<import resource="control-task-job-winRpt-cqssc.xml"/>
+	<import resource="control-task-job-winRpt-xjssc.xml"/>
+	<import resource="control-task-job-winRpt-cq115.xml"/>
+	<import resource="control-task-job-winRpt-jlsb_comm.xml"/>
+	<import resource="control-task-job-winRpt-jlsb_vip.xml"/>
+	<import resource="control-task-job-winRpt-txffc.xml"/>
+	
+	<import resource="control-task-job-plan.xml"/>
+	
+	<import resource="/beginmission/control-task-job-bindCardAward.xml"/>
+	<import resource="/beginmission/control-task-job-chargeAward.xml"/>
+	<import resource="/beginmission/control-task-job-dayBetAward.xml"/>
+	<import resource="/beginmission/control-task-job-invalidMission.xml"/>
+	<import resource="/beginmission/control-task-job-tolBetAward.xml"/>		
+	<import resource="control-task-job-seriesChange.xml"/>
+	<import resource="control-task-job-planCancel.xml"/>
+	<!-- activity -->
+	<!-- <import resource="/activity/control-task-job-activity-20160902.xml"/>
+	<import resource="/activity/control-task-job-activity-daily-20160903.xml"/>
+	<import resource="/activity/control-task-job-activity-interval-20160903.xml"/>
+	<import resource="/activity/control-task-job-activity-draw-20160903.xml"/> -->
+	<!-- 奖期自动生成任务开始 -->
+	<!-- 定义任务 -->
+	<bean id="generateGameIssueTask" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<!-- 实际的任务的Bean name，填上EventMonitorService的Bean name -->
+				<entry key="targetObject" value="gameIssuesGenerateSchedule"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- 任务触发器 -->
+	<bean id="generateGameIssueTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="generateGameIssueTask" />
+		</property>
+		
+		<property name="cronExpression"> 
+			<value>0 0/5 0 * * ?</value>
+		</property>
+	</bean> 
+	
+	<!-- 奖期自动生成任务结束 -->
+	
+	<!-- 任务调度入口 -->
+	<bean autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<!-- 任务列表，可以配置多个任务加入到该List -->
+		<property name="triggers">
+			<list>
+				<ref bean="gameControlEventManageTaskTrigger" />
+				<ref bean="gameControlEventCheckStatusTaskTrigger" />
+				<ref bean="generateGameIssueTrigger" />
+				<ref bean="monitoringOpenDrawTimeEndTaskTrigger" />
+				<ref bean="monitoringOpenDrawTimeEndTaskTriggerJlffc" />
+				<ref bean="monitoringOpenDrawTimeEndTaskTriggerTxffc" />
+				<ref bean="toBeFinishedTaskTrigger" />
+				
+				<ref bean="gameControlEventTaskTriggercq" />
+				<ref bean="gameControlEventTaskTriggerhlj" />
+				<!-- 移除江西時時彩任務  
+				<ref bean="gameControlEventTaskTriggerjx" />
+				-->
+				<ref bean="gameControlEventTaskTriggerll" />
+				<ref bean="gameControlEventTaskTriggertj" />
+				<ref bean="gameControlEventTaskTriggerxj" />
+				<!-- 体彩排列5 -->
+				<ref bean="gameControlEventTaskTriggertcpl5"/>
+				<!-- 北京快乐8 -->
+				<ref bean="gameControlEventTaskTriggerbjkl8"/>
+				<ref bean="gameControlEventTaskTriggerfc3d"/>
+				
+				<ref bean="gameControlEventTaskTriggercq115" />
+				<ref bean="gameControlEventTaskTriggersd115" />
+				<ref bean="gameControlEventTaskTriggergd115" />
+				<ref bean="gameControlEventTaskTriggerjx115" />
+				<ref bean="gameControlEventTaskTriggerll115" />
+				<ref bean="gameControlEventTaskTriggerJs115" />
+				<ref bean="gameControlEventTaskTriggershssl" />
+				<ref bean="gameControlEventTaskTriggerjlffc" />
+				<ref bean="gameControlEventTaskTriggerssq" />
+				<ref bean="gameControlEventTaskTriggerJsk3" />
+				<ref bean="gameControlEventTaskTriggerAhk3" />
+				<ref bean="gameControlEventTaskTriggerJssb" />
+				<!-- 六合彩 -->
+				<ref bean="gameControlEventTaskTriggerlhc"/>
+				<ref bean="gameControlEventTaskTriggerJlsbComm" />
+				<ref bean="gameControlEventTaskTriggerJlsbVip" />
+				<ref bean="gameControlEventTaskTriggerTxffc" />
+				
+				
+				<ref bean="gameOrderWinNoticeTaskTrigger" />
+				<ref bean="gameTrendChartGenerateTaskTrigger1" /> 
+				<ref bean="gameTrendChartGenerateTaskTriggerJlffc" />
+				<ref bean="gameTrendChartGenerateTaskTriggerLlssc" />
+				<ref bean="gameTrendChartGenerateTaskTriggerLl115" />
+				<ref bean="gameTrendChartGenerateTaskTriggerJs115" />
+				<ref bean="gameTrendChartGenerateTaskTriggerBjkl8" /> 
+				<ref bean="gameTrendChartGenerateTaskTriggerCqssc" /> 
+				<ref bean="gameTrendChartGenerateTaskTriggerXjssc" /> 
+				<ref bean="gameTrendChartGenerateTaskTriggerCq115" />
+				<ref bean="gameTrendChartGenerateTaskTriggerJlsbComm" />
+				<ref bean="gameTrendChartGenerateTaskTriggerJlsbVip" />
+				<!-- <ref bean="gameTrendChartGenerateTaskTriggerSlmmc" /> GameTrendTaskProcessor实现 -->   
+				<ref bean="gameTrendChartGenerateTaskTriggerTxffc" />
+				
+				 
+				<ref bean="gameWinsReportMmcTaskTrigger" /> 
+				<ref bean="monitorFollowIssueTaskTrigger" />
+				<ref bean="monitorMmcTaskTrigger" />
+				<ref bean="exportMmcFileGenerateTaskTrigger" />
+				<!-- <ref bean="gameControlEventTaskTriggerFund" /> -->    
+				<ref bean="salesTimeEndEmailSendTaskTrigger" />  
+				
+				<ref bean="gameIssueEndAfterTaskTrigger" />
+				<ref bean="gameIssueEndAfterTaskTriggerLlssc" />
+				<ref bean="gameIssueEndAfterTaskTriggerJlffc" />
+				<ref bean="gameIssueEndAfterTaskTriggerLl115" />
+				<ref bean="gameIssueEndAfterTaskTriggerJs115" />
+				<ref bean="gameIssueEndAfterTaskTriggerBjkl8" />
+				<ref bean="gameIssueEndAfterTaskTriggerCqssc" />
+				<ref bean="gameIssueEndAfterTaskTriggerXjssc" />
+				<ref bean="gameIssueEndAfterTaskTriggerCq115" />
+				<ref bean="gameIssueEndAfterTaskTriggerJlsbComm" />
+				<ref bean="gameIssueEndAfterTaskTriggerJlsbVip" />     
+				<ref bean="gameIssueEndAfterTaskTriggerTxffc" />
+				
+				<ref bean="gameControlEventTaskTriggerOrderFund" />
+				<ref bean="gameControlEventTaskTriggerOrderFundXjssc" />
+				<ref bean="gameControlEventTaskTriggerOrderFundLlssc" />
+				<ref bean="gameControlEventTaskTriggerOrderFundLl115" />
+				<ref bean="gameControlEventTaskTriggerOrderFundCqssc" />
+				<ref bean="gameControlEventTaskTriggerOrderFundCq115" />
+				<ref bean="gameControlEventTaskTriggerOrderFundBjkl8" />   
+				<ref bean="gameControlEventTaskTriggerOrderFundJlffc" />
+				<ref bean="gameControlEventTaskTriggerOrderFundJlsbComm" />
+				<ref bean="gameControlEventTaskTriggerOrderFundJlsbVip" /> 
+				<ref bean="gameControlEventTaskTriggerOrderFundTxffc" />
+				
+				<!--活动终止 <ref bean="activitySheepTaskTrigger" />
+				<ref bean="activitySheepConfigTaskTrigger" />  -->
+				<ref bean="gameControlEventTaskTriggerWinRpt" />
+				<ref bean="gameControlEventTaskTriggerWinRptXjssc" />
+				<ref bean="gameControlEventTaskTriggerWinRptLlssc" />
+				<ref bean="gameControlEventTaskTriggerWinRptLl115" />
+				<ref bean="gameControlEventTaskTriggerWinRptJs115" />
+				<ref bean="gameControlEventTaskTriggerWinRptCqssc" />
+				<ref bean="gameControlEventTaskTriggerWinRptCq115" />
+				<ref bean="gameControlEventTaskTriggerWinRptBjkl8" />   
+				<ref bean="gameControlEventTaskTriggerWinRptJlffc" />
+				<ref bean="gameControlEventTaskTriggerWinRptJlsbComm" />
+				<ref bean="gameControlEventTaskTriggerWinRptJlsbVip" />
+				<ref bean="gameControlEventTaskTriggerWinRptTxffc" />
+				
+				<ref bean="gameControlEventTaskTriggerPlan" />
+				<!-- 一代回收  -->
+				<ref bean="userLevelRecycleTaskTrigger" />
+				<!-- 新手任務 -->
+				<ref bean="beginMissionChargeAwardTrigger"/>
+				<ref bean="beginMissionBindCardAwardTrigger"/>
+				<ref bean="beginMissionDayBetAwardTrigger"/>								
+				<ref bean="beginMissionCancelMissionTrigger"/>
+				<ref bean="beginMissionTolBetAwardTrigger"/>
+				<!-- 彩種上下架 -->
+				<ref bean="gameSeriesChangeTaskTrigger"/>
+				<!-- ThPay Query -->
+				<ref bean="thPayQueryTaskTrigger"/>
+				<ref bean="immediateOpenDrawNumberJlsbCommTrigger" />
+				<ref bean="immediateOpenDrawNumberJlsbVipTrigger" />
+				<!-- <ref bean="activity20160903IntevalTrigger"/>
+				<ref bean="activity20160903DailyTrigger" />	
+				<ref bean="activity20160903DrawTrigger" />	
+				<ref bean="activity20160902Trigger"/> -->
+				<!-- 追號撤銷異常處理 -->
+				<ref bean="gamePlanDetailCancelTaskTrigger"/>						
+				<ref bean="FundChargeQueueTaskTrigger"/>	
+				<ref bean="thPayConfirmTaskTrigger"/>		
+				<ref bean="jlsbCommGrabDrawNumberTaskTrigger"/>
+				<ref bean="jlsbVipGrabDrawNumberTaskTrigger"/>			
+			</list>
+		</property>
+		<!-- 启动时延期3秒开始任务 -->
+		<!--这个是必须的，QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动 -->
+		<property name="startupDelay" value="3" />
+		<property name="configLocation" value="classpath:schedule/quartz.properties" />
+		<!--这个是可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了 -->
+		<property name="overwriteExistingJobs" value="true" />
+	</bean>
+
+	<!-- 监控销售截止时间task begin -->
+	<bean id="monitoringOpenDrawTimeEndTask" class="com.winterframework.firefrog.schedule.gameIssue.MonitoringOpenDrawTimeEndTask" />
+	<bean id="monitoringOpenDrawTimeEndTaskJlffc" class="com.winterframework.firefrog.schedule.gameIssue.MonitoringOpenDrawTimeEndTask" >
+		<property name="lotteryId" >
+		  	<value>${lottery.JLFFC}</value>
+		</property>
+	</bean> 
+	<bean id="monitoringOpenDrawTimeEndTaskTxffc" class="com.winterframework.firefrog.schedule.gameIssue.MonitoringOpenDrawTimeEndTask" >
+		<property name="lotteryId" >
+		  	<value>${lottery.TXFFC}</value>
+		</property>
+	</bean> 
+
+	<bean id="monitoringOpenDrawTimeEndJobDetailBean" class="org.springframework.scheduling.quartz.JobDetailBean">	                                                     
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="monitoringOpenDrawTimeEndTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+	<bean id="monitoringOpenDrawTimeEndJobDetailBeanJlffc" class="org.springframework.scheduling.quartz.JobDetailBean">	                                                     
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="monitoringOpenDrawTimeEndTaskJlffc" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+	<bean id="monitoringOpenDrawTimeEndJobDetailBeanTxffc" class="org.springframework.scheduling.quartz.JobDetailBean">	                                                     
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="monitoringOpenDrawTimeEndTaskTxffc" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="monitoringOpenDrawTimeEndTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="monitoringOpenDrawTimeEndJobDetailBean"></property>
+		<property name="cronExpression" value="0/5 * * * * ?"></property>
+	</bean>
+	<bean id="monitoringOpenDrawTimeEndTaskTriggerJlffc" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="monitoringOpenDrawTimeEndJobDetailBeanJlffc"></property>
+		<property name="cronExpression" value="0/5 * * * * ?"></property>
+	</bean>
+	<bean id="monitoringOpenDrawTimeEndTaskTriggerTxffc" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="monitoringOpenDrawTimeEndJobDetailBeanTxffc"></property>
+		<property name="cronExpression" value="0/5 * * * * ?"></property>
+	</bean>
+	<!-- 监控销售截止时间task end -->
+	
+	<!-- 销售截止邮件发送task begin -->
+	<bean id="salesTimeEndEmailSendTask" class="com.winterframework.firefrog.schedule.gameIssue.SalesTimeEndEmailSendTask" />  
+
+	<bean id="salesTimeEndEmailSendJobDetailBean" class="org.springframework.scheduling.quartz.JobDetailBean">	                                                     
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="salesTimeEndEmailSendTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 
+	<bean id="salesTimeEndEmailSendTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="salesTimeEndEmailSendJobDetailBean"></property>
+		<property name="cronExpression" value="0 0/30 17-23 * * ?"></property>
+	</bean> 
+	<!-- 销售截止邮件发送task end -->
+	<!-- 修改0004859 问题， -->
+	<!-- 0004859 问题 注销begin <bean id="gameIssueEndAfterTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="gameIssueEndAfterJobDetailBean"></property>
+		<property name="cronExpression" value="0/5 * * * * ?"></property>
+	</bean> 
+	
+	<bean id="gameIssueEndAfterJobDetailBean" class="org.springframework.scheduling.quartz.JobDetailBean">	                                                     
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="salesTimeEndEmailSendTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 0004859 问题 注销END -->
+	<!-- 走势图数据更新 task begin -->
+	<!--<bean id="gameTrendChartGenerateTask" class="com.winterframework.firefrog.schedule.gameTrendChart.GameTrendChartGenerateTask" />
+
+	<bean id="gameTrendChartGenerateJobDetailBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" >
+			<value>com.winterframework.firefrog.schedule.DetailQuartzJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="gameTrendChartGenerateTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="gameTrendChartGenerateTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="gameTrendChartGenerateJobDetailBean"></property>
+		<property name="cronExpression" value="0 0/1 * * * ?"></property>
+	</bean>-->
+	<!-- 走势图数据更新 task end -->	
+	
+	<!-- 待结束奖期 task begin -->
+	<bean id="toBeFinishedTask" class="com.winterframework.firefrog.schedule.gameIssue.ToBeFinishedTask" />
+
+	<bean id="toBeFinishedJobDetailBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="toBeFinishedTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="toBeFinishedTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="toBeFinishedJobDetailBean"></property>
+		<property name="cronExpression" value="0/20 * * * * ?"></property>
+	</bean>
+	<!-- 待结束奖期 task end -->
+	
+	<!--任务狀態檢查器 task begin -->
+	<bean id="gameControlEventCheckStatusTask" class="com.winterframework.firefrog.schedule.GameControlEventCheckStatusTask" />
+
+	<bean id="gameControlEventCheckStatusTaskBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="gameControlEventCheckStatusTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="gameControlEventCheckStatusTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="gameControlEventCheckStatusTaskBean"></property>
+		<property name="cronExpression" value="0/5 * * * * ?"></property>
+	</bean>
+	<!-- 任务狀態檢查器 task end -->
+	
+	<!--任务调度生成器 task begin -->
+	<bean id="gameControlEventManageTask" class="com.winterframework.firefrog.schedule.GameControlEventManageTask" />
+
+	<bean id="gameControlEventManageTaskBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="gameControlEventManageTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="gameControlEventManageTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="gameControlEventManageTaskBean"></property>
+		<property name="cronExpression" value="0 0/5 * * * ?"></property>
+	</bean>
+	<!-- 任务调度生成器 task end -->
+	
+	
+		<!--任务调度生成器 task begin -->
+	<bean id="gameOrderWinNoticeTask" class="com.winterframework.firefrog.schedule.gameOrder.GameOrderWinNoticeTask" />
+
+	<bean id="gameOrderWinNoticeTaskBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="gameOrderWinNoticeTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="gameOrderWinNoticeTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="gameOrderWinNoticeTaskBean"></property>
+		<property name="cronExpression" value="0 0/1 * * * ?"></property>
+	</bean>
+	<!-- 任务调度生成器 task end --> 
+	
+	<!--任务活动调度生成器 task begin -->
+	<bean id="activitySheepHongBaoTask" class="com.winterframework.firefrog.schedule.gameOrder.ActivitySheepHongBaoTask" />
+
+	<bean id="activitySheepHongBaoTaskBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="activitySheepHongBaoTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="activitySheepTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="activitySheepHongBaoTaskBean"></property>
+		<property name="cronExpression" value="0 1 1 * * ?"></property>
+	</bean>
+	
+	
+	<bean id="activitySheepConfigTask" class="com.winterframework.firefrog.schedule.gameOrder.ActivitySheepConfigTask" />
+
+	<bean id="activitySheepConfigTaskBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="activitySheepConfigTask" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="activitySheepConfigTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="activitySheepConfigTaskBean"></property>
+		<property name="cronExpression" value="0 30 1 * * ?"></property>
+	</bean>  
+	<!-- 任务调度生成器 task end --> 
+	
+	
+	<!-- begin 奖期盈亏报表    秒秒彩 每5分钟 --> 
+	<bean id="gameWinsReportMmcTask" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="gameWinsReportMmcService"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+	<bean id="gameWinsReportMmcTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="gameWinsReportMmcTask" />
+		</property> 
+		<property name="cronExpression">
+			<value>0 0/5 * * * ?</value>
+		</property>
+	</bean>
+	<!-- end 奖期盈亏报表    秒秒彩 每5分钟 --> 
+	
+	<!-- begin  监控系统    次两日奖期文件生成  每日凌晨1点 --> 
+	<bean id="monitorFollowIssueTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="monitorFollowIssueTask" />
+		</property> 
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+	</bean>
+	<bean id="monitorFollowIssueTask" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="monitorFollowIssueService"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 
+	<!-- end  监控系统    次两日奖期文件生成  每日晚间11点 --> 
+	
+	<!-- begin  监控系统    MMC注单文本    每分钟 --> 
+	<bean id="monitorMmcTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="monitorMmcTask" />
+		</property> 
+		<property name="cronExpression">
+			<value>0 0/1 * * * ?</value>
+		</property>
+	</bean>
+	<bean id="monitorMmcTask" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="monitorMmcService"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 
+	<!-- end  监控系统    MMC注单文本    每分钟 --> 
+	
+	<!-- start  监控系统     每晚产生隔天MMC注单文本任务  每日凌晨1点 --> 
+	<bean id="exportMmcFileGenerateBean" init-method="execute" lazy-init="true" class="com.winterframework.firefrog.schedule.MmcExportFileGenerateTask" />
+	<bean id="exportMmcFileGenerateTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="exportMmcFileGenerateTask" />
+		</property> 
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+	</bean>
+	<bean id="exportMmcFileGenerateTask" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="exportMmcFileGenerateBean"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 
+	<!-- end  监控系统     每晚产生隔天MMC注单文本任务  每日凌晨1点 --> 
+	
+	<!-- begin  一代回收 回收Task   每5分钟 --> 
+	<bean id="userLevelRecycleTask" class="com.winterframework.firefrog.schedule.UserLevelRecycleTask" /> 
+	<bean id="userLevelRecycleTaskJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="userLevelRecycleTask"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 
+	<bean id="userLevelRecycleTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="userLevelRecycleTaskJob" />
+		</property> 
+		<property name="cronExpression">
+			<value>0 0/5 * * * ?</value>
+		</property>
+	</bean>
+	<!-- end  一代回收 回收Task   每5分钟 --> 
+	
+	<!-- begin  ThPayQuery Task   每5分钟 --> 
+	<bean id="thPayQueryTask" class="com.winterframework.firefrog.schedule.ThPayQueryTask" /> 
+	<bean id="thPayQueryTaskJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="thPayQueryTask"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 
+	<bean id="thPayQueryTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="thPayQueryTaskJob" />
+		</property> 
+		<property name="cronExpression">
+			<value>0 0/5 * * * ?</value>
+		</property>
+	</bean>
+	<!-- end  ThPayQuery Task   每5分钟 -->
+	
+	<!-- begin  ThPayException Task   每3分钟 --> 
+	<bean id="thPayConfirmTask" class="com.winterframework.firefrog.schedule.ThPayConfirmTask" /> 
+	<bean id="thPayConfirmTaskJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="thPayConfirmTask"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 
+	<bean id="thPayConfirmTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="thPayConfirmTaskJob"/>
+		</property>
+		<property name="cronExpression">
+			<value>0 0/3 * * * ?</value>
+		</property>
+	</bean>
+	<!-- end  ThPayExceptionTask   每3分钟 -->
+	
+	
+	<!-- begin  FundChargeQueueTask   每1分钟 --> 
+	<bean id="FundChargeQueueTask" class="com.winterframework.firefrog.schedule.FundChargeQueueTask" /> 
+	<bean id="FundChargeQueueTaskJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="FundChargeQueueTask"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 
+	<bean id="FundChargeQueueTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="FundChargeQueueTaskJob"/>
+		</property>
+		<property name="cronExpression">
+			<value>0 0/1 * * * ?</value>
+		</property>
+	</bean>
+	<!-- end  FundChargeQueueTask   每1分钟 -->
+	<!-- start jlsb  获取开奖号码任务  每分钟的47s开始 每3s一次 --> 
+	<bean id="jlsbCommGrabDrawNumberTask" class="com.winterframework.firefrog.schedule.JlsbCommGrabDrawNumberTask">
+		<property name="briefCode">
+			<value>JLSB2</value>
+		</property>
+		<property name="lotteryId">
+			<value>99602</value>
+		</property>
+	</bean>
+	<bean id="jlsbVipGrabDrawNumberTask" class="com.winterframework.firefrog.schedule.JlsbVipGrabDrawNumberTask">
+		<property name="briefCode">
+			<value>JLSB</value>
+		</property>
+		<property name="lotteryId">
+			<value>99603</value>
+		</property>
+	</bean>
+	<bean id="jlsbCommGrabDrawNumberTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="jlsbCommGrabDrawNumberTaskJob" />
+		</property> 
+		<property name="cronExpression">
+			<value>0/5 * * * * ?</value>
+		</property>
+	</bean>
+	<bean id="jlsbVipGrabDrawNumberTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="jlsbVipGrabDrawNumberTaskJob" />
+		</property> 
+		<property name="cronExpression">
+			<value>47-20/3 * * * * ?</value>
+		</property>
+	</bean>
+	<bean id="jlsbCommGrabDrawNumberTaskJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="jlsbCommGrabDrawNumberTask"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean> 
+	<bean id="jlsbVipGrabDrawNumberTaskJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map> 
+				<entry key="targetObject" value="jlsbVipGrabDrawNumberTask"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+	<!-- end  jlsb  获取开奖号码任务  每分钟的47s开始 每3s一次  --> 
+</beans>

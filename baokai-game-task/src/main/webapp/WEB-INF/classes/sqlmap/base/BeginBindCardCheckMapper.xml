@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginBankCardCheck">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginBankCardCheck">
+			<result column="ID" property="id"/>
+			<result column="USER_ID" property="userId"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="CHECK_TIME" property="checkTime"/>
+			<result column="CHECK_STATUS" property="checkStatus"/>
+			<result column="CHECK_USER" property="checkUser"/>
+			<result column="BANK_NUM" property="bankNum"/>
+			<result column="ACCOUNT_NAME" property="accountName"/>
+			<result column="CITY" property="city"/>
+
+ </resultMap>
+	<sql id="fields">ID,USER_ID,CREATE_TIME,CHECK_TIME,CHECK_STATUS,CHECK_USER,BANK_NUM,ACCOUNT_NAME,CITY
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="userId != null">
+			And USER_ID = #{userId}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="checkTime != null">
+			And CHECK_TIME = #{checkTime}
+		</if>
+
+		<if test="checkStatus != null">
+			And CHECK_STATUS = #{checkStatus}
+		</if>
+
+		<if test="checkUser != null">
+			And CHECK_USER = #{checkUser}
+		</if>
+
+		<if test="bankNum != null">
+			And BANK_NUM = #{bankNum}
+		</if>
+
+		<if test="accountName != null">
+			And ACCOUNT_NAME = #{accountName}
+		</if>
+
+		<if test="city != null">
+			And CITY = #{city}
+		</if>
+
+		</where>
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginBankCardCheck">
+		Select <include refid="fields"/>
+				From BEGIN_BANK_CARD_CHECK
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getAll" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginBankCardCheck">
+		Select <include refid="fields"/>
+				From BEGIN_BANK_CARD_CHECK
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_BANK_CARD_CHECK
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_BANK_CARD_CHECK
+	</select>
+
+    <select id="getCountByPage" resultType="long">
+        select count(1) from BEGIN_BANK_CARD_CHECK 
+		<include refid="whereCondition"/>    
+    </select>
+    
+   <select id="getByPage" resultMap="result">
+    	select <include refid="fields" />
+	    from BEGIN_BANK_CARD_CHECK 
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="queryBankCardCheckCount" resultType="long">
+    	SELECT count(1)
+		FROM BEGIN_BANK_CARD_CHECK a,
+		  BEGIN_MISSION b,
+		  USER_CUSTOMER c
+		WHERE a.USER_ID    = b.USER_ID
+		AND B.USER_ID      = c.ID
+		AND a.USER_ID      = c.ID
+		<if test="@Ognl@isNotEmpty(status)">
+			<choose>
+				<when test="status>=0">
+				<![CDATA[
+			    	AND a.CHECK_STATUS = #{status}
+			    ]]>
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+		</if>
+    </select>
+    
+    <select id="queryBankCardChecksByCondition" resultMap="result">
+    	SELECT a.user_id  AS userId,
+		  a.create_time   AS createTime,
+		  a.check_time    AS checkTime,
+		  a.check_status  AS checkStatus,
+		  a.check_user    AS checkUser,
+		  a.bank_num      AS bankNum,
+		  a.account_name  AS accountName,
+		  a.city          AS city,
+		  b.charge_time   AS chargeTime,
+		  b.charge_amt    AS chargeAmt,
+		  b.withdraw_time AS withdrawTime,
+		  b.withdraw_amt  AS withdrawAmt,
+		  c.REGISTER_DATE,
+		  c.REGISTER_IP AS registerIp,
+		  c.DEVICE      AS device,
+		  c.ACCOUNT     AS account,
+		  c.PARENT_ID   AS parentId,
+		  c.USER_CHAIN  AS userChain,
+		  (SELECT SUM(TOTAMOUNT)
+		  FROM GAME_ORDER
+		  WHERE USERID    = b.USER_ID
+		  AND STATUS     IN (2,3)
+		  <choose>
+		  	<when test="timeStart != null and timeEnd != null">
+			<![CDATA[
+			    AND ORDER_TIME >= #{timeStart}
+				AND ORDER_TIME  < #{timeEnd}
+			]]>
+			</when>
+			<otherwise>
+			<![CDATA[
+				AND ORDER_TIME >= trunc(SYSDATE)
+				AND ORDER_TIME  < trunc(SYSDATE+1)
+			]]>
+			</otherwise>
+		  </choose>
+		  ) AS totAmount
+		FROM BEGIN_BANK_CARD_CHECK a,
+		  BEGIN_MISSION b,
+		  USER_CUSTOMER c
+		WHERE a.USER_ID    = b.USER_ID
+		AND B.USER_ID      = c.ID
+		AND a.USER_ID      = c.ID
+		<if test="@Ognl@isNotEmpty(status)">
+			<choose>
+				<when test="status>=0">
+				<![CDATA[
+			    	AND a.CHECK_STATUS = #{status}
+			    ]]>
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+		</if>
+    	
+    </select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginBankCardCheck"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_BCARD_CHECK.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_BANK_CARD_CHECK (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{userId,javaType=long,jdbcType=DECIMAL},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{checkTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{checkStatus,javaType=long,jdbcType=DECIMAL},
+	         #{checkUser,javaType=string,jdbcType=VARCHAR},
+	         #{bankNum,javaType=string,jdbcType=VARCHAR},
+	         #{accountName,javaType=string,jdbcType=VARCHAR},
+	         #{city,javaType=string,jdbcType=VARCHAR}
+	        )
+	</insert>
+	
+	<update id="update" parameterType="map">
+		update BEGIN_BANK_CARD_CHECK set 
+		  	 CHECK_TIME = #{checkTime,javaType=object,jdbcType=TIMESTAMP},
+	         CHECK_STATUS = #{checkStatus,javaType=long,jdbcType=DECIMAL},
+	         CHECK_USER = #{checkUser,javaType=string,jdbcType=VARCHAR}
+		 where 
+		 USER_ID = #{userId} 
+	</update>
+
+	<select id="getByUserIdCount" parameterType="long" resultType="long">
+		select nvl(count(1),0) from BEGIN_BANK_CARD_CHECK where USER_ID = #{userId}
+	</select>
+	
+</mapper>

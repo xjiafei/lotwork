@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.ActivityAwardConfig">
+	<resultMap id="ConfigResult" type="com.winterframework.firefrog.game.dao.vo.ActivityAwardConfig">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="configColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACTIVITY_ID as activityId ,
+				AWARD  as  award, 
+				AWARD_NAME  as  awardName,
+				RATIO as   ratio, 
+			  	MULTIPLE  as multiple, 
+				ALL_NUMBER  as  allNumber, 
+				LAST_NUMBER  as  lastNumber,
+				WIN_NUMBER  as  winNumber,
+				GMT_CREATED as  gmtCreated, 
+				GMT_MODIFIED as  gmtModified,
+				RECHARGE_LIMIT  as  rechargeLimit,
+				ORDER_NUM   as  orderNum
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.ActivityAwardConfig" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_ACTIVITY_AWARD_CONFIG_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVITY_AWARD_CONFIG (
+	        	ID ,
+	        	ACTIVITY_ID  ,
+				AWARD  , 
+				AWARD_NAME  ,
+				RATIO , 
+			  	MULTIPLE  , 
+				ALL_NUMBER  , 
+				LAST_NUMBER ,
+				WIN_NUMBER  ,
+				GMT_CREATED , 
+				GMT_MODIFIED ,
+				RECHARGE_LIMIT ,
+				ORDER_NUM NUMBER 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{award,javaType=long,jdbcType=DECIMAL} ,
+	        	#{awardName,javaType=string,jdbcType=VARCHAR} ,	        	
+	        	#{ratio,javaType=long,jdbcType=DECIMAL} ,
+	        	#{multiple,javaType=long,jdbcType=DECIMAL} ,
+	        	#{allNumber,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lastNumber,javaType=long,jdbcType=DECIMAL} ,
+	        	#{winNumber,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{rechargeLimit,javaType=long,jdbcType=DECIMAL} ,
+	        	#{orderNum,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.ActivityAwardConfig">
+	    <![CDATA[
+	        UPDATE ACTIVITY_AWARD_CONFIG SET
+	        	 ACTIVITY_ID = #{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	 AWARD = #{award,javaType=long,jdbcType=DECIMAL} ,
+	        	 AWARD_NAME = #{awardName,javaType=string,jdbcType=VARCHAR} ,	        	
+	        	 RATIO = #{ratio,javaType=long,jdbcType=DECIMAL} ,
+	        	 MULTIPLE = #{multiple,javaType=long,jdbcType=DECIMAL} ,
+	        	 ALL_NUMBER = #{allNumber,javaType=long,jdbcType=DECIMAL} ,
+	        	 LAST_NUMBER = #{lastNumber,javaType=long,jdbcType=DECIMAL} ,
+	        	 WIN_NUMBER = #{winNumber,javaType=long,jdbcType=DECIMAL} ,
+	        	 GMT_CREATED = #{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+	        	 GMT_MODIFIED = #{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	 RECHARGE_LIMIT = #{rechargeLimit,javaType=long,jdbcType=DECIMAL} ,
+	        	 ORDER_NUM = #{orderNum,javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACTIVITY_AWARD_CONFIG where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+		    <![CDATA[
+			    from ACTIVITY_AWARD_CONFIG 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+			    from ACTIVITY_AWARD_CONFIG 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="configDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(activityId)">
+				and ACTIVITY_ID = #{activityId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(award)">
+				and AWARD = #{award}
+			</if>
+	       <if test="@Ognl@isNotEmpty(awardName)">
+				and AWARD_NAME = #{awardName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ratio)">
+				and RATIO = #{ratio}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtModified)">
+				and GMT_MODIFIED = #{gmtModified}
+			</if>
+	       <if test="@Ognl@isNotEmpty(rechargeLimit)">
+				and RECHARGE_LIMIT = #{rechargeLimit}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="ConfigResult"  flushCache="false">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_AWARD_CONFIG 
+
+		
+			ORDER BY ORDER_NUM 
+		
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACTIVITY_AWARD_CONFIG 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ACTIVITY_AWARD_CONFIG 
+		<include refid="configDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="ConfigResult">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_AWARD_CONFIG 
+		<include refid="configDynamicWhere"/>
+			ORDER BY ORDER_NUM 
+    </select>
+
+
+</mapper>

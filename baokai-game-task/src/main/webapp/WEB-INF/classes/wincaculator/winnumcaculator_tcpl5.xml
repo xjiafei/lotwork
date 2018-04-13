@@ -1,0 +1,187 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="false">
+	<!-- 体彩排列5 -->
+	<bean id="lottery99109"
+		class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 彩种类型 -->
+		<property name="lotteryType" value="${lottery.p5}" />
+		<!-- 继承扩展体彩排列5 -->
+		<constructor-arg>
+			<map>
+				
+				<!-- 一星定位胆 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.p5YX}" />
+							<property name="setCode" value="${setCode.DWD}" />
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.number.LotteryWinNumDWDCaculator">
+					</bean>
+				</entry>
+				
+				<!-- 后二直选复式 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.p5HE}" />
+							<property name="setCode" value="${setCode.ZHX}" />
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumCaculator">
+						<property name="caculator" ref="lotteryWinNumZXFSCaculator5"></property>
+						<property name="config" ref="lotteryWinSlipNumContextParamsConfigHe"></property>
+					</bean>
+				</entry>
+				<!-- 后二直选单身 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.p5HE}" />
+							<property name="setCode" value="${setCode.ZHX}" />
+							<property name="methodCode" value="${methodCode.DS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumCaculator">
+						<property name="caculator" ref="lotteryWinNumZXDSCaculator"></property>
+						<property name="config" ref="lotteryWinSlipNumContextParamsConfigHe"></property>
+					</bean>
+				</entry>
+				<!-- 后二直选和值 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+
+							<property name="groupCode" value="${groupCode.p5HE}" />
+							<property name="setCode" value="${setCode.ZHX}" />
+							<property name="methodCode" value="${methodCode.HZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumCaculator">
+						<property name="caculator" ref="lotteryWinNumHZCaculator"></property>
+						<property name="config" ref="lotteryWinSlipNumContextParamsConfigHe"></property>
+					</bean>
+				</entry>
+				<!-- 后二直选跨度 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+
+							<property name="groupCode" value="${groupCode.p5HE}" />
+							<property name="setCode" value="${setCode.ZHX}" />
+							<property name="methodCode" value="${methodCode.KD}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumCaculator">
+						<property name="caculator" ref="lotteryWinNumZXKDCaculator"></property>
+						<property name="config" ref="lotteryWinSlipNumContextParamsConfigHe"></property>
+					</bean>
+				</entry>
+
+				<!-- 后二组选复式 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+
+							<property name="groupCode" value="${groupCode.p5HE}" />
+							<property name="setCode" value="${setCode.ZX}" />
+							<property name="methodCode" value="${methodCode.FS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumCaculator">
+						<property name="caculator" ref="lotteryWinNumZSLCaculator1"></property>
+						<property name="config" ref="lotteryWinSlipNumContextParamsConfigHe"></property>
+						<property name="checker" ref="lotteryWinNotSameValidateChainNe1"></property>
+					</bean>
+				</entry>
+				<!-- 后二组选单式 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+
+							<property name="groupCode" value="${groupCode.p5HE}" />
+							<property name="setCode" value="${setCode.ZX}" />
+							<property name="methodCode" value="${methodCode.DS}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumCaculator">
+						<property name="caculator" ref="lotteryWinNumZSLCaculator1"></property>
+						<property name="config" ref="lotteryWinSlipNumContextParamsConfigHe"></property>
+						<property name="checker" ref="lotteryWinNotSameValidateChainNe1"></property>
+					</bean>
+				</entry>
+				<!-- 后二和值 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+
+							<property name="groupCode" value="${groupCode.p5HE}" />
+							<property name="setCode" value="${setCode.ZX}" />
+							<property name="methodCode" value="${methodCode.HZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumCaculator">
+						<property name="caculator" ref="lotteryWinNumHZCaculator"></property>
+						<property name="config" ref="lotteryWinSlipNumContextParamsConfigHe"></property>
+						<property name="checker" ref="lotteryWinNotSameValidateChain"></property>
+					</bean>
+				</entry>
+				<!-- 后二包胆 -->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+
+							<property name="groupCode" value="${groupCode.p5HE}" />
+							<property name="setCode" value="${setCode.ZX}" />
+							<property name="methodCode" value="${methodCode.BD}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumCaculator">
+						<property name="caculator" ref="lotteryWinNumZXBDCaculator"></property>
+						<property name="config" ref="lotteryWinSlipNumContextParamsConfigHe"></property>
+						<property name="checker" ref="lotteryWinNotSameValidateChainNe1"></property>
+					</bean>
+				</entry>
+
+
+
+
+
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>

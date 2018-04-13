@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameIssueLog">
+	<resultMap id="GameIssueLogResult" type="com.winterframework.firefrog.game.dao.vo.GameIssueLog">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameIssueLogColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	SALE_START_TIME as saleStartTime,
+	        	SALE_END_TIME as saleEndTime,
+	        	OPEN_DRAW_TIME as openDrawTime,
+	        	FACTION_DRAW_TIME as factionDrawTime,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	PERIOD_STATUS as periodStatus,
+	        	PAUSE_STATUS as pauseStatus,
+	        	EVENT_STATUS as eventStatus,
+	        	SEQUENCE as sequence,
+	        	PLAN_FINISH_STATUS as planFinishStatus,
+	        	LAST_ISSUE_STOP as lastIssueStop
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueLog" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_ISSUE_LOG (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_CODE ,
+	        	WEB_ISSUE_CODE ,
+	        	SALE_START_TIME ,
+	        	SALE_END_TIME ,
+	        	OPEN_DRAW_TIME ,
+	        	FACTION_DRAW_TIME ,
+	        	STATUS ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	PERIOD_STATUS ,
+	        	PAUSE_STATUS ,
+	        	EVENT_STATUS ,
+	        	SEQUENCE ,
+	        	PLAN_FINISH_STATUS ,
+	        	LAST_ISSUE_STOP 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{saleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{saleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{openDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{factionDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{periodStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{pauseStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{eventStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sequence,javaType=long,jdbcType=DECIMAL} ,
+	        	#{planFinishStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lastIssueStop,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueLog">
+	    <![CDATA[
+	        UPDATE GAME_ISSUE_LOG SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        SALE_START_TIME = #{saleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SALE_END_TIME = #{saleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        OPEN_DRAW_TIME = #{openDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        FACTION_DRAW_TIME = #{factionDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        PERIOD_STATUS = #{periodStatus,javaType=long,jdbcType=DECIMAL} ,
+		        PAUSE_STATUS = #{pauseStatus,javaType=long,jdbcType=DECIMAL} ,
+		        EVENT_STATUS = #{eventStatus,javaType=long,jdbcType=DECIMAL} ,
+		        SEQUENCE = #{sequence,javaType=long,jdbcType=DECIMAL} ,
+		        PLAN_FINISH_STATUS = #{planFinishStatus,javaType=long,jdbcType=DECIMAL} ,
+		        LAST_ISSUE_STOP = #{lastIssueStop,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_ISSUE_LOG where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameIssueLogResult" flushCache="false">
+			select <include refid="gameIssueLogColumns" />
+		    <![CDATA[
+			    from GAME_ISSUE_LOG 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameIssueLogResult" flushCache="false">
+			select <include refid="gameIssueLogColumns" />
+			    from GAME_ISSUE_LOG 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameIssueLogDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(webIssueCode)">
+				and WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(saleStartTime)">
+				and SALE_START_TIME = #{saleStartTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(saleEndTime)">
+				and SALE_END_TIME = #{saleEndTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(openDrawTime)">
+				and OPEN_DRAW_TIME = #{openDrawTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(factionDrawTime)">
+				and FACTION_DRAW_TIME = #{factionDrawTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(periodStatus)">
+				and PERIOD_STATUS = #{periodStatus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(pauseStatus)">
+				and PAUSE_STATUS = #{pauseStatus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(eventStatus)">
+				and EVENT_STATUS = #{eventStatus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sequence)">
+				and SEQUENCE = #{sequence}
+			</if>
+	       <if test="@Ognl@isNotEmpty(planFinishStatus)">
+				and PLAN_FINISH_STATUS = #{planFinishStatus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lastIssueStop)">
+				and LAST_ISSUE_STOP = #{lastIssueStop}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameIssueLogResult"  flushCache="false">
+    	select <include refid="gameIssueLogColumns" />
+	    from GAME_ISSUE_LOG 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_ISSUE_LOG 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_ISSUE_LOG 
+		<include refid="gameIssueLogDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameIssueLogResult">
+    	select <include refid="gameIssueLogColumns" />
+	    from GAME_ISSUE_LOG 
+		<include refid="gameIssueLogDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

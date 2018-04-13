@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context.xsd">
+<!-- 主控任务开始  资金队列请求-->
+	<!-- 任务触发器 -->
+	<bean id="gameControlEventTaskTriggerWinRptJlsbComm" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<!-- 任务代理Bean name -->
+			<ref bean="gameControlEventJobWinRptJlsbComm" />
+		</property>
+		<property name="cronExpression">
+			<value>0/10 * * * * ?</value>
+		</property>
+	</bean>
+	<!-- 定义任务 -->
+	<bean id="gameControlEventJobWinRptJlsbComm" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+		  <!-- 上面的任务代理类 -->
+			<value>com.winterframework.firefrog.schedule.DetailQuartzStateJobBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<!-- 实际的任务的Bean name，填上EventMonitorService的Bean name -->
+				<entry key="targetObject" value="gameControlEventTaskWinRptJlsbComm"/>
+				<!-- 执行Bean中的哪个方法 -->
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="gameControlEventTaskWinRptJlsbComm" class="com.winterframework.firefrog.schedule.GameControlEventAsyncTask">
+		<property name="gameIssueService" >
+		  	<ref bean="gameIssueServiceImpl" />
+		</property>
+		<property name="gameWarnIssueService" >
+		  	<ref bean="gameWarnIssueServiceImpl" />
+		</property>
+		<property name="gameWarnIssuelogService" >
+		  	<ref bean="gameWarnIssueLogServiceImpl" />
+		</property>
+		<property name="eventDispatcher" >
+		  	<ref bean="eventDispatcher" />
+		</property>
+		<property name="gameControlEventService" >
+		  	<ref bean="gameControlEventServiceImpl" />
+		</property>
+		<property name="lotteryId" >
+		  	<value>10001</value>
+		</property>
+		<property name="isDependent" >
+		  	<value>1</value>
+		</property>
+		<property name="realLotteryId" >
+		  	<value>99602</value>
+		</property>
+	</bean> 
+	<!-- 主控任务结束 -->	
+</beans>

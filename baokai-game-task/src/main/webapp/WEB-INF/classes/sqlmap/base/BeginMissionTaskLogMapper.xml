@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginMissionTaskLog">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginMissionTaskLog">
+			<result column="ID" property="id"/>
+			<result column="TASK_TYPE" property="taskType"/>
+			<result column="STATUS" property="status"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="FINISH_TIME" property="finishTime"/>
+ </resultMap>
+	<sql id="fields">ID,TASK_TYPE,STATUS,CREATE_TIME,FINISH_TIME
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="taskType != null">
+			And TASK_TYPE = #{taskType}
+		</if>
+
+		<if test="status != null">
+			And STATUS = #{status}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+
+		<if test="finishTime != null">
+			And FINISH_TIME = #{finishTime}
+		</if>
+		</where>
+
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginMissionTaskLog">
+		Select <include refid="fields"/>
+				From BEGIN_MISSION_TASK_LOG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_MISSION_TASK_LOG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_MISSION_TASK_LOG
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginMissionTaskLog"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_MISSION_TASK_LOG.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_MISSION_TASK_LOG (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{taskType,javaType=long,jdbcType=DECIMAL},
+	         #{status,javaType=long,jdbcType=DECIMAL},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{finishTime,javaType=object,jdbcType=TIMESTAMP}        
+	        )
+	</insert>
+
+	<select id="getCountByPage" resultType="Long">
+		Select count(1) 
+				From BEGIN_MISSION_TASK_LOG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getByPage" resultType="Long">
+		Select <include refid="fields" /> 
+				From BEGIN_MISSION_TASK_LOG
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<update id="updateStatus" parameterType="map">
+		update BEGIN_MISSION_TASK_LOG set status = #{status} , finish_Time=#{finishTime} where 
+			id = #{id}
+	</update>
+	
+</mapper>

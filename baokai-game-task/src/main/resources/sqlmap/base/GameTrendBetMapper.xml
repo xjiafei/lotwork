@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameTrendBet">
+	<resultMap id="GameTrendBetResult" type="com.winterframework.firefrog.game.dao.vo.GameTrendBet">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameTrendBetColumns"> 
+       	ID as id,
+       	LOTTERYID as lotteryId,
+       	GROUP_CODE as groupCode,
+       	SET_CODE as setCode,
+       	METHOD_CODE as methodCode,
+       	TYPE as type,
+       	VALUE as value,
+       	WEB_VALUE as webValue,
+       	CREATE_TIME as createTime,  
+       	UPDATE_TIME as createTime
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameTrendBet" useGeneratedKeys="false" keyProperty="id" flushCache="true">
+			<selectKey resultType="long" order="BEFORE" keyProperty="id">
+					SELECT SEQ_GAME_TREND_BET_ID.Nextval from dual
+			</selectKey> 
+	        INSERT INTO
+	        GAME_TREND_BET (
+	        	ID ,
+	        	LOTTERYID ,
+	        	GROUP_CODE ,
+	        	SET_CODE ,
+	        	METHOD_CODE ,
+	        	TYPE , 
+	        	VALUE,
+	        	WEB_VALUE,
+	        	CREATE_TIME
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{groupCode,javaType=integer,jdbcType=DECIMAL} , 
+	        	#{setCode,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{methodCode,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{type,javaType=integer,jdbcType=DECIMAL} , 
+	        	#{value,javaType=string,jdbcType=VARCHAR} ,
+		        #{webValue,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP}
+	        ) 
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameTrendBet"> 
+	        UPDATE GAME_TREND_BET SET 
+		        VALUE = #{value,javaType=string,jdbcType=VARCHAR} ,
+		        WEB_VALUE = #{webValue,javaType=string,jdbcType=VARCHAR} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+		     WHERE ID=#{id}  
+		</update>
+	    <delete id="delete" parameterType="java.lang.Long"> 
+	        delete from GAME_TREND_BET where ID = #{id}  
+	    </delete>    
+	    <select id="getById" parameterType="long" resultMap="GameTrendBetResult" flushCache="false">
+		   select <include refid="gameTrendBetColumns" /> 
+		     from GAME_TREND_BET 
+	        where ID = #{id}  
+		</select>	 
+	<sql id="gameTrendBetDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	        <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	        <if test="@Ognl@isNotEmpty(lotteryId)">
+				and LOTTERYID = #{lotteryId}
+			</if>
+	        <if test="@Ognl@isNotEmpty(groupCode)">
+				and GROUP_CODE = #{groupCode}
+			</if>
+	        <if test="@Ognl@isNotEmpty(setCode)">
+				and SET_CODE = #{setCode}
+			</if> 
+			<if test="@Ognl@isNotEmpty(methodCode)">
+				and METHOD_CODE = #{methodCode}
+			</if> 
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if> 
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameTrendBetResult"  flushCache="false">
+    	select <include refid="gameTrendBetColumns" />
+	    from GAME_TREND_BET  
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="getByLotteryIdAndBetTypeAndType" resultMap="GameTrendBetResult"  flushCache="false">
+    	select <include refid="gameTrendBetColumns" /> 
+   		  from game_trend_bet b
+		 where b.lotteryid = #{lotteryId}
+		   and b.type = #{type} 
+		 <if test="@Ognl@isNotEmpty(groupCode)">
+		   and b.group_code = #{groupCode}
+		 </if>
+		 <if test="@Ognl@isNotEmpty(setCode)">
+		   and b.set_code = #{setCode}
+		 </if>
+		 <if test="@Ognl@isNotEmpty(methodCode)">
+		   and b.method_code = #{methodCode}
+		 </if> 
+		 and rownum=1
+    </select>
+    <select id="getByLotteryId" resultMap="GameTrendBetResult"  flushCache="false">
+    	select <include refid="gameTrendBetColumns" /> 
+   		  from game_trend_bet b
+		 where b.lotteryid = #{lotteryId}
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(1) from GAME_TREND_BET 
+		<include refid="gameTrendBetDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameTrendBetResult">
+    	select <include refid="gameTrendBetColumns" />
+	    from GAME_TREND_BET 
+		<include refid="gameTrendBetDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select> 
+</mapper>

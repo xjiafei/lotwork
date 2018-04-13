@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.0.xsd " 
+	default-autowire="byName" default-lazy-init="false">
+	<!-- 属性文件读入 -->
+
+	<!-- ssc 中奖判断模板 -->
+	<import resource="specialLotteryConfigtemplate.xml"/>
+	<!-- 重庆ssc 中奖判断 -->
+	<import resource="cqssc_specialConfig.xml"/>
+	
+	<!-- 黑龙江ssc 中奖判断 -->
+	<import resource="hljssc_specialConfig.xml"/>
+	<!-- 江西ssc 中奖判断 -->
+	<import resource="jxssc_specialConfig.xml"/>
+	<!-- 乐力ssc 中奖判断 -->
+	<import resource="llssc_specialConfig.xml"/>
+	<!-- 天津ssc 中奖判断 -->
+	<import resource="tjssc_specialConfig.xml"/>
+	<!-- 新疆时时彩 -->
+	<import resource="xjssc_specialConfig.xml"/>
+	<!-- 北京快乐8模板 -->
+	<import resource="specialLotteryConfigtemplatebjkl8.xml"/>
+	<!-- 北京快乐8-->
+	<import resource="bjkl8_specialConfig.xml"/>
+	<!-- 11选5模板 -->
+	<import resource="specialLotteryConfigtemplateN115.xml"/>
+	<!-- 山东11选5-->
+	<import resource="sd11N5_specialConfig.xml"/>
+	<import resource="cq11N5_specialConfig.xml"/>
+	<import resource="gd11N5_specialConfig.xml"/>
+	<import resource="jx11N5_specialConfig.xml"/>
+	<import resource="ll11N5_specialConfig.xml"/>
+	<!-- 排列35-->
+	<import resource="specialLotteryConfigtemplateP35.xml"/>
+	<import resource="p35_specialConfig.xml"/>
+	
+	<!-- 3D -->
+	<import resource="specialLotteryConfigtemplate3D.xml"/>
+	<import resource="fc3d_specialConfig.xml"/>
+	<import resource="shssl_specialConfig.xml"/>
+	<bean id="propertyConfigurer"
+		class="com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/game-type.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置默认彩系对应的LotteryId  -->
+	<bean id="lotteryMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key><value>SSCLotteryId</value></key>
+					<value>99101</value> 
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>

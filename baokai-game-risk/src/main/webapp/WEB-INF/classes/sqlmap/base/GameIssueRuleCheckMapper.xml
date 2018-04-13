@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameIssueRuleCheck">
+	<resultMap id="GameIssueRuleCheckResult"
+		type="com.winterframework.firefrog.game.dao.vo.GameIssueRuleCheck">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameIssueRuleCheckColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ISSUE_RULES_NAME as issueRulesName,
+	        	RULE_START_TIME as ruleStartTime,
+	        	RULE_END_TIME as ruleEndTime,
+	        	OPEN_AWARD_PERIOD as openAwardPeriod,
+	        	RULE_TYPE as ruleType,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	RULEID as ruleid
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueRuleCheck"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_ISSUE_RULE_CHECK (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_RULES_NAME ,
+	        	RULE_START_TIME ,
+	        	RULE_END_TIME ,
+	        	OPEN_AWARD_PERIOD ,
+	        	RULE_TYPE ,
+	        	STATUS ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	RULEID 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueRulesName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ruleStartTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{ruleEndTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{openAwardPeriod,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ruleType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{ruleid,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<select resultType="long" id="getGameIssueRuleCheckInsertId">
+		SELECT
+		SEQ_ISSUE_RULE_CHECK_ID.Nextval from dual
+	</select>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueRuleCheck">
+	    <![CDATA[
+	        UPDATE GAME_ISSUE_RULE_CHECK SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_RULES_NAME = #{issueRulesName,javaType=string,jdbcType=VARCHAR} ,
+		        RULE_START_TIME = #{ruleStartTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        RULE_END_TIME = #{ruleEndTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        OPEN_AWARD_PERIOD = #{openAwardPeriod,javaType=string,jdbcType=VARCHAR} ,
+		        RULE_TYPE = #{ruleType,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        RULEID = #{ruleid,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_ISSUE_RULE_CHECK where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="GameIssueRuleCheckResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueRuleCheckColumns" />
+		    <![CDATA[
+			    from GAME_ISSUE_RULE_CHECK 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="GameIssueRuleCheckResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueRuleCheckColumns" />
+		from GAME_ISSUE_RULE_CHECK
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="gameIssueRuleCheckDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(issueRulesName)">
+				and ISSUE_RULES_NAME = #{issueRulesName}
+			</if>
+			<if test="@Ognl@isNotEmpty(ruleStartTime)">
+				and RULE_START_TIME = #{ruleStartTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(ruleEndTime)">
+				and RULE_END_TIME = #{ruleEndTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(openAwardPeriod)">
+				and OPEN_AWARD_PERIOD = #{openAwardPeriod}
+			</if>
+			<if test="@Ognl@isNotEmpty(ruleType)">
+				and RULE_TYPE = #{ruleType}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(ruleid)">
+				and RULEID = #{ruleid}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameIssueRuleCheckResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueRuleCheckColumns" />
+		from GAME_ISSUE_RULE_CHECK
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from
+		GAME_ISSUE_RULE_CHECK
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_ISSUE_RULE_CHECK
+		<include refid="gameIssueRuleCheckDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameIssueRuleCheckResult">
+		select
+		<include refid="gameIssueRuleCheckColumns" />
+		from GAME_ISSUE_RULE_CHECK
+		<include refid="gameIssueRuleCheckDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="queryGameIssueRuleCheck" resultMap="GameIssueRuleCheckResult"
+		parameterType="hashMap">
+		select
+		<include refid="gameIssueRuleCheckColumns" />
+		 <![CDATA[
+			    from GAME_ISSUE_RULE_CHECK 
+		        where 
+		         RULE_START_TIME<=#{toDate} and RULE_END_TIME>=#{fromDate} and LOTTERYID=#{lotteryId} and STATUS=1 order by RULE_START_TIME asc
+		    ]]>
+
+	</select>
+	
+	<select id="getGameIssueRuleCheckByLotteryIdAndRuleId" resultMap="GameIssueRuleCheckResult"
+		parameterType="hashMap">
+		select
+		<include refid="gameIssueRuleCheckColumns" />
+		 <![CDATA[
+			    from GAME_ISSUE_RULE_CHECK 
+		        where 
+		          LOTTERYID=#{lotteryId} and  ID=#{ruleId}
+		    ]]>
+
+	</select>
+	
+	<select id="getCommenGameIssuesByMainRuleId" resultMap="GameIssueRuleCheckResult"
+		parameterType="java.lang.Long">
+		select
+		<include refid="gameIssueRuleCheckColumns" />
+		 <![CDATA[
+			    from GAME_ISSUE_RULE_CHECK 
+		        where 
+		        RULEID=#{ruleId}
+		    ]]>
+
+	</select>
+
+	<select id="queryGameIssueRuleCheckByLotteryIdAndRuleId"
+		resultMap="GameIssueRuleCheckResult" parameterType="hashMap">
+		select
+		c.ID as id,
+		c.LOTTERYID as lotteryid,
+		c.ISSUE_RULES_NAME as
+		issueRulesName,
+		c.RULE_START_TIME as ruleStartTime,
+		c.RULE_END_TIME as
+		ruleEndTime,
+		c.OPEN_AWARD_PERIOD as openAwardPeriod,
+		c.STATUS as status,
+		c.RULE_TYPE as ruleType,
+		c.CREATE_TIME as createTime,
+		c.UPDATE_TIME
+		as updateTime,
+		c.RULEID as ruleid
+		from GAME_ISSUE_RULE_CHECK c where
+		c.LOTTERYID=#{lotteryId}
+		<if test="@Ognl@isNotEmpty(ruleId)">
+			and c.ruleId = #{ruleId}
+		</if>
+		union all
+		select
+		r.ID as id,
+		r.LOTTERYID as lotteryid,
+		r.ISSUE_RULES_NAME
+		as issueRulesName,
+		r.RULE_START_TIME as ruleStartTime,
+		r.RULE_END_TIME
+		as ruleEndTime,
+		r.OPEN_AWARD_PERIOD as openAwardPeriod,
+		r.STATUS as	status,
+		r.RULE_TYPE as ruleType,
+		r.CREATE_TIME as createTime,
+		r.UPDATE_TIME as updateTime,
+		null as ruleid <!-- 正式表中无ruleid -->
+		from GAME_ISSUE_RULE r
+		where
+		<!-- r.id not in(select RULEID from GAME_ISSUE_RULE_CHECK)
+		and --> 
+		r.LOTTERYID=#{lotteryId}
+		and r.id not in (select ruleid from game_issue_rule_check t where r.id = t.ruleid)
+		<if test="@Ognl@isNotEmpty(ruleId)">
+			and r.ID = #{ruleId}
+		</if>
+
+	</select>
+
+	<select id="querySpecialGameIssueRuleCheckByLotteryIdAndPeriodTime"
+		resultMap="GameIssueRuleCheckResult" parameterType="hashMap">
+		select
+		c.ID as id,
+		c.LOTTERYID as lotteryid,
+		c.ISSUE_RULES_NAME as
+		issueRulesName,
+		c.RULE_START_TIME as ruleStartTime,
+		c.RULE_END_TIME as
+		ruleEndTime,
+		c.OPEN_AWARD_PERIOD as openAwardPeriod,
+		c.RULE_TYPE as
+		ruleType,
+		c.STATUS as status,
+		c.CREATE_TIME as createTime,
+		c.UPDATE_TIME
+		as updateTime,
+		c.RULEID as ruleid
+		from GAME_ISSUE_RULE_CHECK c 
+		<![CDATA[
+		       where 
+		        c.RULE_START_TIME<=#{fromDate}  and 
+		    ]]>
+		 <if test="@Ognl@isNotEmpty(toDate)">
+		 	c.RULE_END_TIME>=#{toDate} and
+		 </if>
+		 c.LOTTERYID=#{lotteryId} and c.RULE_TYPE in(2,3) 
+		union all
+		select
+		r.ID as id,
+		r.LOTTERYID as lotteryid,
+		r.ISSUE_RULES_NAME
+		as issueRulesName,
+		r.RULE_START_TIME as ruleStartTime,
+		r.RULE_END_TIME
+		as ruleEndTime,
+		r.OPEN_AWARD_PERIOD as openAwardPeriod,
+		r.STATUS as
+		status,
+		r.RULE_TYPE as ruleType,
+		r.CREATE_TIME as createTime,
+		r.UPDATE_TIME as updateTime,
+		r.id as ruleid
+		from GAME_ISSUE_RULE r
+		where
+		<![CDATA[
+		        r.RULE_START_TIME<=#{fromDate} and
+		 ]]>
+        <if test="@Ognl@isNotEmpty(toDate)">
+         	r.RULE_END_TIME>=#{toDate} and
+         </if>
+		 r.ID not in(select RULEID from GAME_ISSUE_RULE_CHECK) and
+		r.LOTTERYID=#{lotteryId} and r.RULE_TYPE in(2,3)
+		<if test="@Ognl@isNotEmpty(ruleId)">
+			and r.ID = #{ruleId}
+		</if>
+
+	</select>
+	
+	
+	<select id="getCommenGameIssueRuleByRuleTypeAndDayWithUnAuditRule"
+		resultMap="GameIssueRuleCheckResult" parameterType="hashMap">
+		select b.id as id,
+		b.lotteryid as lotteryid,
+		b.issueRulesName as
+		issueRulesName,
+		b.ruleStartTime as ruleStartTime,
+		b.ruleEndTime as
+		ruleEndTime,
+		b.openAwardPeriod as openAwardPeriod,
+		b.ruleType as
+		ruleType,
+		b.status as status,
+		b.createTime as createTime,
+		b.updateTime
+		as updateTime,
+		b.ruleid as ruleid from(
+		select a.id as id,
+		a.lotteryid as lotteryid,
+		a.issueRulesName as
+		issueRulesName,
+		a.ruleStartTime as ruleStartTime,
+		a.ruleEndTime as
+		ruleEndTime,
+		a.openAwardPeriod as openAwardPeriod,
+		a.ruleType as
+		ruleType,
+		a.status as status,
+		a.createTime as createTime,
+		a.updateTime
+		as updateTime,
+		a.ruleid as ruleid from (
+		select
+		c.ID as id,
+		c.LOTTERYID as lotteryid,
+		c.ISSUE_RULES_NAME as
+		issueRulesName,
+		c.RULE_START_TIME as ruleStartTime,
+		c.RULE_END_TIME as
+		ruleEndTime,
+		c.OPEN_AWARD_PERIOD as openAwardPeriod,
+		c.RULE_TYPE as
+		ruleType,
+		c.STATUS as status,
+		c.CREATE_TIME as createTime,
+		c.UPDATE_TIME
+		as updateTime,
+		c.RULEID as ruleid
+		from GAME_ISSUE_RULE_CHECK c 
+		<![CDATA[
+		       where 
+		       c.RULE_START_TIME>=#{auditLimitDate} and c.RULE_START_TIME<=#{toDate}   and c.LOTTERYID=#{lotteryId} and c.RULE_TYPE=1 
+		    ]]>
+		union all
+		select
+		r.ID as id,
+		r.LOTTERYID as lotteryid,
+		r.ISSUE_RULES_NAME
+		as issueRulesName,
+		r.RULE_START_TIME as ruleStartTime,
+		r.RULE_END_TIME
+		as ruleEndTime,
+		r.OPEN_AWARD_PERIOD as openAwardPeriod,
+		r.STATUS as
+		status,
+		r.RULE_TYPE as ruleType,
+		r.CREATE_TIME as createTime,
+		r.UPDATE_TIME as updateTime,
+		r.id as ruleid
+		from GAME_ISSUE_RULE r
+		where
+		<![CDATA[ 
+		        r.RULE_START_TIME<=#{toDate} and
+		    ]]> 
+		r.LOTTERYID=#{lotteryId} and r.RULE_TYPE=1 ) a  order by a.ruleStartTime desc) b where rownum=1
+	</select>
+	
+	
+	<select id="getSpecialOrStopGameIssueRuleByRuleTypeAndDayWithUnAuditRule"
+		resultMap="GameIssueRuleCheckResult" parameterType="hashMap">
+		select b.id as id,
+		b.lotteryid as lotteryid,
+		b.issueRulesName as
+		issueRulesName,
+		b.ruleStartTime as ruleStartTime,
+		b.ruleEndTime as
+		ruleEndTime,
+		b.openAwardPeriod as openAwardPeriod,
+		b.ruleType as
+		ruleType,
+		b.status as status,
+		b.createTime as createTime,
+		b.updateTime
+		as updateTime,
+		b.ruleid as ruleid from(
+		select a.id as id,
+		a.lotteryid as lotteryid,
+		a.issueRulesName as
+		issueRulesName,
+		a.ruleStartTime as ruleStartTime,
+		a.ruleEndTime as
+		ruleEndTime,
+		a.openAwardPeriod as openAwardPeriod,
+		a.ruleType as
+		ruleType,
+		a.status as status,
+		a.createTime as createTime,
+		a.updateTime
+		as updateTime,
+		a.ruleid as ruleid from (
+		select
+		c.ID as id,
+		c.LOTTERYID as lotteryid,
+		c.ISSUE_RULES_NAME as
+		issueRulesName,
+		c.RULE_START_TIME as ruleStartTime,
+		c.RULE_END_TIME as
+		ruleEndTime,
+		c.OPEN_AWARD_PERIOD as openAwardPeriod,
+		c.RULE_TYPE as
+		ruleType,
+		c.STATUS as status,
+		c.CREATE_TIME as createTime,
+		c.UPDATE_TIME
+		as updateTime,
+		c.RULEID as ruleid
+		from GAME_ISSUE_RULE_CHECK c 
+		<![CDATA[
+		       where 
+		       c.RULE_START_TIME>=#{auditLimitDate} and c.RULE_START_TIME<=#{toDate}   and c.LOTTERYID=#{lotteryId} and c.RULE_TYPE in(2,3)
+		    ]]>
+		union all
+		select
+		r.ID as id,
+		r.LOTTERYID as lotteryid,
+		r.ISSUE_RULES_NAME
+		as issueRulesName,
+		r.RULE_START_TIME as ruleStartTime,
+		r.RULE_END_TIME
+		as ruleEndTime,
+		r.OPEN_AWARD_PERIOD as openAwardPeriod,
+		r.STATUS as
+		status,
+		r.RULE_TYPE as ruleType,
+		r.CREATE_TIME as createTime,
+		r.UPDATE_TIME as updateTime,
+		r.id as ruleid
+		from GAME_ISSUE_RULE r
+		where
+		<![CDATA[
+		        r.RULE_START_TIME<=#{toDate} and r.RULE_END_TIME>=#{fromDate} and
+		    ]]> 
+		r.LOTTERYID=#{lotteryId} and r.RULE_TYPE in(2,3) ) a  order by a.ruleStartTime desc) b where rownum=1
+	</select>
+
+</mapper>

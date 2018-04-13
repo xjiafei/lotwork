@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameOrder">
+	<resultMap id="GameOrderResult" type="com.winterframework.firefrog.game.dao.vo.GameOrder"></resultMap>
+	<resultMap id="GameOrderOperationsEntity" type="com.winterframework.firefrog.game.entity.GameOrderOperationsEntity"></resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameOrderColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	PARENTID as parentid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	web_issue_code,
+	        	LOTTERYID as lotteryid,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	CANCEL_TIME as cancelTime,
+	        	CANCEL_MODES as cancelModes,
+	        	ORDER_CODE as orderCode,
+	        	COUNT_WIN AS totalWin,
+	        	AWARD_GROUP_ID as awardGroupId
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameOrder"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_ORDER_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_ORDER (
+	        	ID ,
+	        	PARENTID ,
+	        	USERID ,
+	        	ISSUE_CODE ,
+	        	LOTTERYID ,
+	        	TOTAMOUNT ,
+	        	STATUS ,
+	        	ORDER_TIME ,
+	        	CALCULATE_WIN_TIME ,
+	        	SALE_TIME ,
+	        	CANCEL_TIME ,
+	        	CANCEL_MODES ,
+	        	ORDER_CODE,
+	        	AWARD_GROUP_ID
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{parentid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totamount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{orderTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{calculateWinTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{saleTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{cancelTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{cancelModes,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{orderCode,javaType=string,jdbcType=DECIMAL},
+	        	#{awardGroupId,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>
+
+
+	</insert>
+
+	<select resultType="long" id="getGameOrderInsertId">
+		SELECT SEQ_GAME_ORDER_ID.Nextval from dual
+	</select>
+
+	<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameOrder">
+	    <![CDATA[
+	        UPDATE GAME_ORDER SET
+		        PARENTID = #{parentid,javaType=long,jdbcType=DECIMAL} ,
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAMOUNT = #{totamount,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=integer,jdbcType=DECIMAL} ,
+		        ORDER_TIME = #{orderTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CALCULATE_WIN_TIME = #{calculateWinTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SALE_TIME = #{saleTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CANCEL_TIME = #{cancelTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        CANCEL_MODES = #{cancelModes,javaType=integer,jdbcType=DECIMAL} ,		       
+		        ORDER_CODE = #{orderCode,javaType=string,jdbcType=DECIMAL},
+		        AWARD_GROUP_ID=#{awardGroupId,javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_ORDER where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<update id="updateGameOrder" parameterType="hashMap">
+		UPDATE GAME_ORDER SET
+		STATUS = #{status},
+		CANCEL_TIME = #{cancelTime}
+		WHERE
+		ID = #{orderId}
+		AND STATUS = 1
+		<if test="@Ognl@isNotEmpty(issueCode)">
+			and ISSUE_CODE = #{issueCode}
+		</if>
+	</update>
+	<select id="getById" parameterType="long" resultMap="GameOrderResult"
+		flushCache="false">
+		select
+		 	ID as id,
+	        	PARENTID as parentid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	(select web_issue_code from game_issue g where g.issue_code=o.ISSUE_CODE) as webIssueCode,
+	        	LOTTERYID as lotteryid,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	CANCEL_TIME as cancelTime,
+	        	CANCEL_MODES as cancelModes,
+	        	ORDER_CODE as orderCode,
+	        	(select count_win from game_order_win where orderId=o.id) as totalWin,
+				award_group_id as awardGroupId
+			    from GAME_ORDER o
+		        where 
+		        ID = #{id} 
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="GameOrderResult"
+		flushCache="false">
+		select
+		ID as id,
+	        	PARENTID as parentid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	(select web_issue_code from game_issue g where g.issue_code=o.ISSUE_CODE) as webIssueCode,
+	        	LOTTERYID as lotteryid,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	CANCEL_TIME as cancelTime,
+	        	CANCEL_MODES as cancelModes,
+	        	ORDER_CODE as orderCode,
+	        	(select count_win from game_order_win where orderId=o.id) as totalWin,
+		award_group_id as awardGroupId
+		from GAME_ORDER o
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="gameOrderDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(parentid)">
+				and PARENTID = #{parentid}
+			</if>
+			<if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+			<if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(totamount)">
+				and TOTAMOUNT = #{totamount}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(orderTime)">
+				and ORDER_TIME = #{orderTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(calculateWinTime)">
+				and CALCULATE_WIN_TIME = #{calculateWinTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(saleTime)">
+				and SALE_TIME = #{saleTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(cancelTime)">
+				and CANCEL_TIME = #{cancelTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(cancelModes)">
+				and CANCEL_MODES = #{cancelModes}
+			</if>
+			<if test="@Ognl@isNotEmpty(orderCode)">
+				and ORDER_CODE = #{orderCode}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameOrderResult" flushCache="false">
+		select
+		ID as id,
+	        	PARENTID as parentid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	(select web_issue_code from game_issue g where g.issue_code=o.ISSUE_CODE) as webIssueCode,
+	        	LOTTERYID as lotteryid,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	CANCEL_TIME as cancelTime,
+	        	CANCEL_MODES as cancelModes,
+	        	ORDER_CODE as orderCode,
+	        	(select count_win from game_order_win where orderId=o.id) as totalWin,
+		award_group_id as awardGroupId
+		from GAME_ORDER o
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from GAME_ORDER
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_ORDER
+		<include refid="gameOrderDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameOrderResult">
+		select
+			ID as id,
+	        	PARENTID as parentid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	(select web_issue_code from game_issue g where g.issue_code=o.ISSUE_CODE) as webIssueCode,
+	        	LOTTERYID as lotteryid,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	CANCEL_TIME as cancelTime,
+	        	CANCEL_MODES as cancelModes,
+	        	ORDER_CODE as orderCode,
+	        	(select count_win from game_order_win where orderId=o.id) as totalWin,
+				award_group_id as awardGroupId
+		from GAME_ORDER o
+		<include refid="gameOrderDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<!-- 订单查询动态条件 -->
+	<sql id="gameOrderQueryDynamicWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+			    <if test="lotteryid!=0">
+				and LOTTERYID = #{lotteryid}
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				<if test="status!=0">
+					and STATUS = #{status}
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(issueCode)">
+			    <if test="issueCode!=0">
+				and ISSUE_CODE = #{issueCode}
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(startTime)">
+				<![CDATA[
+				and SALE_TIME >= #{startTime}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(endTime)">
+				<![CDATA[
+				and SALE_TIME <= #{endTime}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(orderCode)">
+				and ORDER_CODE = #{orderCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(userid)">
+			    <choose>
+			       <when test="containSub!=null and containSub==1">
+			          and (select USER_CHAIN from USER_CUSTOMER where id = #{userid}) like
+						(select USER_CHAIN from USER_CUSTOMER where id = #{userid})||'%'
+			       </when>
+			       <when test="containSub!=null and containSub==0">
+			          and USERID=#{userid}
+			       </when>
+			       <otherwise>
+			         and USERID=#{userid}
+			       </otherwise>
+			    </choose>
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				and USERID = (select id from USER_CUSTOMER where account=#{account})
+				<if test="@Ognl@isNotEmpty(containSub)">
+					<if test="containSub==1">
+						and (select USER_CHAIN from USER_CUSTOMER where account=#{account})
+						like (select USER_CHAIN from USER_CUSTOMER where
+						account=#{account})||'%'
+					</if>
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<!-- 订单查询 -->
+	<select id="getOrders" resultMap="GameOrderResult"
+		parameterType="HashMap">
+		select
+		ID as id,
+	        	PARENTID as parentid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	(select web_issue_code from game_issue g where g.issue_code=o.ISSUE_CODE) as webIssueCode,
+	        	LOTTERYID as lotteryid,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	CANCEL_TIME as cancelTime,
+	        	CANCEL_MODES as cancelModes,
+	        	ORDER_CODE as orderCode,
+	        	(select count_win from game_order_win where orderId=o.id) as totalWin,
+				award_group_id as awardGroupId
+		from GAME_ORDER o
+		<include refid="gameOrderQueryDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getOrdersNumber" resultType="long" parameterType="HashMap">
+		select count(*)
+		from GAME_ORDER a
+		<include refid="gameOrderQueryDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<!-- 根据追号计划ID查询订单列表 -->
+	<select id="getOrdersByPlanId" resultMap="GameOrderResult"
+		parameterType="HashMap">
+		select
+		ID as id,
+	        	PARENTID as parentid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	(select web_issue_code from game_issue g where g.issue_code=o.ISSUE_CODE) as webIssueCode,
+	        	LOTTERYID as lotteryid,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	CANCEL_TIME as cancelTime,
+	        	CANCEL_MODES as cancelModes,
+	        	ORDER_CODE as orderCode,
+	        	(select count_win from game_order_win where orderId=o.id) as totalWin,
+	        	(select gdr.number_record from game_draw_result gdr where gdr.lotteryid = o.LOTTERYID and gdr.issue_code = o.ISSUE_CODE) as numberRecord,
+				award_group_id as awardGroupId
+		from GAME_ORDER o
+		where PARENT_TYPE = 2 and parentid = #{planid}
+		order by id
+	</select>
+	
+	
+	<!-- 订单运营记录查询动态条件 -->
+	<sql id="gameOrderOperationsQueryDynamicWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				<if test="lotteryid!=0">
+					and t.lotteryid = #{lotteryid}
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(startTime)">
+				<![CDATA[
+				and t.saleTime >= #{startTime}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(endTime)">
+				<![CDATA[
+				and t.saleTime <= #{endTime}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				<if test="status!=0">
+					and t.status = #{status}
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(cancelModes)">
+				<if test="status!=0">
+					and t.cancelModes = #{cancelModes}
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(startWinsCount)">
+				<![CDATA[
+				and t.totwin >= #{startWinsCount}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(endWinsCount)">
+				<![CDATA[
+				and t.totwin <= #{endWinsCount}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(userid)">
+				<if test="@Ognl@isNotEmpty(containSub)">
+					<if test="containSub==1">
+						and (select USER_CHAIN from USER_CUSTOMER where id = #{userid}) like
+						(select USER_CHAIN from USER_CUSTOMER where id = #{userid})||'%'
+					</if>
+					<if test="containSub==0">
+						and t.userid=#{userid}
+					</if>
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				and t.userid = (select id from USER_CUSTOMER where account=#{account})
+				<if test="@Ognl@isNotEmpty(containSub)">
+					<if test="containSub==1">
+						and (select USER_CHAIN from USER_CUSTOMER where account=#{account})
+						like (select USER_CHAIN from USER_CUSTOMER where
+						account=#{account})||'%'
+					</if>
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(orderCode)">
+				and t.orderCode = #{orderCode}
+			</if>
+		</where>
+	</sql>
+	
+	
+	<sql id="gameOrderOperationsColumns">
+	    <![CDATA[
+	    		a.ORDER_CODE as orderCode,
+	    		a.LOTTERYID as lotteryid,
+	        	b.LOTTERY_NAME as lotteryName,
+	        	d.WEB_ISSUE_CODE as webIssueCode,
+	        	a.ISSUE_CODE as issueCode,
+	        	d.STATUS as issueStatus,
+	        	a.TOTAMOUNT as totamount,
+	        	c.COUNT_WIN as totwin,
+	        	a.STATUS as status,
+	        	a.CANCEL_MODES as cancelModes,
+	        	a.PARENTID as parentid,
+	        	a.SALE_TIME as saleTime,
+	        	e.NUMBER_RECORD as numberRecord,
+	        	a.ID as orderId,
+	        	f.ACCOUNT as account,
+	        	a.USERID as userid,
+	        	c.WINS_RATIO as winsRatio,
+	        	p.CHANNEL_ID as channelId,     	
+	        	p.CHANNEL_VERSION as channelVersion
+	    ]]>
+	</sql>
+
+	<select id="getOrderOperations" resultMap="GameOrderOperationsEntity" parameterType="HashMap">
+		select * from (
+			select 
+			<include refid="gameOrderOperationsColumns" />
+			from GAME_ORDER a 
+			left join GAME_SERIES b 
+				on a.LOTTERYID = b.LOTTERYID 
+			left join GAME_ORDER_WIN c 
+				on a.ID = c.ORDERID 
+			left join GAME_ISSUE d 
+				on a.LOTTERYID = d.LOTTERYID and a.ISSUE_CODE = d.ISSUE_CODE
+			left join GAME_DRAW_RESULT e 
+				on a.LOTTERYID = e.LOTTERYID and a.ISSUE_CODE = e.ISSUE_CODE
+			left join USER_CUSTOMER f 
+				on a.USERID = f.ID
+			left join GAME_PACKAGE p 
+				on a.PARENTID = p.ID
+		) t 
+		<include refid="gameOrderOperationsQueryDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getOrderOperationsNumber" resultType="long" parameterType="HashMap">
+		select count(*) from (
+			select 
+			<include refid="gameOrderOperationsColumns" />
+			from GAME_ORDER a 
+			left join GAME_SERIES b 
+				on a.LOTTERYID = b.LOTTERYID 
+			left join GAME_ORDER_WIN c 
+				on a.ID = c.ORDERID 
+			left join GAME_ISSUE d 
+				on a.LOTTERYID = d.LOTTERYID and a.ISSUE_CODE = d.ISSUE_CODE
+			left join GAME_DRAW_RESULT e 
+				on a.LOTTERYID = e.LOTTERYID and a.ISSUE_CODE = e.ISSUE_CODE
+			left join USER_CUSTOMER f 
+				on a.USERID = f.ID
+			left join GAME_PACKAGE p 
+				on a.PARENTID = p.ID
+		) t 
+		<include refid="gameOrderOperationsQueryDynamicWhere" />
+	</select>
+	
+	<select id="queryOrderOperationsDetailbyOrderID" parameterType="long" resultMap="GameOrderOperationsEntity">
+		select 
+		<include refid="gameOrderOperationsColumns" />
+		from (select * from GAME_ORDER where ID=#{orderid}) a 
+		left join GAME_SERIES b 
+			on a.LOTTERYID = b.LOTTERYID 
+		left join GAME_ORDER_WIN c 
+			on a.ID = c.ORDERID 
+		left join GAME_ISSUE d 
+			on a.LOTTERYID = d.LOTTERYID and a.ISSUE_CODE = d.ISSUE_CODE
+		left join GAME_DRAW_RESULT e 
+			on a.LOTTERYID = e.LOTTERYID and a.ISSUE_CODE = e.ISSUE_CODE
+		left join USER_CUSTOMER f 
+			on a.USERID = f.ID
+		left join GAME_PACKAGE p 
+			on a.PARENTID = p.ID
+	</select>
+	
+	<select id="queryOrderOperationsListByPlanID" parameterType="long" resultMap="GameOrderOperationsEntity">
+		select 
+		<include refid="gameOrderOperationsColumns" />
+		from (select * from GAME_PLAN where ID=#{planid}) t1 
+		left join GAME_ORDER a 
+			on a.PARENTID = t1.ID
+		left join GAME_SERIES b 
+			on a.LOTTERYID = b.LOTTERYID 
+		left join GAME_ORDER_WIN c 
+			on a.ID = c.ORDERID 
+		left join GAME_ISSUE d 
+			on a.LOTTERYID = d.LOTTERYID and a.ISSUE_CODE = d.ISSUE_CODE
+		left join GAME_DRAW_RESULT e 
+			on a.LOTTERYID = e.LOTTERYID and a.ISSUE_CODE = e.ISSUE_CODE
+		left join USER_CUSTOMER f 
+			on a.USERID = f.ID
+		left join GAME_PACKAGE p 
+			on a.PARENTID = p.ID
+	</select>
+	
+	<select id="queryOrderByLotteryIdAndIssueCode" parameterType="hashMap" resultMap="GameOrderResult">
+		select
+		<include refid="gameOrderColumns"/>
+		from GAME_ORDER a
+		where ISSUE_CODE = #{issueCode}
+		and LOTTERYID = #{lotteryId}
+	</select>
+	
+	<select id="getOrderWinAmount" parameterType="string" resultType="long">
+	   <![CDATA[ select count_win from game_order_win where orderid = (select id from game_order where order_code = #{orderCode}) and status <> 3]]>
+	</select>
+	
+	<select id="getOrderByCode" parameterType="string" resultMap="GameOrderResult">
+	 	select
+		 	ID as id,
+	        	PARENTID as parentid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	(select web_issue_code from game_issue g where g.issue_code=o.ISSUE_CODE) as webIssueCode,
+	        	LOTTERYID as lotteryid,
+	        	TOTAMOUNT as totamount,
+	        	STATUS as status,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	CANCEL_TIME as cancelTime,
+	        	CANCEL_MODES as cancelModes,
+	        	ORDER_CODE as orderCode,
+	        	(select count_win from game_order_win where orderId=o.id) as totalWin,
+				award_group_id as awardGroupId
+			    from GAME_ORDER o
+		        where 
+		 order_Code = #{orderCode}
+	</select>
+	
+	
+</mapper>

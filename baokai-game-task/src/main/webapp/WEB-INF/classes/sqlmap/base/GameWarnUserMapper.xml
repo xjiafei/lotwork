@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameWarnUser">
+	<resultMap id="GameWarnUserResult" type="com.winterframework.firefrog.game.dao.vo.GameWarnUser">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameWarnUserColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ISSUE_CODE as issueCode,
+	        	USERID as userid,
+	        	USER_ACCOUNT as userAccount,
+	        	TOTAL_WINS as totalWins,
+	        	WINS_RATIO as winsRatio,
+	        	CONTINUOUS_WINS_ISSUE as continuousWinsIssue,
+	        	CONTINUOUS_WINS_TIMES as continuousWinsTimes,
+	        	USER_MAXSLIP_WINS as maxslipWins,
+	        	TYPE as type,
+	        	BET_TOTAMOUNT as betTotamount
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameWarnUser" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_GAME_WARN_USER_ID.Nextval from dual
+			   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_WARN_USER (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_CODE ,
+	        	USERID ,
+	        	USER_ACCOUNT ,
+	        	TOTAL_WINS ,
+	        	WINS_RATIO ,
+	        	CONTINUOUS_WINS_ISSUE ,
+	        	CONTINUOUS_WINS_TIMES ,
+	        	USER_MAXSLIP_WINS ,
+	        	TYPE,
+	        	BET_TOTAMOUNT
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{totalWins,javaType=long,jdbcType=DECIMAL} ,
+	        	#{winsRatio,javaType=long,jdbcType=DECIMAL} ,
+	        	#{continuousWinsIssue,javaType=long,jdbcType=DECIMAL} ,
+	        	#{continuousWinsTimes,javaType=long,jdbcType=DECIMAL} ,
+	        	#{maxslipWins,javaType=long,jdbcType=DECIMAL} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betTotamount,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameWarnUser">
+	    <![CDATA[
+	        UPDATE GAME_WARN_USER SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        USER_ACCOUNT = #{userAccount,javaType=string,jdbcType=VARCHAR} ,
+		        TOTAL_WINS = #{totalWins,javaType=long,jdbcType=DECIMAL} ,
+		        WINS_RATIO = #{winsRatio,javaType=long,jdbcType=DECIMAL} ,
+		        CONTINUOUS_WINS_ISSUE = #{continuousWinsIssue,javaType=long,jdbcType=DECIMAL} ,
+		        CONTINUOUS_WINS_TIMES = #{continuousWinsTimes,javaType=long,jdbcType=DECIMAL} ,
+		        USER_MAXSLIP_WINS = #{maxslipWins,javaType=long,jdbcType=DECIMAL} ,
+		        TYPE = #{type,javaType=long,jdbcType=DECIMAL},
+		        BET_TOTAMOUNT= #{betTotamount,javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_WARN_USER where
+		        ID = #{id} 
+	    ]]>
+	    </delete> 
+	    
+	    <delete id="deleteByLotteryIssue"  parameterType="hashMap">
+	    <![CDATA[
+	        delete from GAME_WARN_USER where
+			 	LOTTERYID = #{lotteryid}    
+				and ISSUE_CODE = #{issueCode}
+	    ]]>
+	    </delete> 	    
+	    
+	      
+	    <select id="getById" parameterType="long" resultMap="GameWarnUserResult" flushCache="false">
+			select <include refid="gameWarnUserColumns" />
+		    <![CDATA[
+			    from GAME_WARN_USER 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameWarnUserResult" flushCache="false">
+			select <include refid="gameWarnUserColumns" />
+			    from GAME_WARN_USER 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+		
+		<select id="queryWarnUserByUserIdAndLotteryIdIssueCode" resultMap="GameWarnUserResult" parameterType="hashMap">
+		    select <include refid="gameWarnUserColumns" />
+			    from GAME_WARN_USER 
+			    where LOTTERYID =#{lotteryid} and USERID = #{userid} and ISSUE_CODE = #{issueCode}
+		</select>
+		
+		
+		<select id="getLastWarnUserBefore" resultMap="GameWarnUserResult" parameterType="hashMap">
+		    select <include refid="gameWarnUserColumns" />
+			  from (select *
+			          from GAME_WARN_USER
+			         where USERID = #{userId}
+			           and LOTTERYID = #{lotteryId}
+			           and ISSUE_CODE <![CDATA[ < ]]>#{issueCode}
+			           and ISSUE_CODE<![CDATA[ > ]]>(select issue_code from (select issue_code from GAME_WARN_USER where userid=#{userId}
+			           									and LOTTERYID = #{lotteryId} and continuous_wins_issue=0 order by issue_code desc) t where rownum=1)
+			         ORDER BY ISSUE_CODE DESC) a 
+		</select>
+		<select id="getLastWarnUserAfter" resultMap="GameWarnUserResult" parameterType="hashMap">
+		    select <include refid="gameWarnUserColumns" />
+			  from (select *
+			          from GAME_WARN_USER
+			         where USERID = #{userId}
+			           and LOTTERYID = #{lotteryId}
+			           and ISSUE_CODE <![CDATA[ > ]]>#{issueCode}
+			           and ISSUE_CODE<![CDATA[ < ]]>(select issue_code from (select issue_code from GAME_WARN_USER where userid=#{userId}
+			           									and LOTTERYID = #{lotteryId} and continuous_wins_issue=0 order by issue_code ) t where rownum=1)
+			         ORDER BY ISSUE_CODE DESC) a 
+		</select>
+
+	<sql id="gameWarnUserDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userAccount)">
+				and USER_ACCOUNT = #{userAccount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalWins)">
+				and TOTAL_WINS = #{totalWins}
+			</if>
+	       <if test="@Ognl@isNotEmpty(winsRatio)">
+				and WINS_RATIO = #{winsRatio}
+			</if>
+	       <if test="@Ognl@isNotEmpty(continuousWinsIssue)">
+				and CONTINUOUS_WINS_ISSUE = #{continuousWinsIssue}
+			</if>
+	       <if test="@Ognl@isNotEmpty(continuousWinsTimes)">
+				and CONTINUOUS_WINS_TIMES = #{continuousWinsTimes}
+			</if>
+	       <if test="@Ognl@isNotEmpty(maxslipWins)">
+				and USER_MAXSLIP_WINS = #{maxslipWins}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameWarnUserResult"  flushCache="false">
+    	select <include refid="gameWarnUserColumns" />
+	    from GAME_WARN_USER 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_WARN_USER 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_WARN_USER 
+		<include refid="gameWarnUserDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameWarnUserResult">
+    	select <include refid="gameWarnUserColumns" />
+	    from GAME_WARN_USER 
+		<include refid="gameWarnUserDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

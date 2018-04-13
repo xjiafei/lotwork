@@ -1,0 +1,1 @@
+{"head":{"sowner":0,"rowner":0,"msn":0,"userId":0,"msnsn":0,"status":0,"sendtime":1462870373847},"body":{"result":{"isSuccess":1,"isPrize":null,"hisBonus":null,"betAmount":100000,"betRatio":2,"data":null,"endTime":null,"multiple":10,"bonus":1000000},"pager":{"startNo":0,"endNo":0,"total":0,"otherMap":null}}}

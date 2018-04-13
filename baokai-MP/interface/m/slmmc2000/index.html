@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <style>
+        .loadding img {
+            font-size: 14px;
+            max-width: 70px;
+            max-height: 52px;
+        }
+
+        .loadding {
+            text-align: center;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 99999;
+        }
+
+        .loadding-bg {
+            opacity: 1;
+            background: #fff;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+        }
+
+        .spinner {
+            height: 70px;
+            width: 70px;
+            text-align: center;
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+
+        }
+
+        .spinner > div {
+            width: 18px;
+            height: 18px;
+            background-color: #545067;
+            border-radius: 100%;
+            display: inline-block;
+            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        }
+
+        .spinner .bounce1 {
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+        }
+
+        .spinner .bounce2 {
+            -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+        }
+
+        @-webkit-keyframes sk-bouncedelay {
+            0%, 80%, 100% {
+                -webkit-transform: scale(0)
+            }
+            40% {
+                -webkit-transform: scale(1.0)
+            }
+        }
+
+        @keyframes sk-bouncedelay {
+            0%, 80%, 100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+            40% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+            }
+        }
+
+        @font-face {
+            font-family: "Ionicons";
+            src: url("/m/slmmc2000/fonts/ionicons.eot?v=2.0.1");
+            src: url("/m/slmmc2000/fonts/ionicons.eot?v=2.0.1#iefix") format("embedded-opentype"), url("/m/slmmc2000/fonts/ionicons.ttf?v=2.0.1") format("truetype"), url("/m/slmmc2000/fonts/ionicons.woff?v=2.0.1") format("woff"), url("/m/slmmc2000/fonts/ionicons.woff") format("woff"), url("/m/slmmc2000/fonts/ionicons.svg?v=2.0.1#Ionicons") format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: "Ionicons";
+        }
+
+    </style>
+
+
+    <div class="loadding">
+        <div class="loadding-bg"></div>
+        <div class="spinner">
+            <img src="/m/slmmc2000/img/LOGO.jpg" alt=""/>
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+
+    </div>
+
+
+
+    <script type="text/javascript">
+        var basePath = '/m/slmmc2000/';
+        var postbasePath = '/slmmc2000/';
+        var CGISESSID = "<?php echo $CGISESSID;?>";
+        var returnUrl = 'phlotto://go_lottolobby';
+        var configData = <?php echo $init_data;?>;
+
+    </script>
+
+    <script type="text/javascript">
+
+        if(/#\/drawing|#\/submit/.test(location.hash)){
+            location.hash = '#/pick';
+        }
+
+    </script>
+
+    <link href="/m/slmmc2000/dist/app.min.css" rel="stylesheet">
+</head>
+<body ng-app="starter" ng-controller="allCtrl" ng-click="allClick()">
+
+<ion-nav-view></ion-nav-view>
+
+
+<img src="/m/slmmc2000/img/bg-digital.png" style="display: none;">
+<img src="/m/slmmc2000/img/bg-number.png" style="display: none;">
+<img src="/m/slmmc2000/img/number-list.png" style="display: none;">
+<img src="/m/slmmc2000/img/redbutton.png" style="display: none;">
+<img src="/m/slmmc2000/img/light-off.png" style="display: none;">
+<img src="/m/slmmc2000/img/lightup.png" style="display: none;">
+<img src="/m/slmmc2000/img/conin.png" style="display: none;">
+<img src="/m/slmmc2000/img/wave-b.png" style="display: none;">
+<img src="/m/slmmc2000/img/wave-a.png" style="display: none;">
+<img src="/m/slmmc2000/img/bg-drawing.png" style="display: none;">
+<img src="/m/slmmc2000/img/bg-bottom.png" style="display: none;">
+<img src="/m/slmmc2000/img/bg-winlist.png" style="display: none;">
+
+<script src="/m/slmmc2000/dist/game.js"></script>
+<script src="/m/slmmc2000/dist/app.min.js?"></script>
+
+</body>
+</html>

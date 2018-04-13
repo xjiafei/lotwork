@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepDetail">
+	<resultMap id="ConfigResult" type="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepDetail">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="configColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACTIVITY_ID as activityId,
+	        	ACTIVITY_TIME as activityTime ,
+				USER_NAME   as  userName,
+				USER_ID as userId,		
+				RECHARGE   as  recharge,
+				ACTIVITY_TYPE   as  activityType,
+				RESULT   as  result,
+				USE_NUM   as  useNum,
+				GET_NUM   as  getNum,
+				CHANNEL   as  channel,
+				VERIFY_TIME as   verifyTime, 
+			  	VERIFY_NAME  as verifyName, 
+				VERIFY_REASON  as  verifyReason, 
+				STATUS  as  status,
+				AWARD_CONFIG_ID as activityConfigId,
+				DRAW_RESULT as drawResult ,
+				DRAW_TYPE as drawType,
+				AWARD   as  award		
+				
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepDetail" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_ACTIVITY_SHEEP_DETAIL_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVITY_SHEEP_DETAIL (
+	        	ID ,
+	        	ACTIVITY_ID ,
+	        	ACTIVITY_TIME ,
+				USER_NAME   ,
+				USER_ID,	
+				RECHARGE  ,
+				ACTIVITY_TYPE   ,
+				RESULT   ,
+				USE_NUM  ,
+				GET_NUM  ,
+				CHANNEL  ,
+				VERIFY_TIME, 
+			  	VERIFY_NAME , 
+				VERIFY_REASON  , 
+				STATUS ,
+				AWARD_CONFIG_ID  ,
+				DRAW_RESULT  ,
+				DRAW_TYPE  ,
+				AWARD 		
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{userName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,   
+	        	#{recharge,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{result,javaType=string,jdbcType=VARCHAR} ,
+	        	#{useNum,javaType=long,jdbcType=DECIMAL} ,
+	        	#{getNum,javaType=long,jdbcType=DECIMAL} ,
+	        	#{channel,javaType=long,jdbcType=DECIMAL} ,
+	        	#{verifyTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{verifyName,javaType=string,jdbcType=VARCHAR} ,	
+	        	#{verifyReason,javaType=string,jdbcType=VARCHAR} ,	
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,   
+	        	#{activityConfigId,javaType=long,jdbcType=DECIMAL} ,      
+	        	#{drawResult,javaType=string,jdbcType=VARCHAR} ,	     
+	        	#{drawType,javaType=string,jdbcType=VARCHAR} ,	        		      	
+	        	#{award,javaType=long,jdbcType=DECIMAL}         		        	
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepDetail">
+	    <![CDATA[
+	        UPDATE ACTIVITY_SHEEP_DETAIL SET
+	        	
+	        	ACTIVITY_ID = #{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	ACTIVITY_TIME = #{activityTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	USER_NAME = #{userName,javaType=string,jdbcType=VARCHAR} ,	
+	        	USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,    
+	        	RECHARGE = #{recharge,javaType=long,jdbcType=DECIMAL} ,
+	        	ACTIVITY_TYPE = #{activityType,javaType=long,jdbcType=DECIMAL} ,
+	        	RESULT = #{result,javaType=string,jdbcType=VARCHAR} ,
+	        	USE_NUM = #{useNum,javaType=long,jdbcType=DECIMAL} ,
+	        	GET_NUM = #{getNum,javaType=long,jdbcType=DECIMAL} ,
+	        	CHANNEL = #{channel,javaType=long,jdbcType=DECIMAL},
+	        	VERIFY_TIME = #{verifyTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	VERIFY_NAME = #{verifyName,javaType=string,jdbcType=VARCHAR} ,	
+	        	VERIFY_REASON = #{verifyReason,javaType=string,jdbcType=VARCHAR} ,	
+	        	STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,	 
+	        	AWARD_CONFIG_ID = #{activityConfigId,javaType=long,jdbcType=DECIMAL} ,      
+	        	DRAW_RESULT = #{drawResult,javaType=string,jdbcType=VARCHAR} ,	     
+	        	DRAW_TYPE = #{drawType,javaType=string,jdbcType=VARCHAR} ,	 	        		
+	        	AWARD = #{award,javaType=long,jdbcType=DECIMAL} 
+        	 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACTIVITY_SHEEP_DETAIL where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+		    <![CDATA[
+			    from ACTIVITY_SHEEP_DETAIL 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		
+		<select id="getNotPublishByUserId" parameterType="long" resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+		    <![CDATA[
+			    from ACTIVITY_SHEEP_DETAIL 
+		        where USER_ID = #{id} AND STATUS = 0 
+		    ]]>
+		</select>
+		
+		<select id="getByIds" parameterType="list"  resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+			    from ACTIVITY_SHEEP_DETAIL 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="configDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			and status != 2
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userName)">
+				and USER_NAME = #{userName}
+			</if>
+	      <if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>	
+			<if test="@Ognl@isNotEmpty(beginTime)">
+				<![CDATA[
+				and ACTIVITY_TIME >= #{beginTime}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(endTime)">
+				<![CDATA[
+				and ACTIVITY_TIME <= #{endTime}
+				]]>
+			</if>	
+			
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(channel)">
+				and CHANNEL = #{channel}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="ConfigResult"  flushCache="false">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_DETAIL 
+
+		
+			ORDER BY ID 
+		
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACTIVITY_SHEEP_DETAIL 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ACTIVITY_SHEEP_DETAIL 
+		<include refid="configDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="ConfigResult">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_DETAIL 
+		<include refid="configDynamicWhere"/>
+			ORDER BY ORDER_NUM 
+    </select>
+    <select id="getUserDiceDetailList" parameterType="long" resultMap="ConfigResult">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_DETAIL where USER_ID=#{userId} order by ACTIVITY_TIME desc
+    </select>
+
+</mapper>

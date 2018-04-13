@@ -1,0 +1,234 @@
+*{
+    margin:0;
+    padding:0;
+}
+.container{
+    background:#252f3a;
+    display: none;
+}
+
+.page{
+    width:750px;
+    overflow: hidden;
+    height: auto;
+    position: relative;
+    background:#252f3a;
+}
+.top{
+    width:750px;
+    height: 994px;
+    background: url(bg.jpg) no-repeat center center;
+}
+.middle{
+    width:750px;
+    height: auto;
+}
+.head{
+    width:750px;
+    height: 401px;
+    background:url(head.png);
+}
+
+
+.head{
+    width:750px;
+    height: 401px;
+    background:url(head.png) no-repeat center center;
+    position: absolute;
+    top: 414px;
+}
+
+.total{
+    width: 200px;
+    height: 40px;
+    position: absolute;
+    left: 50px;
+    top: 150px;
+    font-size: 27px;
+    color: #79a6e3;
+    text-align: center;
+    line-height: 40px;
+}
+
+.sales{
+    left:500px;
+}
+
+.money{
+    width: 241px;
+    height: 50px;
+    position: absolute;
+    left: 255px;
+    top: 272px;
+    text-align: center;
+    line-height: 50px;
+    color: #dfca81;
+    font-size: 52px;
+}
+
+.gold{
+    width: 50px;
+    height: 65px;
+    background: url(0.png) no-repeat center center;
+    background-size:100%;
+    position: absolute;
+    left: 325px;
+    top: 129px;
+}
+
+.bit{
+    left:376px;
+}
+
+.rule{
+    width: 178px;
+    height: 35px;
+    position: absolute;
+    bottom: 4px;
+    left: 287px;
+}
+
+.curtion{
+    background: none;
+    display: none;
+    background: url('curtion.png') no-repeat center center;
+}
+
+
+.back{
+    width: 150px;
+    height: 32px;
+    position: absolute;
+    top: 5px;
+    left: 302px;
+}
+
+.txt{
+    width: 200px;
+    height: 37px;
+    left: 36px;
+    color: #96b7da;
+    font-size: 27px;
+    top: 155px;
+    position: absolute;
+    overflow: visible;
+    text-align: center;
+}
+.t2{
+    left:190px;
+}
+.t3{
+    left:327px;
+}
+.t4{
+    left:442px;
+}
+.t5{
+    left:546px;
+}
+.t6{
+    top: 267px;
+    left: 258px;
+    color: #dfca81;
+    font-size: 41px;
+    height: 55px;
+}
+
+.activity{
+    width: 750px;
+    height:auto;
+}
+
+h1{
+    font-size:25px;
+    color:#aac2e0;
+    line-height: 55px;
+    text-indent: 10px;
+}
+p{
+    color: #b3c9e4;
+    font-size: 22px;
+    line-height: 38px;
+    padding: 2px 10px;
+    margin: 6px auto;
+}
+
+table th{
+    background: #3f4e69;
+    color: #98c5ff;
+    font-size: 23px;
+    height: 33px;
+    font-weight: normal;
+    padding: 0 6px;
+}
+.last{
+    width:20%;
+}
+table td{
+    font-size:22px;
+    color:#d8e9ff;
+    text-align: center;
+    height: 31px;
+}
+.odd{
+    background:#263248;
+}
+.even{
+    background:#12131a;
+}
+.bd{
+    border-bottom:2px solid #3f4e69;
+}
+.pd25{
+    padding:0 10px;
+}
+.arule{
+    margin-top:40px;
+}
+
+.bottoms{
+    width:750px;
+    height:75px;
+    font-size:19px;
+    text-align: center;
+    line-height: 75px;
+    color:#535c65;
+    background: #0e1217;
+}
+
+/** 2016-7-18 15:04:16 by feiker */
+
+.enter{
+    width: 260px;
+    height: 124px;
+    background: url(enter.png) no-repeat center center;
+    position: absolute;
+    left: 246px;
+    top: 215px;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 20px;
+}
+.cover{
+    width:100%;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 10;
+    background: rgba(0,0,0,0.6);
+    display: none;
+}
+.ok{
+    width:580px;
+    height:440px;
+    background:url(ok.png) no-repeat center center;
+    position:absolute;
+    left:85px;
+    top:334px;
+}
+.confirm{
+    width: 260px;
+    height: 79px;
+    top: 323px;
+    position: absolute;
+    left: 159px;
+}

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundFreeze">
+	<resultMap id="FundFreezeResult" type="com.winterframework.firefrog.fund.dao.vo.FundFreeze">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundFreezeColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	AMT as amt,
+	        	TYPE as type,
+	        	STATUS as status,
+	        	FREEZE_TIME as freezeTime,
+	        	DEAL_TIIME as dealTiime,
+	        	FUND_ID as fundId
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundFreeze" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_FUND_FREEZE_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_FREEZE (
+	        	ID ,
+	        	AMT ,
+	        	TYPE ,
+	        	STATUS ,
+	        	FREEZE_TIME ,
+	        	DEAL_TIIME ,
+	        	FUND_ID 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{amt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{freezeTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{dealTiime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{fundId,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.FundFreeze">
+	    <![CDATA[
+	        UPDATE FUND_FREEZE SET
+		        AMT = #{amt,javaType=long,jdbcType=DECIMAL} ,
+		        TYPE = #{type,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        FREEZE_TIME = #{freezeTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        DEAL_TIIME = #{dealTiime,javaType=date,jdbcType=TIMESTAMP} ,
+		        FUND_ID = #{fundId,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+		<update id="updateFreezeById">
+			UPDATE FUND_FREEZE 
+			<set>
+				<if test="@Ognl@isNotEmpty(status)">
+					 STATUS = #{status} ,
+				</if>
+				<if test="@Ognl@isNotEmpty(dealTiime)">
+					 DEAL_TIIME = #{dealTiime} 
+				</if>
+			</set>
+			WHERE
+				ID = #{id}
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_FREEZE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="FundFreezeResult" flushCache="false">
+			select <include refid="fundFreezeColumns" />
+		    <![CDATA[
+			    from FUND_FREEZE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="FundFreezeResult" flushCache="false">
+			select <include refid="fundFreezeColumns" />
+			    from FUND_FREEZE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="fundFreezeDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(amt)">
+				and AMT = #{amt}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(freezeTime)">
+				and FREEZE_TIME = #{freezeTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(dealTiime)">
+				and DEAL_TIIME = #{dealTiime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(fundId)">
+				and FUND_ID = #{fundId}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="FundFreezeResult"  flushCache="false">
+    	select <include refid="fundFreezeColumns" />
+	    from FUND_FREEZE 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from FUND_FREEZE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from FUND_FREEZE 
+		<include refid="fundFreezeDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="FundFreezeResult">
+    	select <include refid="fundFreezeColumns" />
+	    from FUND_FREEZE 
+		<include refid="fundFreezeDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

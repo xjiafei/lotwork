@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GamePackage">
+	<resultMap id="GamePackageResult" type="com.winterframework.firefrog.game.dao.vo.GamePackage">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gamePackageColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	LOTTERYID as lotteryid,
+	        	PACKAGE_CODE as packageCode,
+	        	TYPE as type,
+	        	SALE_TIME as saleTime,
+	        	CANCEL_TIME as cancelTime,
+	        	USERIP as userip,
+	        	SERVERIP as serverip,
+	        	PACKAGE_AMOUNT as packageAmount,
+	        	CHANNEL_ID as channelId,
+	        	CHANNEL_VERSION as channelVersion,
+	        	AWARD_ID as awardId,
+	        	WEB_SALE_TIME as webSaleTime,
+	        	FILE_MODE as fileMode,
+	        	RET_USER_CHAIN as retUserChain
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GamePackage" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_PACKAGE_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_PACKAGE (
+	        	ID ,
+	        	USERID ,
+	        	ISSUE_CODE ,
+	        	LOTTERYID ,
+	        	PACKAGE_CODE ,
+	        	TYPE ,
+	        	SALE_TIME ,
+	        	CANCEL_TIME ,
+	        	USERIP ,
+	        	SERVERIP ,
+	        	PACKAGE_AMOUNT ,
+	        	CHANNEL_ID ,
+	        	CHANNEL_VERSION ,
+	        	AWARD_ID ,
+	        	WEB_SALE_TIME ,
+	        	FILE_MODE ,
+	        	RET_USER_CHAIN 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{packageCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{type,javaType=integer,jdbcType=NUMERIC} ,
+	        	#{saleTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{cancelTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{userip,javaType=long,jdbcType=DECIMAL} ,
+	        	#{serverip,javaType=long,jdbcType=DECIMAL} ,
+	        	#{packageAmount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{channelId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{channelVersion,javaType=string,jdbcType=VARCHAR} ,
+	        	#{awardId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webSaleTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{fileMode,javaType=integer,jdbcType=NUMERIC} ,
+	        	#{retUserChain,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GamePackage">
+	    <![CDATA[
+	        UPDATE GAME_PACKAGE SET
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        PACKAGE_CODE = #{packageCode,javaType=string,jdbcType=VARCHAR} ,
+		        TYPE = #{type,javaType=integer,jdbcType=NUMERIC} ,
+		        SALE_TIME = #{saleTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CANCEL_TIME = #{cancelTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        USERIP = #{userip,javaType=long,jdbcType=DECIMAL} ,
+		        SERVERIP = #{serverip,javaType=long,jdbcType=DECIMAL} ,
+		        PACKAGE_AMOUNT = #{packageAmount,javaType=long,jdbcType=DECIMAL} ,
+		        CHANNEL_ID = #{channelId,javaType=long,jdbcType=DECIMAL} ,
+		        CHANNEL_VERSION = #{channelVersion,javaType=string,jdbcType=VARCHAR} ,
+		        AWARD_ID = #{awardId,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_SALE_TIME = #{webSaleTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        FILE_MODE = #{fileMode,javaType=integer,jdbcType=NUMERIC} ,
+		        RET_USER_CHAIN = #{retUserChain,javaType=string,jdbcType=VARCHAR}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_PACKAGE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GamePackageResult" flushCache="false">
+			select <include refid="gamePackageColumns" />
+		    <![CDATA[
+			    from GAME_PACKAGE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GamePackageResult" flushCache="false">
+			select <include refid="gamePackageColumns" />
+			    from GAME_PACKAGE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gamePackageDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(packageCode)">
+				and PACKAGE_CODE = #{packageCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(saleTime)">
+				and SALE_TIME = #{saleTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(cancelTime)">
+				and CANCEL_TIME = #{cancelTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userip)">
+				and USERIP = #{userip}
+			</if>
+	       <if test="@Ognl@isNotEmpty(serverip)">
+				and SERVERIP = #{serverip}
+			</if>
+	       <if test="@Ognl@isNotEmpty(packageAmount)">
+				and PACKAGE_AMOUNT = #{packageAmount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(awardId)">
+				and AWARD_ID = #{awardId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(webSaleTime)">
+				and WEB_SALE_TIME = #{webSaleTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(fileMode)">
+				and FILE_MODE = #{fileMode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(retUserChain)">
+				and RET_USER_CHAIN = #{retUserChain}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GamePackageResult"  flushCache="false">
+    	select <include refid="gamePackageColumns" />
+	    from GAME_PACKAGE 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_PACKAGE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_PACKAGE 
+		<include refid="gamePackageDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GamePackageResult">
+    	select <include refid="gamePackageColumns" />
+	    from GAME_PACKAGE 
+		<include refid="gamePackageDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<select id="queryGamePackageByPlanId" resultMap="GamePackageResult" parameterType="hashMap">
+		select <include refid="gamePackageColumns" />
+	    from 
+	    (select a.* from GAME_PACKAGE a,GAME_PLAN b where a.id=b.PACKAGE_ID and a.TYPE=2 and b.id=#{planId} and a.lotteryid =#{lotteryId})
+	</select>
+	<select id="getByLotteryIdAndIssueCode" resultMap="GamePackageResult" parameterType="hashMap">
+		select <include refid="gamePackageColumns" /> 
+		  from game_package
+		 where lotteryid = #{lotteryId}
+		   and issue_code = #{issueCode}				
+	</select>
+	
+	
+</mapper>

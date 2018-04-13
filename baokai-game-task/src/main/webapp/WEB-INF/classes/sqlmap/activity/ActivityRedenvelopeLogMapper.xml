@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.active.dao.vo.ActivityRedenvelopeLog">
+	<resultMap id="result" type="com.winterframework.firefrog.active.dao.vo.ActivityRedenvelopeLog">
+			<result column="ID" property="id"/>
+			<result column="USER_ID" property="userId"/>
+			<result column="USER_ACCOUNT" property="userAccount"/>
+			<result column="ACTIVITY_ID" property="activityId"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="VIP_LVL" property="vipLvl"/>
+			<result column="RED_ENVELOPE" property="redEnvelope"/>			
+	</resultMap>
+	<sql id="fields">ID,USER_ID,USER_ACCOUNT,ACTIVITY_ID,CREATE_TIME,VIP_LVL,RED_ENVELOPE
+	</sql>
+	<sql id="whereCondition">
+		<where>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and user_id = #{userId}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(activityId)">
+				and activity_id = #{activityId}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(activityId)">
+				and vip_lvl = #{vipLvl}
+			</if>
+			
+			
+		</where>
+	</sql>
+	
+	 
+    <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.active.dao.vo.ActivityRedenvelopeLog" 
+			useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_ACTIVITY_REDENVELOPE_LOG.Nextval from dual
+			   	    </selectKey>
+		<![CDATA[
+	        INSERT INTO
+	        ACTIVITY_REDENVELOPE_LOG (
+	        	ID ,
+	        	USER_ID,
+	        	USER_ACCOUNT,
+	        	ACTIVITY_ID,
+	        	CREATE_TIME,
+				VIP_LVL,
+				RED_ENVELOPE		
+			) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP} ,	        
+	        	#{vipLvl,javaType=long,jdbcType=DECIMAL} ,      
+	        	#{redEnvelope,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>	
+	
+		</insert>
+		
+	    <select id="queryTodayCountgByVipLvl" resultType="long">
+	    	select count(1)
+	    	from ACTIVITY_REDENVELOPE_LOG 
+	    	<include refid="whereCondition"/>
+	    	<![CDATA[
+	    		AND CREATE_TIME >= trunc(sysdate)
+	    		AND CREATE_TIME < trunc(sysdate+1)
+	    	]]>
+	    </select>
+	    
+	    <select id="queryTodayLottoCount" resultType="long">
+	    	select count(1)
+	    	from ACTIVITY_REDENVELOPE_LOG 
+	    	<include refid="whereCondition"/>
+	    	<![CDATA[
+	    		AND RED_ENVELOPE >= #{redEnvelope}
+	    		AND CREATE_TIME >= trunc(sysdate)
+	    		AND CREATE_TIME < trunc(sysdate+1)
+	    	]]>
+	    </select>
+	    
+	    <select id="queryTodayRedEnvelopeByUserId" parameterType="map" resultMap="result" flushCache="false">
+	    	select <include refid="fields"/>
+	    	from ACTIVITY_REDENVELOPE_LOG a
+	    	<include refid="whereCondition"/>
+	    	<![CDATA[
+	    		AND CREATE_TIME >=  trunc(sysdate)
+	    		AND CREATE_TIME < trunc(sysdate+1)
+	    	]]>
+	    </select>
+	    
+	   
+
+
+</mapper>

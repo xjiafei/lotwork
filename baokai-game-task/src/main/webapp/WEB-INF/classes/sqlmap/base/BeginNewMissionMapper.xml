@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginNewMission">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginNewMission">
+			<result column="ID" property="id"/>
+			<result column="CREATE_USER" property="createUser"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="MODIFY_USER" property="modifyUser"/>
+			<result column="MODIFY_TIME" property="modifyTime"/>
+			<result column="BIND_CARD_TEXT" property="bindCardText"/>
+			<result column="BIND_CARD_PREMIUM" property="bindCardPremium"/>
+			<result column="BIND_CARD_CHECK" property="bindCardCheck"/>
+			<result column="CHARGE_TEXT" property="chargeText"/>
+			<result column="WITHDRAW_TEXT" property="withdrawText"/>
+			<result column="WITHDRAW_FACTOR" property="withdrawFactor"/>
+			<result column="WITHDRAW_PREMIUM" property="withdrawPremium"/>
+			<result column="DAY_BET_FACTOR" property="dayBetFactor"/>
+			<result column="DAY_ANS_LOW" property="dayAnsLow"/>
+			<result column="DAY_ANS_HIGH" property="dayAnsHigh"/>
+			<result column="DAY_ANS_UNIT" property="dayAnsUnit"/>
+			<result column="VERSION" property="version"/>		
+			
+
+ </resultMap>
+	<sql id="fields">ID,CREATE_USER,CREATE_TIME,MODIFY_USER,MODIFY_TIME,BIND_CARD_TEXT,BIND_CARD_PREMIUM,BIND_CARD_CHECK,CHARGE_TEXT,WITHDRAW_TEXT,WITHDRAW_FACTOR,WITHDRAW_PREMIUM,DAY_BET_FACTOR,DAY_ANS_LOW,DAY_ANS_HIGH,DAY_ANS_UNIT,VERSION
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="createUser != null">
+			And CREATE_USER = #{createUser}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="modifyUser != null">
+			And MODIFY_USER = #{modifyUser}
+		</if>
+
+		<if test="modifyTime != null">
+			And MODIFY_TIME = #{modifyTime}
+		</if>
+
+		<if test="bindCardText != null">
+			And BIND_CARD_TEXT = #{bindCardText}
+		</if>
+
+		<if test="bindCardPremium != null">
+			And BIND_CARD_PREMIUM = #{bindCardPremium}
+		</if>
+
+		<if test="bindCardCheck != null">
+			And BIND_CARD_CHECK = #{bindCardCheck}
+		</if>
+
+		<if test="chargeText != null">
+			And CHARGE_TEXT = #{chargeText}
+		</if>
+
+		<if test="withdrawText != null">
+			And WITHDRAW_TEXT = #{withdrawText}
+		</if>
+
+		<if test="withdrawFactor != null">
+			And WITHDRAW_FACTOR = #{withdrawFactor}
+		</if>
+
+		<if test="withdrawPremium != null">
+			And WITHDRAW_PREMIUM = #{withdrawPremium}
+		</if>
+
+		<if test="dayBetFactor != null">
+			And DAY_BET_FACTOR = #{dayBetFactor}
+		</if>
+
+		<if test="dayAnsLow != null">
+			And DAY_ANS_LOW = #{dayAnsLow}
+		</if>
+
+		<if test="dayAnsHigh != null">
+			And DAY_ANS_HIGH = #{dayAnsHigh}
+		</if>
+
+		<if test="dayAnsUnit != null">
+			And DAY_ANS_UNIT = #{dayAnsUnit}
+		</if>
+
+		<if test="version != null">
+			And VERSION = #{version}
+		</if>
+
+		</where>
+
+	</sql>
+	
+	<select id="findMaxVersion" resultMap="result" >
+		Select <include refid="fields"/>
+				From BEGIN_NEW_MISSION
+		where VERSION = (select max(VERSION) from BEGIN_NEW_MISSION)
+	</select>
+	
+	<select id="getMaxVersion" resultType="long">
+		Select nvl(max(version),0)
+				From BEGIN_NEW_MISSION
+	</select>
+	
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewMission">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_MISSION
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_MISSION
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_MISSION
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewMission"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT seq_BEGIN_NEW_MISSION.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_NEW_MISSION (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{createUser,javaType=string,jdbcType=VARCHAR},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{modifyUser,javaType=string,jdbcType=VARCHAR},
+	         #{modifyTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{bindCardText,javaType=string,jdbcType=VARCHAR},
+	         #{bindCardPremium,javaType=long,jdbcType=DECIMAL},
+	         #{bindCardCheck,javaType=string,jdbcType=VARCHAR},
+	         #{chargeText,javaType=string,jdbcType=VARCHAR},
+	         #{withdrawText,javaType=string,jdbcType=VARCHAR},
+	         #{withdrawFactor,javaType=long,jdbcType=DECIMAL},
+	         #{withdrawPremium,javaType=long,jdbcType=DECIMAL},
+	         #{dayBetFactor,javaType=long,jdbcType=DECIMAL},
+	         #{dayAnsLow,javaType=long,jdbcType=DECIMAL},
+	         #{dayAnsHigh,javaType=long,jdbcType=DECIMAL},
+	         #{dayAnsUnit,javaType=long,jdbcType=DECIMAL},
+	         #{version,javaType=long,jdbcType=DECIMAL}
+	        )
+	</insert>
+	
+		<select id="findByVersion" resultMap="result" parameterType="long">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_MISSION
+		where VERSION = #{version}
+	</select>
+
+</mapper>

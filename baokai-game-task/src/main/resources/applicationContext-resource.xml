@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.0.xsd " 
+	default-autowire="byName" default-lazy-init="false">
+	
+	<bean class="com.winterframework.modules.utils.SpringContextHolder" />
+	
+	<import resource="chart/applicationContext-resource-gameTrendChart.xml"/>
+	<import resource="revocation-map.xml"/>
+	<import resource="wincaculator/applicationContext-wincaculator.xml"/>
+	<import resource="event-handler-map.xml"/>
+	
+	<bean id="propertyConfigurer"
+		class="com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/application.properties</value>
+				<value>classpath:/db.properties</value>
+				<value>classpath:/redis.properties</value>
+				<value>classpath:/security.properties</value>
+				<value>classpath:/file.properties</value>
+				<value>classpath:/game-type.properties</value>
+				<value>classpath:/serverUrlPath.properties</value>
+				<value>classpath:/issuecode.properties</value>
+				<value>classpath:/notice.properties</value>
+				<value>classpath:/activity.properties</value>
+				<value>classpath:/pt.properties</value>
+				<value>classpath:/thpay.properties</value>
+				<value>classpath:/sppay.properties</value>
+				<value>file:/usr/local/config/gametask.properties</value>
+				<value>file:C:/config/gametask.properties</value>
+				<value>classpath:/gtaskversion.properties</value>
+				
+			</list>
+		</property>
+	</bean>
+
+	<context:component-scan base-package="com.winterframework.modules.spring.exetend" />
+	<context:component-scan base-package="com.winterframework.modules.spring.console" />
+	<context:component-scan base-package="com.winterframework.**.service" />
+	<context:component-scan base-package="com.winterframework.**.event" />
+	<context:component-scan base-package="com.winterframework.**.dao" />
+	<!-- <context:component-scan base-package="com.winterframework.**.web" /> -->
+	<context:component-scan base-package="com.winterframework.**.util" />
+	<context:component-scan base-package="com.winterframework.firefrog.schedule" />
+	<context:component-scan base-package="com.winterframework.**.common" />
+	<context:component-scan base-package="com.winterframework.**.mmctask" />
+	<aop:aspectj-autoproxy/>		
+	<bean id="lotteryWinSlipNumCaculatorFactory"
+		class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumCaculatorFactory">
+	</bean>
+	
+	<bean id="specialLotteryAssistFactory"
+		class="com.winterframework.firefrog.game.service.assist.bet.SpecialLotteryAssistFactory">
+	</bean>
+	<!-- 配置默认开奖中心彩种对应的彩种ID  -->
+	<bean id="EClotteryMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key><value>CQSSC</value></key>
+					<value>99101</value> 
+				</entry>
+				<entry>
+					<key><value>HLJSSC</value></key>
+					<value>99105</value> 
+				</entry>
+				<entry>
+					<key><value>JXSSC</value></key>
+					<value>99102</value> 
+				</entry>
+				<entry>
+					<key><value>XJSSC</value></key>
+					<value>99103</value> 
+				</entry>
+				<entry>
+					<key><value>TJSSC</value></key>
+					<value>99104</value> 
+				</entry>
+				<entry>
+					<key><value>LLSSC</value></key>
+					<value>99106</value> 
+				</entry>
+				<entry>
+					<key><value>SSL</value></key>
+					<value>99107</value> 
+				</entry>
+				<entry>
+					<key><value>F3D</value></key>
+					<value>99108</value> 
+				</entry>
+				<entry>
+					<key><value>PLW</value></key>
+					<value>99109</value> 
+				</entry>
+				<entry>
+					<key><value>SSQ</value></key>
+					<value>99401</value> 
+				</entry>
+				<entry>
+					<key><value>SD11Y</value></key>
+					<value>99301</value> 
+				</entry>
+				<entry>
+					<key><value>CQ11Y</value></key>
+					<value>99304</value> 
+				</entry>
+				<entry>
+					<key><value>GD11Y</value></key>
+					<value>99303</value> 
+				</entry>
+				<entry>
+					<key><value>JX11Y</value></key>
+					<value>99302</value> 
+				</entry>
+				<entry>
+					<key><value>LL11Y</value></key>
+					<value>99305</value> 
+				</entry>
+				<entry>
+					<key><value>JS11Y</value></key>
+					<value>99307</value> 
+				</entry>
+				<entry>
+					<key><value>JLFFC</value></key>
+					<value>99111</value> 
+				</entry>
+				<entry>
+					<key><value>TXFFC</value></key>
+					<value>99114</value> 
+				</entry>
+				<entry>
+					<key><value>BJKL8</value></key>
+					<value>99201</value> 
+				</entry>
+				<entry>
+					<key><value>JSK3</value></key>
+					<value>99501</value> 
+				</entry>
+				<entry>
+					<key><value>AHK3</value></key>
+					<value>99502</value> 
+				</entry>
+				<entry>
+					<key><value>LHC</value></key>
+					<value>99701</value> 
+				</entry>	
+				<entry>
+					<key><value>JLSB2</value></key>
+					<value>99602</value> 
+				</entry>
+				<entry>
+					<key><value>JLSB</value></key>
+					<value>99603</value> 
+				</entry>			
+			</map>
+		</constructor-arg>
+	</bean>
+	<!-- 将彩种转换为ec对应的彩种名称 -->
+	<bean id="EClotteryNameMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key><value>99101</value></key>
+					<value>CQSSC</value> 
+				</entry>
+				<entry>
+					<key><value>99105</value></key>
+					<value>HLJSSC</value> 
+				</entry>
+				<entry>
+					<key><value>99102</value></key>
+					<value>JXSSC</value> 
+				</entry>
+				<entry>
+					<key><value>99103</value></key>
+					<value>XJSSC</value> 
+				</entry>
+				<entry>
+					<key><value>99104</value></key>
+					<value>TJSSC</value> 
+				</entry>
+				<entry>
+					<key><value>99106</value></key>
+					<value>LLSSC</value> 
+				</entry>
+				<entry>
+					<key><value>99107</value></key>
+					<value>SSL</value> 
+				</entry>
+				<entry>
+					<key><value>99108</value></key>
+					<value>F3D</value> 
+				</entry>
+				<entry>
+					<key><value>99109</value></key>
+					<value>PLW</value> 
+				</entry>
+				<entry>
+					<key><value>99401</value></key>
+					<value>SSQ</value> 
+				</entry>
+				<entry>
+					<key><value>99301</value></key>
+					<value>SD11Y</value> 
+				</entry>
+				<entry>
+					<key><value>99304</value></key>
+					<value>CQ11Y</value> 
+				</entry>
+				<entry>
+					<key><value>99303</value></key>
+					<value>GD11Y</value> 
+				</entry>
+				<entry>
+					<key><value>99302</value></key>
+					<value>JX11Y</value> 
+				</entry>
+				<entry>
+					<key><value>99305</value></key>
+					<value>LL11Y</value> 
+				</entry><entry>
+					<key><value>99307</value></key>
+					<value>JS11Y</value> 
+				</entry>
+				<entry>
+					<key><value>99111</value></key>
+					<value>JLFFC</value> 
+				</entry>
+				<entry>
+					<key><value>99114</value></key>
+					<value>TXFFC</value> 
+				</entry>
+				<entry>
+					<key><value>99201</value></key>
+					<value>BJKL8</value> 
+				</entry>
+				<entry>
+					<key><value>99501</value></key>
+					<value>JSK3</value> 
+				</entry>
+				<entry>
+					<key><value>99502</value></key>
+					<value>AHK3</value> 
+				</entry>
+				<entry>
+					<key><value>99701</value></key>
+					<value>LHC</value> 
+				</entry>		
+				<entry>
+					<key><value>99602</value></key>
+					<value>JLSB2</value> 
+				</entry>
+				<entry>
+					<key><value>99603</value></key>
+					<value>JLSB</value> 
+				</entry>		
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameIssueRule">
+	<resultMap id="GameIssueRuleResult"
+		type="com.winterframework.firefrog.game.dao.vo.GameIssueRule">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameIssueRuleColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ISSUE_RULES_NAME as issueRulesName,
+	        	RULE_START_TIME as ruleStartTime,
+	        	RULE_END_TIME as ruleEndTime,
+	        	STATUS as status,
+	        	OPEN_AWARD_PERIOD as openAwardPeriod,
+	        	RULE_TYPE as ruleType,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueRule"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_ISSUE_RULE (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_RULES_NAME ,
+	        	RULE_START_TIME ,
+	        	RULE_END_TIME ,
+	        	STATUS ,
+	        	OPEN_AWARD_PERIOD ,
+	        	RULE_TYPE ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueRulesName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ruleStartTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{ruleEndTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{openAwardPeriod,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ruleType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=object,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>
+
+	</insert>
+	
+	<select resultType="long" id="getGameIssueRuleInsertId">
+	    SELECT SEQ_GAME_ISSUE_RULE_ID.Nextval from dual
+	</select>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueRule">
+	    <![CDATA[
+	        UPDATE GAME_ISSUE_RULE SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_RULES_NAME = #{issueRulesName,javaType=string,jdbcType=VARCHAR} ,
+		        RULE_START_TIME = #{ruleStartTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        RULE_END_TIME = #{ruleEndTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        OPEN_AWARD_PERIOD = #{openAwardPeriod,javaType=string,jdbcType=VARCHAR} ,
+		        RULE_TYPE = #{ruleType,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=object,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	
+	<update id="cancelGameIssueRule"
+		parameterType="hashmap">
+	        UPDATE GAME_ISSUE_RULE SET
+		        STATUS=#{status}
+	        WHERE 
+		        LOTTERYID = #{lotteryId} and  ID=#{ruleId}
+	</update>
+	
+	<update id="deleteGameIssueRule"
+		parameterType="hashmap">
+	        UPDATE GAME_ISSUE_RULE SET
+		        STATUS=#{status}
+	        WHERE 
+		        LOTTERYID = #{lotteryId} and  ID=#{ruleId}
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_ISSUE_RULE where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="GameIssueRuleResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueRuleColumns" />
+		    <![CDATA[
+			    from GAME_ISSUE_RULE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="GameIssueRuleResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueRuleColumns" />
+		from GAME_ISSUE_RULE
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="gameIssueRuleDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(issueRulesName)">
+				and ISSUE_RULES_NAME = #{issueRulesName}
+			</if>
+			<if test="@Ognl@isNotEmpty(ruleStartTime)">
+				and RULE_START_TIME = #{ruleStartTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(ruleEndTime)">
+				and RULE_END_TIME = #{ruleEndTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(openAwardPeriod)">
+				and OPEN_AWARD_PERIOD = #{openAwardPeriod}
+			</if>
+			<if test="@Ognl@isNotEmpty(ruleType)">
+				and RULE_TYPE = #{ruleType}
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameIssueRuleResult" flushCache="false">
+		select
+		<include refid="gameIssueRuleColumns" />
+		from GAME_ISSUE_RULE
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from
+		GAME_ISSUE_RULE
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_ISSUE_RULE
+		<include refid="gameIssueRuleDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameIssueRuleResult">
+		select
+		<include refid="gameIssueRuleColumns" />
+		from GAME_ISSUE_RULE
+		<include refid="gameIssueRuleDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+	<select id="queryGameIssueRule" resultMap="GameIssueRuleResult"
+		parameterType="hashMap">
+		select
+		<include refid="gameIssueRuleColumns" />
+		 <![CDATA[
+			    from GAME_ISSUE_RULE 
+		        where 
+		         RULE_START_TIME<=#{toDate} and RULE_END_TIME>=#{fromDate} and LOTTERYID=#{lotteryId} and STATUS=1 order by RULE_START_TIME asc
+		    ]]>
+
+	</select>
+
+	<select id="queryGameIssueRuleByDay" resultMap="GameIssueRuleResult"
+		parameterType="hashMap">
+		select
+		<include refid="gameIssueRuleColumns" />
+		 <![CDATA[
+			    from GAME_ISSUE_RULE 
+		        where 
+		         OPEN_AWARD_PERIOD like '%'||'${day}'||'%' RULE_START_TIME<=#{toDate} and RULE_END_TIME>=#{fromDate} and LOTTERYID=#{lotteryId} and STATUS=1 order by RULE_START_TIME asc
+		    ]]>
+
+	</select>
+
+	<select id="getCommenGameIssueRuleByRuleTypeAndDay" resultMap="GameIssueRuleResult"
+		parameterType="hashMap">
+		select
+		<include refid="gameIssueRuleColumns" /> from (
+		select *  
+		 <![CDATA[
+			    from GAME_ISSUE_RULE 
+		        where 
+		          RULE_START_TIME<=#{toDate} and (RULE_END_TIME is null or RULE_END_TIME>=#{fromDate}) and OPEN_AWARD_PERIOD like '%'||'${day}'||'%' and RULE_TYPE=#{ruleType} and  LOTTERYID=#{lotteryId} and STATUS=#{status}  order by RULE_START_TIME desc
+		    ]]>) where rownum=1
+
+	</select>
+	
+	<select id="getSpecialOrStopGameIssueRuleByRuleTypeAndDay" resultMap="GameIssueRuleResult"
+		parameterType="hashMap">
+		select
+		<include refid="gameIssueRuleColumns" /> from(
+		select *  
+		 <![CDATA[
+			    from GAME_ISSUE_RULE 
+		        where 
+		          RULE_START_TIME<=#{toDate} and RULE_END_TIME>=#{fromDate} and OPEN_AWARD_PERIOD like '%'||'${day}'||'%' and RULE_TYPE in(2,3) and  LOTTERYID=#{lotteryId} and STATUS=#{status}  order by RULE_START_TIME desc
+		    ]]>) where rownum=1
+
+	</select>
+
+	<select id="queryGameIssueRuleByLotteryIdAndRuleId" resultMap="GameIssueRuleResult"
+		parameterType="hashMap">
+		select
+		<include refid="gameIssueRuleColumns" />
+		from GAME_ISSUE_RULE
+		where
+		LOTTERYID=#{lotteryId}
+		<if test="@Ognl@isNotEmpty(ruleId)">
+			and ID = #{ruleId}
+		</if>
+		order by RULE_START_TIME asc
+
+	</select>
+
+</mapper>

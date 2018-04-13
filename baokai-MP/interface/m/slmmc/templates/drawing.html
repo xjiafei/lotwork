@@ -1,0 +1,107 @@
+<ion-view view-title="秒开时时彩">
+    <div class="bar bar-header bar-stable">
+
+        <div class="ar-popmenu {{menuShow? '':'menuShow'}}">
+            <ul>
+                <!--<li ng-click="showRecord()">投注记录</li>--> 
+                <li style="color: red">当前模式 {{ moneyUnit==1?"元":(moneyUnit==0.01?"分":"角") }}</li>
+                <!--<li ng-click="fullrefund()">返点全满</li>-->
+                <li ng-click="yuanjiaofen(1)">选择 元</li>
+                <li ng-click="yuanjiaofen(0.1)">选择 角</li>
+                <li ng-click="yuanjiaofen(0.01)">选择 分</li>
+                <li ng-click="volumeSwich()">声音 {{ volume ?'开':'关'}}</li>
+            </ul>
+        </div>
+
+        <a class="button button-icon icon ion-chevron-left" ng-click="goPick()"></a>
+
+        <h1 class="title" ng-click="poptypeshow = !poptypeshow">秒开时时彩</h1>
+        <!--<span ng-click="volumeSwich()"-->
+              <!--class="button button-icon icon  {{volume ? 'ion-android-volume-up':'ion-android-volume-off' }}"></span>-->
+        <a class="button button-icon icon ion-more" ng-click="menuShowHander($event)"></a>
+    </div>
+    <ion-content class="has-footer has-header bg-drawing" overflow-scroll="true">
+        <!--老虎机-->
+        <div class="slot">
+            <div class="slot-center">
+                <div class="slot-number">
+                    <div class="slot-light"></div>
+                    <ul class="number-list">
+                        <li><span style="margin-top: -6336px"></span></li>
+                        <li><span style="margin-top: -6336px"></span></li>
+                        <li><span style="margin-top: -6336px"></span></li>
+                        <li><span style="margin-top: -6336px"></span></li>
+                        <li><span style="margin-top: -6336px"></span></li>
+                    </ul>
+                </div>
+                <div class="drawbar" ng-click="gosubmit()">
+                    <span class="drawbar-up"></span>
+                    <span class="drawbar-down"></span>
+                </div>
+                <div class="big-win"></div>
+            </div>
+        </div>
+        <!--彩票方案操作-->
+        <div class="result-box">
+            <div class="result-operate">
+                <span class="ar-btn" ng-click="goPick()">自选号码</span>
+                <span class="ar-btn" ng-click="getrandomBalls()">机选一注</span>
+                <span class="ar-btn" ng-click="showConfirm()">清空</span>
+            </div>
+
+            <div class="result-list">
+                <div class="result-list-shadow"></div>
+                <ul class="scheme-list">
+                    <li class="scheme {{obj.isDanshi? 'scheme2':''}}" ng-repeat="(i,obj) in ballBucket track by initBacketList($index,obj)"
+                        ng-click="editLottory(obj)">
+                        <dl>
+                            <dt>{{obj.isDanshi?  obj.ballLabel :(obj.checkBallArray | filterArray:obj.type:obj)}}</dt>
+                            <dd>{{ obj.label }} {{ obj.count }}注x{{ obj.onePrice * obj.moneyUnit }}元</dd>
+                        </dl>
+                        <span class="scheme-multiple">{{ obj.totalMultiple }}倍</span>
+                        <span class="scheme-delete" ng-click="removeBucketItem(i,$event)"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ion-content>
+    <div class="extra-operate extraOperateShow">
+        <div class="extra-box">
+            <label>投</label>
+
+            <p>
+                <span class="op-plus"
+                      ng-click="minderMutl()">-</span>
+                <input type="tel" ng-model="globelMultipleData.multiple" id="globleMultipleChange">
+
+                <span class="op-minus" ng-click="globleMultipleChange(true)">+</span>
+            </p>
+            <label>倍</label>
+        </div>
+        <div class="extra-box">
+            <label>连开</label>
+
+            <p>
+                <span class="op-plus"
+                      ng-click="globelMultipleData.continuesBet <= 1?(globelMultipleData.continuesBet = 1): (globelMultipleData.continuesBet=globelMultipleData.continuesBet-1)">-</span>
+                <input type="tel" ng-model="globelMultipleData.continuesBet" id="changeContinuesBet">
+                <span class="op-minus"
+                      ng-click="changeContinuesBet(true)">+</span>
+            </p>
+            <label>期</label>
+        </div>
+    </div>
+
+
+    <div class="bar bar-footer bar-stable">
+        <div class="select-result">
+            <dl class="result-money confirm-money">
+                <dt>共{{ totalObject.totalCount }}注，<span>{{(totalMoney = totalObject.totalM * globelMultipleData.multiple| number:2)  }}元 </span>
+                </dt>
+                <dd>余额：{{serverGameConfig.balance}}元</dd>
+            </dl>
+        </div>
+        <div class="result-next result-confirm" ng-click="gosubmit(0)">投注</div>
+    </div>
+
+</ion-view>

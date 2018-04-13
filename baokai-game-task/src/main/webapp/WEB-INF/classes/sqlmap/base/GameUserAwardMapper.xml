@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameUserAward">
+	<resultMap id="GameUserAwardResult" type="com.winterframework.firefrog.game.dao.vo.GameUserAward">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameUserAwardColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERY_SERIES_CODE as lotteryid,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	ACTUAL_BONUS as actualBonus,
+	        	USER_AWARD_GROUP_ID as userAwardGroupId,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	USERID as userid,
+	        	TYPE as type
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameUserAward" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_USER_AWARD (
+	        	ID ,
+	        	LOTTERY_SERIES_CODE ,
+	        	GAME_GROUP_CODE ,
+	        	GAME_SET_CODE ,
+	        	BET_METHOD_CODE ,
+	        	ACTUAL_BONUS ,
+	        	USER_AWARD_GROUP_ID ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	USERID ,
+	        	TYPE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameGroupCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameSetCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betMethodCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{actualBonus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userAwardGroupId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{type,javaType=int,jdbcType=DECIMAL}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameUserAward">
+	    <![CDATA[
+	        UPDATE GAME_USER_AWARD SET
+		        LOTTERY_SERIES_CODE = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_GROUP_CODE = #{gameGroupCode,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_SET_CODE = #{gameSetCode,javaType=long,jdbcType=DECIMAL} ,
+		        BET_METHOD_CODE = #{betMethodCode,javaType=long,jdbcType=DECIMAL} ,
+		        ACTUAL_BONUS = #{actualBonus,javaType=long,jdbcType=DECIMAL} ,
+		        USER_AWARD_GROUP_ID = #{userAwardGroupId,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        TYPE = #{type,javaType=int,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_USER_AWARD where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameUserAwardResult" flushCache="false">
+			select <include refid="gameUserAwardColumns" />
+		    <![CDATA[
+			    from GAME_USER_AWARD 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameUserAwardResult" flushCache="false">
+			select <include refid="gameUserAwardColumns" />
+			    from GAME_USER_AWARD 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameUserAwardDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERY_SERIES_CODE in (#{lotteryid},(select Lottery_Series_Code from GAME_SERIES where LOTTERYID=  #{lotteryid} ) )
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameGroupCode)">
+				and GAME_GROUP_CODE = #{gameGroupCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameSetCode)">
+				and GAME_SET_CODE = #{gameSetCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betMethodCode)">
+				and BET_METHOD_CODE = #{betMethodCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(actualBonus)">
+				and ACTUAL_BONUS = #{actualBonus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userAwardGroupId)">
+				and USER_AWARD_GROUP_ID = #{userAwardGroupId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+			<if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameUserAwardResult"  flushCache="false">
+    	select <include refid="gameUserAwardColumns" />
+	    from GAME_USER_AWARD 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_USER_AWARD 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_USER_AWARD 
+		<include refid="gameUserAwardDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameUserAwardResult">
+    	select <include refid="gameUserAwardColumns" />
+	    from GAME_USER_AWARD 
+		<include refid="gameUserAwardDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<select id="selectActualBoundsByCondition" resultType="long" parameterType="hashmap">
+		select <include refid="gameUserAwardColumns" />
+		from GAME_USER_AWARD t 
+		where t.Lottery_Series_Code in (#{lotteryid},(select Lottery_Series_Code from GAME_SERIES where LOTTERYID=  #{lotteryid} ) )
+		and t.Game_Group_Code = #{gameGroupCode} 
+		and t.game_set_code = #{gameSetCode} 
+		and t.bet_method_code = #{betMethodCode} and t.userid=#{userId}
+	</select>
+	
+</mapper>

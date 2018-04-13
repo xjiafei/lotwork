@@ -1,0 +1,14 @@
+<?php
+/**
+ *  本文件用于mmc转发submit请求.
+ * User: richardgong
+ * Date: 06/12/15
+ * Time: 12:50
+ */
+
+//sleep(5);
+//echo '{"isSuccess":1,"balance":9960428.38,"data":{"projectId":"DSLCVrCPIe9f5","writeTime":"2016-01-11 10:40:36","result":"0,1,2,7,0","totalprice":0.2,"winMoney":0.66,"list":[{"code":"7","isWin":1,"methodName":"\u4e2d\u4e09_\u4e00\u7801\u4e0d\u5b9a\u4f4d","modes":"\u89d2","multiple":"1","num":1,"projectid":"DSLCVrCPIe9f5","totalPrice":0.2,"winMoney":0.66,"winNum":3,"writeTime":"2016-01-11 10:40:36"}]}}';
+//echo '{"isSuccess":1,"balance":9960417.11,"data":{"projectId":"DSLCVrSg611jo","writeTime":"2016-01-11 11:32:21","result":"6,9,1,1,3","totalprice":1,"winMoney":1.32,"list":[{"code":"1,3,5,7,9","isWin":1,"methodName":"\u4e2d\u4e09_\u4e00\u7801\u4e0d\u5b9a\u4f4d","modes":"\u89d2","multiple":"1","num":5,"projectid":"DSLCVrSg611jo","totalPrice":1,"winMoney":1.32,"winNum":3,"writeTime":"2016-01-11 11:32:21"}]}}';
+echo '{"isSuccess":1,"msg":"恭喜您投注成功","type":"success","balance":0,"data":{"handingcharge":null,"tplData":null,"blockadeInfo":null,"orderData":null,"overMutipleData":null,"projectId":"DSLCejGA9QRp5","writeTime":"2015-12-10 21:46:29","result":"7,2,6,5,2","totalprice":2504,"winMoney":180,"winNum":1,"orderId":null,"number":null,"list":[{"code":"02468,13579,02468,-,-","isWin":0,"methodName":"前三_复式","modes":"角","multiple":"1","num":125,"projectid":"DSLCejGA9QRp5","totalPrice":"25","winMoney":0,"winNum":0,"writeTime":"2015-12-10 21:46:29"},{"code":"01234,01234,01234,-,-","isWin":0,"methodName":"前三_复式","modes":"角","multiple":"1","num":125,"projectid":"DSLCejGA9QRp5","totalPrice":"250000","winMoney":0,"winNum":0,"writeTime":"2015-12-10 21:46:29"},{"code":"4,4,4,-,-","isWin":0,"methodName":"前三_复式","modes":"角","multiple":"1","num":1,"projectid":"DSLCejGA9QRp5","totalPrice":"2000","winMoney":0,"winNum":0,"writeTime":"2015-12-10 21:46:29"},{"code":"4,4,4,-,-","isWin":0,"methodName":"前三_复式","modes":"角","multiple":"1","num":1,"projectid":"DSLCejGA9QRp5","totalPrice":"2000","winMoney":0,"winNum":0,"writeTime":"2015-12-10 21:46:29"},{"code":"4,4,4,-,-","isWin":0,"methodName":"前三_复式","modes":"角","multiple":"1","num":1,"projectid":"DSLCejGA9QRp5","totalPrice":"2000","winMoney":0,"winNum":0,"writeTime":"2015-12-10 21:46:29"},{"code":"4,4,4,-,-","isWin":0,"methodName":"前三_复式","modes":"角","multiple":"1","num":1,"projectid":"DSLCejGA9QRp5","totalPrice":"2000","winMoney":0,"winNum":0,"writeTime":"2015-12-10 21:46:29"},{"code":"4,4,4,-,-","isWin":0,"methodName":"前三_复式","modes":"角","multiple":"1","num":1,"projectid":"DSLCejGA9QRp5","totalPrice":"2000","winMoney":0,"winNum":0,"writeTime":"2015-12-10 21:46:29"},{"code":"7,8,7,-,-","isWin":0,"methodName":"前三_复式","modes":"角","multiple":"1","num":1,"projectid":"DSLCejGA9QRp5","totalPrice":"2000","winMoney":0,"winNum":0,"writeTime":"2015-12-10 21:46:29"}]}}';
+
+?>

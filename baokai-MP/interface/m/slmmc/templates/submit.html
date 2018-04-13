@@ -1,0 +1,83 @@
+<ion-view view-title="秒开时时彩">
+    <div class="bar bar-header bar-stable">
+        <div class="ar-popmenu {{menuShow? '':'menuShow'}}">
+            <ul>
+                <!--<li ng-click="showRecord()">投注记录</li>--> 
+                <li style="color: red">当前模式 {{ moneyUnit==1?"元":(moneyUnit==0.01?"分":"角") }}</li>
+                <!--<li ng-click="fullrefund()">返点全满</li>-->
+                <li ng-click="yuanjiaofen(1)">选择 元</li>
+                <li ng-click="yuanjiaofen(0.1)">选择 角</li>
+                <li ng-click="yuanjiaofen(0.01)">选择 分</li>
+                <li ng-click="volumeSwich()">声音 {{ volume ?'开':'关'}}</li>
+            </ul>
+        </div>
+
+
+        <h1 class="title" ng-click="poptypeshow = !poptypeshow">秒开时时彩</h1>
+        <!--<span ng-click="volumeSwich()"-->
+              <!--class="button button-icon icon  {{volume ? 'ion-android-volume-up':'ion-android-volume-off' }}"></span>-->
+        <a class="button button-icon icon ion-more" ng-click="menuShowHander($event)"></a>
+    </div>
+    <ion-content class="has-footer has-header bg-drawing" overflow-scroll="true" id="drawingContent">
+        <!--老虎机-->
+        <div class="slot" id="slot">
+            <div class="slot-center">
+                <div class="slot-number slot-number2">
+                    <div class="slot-light"></div>
+                    <ul class="number-list">
+                        <li><span style="margin-top: -6336px"></span></li>
+                        <li><span style="margin-top: -6336px"></span></li>
+                        <li><span style="margin-top: -6336px"></span></li>
+                        <li><span style="margin-top: -6336px"></span></li>
+                        <li><span style="margin-top: -6336px"></span></li>
+                    </ul>
+                </div>
+                <!--<div class="drawbar">-->
+                    <!--<span class="drawbar-up"></span>-->
+                    <!--<span class="drawbar-down"></span>-->
+                <!--</div>-->
+                <div class="big-win"></div>
+            </div>
+        </div>
+        <!--开奖结果-->
+        <div class="drawing-box">
+            <div class="drawing-account">
+                <h3>第<span>{{ currentIndex }}/{{ globelMultipleData.continuesBet }}</span>期<strong> &nbsp;&nbsp;<b
+                        id="status"></b></strong></h3>
+
+                <h2>奖金：<span id="countUp" style="float: right"></span></h2>
+            </div>
+            <div class="drawing-list">
+                <div class="drawing-list-shadow"></div>
+                <ul class="wining-list">
+                    <!--<li class="wining wining-first isemptyWinning">-->
+                    <!--<div class="wining-bg"></div>-->
+                    <!--</li>-->
+
+                    <li class="wining repeated-item" ng-repeat="item in winnings">
+                        <div class="wining-bg">
+                            <dl>
+                                <dt>{{item.numbers}}</dt>
+                                <dd>{{item.type}}</dd>
+                            </dl>
+                            <span class="wining-money"><em>奖金</em><br><i>{{item.money}}</i></span>
+                        </div>
+                    </li>
+
+                    <li class="wining repeated-item" ng-repeat="item in isNoshow">
+                        <div class="wining-bg nowining">
+                            <span class="jiong">冏</span><span>这局没中,再来一局...</span>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </ion-content>
+    <div class="bar bar-footer bar-custom">
+        <div class="bar-btn backtodw" style=" display: none;" ng-click="backtDraw()">返回</div>
+        <span class="bar-btn" id="barBtn">加载中...</span>
+    </div>
+
+</ion-view>

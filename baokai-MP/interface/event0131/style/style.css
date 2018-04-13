@@ -1,0 +1,33 @@
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, th, td, em, form, input, select, textarea, button, header, section, aside, footer {
+    margin: 0;
+    padding: 0;
+}
+body {
+	position: relative;
+    background: #F5F5F5;
+    font-size: .24rem;
+	line-height:1.5;
+	color: #333;
+	width: 100%;
+    min-width: 320px;
+    overflow-x: hidden;
+	-webkit-text-size-adjust:none;
+}
+ul, li {list-style: none outside none;}
+img {border: medium none;}
+a{color: #287FC2;text-decoration: none}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+
+.main{
+    margin: 0 auto;
+    max-width: 640px;
+    background-color: #FFF
+}
+.banner img{display:block;width: 100%;}
+.content{padding:.2rem;}
+.content p{line-height:2;}
+.content ol{line-height:2;}
+.table{border-spacing:0;border-collapse:collapse;width:100%;max-width:100%;}
+.table th,.table td{padding:.08rem;border:1px solid #F79646;text-align:center;}
+.table tr:nth-of-type(odd){background-color:#FDE4D0;}

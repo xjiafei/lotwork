@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameIssueRuleLog">
+	<resultMap id="GameIssueRuleLogResult" type="com.winterframework.firefrog.game.dao.vo.GameIssueRuleLog">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameIssueRuleLogColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ISSUE_RULES_NAME as issueRulesName,
+	        	RULE_START_TIME as ruleStartTime,
+	        	RULE_END_TIME as ruleEndTime,
+	        	STATUS as status,
+	        	OPEN_AWARD_PERIOD as openAwardPeriod,
+	        	RULE_TYPE as ruleType,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueRuleLog" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		  <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_ISSUE_RULE_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_ISSUE_RULE_LOG (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_RULES_NAME ,
+	        	RULE_START_TIME ,
+	        	RULE_END_TIME ,
+	        	STATUS ,
+	        	OPEN_AWARD_PERIOD ,
+	        	RULE_TYPE ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueRulesName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ruleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{ruleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{openAwardPeriod,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ruleType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueRuleLog">
+	    <![CDATA[
+	        UPDATE GAME_ISSUE_RULE_LOG SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_RULES_NAME = #{issueRulesName,javaType=string,jdbcType=VARCHAR} ,
+		        RULE_START_TIME = #{ruleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        RULE_END_TIME = #{ruleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        OPEN_AWARD_PERIOD = #{openAwardPeriod,javaType=string,jdbcType=VARCHAR} ,
+		        RULE_TYPE = #{ruleType,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_ISSUE_RULE_LOG where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameIssueRuleLogResult" flushCache="false">
+			select <include refid="gameIssueRuleLogColumns" />
+		    <![CDATA[
+			    from GAME_ISSUE_RULE_LOG 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameIssueRuleLogResult" flushCache="false">
+			select <include refid="gameIssueRuleLogColumns" />
+			    from GAME_ISSUE_RULE_LOG 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameIssueRuleLogDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueRulesName)">
+				and ISSUE_RULES_NAME = #{issueRulesName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ruleStartTime)">
+				and RULE_START_TIME = #{ruleStartTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ruleEndTime)">
+				and RULE_END_TIME = #{ruleEndTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(openAwardPeriod)">
+				and OPEN_AWARD_PERIOD = #{openAwardPeriod}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ruleType)">
+				and RULE_TYPE = #{ruleType}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameIssueRuleLogResult"  flushCache="false">
+    	select <include refid="gameIssueRuleLogColumns" />
+	    from GAME_ISSUE_RULE_LOG 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_ISSUE_RULE_LOG 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_ISSUE_RULE_LOG 
+		<include refid="gameIssueRuleLogDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameIssueRuleLogResult">
+    	select <include refid="gameIssueRuleLogColumns" />
+	    from GAME_ISSUE_RULE_LOG 
+		<include refid="gameIssueRuleLogDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

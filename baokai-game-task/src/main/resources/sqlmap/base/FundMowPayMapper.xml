@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundMowPay">
+	<resultMap id="FundMowPayResult" type="com.winterframework.firefrog.fund.dao.vo.FundMowPay">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundMowPayColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	FF_COMPANY_ID as ffCompanyId,
+	        	FF_BANK_ID as ffBankId,
+	        	FF_AMOUNT as ffAmount,
+	        	FF_CARD_NUM as ffCardNum,
+	        	FF_CARD_NAME as ffCardName,
+	        	FF_ISSUE_BANK_NAME as ffIssueBankName,
+	        	FF_ISSUE_BANK_ADDRESS as ffIssueBankAddress,
+	        	FF_COMPANY_USER as ffCompanyUser,
+	        	MOWNECUM_ORDER_NUM as mownecumOrderNum,
+	        	MOW_STATUS as mowStatus,
+	        	MOW_TRANSACTION_CHARGE as mowTransactionCharge,
+	        	MOW_EXACT_TRANSACTION_CHARGE as mowExactTransactionCharge,
+	        	APPLY_TIME as applyTime,
+	        	RESPONSE_TIME as responseTime,
+	        	NOTICE_TIME as noticeTime,
+	        	TYPE as type,
+	        	EX_ID as exId,
+	        	EX_SN as exSn,
+	        	MOW_DETAIL as mowDetail,
+	        	MOW_AMOUNT as mowAmount,
+	        	CONFIRM_CNT as confirmCnt
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundMowPay" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_FUND_MOW_PAY_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_MOW_PAY (
+	        	ID ,
+	        	FF_COMPANY_ID ,
+	        	FF_BANK_ID ,
+	        	FF_AMOUNT ,
+	        	FF_CARD_NUM ,
+	        	FF_CARD_NAME ,
+	        	FF_ISSUE_BANK_NAME ,
+	        	FF_ISSUE_BANK_ADDRESS ,
+	        	FF_COMPANY_USER ,
+	        	MOWNECUM_ORDER_NUM ,
+	        	MOW_STATUS ,
+	        	MOW_TRANSACTION_CHARGE ,
+	        	MOW_EXACT_TRANSACTION_CHARGE ,
+	        	APPLY_TIME ,
+	        	RESPONSE_TIME ,
+	        	NOTICE_TIME ,
+	        	TYPE ,
+	        	EX_ID ,
+	        	EX_SN ,
+	        	MOW_DETAIL ,
+	        	MOW_AMOUNT 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{ffCompanyId,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ffBankId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{ffAmount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{ffCardNum,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ffCardName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ffIssueBankName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ffIssueBankAddress,javaType=string,jdbcType=VARCHAR} ,
+	        	#{ffCompanyUser,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mownecumOrderNum,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mowStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{mowTransactionCharge,javaType=long,jdbcType=DECIMAL} ,
+	        	#{mowExactTransactionCharge,javaType=long,jdbcType=DECIMAL} ,
+	        	#{applyTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{responseTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{noticeTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{type,javaType=long,jdbcType=DECIMAL} ,
+	        	#{exId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{exSn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mowDetail,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mowAmount,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.FundMowPay">
+	        UPDATE FUND_MOW_PAY
+	        <set>
+	        <if test="@Ognl@isNotEmpty(ffCompanyId)">
+		        FF_COMPANY_ID = #{ffCompanyId,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(ffBankId)">
+		        FF_BANK_ID = #{ffBankId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(ffAmount)">
+		        FF_AMOUNT = #{ffAmount,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(ffCardNum)">
+		        FF_CARD_NUM = #{ffCardNum,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(ffCardName)">
+		        FF_CARD_NAME = #{ffCardName,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(ffIssueBankName)">
+		        FF_ISSUE_BANK_NAME = #{ffIssueBankName,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(ffIssueBankAddress)">
+		        FF_ISSUE_BANK_ADDRESS = #{ffIssueBankAddress,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(ffCompanyUser)">
+		        FF_COMPANY_USER = #{ffCompanyUser,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mownecumOrderNum)">
+		        MOWNECUM_ORDER_NUM = #{mownecumOrderNum,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mowStatus)">
+		        MOW_STATUS = #{mowStatus,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mowTransactionCharge)">
+		        MOW_TRANSACTION_CHARGE = #{mowTransactionCharge,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mowExactTransactionCharge)">
+		        MOW_EXACT_TRANSACTION_CHARGE = #{mowExactTransactionCharge,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(applyTime)">
+		        APPLY_TIME = #{applyTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(responseTime)">
+		        RESPONSE_TIME = #{responseTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(noticeTime)">
+		        NOTICE_TIME = #{noticeTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(type)">
+		        TYPE = #{type,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(exId)">
+		        EX_ID = #{exId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mowDetail)">
+		        MOW_DETAIL = #{mowDetail,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mowAmount)">
+		        MOW_AMOUNT = #{mowAmount,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(confirmCnt)">
+		        CONFIRM_CNT = #{confirmCnt,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    </set>
+	        WHERE 
+		        EX_SN = #{exSn} 
+		        
+			<if test="@Ognl@isNotEmpty(mowStatus)">
+				<if test="mowStatus == 9">
+					AND MOW_STATUS IN (7, 8)
+				</if>
+			</if>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_MOW_PAY where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="FundMowPayResult" flushCache="false">
+			select <include refid="fundMowPayColumns" />
+		    <![CDATA[
+			    from FUND_MOW_PAY 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="FundMowPayResult" flushCache="false">
+			select <include refid="fundMowPayColumns" />
+			    from FUND_MOW_PAY 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>,				
+		</select>	
+
+	<sql id="fundMowPayDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ffCompanyId)">
+				and FF_COMPANY_ID = #{ffCompanyId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ffBankId)">
+				and FF_BANK_ID = #{ffBankId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ffAmount)">
+				and FF_AMOUNT = #{ffAmount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ffCardNum)">
+				and FF_CARD_NUM = #{ffCardNum}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ffCardName)">
+				and FF_CARD_NAME = #{ffCardName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ffIssueBankName)">
+				and FF_ISSUE_BANK_NAME = #{ffIssueBankName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ffIssueBankAddress)">
+				and FF_ISSUE_BANK_ADDRESS = #{ffIssueBankAddress}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ffCompanyUser)">
+				and FF_COMPANY_USER = #{ffCompanyUser}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mownecumOrderNum)">
+				and MOWNECUM_ORDER_NUM = #{mownecumOrderNum}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mowStatus)">
+				and MOW_STATUS = #{mowStatus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mowTransactionCharge)">
+				and MOW_TRANSACTION_CHARGE = #{mowTransactionCharge}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mowExactTransactionCharge)">
+				and MOW_EXACT_TRANSACTION_CHARGE = #{mowExactTransactionCharge}
+			</if>
+	       <if test="@Ognl@isNotEmpty(applyTime)">
+				and APPLY_TIME = #{applyTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(responseTime)">
+				and RESPONSE_TIME = #{responseTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(noticeTime)">
+				and NOTICE_TIME = #{noticeTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(type)">
+				and TYPE = #{type}
+			</if>
+	       <if test="@Ognl@isNotEmpty(exId)">
+				and EX_ID = #{exId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(exSn)">
+				and EX_SN = #{exSn}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mowDetail)">
+				and MOW_DETAIL = #{mowDetail}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mowAmount)">
+				and MOW_AMOUNT = #{mowAmount}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="FundMowPayResult"  flushCache="false">
+    	select <include refid="fundMowPayColumns" />
+	    from FUND_MOW_PAY 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from FUND_MOW_PAY 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from FUND_MOW_PAY 
+		<include refid="fundMowPayDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="FundMowPayResult">
+    	select <include refid="fundMowPayColumns" />
+	    from FUND_MOW_PAY 
+		<include refid="fundMowPayDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="queryThPayOrder" resultMap="FundMowPayResult">
+    	select <include refid="fundMowPayColumns" />
+    	<![CDATA[
+			from FUND_MOW_PAY 
+			where  MOW_STATUS = ${status}
+		]]>
+    </select>
+
+	
+</mapper>

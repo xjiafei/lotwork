@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameTrendTask">
+	<resultMap id="GameTrendTaskResult" type="com.winterframework.firefrog.game.dao.vo.GameTrendTask">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="GameTrendTaskColumns">
+       	ID as id,
+       	LOTTERY_ID as lotteryId,
+       	ISSUE_CODE as issueCode,
+       	DRAW_NUMBER as drawNumber,
+       	REMARK as remark,
+       	USER_ID as userId,
+       	STATUS as status,
+       	CREATE_TIME as createTime,
+       	EXEC_TIME as execTime,
+       	UPDATE_TIME as updateTime
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameTrendTask" 
+			useGeneratedKeys="true" keyProperty="id" flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT   SEQ_GAME_TREND_TASK_ID.Nextval from dual
+		</selectKey>
+	       INSERT INTO GAME_TREND_TASK (
+	       	ID ,
+	       	LOTTERY_ID ,
+	       	ISSUE_CODE ,
+	       	DRAW_NUMBER ,
+	       	REMARK,
+	       	USER_ID,
+	       	STATUS,
+	       	CREATE_TIME
+	       ) VALUES (
+	       	#{id,javaType=long,jdbcType=DECIMAL} ,
+	       	#{lotteryId,javaType=long,jdbcType=DECIMAL} ,
+	       	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	       	#{drawNumber,javaType=string,jdbcType=VARCHAR} ,
+	       	#{remark,javaType=string,jdbcType=VARCHAR} ,
+	       	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	       	#{status,javaType=integer,jdbcType=DECIMAL} ,
+	       	#{createTime,javaType=date,jdbcType=TIMESTAMP}
+	       )
+		</insert>
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameTrendTask">
+	        UPDATE GAME_TREND_TASK SET
+		        LOTTERY_ID = #{lotteryId,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        DRAW_NUMBER = #{drawNumber,javaType=string,jdbcType=VARCHAR} ,
+		        REMARK = #{remark,javaType=string,jdbcType=VARCHAR} ,
+		        USER_ID = #{userId,javaType=long,jdbcType=DECIMAL},
+		        STATUS = #{status,javaType=integer,jdbcType=DECIMAL},
+		        EXEC_TIME = #{execTime,javaType=date,jdbcType=TIMESTAMP},
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP}
+	        WHERE 
+		        ID = #{id}
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	        delete from GAME_TREND_TASK where ID = #{id} 
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameTrendTaskResult" flushCache="false">
+			select <include refid="GameTrendTaskColumns" />
+		    from GAME_TREND_TASK 
+	        where ID = #{id}
+		</select>	
+		<select id="getByLotteryIdAndIssueCode" parameterType="hashmap" resultMap="GameTrendTaskResult" flushCache="false">
+			select <include refid="GameTrendTaskColumns" />
+			  from GAME_TREND_TASK 
+		     where LOTTERY_ID = #{lotteryId} and ISSUE_CODE= #{issueCode}
+		</select> 
+</mapper>

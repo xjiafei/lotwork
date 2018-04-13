@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameTransactionFund">
+	<resultMap id="GameTransactionFundResult" type="com.winterframework.firefrog.game.dao.vo.GameTransactionFund">
+	</resultMap>
+	
+	<resultMap id="GameReportCountVo" type="com.winterframework.firefrog.game.dao.vo.GameReportCountVo">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameTransactionFundColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USERID as userid,
+	        	AMOUNT as amount,
+	        	FUND_TYPE as fundType,
+	        	STATUS as status,
+	        	OPERATORID as operatorid,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	TID as tid,
+	        	REASON as reason,
+	        	SYMBOL as symbol,
+	        	ORDER_CODE as orderCode,
+	        	CHECK_TYPE as checkType,
+	        	PLAN_CODE as planCode,
+	        	LOTTERYID as lotteryId,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	BALANCE as balance
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameTransactionFund" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_TRANSACTION_FUND_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_TRANSACTION_FUND (
+	        	ID ,
+	        	USERID ,
+	        	AMOUNT ,
+	        	FUND_TYPE ,
+	        	STATUS ,
+	        	OPERATORID ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	TID ,
+	        	REASON,
+	        	SYMBOL ,
+	        	ORDER_CODE ,
+	        	CHECK_TYPE ,
+	        	PLAN_CODE ,
+	        	LOTTERYID ,
+	        	ISSUE_CODE ,
+	        	WEB_ISSUE_CODE,
+	        	BALANCE
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{amount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{fundType,javaType=string,jdbcType=VARCHAR} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{operatorid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{tid,javaType=string,jdbcType=VARCHAR} ,
+	        	#{reason,javaType=string,jdbcType=VARCHAR} ,
+	        	#{symbol,javaType=string,jdbcType=VARCHAR} ,
+	        	#{orderCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{checkType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{planCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{lotteryId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR},
+	        	#{balance,javaType=long,jdbcType=VARCHAR}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameTransactionFund">
+	    <![CDATA[
+	        UPDATE GAME_TRANSACTION_FUND SET
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        AMOUNT = #{amount,javaType=long,jdbcType=DECIMAL} ,
+		        FUND_TYPE = #{fundType,javaType=string,jdbcType=VARCHAR} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        OPERATORID = #{operatorid,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=object,jdbcType=TIMESTAMP} ,
+		        TID = #{tid,javaType=string,jdbcType=VARCHAR} ,
+		        REASON = #{reason,javaType=string,jdbcType=VARCHAR} ,
+	        	SYMBOL = #{symbol,javaType=string,jdbcType=VARCHAR} ,
+	        	ORDER_CODE = #{orderCode,javaType=string,jdbcType=VARCHAR} ,
+	        	CHECK_TYPE = #{checkType,javaType=long,jdbcType=DECIMAL} ,
+	        	PLAN_CODE = #{planCode,javaType=string,jdbcType=VARCHAR} ,
+	        	LOTTERYID = #{lotteryId,javaType=long,jdbcType=DECIMAL} ,
+	        	ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR},
+	        	BALANCE = #{balance,javaType=long,jdbcType=VARCHAR}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_TRANSACTION_FUND where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameTransactionFundResult" flushCache="false">
+			select <include refid="gameTransactionFundColumns" />
+		    <![CDATA[
+			    from GAME_TRANSACTION_FUND 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameTransactionFundResult" flushCache="false">
+			select <include refid="gameTransactionFundColumns" />
+			    from GAME_TRANSACTION_FUND 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameTransactionFundDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <include refid="gameTransactionFundDynamicField" />
+		</where>
+	</sql>
+	
+	<sql id="gameTransactionFundDynamicField">
+		
+		<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(amount)">
+				and AMOUNT = #{amount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(fundType)">
+				and FUND_TYPE = #{fundType}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(operatorid)">
+				and OPERATORID = #{operatorid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	        <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(tid)">
+				and TID = #{tid}
+			</if>
+			<if test="@Ognl@isNotEmpty(reason)">
+				and REASON in 
+				 <foreach item="reason" index="index" collection="reason" open="(" separator="," close=")">
+					#{reason}
+				</foreach>
+			</if>
+			<if test="@Ognl@isNotEmpty(symbol)">
+				and SYMBOL = #{symbol}
+			</if>
+			<if test="@Ognl@isNotEmpty(orderCode)">
+				and ORDER_CODE = #{orderCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(checkType)">
+				and CHECK_TYPE = #{checkType}
+			</if>
+			<if test="@Ognl@isNotEmpty(planCode)">
+				and PLAN_CODE = #{planCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryId)">
+				and LOTTERYID = #{lotteryId}
+			</if>
+			<if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(webIssueCode)">
+				and WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+	</sql>
+	
+	<select id="getAllTransaction" resultMap="GameTransactionFundResult"  flushCache="false">
+    	select <include refid="gameTransactionFundColumns" />
+	    from GAME_TRANSACTION_FUND 
+		<include refid="gameTransactionFundDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getPageTransaction" resultMap="GameTransactionFundResult"  flushCache="false">
+    	select 
+    			TID as tid,				
+	        	OPERATORID as userId,
+	        	(select ACCOUNT from USER_CUSTOMER r where r.ID=f.OPERATORID) as operatorName,
+	        	AMOUNT as amount,
+	        	FUND_TYPE as fundType,	
+	        	REASON as reason,	        	
+	        	CREATE_TIME as createTime,
+	        	ORDER_CODE as orderCode,	        	
+	        	PLAN_CODE as planCode,
+	        	LOTTERYID as lotteryId,
+	        	(select LOTTERY_NAME from GAME_SERIES g where g.LOTTERYID=f.LOTTERYID)  as lotteryName,
+				STATUS as status	
+	    from GAME_TRANSACTION_FUND f
+		<include refid="getPageTransactionWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+    <select id="getPageTransactionCount" resultType="long">
+        select count(*) from GAME_TRANSACTION_FUND f
+       <include refid="getPageTransactionWhere" />
+    </select>
+    
+    <sql id = "getPageTransactionWhere">
+    	where 1=1 
+	    <if test="@Ognl@isNotEmpty(startTime)">
+	    	<![CDATA[
+			AND CREATE_TIME < to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss')
+			]]>	
+		</if>
+	    <if test="@Ognl@isNotEmpty(endTime)">
+	    	<![CDATA[
+			AND CREATE_TIME > to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss')
+			]]>	
+		</if>
+		<if test="@Ognl@isNotEmpty(lotteryName)">
+			AND (select LOTTERY_NAME from GAME_SERIES  where LOTTERYID=f.LOTTERYID) in
+			<foreach item="lotteryName" index="index" collection="lotteryName" open="("
+			separator="," close=")">
+			#{lotteryName}
+			</foreach>
+		</if>
+		<if test="@Ognl@isNotEmpty(userName)">
+			<if test="@Ognl@isNotEmpty(containSub)">
+					<if test="containSub==1">
+						and (select USER_CHAIN from USER_CUSTOMER where ID=f.OPERATORID) like (select concat(USER_CHAIN,'%') from USER_CUSTOMER where account=#{userName})
+					</if>
+					<if test="containSub==0">
+						AND (select ACCOUNT from USER_CUSTOMER where ID=f.OPERATORID) = #{userName}
+					</if>
+			</if>
+		</if>	
+		<if test="@Ognl@isNotEmpty(isZhuiHao)">
+	    	<![CDATA[
+			AND PLAN_CODE is not null
+			]]>	
+		</if>
+		<if test="@Ognl@isNotEmpty(isTouzhu)">
+	    	<![CDATA[
+			AND PLAN_CODE is null
+			]]>	
+		</if>	
+		<include refid="gameTransactionFundDynamicField" />
+    	
+    </sql>
+    
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_TRANSACTION_FUND 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_TRANSACTION_FUND 
+		<include refid="gameTransactionFundDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameTransactionFundResult">
+    	select <include refid="gameTransactionFundColumns" />
+	    from GAME_TRANSACTION_FUND 
+		<include refid="gameTransactionFundDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<!--
+    	摘要分类统计
+    -->
+    <select id="getFundCountGroup" resultMap="GameReportCountVo">
+    	SELECT
+    	FUND_TYPE as fund,
+    	sum(AMOUNT) as amoutSum
+	    FROM GAME_TRANSACTION_FUND 
+	    WHERE LOTTERYID = #{lotteryId}
+		AND ISSUE_CODE = #{issueCode}
+		group by FUND_TYPE 
+    </select>
+</mapper>

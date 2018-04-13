@@ -1,0 +1,136 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="false">
+	<bean id="lottery99101" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- ssc的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.SSC}" />
+	</bean>
+	
+	<bean id="lottery99102" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- ssc的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.JXSSC}" />
+	</bean>
+	
+	<bean id="lottery99103" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- ssc的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.XJSSC}" />
+	</bean>
+	
+	<bean id="lottery99104" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- ssc的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.TJSSC}" />
+	</bean>
+	
+	<bean id="lottery99105" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- ssc的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.HLJSSC}" />
+	</bean>
+	
+	<bean id="lottery99106" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- ssc的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.LLSSC}" />
+	</bean>
+	
+	<bean id="lottery99111" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- ssc的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.JLFFC}" />
+	</bean>
+	<bean id="lottery99114" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- ssc的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.TXFFC}" />
+	</bean>
+	
+	<bean id="lottery99112" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- ssc的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.SLMMC}" />
+	</bean>
+	
+	<bean id="lottery99201" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- 北京快乐8的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumbjkl8template"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.BJKL8}" />
+	</bean>
+	
+		<!-- 山东11选5 -->
+	<bean id="lottery99301" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- 模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumtemplate_115"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.SD115}" />
+	</bean>
+	
+	<!-- 江西11选5 -->
+	<bean id="lottery99302" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- 模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumtemplate_115"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.JX115}" />
+	</bean>
+	
+	<!-- 广东11选5 -->
+	<bean id="lottery99303" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- 模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumtemplate_115"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.GD115}" />
+	</bean>
+	
+	<!-- 重庆11选5 -->
+	<bean id="lottery99304" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- 模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumtemplate_115"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.CQ115}" />
+	</bean>
+	
+	<!-- ll 11选5 -->
+	<bean id="lottery99305" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- 模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumtemplate_115"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.LL115}" />
+	</bean>
+	
+	<!-- sl 11选5 -->
+	<bean id="lottery99306" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- 模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumtemplate_115"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.SL115}" />
+	</bean>
+	<!-- js 11选5 -->
+	<bean id="lottery99307" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- 模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumtemplate_115"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.JS115}" />
+	</bean>
+	<!-- 六合彩 -->
+	<bean id="lottery99701" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- 模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumtemplate_lhc"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.LHC}" />
+	</bean>
+</beans>

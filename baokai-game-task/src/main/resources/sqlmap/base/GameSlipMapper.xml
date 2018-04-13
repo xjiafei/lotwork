@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameSlip">
+	<resultMap id="GameSlipResult" type="com.winterframework.firefrog.game.dao.vo.GameSlip">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameSlipColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ORDERID as orderid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	LOTTERYID as lotteryid,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	MONEY_MODE as moneyMode,
+	        	FILE_MODE as fileMode,
+	        	TOTBETS as totbets,
+	        	TOTAMOUNT as totamount,
+	        	MULTIPLE as multiple,
+	        	BET_DETAIL as betDetail,
+	        	EVALUATE_WIN as evaluateWin,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	MUTI_AWARD as mutiAward,
+	        	SINGLE_WIN as singleWin,
+	        	SINGLE_WIN_DOWN as singleWinDown,
+	        	AWARD_MODE as awardMode,
+	        	RET_POINT as retPoint,
+	        	RET_AWARD as retAward,
+	        	PACKAGE_ITEM_ID as packageItemId,
+	        	DIAMOND_AMOUNT as diamondAmount,
+	        	DIAMOND_WIN as diamondWin
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameSlip" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_SLIP_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_SLIP (
+	        	ID,
+	        	ORDERID,
+	        	USERID,
+	        	ISSUE_CODE,
+	        	LOTTERYID,
+	        	BET_TYPE_CODE,
+	        	MONEY_MODE,
+	        	FILE_MODE,
+	        	TOTBETS,
+	        	TOTAMOUNT,
+	        	MULTIPLE,
+	        	BET_DETAIL,
+	        	EVALUATE_WIN,
+	        	STATUS,
+	        	CREATE_TIME,
+	        	MUTI_AWARD,
+	        	SINGLE_WIN,
+	        	SINGLE_WIN_DOWN,
+	        	AWARD_MODE,
+	        	WIN_NUMBER,
+	        	RET_POINT,
+	        	RET_AWARD,
+	        	PACKAGE_ITEM_ID
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{orderid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{moneyMode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{fileMode,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{totbets,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totamount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{multiple,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betDetail,javaType=string,jdbcType=VARCHAR} ,
+	        	#{evaluateWin,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{mutiAward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{singleWin,javaType=long,jdbcType=DECIMAL} ,
+	        	#{singleWinDown,javaType=long,jdbcType=DECIMAL} ,
+	        	#{awardMode,javaType=integer,jdbcType=DECIMAL},
+	        	#{winNumber,javaType=long,jdbcType=DECIMAL},
+				#{retPoint,javaType=long,jdbcType=DECIMAL},
+	        	#{retAward,javaType=long,jdbcType=DECIMAL},
+	        	#{packageItemId,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameSlip">
+	    <![CDATA[
+	        UPDATE GAME_SLIP SET
+		        ORDERID = #{orderid,javaType=long,jdbcType=DECIMAL} ,
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        BET_TYPE_CODE = #{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+		        MONEY_MODE = #{moneyMode,javaType=long,jdbcType=DECIMAL} ,
+		        FILE_MODE = #{fileMode,javaType=integer,jdbcType=DECIMAL} ,
+		        TOTBETS = #{totbets,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAMOUNT = #{totamount,javaType=long,jdbcType=DECIMAL} ,
+		        MULTIPLE = #{multiple,javaType=long,jdbcType=DECIMAL} ,
+		        BET_DETAIL = #{betDetail,javaType=string,jdbcType=VARCHAR} ,
+		        EVALUATE_WIN = #{evaluateWin,javaType=long,jdbcType=DECIMAL} ,
+		        STATUS = #{status,javaType=integer,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        MUTI_AWARD = #{mutiAward,javaType=long,jdbcType=DECIMAL} ,
+		        SINGLE_WIN = #{singleWin,javaType=long,jdbcType=DECIMAL} ,
+		        SINGLE_WIN_DOWN = #{singleWinDown,javaType=long,jdbcType=DECIMAL} ,
+		        WIN_NUMBER = #{winNumber,javaType=long,jdbcType=DECIMAL},
+		        WIN_LEVEL = #{winLevel,javaType=long,jdbcType=DECIMAL},
+		        AWARD_MODE=#{awardMode,javaType=integer,jdbcType=DECIMAL},
+		        RET_POINT=#{retPoint,javaType=long,jdbcType=DECIMAL},
+	        	RET_AWARD=#{retAward,javaType=long,jdbcType=DECIMAL},
+	        	PACKAGE_ITEM_ID=#{packageItemId,javaType=long,jdbcType=DECIMAL}
+	    ]]>
+	    		<if test="@Ognl@isNotEmpty(diamondWin)">
+					,DIAMOND_WIN = #{diamondWin,javaType=long,jdbcType=DECIMAL}
+				</if>
+		<![CDATA[
+	        WHERE 
+		        ID = #{id} 
+		 ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_SLIP where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <update id="updateGameOrderDetailByOrderId" parameterType="hashMap">
+			UPDATE GAME_SLIP SET
+				STATUS = #{status}
+			WHERE
+			   ORDERID = #{orderId} 
+			   AND STATUS = 1
+			   <if test="@Ognl@isNotEmpty(issueCode)">
+					and ISSUE_CODE = #{issueCode}
+				</if>
+		</update>
+		
+		<update id="updateGameSlipByOrderId" parameterType="hashmap">
+			UPDATE GAME_SLIP SET
+				STATUS = #{status}
+			WHERE
+				ORDERID = #{orderId}
+		</update>
+		
+		<update id="revocationGameSlipsByOrderId" parameterType="hashmap">
+			UPDATE GAME_SLIP SET
+				STATUS = #{status},
+				CANCEL_TIME = #{cancelTime},
+				CANCEL_MODES = #{cancelModes}
+			WHERE
+				ORDERID = #{orderId}
+		</update>
+		
+	    <select id="getById" parameterType="long" resultMap="GameSlipResult" flushCache="false">
+			select <include refid="gameSlipColumns" />
+		    <![CDATA[
+			    from GAME_SLIP 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameSlipResult" flushCache="false">
+			select <include refid="gameSlipColumns" />
+			    from GAME_SLIP 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameSlipDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orderid)">
+				and ORDERID = #{orderid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(betTypeCode)">
+				and BET_TYPE_CODE = #{betTypeCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(moneyMode)">
+				and MONEY_MODE = #{moneyMode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totbets)">
+				and TOTBETS = #{totbets}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totamount)">
+				and TOTAMOUNT = #{totamount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(multiple)">
+				and MULTIPLE = #{multiple}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betDetail)">
+				and BET_DETAIL = #{betDetail}
+			</if>
+	       <if test="@Ognl@isNotEmpty(retPoints)">
+				and RET_POINTS = #{retPoints}
+			</if>
+	       <if test="@Ognl@isNotEmpty(evaluateWin)">
+				and EVALUATE_WIN = #{evaluateWin}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mutiAward)">
+				and MUTI_AWARD = #{mutiAward}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameSlipResult"  flushCache="false">
+    	select <include refid="gameSlipColumns" />
+	    from GAME_SLIP 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_SLIP 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_SLIP 
+		<include refid="gameSlipDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameSlipResult">
+    	select <include refid="gameSlipColumns" />
+	    from GAME_SLIP 
+		<include refid="gameSlipDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<!-- 根据订单ID查询注单列表 -->
+	<select id="getSlipsByOrderId" parameterType="long" resultMap="GameSlipResult" flushCache="false">
+			select 
+			 	ID as id,
+	        	ORDERID as orderid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	LOTTERYID as lotteryid,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	MONEY_MODE as moneyMode,
+	        	TOTBETS as totbets,
+	        	TOTAMOUNT as totamount,
+	        	MULTIPLE as multiple,
+	        	BET_DETAIL as betDetail,
+	        	EVALUATE_WIN as evaluateWin,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	MUTI_AWARD as mutiAward,
+	        	SINGLE_WIN as singleWin,
+	        	SINGLE_WIN_DOWN as singleWinDown,
+	        	WIN_NUMBER as winNumber,
+	        	s.file_mode as fileMode,
+				AWARD_MODE as awardMode,
+				RET_POINT as retPoint,
+				RET_AWARD as retAward,
+				PACKAGE_ITEM_ID as packageItemId,
+				DIAMOND_AMOUNT as diamondAmount
+		    <![CDATA[
+			    from GAME_SLIP s
+		        where 
+		        ORDERID = #{orderId} 
+		    ]]>
+		</select>	
+		
+		
+	<!-- 注单记录运营 -->
+	<resultMap id="slipEntityResult" type="com.winterframework.firefrog.game.entity.GameSlipOperationsEntity"></resultMap>
+	
+	<select id="querySlipOperationsListByOrderID" parameterType="long" resultMap="slipEntityResult">
+		select 
+    		a.ID as slipid,
+    		a.BET_TYPE_CODE as betTypeCode,
+    		a.TOTBETS as totbets,
+    		a.MULTIPLE as multiple,
+    		a.TOTAMOUNT as totamount,
+    		a.MONEY_MODE as moneyMode,
+    		a.STATUS as status,
+    		b.ACTUAL_BONUS as award,
+    		c.WINS_RATIO as winsRadio,
+    		a.FILE_MODE as fileMode,
+    		a.BET_DETAIL as betDetail
+    	from (select AA.* from 
+				GAME_SLIP aa,GAME_ORDER cc where AA.ORDERID=CC."ID" and AA.ORDERID=#{orderid}) a 
+   			left join GAME_AWARD b 
+					on a.LOTTERYID=b.LOTTERYID
+   					and a.BET_TYPE_CODE=b.BET_TYPE_CODE
+  			left join GAME_ORDER_WIN c 
+  				on a.ORDERID=c.ORDERID
+	</select>
+	
+	<select id="querySlipOperationsListByPlanID" parameterType="long" resultMap="slipEntityResult">
+		select 
+			a.ID              as slipid,
+       		a.BET_TYPE_CODE as betTypeCode,
+       		a.TOTBETS         as totbets,
+       		a.MULTIPLE        as multiple,
+       		a.TOTAMOUNT       as totamount,
+       		a.MONEY_MODE      as moneyMode,
+       		a.STATUS          as status,
+       		b.ACTUAL_BONUS    as award,
+       		c.WINS_RATIO      as winsRadio,
+       		a.FILE_MODE 		as fileMode,
+       		a.BET_DETAIL      as betDetail
+  		from (select * from GAME_PLAN where ID=#{planid}) t1
+  		left join GAME_ORDER t2 
+  			on t1.id=t2.parentid
+ 		left join (select AA.* from 
+				GAME_SLIP aa,GAME_ORDER cc where AA.ORDERID=CC."ID")a 
+ 			on a.orderid=t2.id
+  		left join GAME_AWARD b 
+			on a.LOTTERYID=b.LOTTERYID
+			and a.BET_TYPE_CODE=b.BET_TYPE_CODE
+  		left join GAME_ORDER_WIN c
+    		on a.ORDERID = c.ORDERID
+	</select>
+	
+	<select id="querySlipByLotteryIdAndIssueCode" parameterType="hashMap" resultMap="GameSlipResult">
+	   select <include refid="gameSlipColumns" /> 
+	     from GAME_SLIP 
+        where LOTTERYID = #{lotteryId}
+          AND ISSUE_CODE = #{issueCode}  
+	</select>
+	
+	<select id="querySlipsByPlanId" parameterType="long" resultMap="GameSlipResult">
+		select <include refid="gameSlipColumns" />
+		    <![CDATA[
+			    from GAME_SLIP 
+		        WHERE orderid IN (
+		        select o.id 
+		        	 from game_order o where o.parentid = #{planId})
+                      order by id  
+		    ]]>
+	</select>
+	
+	<delete id="delSlipByOrderId" parameterType="hashMap">
+	    delete from GAME_SLIP where orderid=#{orderId} and lotteryid=#{lotteryId}
+	</delete>
+	<update id="updateGameOrderDetailCancalByOrderId" parameterType="hashmap">
+	    UPDATE GAME_SLIP SET
+	    STATUS = #{status}
+	    where orderid=#{orderId}
+	    and issueCode = #{issueCode}
+	</update>
+	<update id="undoGameSlip" parameterType="hashmap">
+		update GAME_SLIP set EVALUATE_WIN=(case when MUTI_AWARD>0 then null else EVALUATE_WIN end),STATUS=#{status} 
+		<where>
+			<if test="@Ognl@isNotEmpty(lotteryId)">
+				and LOTTERYID=#{lotteryId} 
+			</if>
+			<if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE=#{issueCode} 
+			</if>
+			<if test="@Ognl@isNotEmpty(saleTime)">
+				and ORDERID in(select id from GAME_ORDER go where go.SALE_TIME >#{saleTime} and LOTTERYID=#{lotteryId} and ISSUE_CODE=#{issueCode}  )
+			</if>
+		</where>
+	</update> 
+	<update id="changeStatus" parameterType="hashmap">
+		 update GAME_SLIP
+		    set STATUS = #{toStatus}
+		  where orderid = #{orderId}
+		    and status = #{fromStatus}
+	</update>
+</mapper>

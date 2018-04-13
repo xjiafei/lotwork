@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundChargeExceptionVO">
+	<resultMap id="FundChargeExceptionResult" type="com.winterframework.firefrog.fund.dao.vo.FundChargeExceptionVO">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundChargeExceptionColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USER_ID as userId,
+	        	BANK_ID as bankId,
+	        	CARD_NUMBER as cardNumber,
+	        	RCV_CARD_NUMBER as rcvCardNumber,
+	        	RCV_ACC_NAME as rcvAccName,
+	        	RCV_EMAIL as rcvEmail,
+	        	REAL_CHARGE_AMT as realChargeAmt,
+	        	MC_NOTICE_TIME as mcNoticeTime,
+	        	STATUS as status,
+	        	MEMO as memo,
+	        	MC_FEE as mcFee,
+	        	SN as sn,
+	        	MC_CHANNEL as mcChannel,
+	        	MC_AREA as mcArea,
+	        	MC_SN as mcSn,
+	        	MC_BANK_FEE as mcBankFee,
+	        	CARD_ACCT as cardAcct,
+	        	ATTACHMENT as attachment,
+	        	BANK_NAME as bankName,
+	        	BANK_ADDR as bankAddr,
+	        	APPR_MEMO as apprMemo,
+	        	MC_EXACT_TIME as mcExactTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeExceptionVO" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        FUND_CHARGE_EXCEPTION (
+	        	ID ,
+	        	USER_ID ,
+	        	BANK_ID ,
+	        	CARD_NUMBER ,
+	        	RCV_CARD_NUMBER ,
+	        	RCV_ACC_NAME ,
+	        	RCV_EMAIL ,
+	        	REAL_CHARGE_AMT ,
+	        	MC_NOTICE_TIME ,
+	        	STATUS ,
+	        	MEMO ,
+	        	MC_FEE ,
+	        	SN ,
+	        	MC_CHANNEL ,
+	        	MC_AREA ,
+	        	MC_SN ,
+	        	MC_BANK_FEE ,
+	        	CARD_ACCT ,
+	        	ATTACHMENT ,
+	        	BANK_NAME ,
+	        	BANK_ADDR ,
+	        	APPR_MEMO ,
+	        	MC_EXACT_TIME
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bankId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{cardNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	#{rcvCardNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	#{rcvAccName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{rcvEmail,javaType=string,jdbcType=VARCHAR} ,
+	        	#{realChargeAmt,javaType=long,jdbcType=DECIMAL} ,
+	        	#{mcNoticeTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcFee,javaType=long,jdbcType=DECIMAL} ,
+	        	#{sn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcChannel,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcArea,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcSn,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcBankFee,javaType=long,jdbcType=DECIMAL} ,
+	        	#{cardAcct,javaType=string,jdbcType=VARCHAR} ,
+	        	#{attachment,javaType=string,jdbcType=VARCHAR} ,
+	        	#{bankName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{bankAddr,javaType=string,jdbcType=VARCHAR} ,
+	        	#{apprMemo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcExactTime,javaType=date,jdbcType=TIMESTAMP}
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeExceptionVO">
+	        UPDATE FUND_CHARGE_EXCEPTION SET
+	        <if test="@Ognl@isNotEmpty(userId)">
+		        USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(bankId)">
+		        BANK_ID = #{bankId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(cardNumber)">
+		        CARD_NUMBER = #{cardNumber,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcvCardNumber)">
+		        RCV_CARD_NUMBER = #{rcvCardNumber,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcvAccName)">
+		        RCV_ACC_NAME = #{rcvAccName,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcvEmail)">
+		        RCV_EMAIL = #{rcvEmail,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(realChargeAmt)">
+		        REAL_CHARGE_AMT = #{realChargeAmt,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcNoticeTime)">
+		        MC_NOTICE_TIME = #{mcNoticeTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(status)">
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(memo)">
+		        MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcFee)">
+		        MC_FEE = #{mcFee,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(sn)">
+		        SN = #{sn,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcChannel)">
+		        MC_CHANNEL = #{mcChannel,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcArea)">
+		        MC_AREA = #{mcArea,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcBankFee)">
+		        MC_BANK_FEE = #{mcBankFee,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(cardAcct)">
+		        CARD_ACCT = #{cardAcct,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(attachment)">
+		        ATTACHMENT = #{attachment,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(bankName)">
+		        BANK_NAME = #{bankName,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(bankAddr)">
+		        BANK_ADDR = #{bankAddr,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcExactTime)">
+		        MC_EXACT_TIME = #{mcExactTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcSn)">
+		        MC_SN = #{mcSn,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(apprMemo)">
+		        APPR_MEMO = #{apprMemo,javaType=string,jdbcType=VARCHAR}
+		    </if>
+	        WHERE 
+		        ID = #{id} 
+		</update>
+		
+		<update id="updateByMcSn" parameterType="com.winterframework.firefrog.fund.dao.vo.FundChargeExceptionVO">
+	        UPDATE FUND_CHARGE_EXCEPTION SET
+	        <if test="@Ognl@isNotEmpty(userId)">
+		        USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(bankId)">
+		        BANK_ID = #{bankId,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(cardNumber)">
+		        CARD_NUMBER = #{cardNumber,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcvCardNumber)">
+		        RCV_CARD_NUMBER = #{rcvCardNumber,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcvAccName)">
+		        RCV_ACC_NAME = #{rcvAccName,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(rcvEmail)">
+		        RCV_EMAIL = #{rcvEmail,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(realChargeAmt)">
+		        REAL_CHARGE_AMT = #{realChargeAmt,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcNoticeTime)">
+		        MC_NOTICE_TIME = #{mcNoticeTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(status)">
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(memo)">
+		        MEMO = #{memo,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcFee)">
+		        MC_FEE = #{mcFee,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(sn)">
+		        SN = #{sn,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcChannel)">
+		        MC_CHANNEL = #{mcChannel,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcArea)">
+		        MC_AREA = #{mcArea,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcBankFee)">
+		        MC_BANK_FEE = #{mcBankFee,javaType=long,jdbcType=DECIMAL} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(cardAcct)">
+		        CARD_ACCT = #{cardAcct,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(attachment)">
+		        ATTACHMENT = #{attachment,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(bankName)">
+		        BANK_NAME = #{bankName,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(bankAddr)">
+		        BANK_ADDR = #{bankAddr,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcExactTime)">
+		        MC_EXACT_TIME = #{mcExactTime,javaType=date,jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(apprMemo)">
+		        APPR_MEMO = #{apprMemo,javaType=string,jdbcType=VARCHAR} ,
+		    </if>
+		    <if test="@Ognl@isNotEmpty(mcSn)">
+		        MC_SN = #{mcSn,javaType=string,jdbcType=VARCHAR} 
+		    </if>
+	        WHERE 
+		        MC_SN = #{mcSn} 
+		</update>
+		
+		
+		
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from FUND_CHARGE_EXCEPTION where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="FundChargeExceptionResult" flushCache="false">
+			select <include refid="fundChargeExceptionColumns" />
+		    <![CDATA[
+			    from FUND_CHARGE_EXCEPTION 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="FundChargeExceptionResult" flushCache="false">
+			select <include refid="fundChargeExceptionColumns" />
+			    from FUND_CHARGE_EXCEPTION 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="fundChargeExceptionDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(bankId)">
+				and BANK_ID = #{bankId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(cardNumber)">
+				and CARD_NUMBER = #{cardNumber}
+			</if>
+	       <if test="@Ognl@isNotEmpty(rcvCardNumber)">
+				and RCV_CARD_NUMBER = #{rcvCardNumber}
+			</if>
+	       <if test="@Ognl@isNotEmpty(rcvAccName)">
+				and RCV_ACC_NAME = #{rcvAccName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(rcvEmail)">
+				and RCV_EMAIL = #{rcvEmail}
+			</if>
+	       <if test="@Ognl@isNotEmpty(realChargeAmt)">
+				and REAL_CHARGE_AMT = #{realChargeAmt}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mcNoticeTime)">
+				and MC_NOTICE_TIME = #{mcNoticeTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(memo)">
+				and MEMO = #{memo}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mcFee)">
+				and MC_FEE = #{mcFee}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sn)">
+				and SN = #{sn}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mcChannel)">
+				and MC_CHANNEL = #{mcChannel}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mcArea)">
+				and MC_AREA = #{mcArea}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mcSn)">
+				and MC_SN = #{mcSn}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mcBankFee)">
+				and MC_BANK_FEE = #{mcBankFee}
+			</if>
+	       <if test="@Ognl@isNotEmpty(cardAcct)">
+				and CARD_ACCT = #{cardAcct}
+			</if>
+	       <if test="@Ognl@isNotEmpty(attachment)">
+				and ATTACHMENT = #{attachment}
+			</if>
+	       <if test="@Ognl@isNotEmpty(bankName)">
+				and BANK_NAME = #{bankName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(bankAddr)">
+				and BANK_ADDR = #{bankAddr}
+			</if>
+	       <if test="@Ognl@isNotEmpty(apprMemo)">
+				and APPR_MEMO = #{apprMemo}
+			</if>
+	       <if test="@Ognl@isNotEmpty(apprMemo)">
+				and MC_EXACT_TIME = #{mcExactTime}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="FundChargeExceptionResult"  flushCache="false">
+    	select <include refid="fundChargeExceptionColumns" />
+	    from FUND_CHARGE_EXCEPTION 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getExceptionCount" resultType="long">
+        select count(*) from FUND_CHARGE_EXCEPTION 
+    </select>
+    <select id="getByPage" resultType="long">
+        select count(*) from FUND_CHARGE_EXCEPTION 
+		<include refid="fundChargeExceptionDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getExceptionByPage" resultMap="FundChargeExceptionResult">
+    	select <include refid="fundChargeExceptionColumns" />
+	    from FUND_CHARGE_EXCEPTION 
+		<include refid="fundChargeExceptionDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.0.xsd " 
+	default-autowire="byName" default-lazy-init="false">
+	
+	<import resource="sscGameTrendBet.xml"/>
+	<import resource="kl8GameTrendBet.xml"/>
+	<import resource="n115GameTrendBet.xml"/>
+	<import resource="3dGameTrendBet.xml"/>
+	<import resource="p5GameTrendBet.xml"/>
+	<import resource="sslGameTrendBet.xml"/>
+	<import resource="ssqGameTrendBet.xml"/>
+	<import resource="k3GameTrendBet.xml"/>  
+	
+	<bean id="gameTrendBetMap" class="java.util.HashMap">
+		<constructor-arg> 
+		   <map> 
+		   		<!-- 时时彩 -->
+		   		<entry key="99101" value-ref="sscGameTrendBet"  />
+		   		<entry key="99102" value-ref="sscGameTrendBet"  />
+		   		<entry key="99103" value-ref="sscGameTrendBet"  />
+		   		<entry key="99104" value-ref="sscGameTrendBet"  />
+		   		<entry key="99105" value-ref="sscGameTrendBet"  />
+		   		<entry key="99106" value-ref="sscGameTrendBet"  />
+		   		<entry key="99111" value-ref="sscGameTrendBet"  />
+				<entry key="99112" value-ref="sscGameTrendBet"  />
+		   		<entry key="99114" value-ref="sscGameTrendBet"  />
+		   		
+		   		<!-- 北京快乐8 -->
+		   		<entry key="99201" value-ref="kl8GameTrendBet"  />
+		   		
+		   		<!-- 11选5 -->
+		   		<entry key="99301" value-ref="n115GameTrendBet"  />
+		   		<entry key="99302" value-ref="n115GameTrendBet"  />
+		   		<entry key="99303" value-ref="n115GameTrendBet"  />
+		   		<entry key="99304" value-ref="n115GameTrendBet"  />
+		   		<entry key="99305" value-ref="n115GameTrendBet"  />
+		   		<entry key="99306" value-ref="n115GameTrendBet"  />
+		   		<entry key="99307" value-ref="n115GameTrendBet"  />
+		   		<!-- 3D -->
+		   		<entry key="99108" value-ref="sdGameTrendBet"  />
+		   		
+		   		<!-- 排列5 -->
+		   		<entry key="99109" value-ref="p5GameTrendBet"  />
+		   		
+		   		<!-- 时时乐 -->
+		   		<entry key="99107" value-ref="sslGameTrendBet"  />
+		   		<!-- 双色球 -->
+		   		<entry key="99401" value-ref="ssqGameTrendBet"  />
+		   		<!-- 快三 -->
+		   		<entry key="99501" value-ref="k3GameTrendBet"  />
+		   		<entry key="99502" value-ref="k3GameTrendBet"  />
+		   </map> 
+	  	</constructor-arg>
+	</bean> 
+</beans>

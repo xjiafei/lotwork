@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameWarnOrderLog">
+	<resultMap id="GameWarnOrderLogResult" type="com.winterframework.firefrog.game.dao.vo.GameWarnOrderLog">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameWarnOrderLogColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	WARN_ORDER_ID as warnOrderId,
+	        	CREATE_TIME as createTime,
+	        	DISPOSE_INFO as disposeInfo,
+	        	DISPOSE_MEMO as disposeMemo,
+	        	DISPOSE_USER as disposeUser,
+	        	DISPOSE_TYPE as disposeType
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameWarnOrderLog" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_WARN_ISSUE_LOG.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_WARN_ORDER_LOG (
+	        	ID ,
+	        	WARN_ORDER_ID ,
+	        	CREATE_TIME ,
+	        	DISPOSE_INFO ,
+	        	DISPOSE_MEMO ,
+	        	DISPOSE_USER ,
+	        	DISPOSE_TYPE 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{warnOrderId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{disposeInfo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{disposeMemo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{disposeUser,javaType=string,jdbcType=VARCHAR} ,
+	        	#{disposeType,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameWarnOrderLog">
+	    <![CDATA[
+	        UPDATE GAME_WARN_ORDER_LOG SET
+		        WARN_ORDER_ID = #{warnOrderId,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        DISPOSE_INFO = #{disposeInfo,javaType=string,jdbcType=VARCHAR} ,
+		        DISPOSE_MEMO = #{disposeMemo,javaType=string,jdbcType=VARCHAR} ,
+		        DISPOSE_USER = #{disposeUser,javaType=string,jdbcType=VARCHAR} ,
+		        DISPOSE_TYPE = #{disposeType,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_WARN_ORDER_LOG where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameWarnOrderLogResult" flushCache="false">
+			select <include refid="gameWarnOrderLogColumns" />
+		    <![CDATA[
+			    from GAME_WARN_ORDER_LOG 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameWarnOrderLogResult" flushCache="false">
+			select <include refid="gameWarnOrderLogColumns" />
+			    from GAME_WARN_ORDER_LOG 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameWarnOrderLogDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(warnOrderId)">
+				and WARN_ORDER_ID = #{warnOrderId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(disposeInfo)">
+				and DISPOSE_INFO = #{disposeInfo}
+			</if>
+	       <if test="@Ognl@isNotEmpty(disposeMemo)">
+				and DISPOSE_MEMO = #{disposeMemo}
+			</if>
+	       <if test="@Ognl@isNotEmpty(disposeUser)">
+				and DISPOSE_USER = #{disposeUser}
+			</if>
+	       <if test="@Ognl@isNotEmpty(disposeType)">
+				and DISPOSE_TYPE = #{disposeType}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameWarnOrderLogResult"  flushCache="false">
+    	select <include refid="gameWarnOrderLogColumns" />
+	    from GAME_WARN_ORDER_LOG 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_WARN_ORDER_LOG 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_WARN_ORDER_LOG 
+		<include refid="gameWarnOrderLogDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameWarnOrderLogResult">
+    	select <include refid="gameWarnOrderLogColumns" />
+	    from GAME_WARN_ORDER_LOG 
+		<include refid="gameWarnOrderLogDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

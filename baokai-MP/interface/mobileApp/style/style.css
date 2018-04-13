@@ -1,0 +1,398 @@
+@charset "UTF-8";
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td,em,form,input,select,textarea,button,header,section,aside,footer{margin:0;padding:0;}
+ul,li{list-style:none;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+img{border:none;}
+body{font:12px/1.5 Microsoft Yahei,Arial,Helvetica,sans-serif;color:#333;}
+.clearfix:after{content:".";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+.hide{display: none;}
+
+a{
+	color: #fff;
+	text-decoration: none;
+}
+
+.layout{
+	width: 1000px;
+	margin: 0px auto;
+}
+
+/*header*/
+header{
+	height: 70px;
+	line-height: 70px;
+	background: #1f2e4d;
+	overflow: hidden;
+}
+
+header nav{
+	float: right;
+}
+
+header nav a{
+	display: block;
+	width: 140px;
+	height: 66px;
+	float: left;
+	line-height: 66px;
+	border-top: 4px solid #1f2e4d;
+	text-align: center;
+	color: #a1b8e5;
+}
+
+header nav .active{
+	color: #fff;
+	border-top: 4px solid #5c8ae6;
+}
+
+header .logo{
+	float: left;
+	width: 215px;
+	height: 49px;
+	margin: 12px 0 0 0;
+	background: url(../images/logo-page.png) no-repeat;
+}
+
+section{
+	width: 100%;
+}
+
+.first-step{
+	width: 100%;
+	height: 710px;
+	overflow: hidden;
+	background: url(../images/table-bg.jpg) no-repeat;
+}
+
+	.first-step .layout{
+		position: relative;
+	}
+
+	.first-step .slogan{
+		position: absolute;
+		top: 155px;
+		left: 410px;
+		width: 553px;
+		height: 192px;
+		background: url(../images/sologan.png) no-repeat;
+	}
+
+	.first-step .phone{
+		position: absolute;
+		opacity: 0;
+		top: 150px;
+		left: 0;
+		width: 465px;
+		height: 636px;
+		background: url(../images/phone.png) no-repeat;
+		z-index: 2;
+		-moz-transition: all 0.5s ease-in 1s;
+	 	-webkit-transition: all 0.5s ease-in 1s;
+	 	-o-transition: all 0.5s ease-in 1s;
+		transition: all 0.5s ease-in 1s;
+	}
+
+	.first-step .show{
+		top: 80px;
+		opacity: 1;
+	}
+
+	.first-step .ribbon{
+		position: absolute;
+		top: 18px;
+		left: 186px;
+		width: 960px;
+		height: 466px;
+		background: url(../images/ribbon.png) no-repeat;
+		z-index: 1;
+	}
+
+	.first-step .button{
+		position: absolute;
+		top: 336px;
+		left: 421px;
+		width: 553px;
+		height: 100px;
+		z-index: 2;
+	}
+
+		.button a{
+			display: block;
+			width: 206px;
+			height: 70px;
+			float: left;
+			background-position: 0 0;
+			background: url(../images/button.png) no-repeat;
+		}		 
+
+		.button a:active{
+			background-position-y: -74px; 
+		}
+
+		.button .andriod{
+			margin: 17px 0 0 25px;
+			background-position:  -220px 0;
+		}
+
+		.button .ios{
+			margin: 17px 0 0 65px;
+			background-position:  0px 0;
+		}
+
+.second-step{
+	height: 360px;
+	background: url(../images/line.png) center 0 no-repeat #1e1d24;
+	overflow: hidden;
+}	
+	
+	.second-step .bg{
+		background: url(../images/flash-bg.png) 0 0;
+	}
+	
+	.second-step .layout{
+		
+	}
+
+	.second-step .cycle-slideshow{
+		width: 1000px;
+		height: 360px;
+	}
+
+.third-step{
+	background: url(../images/line.png) center 0 no-repeat #1d1d24;
+	height: 820px;
+	overflow: auto;
+}
+	
+	.third-step .layout{
+		position: relative;
+	}
+
+	.third-step .logo{
+		width: 270px; 
+		height: 150px;
+		margin: 80px auto 0 auto;
+		background: url(../images/logo-2.jpg) no-repeat;
+	}
+
+	.third-step .slogan{
+		width: 551px;
+		height: 39px;
+		margin: 0px auto;
+		background: url(../images/font.png) no-repeat;
+	}
+
+	.third-step .lottery{
+		width: 1000px;
+		height: 390px;
+		margin: 30px auto 0 auto;
+		background: url(../images/lottery.jpg) no-repeat;
+	}
+
+	.third-step .girl{
+		position: absolute;
+		top: 206px;
+		right: -150px;
+		width: 238px;
+		height: 380px;
+		background: url(../images/girl.png) no-repeat;
+	}
+
+.four-step{
+	height: 512px;
+	background: url(../images/bg-3.jpg) center bottom no-repeat #242433;
+}
+	.four-step .layout{
+		position: relative;
+		height: 512px;
+	}
+	
+	.four-step .girl{
+		position: absolute;
+		top: -80px;
+		left: -80px;
+		width: 307px;
+		height: 307px;
+		background: url(../images/girl-2.png) no-repeat;
+		z-index: 1;
+	}
+
+	.four-step .desc{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 1000px;
+		height: 287px;
+	}
+
+	.four-step .desc-bg{
+		width: 914px;
+		height: 166px;
+		margin: 50px auto;
+		background: url(../images/desc.png) no-repeat;
+	}
+
+	.four-step .slogan{
+		width: 590px;
+		height: 211px;
+		margin: 0px 0 0 250px;
+		background: url(../images/slogan-3.jpg) no-repeat;
+	}
+
+footer{
+	height: 80px;
+	line-height: 80px;
+	overflow: auto;
+	background: #1d1d24;
+}
+
+	footer .copy-right{
+		color: #6f6f6f;
+	}
+
+.cycle-pager-wrap{
+	position: absolute;
+	top: 330px;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	z-index: 102;
+}
+
+.cycle-pager-wrap span{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	margin: 0 0 0 5px;
+	border-radius: 10px;
+	background: #2f7ac0;
+	text-indent: -9999em;
+	filter:alpha(opacity=50);       /* IE */
+	-moz-opacity:0.5;              /* 老版Mozilla */
+	-khtml-opacity:0.5;              /* 老版Safari */
+	opacity: 0.5;           /* 支持opacity的浏览器*/
+	cursor: pointer;
+}
+
+.cycle-pager-wrap .cycle-pager-active{
+	filter:alpha(opacity=100);       /* IE */
+	-moz-opacity:1;              /* 老版Mozilla */
+	-khtml-opacity:1;              /* 老版Safari */
+	opacity: 1;           /* 支持opacity的浏览器*/
+}
+
+
+/**/
+.dialog{
+		width: 620px;
+		position: absolute;
+		left: 50%;
+		margin-left: -340px;
+		padding: 20px 30px;
+		top: 150px;
+		border-radius: 4px;
+		background: #fff;
+		color: #666666;
+		box-shadow: 0px 10px 5px rgba(0,0,0,0.1);
+		display: block;
+		z-index: 5;
+	}
+
+	.dialog .close{
+		position: absolute;
+		display: block;
+		top: 20px;
+		right: 20px;
+		width: 16px;
+		height: 16px;
+		background: url(../images/close.jpg) no-repeat;
+	}
+
+	.dialog .scan,
+	.dialog .pc{
+		float: left;
+		width: 295px;
+	}
+
+	.dialog .scan{
+		padding: 0 0  10px 0 ;
+	}
+
+	.dialog .head{
+		width: 100%;
+		height: 40px;
+		text-align: center;
+		font-size: 18px;
+		color: #5c7099;
+		font-weight: bold;
+		border-bottom: 1px solid #cedaf2;
+	}
+
+	.dialog .scan-font{
+		margin-top: 10px;
+	}
+
+		.dialog .head span{
+			font-weight: normal;
+		}
+
+	.dialog p{
+		font-size: 14px;
+		text-align: center;
+	}
+
+		.dialog p span{
+			color: #5c8ae6;
+		}
+
+	.dialog .scan p{
+		line-height: 50px;
+	}
+
+		.img-area{
+			width: 162px;
+			height: 162px;
+			margin: 0 auto;	
+		}
+
+	.dialog .pc{
+		margin-left: 30px;
+	}	
+
+		.pc a{
+			color: #5c8ae6;
+		}
+
+		.download-font{
+			margin-top: 55px;
+		}
+
+		.pc .download-button{
+			display: block;
+			width: 130px;
+			height: 48px;
+			margin: 20px auto 30px auto;
+			font-size: 18px;
+			line-height: 48px;
+			padding-left: 70px;
+			color: #fff;
+			background: url(../images/download.jpg) no-repeat;
+		}
+
+	.dialog_footer{
+		border-top: 1px solid #cedaf2;
+	}
+
+		.dialog_footer p{
+			float: right;
+			margin-top: 15px;
+		}
+
+		.dialog_footer a{
+			color: #5c8ae6;
+		}

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameIssueTemplate">
+	<resultMap id="GameIssueTemplateResult"
+		type="com.winterframework.firefrog.game.dao.vo.GameIssueTemplate">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameIssueTemplateColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	RULEID as ruleid,
+	        	SALE_START_TIME as saleStartTime,
+	        	SALE_PERIOD_TIME as salePeriodTime,
+	        	SCHEDULE_STOP_TIME as scheduleStopTime,
+	        	FIRST_AWARD_TIME as firstAwardTime,
+	        	LAST_AWARD_TIME as lastAwardTime,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueTemplate"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_ISSUE_TEMPLATE_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_ISSUE_TEMPLATE (
+	        	ID ,
+	        	RULEID ,
+	        	SALE_START_TIME ,
+	        	SALE_PERIOD_TIME ,
+	        	SCHEDULE_STOP_TIME ,
+	        	FIRST_AWARD_TIME ,
+	        	LAST_AWARD_TIME ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{ruleid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{saleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{salePeriodTime,javaType=long,jdbcType=DECIMAL} ,
+	        	#{scheduleStopTime,javaType=long,jdbcType=DECIMAL} ,
+	        	#{firstAwardTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{lastAwardTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.game.dao.vo.GameIssueTemplate">
+	    <![CDATA[
+	        UPDATE GAME_ISSUE_TEMPLATE SET
+		        RULEID = #{ruleid,javaType=long,jdbcType=DECIMAL} ,
+		        SALE_START_TIME = #{saleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SALE_PERIOD_TIME = #{salePeriodTime,javaType=long,jdbcType=DECIMAL} ,
+		        SCHEDULE_STOP_TIME = #{scheduleStopTime,javaType=long,jdbcType=DECIMAL} ,
+		        FIRST_AWARD_TIME = #{firstAwardTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        LAST_AWARD_TIME = #{lastAwardTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_ISSUE_TEMPLATE where
+		        RULEID = #{ruleId} 
+	    ]]>
+	</delete>
+	<delete id="deleteGameIssueTemplateByRuleId" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_ISSUE_TEMPLATE where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	
+	<select id="getById" parameterType="long" resultMap="GameIssueTemplateResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueTemplateColumns" />
+		    <![CDATA[
+			    from GAME_ISSUE_TEMPLATE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="GameIssueTemplateResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueTemplateColumns" />
+		from GAME_ISSUE_TEMPLATE
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="gameIssueTemplateDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(ruleid)">
+				and RULEID = #{ruleid}
+			</if>
+			<if test="@Ognl@isNotEmpty(saleStartTime)">
+				and SALE_START_TIME = #{saleStartTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(salePeriodTime)">
+				and SALE_PERIOD_TIME = #{salePeriodTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(scheduleStopTime)">
+				and SCHEDULE_STOP_TIME = #{scheduleStopTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(firstAwardTime)">
+				and FIRST_AWARD_TIME = #{firstAwardTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(lastAwardTime)">
+				and LAST_AWARD_TIME = #{lastAwardTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameIssueTemplateResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueTemplateColumns" />
+		from GAME_ISSUE_TEMPLATE
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from GAME_ISSUE_TEMPLATE
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_ISSUE_TEMPLATE
+		<include refid="gameIssueTemplateDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameIssueTemplateResult">
+		select
+		<include refid="gameIssueTemplateColumns" />
+		from GAME_ISSUE_TEMPLATE
+		<include refid="gameIssueTemplateDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getGameIssueTemplateByRuleId" resultMap="GameIssueTemplateResult"
+		parameterType="java.lang.Long">
+		select
+		<include refid="gameIssueTemplateColumns" />
+		from GAME_ISSUE_TEMPLATE
+		where RULEID=#{ruleId} order by FIRST_AWARD_TIME asc
+	</select>
+
+
+</mapper>

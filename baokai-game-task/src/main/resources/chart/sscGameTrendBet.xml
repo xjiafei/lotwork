@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.0.xsd " 
+	default-autowire="byName" default-lazy-init="false"> 
+	
+	<!-- 玩法对应走势图数据类型 -->
+	<bean id="sscGameTrendBet" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<!-- 时时彩 start --> 
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">WEISHU</value>  
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<!-- 五星直选复式-->
+								<bean class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.WX}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.FS}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 四星直选复式 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.SX}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.FS}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 前三直选复式 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.QS}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.FS}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 后三直选复式 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.HS}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.FS}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 中三直选复式 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.trend.ZS}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.FS}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 前二直选复式 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.QE}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.FS}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 后二直选复式 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.HE}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.FS}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 一星定位胆复式 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.YX}" />
+									<property name="setCode" value="${setCode.DWD}" />  
+									<property name="methodCode" value="${methodCode.FS}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>  
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">HEZHI</value>  
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<!-- 前三直选和值-->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.QS}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.HZ}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 后三直选和值 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.HS}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.HZ}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean> 
+								<!-- 中三直选和值 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.trend.ZS}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.HZ}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 前二直选和值-->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.QE}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.HZ}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 后二直选和值 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.HE}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.HZ}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry> 
+				<entry>
+					<key>
+						<value type="com.winterframework.firefrog.game.entity.TrendType">KUADU</value>  
+					</key>
+					<bean class="java.util.ArrayList">
+						<constructor-arg>
+							<list>
+								<!-- 前三直选跨度 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.QS}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.KD}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 后三直选跨度 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.HS}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.KD}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 中三直选跨度 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.trend.ZS}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.KD}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 前二直选跨度 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.QE}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.KD}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+								<!-- 后二直选跨度 -->
+								<bean
+									class="com.winterframework.firefrog.game.service.assist.bet.LotteryPlayMethodKeyGenerator">
+									<property name="groupCode" value="${groupCode.HE}" />
+									<property name="setCode" value="${setCode.ZHX}" />  
+									<property name="methodCode" value="${methodCode.KD}" />  
+									<property name="seperator" value="${key.seperator}" />
+								</bean>
+							</list>
+						</constructor-arg>
+					</bean>
+				</entry>    
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>

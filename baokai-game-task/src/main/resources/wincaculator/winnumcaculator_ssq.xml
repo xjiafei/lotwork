@@ -1,0 +1,64 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="false">
+	<!-- 福彩3D -->
+	<bean id="lottery99401" class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<property name="parent" ref="lotteryWinSlipNumccstemplate"></property>
+		<!-- 彩种类型 -->
+		<property name="lotteryType" value="${lottery.SSQ}" />
+		
+		<constructor-arg>
+			<map>
+				<!--单式  32_71_68-->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">							
+							<property name="groupCode" value="32" />
+							<property name="setCode" value="71" />
+							<property name="methodCode" value="68" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.number.ssq.LotteryWinNumDSCaculator" >
+					</bean>
+				</entry>
+				<!--复式  32_71_67-->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">					
+							<property name="groupCode" value="32" />
+							<property name="setCode" value="71" />
+							<property name="methodCode" value="67" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.number.ssq.LotteryWinNumFSCaculator" >						
+					</bean>
+				</entry>
+				
+				<!--胆拖  32_71_69-->
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">					
+							<property name="groupCode" value="32" />
+							<property name="setCode" value="71" />
+							<property name="methodCode" value="69" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean
+						class="com.winterframework.firefrog.game.service.wincaculate.number.ssq.LotteryWinNumDTCaculator" >						
+					</bean>
+				</entry>
+			</map>
+		</constructor-arg>	
+		
+		</bean>
+</beans>

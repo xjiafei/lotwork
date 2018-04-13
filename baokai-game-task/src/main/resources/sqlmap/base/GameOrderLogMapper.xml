@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameOrderLog">
+	<resultMap id="GameOrderResult" type="com.winterframework.firefrog.game.dao.vo.GameOrderLog"></resultMap> 
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameOrderLogColumns">
+	    <![CDATA[
+        	ID as id,
+        	ORDER_ID as orderId,
+        	OPERATION as operation,
+        	REMARK as remark,
+        	USER_ID as userId,
+        	CREATE_TIME as createTime
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameOrderLog"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_ORDER_LOG_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_ORDER_LOG (
+		        ID,
+	        	ORDER_ID,
+	        	OPERATION,
+	        	REMARK,
+	        	USER_ID,
+	        	CREATE_TIME
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{orderId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{operation,javaType=string,jdbcType=VARCHAR} ,
+	        	#{remark,javaType=string,jdbcType=VARCHAR} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP}
+	        )
+	    ]]> 
+	</insert>  	
+</mapper>

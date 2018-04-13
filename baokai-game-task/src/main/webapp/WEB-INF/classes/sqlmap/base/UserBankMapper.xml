@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.UserBank">
+	<resultMap id="UserBankResult" type="com.winterframework.firefrog.fund.dao.vo.UserBank"></resultMap>
+	<resultMap id="UserCardBindVO" type="com.winterframework.firefrog.fund.dao.vo.UserCardBindVO"></resultMap>
+	<resultMap id="UserCardBindHistoryRecordVO" type="com.winterframework.firefrog.fund.dao.vo.UserCardBindHistoryRecordVO"></resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="userBankColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USER_ID as userId,
+	        	BANK_ID as bankId,
+	        	BANK_NUMBER as bankNumber,
+	        	PROVINCE as province,
+	        	CITY as city,
+	        	BRANCH_NAME as branchName,
+	        	GMT_CREATED as gmtCreated,
+	        	GMT_MODIFIED as gmtModified,
+	        	BANK_ACCOUNT as bankAccount,
+	        	MC_BANK_ID as mcBankId
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.fund.dao.vo.UserBank"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_USER_BANK_ID.Nextval from dual
+		</selectKey>
+		
+	    <![CDATA[
+	        INSERT INTO
+	        USER_BANK (
+	        	ID ,
+	        	USER_ID ,
+	        	BANK_ID ,
+	        	BANK_NUMBER ,
+	        	PROVINCE ,
+	        	CITY ,
+	        	BRANCH_NAME ,
+	        	GMT_CREATED ,
+	        	GMT_MODIFIED ,
+	        	BANK_ACCOUNT ,
+	        	MC_BANK_ID 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bankId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bankNumber,javaType=string,jdbcType=VARCHAR} ,
+	        	#{province,javaType=string,jdbcType=VARCHAR} ,
+	        	#{city,javaType=string,jdbcType=VARCHAR} ,
+	        	#{branchName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{bankAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcBankId,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.fund.dao.vo.UserBank">
+	    <![CDATA[
+	        UPDATE USER_BANK SET
+		        USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,
+		        BANK_ID = #{bankId,javaType=long,jdbcType=DECIMAL} ,
+		        BANK_NUMBER = #{bankNumber,javaType=string,jdbcType=VARCHAR} ,
+		        PROVINCE = #{province,javaType=string,jdbcType=VARCHAR} ,
+		        CITY = #{city,javaType=string,jdbcType=VARCHAR} ,
+		        BRANCH_NAME = #{branchName,javaType=string,jdbcType=VARCHAR} ,
+		        GMT_MODIFIED = #{gmtModified,javaType=object,jdbcType=TIMESTAMP} ,
+		        BANK_ACCOUNT = #{bankAccount,javaType=string,jdbcType=VARCHAR} ,
+		        MC_BANK_ID = #{mcBankId,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from USER_BANK where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	
+	<delete id="deleteBankCard" parameterType="HashMap">
+		delete from User_Bank
+		where ID = #{id}
+		
+	</delete>
+	
+	<select id="selectUserBankByUserId" parameterType="long" resultMap="UserBankResult" flushCache="false">
+		select 
+		<include refid="userBankColumns"/>
+		 <![CDATA[
+			    from USER_BANK 
+		        where 
+		        USER_ID = #{userId} 
+		    ]]>
+	</select>
+	
+	<select id="getById" parameterType="long" resultMap="UserBankResult"
+		flushCache="false">
+		select
+		<include refid="userBankColumns" />
+		    <![CDATA[
+			    from USER_BANK 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="UserBankResult"
+		flushCache="false">
+		select
+		<include refid="userBankColumns" />
+		from USER_BANK
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<!-- 按照userId查询已绑定银行卡 -->
+	<select id="getBoundBankCardByUserId" parameterType="long" resultMap="UserBankResult"
+		flushCache="false">
+		select
+		<include refid="userBankColumns" />
+			    <![CDATA[
+				    from USER_BANK 
+			        where 
+			        USER_ID = #{userId} 
+			    ]]>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<sql id="userBankDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+			<if test="@Ognl@isNotEmpty(bankId)">
+				and BANK_ID = #{bankId}
+			</if>
+			<if test="@Ognl@isNotEmpty(bankNumber)">
+				and BANK_NUMBER = #{bankNumber}
+			</if>
+			<if test="@Ognl@isNotEmpty(province)">
+				and PROVINCE = #{province}
+			</if>
+			<if test="@Ognl@isNotEmpty(city)">
+				and CITY = #{city}
+			</if>
+			<if test="@Ognl@isNotEmpty(branchName)">
+				and BRANCH_NAME = #{branchName}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtModified)">
+				and GMT_MODIFIED = #{gmtModified}
+			</if>
+			<if test="@Ognl@isNotEmpty(bankAccount)">
+				and BANK_ACCOUNT = #{bankAccount}
+			</if>
+			<if test="@Ognl@isNotEmpty(mcBankId)">
+				and MC_BANK_ID = #{mcBankId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="UserBankResult" flushCache="false">
+		select
+		<include refid="userBankColumns" />
+		from USER_BANK
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from USER_BANK
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from USER_BANK
+		<include refid="userBankDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="UserBankResult">
+		select
+		<include refid="userBankColumns" />
+		from USER_BANK
+		<include refid="userBankDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="getCountFromUserBank" resultType="long" parameterType="hashmap">
+		select count(*) from ( 
+			select 
+				a.USER_ID,a.GMT_CREATED as gmtCreated,b.ACCOUNT,b.USER_LVL,c.id as lockID,c.OVER_TIME,c.OPERATOR 
+			from 
+				(select DISTINCT(t.USER_ID) as USER_ID,t.GMT_CREATED as GMT_CREATED from USER_BANK t 
+				where 1=1  
+				<if test="@Ognl@isNotEmpty(cardNumber)">
+					AND t.BANK_NUMBER = ${cardNumber}
+				</if>
+				) a
+			left join USER_CUSTOMER b 
+				on a.USER_ID=b.ID 
+				<if test="@Ognl@isNotEmpty(account)">
+					AND b.ACCOUNT = ${account}
+				</if>
+				<if test="@Ognl@isNotEmpty(userLvl)">
+					AND b.USER_LVL = ${userLvl}
+				</if>
+			left join USER_BANK_LOCKED c 
+				on a.USER_ID=c.USER_ID 
+				<if test="@Ognl@isNotEmpty(operator)">
+					and c.OPERATOR = ${operator}
+				</if>
+			) 
+	</select>
+	
+	<select id="queryUserBankBindList" resultMap="UserCardBindVO" parameterType="hashmap">
+		select 
+				a.USER_ID as userId,a.GMT_CREATED as gmtCreated,b.ACCOUNT as account,b.USER_LVL as userLvl,c.id as lockId,c.OVER_TIME as overTime,c.OPERATOR as operator  
+			from 
+				(select DISTINCT(t.USER_ID) as USER_ID,t.GMT_CREATED as GMT_CREATED from USER_BANK t 
+				where 1=1  
+				<if test="@Ognl@isNotEmpty(cardNumber)">
+					AND t.BANK_NUMBER = ${cardNumber}
+				</if>
+				) a
+			left join USER_CUSTOMER b 
+				on a.USER_ID=b.ID 
+				<if test="@Ognl@isNotEmpty(account)">
+					AND b.ACCOUNT = ${account}
+				</if>
+				<if test="@Ognl@isNotEmpty(userLvl)">
+					AND b.USER_LVL = ${userLvl}
+				</if>
+			left join USER_BANK_LOCKED c 
+				on a.USER_ID=c.USER_ID 
+				<if test="@Ognl@isNotEmpty(operator)">
+					and c.OPERATOR = ${operator}
+				</if>
+				<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns} desc
+		</if>
+	</select>
+	
+	<insert id="insertBindHistoryRecord" parameterType="com.winterframework.firefrog.fund.dao.vo.UserCardBindHistoryRecordVO"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_USER_BANK_BIND_HISTORY_ID.Nextval from dual
+		</selectKey>
+		
+	    <![CDATA[
+	        INSERT INTO
+	        USER_BANK_BIND_HISTORY (
+	        	ID ,
+	        	USER_ID ,
+	        	ACTION ,
+	        	ACTION_TIME ,
+	        	BANK_ID ,
+	        	BANK_ACCOUNT ,
+	        	PROVINCE ,
+	        	CITY ,
+	        	BRANCH_NAME ,
+	        	MC_BANK_ID ,
+	        	BANK_NUMBER
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{action,javaType=long,jdbcType=DECIMAL} ,
+	        	#{actionTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{bankId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bankAccount,javaType=string,jdbcType=VARCHAR} ,
+	        	#{province,javaType=string,jdbcType=VARCHAR} ,
+	        	#{city,javaType=string,jdbcType=VARCHAR} ,
+	        	#{branchName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{mcBankId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{bankNumber,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>
+
+	</insert>
+	
+	<select id="getCountFromBindRecord"  resultType="long" parameterType="hashmap">
+		select count(*) from USER_BANK_BIND_HISTORY where USER_ID = ${userId}
+	</select>
+	
+	<select id="queryBindHistoryRecordList" resultMap="UserCardBindHistoryRecordVO" parameterType="hashmap">
+		select 
+			ID as id,
+        	USER_ID as userId,
+        	ACTION as action,
+        	ACTION_TIME as actionTime,
+        	BANK_ID as bankId,
+        	BANK_ACCOUNT as bankAccount,
+        	PROVINCE as province,
+        	CITY as city,
+        	BRANCH_NAME as branchName,
+        	MC_BANK_ID as mcBankId,
+        	BANK_NUMBER as bankNumber
+        from USER_BANK_BIND_HISTORY where USER_ID=${userId}
+	</select>
+	
+	<select id="getFormUserBankByUserId" resultMap="UserBankResult" parameterType="long">
+			select <include refid="userBankColumns" /> from USER_BANK where USER_ID = #{userId} and BINDCARD_TYPE = 0
+	</select>
+
+	<select id="getCountFromUserBankByBankNum"  resultType="long" parameterType="string">
+		select count(1) from USER_BANK where BANK_NUMBER = #{bankNum}
+	</select>
+	
+	<select id="getCountFromUserBankHistoryByDate"  resultType="long" parameterType="map">
+		 <![CDATA[select count(1) from USER_BANK_BIND_HISTORY where USER_ID =#{userId} AND ACTION_TIME >= #{lockTime}]]> and BINDCARD_TYPE = 0
+	</select>
+
+</mapper>

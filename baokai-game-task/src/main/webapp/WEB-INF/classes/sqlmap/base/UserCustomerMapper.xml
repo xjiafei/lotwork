@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserCustomer">
+	<resultMap id="UserCustomerResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserCustomer">
+	</resultMap>
+
+	<resultMap id="userCenterReport"
+		type="com.winterframework.firefrog.game.dao.vo.UserCenterReportVo">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="userCustomerColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACCOUNT as account,
+	        	PASSWD as passwd,
+	        	PASSWD_LVL as passwdLvl,
+	        	WITHDRAW_PASSWD as withdrawPasswd,
+	        	CIPHER as cipher,
+	        	SEX as sex,
+	        	EMAIL as email,
+	        	EMAIL_ACTIVED as emailActived,
+	        	CELLPHONE as cellphone,
+	        	BIRTHDAY as birthday,
+	        	QQ_STRUCTURE as qqStruc,
+	        	IS_FREEZE as isFreeze,
+	        	USER_LVL as userLvl,
+	        	QU_STRUC as quStruc,
+	        	WITHDRAW_PASSWD_ACTIVE_DATE as withdrawPasswdActiveDate,
+	        	QUESTION_STRUCTURE_ACTIVE_DATE as questionStructureActiveDate,
+	        	REGISTER_IP as registerIp,
+	        	REGISTER_DATE as registerDate,
+	        	PARENT_ID as parentId,
+	        	USER_CHAIN as userChain,
+	        	LAST_LOGIN_DATE as lastLoginDate,
+	        	TERM_A_COUNT as termAcount,
+	        	FREEZE_DATE as freezeDate,
+	        	FREEZER as freezer,
+	        	VIP_CELLPHONE as vipCellphone,
+	        	vip_Lvl as vipLvl,
+	        	TERM_U_ACCOUNT as termUaccount,
+	        	AGENT_LIMIT as agentLimit,
+	        	FREEZE_METHOD as freezeMethod,
+	        	LAST_LOGIN_IP as lastLoginIp,
+	        	FREEZE_MEMO as freezeMemo,
+	        	FREEZE_ACCOUNT as freezeAccount,
+				AWARD_RET_STATUS as awardRetStatus,
+	        	SUPER_PAIR_STATUS as superPairStatus,
+	        	nick_name as nickName,
+	        	head_img as headImg,
+	        	nick_update_time as nickUpdateTime,
+	        	freeze_id as freezeId
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserCustomer"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_USER_CUSTOMER_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        USER_CUSTOMER (
+	        	ID ,
+	        	ACCOUNT ,
+	        	PASSWD ,
+	        	PASSWD_LVL ,
+	        	WITHDRAW_PASSWD ,
+	        	CIPHER ,
+	        	SEX ,
+	        	EMAIL ,
+	        	EMAIL_ACTIVED ,
+	        	CELLPHONE ,
+	        	BIRTHDAY ,
+	        	QQ_STRUCTURE ,
+	        	IS_FREEZE ,
+	        	USER_LVL ,
+	        	QU_STRUC ,
+	        	WITHDRAW_PASSWD_ACTIVE_DATE ,
+	        	QUESTION_STRUCTURE_ACTIVE_DATE ,
+	        	REGISTER_IP ,
+	        	REGISTER_DATE ,
+	        	PARENT_ID ,
+	        	USER_CHAIN ,
+	        	LAST_LOGIN_DATE ,
+	        	TERM_A_COUNT ,
+	        	FREEZE_DATE ,
+	        	FREEZER ,
+	        	VIP_CELLPHONE ,
+	        	TERM_U_ACCOUNT ,
+	        	AGENT_LIMIT ,
+	        	FREEZE_METHOD ,
+	        	LAST_LOGIN_IP ,
+	        	FREEZE_MEMO,
+	        	FREEZE_ACCOUNT,
+	        	FREEZE_ID,
+	        	AWARD_RET_STATUS,
+	        	SUPER_PAIR_STATUS
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{account,javaType=string,jdbcType=VARCHAR} ,
+	        	#{passwd,javaType=string,jdbcType=VARCHAR} ,
+	        	#{passwdLvl,javaType=int,jdbcType=DECIMAL} ,
+	        	#{withdrawPasswd,javaType=string,jdbcType=VARCHAR} ,
+	        	#{cipher,javaType=string,jdbcType=VARCHAR} ,
+	        	#{sex,javaType=int,jdbcType=DECIMAL} ,
+	        	#{email,javaType=string,jdbcType=VARCHAR} ,
+	        	#{emailActived,javaType=int,jdbcType=DECIMAL} ,
+	        	#{cellphone,javaType=string,jdbcType=VARCHAR} ,
+	        	#{birthday,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{qqStruc,javaType=string,jdbcType=VARCHAR} ,
+	        	#{isFreeze,javaType=int,jdbcType=DECIMAL} ,
+	        	#{userLvl,javaType=int,jdbcType=DECIMAL} ,
+	        	#{quStruc,javaType=string,jdbcType=VARCHAR} ,
+	        	#{withdrawPasswdActiveDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{questionStructureActiveDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{registerIp,javaType=long,jdbcType=DECIMAL} ,
+	        	#{registerDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{parentId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userChain,javaType=string,jdbcType=VARCHAR} ,
+	        	#{lastLoginDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{termAcount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{freezeDate,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{freezer,javaType=int,jdbcType=DECIMAL} ,
+	        	#{vipCellphone,javaType=string,jdbcType=VARCHAR} ,
+	        	#{termUaccount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{agentLimit,javaType=long,jdbcType=DECIMAL} ,
+	        	#{freezeMethod,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lastLoginIp,javaType=long,jdbcType=DECIMAL} ,
+	        	#{freezeMemo, javaType=string,jdbcType=VARCHAR},
+	        	#{freezeAccount, javaType=string,jdbcType=VARCHAR},
+	        	#{freezeId,javaType=long,jdbcType=DECIMAL},
+	        	#{awardRetStatus,javaType=int,jdbcType=DECIMAL},
+	        	#{superPairStatus,javaType=int,jdbcType=DECIMAL},
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserCustomer">
+		UPDATE USER_CUSTOMER
+		<set>
+			<if test="@Ognl@isNotEmpty(account)">
+				ACCOUNT = #{account,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(passwd)">
+				PASSWD = #{passwd,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(passwdLvl)">
+				PASSWD_LVL = #{passwdLvl,javaType=int,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(withdrawPasswd)">
+				WITHDRAW_PASSWD = #{withdrawPasswd,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(cipher)">
+				CIPHER = #{cipher,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(sex)">
+				SEX = #{sex,javaType=int,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				EMAIL = #{email,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(emailActived)">
+				EMAIL_ACTIVED = #{emailActived,javaType=int,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(cellphone)">
+				CELLPHONE = #{cellphone,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(birthday)">
+				BIRTHDAY = #{birthday,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(qqStruc)">
+				QQ_STRUCTURE = #{qqStruc,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(isFreeze)">
+				IS_FREEZE = #{isFreeze,javaType=int,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(userLvl)">
+				USER_LVL = #{userLvl,javaType=int,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(quStruc)">
+				QU_STRUC = #{quStruc,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(withdrawPasswdActiveDate)">
+				WITHDRAW_PASSWD_ACTIVE_DATE = #{withdrawPasswdActiveDate,javaType=object,jdbcType=DATE} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(questionStructureActiveDate)">
+				QUESTION_STRUCTURE_ACTIVE_DATE = #{questionStructureActiveDate,javaType=object,jdbcType=TIMESTAMP}
+				,
+			</if>
+			<if test="@Ognl@isNotEmpty(registerIp)">
+				REGISTER_IP = #{registerIp,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(registerDate)">
+				REGISTER_DATE = #{registerDate,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(parentId)">
+				PARENT_ID = #{parentId,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(userChain)">
+				USER_CHAIN = #{userChain,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(lastLoginDate)">
+				LAST_LOGIN_DATE = #{lastLoginDate,javaType=object,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(termAcount)">
+				TERM_A_COUNT = #{termAcount,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeDate)">
+				FREEZE_DATE = #{freezeDate,javaType=date,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(freezer)">
+				FREEZER = #{freezer,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(vipCellphone)">
+				VIP_CELLPHONE = #{vipCellphone,javaType=string,jdbcType=VARCHAR} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(termUaccount)">
+				TERM_U_ACCOUNT = #{termUaccount,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(agentLimit)">
+				AGENT_LIMIT = #{agentLimit,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeMethod)">
+				FREEZE_METHOD = #{freezeMethod,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(lastLoginIp)">
+				LAST_LOGIN_IP = #{lastLoginIp,javaType=long,jdbcType=DECIMAL} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeMemo)">
+				FREEZE_MEMO = #{freezeMemo, javaType=string,jdbcType=VARCHAR},
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeAccount)">
+				FREEZE_ACCOUNT = #{freezeAccount, javaType=string,jdbcType=VARCHAR}
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeId)">
+				freeze_id = #{freezeId, javaType=long,jdbcType=DECIMAL}
+			</if>
+			<if test="@Ognl@isNotEmpty(awardRetStatus)">
+				award_ret_status = #{awardRetStatus, javaType=int,jdbcType=DECIMAL}
+			</if>
+			<if test="@Ognl@isNotEmpty(superPairStatus)">
+				super_pair_status = #{superPairStatus, javaType=int,jdbcType=DECIMAL}
+			</if>
+		</set>
+		WHERE
+		ID = #{id}
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from USER_CUSTOMER where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="UserCustomerResult"
+		flushCache="false">
+		select
+		<include refid="userCustomerColumns" />
+		    <![CDATA[
+			    from USER_CUSTOMER 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="UserCustomerResult"
+		flushCache="false">
+		select
+		<include refid="userCustomerColumns" />
+		from USER_CUSTOMER
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="userCustomerDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				<if test="@Ognl@isEmpty(isAccountMatch)">
+					and ACCOUNT = #{account}
+				</if>
+				<if test="@Ognl@isNotEmpty(isAccountMatch)">
+					and ACCOUNT like '%'||#{account}||'%'
+				</if>
+
+			</if>
+			<if test="@Ognl@isNotEmpty(passwd)">
+				and PASSWD = #{passwd}
+			</if>
+			<if test="@Ognl@isNotEmpty(passwdLvl)">
+				and PASSWD_LVL = #{passwdLvl}
+			</if>
+			<if test="@Ognl@isNotEmpty(withdrawPasswd)">
+				and WITHDRAW_PASSWD = #{withdrawPasswd}
+			</if>
+			<if test="@Ognl@isNotEmpty(cipher)">
+				and CIPHER = #{cipher}
+			</if>
+			<if test="@Ognl@isNotEmpty(sex)">
+				and SEX = #{sex}
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				and EMAIL = #{email}
+			</if>
+			<if test="@Ognl@isNotEmpty(emailActived)">
+				and EMAIL_ACTIVED = #{emailActived}
+			</if>
+			<if test="@Ognl@isNotEmpty(cellphone)">
+				and CELLPHONE = #{cellphone}
+			</if>
+			<if test="@Ognl@isNotEmpty(birthday)">
+				and BIRTHDAY = #{birthday}
+			</if>
+			<if test="@Ognl@isNotEmpty(qqStructure)">
+				and QQ_STRUCTURE = #{qqStructure}
+			</if>
+			<if test="@Ognl@isNotEmpty(isFreeze)">
+				and IS_FREEZE = #{isFreeze}
+			</if>
+			<if test="@Ognl@isNotEmpty(userLvl)">
+				and USER_LVL = #{userLvl}
+			</if>
+			<if test="@Ognl@isNotEmpty(quStruc)">
+				and QU_STRUC = #{quStruc}
+			</if>
+			<if test="@Ognl@isNotEmpty(withdrawPasswdActiveDate)">
+				and WITHDRAW_PASSWD_ACTIVE_DATE =
+				#{withdrawPasswdActiveDate}
+			</if>
+			<if test="@Ognl@isNotEmpty(questionStructureActiveDate)">
+				and QUESTION_STRUCTURE_ACTIVE_DATE =
+				#{questionStructureActiveDate}
+			</if>
+			<if test="@Ognl@isNotEmpty(registerIp)">
+				and REGISTER_IP = #{registerIp}
+			</if>
+			<if test="@Ognl@isNotEmpty(registerDate)">
+				and REGISTER_DATE = #{registerDate}
+			</if>
+			<if test="@Ognl@isNotEmpty(parentId)">
+				and PARENT_ID = #{parentId}
+			</if>
+			<if test="@Ognl@isNotEmpty(userChain)">
+				and USER_CHAIN = #{userChain}
+			</if>
+			<if test="@Ognl@isNotEmpty(lastLoginDate)">
+				and LAST_LOGIN_DATE = #{lastLoginDate}
+			</if>
+			<if test="@Ognl@isNotEmpty(termAcount)">
+				and TERM_A_COUNT = #{termAcount}
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeDate)">
+				and FREEZE_DATE = #{freezeDate}
+			</if>
+			<if test="@Ognl@isNotEmpty(freezer)">
+				and FREEZER = #{freezer}
+			</if>
+			<if test="@Ognl@isNotEmpty(vipCellphone)">
+				and VIP_CELLPHONE = #{vipCellphone}
+			</if>
+			<if test="@Ognl@isNotEmpty(termUaccount)">
+				and TERM_U_ACCOUNT = #{termUaccount}
+			</if>
+			<if test="@Ognl@isNotEmpty(agentLimit)">
+				and AGENT_LIMIT = #{agentLimit}
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeMethod)">
+				and FREEZE_METHOD = #{freezeMethod}
+			</if>
+			<if test="@Ognl@isNotEmpty(lastLoginIp)">
+				and LAST_LOGIN_IP = #{lastLoginIp}
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeMemo)">
+				and FREEZE_MEMO = #{freezeMemo}
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeAccount)">
+				and FREEZE_ACCOUNT = #{freezeAccount}
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeId)">
+				and FREEZE_Id = #{freezeId}
+			</if>
+			<if test="@Ognl@isNotEmpty(awardRetStatus)">
+				and AWARD_RET_STATUS = #{awardRetStatus}
+			</if>
+			<if test="@Ognl@isNotEmpty(superPairStatus)">
+				and SUPER_PAIR_STATUS = #{superPairStatus}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="UserCustomerResult" flushCache="false">
+		select
+		<include refid="userCustomerColumns" />
+		from USER_CUSTOMER
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from USER_CUSTOMER
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from USER_CUSTOMER
+		<include refid="userCustomerDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="UserCustomerResult">
+		select
+		<include refid="userCustomerColumns" />
+		from USER_CUSTOMER
+		<include refid="userCustomerDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="queryCustomerList" resultMap="UserCustomerResult"
+		parameterType="HashMap">
+		select
+		<include refid="userCustomerColumns" />
+		from USER_CUSTOMER
+		<include refid="queryDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	
+	<select id="getUserNumber" resultType="long" parameterType="long">
+		select count(*) from USER_CUSTOMER where
+		instr(USER_CHAIN ,(select USER_CHAIN from USER_CUSTOMER where id=#{userId}))=1
+	</select>
+	
+	<select id="getDirectSubUserNumber" resultType="long" parameterType="long">
+		select count(*) from USER_CUSTOMER where PARENT_ID=#{userid}
+	</select>
+	
+	
+	<select id="getUserNumberByCondition" resultType="long"
+		parameterType="hashMap">
+		select
+		count(*)
+		from USER_CUSTOMER where USER_CHAIN like (select USER_CHAIN from USER_CUSTOMER where id=#{userId})||'%'
+		<if test="@Ognl@isNotEmpty(account)">
+		    and USER_CHAIN = (select USER_CHAIN from USER_CUSTOMER where account=#{account})
+		</if>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	
+
+	<select id="queryUserAndSubUserList" resultMap="UserCustomerResult"
+		parameterType="HashMap">
+		select
+		<include refid="userCustomerColumns" />
+		from USER_CUSTOMER
+		where
+		USER_CHAIN like (select USER_CHAIN from USER_CUSTOMER t where t.id = #{id})||'%'
+	</select>
+
+	<select id="getCountByCustomerList" resultType="long"
+		parameterType="HashMap">
+		select count(*) counts from USER_CUSTOMER
+		<include refid="queryDynamicWhere" />
+	</select>
+	<sql id="queryDynamicWhere">
+		<where>
+			<if test="@Ognl@isNotEmpty(account)">
+				<if test="@Ognl@isEmpty(isAccountMatch)">
+					and ACCOUNT = #{account}
+				</if>
+				<if test="@Ognl@isNotEmpty(isAccountMatch)">
+					and ACCOUNT like '%'||#{account}||'%'
+				</if>
+			</if>
+			<if test="@Ognl@isNotEmpty(isFreeze)">
+				and IS_FREEZE=#{isFreeze}
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				and EMAIL = #{email}
+			</if>
+			<if test="@Ognl@isNotEmpty(userLvl)">
+				and USER_LVL = #{userLvl}
+			</if>
+			<if test="@Ognl@isNotEmpty(fromDate)">
+			<![CDATA[
+				and REGISTER_DATE >= #{fromDate}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toDate)">
+			<![CDATA[
+				and REGISTER_DATE <= #{toDate}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(userChain)">
+				and USER_CHAIN like #{userChain}||'%'
+			</if>
+
+			<if test="@Ognl@isNotEmpty(parentId)">
+				and PARENT_ID = #{parentId}
+			</if>
+
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(fromLoginDate)">
+			<![CDATA[
+				and LAST_LOGIN_DATE >= #{fromLoginDate}
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(toLoginDate)">
+			<![CDATA[
+				and LAST_LOGIN_DATE <= #{toLoginDate}
+				]]>
+			</if>
+		</where>
+	</sql>
+	<update id="updateUserFreeze" parameterType="HashMap">
+		UPDATE USER_CUSTOMER
+		<set>
+
+			<if test="@Ognl@isNotEmpty(isFreeze)">
+				IS_FREEZE = #{isFreeze} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeId)">
+				freeze_id = #{freezeId} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeDate)">
+				FREEZE_DATE = #{freezeDate} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(unfreezeDate)">
+				UNFREEZE_DATE = #{unfreezeDate} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(freezer)">
+				FREEZER = #{freezer} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeMethod)">
+				FREEZE_METHOD = #{freezeMethod} ,
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeMemo)">
+				FREEZE_MEMO = #{freezeMemo},
+			</if>
+			<if test="@Ognl@isNotEmpty(freezeAccount)">
+				FREEZE_ACCOUNT = #{freezeAccount}
+			</if>
+		</set>
+		where ID in
+		<foreach collection="ids" index="index" item="user" open="("
+			separator="," close=")">
+			#{user}
+		</foreach>
+	</update>
+
+	<select id="queryUserByIds" resultMap="UserCustomerResult">
+		select
+		<include refid="userCustomerColumns" />
+		from USER_CUSTOMER
+		where
+		ID in
+		<foreach item="ids" index="index" collection="array" open="("
+			separator="," close=")">
+			#{ids}
+		</foreach>
+	</select>
+
+
+</mapper>

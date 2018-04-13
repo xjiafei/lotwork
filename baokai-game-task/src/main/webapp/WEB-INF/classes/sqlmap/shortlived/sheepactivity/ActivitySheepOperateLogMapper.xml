@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepOperateLog">
+	<resultMap id="ConfigResult" type="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepOperateLog">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="configColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	USER_NAME   as  userName,
+				OPERATE_NAME   as  operateName, 
+				ACTIVITY_ID  as  activityId,
+				ACTIVITY_CONFIG_ID as   activityConfigId, 
+			  	ACTIVITY_NAME  as activityName, 
+				ACTIVITY_CHILD_NAME  as  activityChildName, 
+				OPERATE_TYPE  as  operateType,
+				OPERATE_CONTENT  as  operateContent,
+				NUM as  num, 
+				GMT_CREATED as  gmtCreated			
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepOperateLog" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_ACTIVITY_SHEEP_OPERATE_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVITY_SHEEP_OPERATE (
+	        	ID,
+	        	USER_NAME,
+				OPERATE_NAME, 
+				ACTIVITY_ID,
+				ACTIVITY_CONFIG_ID, 
+			  	ACTIVITY_NAME, 
+				ACTIVITY_CHILD_NAME, 
+				OPERATE_TYPE,
+				OPERATE_CONTENT,
+				NUM, 
+				GMT_CREATED	
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{operateName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityConfigId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityName,javaType=string,jdbcType=VARCHAR} ,	
+	        	#{activityChildName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{operateType,javaType=long,jdbcType=DECIMAL} ,
+	        	#{operateContent,javaType=string,jdbcType=VARCHAR} ,
+	        	#{num,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP}	        	
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepOperateLog">
+	    <![CDATA[
+	        UPDATE ACTIVITY_SHEEP_OPERATE SET	        		        	
+	        	USER_NAME = #{userName,javaType=string,jdbcType=VARCHAR} ,
+	        	OPERATE_NAME = #{operateName,javaType=string,jdbcType=VARCHAR} ,
+	        	ACTIVITY_ID = #{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	ACTIVITY_CONFIG_ID = #{activityConfigId,javaType=long,jdbcType=DECIMAL} ,
+	        	ACTIVITY_NAME = #{activityName,javaType=string,jdbcType=VARCHAR} ,	
+	        	ACTIVITY_CHILD_NAME = #{activityChildName,javaType=string,jdbcType=VARCHAR} ,
+	        	OPERATE_TYPE = #{operateType,javaType=long,jdbcType=DECIMAL} ,
+	        	OPERATE_CONTENT = #{operateContent,javaType=string,jdbcType=VARCHAR} ,
+	        	NUM = #{num,javaType=long,jdbcType=DECIMAL} ,
+	        	GMT_CREATED = #{gmtCreated,javaType=object,jdbcType=TIMESTAMP}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACTIVITY_SHEEP_OPERATE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+		    <![CDATA[
+			    from ACTIVITY_SHEEP_OPERATE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+			    from ACTIVITY_SHEEP_HONG_BAO 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="configDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userName)">
+				and USER_NAME = #{userName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+	       <if test="@Ognl@isNotEmpty(activityId)">
+				and ACTIVITY_ID = #{activityId}
+			</if>
+			<if test="@Ognl@isNotEmpty(operateContent)">
+				and OPERATE_CONTENT = #{operateContent}
+			</if>
+			<if test="@Ognl@isNotEmpty(operateType)">
+				and OPERATE_TYPE = #{operateType}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="ConfigResult"  flushCache="false">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_OPERATE 
+
+		
+			ORDER BY ID 
+		
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACTIVITY_SHEEP_OPERATE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ACTIVITY_SHEEP_OPERATE 
+		<include refid="configDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="ConfigResult">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_OPERATE 
+		<include refid="configDynamicWhere"/>
+			ORDER BY id 
+    </select>
+
+
+</mapper>

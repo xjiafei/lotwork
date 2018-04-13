@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameWinsReport">
+	<resultMap id="GameWinsReportResult" type="com.winterframework.firefrog.game.dao.vo.GameWinsReport">
+	</resultMap>
+	
+	<resultMap id="GameWinsSumReportResult" type="com.winterframework.firefrog.game.dao.vo.WinsSumReport">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameWinsReportColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	LOTTERY_TYPE_CODE as lotteryTypeCode,
+	        	LOTTERY_SERIES_CODE as lotterySeriesCode,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	TOTAL_SALES as totalSales,
+	        	TOTAL_POINTS as totalPoints,
+	        	TOTAL_WINS as totalWins,
+	        	TOTAL_PROFIT as totalProfit,
+	        	TOTAL_CANCEL as totalCancel,
+	        	REPORT_DATE as reportDate
+	    ]]>
+	</sql>
+	
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameWinsReport" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_WINS_REPORT (
+	        	ID ,
+	        	LOTTERYID ,
+	        	LOTTERY_TYPE_CODE ,
+	        	LOTTERY_SERIES_CODE ,
+	        	GAME_GROUP_CODE ,
+	        	GAME_SET_CODE ,
+	        	BET_METHOD_CODE ,
+	        	ISSUE_CODE ,
+	        	WEB_ISSUE_CODE ,
+	        	TOTAL_SALES ,
+	        	TOTAL_POINTS ,
+	        	TOTAL_WINS ,
+	        	TOTAL_PROFIT ,
+	        	TOTAL_CANCEL ,
+	        	REPORT_DATE 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryTypeCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotterySeriesCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameGroupCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameSetCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betMethodCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{totalSales,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalPoints,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalWins,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalProfit,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalCancel,javaType=long,jdbcType=DECIMAL} ,
+	        	#{reportDate,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameWinsReport">
+	    <![CDATA[
+	        UPDATE GAME_WINS_REPORT SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        LOTTERY_TYPE_CODE = #{lotteryTypeCode,javaType=long,jdbcType=DECIMAL} ,
+		        LOTTERY_SERIES_CODE = #{lotterySeriesCode,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_GROUP_CODE = #{gameGroupCode,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_SET_CODE = #{gameSetCode,javaType=long,jdbcType=DECIMAL} ,
+		        BET_METHOD_CODE = #{betMethodCode,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        TOTAL_SALES = #{totalSales,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAL_POINTS = #{totalPoints,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAL_WINS = #{totalWins,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAL_PROFIT = #{totalProfit,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAL_CANCEL = #{totalCancel,javaType=long,jdbcType=DECIMAL} ,
+		        REPORT_DATE = #{reportDate,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_WINS_REPORT where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameWinsReportResult" flushCache="false">
+			select <include refid="gameWinsReportColumns" />
+		    <![CDATA[
+			    from GAME_WINS_REPORT 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameWinsReportResult" flushCache="false">
+			select <include refid="gameWinsReportColumns" />
+			    from GAME_WINS_REPORT 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameWinsReportDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryTypeCode)">
+				and LOTTERY_TYPE_CODE = #{lotteryTypeCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotterySeriesCode)">
+				and LOTTERY_SERIES_CODE = #{lotterySeriesCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameGroupCode)">
+				and GAME_GROUP_CODE = #{gameGroupCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(gameSetCode)">
+				and GAME_SET_CODE = #{gameSetCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betMethodCode)">
+				and BET_METHOD_CODE = #{betMethodCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(webIssueCode)">
+				and WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalSales)">
+				and TOTAL_SALES = #{totalSales}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalPoints)">
+				and TOTAL_POINTS = #{totalPoints}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalWins)">
+				and TOTAL_WINS = #{totalWins}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalProfit)">
+				and TOTAL_PROFIT = #{totalProfit}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalCancel)">
+				and TOTAL_CANCEL = #{totalCancel}
+			</if>
+	       <if test="@Ognl@isNotEmpty(reportDate)">
+				and REPORT_DATE = #{reportDate}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameWinsReportResult"  flushCache="false">
+    	select <include refid="gameWinsReportColumns" />
+	    from GAME_WINS_REPORT 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_WINS_REPORT 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_WINS_REPORT 
+		<include refid="gameWinsReportDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameWinsReportResult">
+    	select <include refid="gameWinsReportColumns" />
+	    from GAME_WINS_REPORT 
+		<include refid="gameWinsReportDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+    
+    <select id="getCountGameWinsReport" resultType="long"
+		parameterType="hashMap">
+		select count(*)
+		from GAME_WINS_REPORT
+		where REPORT_DATE between
+		to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss') and to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss') and LOTTERYID = #{lotteryid}
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="getAllGameWinsReport" resultMap="GameWinsReportResult"
+		parameterType="hashMap">
+		select
+				ID as id,
+	        	LOTTERYID as lotteryid,
+	        	(select LOTTERY_NAME
+			          from GAME_SERIES gs
+			         where gs.LOTTERYID = gwr.LOTTERYID) lotteryName,
+	        	LOTTERY_TYPE_CODE as lotteryTypeCode,
+	        	LOTTERY_SERIES_CODE as lotterySeriesCode,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	TOTAL_SALES as totalSales,
+	        	TOTAL_POINTS as totalPoints,
+	        	TOTAL_WINS as totalWins,
+	        	TOTAL_PROFIT as totalProfit,
+	        	TOTAL_CANCEL as totalCancel,
+	        	REPORT_DATE as reportDate
+		from GAME_WINS_REPORT gwr
+		where REPORT_DATE between to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss') and to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss') and LOTTERYID = #{lotteryid}
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="getWinsSumReport" resultMap="GameWinsSumReportResult"
+		parameterType="hashMap">
+		select (select LOTTERY_NAME
+		          from GAME_SERIES gs
+		         where gs.LOTTERYID = gwr.LOTTERYID) lotteryName,
+		       COUNT(DISTINCT issue_code) as totalIssueCount,
+		       SUM(TOTAL_SALES) as totalSalesSum,
+		       SUM(TOTAL_POINTS) as totalPointsSum,
+		       SUM(TOTAL_WINS) as totalWinsSum,
+		       SUM(TOTAL_PROFIT) as totalProfitSum,
+		       SUM(TOTAL_CANCEL) as totalCancelSum
+		  from GAME_WINS_REPORT gwr
+		  where  REPORT_DATE between to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss') and to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss') and LOTTERYID = #{lotteryid}
+		 group by lotteryid
+		
+	</select>
+	
+	<select id="getWinsDetailSumReport" resultMap="GameWinsSumReportResult"
+		parameterType="hashMap">
+		 select SUM(TOTAL_SALES) as totalSalesSum,
+		        SUM(TOTAL_POINTS) as totalPointsSum,
+		        SUM(TOTAL_WINS) as totalWinsSum,
+		        SUM(TOTAL_PROFIT) as totalProfitSum,
+		        SUM(TOTAL_CANCEL) as totalCancelSum
+		   from GAME_WINS_REPORT gwr
+		  where ISSUE_CODE = #{issueCode}
+		    and LOTTERYID = #{lotteryid}
+		  group by lotteryid
+	</select>
+	
+	
+	<select id="getWinsDetailReport" resultMap="GameWinsReportResult"
+		parameterType="hashMap">
+		select
+				ID as id,
+	        	LOTTERYID as lotteryid,
+	        	(select LOTTERY_NAME
+			          from GAME_SERIES gs
+			         where gs.LOTTERYID = gwr.LOTTERYID) lotteryName,
+	        	LOTTERY_TYPE_CODE as lotteryTypeCode,
+	        	LOTTERY_SERIES_CODE as lotterySeriesCode,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	TOTAL_SALES as totalSales,
+	        	TOTAL_POINTS as totalPoints,
+	        	TOTAL_WINS as totalWins,
+	        	TOTAL_PROFIT as totalProfit,
+	        	TOTAL_CANCEL as totalCancel,
+	        	REPORT_DATE as reportDate
+		from GAME_WINS_REPORT gwr
+		where ISSUE_CODE = #{issueCode} and LOTTERYID = #{lotteryid}
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameSlipDetail">
+	<resultMap id="GameSlipDetailResult" type="com.winterframework.firefrog.game.dao.vo.GameSlipDetail">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameSlipDetailColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	PARENT_ID as parentId,
+	        	BET_TYPE_CODE as betTypeCode, 
+	        	REAL_NUMBER as realNumber,
+	        	WIN_LEVEL	as winLevel,
+	        	UPDATE_TIME as updateTime,
+	        	CREATE_TIME as createTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameSlipDetail" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_SLIP_DETAIL_ID.Nextval from dual
+		</selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_SLIP_DETAIL (
+	        	ID ,
+	        	PARENT_ID ,
+	        	BET_TYPE_CODE ,
+	        	STATUS,
+	        	REAL_NUMBER,
+	        	WIN_LEVEL,
+	        	WIN_AMOUNT,
+	        	CREATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{parentId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{status,javaType=int,jdbcType=DECIMAL} , 
+	        	#{realNumber,javaType=string,jdbcType=VARCHAR} , 
+	        	#{winLevel,javaType=int,jdbcType=DECIMAL} , 
+	        	#{winAmount,javaType=long,jdbcType=DECIMAL} , 
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameSlipDetail">
+	    <![CDATA[
+	        UPDATE GAME_SLIP_DETAIL SET
+		        PARENT_ID = #{parentId,javaType=long,jdbcType=DECIMAL} ,
+		        BET_TYPE_CODE = #{betTypeCode,javaType=string,jdbcType=VARCHAR} , 
+		        STATUS=#{status,javaType=int,jdbcType=DECIMAL} , 
+		        REAL_NUMBER = #{realNumber,javaType=string,jdbcType=VARCHAR} ,
+		        WIN_LEVEL = #{winLevel,javaType=long,jdbcType=DECIMAL} ,
+		        WIN_AMOUNT=#{winAmount,javaType=long,jdbcType=DECIMAL} , 
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_SLIP_DETAIL where ID = #{id} 
+	    ]]>
+	    </delete>    
+	<select id="getByParentId" parameterType="long" resultMap="GameSlipDetailResult" flushCache="false">
+		select <include refid="gameSlipDetailColumns" />
+		  from GAME_SLIP_DETAIL 
+	     where PARENT_ID = #{parentId} 
+	</select> 
+</mapper>

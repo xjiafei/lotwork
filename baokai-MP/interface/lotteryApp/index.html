@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>宝开彩票手机版 - 最权威的数字彩投注客户端</title>
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="yes" name="apple-touch-fullscreen" />
+<meta content="telephone=no,email=no" name="format-detection" />
+<link href="lib.flexible/flexible.css" rel="styleSheet" type="text/css"/>
+<script src="lib.flexible/flexible.js"></script>
+<link rel="stylesheet" href="css/style.min.css" />
+<link rel="stylesheet" href="css/animation.min.css" />
+</head>
+<body>
+<div id="header" class="wrap">
+	<img class="img_place" src="images/bg.jpg" alt="">
+	<div class="slogan"></div>
+	<div class="button">
+		<a href="itms-services://?action=download-manifest&url=https://m.phoenix668.com/app/jiaoge_br.plist">立即安装</a>
+	</div>
+	<button class="download-problem" data-action="showTips">下载遇到问题?</button>
+</div>
+<div id="content" class="wrap">
+	<img class="img_place" src="images/f_bg.jpg" alt="">
+	<div class="cycle-slideshow"
+		data-cycle-slides="> div"
+		data-cycle-pager=".cycle-pager"
+		data-cycle-swipe="true"
+		data-cycle-fx="scrollHorz"
+        data-cycle-timeout="4000"
+        data-cycle-random="false"
+        data-cycle-speed="800"
+	>
+        <!-- data-cycle-auto-height="560:315" -->
+        <div class="feature">
+        	<span class="icon fa_icon"></span>
+        	<h2>全新界面</h2>
+        	<p>UI风格清爽简约、导航模式重新打造，投注体验无比流畅</p>
+        </div>
+        <div class="feature">
+        	<span class="icon fb_icon"></span>
+        	<h2>个性游戏</h2>
+        	<p>自由定制喜爱彩种，记录自己的常用玩法，更有美女视频开奖</p>
+        </div>
+        <div class="feature">
+        	<span class="icon fc_icon"></span>
+        	<h2>云端存储</h2>
+        	<p>实时云端同步您的游戏、投注与中奖记录，充提方便快捷</p>
+        </div>
+        <div class="feature">
+        	<span class="icon fd_icon"></span>
+        	<h2>精彩活动</h2>
+        	<p>不间断为您呈现精彩活动，大奖抽到手软，根本停不下来</p>
+        </div>
+    </div>
+    <div class="cycle-pager"></div>
+</div>
+
+<div id="tips" class="wrap">
+	<ul>
+		<li>请查看您的设备是否启用了移动网络或WiFi连接</li>
+		<li>如下载中断导致安装失败，请删除旧的APP后重新扫码下载</li>
+		<li>iPhone系统版本低于8.0或进行过越狱操作，可能导致安装失败</li>
+		<li>如始终无法正常下载安装，请联系客服并提供您的手机型号和系统版本，我们将第一时间为您解决问题</li>
+	</ul>
+	<div class="i-know" data-action="hideTips">我知道了</div>
+</div>
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.cycle2.min.js"></script>
+<script src="js/jquery.cycle2.swipe.min.js"></script>
+<script>
+$(function(){
+	var $tips = $('#tips');
+	$('[data-action]').on('click', function(){
+		var action = $(this).data('action');
+		if( action && action === 'showTips' && !$tips.hasClass('active') ){
+			$tips.addClass('active');
+		}else if( action && action === 'hideTips' && $tips.hasClass('active') ){
+			$tips.removeClass('active');
+		}
+		return false;
+	});
+});
+</script>
+</body>
+</html>

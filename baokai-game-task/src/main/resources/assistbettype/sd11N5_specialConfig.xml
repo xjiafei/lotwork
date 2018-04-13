@@ -1,0 +1,11 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	<bean id="betTypeAssistsd11N5" class="com.winterframework.firefrog.game.service.assist.bet.SpecialLotteryAssistMap">
+		<property name="parent" ref="speciallotteryConfigtemplateN115"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.SD115}" />
+	</bean>
+</beans>

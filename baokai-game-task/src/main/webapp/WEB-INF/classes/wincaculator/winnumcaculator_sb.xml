@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="false">
+	
+	<bean id="lotteryWinNumSbSingleDoubleCaculator"
+			class="com.winterframework.firefrog.game.service.wincaculate.number.sb.LotteryWinNumSbSingleDoubleCaculator">						
+	</bean>
+	<bean id="lotteryWinNumSbBigLittleCaculator"
+			class="com.winterframework.firefrog.game.service.wincaculate.number.sb.LotteryWinNumSbBigLittleCaculator">						
+	</bean>
+	
+	
+	<bean id="lottery99601"
+		class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- sb的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplateSb"></property>
+		<!-- 彩种类型 -->
+		<property name="lotteryType" value="${lottery.JSSB}" />
+	</bean>
+	<bean id="lottery99602"
+		class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- sb的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplateSb"></property>
+		<!-- 彩种类型 -->
+		<property name="lotteryType" value="${lottery.JLSB}" />
+	</bean>
+	<bean id="lottery99603"
+		class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<!-- sb的模板文件 -->
+		<property name="parent" ref="lotteryWinSlipNumccstemplateSb"></property>
+		<!-- 彩种类型 -->
+		<property name="lotteryType" value="${lottery.JLSBV}" />
+	</bean>
+</beans>

@@ -1,0 +1,205 @@
+<ion-view ng-click="cloaseAllWindow()">
+
+    <div class="bar bar-header bar-stable">
+        <!--弹出选择菜单-->
+        <div class="ar-popmenu {{menuShow? '':'menuShow'}}">
+            <ul>
+                <!--<li ng-click="showRecord()">投注记录</li>-->
+                 <li ng-click="yuanjiao()">模式 {{ moneyUnit==1?"元":"角" }}</li>
+                <!--<li ng-click="fullrefund()">返点全满</li>-->
+                <li ng-click="volumeSwich()">声2音 {{ volume ?'开':'关'}}</li>
+                <li ng-click="showPlayInfo()">玩法说明</li>
+            </ul>
+        </div>
+
+        <a class="button button-icon icon ion-chevron-left" ng-hide="iseditor" ng-click="goBack()"></a>
+
+        <h1 class="title" ng-click="changeMethod($event)">{{ currentMethodTitle }}<span
+                class="icon ion-chevron-down {{ poptypeshow ? 'ion-chevron-up':'ion-chevron-down'}}"
+                ng-hide="iseditor"></span></h1>
+        <!--<a href="javascript:;" class="yj" ng-click="yuanjiao()">{{ moneyUnit==1?"元":"角" }}</a>-->
+
+        <a class="button button-icon icon ion-more" ng-click="menuShowHander($event)"></a>
+
+    </div>
+    <!--游戏类型-->
+
+    <div class="ar-poptype" onscroll="true" ng-class="{active: poptypeshow}">
+        <!--业务模板数据-->
+        <div class="strategy-select">
+
+            <div class="row">
+                <div class="col mytitle {{initilesData[i].active ? 'active':''}}"
+                     ng-repeat="(i,gameClass) in serverGameConfig.gameMethods track by initiles($index,gameClass)"
+                     ng-click="slideChange(i,$event)">
+                    {{gameClass.title}}
+                </div>
+            </div>
+
+            <ion-slide-box on-slide-changed="slideHasChanged($index)" ng-click="slideChange()">
+                <ion-slide ng-repeat="(iii,gameClass) in serverGameConfig.gameMethods track by initMM($index)">
+                    <div class="strategy-list">
+                        <dl ng-repeat="gamelabel in gameClass.childs">
+                            <dt>{{gameClass.title+gamelabel.title }}</dt>
+                            <dd>
+                            <span class="{{ gameMethod.cur ? 'active':'' }}"
+                                  ng-click="chooseGame(gameMethod,iii)"
+                                  ng-repeat="gameMethod in gamelabel.childs track by initMethed($index,gameMethod,gameMethod.mode+'.'+gameMethod.parent+'.'+gameMethod.name,gameClass.title+gameMethod.title,iii)">
+                                {{gameMethod.title}}
+                            </span>
+                            </dd>
+                        </dl>
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+
+        </div>
+        <!--业务模板数据-->
+    </div>
+
+    <div class="pick-scroll">
+
+
+        <!--游戏记录-->
+        <div class="game-history {{isDanshi? 'isDanshi':'' }}">
+            <div class="history-bar">
+                <div class="{{historyShow ? '': 'record-list'}}">
+                    <table class="table table-hover morespecial" cellpadding="0" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>期号</th>
+                            <th>开奖结果</th>
+                            <th>投注</th>
+                            <th>奖金</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in historyRecord">
+                            <td><span class="time">{{item.time}}</span></td>
+                            <td>{{item.numberRecord}}</td>
+                            <td>{{item.totalprice}}</td>
+                            <td>{{item.bonus}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="history-bar-title">
+
+                <span ng-click="showRecord10($event)">{{ historyShow?'点击收起开奖记录':'点击查看开奖记录' }}<span
+                        class="{{historyShow?'ion-chevron-up' :'ion-chevron-down'}}"></span></span>
+
+                    <span class="ai-random" ng-click="getRandom()">机选一注</span>
+                </div>
+                <!--<span class="history-down">∨</span>-->
+
+            </div>
+        </div>
+
+        <!--选号容器-->
+        <div class="number-select-content {{isDanshi? 'isDanshi':'' }}">
+            <!--业务模板数据-->
+            <div class="number-select-list" ng-repeat="(ballLabel,balls) in ballsTree">
+                <div class="list-top">
+                    <h3>{{ ballLabel =='isEditor' ? '': ballLabel}}</h3>
+                    <ol>
+                        <li class="{{ val.cur ? 'active':''  }}" ng-repeat="(name,val) in balls.dxqdsq"
+                            ng-click="setGrounpChoose(name,balls,val,balls.dxqdsq,currentMethodName)">{{ val.val }}
+                        </li>
+                    </ol>
+                </div>
+                <ul class="ball-list">
+                    <li ng-repeat="(k,v) in range(this.startPosstion,balls.length+this.startPosstion)"
+                        class="{{ balls[k] ? 'active':'' }}" ng-click="result(balls,k,currentMethodName,v)">{{ v }}
+                    </li>
+                </ul>
+            </div>
+            <!--业务模板数据-->
+        </div>
+        <!--单式-->
+        <div class="number-select-content number-select-content2 {{isDanshi? '': 'isDanshi'}}">
+            <div class="row option-label {{beforesubmited?'':'beforesubmited'}}">
+                <div class="col label">请输入注单:</div>
+                <div ng-click="helprule()" class="col">帮助</div>
+                <div ng-click="clearVal()" class="col">清空</div>
+            </div>
+
+            <div class="row option-label {{beforesubmited?'beforesubmited':''}}">
+                <div class="col label">请输入注单:</div>
+                <div ng-click="helprule()" class="col">规则</div>
+                <div ng-click="cancelSubmited()" class="col">返回</div>
+            </div>
+
+            <div class="number-select-content-danshi">
+                <p id="tips-danshi" class="tips-danshi" style="color:#888;font-size:12px;line-height:170%;">
+                    1.输入的注单请参照如下规则：
+                    单注内各号码保持相连，
+                    不同注号码间用分隔符隔开；<br> 2.分隔符支持：回车[ ] 空格[ ] 逗号[,]
+                    分号[;] 冒号[：] 竖线[|];<br> 3.文件较大时，提交注单可能需要一定时间，请耐心等待；
+                </p>
+
+
+                <div class="nano"  id="about" >
+                    <div class="nano-content">
+                        <textarea  class="text-areas" rows="8" ng-focus="textareaFocus()" ng-blur="textareaBlur()"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="hasDanshiErrror">
+                <div class="showtextarea-err" ng-click="showtextareaError()">
+                    被排除的问题
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="bar bar-footer bar-stable {{ hasChoose && !isDanshi ?'active':'' }}">
+        <em class="text-center submit-button {{isDanshi && beforesubmited ? '': 'isDanshi'}} {{isfocus?'textareasubmitactive':''}}"
+            ng-click="textareaSubmit()">提交</em>
+        <ul class="custompluse" ng-class="{ titleText : extraisShow}">
+            <li class="pluseitem" ng-click="customMutiple(-10,$event)"><span class="n">-10</span></li>
+            <li class="pluseitem" ng-click="customMutiple(-1,$event)"><span class="n">-1</span></li>
+            <li class="pluseitem" ng-click="customMutiple(1,$event)"><span class="n">+1</span></li>
+            <li class="pluseitem" ng-click="customMutiple(10,$event)"><span class="n">+10</span></li>
+        </ul>
+
+        <div ng-hide="iseditor">
+            <div class="select-result">
+                <div class="result-title" ng-click="clickMutit($event)">
+                    <span ng-class="{ titleText : extraisShow}">{{ shopCar.multiple == 1?"倍投x1": ('x'+shopCar.multiple) }}</span>
+                    <input ng-class="{ titleInput : extraisShow}" type="tel" disabled ng-model="shopCar.multiple"
+                           ng-init="shopCar.multiple=1"
+                           ng-value="shopCar.multiple ">
+                </div>
+
+                <dl class="result-money" ng-click="setBukets(isDanshi ? 'imadanshi':undefined)">
+                    <!--业务模板数据-->
+                    <dt>已选{{ shopCar.count }}注x{{ shopCar.onePrice * shopCar.moneyUnit }}元</dt>
+                    <dd>{{ shopCar.count * shopCar.onePrice * shopCar.moneyUnit * shopCar.multiple | number:1}}元</dd>
+                    <!--业务模板数据-->
+                </dl>
+                <span class="result-plus"
+                      ng-click="setBukets(isDanshi ? 'imadanshi':undefined)">{{isDanshi ? ' ':'+'}}</span>
+
+            </div>
+            <div class="result-next {{isDanshi?'result-next2':''}}" ng-click="goBucket()">{{isDanshi?'确定':'号码篮'}}<span
+                    ng-show="ballBucket.length"
+                    class="result-count">{{ ballBucket.length }}</span>
+            </div>
+        </div>
+
+        <div ng-show="iseditor">
+            <div class="select-result select-result2">
+                <div class="result-title" ng-click="clickMutit($event)">
+                    <span ng-class="{ titleText : extraisShow}">{{ shopCar.multiple == 1?"倍投x1": ('x'+shopCar.multiple) }}</span>
+                    <input ng-class="{ titleInput : extraisShow}" type="tel" disabled ng-model="shopCar.multiple"
+                           ng-init="shopCar.multiple=1"
+                           ng-value="shopCar.multiple ">
+                </div>
+                <span ng-click="goBucket(true)" class="comfirm">确定</span>
+            </div>
+        </div>
+    </div>
+    </div>
+</ion-view>

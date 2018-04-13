@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.entity.GameDrawLevel">
+	<resultMap id="GameDrawLevelResult" type="com.winterframework.firefrog.user.entity.GameDrawLevel">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameDrawLevelColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTORYID as lottoryid,
+	        	ISSUE_CODE as issueCode,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	LEVEL_ONE as levelOne,
+	        	ISSUE_BONUS as issueBonus,
+	        	ISSUE_SHAPE as issueShape,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.user.entity.GameDrawLevel" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_DRAW_LEVEL_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_DRAW_LEVEL (
+	        	ID ,
+	        	LOTTORYID ,
+	        	ISSUE_CODE ,
+	        	WEB_ISSUE_CODE ,
+	        	LEVEL_ONE ,
+	        	ISSUE_BONUS ,
+	        	ISSUE_SHAPE ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lottoryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{levelOne,javaType=string,jdbcType=VARCHAR} ,
+	        	#{issueBonus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueShape,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createTime,javaType=object,jdbcType=OTHER} ,
+	        	#{updateTime,javaType=object,jdbcType=OTHER} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.user.entity.GameDrawLevel">
+	    <![CDATA[
+	        UPDATE GAME_DRAW_LEVEL SET
+		        LOTTORYID = #{lottoryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        LEVEL_ONE = #{levelOne,javaType=string,jdbcType=VARCHAR} ,
+		        ISSUE_BONUS = #{issueBonus,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_SHAPE = #{issueShape,javaType=string,jdbcType=VARCHAR} ,
+		        CREATE_TIME = #{createTime,javaType=object,jdbcType=OTHER} ,
+		        UPDATE_TIME = #{updateTime,javaType=object,jdbcType=OTHER} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_DRAW_LEVEL where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameDrawLevelResult" flushCache="false">
+			select <include refid="gameDrawLevelColumns" />
+		    <![CDATA[
+			    from GAME_DRAW_LEVEL 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameDrawLevelResult" flushCache="false">
+			select <include refid="gameDrawLevelColumns" />
+			    from GAME_DRAW_LEVEL 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameDrawLevelDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lottoryid)">
+				and LOTTORYID = #{lottoryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(webIssueCode)">
+				and WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(levelOne)">
+				and LEVEL_ONE = #{levelOne}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueBonus)">
+				and ISSUE_BONUS = #{issueBonus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueShape)">
+				and ISSUE_SHAPE = #{issueShape}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameDrawLevelResult"  flushCache="false">
+    	select <include refid="gameDrawLevelColumns" />
+	    from GAME_DRAW_LEVEL 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_DRAW_LEVEL 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_DRAW_LEVEL 
+		<include refid="gameDrawLevelDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameDrawLevelResult">
+    	select <include refid="gameDrawLevelColumns" />
+	    from GAME_DRAW_LEVEL 
+		<include refid="gameDrawLevelDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

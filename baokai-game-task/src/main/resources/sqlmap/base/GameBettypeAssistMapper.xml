@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameBettypeAssist">
+	<resultMap id="GameBettypeAssistResult" type="com.winterframework.firefrog.game.dao.vo.GameBettypeAssist">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameBettypeAssistColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	BETTYPEID as bettypeid,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	THEORY_BONUS as theoryBonus,
+	        	METHOD_TYPE as methodType
+	    ]]>
+	</sql>
+	    <select id="getById" parameterType="long" resultMap="GameBettypeAssistResult" flushCache="false">
+			select <include refid="gameBettypeAssistColumns" />
+		    <![CDATA[
+			    from GAME_BETTYPE_ASSIST 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getBettypeAssistListByTypeIds" parameterType="list"  resultMap="GameBettypeAssistResult" flushCache="false">
+			select <include refid="gameBettypeAssistColumns" />
+			    from GAME_BETTYPE_ASSIST 
+		        where BETTYPEID in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+					#{item}			
+				</foreach>		
+				order by BETTYPEID			
+		</select>	
+</mapper>

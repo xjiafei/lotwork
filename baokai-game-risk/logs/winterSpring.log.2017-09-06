@@ -1,0 +1,12 @@
+2017-09-06 13:25:09,733 [main] INFO  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Loading properties file from class path resource [application.properties]
+2017-09-06 13:25:09,754 [main] INFO  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Loading properties file from class path resource [db.properties]
+2017-09-06 13:25:09,764 [main] INFO  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Loading properties file from class path resource [redis.properties]
+2017-09-06 13:25:09,764 [main] INFO  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Loading properties file from class path resource [security.properties]
+2017-09-06 13:25:09,764 [main] INFO  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Loading properties file from class path resource [file.properties]
+2017-09-06 13:25:09,764 [main] INFO  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Loading properties file from class path resource [urlPath.properties]
+2017-09-06 13:25:09,764 [main] INFO  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Loading properties file from URL [file:/usr/local/config/gamerisk.properties]
+2017-09-06 13:25:09,764 [main] WARN  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Could not load properties from URL [file:/usr/local/config/gamerisk.properties]: \usr\local\config\gamerisk.properties (系统找不到指定的路径。)
+2017-09-06 13:25:09,764 [main] INFO  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Loading properties file from URL [file:C:/config/gamerisk.properties]
+2017-09-06 13:25:09,764 [main] WARN  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Could not load properties from URL [file:C:/config/gamerisk.properties]: C:\config\gamerisk.properties (系统找不到指定的文件。)
+2017-09-06 13:25:09,764 [main] INFO  [com.winterframework.modules.spring.exetend.ExtendedPropertyPlaceholderConfigurer] - Loading properties file from class path resource [griskversion.properties]
+2017-09-06 13:25:10,537 [main] INFO  [com.winterframework.orm.page.plugin.OffsetLimitInterceptor] - OffsetLimitInterceptor.dialect=com.winterframework.orm.dialect.OracleDialect

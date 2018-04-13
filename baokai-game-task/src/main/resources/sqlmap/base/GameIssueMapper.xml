@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameIssue">
+	<resultMap id="GameIssueResult"
+		type="com.winterframework.firefrog.game.dao.vo.GameIssue">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameIssueColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	ISSUE_CODE as issueCode,
+	        	LAST_ISSUE as lastIssue,
+	        	WEB_ISSUE_CODE as webIssueCode,
+	        	SALE_START_TIME as saleStartTime,
+	        	SALE_END_TIME as saleEndTime,
+	        	OPEN_DRAW_TIME as openDrawTime,
+	        	EC_VERIFIED_TIME as ecVerifiedTime,
+	        	RECIVCE_DRAW_TIME as recivceDrawTime,
+	        	FACTION_DRAW_TIME as factionDrawTime,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	PERIOD_STATUS as periodStatus,
+	        	PAUSE_STATUS as pauseStatus,
+	        	EVENT_STATUS as eventStatus,
+	        	SEQUENCE as sequence,
+	        	PLAN_FINISH_STATUS as planFinishStatus,
+	        	LAST_ISSUE_STOP as lastIssueStop ,
+	        	NUMBER_RECORD as numberRecord,
+	        	NUMBER_UPDATE_TIME as numberUpdateTime,
+	        	NUMBER_UPDATE_OPERATOR as numberUpdateOperator,
+	        	NUMBER_UPDATE_COUNT as numberUpdateCount,
+	        	AWARD_STRUCT as awardStruct,
+	        	PRE_NUMBER_RECORD as preNumberRecord,
+	        	ADMIN_END_CANCEL_TIME as adminEndCancelTime,
+	        	ISSUEWARN_EXCEPTION_TIME as issuewarnExceptionTime,
+	        	TRY_GET_NUMBER_COUNT as tryGetNumberCount
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameIssue"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_ISSUE_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_ISSUE (
+	        	ID ,
+	        	LOTTERYID ,
+	        	ISSUE_CODE ,
+	        	LAST_ISSUE ,
+	        	WEB_ISSUE_CODE ,
+	        	SALE_START_TIME ,
+	        	SALE_END_TIME ,
+	        	OPEN_DRAW_TIME ,
+	        	EC_VERIFIED_TIME,
+	        	RECIVCE_DRAW_TIME,
+	        	FACTION_DRAW_TIME ,
+	        	STATUS ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	PERIOD_STATUS,
+	        	PAUSE_STATUS,
+	        	EVENT_STATUS,
+	        	SEQUENCE,
+	        	PLAN_FINISH_STATUS,
+	        	LAST_ISSUE_STOP,
+	        	NUMBER_RECORD,
+	        	NUMBER_UPDATE_TIME,
+	        	NUMBER_UPDATE_OPERATOR,
+	        	NUMBER_UPDATE_COUNT,
+	        	AWARD_STRUCT
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lastIssue,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{saleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{saleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{openDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{ecVerifiedTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{recivceDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{factionDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{periodStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{pauseStatus,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{eventStatus,javaType=integer,jdbcType=DECIMAL},
+	        	#{sequence,javaType=long,jdbcType=DECIMAL} ,
+	        	#{planFinishStatus,javaType=integer,jdbcType=DECIMAL},
+	        	#{lastIssueStop,javaType=integer,jdbcType=DECIMAL},
+	        	#{numberRecord,javaType=string,jdbcType=VARCHAR},
+	        	#{numberUpdateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{numberUpdateOperator,javaType=long,jdbcType=DECIMAL} ,
+	        	#{numberUpdateCount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{awardStruct,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameIssue">
+	    <![CDATA[
+	        UPDATE GAME_ISSUE SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        SALE_START_TIME = #{saleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SALE_END_TIME = #{saleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        OPEN_DRAW_TIME = #{openDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        EC_VERIFIED_TIME = #{ecVerifiedTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        RECIVCE_DRAW_TIME = #{recivceDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        FACTION_DRAW_TIME = #{factionDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        PERIOD_STATUS = #{periodStatus,javaType=long,jdbcType=DECIMAL} ,
+		        PAUSE_STATUS=	#{pauseStatus,javaType=integer,jdbcType=DECIMAL} ,
+	        	EVENT_STATUS=#{eventStatus,javaType=integer,jdbcType=DECIMAL},
+	        	SEQUENCE=#{sequence,javaType=long,jdbcType=DECIMAL} ,
+	        	PLAN_FINISH_STATUS=#{planFinishStatus,javaType=integer,jdbcType=DECIMAL},
+	        	LAST_ISSUE_STOP=#{lastIssueStop,javaType=integer,jdbcType=DECIMAL},
+	        	NUMBER_RECORD =	#{numberRecord,javaType=string,jdbcType=VARCHAR},
+	        	NUMBER_UPDATE_TIME = #{numberUpdateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	NUMBER_UPDATE_OPERATOR = #{numberUpdateOperator,javaType=long,jdbcType=DECIMAL} ,
+	        	NUMBER_UPDATE_COUNT = #{numberUpdateCount,javaType=long,jdbcType=DECIMAL} ,
+	        	AWARD_STRUCT = #{awardStruct,javaType=string,jdbcType=VARCHAR},
+	        	ADMIN_END_CANCEL_TIME = #{adminEndCancelTime,javaType=date,jdbcType=TIMESTAMP}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<update id="updateGameIssue" parameterType="com.winterframework.firefrog.game.dao.vo.GameIssue">
+	        UPDATE GAME_ISSUE 
+	        <set>
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        SALE_START_TIME = #{saleStartTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SALE_END_TIME = #{saleEndTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        OPEN_DRAW_TIME = #{openDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        EC_VERIFIED_TIME = #{ecVerifiedTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        RECIVCE_DRAW_TIME = #{recivceDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        FACTION_DRAW_TIME = #{factionDrawTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        PERIOD_STATUS = #{periodStatus,javaType=long,jdbcType=DECIMAL} ,
+		        PAUSE_STATUS=	#{pauseStatus,javaType=integer,jdbcType=DECIMAL} ,
+	        	EVENT_STATUS=#{eventStatus,javaType=integer,jdbcType=DECIMAL},
+	        	SEQUENCE=#{sequence,javaType=long,jdbcType=DECIMAL},
+	        	NUMBER_RECORD =	#{numberRecord,javaType=string,jdbcType=VARCHAR},
+	        	NUMBER_UPDATE_TIME = #{numberUpdateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	NUMBER_UPDATE_OPERATOR = #{numberUpdateOperator,javaType=long,jdbcType=DECIMAL} ,
+	        	NUMBER_UPDATE_COUNT = #{numberUpdateCount,javaType=long,jdbcType=DECIMAL} ,
+	        	AWARD_STRUCT = #{awardStruct,javaType=string,jdbcType=VARCHAR} ,
+	        	ADMIN_END_CANCEL_TIME = #{adminEndCancelTime,javaType=date,jdbcType=TIMESTAMP}
+	        	<if test="@Ognl@isNotEmpty(issuewarnExceptionTime)">
+		        ,ISSUEWARN_EXCEPTION_TIME = #{issuewarnExceptionTime,javaType=long,jdbcType=DECIMAL}
+		        </if>
+		       </set>
+	        WHERE 
+		        ID = #{id} 
+	</update>
+	
+	
+		<update id="updataGameIssueSaleEnd" parameterType="com.winterframework.firefrog.game.dao.vo.GameIssue">
+	    <![CDATA[
+	        UPDATE GAME_ISSUE SET	       
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,		       
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        PERIOD_STATUS = #{periodStatus,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} and status = 1
+	    ]]>
+	</update>
+	<update id="updataGameIssueSaleStart" parameterType="com.winterframework.firefrog.game.dao.vo.GameIssue"> 
+        UPDATE GAME_ISSUE SET	       
+	        STATUS = #{status,javaType=integer,jdbcType=DECIMAL} ,		       
+	        PERIOD_STATUS = #{periodStatus,javaType=integer,jdbcType=DECIMAL} ,
+	        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP}
+        WHERE ID = #{id} and status =#{preStatus} 
+	</update>
+	
+	
+	<update id="updateManualLastIssue" parameterType="hashMap">
+	    <![CDATA[
+	        UPDATE GAME_ISSUE SET
+		        LAST_ISSUE = #{lastIssue,javaType=long,jdbcType=DECIMAL} ,
+		        SALE_START_TIME = #{saleStartTime,javaType=date,jdbcType=TIMESTAMP}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>		
+	
+	
+	
+	
+	
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_ISSUE where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="GameIssueResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueColumns" />
+		    <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getGameIssueByGameIssueCode" parameterType="long"
+		resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        ISSUE_CODE = #{issueCode} 
+		    ]]>
+	</select>
+
+	<select id="getGameIssueByTimeAndlotteryId" parameterType="hashmap"
+		resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        LOTTERYID = #{lotteryId}  and #{time} between SALE_START_TIME and SALE_END_TIME
+		    ]]>
+	</select>
+	
+	<select id="getGameIssueByWebIssueCodeAndlotteryId" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        LOTTERYID = #{lotteryId} and WEB_ISSUE_CODE=#{webIssueCode}
+		    ]]>
+	</select>
+	
+	<select id="getGameIssueByLotteryIdAndStatus" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        LOTTERYID = #{lotteryId}  and STATUS <= 6 And STATUS > 3 order By id 
+		    ]]>
+	</select>
+
+<!--  
+	<select id="getNextGameIssueByTimeAndlotteryId" parameterType="hashmap"
+		resultMap="GameIssueResult">
+		select <include refid="gameIssueColumns" /> from (
+		select *
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        LOTTERYID = #{lotteryId} and  SALE_START_TIME>=#{time} order by SALE_START_TIME asc
+		    ]]>) where rownum=1
+	</select>
+	-->
+	
+	<select id="getNextGameIssueByIssueAndLotteryId" parameterType="hashmap"
+		resultMap="GameIssueResult">
+		select <include refid="gameIssueColumns" />
+		    <![CDATA[   			
+			from GAME_ISSUE where ISSUE_CODE=(select min(t.issue_code) from game_issue t where t.lotteryid= #{lotteryId} and t.issue_code>#{issueCode})
+			and LOTTERYID = #{lotteryId}
+		    ]]>
+	</select>
+
+	<select id="getGameIssueByIssueCodeAndlotteryId" parameterType="hashmap"
+		resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        LOTTERYID = #{lotteryId} and ISSUE_CODE=#{issueCode}
+		    ]]>
+	</select>
+
+	<select id="getByIds" parameterType="list" resultMap="GameIssueResult"
+		flushCache="false">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="gameIssueDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(webIssueCode)">
+				and WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(saleStartTime)">
+				and SALE_START_TIME = #{saleStartTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(saleEndTime)">
+				and SALE_END_TIME = #{saleEndTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(openDrawTime)">
+				and OPEN_DRAW_TIME = #{openDrawTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(factionDrawTime)">
+				and FACTION_DRAW_TIME = #{factionDrawTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(periodStatus)">
+				and PERIOD_STATUS = #{periodStatus}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameIssueResult" flushCache="false">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from GAME_ISSUE
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_ISSUE
+		<include refid="gameIssueDynamicWhere" />
+	</select>
+	
+	<select id="getMaxSequence" parameterType="hashmap"
+		resultType="long">
+		select decode(max(sequence),null,0,max(sequence))
+		 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        SALE_START_TIME between #{startTime} and #{endTime} and LOTTERYID = #{lotteryId}
+		    ]]>
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+		<include refid="gameIssueDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getGameIssuesNumber" resultType="long"
+		parameterType="hashmap">
+		select count(*)
+		from GAME_ISSUE
+		where SALE_START_TIME between
+		to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss') and to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss') and LOTTERYID = #{lotteryId}
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+	<select id="getGameIssues" resultMap="GameIssueResult"
+		parameterType="hashmap">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+		where SALE_START_TIME between to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss') and to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss') and LOTTERYID = #{lotteryId}
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="getGameIssuesBylotteryId" parameterType="hashmap"
+		resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        open_draw_time between to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss') and to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss') and LOTTERYID = #{lotteryId}  order by SALE_START_TIME desc
+		    ]]>
+	</select>
+	
+	<select id="getTraceGameIssues" parameterType="hashmap"
+		resultMap="GameIssueResult">
+		select * from(
+		select
+		<include refid="gameIssueColumns" />
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        SALE_END_TIME > #{currentTime} and LOTTERYID = #{lotteryId}  order by SALE_START_TIME asc) where rownum<=#{maxCountIssue}
+		    ]]>
+	</select>
+	
+	<select id="getGameIssueByLotteryIdAndIssueCode" parameterType="hashmap" resultMap="GameIssueResult" flushCache="true">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+		where  LOTTERYID = ${lotteryId}
+		and  ISSUE_CODE = ${issueCode}
+	</select>
+	<select id="getByLotteryIdAndIssueCode" parameterType="hashmap" resultMap="GameIssueResult" flushCache="true">
+		select <include refid="gameIssueColumns" />
+		  from GAME_ISSUE
+		 where LOTTERYID = ${lotteryId}
+		   and ISSUE_CODE = ${issueCode}
+	</select>
+	
+		<select id="getGameIssueByWithoutLock" parameterType="hashmap" resultMap="GameIssueResult" flushCache="true">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+		where  LOTTERYID = ${lotteryId}
+		and  ISSUE_CODE = ${issueCode} 
+		and  EVENT_STATUS = ${status} and STATUS > 2
+		order by issue_code
+	</select>
+
+	<select id="getGameIssueByStatusAndOpenDrawTime" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+		<![CDATA[
+			WHERE STATUS = #{status} AND PERIOD_STATUS = #{periodStatus}
+			AND OPEN_DRAW_TIME < #{date} order by issue_code
+		]]>
+	</select>
+	<select id="getGameIssueByStatusAndSalesEndTime" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+		<![CDATA[
+			WHERE STATUS = #{status} AND PERIOD_STATUS = #{periodStatus}
+			AND SALE_END_TIME < #{date} order by issue_code
+		]]>
+	</select>
+	<select id="queryGameIssueByStatusAndSalesStartTime" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+		 from GAME_ISSUE
+		WHERE STATUS = #{status} 
+		  AND PERIOD_STATUS = #{periodStatus}
+		  AND SALE_START_TIME <![CDATA[<]]> #{date} 
+		order by issue_code
+	</select>
+	
+	
+	<select id="getGameIssueByStatusAndSalesEndTimeForStartSale"  parameterType="hashmap" resultMap="GameIssueResult">
+		 select <include refid="gameIssueColumns" />
+		 <![CDATA[
+		  from game_issue t , 
+		 (select min(issue_code) as issueCodes,lotteryid as lotteryids from game_issue tt where  tt.status=#{status} and tt.period_status =#{periodStatus}
+ 		and tt.sale_start_time < #{date} 
+ 		group by lotteryid) pp where t.issue_code = pp.issueCodes and t.lotteryid = pp.lotteryids
+ 		]]>
+	</select>
+	
+	<select id="getNextGameIssueByTimeAndLotteryId" parameterType="hashmap"
+		resultMap="GameIssueResult">
+		select <include refid="gameIssueColumns" /> from (
+		select *
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        LOTTERYID = #{lotteryId} and  SALE_START_TIME> #{date} order by SALE_START_TIME asc
+		    ]]>) where rownum=1
+	</select>
+	
+	<select id="getPreGameIssueByLotteryIdAndIssueCode" parameterType="hashmap"
+		resultMap="GameIssueResult">
+			select <include refid="gameIssueColumns" /> from (
+		select *
+			 <![CDATA[
+			    from GAME_ISSUE 
+		        where 
+		        LOTTERYID = ${lotteryId} and pause_status = 1 and  SALE_START_TIME <  (select SALE_START_TIME from game_issue where lotteryid=${lotteryId} and issue_code = ${issueCode} )  order by SALE_START_TIME desc
+		    ]]>) where rownum=1
+	</select>
+	
+	<select id="getGameIssueByStatus" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+				<include refid="gameIssueColumns" /> 
+	        	
+		from GAME_ISSUE t
+		<![CDATA[
+			WHERE STATUS = #{status} AND PERIOD_STATUS = #{periodStatus} and rownum <= 20 order by id
+		]]>
+	</select>
+
+	<select id="queryGameIssuesByIssueCodes" parameterType="hashmap" resultMap="GameIssueResult">
+		SELECT <include refid="gameIssueColumns" /> from GAME_ISSUE t 
+		WHERE 
+			t.lotteryid = #{lotteryid}
+		and
+			t.sale_start_time <![CDATA[>=]]> (select sale_start_time from GAME_ISSUE where issue_code=#{startIssueCode})
+		<if test="@Ognl@isNotEmpty(endIssueCode)">
+		and
+			t.sale_end_time <![CDATA[<=]]> (select sale_end_time from GAME_ISSUE where issue_code=#{endIssueCode})
+		</if>
+	</select>
+	
+	<update id="updateGameIssueLastIssueStop" parameterType="hashmap">
+		UPDATE GAME_ISSUE t 
+			SET t.last_issue_stop = #{lastIssueStop} 
+		WHERE t.lotteryid = #{lotteryid} and 
+			t.issue_code = #{issueCode}
+	</update>
+	
+	<select id="getEarlierSuspendedGameIssue" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+		<![CDATA[
+		WHERE PAUSE_STATUS = 0 
+		AND SALE_END_TIME < (select SALE_END_TIME from GAME_ISSUE WHERE ISSUE_CODE = #{issueCode} AND LOTTERYID = #{lotteryId})
+		]]>
+	</select>
+	
+	<select id="getMaxGameIssuesByLotteryId" parameterType="long" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+			WHERE id=(select max(id) from game_issue where lotteryid=#{lotteryId})
+	</select>
+	
+	<select id="getMaxGameIssuesByLotteryIdAndYear" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+		from GAME_ISSUE
+			WHERE id=(select max(id) from game_issue where lotteryid=#{lotteryId} and issue_code like #{yearCode}||'%')
+	</select>
+	
+	
+	<select id="getMaxGameIssuesByLotteryIdAndDate" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+		<![CDATA[
+		from GAME_ISSUE
+			WHERE id in (select id from GAME_ISSUE where SALE_END_TIME in (select max(DISTINCT(SALE_END_TIME)) from game_issue s where s.lotteryid=#{lotteryId} and s.SALE_START_TIME < #{saleStartTime}) and LOTTERYID =#{lotteryId})
+			]]>
+	</select>
+	
+	<select id="getMaxGameIssuesByLotteryIdAndYearAndDate" parameterType="hashmap" resultMap="GameIssueResult">
+		select
+		<include refid="gameIssueColumns" />
+		<![CDATA[
+		from GAME_ISSUE
+			WHERE id in(select id from  GAME_ISSUE where SALE_END_TIME in (select max(DISTINCT(SALE_END_TIME)) from  game_issue s where s.lotteryid=#{lotteryId} and s.SALE_START_TIME < #{saleStartTime} and s.issue_code like #{yearCode}||'%') and LOTTERYID =#{lotteryId})
+			]]>
+	</select>
+	
+	<select id="getNextGameIssueByPlanIdAndIssueCode" parameterType="hashmap" resultMap="GameIssueResult">
+	    select
+  		<include refid="gameIssueColumns" />
+	      from GAME_ISSUE t
+		 where t.issue_code = (select min(issue_code)
+		                         from game_plan_detail pd
+		                        where pd.planid = #{planId}
+		                          and pd.issue_code > #{issueCode})
+	</select>
+	
+	<select id="getGameIssueForIssueFinished" resultMap="GameIssueResult">
+		
+		select <include refid="gameIssueColumns" />,rownum
+	  from game_issue t
+	  <![CDATA[
+	 where  t.status = 7
+	   and t.period_status = 7
+	   and not exists (select 1
+	          from game_wins_report r
+	         where r.issue_code = t.issue_code
+	           and t.lotteryid = r.lotteryid) and rownum <=10 order by id
+	           ]]>
+	</select>
+	
+	
+	<select id="getNoAwardNumberSaleEndIssue" parameterType="map" resultMap="GameIssueResult" flushCache="false">
+		<![CDATA[
+		select
+				i.ID as id,
+	        	i.LOTTERYID as lotteryid,
+	        	i.ISSUE_CODE as issueCode,
+	        	i.WEB_ISSUE_CODE as webIssueCode,
+	        	i.SALE_START_TIME as saleStartTime,
+	        	i.SALE_END_TIME as saleEndTime,
+	        	i.OPEN_DRAW_TIME as openDrawTime,
+	        	i.FACTION_DRAW_TIME as factionDrawTime,
+	        	i.STATUS as status,
+	        	i.CREATE_TIME as createTime,
+	        	i.UPDATE_TIME as updateTime,
+	        	i.PERIOD_STATUS as periodStatus,
+	        	i.PAUSE_STATUS as pauseStatus,
+	        	i.EVENT_STATUS as eventStatus,
+	        	i.SEQUENCE as sequence,
+	        	i.PLAN_FINISH_STATUS as planFinishStatus,
+	        	i.LAST_ISSUE_STOP as lastIssueStop ,
+	        	i.NUMBER_RECORD as numberRecord,
+	        	i.NUMBER_UPDATE_TIME as numberUpdateTime,
+	        	i.NUMBER_UPDATE_OPERATOR as numberUpdateOperator,
+	        	i.NUMBER_UPDATE_COUNT as numberUpdateCount
+			    from GAME_ISSUE i
+			    LEFT JOIN GAME_DRAW_RESULT d 
+			    ON i.LOTTERYID = d.LOTTERYID and i.ISSUE_CODE = d.ISSUE_CODE
+		        where d.NUMBER_RECORD IS NULL 
+				and i.SALE_END_TIME  < #{time}	
+				and (i.TRY_GET_NUMBER_COUNT is null or i.TRY_GET_NUMBER_COUNT = 0)
+				and i.LOTTERYID != 99112 and i.LOTTERYID != 99601 and i.LOTTERYID != 99306 
+				and i.LOTTERYID != 99602 and i.LOTTERYID != 99603 and i.LOTTERYID != 99113 
+				and rownum <=99 order by id			
+				 ]]>
+	</select>
+	<!-- 获取奖期 根据彩种和理论开奖时间  -->
+	<select id="getGameIssueByLotteryIdAndDay" parameterType="hashmap" resultMap="GameIssueResult">
+		select <include refid="gameIssueColumns" />
+		from GAME_ISSUE 	 
+		where substr(issue_code,1,8) between #{startDay} and #{endDay}
+		  and LOTTERYID = #{lotteryId}
+	</select>
+	
+	<select id="getSsqGameIssueForMail" parameterType="hashmap" resultMap="GameIssueResult">
+	
+		select <include refid="gameIssueColumns" />
+		from GAME_ISSUE 
+		<![CDATA[	 
+		where SALE_END_TIME > #{startDay} and SALE_END_TIME <= #{endDay}
+		  and LOTTERYID = #{lotteryId}
+		  ]]>
+	</select>
+	
+	
+	
+	
+	<update id="updateTry" parameterType="hashmap">
+	    <![CDATA[
+	        UPDATE GAME_ISSUE SET
+	        	TRY_GET_NUMBER_COUNT = #{count} 	        
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	
+	<select id="getUserAccount" parameterType="long" resultType="string">
+		select account from user_customer where id = #{userId}
+	</select>
+	
+	<select id="getNoNumberLatestByLotteryIdAndTime" parameterType="hashmap" resultMap="GameIssueResult">
+		select <include refid="gameIssueColumns" />
+		from GAME_ISSUE a
+		where LOTTERYID =#{lotteryId} 
+		<![CDATA[
+		and status = 2
+		and SALE_END_TIME <= #{nowTime}  
+		and (TRY_GET_NUMBER_COUNT is null or TRY_GET_NUMBER_COUNT < 4)
+		and not exists(select 1 from game_draw_result b where LOTTERYID = #{lotteryId}  and a.ISSUE_CODE = b.issue_code)
+		]]>
+	</select>
+	<select id="getGameIssueLastWebIssueCode" parameterType="map" resultType="string">
+		 select web_issue_code from 
+		  (<![CDATA[select web_issue_code from game_issue where lotteryid=#{lotteryId} and  to_char(OPEN_DRAW_TIME,'yyyy') = to_char(#{date},'yyyy') AND 
+		 	SALE_START_TIME < #{date} order by SALE_START_TIME desc ]]>) where rownum = 1
+	</select>	
+</mapper>

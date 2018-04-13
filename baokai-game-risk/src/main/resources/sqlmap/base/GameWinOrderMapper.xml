@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.entity.GameWinOrder">
+	<resultMap id="GameWinOrderResult" type="com.winterframework.firefrog.user.entity.GameWinOrder">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameWinOrderColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ORDERID as orderid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	LOTTORYID as lottoryid,
+	        	COUNT_WIN as countWin,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	ACTUAL_WIN as actualWin
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.user.entity.GameWinOrder" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_WIN_ORDER_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_WIN_ORDER (
+	        	ID ,
+	        	ORDERID ,
+	        	USERID ,
+	        	ISSUE_CODE ,
+	        	LOTTORYID ,
+	        	COUNT_WIN ,
+	        	ORDER_TIME ,
+	        	CALCULATE_WIN_TIME ,
+	        	SALE_TIME ,
+	        	ACTUAL_WIN 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{orderid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lottoryid,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{countWin,javaType=long,jdbcType=DECIMAL} ,
+	        	#{orderTime,javaType=object,jdbcType=OTHER} ,
+	        	#{calculateWinTime,javaType=object,jdbcType=OTHER} ,
+	        	#{saleTime,javaType=object,jdbcType=OTHER} ,
+	        	#{actualWin,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.user.entity.GameWinOrder">
+	    <![CDATA[
+	        UPDATE GAME_WIN_ORDER SET
+		        ORDERID = #{orderid,javaType=long,jdbcType=DECIMAL} ,
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        LOTTORYID = #{lottoryid,javaType=integer,jdbcType=DECIMAL} ,
+		        COUNT_WIN = #{countWin,javaType=long,jdbcType=DECIMAL} ,
+		        ORDER_TIME = #{orderTime,javaType=object,jdbcType=OTHER} ,
+		        CALCULATE_WIN_TIME = #{calculateWinTime,javaType=object,jdbcType=OTHER} ,
+		        SALE_TIME = #{saleTime,javaType=object,jdbcType=OTHER} ,
+		        ACTUAL_WIN = #{actualWin,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_WIN_ORDER where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameWinOrderResult" flushCache="false">
+			select <include refid="gameWinOrderColumns" />
+		    <![CDATA[
+			    from GAME_WIN_ORDER 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameWinOrderResult" flushCache="false">
+			select <include refid="gameWinOrderColumns" />
+			    from GAME_WIN_ORDER 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameWinOrderDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orderid)">
+				and ORDERID = #{orderid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lottoryid)">
+				and LOTTORYID = #{lottoryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(countWin)">
+				and COUNT_WIN = #{countWin}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orderTime)">
+				and ORDER_TIME = #{orderTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(calculateWinTime)">
+				and CALCULATE_WIN_TIME = #{calculateWinTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(saleTime)">
+				and SALE_TIME = #{saleTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(actualWin)">
+				and ACTUAL_WIN = #{actualWin}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameWinOrderResult"  flushCache="false">
+    	select <include refid="gameWinOrderColumns" />
+	    from GAME_WIN_ORDER 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_WIN_ORDER 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_WIN_ORDER 
+		<include refid="gameWinOrderDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameWinOrderResult">
+    	select <include refid="gameWinOrderColumns" />
+	    from GAME_WIN_ORDER 
+		<include refid="gameWinOrderDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

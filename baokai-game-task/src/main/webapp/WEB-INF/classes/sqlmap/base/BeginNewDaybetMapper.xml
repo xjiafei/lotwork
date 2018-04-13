@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginNewDaybet">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginNewDaybet">
+			<result column="ID" property="id"/>
+			<result column="CREATE_USER" property="createUser"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="MODIFY_USER" property="modifyUser"/>
+			<result column="MODIFY_TIME" property="modifyTime"/>
+			<result column="DAYBET_AMOUNT" property="daybetAmount"/>
+			<result column="IS_AMOUNT" property="isAmount"/>
+			<result column="AMOUNT" property="amount"/>
+			<result column="IS_LOTTERY" property="isLottery"/>
+			<result column="LOTTERY" property="lottery"/>
+			<result column="LOTTERY_TYPE" property="lotteryType"/>
+			<result column="VERSION" property="version"/>
+
+ </resultMap>
+	<sql id="fields">ID,CREATE_USER,CREATE_TIME,MODIFY_USER,MODIFY_TIME,DAYBET_AMOUNT,IS_AMOUNT,AMOUNT,IS_LOTTERY,LOTTERY,LOTTERY_TYPE,VERSION
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="createUser != null">
+			And CREATE_USER = #{createUser}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="modifyUser != null">
+			And MODIFY_USER = #{modifyUser}
+		</if>
+
+		<if test="modifyTime != null">
+			And MODIFY_TIME = #{modifyTime}
+		</if>
+
+		<if test="daybetAmount != null">
+			And DAYBET_AMOUNT = #{daybetAmount}
+		</if>
+
+		<if test="isAmount != null">
+			And IS_AMOUNT = #{isAmount}
+		</if>
+
+		<if test="amount != null">
+			And AMOUNT = #{amount}
+		</if>
+
+		<if test="isLottery != null">
+			And IS_LOTTERY = #{isLottery}
+		</if>
+
+		<if test="lottery != null">
+			And LOTTERY = #{lottery}
+		</if>
+
+		<if test="lotteryType != null">
+			And LOTTERY_TYPE = #{lotteryType}
+		</if>
+
+		<if test="version != null">
+			And VERSION = #{version}
+		</if>
+
+		</where>
+
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewDaybet">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_DAYBET
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_DAYBET
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_DAYBET
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginNewDaybet"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_NEW_DAYBET.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_NEW_DAYBET (
+	        <include refid="fields"/>)
+	        Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{createUser,javaType=string,jdbcType=VARCHAR},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{modifyUser,javaType=string,jdbcType=VARCHAR},
+	         #{modifyTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{daybetAmount,javaType=long,jdbcType=DECIMAL},
+	         #{isAmount,javaType=string,jdbcType=VARCHAR},
+	         #{amount,javaType=long,jdbcType=DECIMAL},
+	         #{isLottery,javaType=string,jdbcType=VARCHAR},
+	         #{lottery,javaType=long,jdbcType=DECIMAL},
+	         #{lotteryType,javaType=long,jdbcType=DECIMAL},
+	         #{version,javaType=long,jdbcType=DECIMAL}
+	        )
+	</insert>
+
+	<select id="getCountByPage" resultType="Long">
+		Select count(1) 
+				From BEGIN_NEW_DAYBET
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getByPage" resultType="Long">
+		Select <include refid="fields" /> 
+				From BEGIN_NEW_DAYBET
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+	<select id="findMaxVersion" resultMap="result" >
+		Select <include refid="fields"/>
+				From BEGIN_NEW_DAYBET
+		where VERSION = (select max(VERSION) from BEGIN_NEW_TOLBET) order by id
+	</select>
+	
+	<select id="getMaxVersion" resultType="long">
+		Select nvl(max(version),0)
+				From BEGIN_NEW_DAYBET
+	</select>
+	
+	<select id="findByVersion" resultMap="result" parameterType="long">
+		Select <include refid="fields"/>
+				From BEGIN_NEW_DAYBET
+		where VERSION = #{version}
+	</select>
+
+	<select id="getDayBetAward" parameterType="map" resultMap="result">
+		select <include refid="fields" />  from begin_new_daybet a 
+		<![CDATA[where VERSION = #{version} AND DAYBET_AMOUNT <= #{betAmount} ]]>
+		and not exists( select 1 from begin_award b where b.user_id = #{userId} and mission_id = a.id and award_type1 = #{missionType} 
+		and to_char(b.CREATE_TIME,'yyyymmdd') = to_char(sysdate,'yyyymmdd'))
+		and not exists( select 1 from begin_award_lottery c where c.user_id = #{userId} and c.mission_id = a.id and c.LOTTERY_TYPE1 = #{missionType} 
+		and to_char(c.CREATE_TIME,'yyyymmdd') = to_char(sysdate,'yyyymmdd'))		
+	</select>
+
+</mapper>

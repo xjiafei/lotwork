@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameOrderWin">
+	<resultMap id="GameOrderWinResult" type="com.winterframework.firefrog.game.dao.vo.GameOrderWin">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameOrderWinColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ORDERID as orderid,
+	        	USERID as userid,
+	        	ISSUE_CODE as issueCode,
+	        	LOTTERYID as lotteryid,
+	        	COUNT_WIN as countWin,
+	        	ORDER_TIME as orderTime,
+	        	CALCULATE_WIN_TIME as calculateWinTime,
+	        	SALE_TIME as saleTime,
+	        	STATUS as status,
+	        	WINS_RATIO as winsRatio,
+	        	MAXSLIP_WINS as maxslipWins,
+	        	SLIP_WINSRATIO as slipWinsratio,
+	        	IS_NOTICE as isNotice,
+	        	DIAMOND_COUNT_WIN as diamondCountWin
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameOrderWin" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_ORDER_WIN_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_ORDER_WIN (
+	        	ID ,
+	        	ORDERID ,
+	        	USERID ,
+	        	ISSUE_CODE ,
+	        	LOTTERYID ,
+	        	COUNT_WIN ,
+	        	ORDER_TIME ,
+	        	CALCULATE_WIN_TIME ,
+	        	SALE_TIME ,
+	        	STATUS ,
+	        	WINS_RATIO ,
+	        	MAXSLIP_WINS ,
+	        	SLIP_WINSRATIO ,
+	        	IS_NOTICE,
+	        	DIAMOND_COUNT_WIN
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{orderid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{countWin,javaType=long,jdbcType=DECIMAL} ,
+	        	#{orderTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{calculateWinTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{saleTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{winsRatio,javaType=long,jdbcType=DECIMAL} ,
+	        	#{maxslipWins,javaType=long,jdbcType=DECIMAL} ,
+	        	#{slipWinsratio,javaType=long,jdbcType=DECIMAL} ,
+	        	#{isNotice,javaType=long,jdbcType=DECIMAL} ,
+	        	#{diamondCountWin,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameOrderWin">
+	    <![CDATA[
+	        UPDATE GAME_ORDER_WIN SET
+		        ORDERID = #{orderid,javaType=long,jdbcType=DECIMAL} ,
+		        USERID = #{userid,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        LOTTERYID = #{lotteryid,javaType=integer,jdbcType=DECIMAL} ,
+		        COUNT_WIN = #{countWin,javaType=long,jdbcType=DECIMAL} ,
+		        ORDER_TIME = #{orderTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        CALCULATE_WIN_TIME = #{calculateWinTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        SALE_TIME = #{saleTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+		        WINS_RATIO = #{winsRatio,javaType=long,jdbcType=DECIMAL} ,
+		        MAXSLIP_WINS = #{maxslipWins,javaType=long,jdbcType=DECIMAL} ,
+		        SLIP_WINSRATIO = #{slipWinsratio,javaType=long,jdbcType=DECIMAL} ,
+		        IS_NOTICE = #{isNotice,javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+		<update id="updateWinOrders" parameterType="hashmap">
+			UPDATE GAME_ORDER_WIN SET
+				STATUS = #{status}
+			where LOTTERYID=#{lotteryid} and ISSUE_CODE=#{issueCode}
+		</update>
+		
+		<update id="updateStatus" parameterType="hashMap" >				
+			    UPDATE GAME_ORDER_WIN SET STATUS =  #{status} 
+		        where ORDERID in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}				
+				</foreach>					
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_ORDER_WIN where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameOrderWinResult" flushCache="false">
+			select <include refid="gameOrderWinColumns" />
+		    <![CDATA[
+			    from GAME_ORDER_WIN 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameOrderWinResult" flushCache="false">
+			select <include refid="gameOrderWinColumns" />
+			    from GAME_ORDER_WIN 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameOrderWinDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orderid)">
+				and ORDERID = #{orderid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userid)">
+				and USERID = #{userid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(countWin)">
+				and COUNT_WIN = #{countWin}
+			</if>
+	       <if test="@Ognl@isNotEmpty(orderTime)">
+				and ORDER_TIME = #{orderTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(calculateWinTime)">
+				and CALCULATE_WIN_TIME = #{calculateWinTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(saleTime)">
+				and SALE_TIME = #{saleTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(winsRatio)">
+				and WINS_RATIO = #{winsRatio}
+			</if>
+	       <if test="@Ognl@isNotEmpty(maxslipWins)">
+				and MAXSLIP_WINS = #{maxslipWins}
+			</if>
+	       <if test="@Ognl@isNotEmpty(slipWinsratio)">
+				and SLIP_WINSRATIO = #{slipWinsratio}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameOrderWinResult"  flushCache="false">
+    	select <include refid="gameOrderWinColumns" />
+	    from GAME_ORDER_WIN 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_ORDER_WIN 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_ORDER_WIN 
+		<include refid="gameOrderWinDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameOrderWinResult">
+    	select <include refid="gameOrderWinColumns" />
+	    from GAME_ORDER_WIN 
+		<include refid="gameOrderWinDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	<select id="getGameOrderWinsByLotteryIdAndIssueCode" parameterType="hashmap" resultMap="GameOrderWinResult" flushCache="false">
+			select <include refid="gameOrderWinColumns" />,
+			(select order_code from game_order where id = orderid) as orderCode
+		    <![CDATA[
+			    from GAME_ORDER_WIN 
+		        where 
+		        ISSUE_CODE = #{issueCode} AND LOTTERYID = #{lotteryId}
+		    ]]>
+		    <if test="@Ognl@isNotEmpty(date)">
+		        and SALE_TIME = #{date}
+		    </if>
+	</select>
+	
+	<select id="getOrderWinAmountbyOrderCode" parameterType="string" resultType="long">
+	     <![CDATA[ select count_win from game_order_win where orderid = (select id from game_order where order_code = #{orderCode}) and status <> 3]]>
+	</select>
+	
+	<select id="getOrderWinByOrderId" parameterType="long" resultMap="GameOrderWinResult">
+		select <include refid="gameOrderWinColumns" /> 
+		from GAME_ORDER_WIN
+		WHERE ORDERID = #{orderId} 
+	</select>
+	<delete id="deleteByLotteryIssue"  parameterType="hashMap">
+	    <![CDATA[
+	        delete from GAME_ORDER_WIN where
+			 	LOTTERYID = #{lotteryid}    
+				and ISSUE_CODE = #{issueCode}
+	    ]]>
+	    </delete> 
+	    
+	<select id="selectUnNoticeSendedMondeyWinOrder" parameterType="long" resultMap="GameOrderWinResult">
+		select <include refid="gameOrderWinColumns" /> 
+		from GAME_ORDER_WIN win 
+		<![CDATA[
+		WHERE exists (select 1 from game_order o where o.id = win.orderid)
+		   and win.STATUS = 1
+		   AND nvl(win.IS_NOTICE, 0) = 0
+		   AND rownum < 500
+		]]>
+	</select>	
+</mapper>

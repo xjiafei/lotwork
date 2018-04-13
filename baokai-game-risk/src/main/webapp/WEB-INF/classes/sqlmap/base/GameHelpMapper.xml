@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameHelp">
+	<resultMap id="GameHelpResult"
+		type="com.winterframework.firefrog.game.dao.vo.GameHelp">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameHelpColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	GAME_GROUP_CODE as gameGroupCode,
+	        	GAME_SET_CODE as gameSetCode,
+	        	BET_METHOD_CODE as betMethodCode,
+	        	GAME_PROMPT_DES as gamePromptDes,
+	        	GAME_EXAMPLES_DES as gameExamplesDes,
+	        	CRETEAT_TIME as creteatTime,
+	        	UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameHelp"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_HELP.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_HELP (
+	        	ID ,
+	        	LOTTERYID ,
+	        	GAME_GROUP_CODE ,
+	        	GAME_SET_CODE ,
+	        	BET_METHOD_CODE ,
+	        	GAME_PROMPT_DES ,
+	        	GAME_EXAMPLES_DES ,
+	        	CRETEAT_TIME ,
+	        	UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{gameGroupCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{gameSetCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{betMethodCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{gamePromptDes,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gameExamplesDes,javaType=string,jdbcType=VARCHAR} ,
+	        	#{creteatTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameHelp">
+	    <![CDATA[
+	        UPDATE GAME_HELP SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        GAME_GROUP_CODE = #{gameGroupCode,javaType=int,jdbcType=DECIMAL} ,
+		        GAME_SET_CODE = #{gameSetCode,javaType=int,jdbcType=DECIMAL} ,
+		        BET_METHOD_CODE = #{betMethodCode,javaType=int,jdbcType=DECIMAL} ,
+		        GAME_PROMPT_DES = #{gamePromptDes,javaType=string,jdbcType=VARCHAR} ,
+		        GAME_EXAMPLES_DES = #{gameExamplesDes,javaType=string,jdbcType=VARCHAR} ,
+		        CRETEAT_TIME = #{creteatTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+
+	<update id="updateForCheck" parameterType="com.winterframework.firefrog.game.dao.vo.GameHelp">
+	    <![CDATA[
+	        UPDATE GAME_HELP SET
+		        GAME_PROMPT_DES = #{gamePromptDes,javaType=string,jdbcType=VARCHAR} ,
+		        GAME_EXAMPLES_DES = #{gameExamplesDes,javaType=string,jdbcType=VARCHAR} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        LOTTERYID = #{lotteryid} AND
+		        GAME_GROUP_CODE = #{gameGroupCode} AND
+		        GAME_SET_CODE = #{gameSetCode} AND
+		        BET_METHOD_CODE = #{betMethodCode} 
+	    ]]>
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_HELP where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="GameHelpResult"
+		flushCache="false">
+		select
+		<include refid="gameHelpColumns" />
+		    <![CDATA[
+			    from GAME_HELP 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="GameHelpResult"
+		flushCache="false">
+		select
+		<include refid="gameHelpColumns" />
+		from GAME_HELP
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getGameHelpByLotteryId" parameterType="long"
+		resultMap="GameHelpResult">
+		select
+		<include refid="gameHelpColumns" />
+		from GAME_HELP
+		where LOTTERYID = #{lotteryid} 
+		order by GAME_GROUP_CODE, GAME_SET_CODE, BET_METHOD_CODE
+	</select>
+	
+	<select id="getByBetMethod" parameterType="hashmap"
+		resultMap="GameHelpResult">
+		select
+		<include refid="gameHelpColumns" />
+		from GAME_HELP
+		where LOTTERYID = #{lotteryid} 
+		and GAME_GROUP_CODE = #{gameGroupCode} and GAME_SET_CODE = #{gameSetCode} and BET_METHOD_CODE = #{betMethodCode}
+	</select>
+
+	<sql id="gameHelpDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(gameGroupCode)">
+				and GAME_GROUP_CODE = #{gameGroupCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(gameSetCode)">
+				and GAME_SET_CODE = #{gameSetCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(betMethodCode)">
+				and BET_METHOD_CODE = #{betMethodCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(gamePromptDes)">
+				and GAME_PROMPT_DES = #{gamePromptDes}
+			</if>
+			<if test="@Ognl@isNotEmpty(gameExamplesDes)">
+				and GAME_EXAMPLES_DES = #{gameExamplesDes}
+			</if>
+			<if test="@Ognl@isNotEmpty(creteatTime)">
+				and CRETEAT_TIME = #{creteatTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameHelpResult" flushCache="false">
+		select
+		<include refid="gameHelpColumns" />
+		from GAME_HELP
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from GAME_HELP
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_HELP
+		<include refid="gameHelpDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameHelpResult">
+		select
+		<include refid="gameHelpColumns" />
+		from GAME_HELP
+		<include refid="gameHelpDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.active.dao.vo.ActivityLog">
+	<resultMap id="result" type="com.winterframework.firefrog.active.dao.vo.ActivityLog">
+	</resultMap>	
+	<resultMap id="ActivityConfig" type="com.winterframework.firefrog.active.dao.vo.ActivityConfig">
+	</resultMap>
+	<sql id="DynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(userId)">
+				and user_id = #{userId}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(activityId)">
+				and activity_id = #{activityId}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and (CREATE_TIME >= #{createTime} or CREATE_TIME is null)
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(awardTime)">
+	       		<![CDATA[
+				and (AWARD_TIME <= #{awardTime} or AWARD_TIME is null)
+				]]>
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and status = #{status}
+			</if>
+		</where>
+	</sql>
+	
+	 
+    <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.active.dao.vo.ActivityLog" 
+			useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_ACTIVITY_LOG_ID.Nextval from dual
+			   	    </selectKey>
+		<![CDATA[
+	        INSERT INTO
+	        ACTIVITY_LOG (
+	        	ID ,
+	        	USER_ID,
+	        	ACTIVITY_ID,
+	        	PRIZE,
+	        	CREATE_TIME,
+				AWARD_TIME  ,
+				STATUS, 
+				MEMO,
+				RESULT_ID
+			) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{prize,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=object,jdbcType=TIMESTAMP} ,	        
+	        	#{awardTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,       	
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,       
+	        	#{resultId,javaType=long,jdbcType=DECIMAL}
+	        )
+	    ]]>	
+	
+		</insert>
+		<select id="queryActivityLogCount" resultType="long">
+	    	select count(*) from activity_log
+	    	<include refid="DynamicWhere" />
+	    </select>
+	    
+	    <select id="queryWhiteList" resultType="java.lang.String">
+	    	SELECT * FROM ACTIVITY_WHITELIST
+	    </select>
+	    
+	    <select id="getActCfgById" parameterType="long" resultMap="ActivityConfig" flushCache="false">
+	    	select ID AS id,
+	    	 BEGIN_TIME AS beginTime,
+	    	 END_TIME AS endTime,
+	    	 MAX_PRIZE AS maxPrize,
+	    	 MIN_PRIZE AS minPrize,
+	    	 MEMO AS memo
+	    	from ACTIVITY_CONFIG WHERE ID=#{id} 
+	    </select>
+	    
+<!-- 	    <select id="getActivtyLogByUserId" resultMap="ActivityLog" flushCache="false"> -->
+<!-- 	    	SELECT  -->
+<!-- 	    	ID AS id, -->
+<!-- 	    	USER_ID AS userId, -->
+<!-- 	    	ACTIVITY_ID AS activityId, -->
+<!-- 	    	PRIZE AS prize, -->
+<!-- 	    	CREATE_TIME AS createTime, -->
+<!-- 	    	AWARD_TIME AS awardTime, -->
+<!-- 	    	STATUS AS status, -->
+<!-- 	    	MEMO AS memo -->
+<!-- 	    	FROM ACTIVITY_LOG WHERE USER_ID = #{userId} AND ACTIVITY_ID = #{activityId} -->
+<!-- 	    	ORDER BY CREATE_TIME ASC -->
+<!-- 	    </select> -->
+
+</mapper>

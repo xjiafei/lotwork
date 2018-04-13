@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GamePackageItem">
+	<resultMap id="GamePackageItemResult" type="com.winterframework.firefrog.game.dao.vo.GamePackageItem">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gamePackageItemColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	PACKAGEID as packageid,
+	        	BET_TYPE_CODE as betTypeCode,
+	        	MONEY_MODE as moneyMode,
+	        	TOTBETS as totbets,
+	        	TOTAMOUNT as totamount,
+	        	MULTIPLE as multiple,
+	        	BET_DETAIL as betDetail,
+	        	CREATE_TIME as createTime,
+	        	FILE_MODE as fileMode,
+	        	MUTI_AWARD as mutiAward,
+	        	EVALUATE_AWARD as evaluateAward,
+	        	RET_POINT_CHAIN as retPointChain,
+	        	AWARD_MODE as awardMode,
+	        	RET_POINT as retPoint,
+	        	RET_AWARD as retAward
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GamePackage" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_GAME_PACKAGE_ITEM_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_PACKAGE_ITEM (
+	        	ID ,
+	        	PACKAGEID ,
+	        	BET_TYPE_CODE ,
+	        	MONEY_MODE ,
+	        	TOTBETS ,
+	        	TOTAMOUNT ,
+	        	MULTIPLE ,
+	        	BET_DETAIL ,
+	        	CREATE_TIME ,
+	        	FILE_MODE ,
+	        	MUTI_AWARD ,
+	        	EVALUATE_AWARD ,
+	        	RET_POINT_CHAIN,
+	        	AWARD_MODE,
+	        	RET_POINT,
+	        	RET_AWARD
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{packageid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{moneyMode,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{totbets,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totamount,javaType=long,jdbcType=DECIMAL} ,
+	        	#{multiple,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{betDetail,javaType=string,jdbcType=VARCHAR} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{fileMode,javaType=integer,jdbcType=DECIMAL},
+	        	#{mutiAward,javaType=integer,jdbcType=DECIMAL} ,
+	        	#{evaluateAward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{retPointChain,javaType=string,jdbcType=VARCHAR},
+	        	#{awardMode,javaType=integer,jdbcType=DECIMAL},
+	        	#{retPoint,javaType=long,jdbcType=DECIMAL},
+	        	#{retAward,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GamePackage">
+	    <![CDATA[
+	        UPDATE GAME_PACKAGE_ITEM SET
+		        PACKAGEID = #{packageid,javaType=long,jdbcType=DECIMAL} ,
+		        BET_TYPE_CODE = #{betTypeCode,javaType=string,jdbcType=VARCHAR} ,
+		        MONEY_MODE = #{moneyMode,javaType=integer,jdbcType=DECIMAL} ,
+		        TOTBETS = #{totbets,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAMOUNT = #{totamount,javaType=long,jdbcType=DECIMAL} ,
+		        MULTIPLE = #{multiple,javaType=integer,jdbcType=DECIMAL} ,
+		        BET_DETAIL = #{betDetail,javaType=string,jdbcType=VARCHAR} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        FILE_MODE = #{fileMode,javaType=integer,jdbcType=DECIMAL} ,
+		        MUTI_AWARD = #{mutiAward,javaType=long,jdbcType=DECIMAL} ,
+		        EVALUATE_AWARD = #{evaluateAward,javaType=long,jdbcType=DECIMAL} ,
+		        RET_POINT_CHAIN = #{retPointChain,javaType=string,jdbcType=VARCHAR},
+		        AWARD_MODE=#{awardMode,javaType=integer,jdbcType=DECIMAL},
+		        RET_POINT=#{retPoint,javaType=long,jdbcType=DECIMAL},
+	        	RET_AWARD=#{retAward,javaType=long,jdbcType=DECIMAL}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_PACKAGE_ITEM where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GamePackageItemResult" flushCache="false">
+			select <include refid="gamePackageItemColumns" />
+		    <![CDATA[
+			    from GAME_PACKAGE_ITEM 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		
+		<select id="getPackageItemListByPackageId" parameterType="long" resultMap="GamePackageItemResult" flushCache="false">
+			select <include refid="gamePackageItemColumns" />
+		    <![CDATA[
+			    from GAME_PACKAGE_ITEM 
+		        where 
+		        PACKAGEID = #{packageId} 
+		        order by id 
+		    ]]>
+		</select>
+		
+		<select id="getByIds" parameterType="list"  resultMap="GamePackageItemResult" flushCache="false">
+			select <include refid="gamePackageItemColumns" />
+			    from GAME_PACKAGE_ITEM 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gamePackageItemDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(packageid)">
+				and PACKAGEID = #{packageid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betMethodCode)">
+				and BET_TYPE_CODE = #{betTypeCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(moneyMode)">
+				and MONEY_MODE = #{moneyMode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totbets)">
+				and TOTBETS = #{totbets}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totamount)">
+				and TOTAMOUNT = #{totamount}
+			</if>
+	       <if test="@Ognl@isNotEmpty(multiple)">
+				and MULTIPLE = #{multiple}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betDetail)">
+				and BET_DETAIL = #{betDetail}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(fileMode)">
+				and FILE_MODE = #{fileMode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(mutiAward)">
+				and MUTI_AWARD = #{mutiAward}
+			</if>
+	       <if test="@Ognl@isNotEmpty(evaluateAward)">
+				and EVALUATE_AWARD = #{evaluateAward}
+			</if>
+	       <if test="@Ognl@isNotEmpty(retPointChain)">
+				and RET_POINT_CHAIN = #{retPointChain}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GamePackageItemResult"  flushCache="false">
+    	select <include refid="gamePackageItemColumns" />
+	    from GAME_PACKAGE_ITEM 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_PACKAGE_ITEM 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_PACKAGE_ITEM 
+		<include refid="gamePackageItemDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GamePackageItemResult">
+    	select <include refid="gamePackageItemColumns" />
+	    from GAME_PACKAGE_ITEM 
+		<include refid="gamePackageItemDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+  
+     <select id="getplanItem" parameterType="HashMap" resultMap="GamePackageItemResult">
+    	select  gpi.ID as id,
+	        	gpi.PACKAGEID as packageid,
+	        	gpi.BET_TYPE_CODE as betTypeCode,
+	        	gpi.MONEY_MODE as moneyMode,
+	        	gpi.TOTBETS as totbets,
+	        	gpi.TOTAMOUNT as totamount,
+	        	gpi.MULTIPLE as multiple,
+	        	gpi.BET_DETAIL as betDetail,
+	        	gpi.CREATE_TIME as createTime,
+	        	gpi.FILE_MODE as fileMode,
+	        	gpi.MUTI_AWARD as mutiAward,
+	        	gpi.EVALUATE_AWARD as evaluateAward,
+	        	gpi.RET_POINT_CHAIN as retPointChain,
+	        	gpi.AWARD_MODE as awardMode,
+	        	gpi.RET_POINT as retPoint,
+	        	gpi.RET_AWARD as retAward
+	    from GAME_PLAN gp, GAME_PLAN_DETAIL gpd, GAME_PACKAGE_ITEM gpi
+		where gp.id = gpd.PLANID  
+		and  gp.PACKAGE_ID = gpi.PACKAGEID
+		and  gpd.STATUS = 0
+		and  gpd.issue_code = #{issuecode}
+		and  gp.LOTTERYID = #{lotteryid}
+   </select>
+</mapper>

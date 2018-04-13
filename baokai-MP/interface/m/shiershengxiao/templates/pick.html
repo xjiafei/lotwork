@@ -1,0 +1,290 @@
+<div class="my-content" has-bouncing="false">
+    <div class="morespecial morespecial2">
+        <div class="bbb">
+            <div class="bbb2">
+                <ion-scroll direction="y" scrollbar-y="true" zooming="false" class="scroll2" has-bouncing="false">
+                    <div class="morespecial-c-bg morespecial-c-bg2">
+                        <div class="morespecial-c">
+                            <h1>游戏说明</h1>
+                            <h2>基础知识</h2>
+                            <p>十二生肖游戏是以秒开时时彩为基础，适应手机平台特点开发的小游戏。
+                                因此您会看到 转轮上的数字 以及个位、十位的标识；投注详情里每条记录后括号中的说明；</p>
+                            <p>秒开时时彩是由宝开彩票集团根据十五年彩票销售经验，依据广受彩民喜爱的时时彩游戏提炼、优化而来；</p>
+                            <p>秒秒彩由用户自主（用户点击）立即开奖，每期开奖包含五位，分别为：万位、千位、百位、十位、个位。每一位从0-9之间的随机开出一个数字；
+                                同时，每一位又称为 一个"星"，故有 五星、四星、三星、二星、一星的说法。即五个玩法群，顾名思义玩法群下面还会有很多种不同玩法；</p>
+
+                            <h3>十二生肖与秒秒彩 玩法对应关系</h3>
+                            <img src="img/1.jpg" alt="">
+
+                            <h3>各玩法中奖条件及奖金</h3>
+                            <img src="img/2.jpg" alt="">
+
+                            <h3>1080P未删节版说明</h3>
+
+                            <p>轮盘中外圈采用的是秒秒彩 个位 开出的结果。0-9十个数字分别对应 鼠牛兔蛇马羊猴鸡狗猪 十种生肖。例如
+                                当用户押注猴时，等同于押注了个位的6。当开奖结果为6时（此时指针指向猴），用户即为中奖。
+                                这实际是秒秒彩 一星 玩法群中的 个位复式 玩法。因此在投注记录中的括号内有如下提示：</p>
+
+                            <code>
+                                个位：猴
+                                （一星_复式 个位 -,-,-,-,6）
+                            </code>
+
+                            <p>注：提示信息中从左至右依次显示 万,千,百,十,个位的投注内容，之间用 , 号隔开。
+                                - 表示在某一位上用户未投注。
+                            </p>
+
+                            <p>轮盘中内圈采用的是秒秒彩 十位 开出的结果。0-9十个数字中奇数对应虎、偶数对应龙。例如
+                                当用户押注龙时，等同于押注了十位的所有偶数(0,2,4,6,8)。当开出结果为任意偶数，比如8（此时指针指向龙8），用户即为中奖。</p>
+
+                            <p>这实际是秒秒彩 一星 玩法群中的 十位复式 玩法。因此在投注记录中的括号内有如下提示：</p>
+
+                            <code> 十位： 龙（一星复式 -,-,-,02468,-）</code>
+
+                            <p>高级玩法同时取决于个、十 两位的开奖结果。例如 当用户选择了龙8和猴6进行押注时，等同于押注了8（十位）、6（个位）。当同时开出十位为8、个位为6（此时指针指向
+                                猴和龙8）,用户即为中奖。</p>
+                            <p>这实际是秒秒彩 二星 玩法群中的，后二_直选复式 玩法。因此在投注记录中的括号内有如下提示:</p>
+
+                            <code>
+                                高级 ： 龙8、猴6
+
+                                （后二_直选复式 -,-,-,8,6）
+                            </code>
+
+
+                            <p>除此之外，秒秒彩中还有着丰富多样的玩法（五星复试奖金180000元），您可以进入秒秒彩游戏中进行了解；</p>
+
+                        </div>
+                    </div>
+                </ion-scroll>
+            </div>
+            <img src="img/download.png">
+        </div>
+    </div>
+    <div class="morespecial {{showrc?'block':''}}" ng-click="clickmorespecial()">
+        <div class="bbb">
+            <div class="bbb2">
+                <ion-scroll direction="y" scrollbar-y="true" zooming="false" class="scroll2" has-bouncing="false">
+                    <div class="morespecial-c-bg">
+                        <div class="morespecial-c">
+                            <table class="table table-hover" cellpadding="0" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>期号</th>
+                                    <th>开奖结果</th>
+                                    <th>投注金额</th>
+                                    <th>中奖金额</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in config.records"
+                                    ng-click="recordetail(item.enid,item.orderCode,$event)">
+                                    <td><span class="time">{{item.time | date:'MM-dd HH:mm:ss'}}</span></td>
+                                    <td><span class="d">{{item.numberRecord}}</span></td>
+                                    <td><span class="d">{{item.totalprice}}</span></td>
+                                    <td><span class="d">{{item.bonus ? ((item.bonus | number:2)+'元'):'未中奖'}}</span>
+                                        >
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </ion-scroll>
+            </div>
+            <img src="img/download.png">
+        </div>
+    </div>
+    <div class="titles">
+        <div class="row">
+            <div class="col">
+                <div class="mychoose"><img ng-click="showRecord()" src="img/recordbutton.png" alt=""></div>
+            </div>
+            <div class="col text-right">
+                <div class="issuss" ng-click="showRecord()">
+
+                    <div class="issuss-c">
+                        <img src="img/beforeissue.png" alt="">
+                        <div class="issuss-ccc">
+                            <div class="issue-data">
+                                <span>{{numberMaps.an}}</span><span class="n">{{numberMaps.a}}</span>
+
+                                <span class="w">{{numberMaps.bn}}</span><span>{{numberMaps.b}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mod"></div>
+    <div class="rotation-bg">
+        <div class="myissuesshow">
+            <div class="myissuesshow-c">
+                <span>{{numberMaps.an}}</span><span class="n">{{numberMaps.a}}</span><span
+                    class="w">{{numberMaps.bn}}</span><span>{{numberMaps.b}}</span>
+            </div>
+        </div>
+
+        <div class="select-opotion">
+            <div class="ll" ng-click="goexpation2()"><img ng-src="img/lefttrim.png"
+                                                          my-touchstart="onTouch($event,$element)" class="touchimg"
+                                                          alt=""></div>
+            <div class="rr text-right" ng-click="openModal()">
+                <div class="advancepieliu">{{advancepieliu}}</div>
+                <img on-touchstart="onTouch($event,$element)"
+                     class="touchimg" ng-src="img/righttrim01.png" alt=""></div>
+        </div>
+
+        <div class="bd">
+
+            <div class="peiliu">{{geweipieliu}}</div>
+            <div class="mainrotation">
+                <div class="centerpoint">
+                    <div class="chipitem-contain">
+                    </div>
+                </div>
+            </div>
+            <div class="arrowdrawing"></div>
+            <div class="bigdrawing">
+                <div class="jiang" ng-if="geweiWing">
+                    <div class="hh3"><img src="img/tit_price.png" alt=""></div>
+                    <div class="pp3">{{geweiWing | number:1}}</div>
+                </div>
+            </div>
+            <div class="minpeiliu">{{shiweipieliu}}</div>
+            <div class="minrotation">
+                <div class="dragontigerdrawing dragontigerdrawing_r">
+                    <table class="jiang" ng-if="shiweiWing">
+                        <tr>
+                            <td>
+                                <span class="hh3"><img src="img/tit_price.png" alt=""></span><br>
+                                <span class="pp3">{{shiweiWing | number:1}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="mindrawing"></div>
+        </div>
+
+        <div class="bottom-choose">
+            <div class="row">
+                <div class="col">
+                    <div class="balances">
+                        <table cellspacing="0" cellpadding="0" class="c">
+                            <tr style="visibility: hidden;">
+                                <td>space</td>
+                            </tr>
+                            <tr>
+                                <td><span class="balance-number">{{config.balance | number:2}}</span>
+                                    <!--<a href="">&lt;!&ndash;<img src="img/charge.png" alt=""/>&ndash;&gt;</a>-->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="col text-right">
+                    <div class="prewin">
+                        <table cellspacing="0" cellpadding="0" class="c">
+                            <tr style="visibility: hidden;">
+                                <td>space</td>
+                            </tr>
+                            <tr>
+                                <td><span class="balance-number">{{config.winMoney | number:2}}</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="advancedpopup">
+    <div class="advanced">
+        <div class="close-bottun"><img ng-click="confirmPopupClose()" src="img/close.png" alt=""/></div>
+        <div class="h33 h332"><b>高级玩法</b><span>{{advaceTip}}</span></div>
+        <!--选号容器-->
+        <div class="number-select-content">
+            <!--业务模板数据-->
+            <div class="number-select-list" ng-repeat="(ballLabel,balls) in ballsTree">
+                <div class="gp" ng-if="ballLabel=='个位'">
+                    <span class="h33"><span class="one-word">{{ ballLabel}}</span></span>
+                <span class="itemgroup">
+                    <span ng-repeat="(k,v) in range(0,10)"
+                          class="item-detail"
+                          ng-click="result(balls,k,currentMethodName,v,$event)"><img
+                            ng-src="img/ami{{v}}.png" alt="">
+
+                    </span>
+                </span>
+                </div>
+                <div class="gp" ng-if="ballLabel=='十位'">
+                    <span class="h33"><span class="one-word">{{ ballLabel}}</span></span>
+                <span class="itemgroup">
+                    <span
+                            ng-repeat="(k,v) in range(0,10)"
+                            ng-if="$index % 2 ==0"
+                            class="item-detail"
+                            ng-click="result(balls,k,currentMethodName,v,$event)"><img
+                            ng-src="img/dragon{{v}}.png" alt="">
+
+                    </span>
+                    <span ng-repeat="(k,v) in range(0,10)"
+                          ng-if="$index % 2 != 0"
+                          class="item-detail"
+                          ng-click="result(balls,k,currentMethodName,v,$event)"><img
+                            ng-src="img/dragon{{v}}.png" alt="">
+                    </span>
+                </span>
+                </div>
+            </div>
+            <!--业务模板数据-->
+        </div>
+
+
+        <div class="playnow">
+            <div class="ballpool">
+                <div class="num">{{advancepieliu}}</div>
+                <div>请在此下注</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script id="templates/recordetail.html" type="text/ng-template">
+    <div style="overflow: scroll">
+        <div id="about" class="nano">
+            <div class="nano-content">
+                <table class="table table-hover record-detail" cellpadding="0" cellspacing="0">
+                    <tbody ng-repeat="item in recordetailData">
+                    <tr>
+                        <td><span class="d">{{item.betDetail.myreplace()}}</span></td>
+                        <td><span class="d">投注</span></td>
+                        <td><span class="d">{{item.totamount/10000 | number:2}}元</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="d">（{{item.gamePlayName}} {{item.betDetail}}）</span></td>
+                        <td><span class="d"> 奖金 </span></td>
+                        <td><span class="d"> {{item.award ? ((item.award/10000 | number:2)+'元')   : '未中奖'}}</span></td>
+                    </tr>
+
+
+                    <tr class="emptys">
+                        <td>空</td>
+                        <td>空</td>
+                        <td>空</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="whatsthat"><a ng-click="goexpation()">括号里的内容是什么？</a></div>
+
+</script>

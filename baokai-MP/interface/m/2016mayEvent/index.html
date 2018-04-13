@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html id="html">
+<head>
+    <meta charset="utf-8" />
+    <title>宝开拉霸</title>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="stylesheet" href="css/basic.css" />
+</head>
+<body>
+    <div class="main">
+        <header>
+            <div class="layout">
+                <div class="banner">
+                    <div class="progress-bar">
+                        <div class="progress-bar-tips">
+                            <div class="arrow"></div>
+                            <p>距离下一等级还需投注<strong id="betDiff">1000</strong></p>
+                        </div>
+                        <div class="progress-bar-inner"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+
+        <article>
+            <div class="layout">
+                <div class="content">
+                    <div class="content1">
+                        <div id="endTime" class="end-time"></div>
+                        <div id="betAmount" class="bet-amount"></div>
+                        <div id="betRatio" class="bet-ratio"></div>
+                        <div id="flipball" class="flipball_wrap"></div>
+                        <ul class="handle-hand">
+                            <li class="hand-up"></li>
+                            <li class="hand-mid"></li>
+                            <li class="hand-down"></li>
+                        </ul>
+                    </div>
+                    <div class="content2">
+                        <div id="hisBonus" class="his-bonus"></div>
+                    </div>
+                    <div class="content3">
+                        <div class="notice" id="notice">
+                            <ul></ul>
+                        </div>
+                    </div>
+                    <div class="content4">
+                        <div class="end-time"></div>
+                    </div>
+                </div>
+                
+            </div>
+        </article>
+    </div>
+    <div class="mask"></div>
+    <div class="pop">
+        <div id="betBonus" class="bet-bonus"></div>
+        <div id="betMultiple" class="bet-multiple"></div>
+        <div class="btn">确定</div>
+    </div>
+<!--引入js库-->
+<script type="text/javascript">
+    var fitPage = function(){
+        var w = document.body.clientWidth;
+        w = w > 640 ? 640: w;
+        w = w / 640;
+        w = w * 100;
+        document.getElementById('html').style.fontSize = w + 'px';
+    }
+    fitPage();
+    var t;
+    var func = function(){
+        clearTimeout(t);
+        t = setTimeout(fitPage, 25);
+    }
+    window.onresize = function(){
+        func();
+    };
+</script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/mousewheel.js"></script>
+<script type="text/javascript" src="js/easyscroll.js"></script>
+<script type="text/javascript" src="js/ball_utils.js"></script>
+<script type="text/javascript" src="js/slot.js?23432"></script>
+</body>
+</html>

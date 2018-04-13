@@ -1,0 +1,455 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="false">
+	
+	<!-- 連肖(中) -->
+	<bean id="lhcContinueInCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LhcContinueInCaculator"/>
+	
+	<!-- 連肖(不中) -->
+	<bean id="lhcContinueNotInCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LhcContinueNotInCaculator"/>
+	
+	<!-- 連碼三中二 中二 -->
+	<bean id="lhcContinueCode322Caculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LhcContinueCode322Caculator"/>
+	
+	<!-- 連碼三中二 中三 -->
+	<bean id="lhcContinueCode323Caculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LhcContinueCode323Caculator"/>
+	
+	<!-- 連碼二中二 -->
+	<bean id="lhcContinueCode22ZCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LhcContinueCode22ZCaculator"/>
+	
+	<!-- 連碼二中特 -->
+	<bean id="lhcContinueCode22TCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LhcContinueCode22TCaculator"/>
+	
+	<bean id="lhcCodeCaculatorMapper" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<!-- 連肖(中) -->
+				<entry key="ONCONTINUEIN2" value-ref="lhcContinueInCaculator"/>
+				<entry key="UNCONTINUEIN2" value-ref="lhcContinueInCaculator"/>
+				
+				<entry key="ONCONTINUEIN3" value-ref="lhcContinueInCaculator"/>
+				<entry key="UNCONTINUEIN3" value-ref="lhcContinueInCaculator"/>
+				
+				<entry key="ONCONTINUEIN4" value-ref="lhcContinueInCaculator"/>
+				<entry key="UNCONTINUEIN4" value-ref="lhcContinueInCaculator"/>
+				
+				<entry key="ONCONTINUEIN5" value-ref="lhcContinueInCaculator"/>
+				<entry key="UNCONTINUEIN5" value-ref="lhcContinueInCaculator"/>
+				
+				<!-- 連肖(不中) -->
+				<entry key="ONCONTINUENOTIN2" value-ref="lhcContinueNotInCaculator"/>
+				<entry key="UNCONTINUENOTIN2" value-ref="lhcContinueNotInCaculator"/>
+				
+				<entry key="ONCONTINUENOTIN3" value-ref="lhcContinueNotInCaculator"/>
+				<entry key="UNCONTINUENOTIN3" value-ref="lhcContinueNotInCaculator"/>
+				
+				<entry key="ONCONTINUENOTIN4" value-ref="lhcContinueNotInCaculator"/>
+				<entry key="UNCONTINUENOTIN4" value-ref="lhcContinueNotInCaculator"/>
+				
+				<entry key="ONCONTINUENOTIN5" value-ref="lhcContinueNotInCaculator"/>
+				<entry key="UNCONTINUENOTIN5" value-ref="lhcContinueNotInCaculator"/>
+				
+				<!-- 連碼三中二 中二 -->
+				<entry key="CONTINUECODE322" value-ref="lhcContinueCode322Caculator"/>
+				
+				<!-- 連碼三中二 中二 -->
+				<entry key="CONTINUECODE323" value-ref="lhcContinueCode323Caculator"/>
+				
+				<!-- 連碼二中二  -->
+				<entry key="CONTINUECODE22Z" value-ref="lhcContinueCode22ZCaculator"/>
+				
+				<!-- 連碼二中特 -->
+				<entry key="CONTINUECODE22T" value-ref="lhcContinueCode22TCaculator"/>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="lotteryWinSlipNumtemplate_lhc"
+		class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryWinSlipNumMap">
+		<constructor-arg>
+			<map>
+				<!-- 平碼直選  53_17_64 -->								
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZM}" />
+							<property name="setCode" value="${setCode.PINGMA}" />
+							<property name="methodCode" value="${methodCode.ZXLM}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinPingmaLhcCaculator">
+					</bean>
+				</entry>
+				<!-- 特碼直選 54_10_81-->								
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}" />
+							<property name="setCode" value="${setCode.ZHX}" />
+							<property name="methodCode" value="${methodCode.ZHXONE}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinSpecialChooseNumLhcCaculator">
+					</bean>
+				</entry>
+				<!--兩面 54_37_83-->		
+				<entry>
+					<key>
+						<bean
+							class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}" />
+							<property name="setCode" value="${setCode.LIANGMIAN}" />
+							<property name="methodCode" value="${methodCode.LIANGMIAN}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinSpecialDoubleFaceLhcCaculator">
+					</bean>
+				</entry>	
+				<!--特肖 54_18_82-->								
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}" />
+							<property name="setCode" value="${setCode.TX}" />
+							<property name="methodCode" value="${methodCode.TX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinSpecialAnimalLhcCaculator">
+					</bean>
+				</entry>
+				<!--色波 54_19_84 -->								
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}" />
+							<property name="setCode" value="${setCode.SB}" />
+							<property name="methodCode" value="${methodCode.SB}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinSpecialColorCaculator">
+					</bean>
+				</entry>
+				
+				<!--半波 54_19_85 -->								
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.TM}" />
+							<property name="setCode" value="${setCode.SB}" />
+							<property name="methodCode" value="${methodCode.BB}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinSpecialColorCaculator">
+					</bean>
+				</entry>
+				
+				<!-- 一肖  55_38_86-->								
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.YX}" />
+							<property name="methodCode" value="${methodCode.YX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinYixiaoLhcCaculator">
+					</bean>
+				</entry>
+				
+				<!-- 四不中 55_39_87-->								
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.BZ}" />
+							<property name="methodCode" value="${methodCode.4BZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinBuzhongLhcCaculator">
+							<property name="sizeCombinations" value="4"/>
+					</bean>
+				</entry>
+				
+				<!-- 五不中 55_39_88-->								
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.BZ}" />
+							<property name="methodCode" value="${methodCode.5BZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinBuzhongLhcCaculator">
+							<property name="sizeCombinations" value="5"/>
+					</bean>
+				</entry>
+				
+				<!-- 六不中 55_39_89-->								
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.BZ}" />
+							<property name="methodCode" value="${methodCode.6BZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinBuzhongLhcCaculator">
+							<property name="sizeCombinations" value="6"/>
+					</bean>
+				</entry>
+				
+				<!-- 七不中 55_39_90-->								
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.BZ}" />
+							<property name="methodCode" value="${methodCode.7BZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinBuzhongLhcCaculator">
+							<property name="sizeCombinations" value="7"/>
+					</bean>
+				</entry>
+				
+				<!-- 八不中 55_39_91-->								
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.BZ}" />
+							<property name="methodCode" value="${methodCode.8BZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinBuzhongLhcCaculator">
+							<property name="sizeCombinations" value="8"/>
+					</bean>
+				</entry>
+				
+				<!-- 二連肖(中) 55_40_92 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.LXZ}" />
+							<property name="methodCode" value="${methodCode.2LX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianxiaoLhcCaculator">
+						<property name="sizeCombinations" value="2"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 三連肖(中) 55_40_93 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.LXZ}" />
+							<property name="methodCode" value="${methodCode.3LX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianxiaoLhcCaculator">
+						<property name="sizeCombinations" value="3"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 四連肖(中) 55_40_94 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.LXZ}" />
+							<property name="methodCode" value="${methodCode.4LX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianxiaoLhcCaculator">
+						<property name="sizeCombinations" value="4"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 五連肖(中) 55_40_95 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.LXZ}" />
+							<property name="methodCode" value="${methodCode.5LX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianxiaoLhcCaculator">
+						<property name="sizeCombinations" value="5"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 二連肖(不中) 55_41_92 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.LXBZ}" />
+							<property name="methodCode" value="${methodCode.2LX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianxiaoLhcCaculator">
+						<property name="sizeCombinations" value="2"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 三連肖(不中) 55_41_93 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.LXBZ}" />
+							<property name="methodCode" value="${methodCode.3LX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianxiaoLhcCaculator">
+						<property name="sizeCombinations" value="3"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 四連肖(不中) 55_41_94 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.LXBZ}" />
+							<property name="methodCode" value="${methodCode.4LX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianxiaoLhcCaculator">
+						<property name="sizeCombinations" value="4"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 五連肖(不中) 55_41_95 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.ZTM}" />
+							<property name="setCode" value="${setCode.LXBZ}" />
+							<property name="methodCode" value="${methodCode.5LX}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianxiaoLhcCaculator">
+						<property name="sizeCombinations" value="5"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 連碼 三全中  56_42_13 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.LM}" />
+							<property name="setCode" value="${setCode.LM}" />
+							<property name="methodCode" value="${methodCode.3QZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinQuanzhongLhcCaculator">
+						<property name="sizeCombinations" value="3"/>
+					</bean>
+				</entry>
+				
+				<!-- 連碼 三中二  56_42_14 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.LM}" />
+							<property name="setCode" value="${setCode.LM}" />
+							<property name="methodCode" value="${methodCode.3Z2}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianmaLhcCaculator">
+						<property name="sizeCombinations" value="3"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 連碼 二全中  56_42_15 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.LM}" />
+							<property name="setCode" value="${setCode.LM}" />
+							<property name="methodCode" value="${methodCode.2QZ}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinQuanzhongLhcCaculator">
+						<property name="sizeCombinations" value="2"/>
+					</bean>
+				</entry>
+				
+				<!-- 連碼二中特 56_42_16 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.LM}" />
+							<property name="setCode" value="${setCode.LM}" />
+							<property name="methodCode" value="${methodCode.2ZT}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinLianmaLhcCaculator">
+						<property name="sizeCombinations" value="2"/>
+						<property name="lhcCodeCaculators" ref="lhcCodeCaculatorMapper"/>
+					</bean>
+				</entry>
+				
+				<!-- 連碼 特串  56_42_17 -->
+				<entry>
+					<key>
+						<bean class="com.winterframework.firefrog.game.service.wincaculate.config.LotteryPlayMethodKeyGenerator">
+							<property name="groupCode" value="${groupCode.LM}" />
+							<property name="setCode" value="${setCode.LM}" />
+							<property name="methodCode" value="${methodCode.TC}" />
+							<property name="seperator" value="${key.seperator}" />
+						</bean>
+					</key>
+					<bean id="LotteryWinMultLhcCaculator" class="com.winterframework.firefrog.game.service.wincaculate.number.lhc.LotteryWinTechuanLhcCaculator">
+						<property name="sizeCombinations" value="2"/>
+					</bean>
+				</entry>
+	
+			</map>
+		</constructor-arg>
+	</bean>
+	
+</beans>

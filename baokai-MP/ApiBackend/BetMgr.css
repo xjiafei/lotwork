@@ -1,0 +1,460 @@
+@charset "utf-8";
+
+body.normal .bet_block
+{
+	border: solid 1px #000000;
+	width: 840px;
+	margin: auto auto;
+	background-color: #FFFFFF;
+}
+
+body.normal .top_block
+{
+	border-bottom: solid 1px #000000;
+}
+
+body.normal .plates
+{
+	height: 320px;	
+}
+body.normal .plate
+{
+	
+}
+body.normal .position
+{
+	margin: 5px 15px 5px 5px;
+	padding: 0 10px 0 10px;
+	width: 50px;
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #CCCCCC;
+	text-align: center;
+	line-height: 30px;
+	color: #000000;
+	float: left;
+}
+body.normal .balls
+{
+	float: left;
+	width: 450px;
+}
+body.normal .ball
+{
+	margin: 5px 5px 5px 5px;
+	min-width: 20px;
+	height: 20px;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+	background-color: #CCCCCC;
+	text-align: center;
+	line-height: 20px;
+	color: #000000;
+	float: left;
+	cursor: pointer;
+}
+
+body.normal .ball_enable
+{
+	margin: 5px 5px 5px 5px;
+	min-width: 20px;
+	height: 20px;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+	background-color: #00FF00;
+	text-align: center;
+	line-height: 20px;
+	color: #FFFFFF;
+	float: left;
+	cursor: pointer;
+}
+body.normal .func
+{
+	margin: 5px 5px 5px 15px;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #CCCCCC;
+	text-align: center;
+	line-height: 30px;
+	color: #000000;
+	float: left;
+	cursor: pointer;
+}
+
+body.normal .times
+{
+	border:solid 1px #CCCCCC;
+	width: 40px;
+	text-align: center;
+}
+
+body.normal .data_list
+{
+	width: 840px;
+	height: 160px;
+	border-top: solid 1px #000000;
+	border-bottom: solid 1px #000000;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+body.normal .data_row
+{
+	margin: 0px 1px 0px 1px;
+	height: 24px;
+	line-height: 24px;
+	border: solid 1px #FFFFFF;
+}
+body.normal .data_row:hover
+{
+	margin: 0px 1px 0px 1px;
+	height: 24px;
+	line-height: 24px;
+	border: solid 1px #000000;
+}
+body.normal .data_nums
+{
+	width: 80px;
+	float: left;
+}
+body.normal .data_mode
+{
+	width: 50px;
+	float: left;
+}
+body.normal .data_times
+{
+	width: 80px;
+	float: left;
+}
+body.normal .data_money
+{
+	width: 100px;
+	float: left;
+}
+body.normal .data_name
+{
+	width: 150px;
+	float: left;
+}
+body.normal .data_codes
+{
+	width: 100px;
+	float: left;
+	white-space: nowrap;
+}
+body.normal .bet_data
+{
+	width: 836px;
+	height: 160px;
+	border-top: solid 1px #000000;
+	border-bottom: solid 1px #000000;
+	word-break:break-all;
+	padding: 2px 2px 2px 2px;
+}
+/* -------------------------------------------*/
+body.black .bet_block
+{
+	border: solid 1px #FFFFFF;
+	width: 840px;
+	margin: auto auto;
+	background-color: #000000;
+}
+
+body.black .top_block
+{
+	border-bottom: solid 1px #FFFFFF;
+}
+
+body.black .plates
+{
+	height: 320px;	
+}
+body.black .plate
+{
+	
+}
+body.black .position
+{
+	margin: 5px 15px 5px 5px;
+	padding: 0 10px 0 10px;
+	width: 50px;
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #FFFFFF;
+	text-align: center;
+	line-height: 30px;
+	color: #000000;
+	float: left;
+}
+body.black .balls
+{
+	float: left;
+	width: 450px;
+}
+body.black .ball
+{
+	margin: 5px 5px 5px 5px;
+	min-width: 20px;
+	height: 20px;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+	background-color: #FFFFFF;
+	text-align: center;
+	line-height: 20px;
+	color: #000000;
+	float: left;
+	cursor: pointer;
+}
+
+body.black .ball_enable
+{
+	margin: 5px 5px 5px 5px;
+	min-width: 20px;
+	height: 20px;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+	background-color: #FF0000;
+	text-align: center;
+	line-height: 20px;
+	color: #FFFFFF;
+	float: left;
+	cursor: pointer;
+}
+body.black .func
+{
+	margin: 5px 5px 5px 15px;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #FFFFFF;
+	text-align: center;
+	line-height: 30px;
+	color: #000000;
+	float: left;
+	cursor: pointer;
+}
+
+body.black .times
+{
+	border:solid 1px #FFFFFF;
+	width: 40px;
+	text-align: center;
+}
+
+body.black .data_list
+{
+	width: 840px;
+	height: 160px;
+	border-top: solid 1px #FFFFFF;
+	border-bottom: solid 1px #FFFFFF;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+body.black .data_row
+{
+	margin: 0px 1px 0px 1px;
+	height: 24px;
+	line-height: 24px;
+	border: solid 1px #000000;
+}
+body.black .data_row:hover
+{
+	margin: 0px 1px 0px 1px;
+	height: 24px;
+	line-height: 24px;
+	border: solid 1px #FFFFFF;
+}
+body.black .data_nums
+{
+	width: 80px;
+	float: left;
+}
+body.black .data_mode
+{
+	width: 50px;
+	float: left;
+}
+body.black .data_times
+{
+	width: 80px;
+	float: left;
+}
+body.black .data_money
+{
+	width: 100px;
+	float: left;
+}
+body.black .data_name
+{
+	width: 150px;
+	float: left;
+}
+body.black .data_codes
+{
+	width: 100px;
+	float: left;
+	white-space: nowrap;
+}
+body.black .bet_data
+{
+	width: 836px;
+	height: 160px;
+	border-top: solid 1px #FFFFFF;
+	border-bottom: solid 1px #FFFFFF;
+	word-break:break-all;
+	padding: 2px 2px 2px 2px;
+}
+/* -------------------------------------------*/
+body.pink .bet_block
+{
+	border: solid 1px #CCCCCC;
+	width: 840px;
+	margin: auto auto;
+	background-color: #FDABC3;
+}
+
+body.pink .top_block
+{
+	border-bottom: solid 1px #CCCCCC;
+}
+
+body.pink .plates
+{
+	height: 320px;	
+}
+body.pink .plate
+{
+	
+}
+body.pink .position
+{
+	margin: 5px 15px 5px 5px;
+	padding: 0 10px 0 10px;
+	width: 50px;
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #FFFFFF;
+	text-align: center;
+	line-height: 30px;
+	color: #000000;
+	float: left;
+}
+body.pink .balls
+{
+	float: left;
+	width: 450px;
+}
+body.pink .ball
+{
+	margin: 5px 5px 5px 5px;
+	min-width: 20px;
+	height: 20px;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+	background-color: #FFFFFF;
+	text-align: center;
+	line-height: 20px;
+	color: #000000;
+	float: left;
+	cursor: pointer;
+}
+
+body.pink .ball_enable
+{
+	margin: 5px 5px 5px 5px;
+	min-width: 20px;
+	height: 20px;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+	background-color: #FF0000;
+	text-align: center;
+	line-height: 20px;
+	color: #FFFFFF;
+	float: left;
+	cursor: pointer;
+}
+body.pink .func
+{
+	margin: 5px 5px 5px 15px;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #FFFFFF;
+	text-align: center;
+	line-height: 30px;
+	color: #000000;
+	float: left;
+	cursor: pointer;
+}
+
+body.pink .times
+{
+	border:solid 1px #FFFFFF;
+	width: 40px;
+	text-align: center;
+}
+
+body.pink .data_list
+{
+	width: 840px;
+	height: 160px;
+	border-top: solid 1px #CCCCCC;
+	border-bottom: solid 1px #CCCCCC;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+body.pink .data_row
+{
+	margin: 0px 1px 0px 1px;
+	height: 24px;
+	line-height: 24px;
+	border: solid 1px #FEF6FA;
+}
+body.pink .data_row:hover
+{
+	margin: 0px 1px 0px 1px;
+	height: 24px;
+	line-height: 24px;
+	border: solid 1px #CCCCCC;
+}
+body.pink .data_nums
+{
+	width: 80px;
+	float: left;
+}
+body.pink .data_mode
+{
+	width: 50px;
+	float: left;
+}
+body.pink .data_times
+{
+	width: 80px;
+	float: left;
+}
+body.pink .data_money
+{
+	width: 100px;
+	float: left;
+}
+body.pink .data_name
+{
+	width: 150px;
+	float: left;
+}
+body.pink .data_codes
+{
+	width: 100px;
+	float: left;
+	white-space: nowrap;
+}
+body.pink .bet_data
+{
+	width: 836px;
+	height: 160px;
+	border-top: solid 1px #CCCCCC;
+	border-bottom: solid 1px #CCCCCC;
+	word-break:break-all;
+	padding: 2px 2px 2px 2px;
+}

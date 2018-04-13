@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.beginmession.dao.vo.BeginAward">
+ <resultMap id="result" type="com.winterframework.firefrog.beginmession.dao.vo.BeginAward">
+			<result column="ID" property="id"/>
+			<result column="USER_ID" property="userId"/>
+			<result column="AWARD_TYPE1" property="awardType1"/>
+			<result column="AWARD_TYPE2" property="awardType2"/>
+			<result column="MISSION_ID" property="missionId"/>
+			<result column="CREATE_TIME" property="createTime"/>
+			<result column="STATUS" property="status"/>
+			<result column="AWARD_TIME" property="awardTime"/>
+			<result column="CANCEL_REASON" property="cancelReason"/>			
+ </resultMap>
+	<sql id="fields">ID,USER_ID,AWARD_TYPE1,AWARD_TYPE2,MISSION_ID,CREATE_TIME,STATUS,AWARD_TIME,CANCEL_REASON
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="userId != null">
+			And USER_ID = #{userId}
+		</if>
+
+		<if test="awardType1 != null">
+			And AWARD_TYPE1 = #{awardType1}
+		</if>
+
+		<if test="awardType2 != null">
+			And AWARD_TYPE2 = #{awardType2}
+		</if>
+
+		<if test="missionId != null">
+			And MISSION_ID = #{missionId}
+		</if>
+
+		<if test="createTime != null">
+			And CREATE_TIME = #{createTime}
+		</if>
+
+		<if test="status != null">
+			And STATUS = #{status}
+		</if>
+
+		<if test="awardTime != null">
+			And AWARD_TIME = #{awardTime}
+		</if>
+
+		</where>
+
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginAward">
+		Select <include refid="fields"/>
+				From BEGIN_AWARD
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From BEGIN_AWARD
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From BEGIN_AWARD
+	</select>
+
+	<insert id="insert" parameterType="com.winterframework.firefrog.beginmession.dao.vo.BeginAward"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true" >
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_BEGIN_AWARD.Nextval from dual
+		</selectKey>
+	        INSERT INTO
+	        BEGIN_AWARD (
+	        <include refid="fields"/>)
+	       	 Values (
+	         #{id,javaType=long,jdbcType=DECIMAL},
+	         #{userId,javaType=long,jdbcType=DECIMAL},
+	         #{awardType1,javaType=long,jdbcType=DECIMAL},
+	         #{awardType2,javaType=long,jdbcType=DECIMAL},
+	         #{missionId,javaType=long,jdbcType=DECIMAL},
+	         #{createTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{status,javaType=long,jdbcType=DECIMAL},
+	         #{awardTime,javaType=object,jdbcType=TIMESTAMP},
+	         #{cancelReason,javaType=string,jdbcType=VARCHAR}	         
+	        )
+	</insert>
+	
+	<select id="findByUserId" resultMap="result" parameterType="long">
+		Select <include refid="fields" /> 
+				From BEGIN_AWARD
+		where user_id = #{userId}		
+	</select>
+	
+
+	<select id="getCountByPage" resultType="Long">
+		Select count(1) 
+				From BEGIN_AWARD
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getByPage" resultType="Long">
+		Select <include refid="fields" /> 
+				From BEGIN_AWARD
+		<include refid="whereCondition"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<update id="updateAwardStatus" parameterType="map">
+		update BEGIN_AWARD 
+		SET STATUS = #{status} 
+		<if test="awardTime != null">
+			, award_Time = #{awardTime}
+		</if>
+		<if test="cancelReason != null">
+			, CANCEL_REASON = #{cancelReason}
+		</if>
+		where id = #{id} 
+	</update>
+
+	<select id="getNowDailyAnsAward" parameterType="map" resultMap="result">
+		select <include refid="fields"/> from Begin_Award where USER_ID = #{userId} and to_char(CREATE_TIME,'yyyymmdd') = to_char(sysdate,'yyyymmdd')
+		and AWARD_TYPE1 = #{type1} and rownum = 1
+	</select>
+
+	<select id="getAwardNowByMissionId" parameterType="map" resultType="long">
+		select nvl(count(1),0) from Begin_Award where USER_ID = #{userId} and to_char(CREATE_TIME,'yyyymmdd') = to_char(sysdate,'yyyymmdd')
+		and AWARD_TYPE1 = #{type1} and MISSION_ID = #{missionId}
+	</select>
+	
+
+	<update id="updateUnAward">
+		update BEGIN_AWARD 
+		SET STATUS = #{cancelStatus},
+		CANCEL_REASON =#{cancelReason} 
+		where user_id = #{userId}  and award_type1 = #{awardType1} and award_type2 =#{awardType2}
+		and STATUS = #{unAwardStatus}
+	</update>	
+	
+
+</mapper>

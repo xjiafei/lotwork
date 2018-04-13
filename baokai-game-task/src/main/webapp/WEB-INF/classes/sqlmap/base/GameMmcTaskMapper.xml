@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.entity.GameMmcTask">
+	<resultMap id="result" type="com.winterframework.firefrog.game.dao.entity.GameMmcTask">
+			<result column="ID" property="id"/>
+			<result column="LOTTERYID" property="lotteryid"/>
+			<result column="TYPE" property="type"/>
+			<result column="ISSUE" property="issue"/>
+			<result column="ISSUE_START_TIME" property="issueStartTime"/>
+			<result column="ISSUE_END_TIME" property="issueEndTime"/>
+			<result column="STATUS" property="status"/>
+			<result column="PARAM" property="param"/>
+			<result column="CREATE_DATE" property="createDate"/>
+			<result column="UPDATE_DATE" property="updateDate"/>
+	</resultMap>
+	<sql id="fields">
+		ID AS id,
+		LOTTERYID AS lotteryid,
+		TYPE AS type,
+		ISSUE AS issue,
+		ISSUE_START_TIME AS issueStartTime,
+		ISSUE_END_TIME AS issueEndTime,
+		STATUS AS status,
+		PARAM AS param,
+		CREATE_DATE AS createDate,
+		UPDATE_DATE AS updateDate
+	</sql>
+	<sql id="whereCondition">
+		<where>
+		<if test="targetId != null">
+			AND ID = #{targetId}
+		</if>
+		<if test="targetLotteryId != null">
+			AND LOTTERYID = #{targetLotteryId}
+		</if>
+		<if test="targetType != null">
+			AND TYPE = #{targetType}
+		</if>
+		<if test="targetIssue != null">
+			AND ISSUE = #{targetIssue}
+		</if>
+		<if test="targetStartTimeStart != null">
+			AND ISSUE_START_TIME >= #{targetStartTimeStart}
+		</if>
+		<if test="targetStartTimeEnd != null">
+			<![CDATA[
+			AND ISSUE_START_TIME < #{targetStartTimeEnd}
+			]]>
+		</if>
+		<if test="targetEndTimeStart != null">
+			AND ISSUE_END_TIME >= #{targetEndTimeStart}
+		</if>
+		<if test="targetEndTimeEnd != null">
+			<![CDATA[
+			AND ISSUE_END_TIME < #{targetEndTimeEnd}
+			]]>
+		</if>
+		<if test="targetStatus != null">
+			AND STATUS = #{targetStatus}
+		</if>
+		</where>
+	</sql>
+	<select id="findAll" resultMap="result" parameterType="com.winterframework.firefrog.game.dao.entity.GameMmcTask">
+		SELECT <include refid="fields"/>
+				FROM GAME_MMC_TASK
+		<include refid="whereCondition"/>
+	</select>
+	
+	<select id="queryBeforeNowTaskList" resultMap="result" parameterType="com.winterframework.firefrog.game.dao.entity.GameMmcTask">
+		SELECT 
+			<include refid="fields"/>
+		FROM GAME_MMC_TASK
+		WHERE 
+		<![CDATA[
+			STATUS = #{targetStatus}
+			AND ISSUE_END_TIME <= #{targetEndTimeEnd}
+			AND ROWNUM <= 20
+		]]>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		SELECT COUNT(1) 
+				FROM GAME_MMC_TASK
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		SELECT COUNT(1) 
+				FROM GAME_MMC_TASK
+	</select>
+
+	<insert id="insertUpdate" parameterType="com.winterframework.firefrog.game.dao.entity.GameMmcTask"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+	        MERGE INTO GAME_MMC_TASK T
+			USING (
+			  SELECT 
+		         #{id,javaType=long,jdbcType=DECIMAL} AS ID,
+		         #{lotteryid,javaType=long,jdbcType=DECIMAL} AS LOTTERYID,
+		         #{type,javaType=long,jdbcType=DECIMAL} AS TYPE,
+		         #{issue,javaType=long,jdbcType=DECIMAL} AS ISSUE,
+		         #{issueStartTime,javaType=object,jdbcType=TIMESTAMP} AS ISSUE_START_TIME,
+		         #{issueEndTime,javaType=object,jdbcType=TIMESTAMP} AS ISSUE_END_TIME,
+		         #{status,javaType=long,jdbcType=DECIMAL} AS STATUS,
+		         #{param,javaType=string,jdbcType=VARCHAR} AS PARAM,
+		         #{createDate,javaType=object,jdbcType=TIMESTAMP} AS CREATE_DATE,
+		         #{updateDate,javaType=object,jdbcType=TIMESTAMP} AS UPDATE_DATE
+			  FROM DUAL
+			)I ON (I.ISSUE = T.ISSUE AND I.TYPE = T.TYPE)
+			WHEN MATCHED THEN UPDATE SET 
+				 T.ISSUE_START_TIME = I.ISSUE_START_TIME,
+				 T.ISSUE_END_TIME = I.ISSUE_END_TIME,
+				 T.STATUS = I.STATUS,
+				 T.PARAM = I.PARAM,
+				 T.CREATE_DATE = I.CREATE_DATE,
+				 T.UPDATE_DATE = I.UPDATE_DATE
+			WHEN NOT MATCHED THEN INSERT 
+			VALUES (
+				 SEQ_GAME_MMC_TASK_ID.NEXTVAL,
+				 I.LOTTERYID,
+				 I.TYPE,
+				 I.ISSUE,
+				 I.ISSUE_START_TIME,
+				 I.ISSUE_END_TIME,
+				 I.STATUS,
+				 I.PARAM,
+				 I.CREATE_DATE,
+				 I.UPDATE_DATE
+			)
+	</insert>
+	
+	<update id="update" parameterType="com.winterframework.firefrog.game.dao.entity.GameMmcTask" flushCache="true">
+		UPDATE GAME_MMC_TASK
+		<set>
+			<if test="issueStartTime != null">
+				ISSUE_START_TIME = #{issueStartTime},
+			</if>
+			<if test="issueEndTime != null">
+				ISSUE_END_TIME = #{issueEndTime},
+			</if>
+			<if test="status != null">
+				STATUS = #{status},
+			</if>
+			<if test="param != null">
+				PARAM = #{param},
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateDate == null">
+				UPDATE_DATE = SYSDATE
+			</if>
+		</set>
+		<include refid="whereCondition"/>
+	</update>
+
+</mapper>

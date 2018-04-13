@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserCustomerRecycle">
+	<resultMap id="ViewUserCustomerResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserCustomerVo">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="userCustomerColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACCOUNT as account,
+	        	PASSWD as passwd,
+	        	PASSWD_LVL as passwdLvl,
+	        	WITHDRAW_PASSWD as withdrawPasswd,
+	        	CIPHER as cipher,
+	        	SEX as sex,
+	        	EMAIL as email,
+	        	EMAIL_ACTIVED as emailActived,
+	        	CELLPHONE as cellphone,
+	        	BIRTHDAY as birthday,
+	        	QQ_STRUCTURE as qqStruc,
+	        	IS_FREEZE as isFreeze,
+	        	USER_LVL as userLvl,
+	        	QU_STRUC as quStruc,
+	        	WITHDRAW_PASSWD_ACTIVE_DATE as withdrawPasswdActiveDate,
+	        	QUESTION_STRUCTURE_ACTIVE_DATE as questionStructureActiveDate,
+	        	REGISTER_IP as registerIp,
+	        	REGISTER_DATE as registerDate,
+	        	PARENT_ID as parentId,
+	        	USER_CHAIN as userChain,
+	        	LAST_LOGIN_DATE as lastLoginDate,
+	        	TERM_A_COUNT as termAcount,
+	        	FREEZE_DATE as freezeDate,
+	        	FREEZER as freezer,
+	        	VIP_CELLPHONE as vipCellphone,
+	        	vip_Lvl as vipLvl,
+	        	TERM_U_ACCOUNT as termUaccount,
+	        	AGENT_LIMIT as agentLimit,
+	        	FREEZE_METHOD as freezeMethod,
+	        	LAST_LOGIN_IP as lastLoginIp,
+	        	FREEZE_MEMO as freezeMemo,
+	        	FREEZE_ACCOUNT as freezeAccount,
+	        	freeze_id as freezeId
+	    ]]>
+	</sql>	
+
+	<update id="cleanSafeCenter"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserCustomer">
+		UPDATE USER_CUSTOMER
+		<set>
+			WITHDRAW_PASSWD = null,
+			QU_STRUC = null,
+			EMAIL = null,
+			EMAIL_ACTIVED = null,
+			CIPHER = null,
+			BIND_DATE =null,
+			BIND_PHONE_SERIAL = null,
+			UNBIND_TYPE = null,
+			PHONE_SERIAL_NUM = null,
+			PHONE_TYPE = null,
+			SOURCE = null,
+			<if test="@Ognl@isNotEmpty(passwd)">
+				PASSWD=#{passwd,javaType=string,jdbcType=VARCHAR}
+	        </if>
+		</set>
+		WHERE
+			ACCOUNT = #{account}
+	</update>
+	
+	<update id="cleanPersonalInfo"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserCustomer">
+		UPDATE USER_CUSTOMER
+		<set>			
+			SEX = null,
+			EMAIL = null,
+			EMAIL_ACTIVED = null,
+			CELLPHONE = null,
+			BIRTHDAY =null,
+			QQ_STRUCTURE = null			
+		</set>
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(account)">
+				and ACCOUNT = #{account}
+			</if>
+		</where>	
+	</update>
+	
+	<select id="getCountByAccountPasswd" resultType="long" parameterType="string">
+		SELECT count(*) from USER_CUSTOMER
+		WHERE
+			ACCOUNT = #{account}
+		AND
+			PASSWD = #{passwd}
+	</select>	
+
+</mapper>

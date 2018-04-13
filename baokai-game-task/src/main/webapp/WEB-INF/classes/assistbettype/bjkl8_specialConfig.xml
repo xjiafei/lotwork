@@ -1,0 +1,12 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+	<bean id="betTypeAssistbjkl8" class="com.winterframework.firefrog.game.service.assist.bet.SpecialLotteryAssistMap">
+		<!-- 北京快乐8的模板文件 -->
+		<property name="parent" ref="speciallotteryConfigtemplatebjkl8"></property>
+		<!-- 采种类型 -->
+		<property name="lotteryType" value="${lottery.BJKL8}" />
+	</bean>
+</beans>

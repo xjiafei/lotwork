@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameSeriesConfigCheck">
+	<resultMap id="GameSeriesConfigCheckResult" type="com.winterframework.firefrog.game.dao.vo.GameSeriesConfigCheck">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameSeriesConfigCheckColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERYID as lotteryid,
+	        	BACKOUT_START_FEE as backoutStartFee,
+	        	BACKOUT_RATIO as backoutRatio,
+	        	ISSUEWARN_NOT_OPENAWARD as issuewarnNotOpenaward,
+	        	ISSUEWARN_AHEAD_OPENAWARD as issuewarnAheadOpenaward,
+	        	ISSUEWARN_DELAY_OPENAWARD as issuewarnDelayOpenaward,
+	        	ISSUEWARN_BACKOUT_TIME as issuewarnBackoutTime,
+	        	ISSUEWARN_EXCEPTION_TIME as issuewarnExceptionTime,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	STATUS as status
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameSeriesConfigCheck" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		 <selectKey resultType="long" order="BEFORE" keyProperty="id">
+			     SELECT SEQ_GAME_SERIES_CONF_CHECK_ID.Nextval from dual
+   	    </selectKey>
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_SERIES_CONFIG_CHECK (
+	        	ID ,
+	        	LOTTERYID ,
+	        	BACKOUT_START_FEE ,
+	        	BACKOUT_RATIO ,
+	        	ISSUEWARN_NOT_OPENAWARD ,
+	        	ISSUEWARN_AHEAD_OPENAWARD ,
+	        	ISSUEWARN_DELAY_OPENAWARD ,
+	        	ISSUEWARN_BACKOUT_TIME ,
+	        	ISSUEWARN_EXCEPTION_TIME ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	STATUS 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{backoutStartFee,javaType=long,jdbcType=DECIMAL} ,
+	        	#{backoutRatio,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issuewarnNotOpenaward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issuewarnAheadOpenaward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issuewarnDelayOpenaward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issuewarnBackoutTime,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issuewarnExceptionTime,javaType=long,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameSeriesConfigCheck">
+	    <![CDATA[
+	        UPDATE GAME_SERIES_CONFIG_CHECK SET
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        BACKOUT_START_FEE = #{backoutStartFee,javaType=long,jdbcType=DECIMAL} ,
+		        BACKOUT_RATIO = #{backoutRatio,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUEWARN_NOT_OPENAWARD = #{issuewarnNotOpenaward,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUEWARN_AHEAD_OPENAWARD = #{issuewarnAheadOpenaward,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUEWARN_DELAY_OPENAWARD = #{issuewarnDelayOpenaward,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUEWARN_BACKOUT_TIME = #{issuewarnBackoutTime,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUEWARN_EXCEPTION_TIME = #{issuewarnExceptionTime,javaType=long,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        STATUS = #{status,javaType=long,jdbcType=DECIMAL} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_SERIES_CONFIG_CHECK where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <delete id="deleteGameSeriesConfigCheckByLotteryId"  parameterType="java.lang.Long">
+	    	<![CDATA[
+	        delete from GAME_SERIES_CONFIG_CHECK where
+		        LOTTERYID = #{lotteryId} 
+	    ]]>
+	    </delete>
+	    <select id="getById" parameterType="long" resultMap="GameSeriesConfigCheckResult" flushCache="false">
+			select <include refid="gameSeriesConfigCheckColumns" />
+		    <![CDATA[
+			    from GAME_SERIES_CONFIG_CHECK 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameSeriesConfigCheckResult" flushCache="false">
+			select <include refid="gameSeriesConfigCheckColumns" />
+			    from GAME_SERIES_CONFIG_CHECK 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+		
+		<select id="com.winterframework.firefrog.game.dao.vo.GameSeriesConfigCheck.getByLotteryId" parameterType="long" resultMap="GameSeriesConfigCheckResult" flushCache="false">
+			select <include refid="gameSeriesConfigCheckColumns" />
+			<![CDATA[
+			    from GAME_SERIES_CONFIG_CHECK 
+		        where 
+		        LOTTERYID = #{lotteryId} 
+		    ]]>
+		</select>
+
+	<sql id="gameSeriesConfigCheckDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+	       <if test="@Ognl@isNotEmpty(backoutStartFee)">
+				and BACKOUT_START_FEE = #{backoutStartFee}
+			</if>
+	       <if test="@Ognl@isNotEmpty(backoutRatio)">
+				and BACKOUT_RATIO = #{backoutRatio}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issuewarnNotOpenaward)">
+				and ISSUEWARN_NOT_OPENAWARD = #{issuewarnNotOpenaward}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issuewarnAheadOpenaward)">
+				and ISSUEWARN_AHEAD_OPENAWARD = #{issuewarnAheadOpenaward}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issuewarnDelayOpenaward)">
+				and ISSUEWARN_DELAY_OPENAWARD = #{issuewarnDelayOpenaward}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issuewarnBackoutTime)">
+				and ISSUEWARN_BACKOUT_TIME = #{issuewarnBackoutTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(issuewarnExceptionTime)">
+				and ISSUEWARN_EXCEPTION_TIME = #{issuewarnExceptionTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="GameSeriesConfigCheckResult"  flushCache="false">
+    	select <include refid="gameSeriesConfigCheckColumns" />
+	    from GAME_SERIES_CONFIG_CHECK 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_SERIES_CONFIG_CHECK 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_SERIES_CONFIG_CHECK 
+		<include refid="gameSeriesConfigCheckDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameSeriesConfigCheckResult">
+    	select <include refid="gameSeriesConfigCheckColumns" />
+	    from GAME_SERIES_CONFIG_CHECK 
+		<include refid="gameSeriesConfigCheckDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>

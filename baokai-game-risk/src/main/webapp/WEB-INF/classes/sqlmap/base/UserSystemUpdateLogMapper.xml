@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.UserSystemUpdateLog">
+	<resultMap id="UpdateLogResult" type="com.winterframework.firefrog.game.dao.vo.UserSystemUpdateLog">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="configColumns">
+	    <![CDATA[
+	        	ID as id,
+  				USER_ID as  userId,
+  				IS_UPDATE as isUpdate ,
+				UPDATE_TIME as updateTime , 
+  				IS_RECHARGE as  isRecharge,
+  				RECHARGE_TIME as rechargeTime , 
+  				IS_BET  as  isBet,
+  				BET_TIME as  betTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.UserSystemUpdateLog" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_USER_SYSTEM_UPDATE_LOG_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        USER_SYSTEM_UPDATE_LOG (
+	        	ID,
+  				USER_ID ,
+  				IS_UPDATE  ,
+				UPDATE_TIME  , 
+  				IS_RECHARGE ,
+  				RECHARGE_TIME  , 
+  				IS_BET  ,
+  				BET_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{isUpdate,javaType=long,jdbcType=DECIMAL} ,
+	        	#{updateTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{isRecharge,javaType=long,jdbcType=DECIMAL} ,
+	        	#{rechargeTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{isBet,javaType=long,jdbcType=DECIMAL} ,
+	        	#{betTime,javaType=object,jdbcType=TIMESTAMP} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.UserSystemUpdateLog">
+	    <![CDATA[
+	        UPDATE USER_SYSTEM_UPDATE_LOG SET
+	        	 IS_UPDATE = #{isUpdate,javaType=long,jdbcType=DECIMAL} ,
+	        	 UPDATE_TIME = #{updateTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	 IS_RECHARGE = #{isRecharge,javaType=long,jdbcType=DECIMAL} ,
+	        	 RECHARGE_TIME = #{rechargeTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	 IS_BET = #{isBet,javaType=long,jdbcType=DECIMAL} ,
+	        	 BET_TIME = #{betTime,javaType=object,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        USER_ID = #{userId} 
+	    ]]>
+		</update>
+	
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from USER_SYSTEM_UPDATE_LOG where
+		        USER_ID = #{userId} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="UpdateLogResult" flushCache="false">
+			select <include refid="configColumns" />
+		    <![CDATA[
+			    from USER_SYSTEM_UPDATE_LOG 
+		        where 
+		        USER_ID = #{userId} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="UpdateLogResult" flushCache="false">
+			select <include refid="configColumns" />
+			    from USER_SYSTEM_UPDATE_LOG 
+		        where USER_ID in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="configDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userId)">
+				and USER_ID = #{userId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isUpdate)">
+				and IS_UPDATE = #{isUpdate}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>			
+	       <if test="@Ognl@isNotEmpty(isRecharge)">
+				and IS_RECHARGE = #{isRecharge}
+			</if>
+	       <if test="@Ognl@isNotEmpty(rechargeTime)">
+				and RECHARGE_TIME = #{rechargeTime}
+			</if>
+	       <if test="@Ognl@isNotEmpty(isBet)">
+				and IS_BET = #{isBet}
+			</if>
+	       <if test="@Ognl@isNotEmpty(betTime)">
+				and BET_TIME = #{betTime}
+			</if>
+	       
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="UpdateLogResult"  flushCache="false">
+    	select <include refid="configColumns" />
+	    from USER_SYSTEM_UPDATE_LOG 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from USER_SYSTEM_UPDATE_LOG 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from USER_SYSTEM_UPDATE_LOG 
+		<include refid="configDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="UpdateLogResult">
+    	select <include refid="configColumns" />
+	    from USER_SYSTEM_UPDATE_LOG 
+		<include refid="configDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+
+</mapper>

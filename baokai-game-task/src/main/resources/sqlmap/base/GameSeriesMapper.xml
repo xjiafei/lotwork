@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameSeries">
+	<resultMap id="GameSeriesResult"
+		type="com.winterframework.firefrog.game.dao.vo.GameSeries">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameSeriesColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	LOTTERY_TYPE_CODE as lotteryTypeCode,
+	        	LOTTERY_TYPE_NAME as lotteryTypeName,
+	        	LOTTERY_SERIES_CODE as lotterySeriesCode,
+	        	LOTTERY_SERIES_NAME as lotterySeriesName,
+	        	LOTTERYID as lotteryid,
+	        	LOTTERY_NAME as lotteryName,
+	        	STATUS as status,
+	        	CREATE_TIME as createTime,
+	        	UPDATE_TIME as updateTime,
+	        	MAX_COUNT_ISSUE as maxCountIssue,
+	        	MINI_LOTTERY_PROFIT as miniLotteryProfit,
+	        	LOTTERY_HELP_DES as lotteryHelpDes,
+	        	TAKEOFF_TIME as takeOffTime
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameSeries"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_GAME_SERIES_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_SERIES (
+	        	ID ,
+	        	LOTTERY_TYPE_CODE ,
+	        	LOTTERY_TYPE_NAME ,
+	        	LOTTERY_SERIES_CODE ,
+	        	LOTTERY_SERIES_NAME ,
+	        	LOTTERYID ,
+	        	LOTTERY_NAME ,
+	        	STATUS ,
+	        	CREATE_TIME ,
+	        	UPDATE_TIME ,
+	        	MINI_LOTTERY_PROFIT ,
+	        	LOTTERY_HELP_DES
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryTypeCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{lotteryTypeName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{lotterySeriesCode,javaType=int,jdbcType=DECIMAL} ,
+	        	#{lotterySeriesName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{status,javaType=int,jdbcType=DECIMAL} ,
+	        	#{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+	        	#{miniLotteryProfit,javaType=float,jdbcType=DECIMAL} ,
+	        	#{lotteryHelpDes,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameSeries">
+	    <![CDATA[
+	        UPDATE GAME_SERIES SET
+		        LOTTERY_TYPE_CODE = #{lotteryTypeCode,javaType=int,jdbcType=DECIMAL} ,
+		        LOTTERY_TYPE_NAME = #{lotteryTypeName,javaType=string,jdbcType=VARCHAR} ,
+		        LOTTERY_SERIES_CODE = #{lotterySeriesCode,javaType=int,jdbcType=DECIMAL} ,
+		        LOTTERY_SERIES_NAME = #{lotterySeriesName,javaType=string,jdbcType=VARCHAR} ,
+		        LOTTERYID = #{lotteryid,javaType=long,jdbcType=DECIMAL} ,
+		        LOTTERY_NAME = #{lotteryName,javaType=string,jdbcType=VARCHAR} ,
+		        STATUS = #{status,javaType=int,jdbcType=DECIMAL} ,
+		        CREATE_TIME = #{createTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        UPDATE_TIME = #{updateTime,javaType=date,jdbcType=TIMESTAMP} ,
+		        MINI_LOTTERY_PROFIT = #{miniLotteryProfit,javaType=float,jdbcType=DECIMAL} ,
+		        LOTTERY_HELP_DES = #{lotteryHelpDes,javaType=string,jdbcType=VARCHAR},
+		        TAKEOFF_TIME = #{takeOffTime,javaType=date,jdbcType=TIMESTAMP}
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+
+	<update id="updateForPublish" parameterType="hashMap">
+	    <![CDATA[
+	        UPDATE GAME_SERIES SET
+		        STATUS = #{status,javaType=int,jdbcType=DECIMAL} ,
+		        UPDATE_TIME = #{date,javaType=date,jdbcType=TIMESTAMP} 
+	        WHERE 
+		        LOTTERYID = #{lotteryid}  
+	    ]]>
+	</update>
+
+	<delete id="delete" parameterType="long">
+	    <![CDATA[
+	        delete from GAME_SERIES where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="GameSeriesResult"
+		flushCache="false">
+		select
+		<include refid="gameSeriesColumns" />
+		    <![CDATA[
+			    from GAME_SERIES 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+
+	<select id="getByLotteryId" parameterType="long" resultMap="GameSeriesResult"
+		flushCache="false">
+		select
+		<include refid="gameSeriesColumns" />
+		    <![CDATA[
+			    from GAME_SERIES 
+		        where 
+		        LOTTERYID = #{lotteryid} 
+		    ]]>
+	</select>
+
+	<select id="getLotteryHelpDesByLotteryId" parameterType="long"
+		resultType="String" flushCache="false">
+		select LOTTERY_HELP_DES
+		    <![CDATA[
+			    from GAME_SERIES 
+		        where 
+		        LOTTERYID = #{lotteryid} 
+		    ]]>
+	</select>
+
+	<select id="getLotterySellingStatus" parameterType="long"
+		resultType="int" flushCache="false">
+		select STATUS
+		    <![CDATA[
+			    from GAME_SERIES 
+		        where 
+		        LOTTERYID = #{lotteryid} 
+		    ]]>
+	</select>
+	
+	<select id="getLotterySeriesNameByCode" parameterType="int"
+		resultType="String" flushCache="false">
+		select distinct LOTTERY_SERIES_NAME as lotterySeriesName
+		    <![CDATA[
+			    from GAME_SERIES 
+		        where 
+		        LOTTERY_SERIES_CODE = #{lotterySeriesCode} 
+		    ]]>
+	</select>
+	
+	<select id="getLotterySeriesByLotteryidAndStatus" parameterType="hashMap"
+		resultMap="GameSeriesResult" flushCache="false">
+		select <include refid="gameSeriesColumns" />
+		    <![CDATA[
+			    from GAME_SERIES 
+		        where 
+		        LOTTERYID = #{lotteryid} and STATUS = #{status}
+		    ]]>
+	</select>
+	
+
+	<select id="getByIds" parameterType="list" resultMap="GameSeriesResult"
+		flushCache="false">
+		select
+		<include refid="gameSeriesColumns" />
+		from GAME_SERIES
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<resultMap type="java.lang.Float" id="profit_result">
+	</resultMap>
+	<select id="getMiniLotteryProfitByLotteryId" parameterType="long"
+		resultMap="profit_result">
+		select MINI_LOTTERY_PROFIT from GAME_SERIES where LOTTERYID = #{lotteryId}
+	</select>
+
+	<sql id="gameSeriesDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryTypeCode)">
+				and LOTTERY_TYPE_CODE = #{lotteryTypeCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryTypeName)">
+				and LOTTERY_TYPE_NAME = #{lotteryTypeName}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotterySeriesCode)">
+				and LOTTERY_SERIES_CODE = #{lotterySeriesCode}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotterySeriesName)">
+				and LOTTERY_SERIES_NAME = #{lotterySeriesName}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryid)">
+				and LOTTERYID = #{lotteryid}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryName)">
+				and LOTTERY_NAME = #{lotteryName}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				and CREATE_TIME = #{createTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>
+			<if test="@Ognl@isNotEmpty(miniLotteryProfit)">
+				and MINI_LOTTERY_PROFIT = #{miniLotteryProfit}
+			</if>
+			<if test="@Ognl@isNotEmpty(lotteryHelpDes)">
+				and LOTTERY_HELP_DES = #{lotteryHelpDes}
+			</if>
+			<if test="@Ognl@isNotEmpty(takeOffTime)">
+				and TAKEOFF_TIME IS NOT NULL
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="GameSeriesResult" flushCache="false">
+		select
+		<include refid="gameSeriesColumns" />
+		from GAME_SERIES
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from GAME_SERIES
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from GAME_SERIES
+		<include refid="gameSeriesDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="GameSeriesResult">
+		select
+		<include refid="gameSeriesColumns" />
+		from GAME_SERIES
+		<include refid="gameSeriesDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<select id="getAllValidLottery" parameterType="long"
+		resultMap="GameSeriesResult">
+		select <include refid="gameSeriesColumns" /> from GAME_SERIES where status=#{status}
+	</select>
+
+
+</mapper>

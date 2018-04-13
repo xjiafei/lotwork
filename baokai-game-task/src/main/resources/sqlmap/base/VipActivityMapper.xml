@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.VipActivityVo">
+	<resultMap id="VipActitvityResult" type="com.winterframework.firefrog.user.dao.vo.VipActivityVo">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="VipActivityColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	ACCOUNT as account,
+	        	SOURCE as source,
+	        	MONTH as month,
+	        	START_TIME as startTime,
+	        	END_TIME as endTime
+	    ]]>
+	</sql>
+
+		<insert id="insert" parameterType="com.winterframework.firefrog.user.dao.vo.VipActivityVo" 
+			useGeneratedKeys="false" keyProperty="id"  flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_VIP_AVTIVITY.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVITY_VIP_APPLICATION (
+	        	ID,
+	        	ACCOUNT ,
+	        	SOURCE,
+	        	MONTH,
+	        	START_TIME,
+	        	END_TIME
+	        ) VALUES (
+		        #{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{account,javaType=string,jdbcType=VARCHAR} ,
+	        	#{source,javaType=string,jdbcType=VARCHAR} ,
+	        	#{month,javaType=long,jdbcType=DECIMAL},
+	        	#{startTime,javaType=date,jdbcType=TIMESTAMP},
+	        	#{endTime,javaType=date,jdbcType=TIMESTAMP}        		        	
+	        )
+	    ]]>	
+	
+		</insert>
+		
+		
+	    <insert id="insertUpdate" parameterType="com.winterframework.firefrog.user.dao.vo.VipActivityVo"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		        MERGE INTO  ACTIVITY_VIP_APPLICATION AVP
+		        USING (
+		        	select 
+				 	 #{id,javaType=long,jdbcType=DECIMAL} AS ID,
+			         #{account,javaType=STRING,jdbcType=DECIMAL} AS ACCOUNT,
+			         #{month,javaType=long,jdbcType=DECIMAL} AS MONTH
+			         FROM DUAL
+			    ) I ON (I.ACCOUNT = AVP.ACCOUNT AND I.MONTH = AVP.MONTH)
+				WHEN NOT MATCHED THEN INSERT 
+				VALUES 
+				(
+			         SEQ_VIP_AVTIVITY.NEXTVAL,
+					 I.ACCOUNT,
+					 I.MONTH
+		        )
+	   	</insert>
+	
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACTIVITY_VIP_APPLICATION where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    
+	    <select id="getById" parameterType="long" resultMap="VipActitvityResult" flushCache="false">
+			select <include refid="VipActivityColumns" />
+		    <![CDATA[
+			    from ACTIVITY_VIP_APPLICATION 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+	   <select id="queryByActivityVo" parameterType="hashMap" resultMap="VipActitvityResult" flushCache="false">
+			select <include refid="VipActivityColumns" />
+				from ACTIVITY_VIP_APPLICATION 
+		    <where>
+				<if test="account != null">
+					And ACCOUNT = #{account}
+				</if>
+				<if test="month != null">
+					And MONTH = #{month}
+				</if>
+				<if test="startTime != null">
+					And START_TIME = #{startTime}
+				</if>
+				<if test="endTime != null">
+					And END_TIME = #{endTime}
+				</if>
+			</where>
+		</select>	
+</mapper>

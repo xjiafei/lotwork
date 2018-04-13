@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- 游戏报表 -->
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameReportIssue">
+	<resultMap id="GameReportResult" type="com.winterframework.firefrog.game.dao.vo.GameReportIssue">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="gameReportColumns">
+	    <![CDATA[
+	        	ID as id,
+				LOTTERYID as lotteryId,
+				ISSUE_CODE as issueCode,
+				WEB_ISSUE_CODE as webIssueCode,
+				TOTAL_SALES as totalSales,
+				TOTAL_POINTS as totalPoints,
+				TOTAL_WINS as totalWins,
+				TOTAL_PROFIT as totalProfit,
+				TOTAL_CANCEL as totalCancel,
+				TOTAL_CANCEL_ORDER as totalCancelOrder,
+				TOTAL_ACTUAL_AWARD as totalActualAward,
+				REPORT_DATE as reportDate,
+				UPDATE_TIME as updateTime
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.game.dao.vo.GameReportIssue" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_GAME_REPORT_ISSUE_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        GAME_REPORT_ISSUE (
+	        	ID ,
+				LOTTERYID ,
+				ISSUE_CODE ,
+				WEB_ISSUE_CODE ,
+				TOTAL_SALES ,
+				TOTAL_POINTS ,
+				TOTAL_WINS ,
+				TOTAL_PROFIT ,
+				TOTAL_CANCEL ,
+				TOTAL_CANCEL_ORDER ,
+				TOTAL_ACTUAL_AWARD ,
+				REPORT_DATE ,
+				UPDATE_TIME 
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{lotteryId,javaType=long,jdbcType=DECIMAL} ,
+	        	#{issueCode,javaType=long,jdbcType=DECIMAL} ,
+	        	#{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+	        	#{totalSales,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalPoints,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalWins,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalProfit,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalCancel,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalCancelOrder,javaType=long,jdbcType=DECIMAL} ,
+	        	#{totalActualAward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{reportDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{updateTime,javaType=object,jdbcType=TIMESTAMP} 	        
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.game.dao.vo.GameReportIssue">
+	    <![CDATA[
+	        UPDATE GAME_REPORT_ISSUE SET
+		        LOTTERYID = #{lotteryId,javaType=long,jdbcType=DECIMAL} ,
+		        ISSUE_CODE = #{issueCode,javaType=long,jdbcType=DECIMAL} ,
+		        WEB_ISSUE_CODE = #{webIssueCode,javaType=string,jdbcType=VARCHAR} ,
+		        TOTAL_SALES = #{totalSales,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAL_POINTS = #{totalPoints,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAL_WINS = #{totalWins,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAL_PROFIT = #{totalProfit,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAL_CANCEL = #{totalCancel,javaType=long,jdbcType=DECIMAL} ,
+		        TOTAL_CANCEL_ORDER = #{totalCancelOrder,javaType=long,jdbcType=DECIMAL} ,
+	        	TOTAL_ACTUAL_AWARD = #{totalActualAward,javaType=long,jdbcType=DECIMAL} ,
+	        	REPORT_DATE = #{reportDate,javaType=object,jdbcType=TIMESTAMP} ,
+	        	UPDATE_TIME = #{updateTime,javaType=object,jdbcType=TIMESTAMP} 	        	
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from GAME_REPORT_ISSUE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="GameReportResult" flushCache="false">
+			select <include refid="gameReportColumns" />
+		    <![CDATA[
+			    from GAME_REPORT_ISSUE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="GameReportResult" flushCache="false">
+			select <include refid="gameReportColumns" />
+			    from GAME_REPORT_ISSUE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="gameReportDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lotteryId)">
+				and LOTTERYID = #{lotteryId}
+			</if>
+			<if test="@Ognl@isNotEmpty(issueCode)">
+				and ISSUE_CODE = #{issueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(webIssueCode)">
+				and WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalSales)">
+				and TOTAL_SALES = #{totalSales}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalPoints)">
+				and TOTAL_POINTS = #{totalPoints}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalWins)">
+				and TOTAL_WINS = #{totalWins}
+			</if>
+	       <if test="@Ognl@isNotEmpty(totalProfit)">
+				and TOTAL_PROFIT = #{totalProfit}
+			</if>
+	        <if test="@Ognl@isNotEmpty(totalCancel)">
+				and TOTAL_CANCEL = #{totalCancel}
+			</if>
+			<if test="@Ognl@isNotEmpty(totalCancelOrder)">
+				and TOTAL_CANCEL_ORDER = #{totalCancelOrder}
+			</if>
+			<if test="@Ognl@isNotEmpty(totalActualAward)">
+				and TOTAL_ACTUAL_AWARD = #{totalActualAward}
+			</if>
+			<if test="@Ognl@isNotEmpty(reportDate)">
+				and REPORT_DATE = #{reportDate}
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				and UPDATE_TIME = #{updateTime}
+			</if>		
+		</where>
+	</sql>
+	<select id="getAll" resultMap="GameReportResult"  flushCache="false">
+    	select <include refid="gameReportColumns" />
+	    from GAME_REPORT_ISSUE 
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+
+	<select id="getCount" resultType="long">
+        select count(*) from GAME_REPORT_ISSUE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from GAME_REPORT_ISSUE 
+		<include refid="gameReportDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="GameReportResult">
+    	select <include refid="gameReportColumns" />
+	    from GAME_REPORT_ISSUE 
+		<include refid="gameReportDynamicWhere"/>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+  
+    <!--
+    	报表分页
+    -->
+	<select id="getReportByPage" resultMap="GameReportResult"  flushCache="false">
+    	SELECT <include refid="gameReportColumns" />,
+    	(select LOTTERY_NAME from GAME_SERIES where LOTTERYID=R.LOTTERYID)as lotteryName ,
+    	(select SALE_START_TIME from GAME_ISSUE where LOTTERYID=R.LOTTERYID AND ISSUE_CODE=R.ISSUE_CODE)as saleTimeBegin ,
+    	(select SALE_END_TIME from GAME_ISSUE where LOTTERYID=R.LOTTERYID AND ISSUE_CODE=R.ISSUE_CODE)as saleTimeEnd 
+	    FROM GAME_REPORT_ISSUE R
+	    <include refid="getReportsWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>	
+    
+    <select id="getCountReportByPage" resultType="long">
+        select count(*) from GAME_REPORT_ISSUE 
+        <include refid="getReportsWhere" />		   
+    </select>
+    
+    <sql id="getReportsWhere">	
+    	<where>	 
+    		<if test="@Ognl@isNotEmpty(startTime)">   
+	    		AND UPDATE_TIME 
+	    			BETWEEN to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss') 
+	    			AND to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss') 
+	   	 	</if>
+			<if test="@Ognl@isNotEmpty(lotteryId)">
+		 		AND LOTTERYID = #{lotteryId}
+			</if>
+			<if test="@Ognl@isNotEmpty(webIssueCode)">
+				AND WEB_ISSUE_CODE = #{webIssueCode}
+			</if>
+    	</where>
+    </sql>
+    <select id="getGameReportIssue" resultMap="GameReportResult" >
+        select <include refid="gameReportColumns" />
+        from GAME_REPORT_ISSUE 
+        where LOTTERYID = #{lotteryId}
+		AND ISSUE_CODE = #{issueCode}			
+    </select>
+    
+</mapper>

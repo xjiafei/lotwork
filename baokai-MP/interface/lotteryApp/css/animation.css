@@ -1,0 +1,75 @@
+/* INIT */
+.slogan,
+.button,
+.download-problem,
+.cycle-slideshow{
+	opacity: 0;
+}
+
+/* 
+** COMMON
+*/
+
+/* fade */
+@keyframes fade {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@-webkit-keyframes fade {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+/* scale */
+@keyframes scale {
+	0%   { transform:scale(.8); opacity: 0; }
+	100% { transform:scale(1); opacity: 1; }
+}
+@-webkit-keyframes scale {
+	0%   { -webkit-transform:scale(.8); opacity: 0; }
+	100% { -webkit-transform:scale(1); opacity: 1; }
+}
+
+/* swing */
+@-webkit-keyframes swing {
+	20% { -webkit-transform: rotate(15deg); }
+	40% { -webkit-transform: rotate(-10deg); }
+	60% { -webkit-transform: rotate(5deg); }
+	80% { -webkit-transform: rotate(-5deg); }
+	100% { -webkit-transform: rotate(0deg); }
+}
+@keyframes swing {
+	20% { transform: rotate(15deg); }
+	40% { transform: rotate(-10deg); }
+	60% { transform: rotate(5deg); }
+	80% { transform: rotate(-5deg); }
+	100% { transform: rotate(0deg); }
+}
+
+/* slogan */
+@keyframes slogan {
+	0%   { margin-top: -100px; opacity: 0; }
+	100% { margin-top: 0; opacity: 1; }
+}
+@-webkit-keyframes slogan {
+	0%   { margin-top: -100px; opacity: 0; }
+	100% { margin-top: 0; opacity: 1; }
+}
+
+.slogan{
+	-webkit-animation: slogan 0.8s ease-in 0s forwards;
+	animation        : slogan 0.8s ease-in 0s forwards;
+}
+.button{
+	-webkit-animation: scale 0.8s ease-in 0s forwards;
+	animation        : scale 0.8s ease-in 0s forwards;
+}
+.download-problem{
+	-webkit-animation: fade 1s ease-in 0.4s forwards, swing 1s ease-in 1.4s forwards;
+	animation        : fade 1s ease-in 0.4s forwards, swing 1s ease-in 1.4s forwards;
+}
+
+.cycle-slideshow{
+	-webkit-animation: fade 1s ease-in 0.4s forwards;
+	animation        : fade 1s ease-in 0.4s forwards;
+}

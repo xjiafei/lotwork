@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.fund.dao.vo.FundWithdraw">
+	<resultMap id="FundWithdrawResult" type="com.winterframework.firefrog.fund.dao.vo.FundWithdraw">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="fundWithdrawColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	CURR_APPRER as currApprer,
+	        	USER_ID as userId,
+	        	APPLY_TIME as applyTime,
+	        	WITHDRAW_AMT as withdrawAmt,
+	        	APPR_ACCOUNT as apprAccount,
+	        	APPR_TIME as apprTime,
+	        	MC_REMIT_TIME as mcRemitTime,
+	        	STATUS as status,
+	        	SN as sn,
+	        	mc_sn as mcSn,
+	        	IP_ADDR as ipAddr,
+	        	APPROVE_MEMO as approveMemo,
+	        	USER_BANK_STRUC as userBankStruc,
+	        	APPLY_EXPIRE_TIME as applyExpireTime,
+	        	MEMO as memo,
+	        	MC_NOTICE_TIME as mcNoticeTime,
+	        	APPLY_ACCOUNT as applyAccount,
+	        	APPR2_ACCT as appr2Acct,
+	        	APPR2_TIME as appr2Time,
+	        	NOTICE_MOW_TIME as noticeMowTime,
+	        	appr_begin_Time as apprBeginTime,
+	        	appr_begin_status as apprBeginStatus,
+	        	risk_type as riskType,
+	        	attach,
+	        	appr2_begin_Time as appr2BeginTime,
+	        	curr_date as currDate,
+	        	mc_memo as mcMemo,
+	        	REAL_WITHDRAL_AMT as realWithdrawAmt
+	        	,isVip
+				,top_acc as topAcc
+				,apChannel
+				,apProject
+				,CANCEL_ACCT as cancelAcct
+	        	,CANCEL_TIME as cancelTime,
+	        	OPERATING_TIME as operatingTime,
+	        	WITHDRAW_MODE as withdrawMode,
+	        	ROOT_SN as rootSn,
+	        	IS_SEPERATE as isSeperate,
+	        	SEPERATE_COUNT as seperateCount,
+	        	TOTAL_DRAW_AMOUNT as totalDrawAmount
+	        	
+	        	
+	    ]]>
+	</sql>
+	<select id="getBySn" parameterType="string" resultMap="FundWithdrawResult" flushCache="false">
+			select <include refid="fundWithdrawColumns" />
+		    <![CDATA[
+			    from FUND_WITHDRAW 
+		        where 
+		        sn = #{sn} 
+		    ]]>
+		</select>
+</mapper>

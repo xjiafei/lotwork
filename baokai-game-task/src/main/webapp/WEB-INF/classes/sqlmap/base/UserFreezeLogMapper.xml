@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.user.dao.vo.UserFreezeLog">
+	<resultMap id="UserFreezeLogResult"
+		type="com.winterframework.firefrog.user.dao.vo.UserFreezeLog">
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="userFreezeLogColumns">
+	    <![CDATA[
+	        	ID as id,
+	        	RANGE as range,
+	        	METHOD as method,
+	        	MEMO as memo,
+	        	GMT_CREATED as gmtCreated,
+	        	FROZEN as frozen,
+	        	ACTOR as actor,
+	        	ACTION as action
+	    ]]>
+	</sql>
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserFreezeLog"
+		useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+			SELECT SEQ_USER_FREEZE_LOG_ID.Nextval from dual
+		</selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        USER_FREEZE_LOG (
+	        	ID ,
+	        	RANGE ,
+	        	METHOD ,
+	        	MEMO ,
+	        	GMT_CREATED ,
+	        	FROZEN ,
+	        	ACTOR ,
+	        	ACTION ,
+	        	freeze_account
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{range,javaType=int,jdbcType=DECIMAL} ,
+	        	#{method,javaType=int,jdbcType=DECIMAL} ,
+	        	#{memo,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtCreated,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{frozen,javaType=long,jdbcType=DECIMAL} ,
+	        	#{actor,javaType=long,jdbcType=DECIMAL} ,
+	        	#{action,javaType=int,jdbcType=DECIMAL} ,
+	        	#{freezeAccount,javaType=string,jdbcType=VARCHAR}
+	        )
+	    ]]>
+
+	</insert>
+
+	<update id="update"
+		parameterType="com.winterframework.firefrog.user.dao.vo.UserFreezeLog">
+	    <![CDATA[
+	        UPDATE USER_FREEZE_LOG SET   
+		        unfreeze_RANGE = #{unfreezeRange,javaType=int,jdbcType=DECIMAL} ,
+		        unfreeze_METHOD = #{unfreezeMethod,javaType=int,jdbcType=DECIMAL} ,
+		        unfreeze_MEMO = #{unfreezeMemo,javaType=string,jdbcType=VARCHAR} ,
+		        unfreeze_ACTOR = #{unfreezeActor,javaType=long,jdbcType=DECIMAL} ,
+		        unfreeze_date = #{unfreezeDate,javaType=object,jdbcType=TIMESTAMP},
+		        action = #{action,javaType=int,jdbcType=DECIMAL} ,
+	        	unfreeze_account = #{unfreezeAccount,javaType=string,jdbcType=VARCHAR} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+	</update>
+	<delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from USER_FREEZE_LOG where
+		        ID = #{id} 
+	    ]]>
+	</delete>
+	<select id="getById" parameterType="long" resultMap="UserFreezeLogResult"
+		flushCache="false">
+		select
+		<include refid="userFreezeLogColumns" />
+		    <![CDATA[
+			    from USER_FREEZE_LOG 
+		        where 
+		        ID = #{id} 
+		    ]]>
+	</select>
+	<select id="getByIds" parameterType="list" resultMap="UserFreezeLogResult"
+		flushCache="false">
+		select
+		<include refid="userFreezeLogColumns" />
+		from USER_FREEZE_LOG
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<sql id="userFreezeLogDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(range)">
+				and RANGE = #{range}
+			</if>
+			<if test="@Ognl@isNotEmpty(method)">
+				and METHOD = #{method}
+			</if>
+			<if test="@Ognl@isNotEmpty(memo)">
+				and MEMO = #{memo}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtCreated)">
+				and GMT_CREATED = #{gmtCreated}
+			</if>
+			<if test="@Ognl@isNotEmpty(frozen)">
+				and FROZEN = #{frozen}
+			</if>
+			<if test="@Ognl@isNotEmpty(actor)">
+				and ACTOR = #{actor}
+			</if>
+			<if test="@Ognl@isNotEmpty(action)">
+				and ACTION = #{action}
+			</if>
+		</where>
+	</sql>
+
+	<select id="getAll" resultMap="UserFreezeLogResult" flushCache="false">
+		select
+		<include refid="userFreezeLogColumns" />
+		from USER_FREEZE_LOG
+
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="getCount" resultType="long">
+		select count(*) from
+		USER_FREEZE_LOG
+	</select>
+	<select id="getCountByPage" resultType="long">
+		select count(*) from USER_FREEZE_LOG
+		<include refid="userFreezeLogDynamicWhere" />
+	</select>
+
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 
+		三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="getByPage" resultMap="UserFreezeLogResult">
+		select
+		<include refid="userFreezeLogColumns" />
+		from USER_FREEZE_LOG
+		<include refid="userFreezeLogDynamicWhere" />
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	<select id="queryUnFreezeLog" resultMap="UserFreezeLogResult"
+		parameterType="HashMap">
+	select ufl.ID            as id,
+       ufl.RANGE         as range,
+       ufl.METHOD        as method,
+       ufl.MEMO          as memo,
+       ufl.UNFREEZE_MEMO as unfreezeMemo,
+       ufl.unfreeze_date as unfreezeDate,
+       ufl.FROZEN        as frozen,
+       ufl.ACTOR         as actor,
+       ufl.ACTION        as action,
+       0                 as frozenAccountBal,
+       uc.ACCOUNT        as frozenAccount,
+       uc.USER_LVL       as userLvl,
+      ufl.freeze_account    as actorAccount,     
+      ufl.freeze_account    as freezeAccount,   
+      ufl.unfreeze_account  as unfreezeAccount,
+       ufl.gmt_created   as gmtCreated
+  from USER_FREEZE_LOG ufl, USER_CUSTOMER uc
+ where ufl.ACTION = 0
+   and ufl.FROZEN = uc.ID
+		<if test="@Ognl@isNotEmpty(account)">
+			and uc.ACCOUNT like '${account}'||'%'
+		</if>
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+	<select id="getUnFreezeLogCount" resultType="long"
+		parameterType="HashMap">
+		select count(*)
+		from USER_FREEZE_LOG  ufl left join USER_CUSTOMER uc on ufl.FROZEN=uc.ID where ACTION=0
+		<if test="@Ognl@isNotEmpty(account)">
+			and uc.ACCOUNT like '${account}'||'%'
+		</if>
+	</select>
+
+
+</mapper>

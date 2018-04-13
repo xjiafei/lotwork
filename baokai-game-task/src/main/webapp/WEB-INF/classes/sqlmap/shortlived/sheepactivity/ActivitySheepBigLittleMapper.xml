@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepBigLittle">
+	<resultMap id="ConfigResult" type="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepBigLittle">
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="configColumns">
+	    <![CDATA[
+	        	ID as id,	
+				USER_NAME   as  userName,
+				USER_ID as userId,						
+				LAST_NUM   as  lastNum,
+				NEXT_WIN_NUM_NOW   as  nextWinNumNow,
+				MAX_NEXT_WIN_NUM   as  maxNextWinNum,
+				ALL_AWARD   as  allAward,
+				STATUS  as  status,
+				
+				UPDATE_STATUS  as  updateStatus,
+				UPDATE_AWARD as  updateAward, 
+				UPDATE_NAME as  updateName,
+				UPDATE_REASON  as  updateReason
+	    ]]>
+	</sql>
+		<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepBigLittle" 
+			useGeneratedKeys="false" keyProperty="id" 
+		 flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT   SEQ_ACTIVITY_SHEEP_BIG_ID.Nextval from dual
+			   	    </selectKey>
+			   	    
+	    <![CDATA[
+	        INSERT INTO
+	        ACTIVITY_SHEEP_BIG_LITTLE (
+	        	ID ,
+				USER_NAME  ,
+				USER_ID,	
+				LAST_NUM ,
+				NEXT_WIN_NUM_NOW ,
+				MAX_NEXT_WIN_NUM ,
+				ALL_AWARD ,
+				STATUS ,
+				UPDATE_STATUS  ,
+				UPDATE_AWARD , 
+				UPDATE_NAME ,
+				UPDATE_REASON  ,
+	        ) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,	        		        		  
+	        	#{userName,javaType=string,jdbcType=VARCHAR} ,	
+	        	#{userId,javaType=long,jdbcType=DECIMAL} ,         	
+	        	#{lastNum,javaType=long,jdbcType=DECIMAL} ,
+	        	#{nextWinNumNow,javaType=long,jdbcType=DECIMAL} ,
+	        	#{maxNextWinNum,javaType=long,jdbcType=DECIMAL} ,
+	        	#{allAward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{channel,javaType=long,jdbcType=DECIMAL} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,
+	        	#{updateStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	#{updateAward,javaType=long,jdbcType=DECIMAL} ,
+	        	#{updateName,javaType=string,jdbcType=VARCHAR} ,
+	        	#{updateReason,javaType=string,jdbcType=VARCHAR} 
+	        )
+	    ]]>	
+	
+		</insert>
+	    
+		<update id="update" parameterType="com.winterframework.firefrog.shortlived.sheepactivity.dao.vo.ActivitySheepBigLittle">
+	    <![CDATA[
+	        UPDATE ACTIVITY_SHEEP_BIG_LITTLE SET    		  
+	        	USER_NAME = #{userName,javaType=string,jdbcType=VARCHAR} ,	    
+	        	USER_ID = #{userId,javaType=long,jdbcType=DECIMAL} ,      	
+	        	LAST_NUM = #{lastNum,javaType=long,jdbcType=DECIMAL} ,
+	        	NEXT_WIN_NUM_NOW = #{nextWinNumNow,javaType=long,jdbcType=DECIMAL} ,
+	        	MAX_NEXT_WIN_NUM = #{maxNextWinNum,javaType=long,jdbcType=DECIMAL} ,
+	        	ALL_AWARD = #{allAward,javaType=long,jdbcType=DECIMAL} ,
+	        	CHANNEL = #{channel,javaType=long,jdbcType=DECIMAL} ,
+	        	STATUS = #{status,javaType=long,jdbcType=DECIMAL} ,
+	        	UPDATE_STATUS = #{updateStatus,javaType=long,jdbcType=DECIMAL} ,
+	        	UPDATE_AWARD = #{updateAward,javaType=long,jdbcType=DECIMAL} ,
+	        	UPDATE_NAME = #{updateName,javaType=string,jdbcType=VARCHAR} ,
+	        	UPDATE_REASON = #{updateReason,javaType=string,jdbcType=VARCHAR} 
+	        WHERE 
+		        ID = #{id} 
+	    ]]>
+		</update>
+		
+	   <delete id="delete" parameterType="java.lang.Long">
+	    <![CDATA[
+	        delete from ACTIVITY_SHEEP_BIG_LITTLE where
+		        ID = #{id} 
+	    ]]>
+	    </delete>   
+	    <select id="getById" parameterType="long" resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+		    <![CDATA[
+			    from ACTIVITY_SHEEP_BIG_LITTLE 
+		        where 
+		        ID = #{id} 
+		    ]]>
+		</select>	
+		<select id="getByIds" parameterType="list"  resultMap="ConfigResult" flushCache="false">
+			select <include refid="configColumns" />
+			    from ACTIVITY_SHEEP_BIG_LITTLE 
+		        where id in
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+#{item}				</foreach>					
+		</select>	
+
+	<sql id="configDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为class org.apache.maven.project.MavenProjectmethod(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+	       <if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+	       <if test="@Ognl@isNotEmpty(userName)">
+				and USER_NAME = #{userName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updateStatus)">
+				and UPDATE_STATUS = #{updateStatus}
+			</if>
+	       <if test="@Ognl@isNotEmpty(channel)">
+				and CHANNEL = #{channel}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getAll" resultMap="ConfigResult"  flushCache="false">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_BIG_LITTLE 
+
+		
+			ORDER BY ID 
+		
+    </select>	
+	<select id="getCount" resultType="long">
+        select count(*) from ACTIVITY_SHEEP_BIG_LITTLE 
+    </select>
+    <select id="getCountByPage" resultType="long">
+        select count(*) from ACTIVITY_SHEEP_BIG_LITTLE 
+		<include refid="configDynamicWhere"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="getByPage" resultMap="ConfigResult">
+    	select <include refid="configColumns" />
+	    from ACTIVITY_SHEEP_BIG_LITTLE 
+		<include refid="configDynamicWhere"/>
+			ORDER BY ORDER_NUM 
+    </select>
+
+
+</mapper>

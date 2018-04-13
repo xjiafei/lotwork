@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.winterframework.firefrog.active.dao.vo.Activity">
+
+	<resultMap id="result" type="com.winterframework.firefrog.active.dao.vo.Activity">
+			<result column="ID" property="id"/>
+			<result column="ACTIVITY_NAME" property="activityName"/>
+			<result column="START_TIME" property="startTime"/>
+			<result column="END_TIME" property="endTime"/>
+			<result column="STATUS" property="status"/>
+			<result column="ACTIVITY_TYPE" property="activityType"/>
+			<result column="GMT_CREATED" property="gmtCreate"/>
+			<result column="GMT_MODIFIED" property="gmtModify"/>
+			<result column="ACTIVITY_CODE" property="activityCode"/>	
+			<result column="COMMON" property="common"/>	
+	</resultMap>
+	
+	<sql id="DynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				and ID = #{id}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(activityName)">
+				and ACTIVITY_NAME = #{activityName}
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(startTime)">
+				and (START_TIME >= #{startTime} or START_TIME is null)
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(endTime)">
+	       		<![CDATA[
+				and (END_TIME <= #{endTime} or END_TIME is null)
+				]]>
+			</if>
+			
+			<if test="@Ognl@isNotEmpty(status)">
+				and STATUS = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(activityType)">
+				and ACTIVITY_TYPE = #{activityType}
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtCreate)">
+				and (GMT_CREATED <![CDATA[>=]]> #{gmtCreate} or GMT_CREATED is null)
+			</if>
+			<if test="@Ognl@isNotEmpty(gmtModify)">
+				and (GMT_MODIFIED <![CDATA[>=]]> #{gmtModify} or GMT_MODIFIED is null)
+			</if>
+			<if test="@Ognl@isNotEmpty(activityCode)">
+				and ACTIVITY_CODE <![CDATA[=]]> #{activityCode}
+			</if>
+		</where>
+	</sql>
+	
+	 
+    <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+		<insert id="insert" parameterType="com.winterframework.firefrog.active.dao.vo.Activity" 
+			useGeneratedKeys="false" keyProperty="id" flushCache="true">
+		   	     	<selectKey resultType="long" order="BEFORE" keyProperty="id">
+						     SELECT  SEQ_ACTIVITY_ID.Nextval from dual
+			   	    </selectKey>
+		<![CDATA[
+	        INSERT INTO
+	        ACTIVITY (
+	        	ID ,
+	        	ACTIVITY_NAME,
+	        	START_TIME,
+	        	END_TIME,
+	        	STATUS,
+				ACTIVITY_TYPE  ,
+				GMT_CREATED, 
+				GMT_MODIFIED,
+				ACTIVITY_CODE,
+				COMMON
+			) VALUES (
+	        	#{id,javaType=long,jdbcType=DECIMAL} ,
+	        	#{activityName,javaType=long,jdbcType=DECIMAL} ,
+	        	#{startTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{endTime,javaType=object,jdbcType=TIMESTAMP} ,
+	        	#{status,javaType=long,jdbcType=DECIMAL} ,	        
+	        	#{activityType,javaType=string,jdbcType=VARCHAR} ,
+	        	#{gmtCreate,javaType=object,jdbcType=TIMESTAMP} ,       	
+	        	#{gmtModify,javaType=object,jdbcType=TIMESTAMP},   
+	        	#{activityCode,javaType=string,jdbcType=VARCHAR},
+	        	#{common,javaType=string,jdbcType=VARCHAR}       
+	        )
+	    ]]>	
+	
+		</insert>
+		
+		<select id="queryActivityByCode" resultMap="result" 
+			parameterType="com.winterframework.firefrog.active.dao.vo.Activity" flushCache="false">
+	    	select * from ACTIVITY 
+	    	WHERE ACTIVITY_CODE = #{activityCode}
+	    </select>
+	    <select id="queryActivityById" resultMap="result" 
+			parameterType="com.winterframework.firefrog.active.dao.vo.Activity" flushCache="false">
+	    	select * from ACTIVITY 
+	    	WHERE ID = #{id}
+	    </select>
+	    
+</mapper>
