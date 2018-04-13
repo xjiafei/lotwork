@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+<wsdl:types>
+<s:schema targetNamespace="http://tempuri.org/" elementFormDefault="qualified">
+<s:element name="ReceiveNumber">
+<s:complexType>
+<s:sequence>
+<s:element name="param" type="s:string" maxOccurs="1" minOccurs="0"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ReceiveNumberResponse">
+<s:complexType>
+<s:sequence>
+<s:element name="ReceiveNumberResult" type="s:boolean" maxOccurs="1" minOccurs="1"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GrabRandomNumber">
+<s:complexType>
+<s:sequence>
+<s:element name="param" type="s:string" maxOccurs="1" minOccurs="0"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GrabRandomNumberResponse">
+<s:complexType>
+<s:sequence>
+<s:element name="GrabRandomNumberResult" type="s:string" maxOccurs="1" minOccurs="0"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="RetrieveHistoryNumber">
+<s:complexType>
+<s:sequence>
+<s:element name="time" type="s:string" maxOccurs="1" minOccurs="0"/>
+<s:element name="pre_min" type="s:int" maxOccurs="1" minOccurs="1"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="RetrieveHistoryNumberResponse">
+<s:complexType>
+<s:sequence>
+<s:element name="RetrieveHistoryNumberResult" maxOccurs="1" minOccurs="0">
+<s:complexType>
+<s:sequence>
+<s:any/>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="boolean" type="s:boolean"/>
+<s:element name="string" type="s:string" nillable="true"/>
+<s:element name="DataSet" nillable="true">
+<s:complexType>
+<s:sequence>
+<s:any/>
+</s:sequence>
+</s:complexType>
+</s:element>
+</s:schema>
+</wsdl:types>
+<wsdl:message name="ReceiveNumberSoapIn">
+<wsdl:part name="parameters" element="tns:ReceiveNumber"/>
+</wsdl:message>
+<wsdl:message name="ReceiveNumberSoapOut">
+<wsdl:part name="parameters" element="tns:ReceiveNumberResponse"/>
+</wsdl:message>
+<wsdl:message name="GrabRandomNumberSoapIn">
+<wsdl:part name="parameters" element="tns:GrabRandomNumber"/>
+</wsdl:message>
+<wsdl:message name="GrabRandomNumberSoapOut">
+<wsdl:part name="parameters" element="tns:GrabRandomNumberResponse"/>
+</wsdl:message>
+<wsdl:message name="RetrieveHistoryNumberSoapIn">
+<wsdl:part name="parameters" element="tns:RetrieveHistoryNumber"/>
+</wsdl:message>
+<wsdl:message name="RetrieveHistoryNumberSoapOut">
+<wsdl:part name="parameters" element="tns:RetrieveHistoryNumberResponse"/>
+</wsdl:message>
+<wsdl:message name="ReceiveNumberHttpGetIn">
+<wsdl:part name="param" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ReceiveNumberHttpGetOut">
+<wsdl:part name="Body" element="tns:boolean"/>
+</wsdl:message>
+<wsdl:message name="GrabRandomNumberHttpGetIn">
+<wsdl:part name="param" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="GrabRandomNumberHttpGetOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="RetrieveHistoryNumberHttpGetIn">
+<wsdl:part name="time" type="s:string"/>
+<wsdl:part name="pre_min" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="RetrieveHistoryNumberHttpGetOut">
+<wsdl:part name="Body" element="tns:DataSet"/>
+</wsdl:message>
+<wsdl:message name="ReceiveNumberHttpPostIn">
+<wsdl:part name="param" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ReceiveNumberHttpPostOut">
+<wsdl:part name="Body" element="tns:boolean"/>
+</wsdl:message>
+<wsdl:message name="GrabRandomNumberHttpPostIn">
+<wsdl:part name="param" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="GrabRandomNumberHttpPostOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="RetrieveHistoryNumberHttpPostIn">
+<wsdl:part name="time" type="s:string"/>
+<wsdl:part name="pre_min" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="RetrieveHistoryNumberHttpPostOut">
+<wsdl:part name="Body" element="tns:DataSet"/>
+</wsdl:message>
+<wsdl:portType name="rngSoap">
+<wsdl:operation name="ReceiveNumber">
+<wsdl:input message="tns:ReceiveNumberSoapIn"/>
+<wsdl:output message="tns:ReceiveNumberSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="GrabRandomNumber">
+<wsdl:input message="tns:GrabRandomNumberSoapIn"/>
+<wsdl:output message="tns:GrabRandomNumberSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="RetrieveHistoryNumber">
+<wsdl:input message="tns:RetrieveHistoryNumberSoapIn"/>
+<wsdl:output message="tns:RetrieveHistoryNumberSoapOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="rngHttpGet">
+<wsdl:operation name="ReceiveNumber">
+<wsdl:input message="tns:ReceiveNumberHttpGetIn"/>
+<wsdl:output message="tns:ReceiveNumberHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="GrabRandomNumber">
+<wsdl:input message="tns:GrabRandomNumberHttpGetIn"/>
+<wsdl:output message="tns:GrabRandomNumberHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="RetrieveHistoryNumber">
+<wsdl:input message="tns:RetrieveHistoryNumberHttpGetIn"/>
+<wsdl:output message="tns:RetrieveHistoryNumberHttpGetOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="rngHttpPost">
+<wsdl:operation name="ReceiveNumber">
+<wsdl:input message="tns:ReceiveNumberHttpPostIn"/>
+<wsdl:output message="tns:ReceiveNumberHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="GrabRandomNumber">
+<wsdl:input message="tns:GrabRandomNumberHttpPostIn"/>
+<wsdl:output message="tns:GrabRandomNumberHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="RetrieveHistoryNumber">
+<wsdl:input message="tns:RetrieveHistoryNumberHttpPostIn"/>
+<wsdl:output message="tns:RetrieveHistoryNumberHttpPostOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="rngSoap" type="tns:rngSoap">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="ReceiveNumber">
+<soap:operation style="document" soapAction="http://tempuri.org/ReceiveNumber"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="GrabRandomNumber">
+<soap:operation style="document" soapAction="http://tempuri.org/GrabRandomNumber"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="RetrieveHistoryNumber">
+<soap:operation style="document" soapAction="http://tempuri.org/RetrieveHistoryNumber"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="rngSoap12" type="tns:rngSoap">
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="ReceiveNumber">
+<soap12:operation style="document" soapAction="http://tempuri.org/ReceiveNumber"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="GrabRandomNumber">
+<soap12:operation style="document" soapAction="http://tempuri.org/GrabRandomNumber"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="RetrieveHistoryNumber">
+<soap12:operation style="document" soapAction="http://tempuri.org/RetrieveHistoryNumber"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="rngHttpGet" type="tns:rngHttpGet">
+<http:binding verb="GET"/>
+<wsdl:operation name="ReceiveNumber">
+<http:operation location="/ReceiveNumber"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="GrabRandomNumber">
+<http:operation location="/GrabRandomNumber"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="RetrieveHistoryNumber">
+<http:operation location="/RetrieveHistoryNumber"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="rngHttpPost" type="tns:rngHttpPost">
+<http:binding verb="POST"/>
+<wsdl:operation name="ReceiveNumber">
+<http:operation location="/ReceiveNumber"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="GrabRandomNumber">
+<http:operation location="/GrabRandomNumber"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="RetrieveHistoryNumber">
+<http:operation location="/RetrieveHistoryNumber"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="rng">
+<wsdl:port name="rngSoap" binding="tns:rngSoap">
+<soap:address location="http://203.208.27.253/rng/rng.asmx"/>
+</wsdl:port>
+<wsdl:port name="rngSoap12" binding="tns:rngSoap12">
+<soap12:address location="http://203.208.27.253/rng/rng.asmx"/>
+</wsdl:port>
+<wsdl:port name="rngHttpGet" binding="tns:rngHttpGet">
+<http:address location="http://203.208.27.253/rng/rng.asmx"/>
+</wsdl:port>
+<wsdl:port name="rngHttpPost" binding="tns:rngHttpPost">
+<http:address location="http://203.208.27.253/rng/rng.asmx"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

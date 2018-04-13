@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.winterframework.firefrog.game.dao.vo.GameNumberConfig">
+ <resultMap id="result" type="com.winterframework.firefrog.game.dao.vo.GameNumberConfig">
+			<result column="ID" property="id"/>
+			<result column="LOTTERYID" property="lotteryid"/>
+			<result column="NUM_TYPE" property="numType"/>
+			<result column="GAME_NUMBER" property="gameNumber"/>
+			<result column="START_TIME" property="startTime"/>
+			<result column="END_TIME" property="endTime"/>
+			<result column="SPECIAL_FLAG" property="specialFlag"/>
+
+ </resultMap>
+	<sql id="fields">ID,LOTTERYID,NUM_TYPE,GAME_NUMBER,START_TIME,END_TIME,SPECIAL_FLAG
+	</sql>
+
+
+	<sql id="whereCondition">
+		<where>
+		<if test="id != null">
+			And ID = #{id}
+		</if>
+
+		<if test="lotteryid != null">
+			And LOTTERYID = #{lotteryid}
+		</if>
+
+		<if test="numType != null">
+			And NUM_TYPE = #{numType}
+		</if>
+
+		<if test="gameNumber != null">
+			And GAME_NUMBER = #{gameNumber}
+		</if>
+
+		<if test="startTime != null">
+			And START_TIME = #{startTime}
+		</if>
+
+		<if test="endTime != null">
+			And END_TIME = #{endTime}
+		</if>
+
+		<if test="specialFlag != null">
+			And SPECIAL_FLAG = #{specialFlag}
+		</if>
+
+		</where>
+
+	</sql>
+	<select id="findByCondition" resultMap="result" parameterType="com.winterframework.firefrog.game.dao.vo.GameNumberConfig">
+		Select <include refid="fields"/>
+				From GAME_NUMBER_CONFIG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="genCountByCondition" resultType="Long">
+		Select count(1) 
+				From GAME_NUMBER_CONFIG
+		<include refid="whereCondition"/>
+	</select>
+
+	<select id="getCount" resultType="Long">
+		Select count(1) 
+				From GAME_NUMBER_CONFIG
+	</select>
+	
+	<select id="getByEffDate" parameterType="map" resultMap="result">
+		Select  <include refid="fields"/>
+				From GAME_NUMBER_CONFIG where 
+				<![CDATA[sysdate between start_time and end_time]]>
+	</select>
+	
+	<select id="getByYearLaterDate" parameterType="map" resultMap="result">
+		Select  <include refid="fields"/>
+				From GAME_NUMBER_CONFIG where 
+				#{yearLater} between start_time and end_time
+	</select>
+	
+
+</mapper>
